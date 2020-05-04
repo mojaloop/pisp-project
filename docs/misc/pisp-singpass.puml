@@ -1,0 +1,62 @@
+@startuml
+
+title PISP: Linking
+
+box "Mobile device"
+    actor Alice
+    participant "PISP App" as App
+    participant "PISP Server" as PISP
+end box
+participant "SingPass" as IP
+box "DFSP"
+    participant "DFSP A\n(as Account Info Provider)" as AIP
+end box
+
+Alice -> App: I'd like to link an account please.
+activate App
+App --> Alice: No problem. Which FSP?\nSupported options are: A, B, C, ...
+activate Alice
+deactivate App
+Alice -> App: My account is with DFSP A.
+deactivate Alice
+activate App
+
+group SingPass Login
+    App -> Alice: OK. We're routing you to a SingPass login.\nIt will redirect to us when you're done.
+    deactivate App
+    activate Alice
+    Alice -> IP: I'd like to login with SingPass.\n""GET singpass.gov.sg/login""
+    activate IP
+    IP --> Alice: Sure. Here's your login form.\n""200 OK <html><form ...> ...</html>""
+    deactivate IP
+    Alice -> IP: OK. Here's my credentials.\n""POST singpass.gov.sg/login { username: Alice, password: ****** }""
+    activate IP
+    IP -> Alice: Confirm your login with your SingPass mobile app as 2FA.
+    deactivate IP
+    Alice --> IP: Click "Approve" in the SingPass mobile app.
+    deactivate Alice
+    activate IP
+    IP -> App: Alice logged in. Here's a SingPass token.\n""302 pisp-server/link?credentials=~*~*~*""
+    deactivate IP
+    activate App
+end
+
+group Listing accounts
+    App -> AIP: Here's my token proving I'm Alice with SingPass ID 1234.\nCan you show me the accounts I have access to?
+    deactivate App
+    note over AIP
+      Because the DFSP opened your account with
+      SingPass ID 1234, they know what accounts
+      you have access to!
+    end note
+    activate AIP
+    AIP --> App: Sure. There's account #1, #2, and #3.
+    deactivate AIP
+    activate App
+    App -> Alice: You have access to Account #1, #2, and #3.\nWhich do you want to link?
+    deactivate App
+end
+
+...
+
+@enduml

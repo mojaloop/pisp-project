@@ -1,0 +1,121 @@
+@startuml
+
+title PISP: Linking
+autonumber
+
+!include participants.iuml
+
+note over Alice, Server
+    During registration, DFSPs provide Auth URLs and PISPs provide redirect domains.
+end note
+
+group Discovery: Which DFSP do we link with?
+    Alice -> App: I'd like to link an account please.
+    activate App
+    App -> Server: What DFSPs are available for linking?
+    Server -> Switch: What DFSPs are available for linking?
+    activate Switch
+    Switch --> Server: We have DFSP A, B, and C.\n(and metadata on each)
+    deactivate Switch
+    Server --> App: We have DFSP A, B, and C.\n(and metadata on each)
+    App --> Alice: No problem. Which FSP?\nSupported options are: A, B, and C.
+    deactivate App
+    activate Alice
+    Alice -> App: My account is with DFSP A.
+    deactivate Alice
+    activate App
+end group
+
+group Authentication: Prove to the DFSP that you are their customer.
+    App -> Alice: OK. We'll open a direct you to DFSP A's login URL.\nIt will redirect to us when you're done.
+    deactivate App
+    activate Alice
+    Alice -> IP: ""GET dfspa.example.com/login?redirect=pisp.example.com/token""
+    activate IP
+    IP --> Alice: ""<html><form ...> ...</html>""
+    deactivate IP
+    Alice -> IP: ""POST dfspa.example.com/login { username: Alice, password: ~*~*~*~*~*~* }""
+    deactivate Alice
+    activate IP
+end
+
+group Delegation: Provide a secret the PISP can use to act on the user's behalf.
+    IP -> Switch: I've been instructed to redirect to\n""pisp.example.com/token"". Is that OK?
+    activate Switch
+    Switch -> IP: Yep! That's fine!
+    deactivate Switch
+    IP -> Alice: ""302. pisp.example.com/token?secret=~*~*~*~*""
+    deactivate IP
+    activate Alice
+    Alice -> Server: ""GET pisp.example.com/token?secret=~*~*~*~*""
+    deactivate Alice
+    activate Server
+    Server -> Server: Store access token for future use.
+end
+
+group Account selection
+    Server -> Switch: Here's my token. Which the accounts do I\nhave access to at DFSP A?
+    activate Switch
+    Switch -> AIP: What accounts are available for this token?
+    activate AIP
+    AIP --> Switch: That token can access account #1, #2, and #3 (including balances).
+    deactivate AIP
+    Switch --> Server: Alice is able to link with Account #1, #2, or #3.
+    deactivate Switch
+    Server --> App: Alice is able to link with Account #1, #2, or #3.
+    deactivate Server
+    activate App
+    App --> Alice: You have access to Account #1, #2, and #3.\nWhich do you want to link?
+    deactivate App
+    activate Alice
+end
+
+group FIDO Registration
+    Alice --> App: I'd like to link Account #1 please.
+    deactivate Alice
+    activate App
+    App -> Switch: I'd like to register a key for Alice's Account #1.\nHere's my token. Challenge me please?
+    deactivate App
+    activate Switch
+    Switch -> IP: PISP gave us this token and said it was\nfrom you. Is it valid?
+    activate IP
+    IP --> Switch: Yes, that token is valid.
+    deactivate IP
+    Switch -> FIDO: PISP wants to register.\nCan you generate a challenge?
+    activate FIDO
+    FIDO --> Switch: Here's a challenge. Send it back signed\nalong with the public key.
+    deactivate FIDO
+    Switch -> Server: Here's a challenge. Send it back signed\nalong with the public key.
+    deactivate Switch
+    activate Server
+    Server -> App: Here's a challenge. Send it back signed\nalong with the public key.
+    deactivate Server
+    activate App
+    App -> App: ""Authenticator.generateKeypair()""
+    App -> App: ""Authenticator.sign(challenge)""
+    App -> Alice: I'll need your fingerprint for this.
+    deactivate App
+    activate Alice
+    Alice --> App: Sure. Here you go.
+    deactivate Alice
+    activate App
+    App --> Server: Here's the signed challenge and the public key.
+    deactivate App
+    activate Server
+    Server --> Switch: Here's the signed challenge and the public key.
+    activate Switch
+    deactivate Server
+    Switch --> FIDO: Here's the signed challenge and the public key.
+    activate FIDO
+    FIDO --> Switch: OK. You're all set.
+    deactivate FIDO
+    Switch --> Server: OK. You're all set.
+    deactivate Switch
+    activate Server
+    Server --> App: OK. You're all set.
+    deactivate Server
+    activate App
+    App --> Alice: You've successfully linked Account #1 at DFSP A.
+    deactivate App
+end
+@enduml

@@ -1,0 +1,60 @@
+@startuml
+
+title PISP Linking: FIDO Registration
+!include participants.iuml
+
+... Alice has chosen to link with Account # at DFSP A ...
+
+autonumber 7 "<b>ACCT-#</b>"
+Alice -> App: I'd like to link Account #1 please.
+
+autonumber 1 "<b>FIDO-#</b>"
+group FIDO Registration
+    deactivate Alice
+    activate App
+    App -> Switch: I'd like to register a key for Alice's Account #1.
+    deactivate App
+    activate Switch
+    Switch -> DFSP: Can you confirm that Alice has granted consent to act on her behalf with PISPA
+    activate DFSP
+    DFSP --> Switch: Yes, Alice granted consent a few slides back
+    deactivate DFSP
+    Switch -> FIDO: PISP wants to register.\nCan you generate a challenge?
+    activate FIDO
+    FIDO --> Switch: Here's a challenge. Send it back signed\nalong with the public key.
+    deactivate FIDO
+    Switch -> Server: Here's a challenge. Send it back signed\nalong with the public key.
+    deactivate Switch
+    activate Server
+    Server -> App: Here's a challenge. Send it back signed\nalong with the public key.
+    deactivate Server
+    activate App
+    App -> App: ""Authenticator.generateKeypair()""
+    App -> App: ""Authenticator.sign(challenge)""
+    App -> Alice: I'll need your fingerprint for this.
+    deactivate App
+    activate Alice
+    Alice --> App: Sure. Here you go.
+    deactivate Alice
+    activate App
+    App --> Server: Here's the signed challenge and the public key.
+    deactivate App
+    activate Server
+    Server --> Switch: Here's the signed challenge and the public key.
+    activate Switch
+    deactivate Server
+    Switch --> FIDO: Here's the signed challenge and the public key.
+    activate FIDO
+    FIDO --> Switch: OK. You're all set.
+    deactivate FIDO
+    Switch --> Server: OK. You're all set.
+    deactivate Switch
+    activate Server
+    Server --> App: OK. You're all set.
+    deactivate Server
+    activate App
+    App --> Alice: You've successfully linked Account #1 at DFSP A.
+    deactivate App
+end
+
+@enduml

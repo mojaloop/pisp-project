@@ -1,0 +1,57 @@
+@startuml
+
+title PISP: Centralized FIDO Server
+
+box "Mobile device"
+    actor Alice
+    participant "PISP App" as App
+end box
+box "DFSP"
+    participant "DFSP A\n(as Identity Provider)" as IP
+end box
+box "Mojaloop"
+    participant "FIDO Server" as FIDO
+end box
+
+...
+
+note over Alice, App
+    The App currently has an Access Token granted by DFSP A
+    acting as an Identity Provider.
+end note
+
+group FIDO: Registration
+    Alice --> App: I'd like to link Account #1 please.
+    deactivate Alice
+    activate App
+    App -> FIDO: I'd like to register a key for Alice's Account #1 at DFSP A.\nHere's my token. Challenge me please?
+    group Verify token with DFSP as Identity Provider
+        deactivate App
+        activate FIDO
+        FIDO -> IP: Can you tell me if this token is valid\nfor Alice's Account #1?
+        activate IP
+        IP -> IP: Check validity of Access Token.
+        IP --> FIDO: Yep. This checks out!
+        deactivate IP
+    end
+    FIDO --> App: OK. Here's a challenge.\nSend it back signed along with the public key.
+    deactivate FIDO
+    activate App
+    App -> App: ""Authenticator.generateKeypair()""
+    App -> Alice: I'll need your fingerprint for this.
+    deactivate App
+    activate Alice
+    Alice --> App: Sure. Here you go.
+    deactivate Alice
+    activate App
+    App -> App: ""Authenticator.sign(challenge)""
+    App -> FIDO: Here's the signed challenge and the public key.
+    deactivate App
+    activate FIDO
+    FIDO --> App: OK. Just use that key in the future when accessing Account #1.
+    deactivate FIDO
+    activate App
+    App -> Alice: You've successfully linked Account #1 at DFSP A.
+    deactivate App
+end
+@enduml

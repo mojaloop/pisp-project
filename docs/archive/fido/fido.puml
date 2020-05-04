@@ -1,0 +1,66 @@
+@startuml
+autonumber
+title FIDO Stages
+
+actor User
+box "Mobile Device"
+  participant Authenticator
+  participant Application as App
+end box
+participant Service
+
+== Stage 0: Traditional Login ==
+
+
+User -> App: Here's my username and password.\nCan you log us in?
+activate App
+App -> Service: Here's the user's password.\nCan you authenticate us?
+activate Service
+Service --> App: OK. You're logged in.
+deactivate Service
+App --> User: OK. We're logged in.
+deactivate App
+
+== Stage 1: Registration ==
+
+Service -> App: We'd like to use FIDO.\nCan you prompt the user to answer this challenge?
+activate App
+App -> Authenticator: The service would like to use FIDO.\nI need your help.
+activate Authenticator
+Authenticator -> User: I'll need your fingerprint to verify that you're you.
+activate User
+User --> Authenticator: Sure. Here's my fingerprint.
+deactivate User
+Authenticator --> App: Here's the signed challenge.\nAnd the Public Key for the Service to store.
+deactivate Authenticator
+App --> Service: Here's your signed challenge.\nAnd the public key for this user.
+deactivate App
+
+... Some time later ...
+
+== Stage 2: Login ==
+
+User -> App: Here's my username.\nCan you log us in?
+activate App
+App -> Service: Here's our username.\nCan you authenticate us?
+activate Service
+Service --> App: Sure. Here's a challenge.\nSign it with that public key you registered with.
+deactivate Service
+App -> Authenticator: The service wants to sign this challenge.\nI need your help.
+deactivate App
+activate Authenticator
+Authenticator -> User: I'll need your fingerprint to verify that you're you.
+activate User
+User --> Authenticator: Sure. Here's my fingerprint.
+deactivate User
+Authenticator --> App: OK. Here's the signed challenge.
+deactivate Authenticator
+activate App
+App --> Service: Here's the signed challenge.\nCan you authenticate us?
+activate Service
+Service --> App: OK. You're logged in.
+deactivate Service
+App --> User: OK. We're logged in.
+deactivate App
+
+@enduml

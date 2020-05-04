@@ -1,0 +1,54 @@
+@startuml
+title PISP Linking: Authentication
+box "Mobile device"
+    actor Alice
+    participant "PISP App" as App    
+end box
+box "PISP"
+participant "PISP Server" as Server
+end box
+box "DFSP A"
+    participant "DFSP A" as DFSP
+end box
+
+Alice -> App: My account is with DFSP A.
+
+autonumber 1 "<b>AUTH-#</b>"
+    group Auth-N and Consent
+    App -> Server: Get authorization to act \non behalf of Alice from DFSP A
+    Server -> DFSP: Can I get auth-z to act on Alice's behalf?
+    DFSP -> Alice: (SMS) PISP wants to view a list of your accounts. Enter this OTP to grant them access
+    DFSP --> Server: Ask Alice to enter the OTP I sent her\n and I'll give you a list of her accounts
+    Server -> App: Get the OTP from Alice \nthat DFSPA sent her
+    App -> Alice: Enter the OTP you got to give \nme access to a list of your account
+    Alice --> App: <OTP>
+    App --> Server: <OTP>
+    Server --> DFSP: <OTP>
+    DFSP --> Server: Here's a list of Alice's accounts.\n Which do you want to transact from?
+    Server -> App: Ask Alice to choose an account.
+    App -> Alice: Which account should I use at DFSP A?
+    Alice --> App: Use my Savings account
+    App --> Server: Savings
+    Server -> DFSP: Can I get auth-z to transact \nfrom Alice's savings account?
+    DFSP -> Alice: (SMS) PISP wants to get balances and send payments from your savings account. Provide this OTP to auth-z them to do this.
+    DFSP --> Server: Ask Alice to enter the OTP I sent her\n and I'll grant you auth-z
+    Server -> App: Get the OTP from Alice \nthat DFSPA sent her
+    App -> Alice: Enter the OTP you got to allow \nme to access your Savings account
+    Alice --> App: <OTP>
+    App --> Server: <OTP>
+    Server --> DFSP: <OTP>
+    DFSP --> Server: Alice has granted auth-z for you \nto access her Savings account
+    end
+    group FIDO Enrollment
+      Server -> DFSP: Give me a challange to create a credential\n for Alice's Savings account
+      DFSP --> Server: Here you go
+      Server --> App: Use this challenge to create\n a new FIDO credential for Alice
+      App -> Alice: Register your fingerprint to \nauthenticate when transacting in future
+      Alice --> App: <scan fingerprint>
+      App -> Server: Enroll this credential for \nAlice's Savings account at DFSP A
+      Server -> DFSP: Enroll this credential for Alice's Savings account
+      DFSP --> Server: Done!
+    end
+    Server -> App: Success
+    App -> Alice: Success
+@enduml

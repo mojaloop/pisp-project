@@ -1,0 +1,41 @@
+@startuml
+autonumber
+title OAuth Stages
+
+actor User
+
+participant "Web App" as App
+
+box "Service"
+  participant "Authz Server" as AuthService
+  participant "Resource Server" as ResourceService
+end box
+
+== Stage 0: User wants access to a resource ==
+
+User -> App: ""GET /resources/1234""
+
+== Stage 1: Getting consent from the user ==
+
+App -> User: Can I act on your behalf\nto get this resource?
+User --> App: Sure.
+App -> User: OK. Here's a WebView where you\ncan login with the Authz Server.
+User -> AuthService: ""GET /login""
+AuthService --> User: ""<html> ... ""
+User -> AuthService: ""POST /login { username: "~*~*~*", password: "~*~*~*" }""
+AuthService -> User: ""302 Redirect /authGrant?secretToken=~*~*~*""
+User -> App: ""GET /authGrant?secretToken=~*~*~*""
+App -> App: Store ""{ authGrant: "secretToken=~*~*~*" }""
+
+== Stage 2: Obtaining the access token ==
+
+App -> AuthService: ""GET /accessToken?resource=1234&authGrant=~*~*~*""
+AuthService --> App: ""200 OK. { accessToken: "~*~*~*" }""
+
+== Stage 3: Accessing the resource ==
+
+App -> ResourceService: ""GET /resources/1234?accessToken=~*~*~*""
+ResourceService -> ResourceService: ""Verify(1234, accessToken=~*~*~*)""
+ResourceService --> App: ""Resource { id: 1234, ... }""
+
+@enduml

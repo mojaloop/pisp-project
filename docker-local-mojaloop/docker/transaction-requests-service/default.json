@@ -1,0 +1,27 @@
+{
+  "PORT": 4003,
+  "ENDPOINT_CACHE_CONFIG": {
+    "expiresIn": 180000,
+    "generateTimeout": 30000
+  },
+  "SWITCH_ENDPOINT": "http://central-ledger.local:3001",
+  "ERROR_HANDLING": {
+    "includeCauseExtension": true,
+    "truncateExtensions": true
+  },
+  "INSTRUMENTATION": {
+    "METRICS": {
+      "DISABLED": false,
+      "labels": {
+        "eventId": "*"
+      },
+      "config": {
+        "timeout": 5000,
+        "prefix": "moja_trs_",
+        "defaultLabels": {
+          "serviceName": "transaction-requests"
+        }
+      }
+    }
+  }
+}

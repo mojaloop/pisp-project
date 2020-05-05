@@ -1,0 +1,62 @@
+{
+  "PORT": 3007,
+  "HOSTNAME": "http://central-settlements.local",
+  "DATABASE": {
+    "DIALECT": "mysql",
+    "HOST": "mysql",
+    "PORT": 3306,
+    "USER": "central_ledger",
+    "PASSWORD": "password",
+    "SCHEMA": "central_ledger",
+    "POOL_MIN_SIZE": 10,
+    "POOL_MAX_SIZE": 10,
+    "ACQUIRE_TIMEOUT_MILLIS": 30000,
+    "CREATE_TIMEOUT_MILLIS": 30000,
+    "DESTROY_TIMEOUT_MILLIS": 5000,
+    "IDLE_TIMEOUT_MILLIS": 30000,
+    "REAP_INTERVAL_MILLIS": 1000,
+    "CREATE_RETRY_INTERVAL_MILLIS": 200,
+    "DEBUG": false
+  },
+  "TRANSFER_VALIDITY_SECONDS": "432000",
+  "HUB_PARTICIPANT": {
+    "ID": 1,
+    "NAME": "Hub"
+  },
+  "KAFKA": {
+    "TOPIC_TEMPLATES": {
+      "GENERAL_TOPIC_TEMPLATE": {
+        "TEMPLATE": "topic-{{functionality}}-{{action}}",
+        "REGEX": "topic-(.*)-(.*)"
+      }
+    },
+    "PRODUCER": {
+      "NOTIFICATION": {
+        "EVENT": {
+          "config": {
+            "options": {
+              "messageCharset": "utf8"
+            },
+            "rdkafkaConf": {
+              "debug": "all",
+              "metadata.broker.list": "kafka:9092",
+              "client.id": "cs-prod-notification-event",
+              "event_cb": true,
+              "compression.codec": "none",
+              "retry.backoff.ms": 100,
+              "message.send.max.retries": 2,
+              "socket.keepalive.enable": true,
+              "queue.buffering.max.messages": 10000000,
+              "batch.num.messages": 100,
+              "dr_cb": true,
+              "socket.blocking.max.ms": 1,
+              "queue.buffering.max.ms": 1,
+              "broker.version.fallback": "0.10.1.0",
+              "api.version.request": true
+            }
+          }
+        }
+      }
+    }
+  }
+}

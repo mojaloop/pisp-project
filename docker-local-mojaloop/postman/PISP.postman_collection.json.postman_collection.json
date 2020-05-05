@@ -1,0 +1,415 @@
+{
+	"info": {
+		"_postman_id": "a9e5e624-ed85-4861-bf83-99a853328454",
+		"name": "PISP.postman_collection.json",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Add parties to DFSP backends",
+			"item": [
+				{
+					"name": "Add Alice account to DFSPA",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7fb04c1c-59b7-4bdb-82ab-0dcd31561174",
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"displayName\": \"Alice Alpaca\",\n    \"firstName\": \"Alice\",\n    \"middleName\": \"K\",\n    \"lastName\": \"Alpaca\",\n    \"dateOfBirth\": \"1970-01-01\",\n    \"idType\": \"MSISDN\",\n    \"idValue\": \"123456789\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9003/repository/parties",
+							"host": [
+								"localhost"
+							],
+							"port": "9003",
+							"path": [
+								"repository",
+								"parties"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Bob account to DFSPB",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "575ffd01-e396-4e01-bd93-681b6bf1438e",
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"displayName\": \"Bob Babirusa\",\n    \"firstName\": \"Bob\",\n    \"middleName\": \"O\",\n    \"lastName\": \"Babirusa\",\n    \"dateOfBirth\": \"1970-01-01\",\n    \"idType\": \"MSISDN\",\n    \"idValue\": \"987654321\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:10003/repository/parties",
+							"host": [
+								"localhost"
+							],
+							"port": "10003",
+							"path": [
+								"repository",
+								"parties"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "E2E Tests",
+			"item": [
+				{
+					"name": "Successful E2E transfer Alice to Bob",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "3ea1ecb7-ca7b-45d3-84a9-9e203ac555c9",
+								"exec": [
+									"var uuid = require('uuid');",
+									"var generatedUUID = uuid.v4();",
+									"pm.environment.set('transferDate', (new Date()).toUTCString());",
+									"",
+									"",
+									"pm.environment.set('payerIdType', 'MSISDN');",
+									"pm.environment.set('payerIdValue', '123456789');",
+									"",
+									"pm.environment.set('payeeIdType', 'MSISDN');",
+									"pm.environment.set('payeeIdValue', '987654321');",
+									"",
+									"pm.environment.set('amount', '100');",
+									"pm.environment.set('currency', 'USD');",
+									"pm.environment.set('note', 'Test note');",
+									"pm.environment.set('homeTransactionId', '123ABC');",
+									"",
+									"pm.environment.set('amountType', 'SEND');",
+									"pm.environment.set('transactionType', 'TRANSFER');"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "c3022fda-b665-4d6d-998e-af82b47d4c87",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    ",
+									"    var headers = pm.response.json().headers;",
+									"    var jsonData = pm.response.json().scenario1.result;",
+									"",
+									"    pm.test(\"transfer should have completed\", function () {",
+									"       pm.expect(jsonData.currentState).to.eql(\"COMPLETED\");",
+									"       pm.expect(jsonData.fulfil.transferState).to.eql(\"COMMITTED\");",
+									"    });",
+									"    ",
+									"    pm.test(\"payerfsp data should have the same payer as request\", function () {",
+									"       pm.expect(jsonData.from.idType).to.eql(pm.environment.get(\"payerIdType\"));",
+									"       pm.expect(jsonData.from.idValue).to.eql(pm.environment.get(\"payerIdValue\"));",
+									"    });",
+									"                ",
+									"    pm.test(\"payeefsp data should have the same payer as request\", function () {",
+									"       pm.expect(jsonData.to.idType).to.eql(pm.environment.get(\"payeeIdType\"));",
+									"       pm.expect(jsonData.to.idValue).to.eql(pm.environment.get(\"payeeIdValue\"));",
+									"    });",
+									"    ",
+									"                    ",
+									"    pm.test(\"quote data should have correct transfer amount and currency\", function () {",
+									"        pm.expect(jsonData.quoteResponse.transferAmount.amount).to.eql(pm.environment.get(\"amount\"));",
+									"        pm.expect(jsonData.quoteResponse.transferAmount.currency).to.eql(pm.environment.get(\"currency\"));",
+									"",
+									"    });",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"name\": \"scenario1\",\n        \"operation\": \"postTransfers\",\n        \"body\": {\n\t\t    \"from\": {\n\t\t        \"idType\": \"{{payerIdType}}\",\n\t\t        \"idValue\": \"{{payerIdValue}}\"\n\t\t    },\n\t\t    \"to\": {\n\t\t        \"idType\": \"{{payeeIdType}}\",\n\t\t        \"idValue\": \"{{payeeIdValue}}\"\n\t\t    },\n\t\t    \"amountType\": \"{{amountType}}\",\n\t\t    \"currency\": \"{{currency}}\",\n\t\t    \"amount\":  \"{{amount}}\",\n\t\t    \"transactionType\": \"{{transactionType}}\",\n\t\t    \"note\": \"{{note}}\",\n\t\t    \"homeTransactionId\": \"{{homeTransactionId}}\"\n        }\n    }\n]"
+						},
+						"url": {
+							"raw": "http://localhost:9003/scenarios",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9003",
+							"path": [
+								"scenarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Payee Rejection E2E transfer Alice to Bob",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "3ea1ecb7-ca7b-45d3-84a9-9e203ac555c9",
+								"exec": [
+									"var uuid = require('uuid');",
+									"var generatedUUID = uuid.v4();",
+									"pm.environment.set('transferDate', (new Date()).toUTCString());",
+									"",
+									"",
+									"pm.environment.set('payerIdType', 'MSISDN');",
+									"pm.environment.set('payerIdValue', '123456789');",
+									"",
+									"pm.environment.set('payeeIdType', 'MSISDN');",
+									"pm.environment.set('payeeIdValue', '987654321');",
+									"",
+									"pm.environment.set('amount', '5105');",
+									"pm.environment.set('currency', 'USD');",
+									"pm.environment.set('note', 'Test note');",
+									"pm.environment.set('homeTransactionId', '123ABC');",
+									"",
+									"pm.environment.set('amountType', 'SEND');",
+									"pm.environment.set('transactionType', 'TRANSFER');"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "c3022fda-b665-4d6d-998e-af82b47d4c87",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    ",
+									"    var headers = pm.response.json().headers;",
+									"    var result = pm.response.json().scenario1.result;",
+									"    var transferState = result.transferState;",
+									"",
+									"    pm.test(\"transfer should have status code of 5105\", function () {",
+									"       pm.expect(result.statusCode).to.eql(\"5105\");",
+									"    });",
+									"    ",
+									"    pm.test(\"transfer current state should have errored\", function () {",
+									"       pm.expect(transferState.currentState).to.eql(\"ERROR_OCCURRED\");",
+									"    });",
+									"    ",
+									"    pm.test(\"payerfsp data should have the same payer as request\", function () {",
+									"       pm.expect(transferState.from.idType).to.eql(pm.environment.get(\"payerIdType\"));",
+									"       pm.expect(transferState.from.idValue).to.eql(pm.environment.get(\"payerIdValue\"));",
+									"    });",
+									"                ",
+									"    pm.test(\"payeefsp data should have the same payer as request\", function () {",
+									"       pm.expect(transferState.to.idType).to.eql(pm.environment.get(\"payeeIdType\"));",
+									"       pm.expect(transferState.to.idValue).to.eql(pm.environment.get(\"payeeIdValue\"));",
+									"    });",
+									"    ",
+									"                    ",
+									"    pm.test(\"quote data should have correct transfer amount and currency\", function () {",
+									"        pm.expect(transferState.quoteResponse.transferAmount.amount).to.eql(pm.environment.get(\"amount\"));",
+									"        pm.expect(transferState.quoteResponse.transferAmount.currency).to.eql(pm.environment.get(\"currency\"));",
+									"",
+									"    });",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"name\": \"scenario1\",\n        \"operation\": \"postTransfers\",\n        \"body\": {\n\t\t    \"from\": {\n\t\t        \"idType\": \"{{payerIdType}}\",\n\t\t        \"idValue\": \"{{payerIdValue}}\"\n\t\t    },\n\t\t    \"to\": {\n\t\t        \"idType\": \"{{payeeIdType}}\",\n\t\t        \"idValue\": \"{{payeeIdValue}}\"\n\t\t    },\n\t\t    \"amountType\": \"{{amountType}}\",\n\t\t    \"currency\": \"{{currency}}\",\n\t\t    \"amount\":  \"{{amount}}\",\n\t\t    \"transactionType\": \"{{transactionType}}\",\n\t\t    \"note\": \"{{note}}\",\n\t\t    \"homeTransactionId\": \"{{homeTransactionId}}\"\n        }\n    }\n]"
+						},
+						"url": {
+							"raw": "http://localhost:9003/scenarios",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9003",
+							"path": [
+								"scenarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Successful E2E transfer Bob to Alice",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "3ea1ecb7-ca7b-45d3-84a9-9e203ac555c9",
+								"exec": [
+									"var uuid = require('uuid');",
+									"var generatedUUID = uuid.v4();",
+									"pm.environment.set('transferDate', (new Date()).toUTCString());",
+									"",
+									"",
+									"pm.environment.set('payerIdType', 'MSISDN');",
+									"pm.environment.set('payerIdValue', '987654321');",
+									"",
+									"pm.environment.set('payeeIdType', 'MSISDN');",
+									"pm.environment.set('payeeIdValue', '123456789');",
+									"",
+									"pm.environment.set('amount', '100');",
+									"pm.environment.set('currency', 'USD');",
+									"pm.environment.set('note', 'Test note');",
+									"pm.environment.set('homeTransactionId', '123ABC');",
+									"",
+									"pm.environment.set('amountType', 'SEND');",
+									"pm.environment.set('transactionType', 'TRANSFER');"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "c3022fda-b665-4d6d-998e-af82b47d4c87",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    ",
+									"    var headers = pm.response.json().headers;",
+									"    var jsonData = pm.response.json().scenario1.result;",
+									"",
+									"    pm.test(\"transfer should have completed\", function () {",
+									"       pm.expect(jsonData.currentState).to.eql(\"COMPLETED\");",
+									"       pm.expect(jsonData.fulfil.transferState).to.eql(\"COMMITTED\");",
+									"    });",
+									"    ",
+									"    pm.test(\"payerfsp data should have the same payer as request\", function () {",
+									"       pm.expect(jsonData.from.idType).to.eql(pm.environment.get(\"payerIdType\"));",
+									"       pm.expect(jsonData.from.idValue).to.eql(pm.environment.get(\"payerIdValue\"));",
+									"    });",
+									"                ",
+									"    pm.test(\"payeefsp data should have the same payer as request\", function () {",
+									"       pm.expect(jsonData.to.idType).to.eql(pm.environment.get(\"payeeIdType\"));",
+									"       pm.expect(jsonData.to.idValue).to.eql(pm.environment.get(\"payeeIdValue\"));",
+									"    });",
+									"    ",
+									"                    ",
+									"    pm.test(\"quote data should have correct transfer amount and currency\", function () {",
+									"        pm.expect(jsonData.quoteResponse.transferAmount.amount).to.eql(pm.environment.get(\"amount\"));",
+									"        pm.expect(jsonData.quoteResponse.transferAmount.currency).to.eql(pm.environment.get(\"currency\"));",
+									"",
+									"    });",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"name\": \"scenario1\",\n        \"operation\": \"postTransfers\",\n        \"body\": {\n\t\t    \"from\": {\n\t\t        \"idType\": \"{{payerIdType}}\",\n\t\t        \"idValue\": \"{{payerIdValue}}\"\n\t\t    },\n\t\t    \"to\": {\n\t\t        \"idType\": \"{{payeeIdType}}\",\n\t\t        \"idValue\": \"{{payeeIdValue}}\"\n\t\t    },\n\t\t    \"amountType\": \"{{amountType}}\",\n\t\t    \"currency\": \"{{currency}}\",\n\t\t    \"amount\":  \"{{amount}}\",\n\t\t    \"transactionType\": \"{{transactionType}}\",\n\t\t    \"note\": \"{{note}}\",\n\t\t    \"homeTransactionId\": \"{{homeTransactionId}}\"\n        }\n    }\n]"
+						},
+						"url": {
+							"raw": "http://localhost:10003/scenarios",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "10003",
+							"path": [
+								"scenarios"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

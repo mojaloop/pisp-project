@@ -1,0 +1,43 @@
+{
+    "ADMIN_PORT": 4001,
+    "API_PORT": 4002,
+    "DATABASE": {
+      "DIALECT": "mysql",
+      "HOST": "mysql-als",
+      "PORT": 3306,
+      "USER": "account_lookup",
+      "PASSWORD": "password",
+      "DATABASE": "account_lookup",
+      "POOL_MIN_SIZE": 10,
+      "POOL_MAX_SIZE": 10,
+      "ACQUIRE_TIMEOUT_MILLIS": 30000,
+      "CREATE_TIMEOUT_MILLIS": 30000,
+      "DESTROY_TIMEOUT_MILLIS": 5000,
+      "IDLE_TIMEOUT_MILLIS": 30000,
+      "REAP_INTERVAL_MILLIS": 1000,
+      "CREATE_RETRY_INTERVAL_MILLIS": 200,
+      "DEBUG": false
+    },
+    "DISPLAY_ROUTES": true,
+    "RUN_MIGRATIONS": true,
+    "ENDPOINT_CACHE_CONFIG": {
+      "expiresIn": 180000,
+      "generateTimeout": 30000
+    },
+    "SWITCH_ENDPOINT": "http://central-ledger:3001",
+    "INSTRUMENTATION": {
+      "METRICS": {
+        "DISABLED": false,
+        "labels": {
+          "fspId": "*"
+        },
+        "config": {
+          "timeout": 5000,
+          "prefix": "moja_",
+          "defaultLabels": {
+            "serviceName": "account-lookup-service"
+          }
+        }
+      }
+    }
+  }

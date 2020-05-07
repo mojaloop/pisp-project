@@ -32,19 +32,7 @@ services:
       retries: 10
       interval: 30s
     extra_hosts:
-      - "central-ledger.local:172.17.0.1"
-      - "central-settlement.local:172.17.0.1"
-      - "ml-api-adapter.local:172.17.0.1"
-      - "account-lookup-service.local:172.17.0.1"
-      - "account-lookup-service-admin.local:172.17.0.1"
-      - "quoting-service.local:172.17.0.1"
       - "moja-simulator.local:172.17.0.1"
-      - "central-ledger:172.17.0.1"
-      - "central-settlement:172.17.0.1"
-      - "ml-api-adapter:172.17.0.1"
-      - "account-lookup-service:172.17.0.1"
-      - "account-lookup-service-admin:172.17.0.1"
-      - "quoting-service:172.17.0.1"
       - "simulator:172.17.0.1"
       - "host.docker.internal:172.17.0.1"
       - "simulator.local:172.17.0.1"
@@ -91,19 +79,9 @@ services:
       interval: 30s
     extra_hosts:
       - "central-ledger.local:172.17.0.1"
-      - "central-settlement.local:172.17.0.1"
-      - "ml-api-adapter.local:172.17.0.1"
-      - "account-lookup-service.local:172.17.0.1"
-      - "account-lookup-service-admin.local:172.17.0.1"
-      - "quoting-service.local:172.17.0.1"
-      - "moja-simulator.local:172.17.0.1"
       - "central-ledger:172.17.0.1"
-      - "central-settlement:172.17.0.1"
-      - "ml-api-adapter:172.17.0.1"
-      - "account-lookup-service:172.17.0.1"
-      - "account-lookup-service-admin:172.17.0.1"
-      - "quoting-service:172.17.0.1"
       - "simulator:172.17.0.1"
+      - "moja-simulator.local:172.17.0.1"
       - "host.docker.internal:172.17.0.1"
       - "simulator.local:172.17.0.1"
 

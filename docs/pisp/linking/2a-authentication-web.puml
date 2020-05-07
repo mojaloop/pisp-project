@@ -1,0 +1,73 @@
+@startuml
+title PISP Linking: Authentication
+box "Mobile device"
+    actor Alice
+    participant "PISP App" as App
+    participant "Browser" as Browser
+    
+end box
+box "PISP"
+participant "PISP Server" as Server
+end box
+box "Mojaloop"
+    participant "FIDO Server" as FIDO
+    participant Switch
+end box
+box "DFSP A"
+    participant "DFSP A" as DFSP
+end box
+
+... Alice chooses DFSP A ...
+
+Alice -> App: My account is with DFSP A.
+
+autonumber 1 "<b>AUTH-#</b>"
+note over Alice, DFSP
+    This flow is based on Pushed Authorization Requests:
+    https://tools.ietf.org/html/draft-ietf-oauth-par-01.
+
+    The PAR interaction should be done via a Mojaloop APIs resource called /authorizationRequests
+end note
+
+    App -> Server: Get authorization to act on behalf of Alice from DFSP A
+    Server -> Switch: POST /authorizationRequests/{ID}\n { supportedAuthenticationChannels: [Web, OTP],\n scopes: [balanceEnquiry, accountList, sendTransfer],\n callbackUrl: pisp-app://callback ... }
+    Switch --> Server: 201 Created
+    Switch -> DFSP: POST /authorizationRequests/{ID}\n { supportedAuthenticationChannels: [Web, OTP],\n scopes: [balanceEnquiry, accountList, sendTransfer],\n callbackUrl: pisp-app://callback ... }
+    DFSP --> Switch: 201 Created
+    DFSP -> Switch: GET /authorizations/{ID}\n?authenticationType=Web\n&url=https://dfspa.com/auth?request_uri={ID}
+    Switch --> DFSP: 200 Success
+    Switch -> Server: GET /authorizations/{ID}\n?authenticationType=Web\n&url=https://dfspa.com/auth?request_uri={ID}
+    Server --> Switch: 200 Success
+    Server -> App: Redirect user to:\n https://dfspa.com/auth?request_uri={ID}
+    App -> Alice: We are going open a browser so you can login to DFSPA.\They'll direct you back here when you're done.
+    App -> Browser: Open the following URL: \nhttps://dfspa.com/auth?request_uri={ID}
+    Browser --> DFSP: GET https://dfspa.com/auth?request_uri={ID}
+    DFSP --> Browser: 200 Success - Login
+    Alice -> Browser: Username & Password
+    Browser -> DFSP: POST https://dfspa.com/login?request_uri={ID}
+    DFSP --> Browser: 302 Location: https://dfspa.com/consent?request_uri={ID}
+    Browser -> DFSP: GET https://dfspa.com/consent?request_uri={ID}
+    DFSP --> Browser: 200 Success - Consent (with account selector)
+    Alice -> Browser: I consent to PISP having access to my Savings account...
+    Browser -> DFSP: POST https://dfspa.com/consent?request_uri={ID}&account=savings
+    DFSP --> Browser: 302 Location: pisp-app://callback?authz_code=abcd
+    Browser -> App: Deeplink: pisp-app://callback?code=abcd
+    group FIDO Enrollment
+      note over Server
+      TODO: Add API calls from PISP to FIDO Server (via DFSP?) to get challenge
+      end note
+      App --> Alice: Register your fingerprint to authenticate when transacting in future
+      Alice -> App: <scan fingerprint>
+    end
+    App -> Server: AuthZ Code: xxxx, FIDO Credential: {...}
+    Server -> Switch: PUT /authorizations/{ID}\n { authenticationInfo: abcd, \n fidoCredential {...}... }
+    Switch --> Server: 200 Success
+    Switch -> DFSP: PUT /authorizations/{ID}\n { authenticationInfo: abcd, \n fidoCredential {...} ... }
+    DFSP --> Switch: 200 Success
+    DFSP --> Switch: PUT /authorizationRequests/{ID}\n { scopes: [balanceEnquiry:12345-67890, sendTransfer:12345-67890]}
+    Switch -> DFSP: 200 Success
+    Switch --> Server: PUT /authorizationRequests/{ID}\n { scopes: [balanceEnquiry:12345-67890, sendTransfer:12345-67890]}
+    Server -> Switch: 200 Success
+    Server -> App: Success
+    App -> Alice: Success
+@enduml

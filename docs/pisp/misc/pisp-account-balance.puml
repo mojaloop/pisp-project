@@ -1,0 +1,58 @@
+@startuml
+
+title PISP: Account balance
+
+box "Mobile device"
+    actor Alice
+    participant "PISP App" as App
+end box
+
+box "DFSP"
+    participant "DFSP A\n(as Identity Provider)" as IP
+    'participant "DFSP A\n(as FIDO Server)" as FIDO
+    participant "DFSP A\n(as Account Info Provider)" as AIP
+end box
+
+participant "PISP Server" as PISP
+
+...
+
+note over Alice, IP
+    Alice has just provided her username and password in the Web View
+end note
+
+IP -> App: 302. Alice logged in.\nHere's a token you can use on her behalf.\n""{accessToken: XXXX, refreshToken: XXXX}""
+activate App
+App -> PISP: Use these to get Alice's account info: ""{accessToken: XXXX, refreshToken: XXXX}""
+deactivate App
+activate PISP
+PISP --> App: OK. Got it.
+deactivate PISP
+
+loop every few minutes
+    PISP -> AIP: Here's my Access Token.\nCan I get the balance for Alice's Account #1?
+    activate AIP
+    AIP --> PISP: Sure. She has USD $540.02 in Account #1.
+    deactivate AIP
+    note over AIP, PISP
+        If the Access Token expires, obtain a new one
+        using the Refresh Token from before.
+    end note
+end
+
+...
+
+note over Alice, App
+    Alice re-opens the PISP App later
+end note
+
+group Balance update
+    App -> PISP: Alice just opened the app. What's her latest balance?
+    activate PISP
+    PISP --> App: Latest balances we have is USD $540.02 for Account #1.
+    deactivate PISP
+end
+
+App -> Alice: Here's your accounts and balances.
+
+@enduml

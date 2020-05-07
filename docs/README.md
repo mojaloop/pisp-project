@@ -33,15 +33,15 @@ Supporting documentation for the PISP implementation.
 For the entire flows, see the [PISP Transfer model](./out/transfer/complete/PISP%20transfer.png)
 
 ### 1. Discovery
-![discovery](./out/transfer/1-discovery/PISP%20transfer.png)
+![discovery](./out/transfer/1-discovery/PISP%20Transfer.png)
 
 ### 2. Agreement
 
-![agreement](./out/transfer/2-agreement/PISP%20transfer.png)
+![agreement](./out/transfer/2-agreement/PISP%20Transfer.png)
 
 ### 3. Transfer
 
-![transfer](./out/transfer/3-transfer/PISP%20transfer.png)
+![transfer](./out/transfer/3-transfer/PISP%20Transfer.png)
 
 
 ## Tools

@@ -1,8 +1,6 @@
 # Local Mojaloop + Custom DFSP Test setup
 
-The aim of this Document is to have a local mojaloop running with two customs DFSPs (backend plus sdk-adapter) and a mojaloop simulator (which implements mojaloop api) as shown in
-
-![](img/architecture.png).
+The aim of this Document is to have a local mojaloop running with two customs DFSPs (backend plus sdk-adapter) and a PISP represented by a mojaloop simulator (which implements mojaloop api).
 
 
 ## Create host

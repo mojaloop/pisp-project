@@ -226,6 +226,14 @@ $ sh scripts/setupDockerCompose-DFSP-SIMULATOR-MSISDN.sh
 $ sh scripts/setupDockerCompose-dfsp-backend-parties.sh
 ```
 
+### Run E2E tests.
+
+
+```
+$ sh scripts/testE2ETransfers.sh
+```
+
+
 ### If you restart docker compose you'll need to re-run this command to setup ALS
 
 ```
@@ -319,23 +327,28 @@ curl -v -X POST http://localhost:9003/scenarios   -H 'Content-Type: application/
 * Transfer USD 90 from MSIDNS 123456789 (DFSP A) to MSIDNS 333333333 (Simulator)
 
 ```
-curl -v -X POST http://localhost:10000/send   -H 'Content-Type: application/json'  -d '{
-    "from": {
-        "displayName": "Livia",
-        "idType": "MSISDN",
-        "idValue": "123456789"
-    },
-    "to": {
-        "idType": "MSISDN",
-        "idValue": "333333333"
-    },
-    "amountType": "SEND",
-    "currency": "USD",
-    "amount": "90",
-    "transactionType": "TRANSFER",
-    "note": "test",
-    "homeTransactionId": "123ABC"
-}'
+curl -v -X POST http://localhost:9003/scenarios   -H 'Content-Type: application/json'  -d '[
+  {
+    "name": "scenario1",
+    "operation": "postTransfers",
+    "body": {
+      "from": {
+          "idType": "MSISDN",
+          "idValue": "123456789"
+      },
+      "to": {
+          "idType": "MSISDN",
+          "idValue": "333333333"
+      },
+      "amountType": "SEND",
+      "currency": "USD",
+      "amount": "90",
+      "transactionType": "TRANSFER",
+      "note": "test",
+      "homeTransactionId": "123ABC"
+    }
+  }
+]'
 ```
 
 * WIP transaction requests

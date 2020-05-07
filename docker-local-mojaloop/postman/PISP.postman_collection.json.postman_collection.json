@@ -177,6 +177,19 @@
 									"        pm.expect(jsonData.quoteResponse.transferAmount.currency).to.eql(pm.environment.get(\"currency\"));",
 									"",
 									"    });",
+									"    ",
+									"    pm.test(\"home transaction id should have the same id as request\", function () {",
+									"        pm.expect(jsonData.homeTransactionId).to.eql(pm.environment.get(\"homeTransactionId\"));",
+									"    });",
+									"    ",
+									"        ",
+									"    pm.test(\"amount type should have the same type as request\", function () {",
+									"        pm.expect(jsonData.amountType).to.eql(pm.environment.get(\"amountType\"));",
+									"    });",
+									"    ",
+									"    pm.test(\"transaction type should have the same type as request\", function () {",
+									"        pm.expect(jsonData.transactionType).to.eql(pm.environment.get(\"transactionType\"));",
+									"    });",
 									"});",
 									""
 								],
@@ -184,6 +197,9 @@
 							}
 						}
 					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
 					"request": {
 						"method": "POST",
 						"header": [
@@ -195,7 +211,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "[\n    {\n        \"name\": \"scenario1\",\n        \"operation\": \"postTransfers\",\n        \"body\": {\n\t\t    \"from\": {\n\t\t        \"idType\": \"{{payerIdType}}\",\n\t\t        \"idValue\": \"{{payerIdValue}}\"\n\t\t    },\n\t\t    \"to\": {\n\t\t        \"idType\": \"{{payeeIdType}}\",\n\t\t        \"idValue\": \"{{payeeIdValue}}\"\n\t\t    },\n\t\t    \"amountType\": \"{{amountType}}\",\n\t\t    \"currency\": \"{{currency}}\",\n\t\t    \"amount\":  \"{{amount}}\",\n\t\t    \"transactionType\": \"{{transactionType}}\",\n\t\t    \"note\": \"{{note}}\",\n\t\t    \"homeTransactionId\": \"{{homeTransactionId}}\"\n        }\n    }\n]"
+							"raw": "[\n    {\n        \"name\": \"scenario1\",\n        \"operation\": \"postTransfers\",\n        \"body\": {\n            \"from\": {\n                \"idType\": \"{{payerIdType}}\",\n                \"idValue\": \"{{payerIdValue}}\"\n            },\n            \"to\": {\n                \"idType\": \"{{payeeIdType}}\",\n                \"idValue\": \"{{payeeIdValue}}\"\n            },\n            \"amountType\": \"{{amountType}}\",\n            \"currency\": \"{{currency}}\",\n            \"amount\": \"{{amount}}\",\n            \"transactionType\": \"{{transactionType}}\",\n            \"note\": \"{{note}}\",\n            \"homeTransactionId\": \"{{homeTransactionId}}\"\n        }\n    }\n]"
 						},
 						"url": {
 							"raw": "http://localhost:9003/scenarios",
@@ -276,6 +292,19 @@
 									"        pm.expect(transferState.quoteResponse.transferAmount.amount).to.eql(pm.environment.get(\"amount\"));",
 									"        pm.expect(transferState.quoteResponse.transferAmount.currency).to.eql(pm.environment.get(\"currency\"));",
 									"",
+									"    });",
+									"    ",
+									"    pm.test(\"home transaction id should have the same id as request\", function () {",
+									"        pm.expect(transferState.homeTransactionId).to.eql(pm.environment.get(\"homeTransactionId\"));",
+									"    });",
+									"    ",
+									"        ",
+									"    pm.test(\"amount type should have the same type as request\", function () {",
+									"        pm.expect(transferState.amountType).to.eql(pm.environment.get(\"amountType\"));",
+									"    });",
+									"    ",
+									"    pm.test(\"transaction type should have the same type as request\", function () {",
+									"        pm.expect(transferState.transactionType).to.eql(pm.environment.get(\"transactionType\"));",
 									"    });",
 									"});",
 									""
@@ -372,6 +401,19 @@
 									"        pm.expect(jsonData.quoteResponse.transferAmount.amount).to.eql(pm.environment.get(\"amount\"));",
 									"        pm.expect(jsonData.quoteResponse.transferAmount.currency).to.eql(pm.environment.get(\"currency\"));",
 									"",
+									"    });",
+									"    ",
+									"    pm.test(\"home transaction id should have the same id as request\", function () {",
+									"        pm.expect(jsonData.homeTransactionId).to.eql(pm.environment.get(\"homeTransactionId\"));",
+									"    });",
+									"    ",
+									"        ",
+									"    pm.test(\"amount type should have the same type as request\", function () {",
+									"        pm.expect(jsonData.amountType).to.eql(pm.environment.get(\"amountType\"));",
+									"    });",
+									"    ",
+									"    pm.test(\"transaction type should have the same type as request\", function () {",
+									"        pm.expect(jsonData.transactionType).to.eql(pm.environment.get(\"transactionType\"));",
 									"    });",
 									"});",
 									""

@@ -14,9 +14,14 @@ The aim of this Document is to have a local mojaloop running with two customs DF
 
 
 ```
-Running the services separately in terminals is recommended
+Running the services separately in different terminals is recommended
 
-Run docker-compose up account-lookup-service then close once the service is ready. Proceed to stop account-lookup-service and proceed with the following commands.
+Run
+
+docker-compose up account-lookup-service
+
+Then close once the service is ready.
+Proceed to stop account-lookup-service and proceed with the following commands.
 ALS needs to be run initially so it setups properly.
 
 docker-compose up central-ledger
@@ -27,23 +32,6 @@ docker-compose up account-lookup-service
 docker-compose up dfspa-scheme-adapter dfspa-backend
 docker-compose up dfspb-scheme-adapter dfspb-backend
 ```
-
-We need to check if account-services is running for that reason we'll execute this health request
-
-```
-curl -X GET http://account-lookup-service:4002/health
-```
-
-If this response is "OK", we can continue with the next step otherwise we need to down this service and start it again
-
-```
-docker-compose stop  account-lookup-service
-```
-
-```
-docker-compose start  account-lookup-service
-```
-
 
 ## Create some initial data
 

@@ -117,11 +117,11 @@ services:
       - "8444:8444"
     environment:
       - LOG_LEVEL=info
-      - TRANSFERS_ENDPOINT=http://172.17.0.1:3000
-      - QUOTES_ENDPOINT=http://172.17.0.1:3002
-      - PARTIES_ENDPOINT=http://172.17.0.1:4002
+      - TRANSFERS_ENDPOINT=http://ml-api-adapter:3000
+      - QUOTES_ENDPOINT=http://quoting-service:3002
+      - PARTIES_ENDPOINT=http://account-lookup-service:4002
+      - TRANSACTION_REQUESTS_ENDPOINT=http://transaction-request-service:4003
       - TRANSFERS_FULFIL_RESPONSE_DISABLED=false
-      - TRANSACTION_REQUESTS_ENDPOINT=http://172.17.0.1:4003
     networks:
       - mojaloop-net
     healthcheck:
@@ -146,6 +146,7 @@ services:
       - "simulator:172.17.0.1"
       - "host.docker.internal:172.17.0.1"
       - "simulator.local:172.17.0.1"
+      - "transaction-request-service:172.17.0.1"
 
   transaction-requests-service:
     image: mojaloop/transaction-requests-service:v9.5.0

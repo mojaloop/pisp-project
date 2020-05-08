@@ -8,7 +8,7 @@ The aim of this Document is to have a local mojaloop running with two customs DF
 * Add to /etc/hosts
 ```
 127.0.0.1       central-ledger.local central-settlement.local ml-api-adapter.local account-lookup-service.local account-lookup-service-admin.local quoting-service.local moja-simulator.local central-ledger central-settlement ml-api-adapter account-lookup-service account-lookup-service-admin quoting-service simulator host.docker.internal
-127.0.0.1 dfspa-backend dfspb-backend pisp-backend dfspa-scheme-adapter dfspb-scheme-adapter pisp-scheme-adapter
+127.0.0.1 dfspa-backend dfspb-backend pisp-backend dfspa-scheme-adapter dfspb-scheme-adapter pisp-scheme-adapter transaction-request-service
 ```
 
 ## Start the compose
@@ -238,7 +238,7 @@ $ sh scripts/testE2ETransfers.sh
 ### If you restart docker compose you'll need to re-run this command to setup ALS
 
 ```
-sh scripts/setupDockerCompose-DFSP-B-MSISDN.sh && sh scripts/setupDockerCompose-DFSP-A-MSISDN.sh
+sh scripts/setupDockerCompose-DFSP-B-MSISDN.sh && sh scripts/setupDockerCompose-DFSP-A-MSISDN.sh && sh scripts/setupDockerCompose-DFSP-SIMULATOR-MSISDN.sh
 ```
 
 ## Examples

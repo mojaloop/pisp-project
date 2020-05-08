@@ -282,6 +282,8 @@ services:
       - "9000:3000"
       - "9002:3002"
       - "9003:3003"
+    extra_hosts:
+      - "dfspa-scheme-adapter:172.17.0.1"
 
   dfspa-scheme-adapter:
     image: "mojaloop/sdk-scheme-adapter:v9.4.11"
@@ -315,6 +317,7 @@ services:
       - "simulator:172.17.0.1"
       - "host.docker.internal:172.17.0.1"
       - "simulator.local:172.17.0.1"
+      - "dfspa-backend:172.17.0.1"
 
   dfspa-redis:
     container_name: dfspa-redis
@@ -334,6 +337,8 @@ services:
       - "10000:3000"
       - "10002:3002"
       - "10003:3003"
+    extra_hosts:
+      - "dfspb-scheme-adapter:172.17.0.1"
 
   dfspb-scheme-adapter:
     image: "mojaloop/sdk-scheme-adapter:v9.4.11"
@@ -367,6 +372,7 @@ services:
       - "simulator:172.17.0.1"
       - "host.docker.internal:172.17.0.1"
       - "simulator.local:172.17.0.1"
+      - "dfspb-backend:172.17.0.1"
 
   dfspb-redis:
     container_name: dfspb-redis

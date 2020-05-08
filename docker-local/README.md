@@ -8,6 +8,7 @@ The aim of this Document is to have a local mojaloop running with two customs DF
 * Add to /etc/hosts
 ```
 127.0.0.1       central-ledger.local central-settlement.local ml-api-adapter.local account-lookup-service.local account-lookup-service-admin.local quoting-service.local moja-simulator.local central-ledger central-settlement ml-api-adapter account-lookup-service account-lookup-service-admin quoting-service simulator host.docker.internal
+127.0.0.1 dfspa-backend dfspb-backend pisp-backend dfspa-scheme-adapter dfspb-scheme-adapter pisp-scheme-adapter
 ```
 
 ## Start the compose
@@ -45,7 +46,7 @@ npm install -g newman
 
 * cd to the postman folder
 
-* Use this to run all the scripts
+* Use this convenience script to run all the setup scripts and forgo having to run the setup scripts individually.
 
 ```
 sh scripts/setupDockerCompose-FullSetup.sh

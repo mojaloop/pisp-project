@@ -1,0 +1,108 @@
+@startuml
+  skinparam SequenceMessageAlignment left
+  title Transfer Request Initiation
+  
+  actor "PISP" as A
+  participant "PISP DFSP\nSimulator" as PS
+  participant "ALS\n SWITCH" as ALS
+  participant "ThirdpartyTransactionRequest\n SWITCH" as TTR
+  participant payerDFSP as X
+  participant payeeDFSP as Y
+  ...
+
+  A -> PS: POST transactionInitiations(requestId, payer, payee, amount)
+  
+  activate PS
+  PS -> PS: save stransactionInitiation(requestId, state="start")
+  PS --> A: OK: 201
+  PS <-> ALS: payerDFSP, payerInfo = GET parties(payer)\npayeeDFSP, payeeInfo = GET parties(payee)
+  PS --> A: in case of any parties' resolving error:\nPUT transactionInitiations(requestId, error="parties_not_resolved")
+  PS -> PS: save transactionInitiation(transactionRequestId, payerInfo, payerDFSP, payeeInfo, payeeDFSP, state="parties_resolved")
+  PS --> A: in case parties' resolved sucessfuly:\nPUT transactionInitiations(requestId, payerInfo, payerDFSP, payeeInfo, payeeDFSP, state="parties_resolved")
+  deactivate PS
+  activate A
+  A -> A: Enduser accepts payeeInfo and confirms to continue transaction
+  A -> PS: PUT transactionInitiations(requestId, initiatorId, payerKeyHandle, state="parties_accepted")
+  deactivate A
+  activate PS
+  PS -> PS: save transactionInitiations(requestId, initiatorId, payerKeyHandle, state="parties_accepted")
+  PS --> A: OK: 200
+  PS -> TTR: POST thirdpartyTransactionRequests(\n  requestId, \n  payer, payee, payerDFSP, payeeDFSP,\n  initiatorId, payerKeyHandle\n)
+  activate TTR
+  TTR -> TTR: save thirdpartyTransactionRequests(\n  requestId, \n  payer, payee, payerDFSP, payeeDFSP,\n  initiatorId, payerKeyHandle,\n  state="start"\n)
+  TTR --> PS: OK: 202, I will get back to you
+  PS -> PS: save transactionInitiations(requestId, state="transaction_requested")
+  PS --> A: PUT transactionInitiations(requestId, state="transaction_requested")
+  deactivate PS
+  TTR -> Y: quotation
+  activate Y
+  Y --> TTR: OK: 202, I will get back to you
+  TTR -> TTR: save thirdpartyTransactionRequests(\n  requestId, state="calculate_quotation"\n)
+  TTR -> PS: PUT thirdpartyTransactionRequests(requestId, state="calculate_quotation")
+  activate PS
+  PS -> PS: save transactionInitiations(requestId, state="calculate_quotation")
+  PS --> A: PUT transactionInitiations(requestId, state="calculate_quotation")
+  deactivate PS
+  deactivate TTR
+  Y -> Y: calculate\nquotation
+  Y --> TTR: deliver quotation
+  deactivate Y
+  activate TTR
+  TTR -> TTR: save thirdpartyTransactionRequests(\n  requestId, quotation, state="quotation_calculated"\n)
+
+  TTR -> PS: PUT thirdpartyTransactionRequest(requestId, quotation)
+  activate PS
+  PS -> PS: save transactionInitiations(requestId, quotation, state="transaction_quoted")
+  PS --> TTR: OK: 200
+  TTR -> X: POST transfer(\n  requestId,\n  payee, payer, payeeDFSP, payerDFSP,\n  quotation, amount\n)
+  activate X
+  PS --> A: PUT transactionInitiations(requestId, quotation, state="transaction_quoted")
+  deactivate PS
+  X --> TTR: OK: 202, I will get back to you
+  TTR -> TTR: save thirdpartyTransactionRequests(\n  requestId, quotation, state="transfer_requested"\n)
+  deactivate TTR
+  X -> X: initiate the authorization
+  X -> TTR: GET authorization(requestId)
+  activate TTR
+  TTR -> TTR: save thirdpartyTransactionRequests(\n  requestId, quotation, state="authorization_requested"\n)
+  TTR --> X: OK: 202, I will get back to you
+  deactivate X
+  deactivate Y
+  TTR -> PS: GET authorization(requestId)
+  activate PS
+  PS --> TTR: OK: 202, I will get back to you
+  deactivate TTR
+  PS -> PS: save transactionInitiations(requestId, state="authorization_requested")
+  PS -> A: PUT transactionInitiations(requestId, state="authorization_requested")
+  deactivate PS
+  activate A
+  A -> A: Enduser accepts quotation deliver enduser_authorization_proof
+  A -> PS: PUT transactionInitiations(requestId, state="transaction_authorized", enduser_authorization_proof)
+  deactivate A
+  activate PS
+  PS -> PS: save transactionInitiations(requestId, state="transaction_authorized", enduser_authorization_proof)
+  PS -> TTR: PUT authorization(requestId, enduser_authorization_proof)
+  activate TTR
+  TTR -> TTR: save thirdpartyTransactionRequests(\n  requestId, state="transaction_authorized", enduser_authorization_proof\n)
+  TTR --> PS: OK: 200
+  deactivate PS
+  TTR -> X: PUT authorization(requestId, enduser_authorization_proof)
+  deactivate TTR
+  activate X
+  X -> X: validate enduser_authorization_proof
+  X <-> Y: do the transfer
+  X -> TTR: PUT transfer(requestId, state="transfer_success")
+  deactivate X
+  activate TTR
+  TTR -> TTR: save thirdpartyTransactionRequests(\n  requestId, state="transfer_success"\n)
+  TTR -> PS: PUT transactionInitiations(requestId, state="transaction_success") 
+  activate PS
+  PS -> PS: save transactionInitiations(requestId, state="transaction_success") 
+  PS --> TTR: OK: 200
+  deactivate TTR
+  PS -> A: PUT transactionInitiations(requestId, state="transaction_success") 
+  deactivate PS
+  activate A
+  A -> A: Inform Enduser that transcation ended with success
+
+@enduml

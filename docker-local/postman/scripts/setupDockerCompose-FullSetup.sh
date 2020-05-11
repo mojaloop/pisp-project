@@ -1,0 +1,9 @@
+sh scripts/setupDockerCompose-HubAccount.sh
+sh scripts/setupDockerCompose-OracleOnboarding.sh
+sh scripts/setupDockerCompose-DFSP-A.sh
+sh scripts/setupDockerCompose-DFSP-B.sh
+sh scripts/setupDockerCompose-DFSP-SIMULATOR.sh
+sh scripts/setupDockerCompose-DFSP-A-MSISDN.sh
+sh scripts/setupDockerCompose-DFSP-B-MSISDN.sh
+sh scripts/setupDockerCompose-DFSP-SIMULATOR-MSISDN.sh
+sh scripts/setupDockerCompose-dfsp-backend-parties.sh

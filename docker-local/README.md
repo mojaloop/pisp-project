@@ -389,7 +389,7 @@ curl -v -X POST http://localhost:9003/scenarios   -H 'Content-Type: application/
 
 ```
 curl -v  -X  POST http://localhost:7002/requestToPay  -H  'Content-Type: application/json'  -d  '{
-    "homeTransactionId": "4f50ff55-98eb-41e1-a423-80a1d977be60",
+    "homeTransactionId": "f0cf62e7-fb15-46a5-9525-37f934d98fcd",
     "from": {
         "idType": "MSISDN",
         "idValue": "987654321"
@@ -408,10 +408,40 @@ curl -v  -X  POST http://localhost:7002/requestToPay  -H  'Content-Type: applica
 }'
 ```
 
+##### POST /requestToPay Response:
+````
+{
+    "homeTransactionId": "f0cf62e7-fb15-46a5-9525-37f934d98fcd",
+    "from": {
+        "idType": "MSISDN",
+        "idValue": "987654321",
+        "fspId": "pisp"
+    },
+    "to": {
+        "idType": "MSISDN",
+        "idValue": "123456789",
+        "fspId": "dfspa",
+        "firstName": "Alice",
+        "middleName": "K",
+        "lastName": "Alpaca",
+        "dateOfBirth": "1970-01-01"
+    },
+    "amountType": "SEND",
+    "currency": "USD",
+    "amount": "18",
+    "scenario": "PAYMENT",
+    "initiator": "PAYEE",
+    "initiatorType": "BUSINESS",
+    "note": "pisp test payment",
+    "transactionRequestId": "70c522c9-0880-40b1-b28f-0c567e0b39aa",
+    "currentState": "COMPLETED",
+    "requestToPayState": "RECEIVED"
+}
+````
 * 2. The HTTP request `POST /requestToPayTransfer` is used to request the movement of funds from payer DFSP to payee DFSP.The underlying Mojaloop API has three stages for money transfer:Quotation , Authorization and Transfer
 ```
 curl -v  -X  POST http://localhost:5002/requestToPayTransfer  -H  'Content-Type: application/json' -d '{
-  "requestToPayTransactionId": "4f50ff55-98eb-41e1-a423-80a1d977be60",
+  "requestToPayTransactionId": "70c522c9-0880-40b1-b28f-0c567e0b39aa",
   "from": {
     "idType": "MSISDN",
     "idValue": "123456789"
@@ -430,10 +460,102 @@ curl -v  -X  POST http://localhost:5002/requestToPayTransfer  -H  'Content-Type:
   "note": "pisp test payment"
 }'
 ```
-
+##### POST /requestToPayTransfer Response:
+```
+{
+    "requestToPayTransactionId": "70c522c9-0880-40b1-b28f-0c567e0b39aa",
+    "from": {
+        "idType": "MSISDN",
+        "idValue": "123456789"
+    },
+    "to": {
+        "idType": "MSISDN",
+        "idValue": "987654321",
+        "fspId": "dfspb"
+    },
+    "amountType": "SEND",
+    "currency": "USD",
+    "amount": "18",
+    "scenario": "PAYMENT",
+    "initiator": "PAYEE",
+    "initiatorType": "BUSINESS",
+    "note": "pisp test payment",
+    "transferId": "ab3532c6-7ca3-461d-b2b9-4235085e7f6e",
+    "currentState": "WAITING_FOR_QUOTE_ACCEPTANCE",
+    "quoteId": "17467236-b6fe-4487-b21d-db9d37fd9128",
+    "quoteResponse": {
+        "transferAmount": {
+            "amount": "18",
+            "currency": "USD"
+        },
+        "expiration": "2020-05-12T09:26:13.967Z",
+        "ilpPacket": "AYICXAAAAAAAAAcIGGcuZGZzcGIubXNpc2RuLjk4NzY1NDMyMYICN2V5SjBjbUZ1YzJGamRHbHZia2xrSWpvaVlXSXpOVE15WXpZdE4yTmhNeTAwTmpGa0xXSXlZamt0TkRJek5UQTROV1UzWmpabElpd2ljWFZ2ZEdWSlpDSTZJakUzTkRZM01qTTJMV0kyWm1VdE5EUTROeTFpTWpGa0xXUmlPV1F6TjJaa09URXlPQ0lzSW5CaGVXVmxJanA3SW5CaGNuUjVTV1JKYm1adklqcDdJbkJoY25SNVNXUlVlWEJsSWpvaVRWTkpVMFJPSWl3aWNHRnlkSGxKWkdWdWRHbG1hV1Z5SWpvaU9UZzNOalUwTXpJeElpd2labk53U1dRaU9pSmtabk53WWlKOWZTd2ljR0Y1WlhJaU9uc2ljR0Z5ZEhsSlpFbHVabThpT25zaWNHRnlkSGxKWkZSNWNHVWlPaUpOVTBsVFJFNGlMQ0p3WVhKMGVVbGtaVzUwYVdacFpYSWlPaUl4TWpNME5UWTNPRGtpTENKbWMzQkpaQ0k2SW1SbWMzQmhJbjE5TENKaGJXOTFiblFpT25zaVlXMXZkVzUwSWpvaU1UZ2lMQ0pqZFhKeVpXNWplU0k2SWxWVFJDSjlMQ0owY21GdWMyRmpkR2x2YmxSNWNHVWlPbnNpYzJObGJtRnlhVzhpT2lKUVFWbE5SVTVVSWl3aWFXNXBkR2xoZEc5eUlqb2lVRUZaUlVVaUxDSnBibWwwYVdGMGIzSlVlWEJsSWpvaVFsVlRTVTVGVTFNaWZYMAA",
+        "condition": "AO5FG1LtEt-NHakXIQoTQVjfnlmNFh6UFRBbW93FVDk",
+        "payeeFspFee": {
+            "amount": "0",
+            "currency": "USD"
+        },
+        "payeeFspCommission": {
+            "amount": "0",
+            "currency": "USD"
+        }
+    },
+    "quoteResponseSource": "dfspb"
+}
+```
 * 3. The HTTP request `POST /requestToPayTransfer/{requestToPayTransactionId}:` is used to Continues a transfer that has paused at the authorization stage in order to accept quote
 ```
-curl -v  -X  POST http://localhost:5002/requestToPayTransfer/4f50ff55-98eb-41e1-a423-80a1d977be60  -H  'Content-Type: application/json'  -d  '{
+curl -v  -X  POST http://localhost:5002/requestToPayTransfer/70c522c9-0880-40b1-b28f-0c567e0b39aa  -H  'Content-Type: application/json'  -d  '{
        "acceptQuote": true
 }'
+```
+```
+##### POST /requestToPayTransfer/{requestToPayTransactionId} Response:
+```
+```
+{
+    "requestToPayTransactionId": "70c522c9-0880-40b1-b28f-0c567e0b39aa",
+    "from": {
+        "idType": "MSISDN",
+        "idValue": "123456789"
+    },
+    "to": {
+        "idType": "MSISDN",
+        "idValue": "987654321",
+        "fspId": "dfspb"
+    },
+    "amountType": "SEND",
+    "currency": "USD",
+    "amount": "18",
+    "scenario": "PAYMENT",
+    "initiator": "PAYEE",
+    "initiatorType": "BUSINESS",
+    "note": "pisp test payment",
+    "transferId": "ab3532c6-7ca3-461d-b2b9-4235085e7f6e",
+    "currentState": "COMPLETED",
+    "quoteId": "17467236-b6fe-4487-b21d-db9d37fd9128",
+    "quoteResponse": {
+        "transferAmount": {
+            "amount": "18",
+            "currency": "USD"
+        },
+        "expiration": "2020-05-12T09:26:13.967Z",
+        "ilpPacket": "AYICXAAAAAAAAAcIGGcuZGZzcGIubXNpc2RuLjk4NzY1NDMyMYICN2V5SjBjbUZ1YzJGamRHbHZia2xrSWpvaVlXSXpOVE15WXpZdE4yTmhNeTAwTmpGa0xXSXlZamt0TkRJek5UQTROV1UzWmpabElpd2ljWFZ2ZEdWSlpDSTZJakUzTkRZM01qTTJMV0kyWm1VdE5EUTROeTFpTWpGa0xXUmlPV1F6TjJaa09URXlPQ0lzSW5CaGVXVmxJanA3SW5CaGNuUjVTV1JKYm1adklqcDdJbkJoY25SNVNXUlVlWEJsSWpvaVRWTkpVMFJPSWl3aWNHRnlkSGxKWkdWdWRHbG1hV1Z5SWpvaU9UZzNOalUwTXpJeElpd2labk53U1dRaU9pSmtabk53WWlKOWZTd2ljR0Y1WlhJaU9uc2ljR0Z5ZEhsSlpFbHVabThpT25zaWNHRnlkSGxKWkZSNWNHVWlPaUpOVTBsVFJFNGlMQ0p3WVhKMGVVbGtaVzUwYVdacFpYSWlPaUl4TWpNME5UWTNPRGtpTENKbWMzQkpaQ0k2SW1SbWMzQmhJbjE5TENKaGJXOTFiblFpT25zaVlXMXZkVzUwSWpvaU1UZ2lMQ0pqZFhKeVpXNWplU0k2SWxWVFJDSjlMQ0owY21GdWMyRmpkR2x2YmxSNWNHVWlPbnNpYzJObGJtRnlhVzhpT2lKUVFWbE5SVTVVSWl3aWFXNXBkR2xoZEc5eUlqb2lVRUZaUlVVaUxDSnBibWwwYVdGMGIzSlVlWEJsSWpvaVFsVlRTVTVGVTFNaWZYMAA",
+        "condition": "AO5FG1LtEt-NHakXIQoTQVjfnlmNFh6UFRBbW93FVDk",
+        "payeeFspFee": {
+            "amount": "0",
+            "currency": "USD"
+        },
+        "payeeFspCommission": {
+            "amount": "0",
+            "currency": "USD"
+        }
+    },
+    "quoteResponseSource": "dfspb",
+    "fulfil": {
+        "completedTimestamp": "2020-05-12T09:25:27.227Z",
+        "transferState": "COMMITTED",
+        "fulfilment": "PjQaZGeBajwGGv-Oqa2F-gYX21ngMVJZOLc6hxNDS74"
+    }
+}
 ```

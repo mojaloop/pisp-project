@@ -508,10 +508,8 @@ curl -v  -X  POST http://localhost:5002/requestToPayTransfer  -H  'Content-Type:
 curl -v  -X  POST http://localhost:5002/requestToPayTransfer/70c522c9-0880-40b1-b28f-0c567e0b39aa  -H  'Content-Type: application/json'  -d  '{
        "acceptQuote": true
 }'
-```
-```
+````
 ##### POST /requestToPayTransfer/{requestToPayTransactionId} Response:
-```
 ```
 {
     "requestToPayTransactionId": "70c522c9-0880-40b1-b28f-0c567e0b39aa",

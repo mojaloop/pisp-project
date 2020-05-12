@@ -18,16 +18,53 @@
     "CREATE_RETRY_INTERVAL_MILLIS": 200,
     "DEBUG": false
   },
+  "WINDOW_AGGREGATION": {
+    "RETRY_COUNT": 3,
+    "RETRY_INTERVAL": 3000
+  },
   "TRANSFER_VALIDITY_SECONDS": "432000",
   "HUB_PARTICIPANT": {
     "ID": 1,
     "NAME": "Hub"
+  },
+  "HANDLERS": {
+    "DISABLED": false,
+    "API": {
+      "DISABLED": false
+    }
   },
   "KAFKA": {
     "TOPIC_TEMPLATES": {
       "GENERAL_TOPIC_TEMPLATE": {
         "TEMPLATE": "topic-{{functionality}}-{{action}}",
         "REGEX": "topic-(.*)-(.*)"
+      }
+    },
+    "CONSUMER": {
+      "SETTLEMENTWINDOW": {
+        "CLOSE": {
+          "config": {
+            "options": {
+              "mode": 2,
+              "batchSize": 1,
+              "pollFrequency": 10,
+              "recursiveTimeout": 100,
+              "messageCharset": "utf8",
+              "messageAsJSON": true,
+              "sync": true,
+              "consumeTimeout": 1000
+            },
+            "rdkafkaConf": {
+              "client.id": "cs-con-setlementwindow-close",
+              "group.id": "cs-group-setlementwindow-close",
+              "metadata.broker.list": "kafka:9092",
+              "socket.keepalive.enable": true
+            },
+            "topicConf": {
+              "auto.offset.reset": "earliest"
+            }
+          }
+        }
       }
     },
     "PRODUCER": {
@@ -53,6 +90,26 @@
               "queue.buffering.max.ms": 1,
               "broker.version.fallback": "0.10.1.0",
               "api.version.request": true
+            }
+          }
+        }
+      },
+      "SETTLEMENTWINDOW": {
+        "CLOSE": {
+          "config": {
+            "options": {
+              "messageCharset": "utf8"
+            },
+            "rdkafkaConf": {
+              "metadata.broker.list": "kafka:9092",
+              "client.id": "cs-prod-setlementwindow-close",
+              "event_cb": true,
+              "dr_cb": true,
+              "socket.keepalive.enable": true,
+              "queue.buffering.max.messages": 10000000
+            },
+            "topicConf": {
+              "request.required.acks": "all"
             }
           }
         }

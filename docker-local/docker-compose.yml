@@ -6,7 +6,7 @@ networks:
 
 services:
   central-ledger:
-    image: mojaloop/central-ledger:v9.5.2
+    image: mojaloop/central-ledger:v10.1.0
     container_name: central-ledger
     command:
       - "sh"
@@ -29,7 +29,7 @@ services:
     healthcheck:
       test: ["CMD", "bash", "-c" ,"apk --no-cache add curl", ";", "curl", "http://172.17.0.1:3001/health"]
       timeout: 20s
-      retries: 10
+      retries: 30
       interval: 30s
     extra_hosts:
       - "moja-simulator.local:172.17.0.1"
@@ -38,7 +38,7 @@ services:
       - "simulator.local:172.17.0.1"
 
   quoting-service:
-    image: "mojaloop/quoting-service:v8.4.0-snapshot"
+    image: "mojaloop/quoting-service:v10.1.0"
     container_name: quoting-service
     networks:
       - mojaloop-net
@@ -55,7 +55,7 @@ services:
       - "simulator.local:172.17.0.1"
 
   ml-api-adapter:
-    image: mojaloop/ml-api-adapter:v8.4.1
+    image: mojaloop/ml-api-adapter:v10.1.1
     container_name: ml-api-adapter
     command:
       - "sh"
@@ -149,7 +149,7 @@ services:
       - "transaction-request-service:172.17.0.1"
 
   transaction-requests-service:
-    image: mojaloop/transaction-requests-service:v9.5.0
+    image: mojaloop/transaction-requests-service:v10.1.0
     container_name: transaction-requests-service
     ports:
       - "4003:4003"
@@ -203,12 +203,12 @@ services:
       interval: 30s
 
   central-settlement:
-    image: mojaloop/central-settlement:v8.3.0
+    image: mojaloop/central-settlement:v9.5.0
     container_name: central-settlement
     command:
       - "sh"
       - "-c"
-      - "sh /opt/wait-for/wait-for-central-settlement.sh && node src/server.js"
+      - "sh /opt/wait-for/wait-for-central-settlement.sh && node src/api/index.js"
     networks:
       - mojaloop-net
     depends_on:
@@ -221,7 +221,7 @@ services:
        - ./docker/wait-for:/opt/wait-for
 
   account-lookup-service:
-    image: mojaloop/account-lookup-service:v8.3.0
+    image: mojaloop/account-lookup-service:v10.1.0
     container_name: account-lookup-service
     command:
       - "sh"
@@ -231,7 +231,7 @@ services:
       - "4001:4001"
       - "4002:4002"
     environment:
-      - LOG_LEVEL=debug
+      - LOG_LEVEL=info
     networks:
       - mojaloop-net
     depends_on:
@@ -250,6 +250,7 @@ services:
       - "simulator:172.17.0.1"
       - "host.docker.internal:172.17.0.1"
       - "simulator.local:172.17.0.1"
+      - "transaction-request-service:172.17.0.1"
 
   mysql-als:
     image: mysql/mysql-server
@@ -318,6 +319,7 @@ services:
       - "simulator:172.17.0.1"
       - "host.docker.internal:172.17.0.1"
       - "simulator.local:172.17.0.1"
+      - "transaction-request-service:172.17.0.1"
       - "dfspa-backend:172.17.0.1"
 
   dfspa-redis:
@@ -373,6 +375,7 @@ services:
       - "simulator:172.17.0.1"
       - "host.docker.internal:172.17.0.1"
       - "simulator.local:172.17.0.1"
+      - "transaction-request-service:172.17.0.1"
       - "dfspb-backend:172.17.0.1"
 
   dfspb-redis:
@@ -382,50 +385,56 @@ services:
       - mojaloop-net
     restart: always
 
-  ## PISP
-#  pisp-backend:
-#    image: "mojaloop/mojaloop-simulator:v9.4.1"
-#    container_name: pisp-backend
-#    env_file: ./pisp/pisp_backend.env
-#    ports:
-#      - "11000:3000"
-#      - "11002:3002"
-#      - "11003:3003"
-#
-#  pisp-scheme-adapter:
-#    image: "mojaloop/sdk-scheme-adapter:v9.4.11"
-#    container_name: pisp-scheme-adapter
-#    env_file: ./pisp/pisp_scheme_adapter.env
-#    volumes:
-#      - "./pisp/secrets:/secrets"
-#      - "./pisp/jwsVerificationKeys:/jwsVerificationKeys"
-#    ports:
-#      - "7000:4000"
-#      - "7002:4001"
-#    networks:
-#      - mojaloop-net
-#    depends_on:
-#      - pisp-redis
-#    restart: always
-#      - "central-ledger.local:172.17.0.1"
-#      - "central-settlement.local:172.17.0.1"
-#      - "ml-api-adapter.local:172.17.0.1"
-#      - "account-lookup-service.local:172.17.0.1"
-#      - "account-lookup-service-admin.local:172.17.0.1"
-#      - "quoting-service.local:172.17.0.1"
-#      - "moja-simulator.local:172.17.0.1"
-#      - "central-ledger:172.17.0.1"
-#      - "central-settlement:172.17.0.1"
-#      - "ml-api-adapter:172.17.0.1"
-#      - "account-lookup-service:172.17.0.1"
-#      - "account-lookup-service-admin:172.17.0.1"
-#      - "quoting-service:172.17.0.1"
-#      - "simulator:172.17.0.1"
-#      - "host.docker.internal:172.17.0.1"
-#      - "simulator.local:172.17.0.1"
+ ## PISP
+  pisp-backend:
+    image: "mojaloop/mojaloop-simulator:v9.4.1"
+    container_name: pisp-backend
+    env_file: ./pisp/pisp_backend.env
+    ports:
+      - "11000:3000"
+      - "11002:3002"
+      - "11003:3003"
+    extra_hosts:
+      - "pisp-scheme-adapter:172.17.0.1"
 
-#  pisp-redis:
-#    image: "redis:5.0.4-alpine"
-#    networks:
-#      - mojaloop-net
-#    restart: always
+  pisp-scheme-adapter:
+    image: "mojaloop/sdk-scheme-adapter:v9.4.11"
+    container_name: pisp-scheme-adapter
+    env_file: ./pisp/pisp_scheme_adapter.env
+    volumes:
+      - "./pisp/secrets:/secrets"
+      - "./pisp/jwsVerificationKeys:/jwsVerificationKeys"
+    ports:
+      - "7000:4000"
+      - "7002:4001"
+    networks:
+      - mojaloop-net
+    depends_on:
+      - pisp-redis
+    restart: always
+    extra_hosts:
+      - "central-ledger.local:172.17.0.1"
+      - "central-settlement.local:172.17.0.1"
+      - "ml-api-adapter.local:172.17.0.1"
+      - "account-lookup-service.local:172.17.0.1"
+      - "account-lookup-service-admin.local:172.17.0.1"
+      - "quoting-service.local:172.17.0.1"
+      - "moja-simulator.local:172.17.0.1"
+      - "central-ledger:172.17.0.1"
+      - "central-settlement:172.17.0.1"
+      - "ml-api-adapter:172.17.0.1"
+      - "account-lookup-service:172.17.0.1"
+      - "account-lookup-service-admin:172.17.0.1"
+      - "quoting-service:172.17.0.1"
+      - "simulator:172.17.0.1"
+      - "host.docker.internal:172.17.0.1"
+      - "simulator.local:172.17.0.1"
+      - "transaction-request-service:172.17.0.1"
+      - "pisp-backend:172.17.0.1"
+
+  pisp-redis:
+    container_name: pisp-redis
+    image: "redis:5.0.4-alpine"
+    networks:
+      - mojaloop-net
+    restart: always

@@ -32,6 +32,8 @@ docker-compose up central-settlement
 docker-compose up account-lookup-service
 docker-compose up dfspa-scheme-adapter dfspa-backend
 docker-compose up dfspb-scheme-adapter dfspb-backend
+docker-compose up transaction-requests-service
+docker-compose up pisp-backend  pisp-scheme-adapter pisp-redis
 ```
 
 ## Create some initial data
@@ -134,7 +136,6 @@ OSS-New-Deployment-FSP-Setup
 │ average response time: 5.2s [min: 5.2s, max: 5.2s, s.d.: 0µs] │
 ```
 
-
 ### Create DFSP A (use SDK + backend)
 
 It will create a new participant with its endpoints and some init data. For this case, name, position, and limits will be
@@ -166,7 +167,6 @@ It will create a new participant with its endpoints and some init data. For this
 ```
 $ sh scripts/setupDockerCompose-DFSP-B.sh
 ```
-
 ### Create a Simulator DFSP (implement mojaloop api)
 
 It will create a new participant with its endpoints and some init data. For this case, name, position, and limits will be
@@ -181,6 +181,21 @@ It will create a new participant with its endpoints and some init data. For this
 
 ```
 $ sh scripts/setupDockerCompose-DFSP-SIMULATOR.sh
+```
+### Create PISP (use SDK + backend)
+
+It will create a new participant with its endpoints and some init data. For this case, name, position, and limits will be
+
+| Parameter | Value |
+|-----------|---------|
+| `name`       | `pisp`  |
+| `currency`       | `USD`  |
+| `limit.type`       | `NET_DEBIT_CAP` |
+| `limit.value`   | `1000000` |
+| `initialPosition`     | `0` |`
+
+```
+$ sh scripts/setupDockerCompose-PISP.sh
 ```
 
 ### Add MSISDN (123456789) for DFSP A
@@ -220,28 +235,46 @@ Register a new MSISDN for this dfsp with this initial data
 $ sh scripts/setupDockerCompose-DFSP-SIMULATOR-MSISDN.sh
 ```
 
-### Add parties to the backend's of DFSP A and DFSP B.
+### Add MSISDN (999999999) for PISP
+
+Register a new MSISDN for this dfsp with this initial data
+
+| Parameter | Value |
+|-----------|---------|
+| `currency`       | `USD`  |
+
+```
+$ sh scripts/setupDockerCompose-PISP-MSISDN.sh
+```
+
+### Add parties to the backend's of DFSP A , DFSP B and PISP.
 
 
 ```
 $ sh scripts/setupDockerCompose-dfsp-backend-parties.sh
 ```
 
-### Run E2E tests.
+### Run P2P E2E tests.
 
 
 ```
 $ sh scripts/testE2ETransfers.sh
 ```
 
+### Run PISP E2E tests.
+
+
+```
+$ sh scripts/test-E2E-transaction-req-initiated-by-PISP.sh
+```
 
 ### If you restart docker compose you'll need to re-run this command to setup ALS
 
 ```
-sh scripts/setupDockerCompose-DFSP-B-MSISDN.sh && sh scripts/setupDockerCompose-DFSP-A-MSISDN.sh && sh scripts/setupDockerCompose-DFSP-SIMULATOR-MSISDN.sh
+sh scripts/setupDockerCompose-DFSP-B-MSISDN.sh && sh scripts/setupDockerCompose-DFSP-A-MSISDN.sh && sh scripts/setupDockerCompose-DFSP-SIMULATOR-MSISDN.sh && sh scripts/setupDockerCompose-PISP-MSISDN.sh
 ```
 
-## Examples
+## P2P Examples
 
 * Transfer USD 100 from MSIDNS 123456789 (DFSP A) to MSIDNS 987654321 (DFSP B)
 
@@ -351,40 +384,176 @@ curl -v -X POST http://localhost:9003/scenarios   -H 'Content-Type: application/
   }
 ]'
 ```
-
-* WIP transaction requests
+## PISP Transaction Request Examples
+* 1. The HTTP request `POST /requestToPay` has two stages, Party lookup and initiate Transaction Request
 
 ```
-curl -v -X POST http://localhost:8444/transactionRequests -H 'FSPIOP-Source: dfspa' -H 'FSPIOP-Destination: dfspb' -H 'Date: Sat, 25 Apr 2020 19:08:07 GMT'  -H 'Content-Type: application/vnd.interoperability.parties+json;version=1.0' -H 'Accept: application/vnd.interoperability.parties+json;version=1' -H ''  -d '{
-    "payee": {
-      "partyIdInfo": {
-          "partyIdType": "MSISDN",
-          "partyIdentifier": "123456789",
-          "fspId":"dfspa"
-      }
+curl -v  -X  POST http://localhost:7002/requestToPay  -H  'Content-Type: application/json'  -d  '{
+    "homeTransactionId": "f0cf62e7-fb15-46a5-9525-37f934d98fcd",
+    "from": {
+        "idType": "MSISDN",
+        "idValue": "987654321"
     },
-    "payer": {
-        "partyIdType": "MSISDN",
-        "partyIdentifier": "987654321",
+    "to": {
+        "idType": "MSISDN",
+        "idValue": "123456789"
+    },
+    "amountType": "SEND",
+    "currency": "USD",
+    "amount": "18",
+    "scenario":"PAYMENT",
+    "initiator":"PAYEE",
+    "initiatorType":"BUSINESS",
+    "note": "pisp test payment"
+}'
+```
+
+##### POST /requestToPay Response:
+````
+{
+    "homeTransactionId": "f0cf62e7-fb15-46a5-9525-37f934d98fcd",
+    "from": {
+        "idType": "MSISDN",
+        "idValue": "987654321",
+        "fspId": "pisp"
+    },
+    "to": {
+        "idType": "MSISDN",
+        "idValue": "123456789",
+        "fspId": "dfspa",
+        "firstName": "Alice",
+        "middleName": "K",
+        "lastName": "Alpaca",
+        "dateOfBirth": "1970-01-01"
+    },
+    "amountType": "SEND",
+    "currency": "USD",
+    "amount": "18",
+    "scenario": "PAYMENT",
+    "initiator": "PAYEE",
+    "initiatorType": "BUSINESS",
+    "note": "pisp test payment",
+    "transactionRequestId": "70c522c9-0880-40b1-b28f-0c567e0b39aa",
+    "currentState": "COMPLETED",
+    "requestToPayState": "RECEIVED"
+}
+````
+* 2. The HTTP request `POST /requestToPayTransfer` is used to request the movement of funds from payer DFSP to payee DFSP.The underlying Mojaloop API has three stages for money transfer:Quotation , Authorization and Transfer
+```
+curl -v  -X  POST http://localhost:5002/requestToPayTransfer  -H  'Content-Type: application/json' -d '{
+  "requestToPayTransactionId": "70c522c9-0880-40b1-b28f-0c567e0b39aa",
+  "from": {
+    "idType": "MSISDN",
+    "idValue": "123456789"
+  },
+  "to": {
+    "idType": "MSISDN",
+    "idValue": "987654321",
+    "fspId":"dfspb"
+  },
+  "amountType": "SEND",
+  "currency": "USD",
+  "amount": "18",
+  "scenario":"PAYMENT",
+  "initiator":"PAYEE",
+  "initiatorType":"BUSINESS",
+  "note": "pisp test payment"
+}'
+```
+##### POST /requestToPayTransfer Response:
+```
+{
+    "requestToPayTransactionId": "70c522c9-0880-40b1-b28f-0c567e0b39aa",
+    "from": {
+        "idType": "MSISDN",
+        "idValue": "123456789"
+    },
+    "to": {
+        "idType": "MSISDN",
+        "idValue": "987654321",
         "fspId": "dfspb"
     },
-    "amount": {
-        "currency": "USD",
-        "amount": "123.45"
-    },
-    "transactionType": {
-        "scenario": "TRANSFER",
-        "subScenario": "CUSTOM_SUBSCENARIO",
-        "initiator": "PAYEE",
-        "initiatorType": "CONSUMER",
-        "refundInfo": {
-            "originalTransactionId": "25a00155-c777-4629-a6b7-61cf0d16f490",
-            "refundReason": "free text indicating reason for the refund"
+    "amountType": "SEND",
+    "currency": "USD",
+    "amount": "18",
+    "scenario": "PAYMENT",
+    "initiator": "PAYEE",
+    "initiatorType": "BUSINESS",
+    "note": "pisp test payment",
+    "transferId": "ab3532c6-7ca3-461d-b2b9-4235085e7f6e",
+    "currentState": "WAITING_FOR_QUOTE_ACCEPTANCE",
+    "quoteId": "17467236-b6fe-4487-b21d-db9d37fd9128",
+    "quoteResponse": {
+        "transferAmount": {
+            "amount": "18",
+            "currency": "USD"
         },
-        "balanceOfPayments": "123"
+        "expiration": "2020-05-12T09:26:13.967Z",
+        "ilpPacket": "AYICXAAAAAAAAAcIGGcuZGZzcGIubXNpc2RuLjk4NzY1NDMyMYICN2V5SjBjbUZ1YzJGamRHbHZia2xrSWpvaVlXSXpOVE15WXpZdE4yTmhNeTAwTmpGa0xXSXlZamt0TkRJek5UQTROV1UzWmpabElpd2ljWFZ2ZEdWSlpDSTZJakUzTkRZM01qTTJMV0kyWm1VdE5EUTROeTFpTWpGa0xXUmlPV1F6TjJaa09URXlPQ0lzSW5CaGVXVmxJanA3SW5CaGNuUjVTV1JKYm1adklqcDdJbkJoY25SNVNXUlVlWEJsSWpvaVRWTkpVMFJPSWl3aWNHRnlkSGxKWkdWdWRHbG1hV1Z5SWpvaU9UZzNOalUwTXpJeElpd2labk53U1dRaU9pSmtabk53WWlKOWZTd2ljR0Y1WlhJaU9uc2ljR0Z5ZEhsSlpFbHVabThpT25zaWNHRnlkSGxKWkZSNWNHVWlPaUpOVTBsVFJFNGlMQ0p3WVhKMGVVbGtaVzUwYVdacFpYSWlPaUl4TWpNME5UWTNPRGtpTENKbWMzQkpaQ0k2SW1SbWMzQmhJbjE5TENKaGJXOTFiblFpT25zaVlXMXZkVzUwSWpvaU1UZ2lMQ0pqZFhKeVpXNWplU0k2SWxWVFJDSjlMQ0owY21GdWMyRmpkR2x2YmxSNWNHVWlPbnNpYzJObGJtRnlhVzhpT2lKUVFWbE5SVTVVSWl3aWFXNXBkR2xoZEc5eUlqb2lVRUZaUlVVaUxDSnBibWwwYVdGMGIzSlVlWEJsSWpvaVFsVlRTVTVGVTFNaWZYMAA",
+        "condition": "AO5FG1LtEt-NHakXIQoTQVjfnlmNFh6UFRBbW93FVDk",
+        "payeeFspFee": {
+            "amount": "0",
+            "currency": "USD"
+        },
+        "payeeFspCommission": {
+            "amount": "0",
+            "currency": "USD"
+        }
     },
-    "note": "test",
-    "transactionRequestId": "25a00155-c777-4629-a6b7-62cf0d16f499",
-    "expiration": "2020-04-26T17:50:09.474Z"
+    "quoteResponseSource": "dfspb"
+}
+```
+* 3. The HTTP request `POST /requestToPayTransfer/{requestToPayTransactionId}:` is used to Continues a transfer that has paused at the authorization stage in order to accept quote
+```
+curl -v  -X  POST http://localhost:5002/requestToPayTransfer/70c522c9-0880-40b1-b28f-0c567e0b39aa  -H  'Content-Type: application/json'  -d  '{
+       "acceptQuote": true
 }'
+````
+##### POST /requestToPayTransfer/{requestToPayTransactionId} Response:
+```
+{
+    "requestToPayTransactionId": "70c522c9-0880-40b1-b28f-0c567e0b39aa",
+    "from": {
+        "idType": "MSISDN",
+        "idValue": "123456789"
+    },
+    "to": {
+        "idType": "MSISDN",
+        "idValue": "987654321",
+        "fspId": "dfspb"
+    },
+    "amountType": "SEND",
+    "currency": "USD",
+    "amount": "18",
+    "scenario": "PAYMENT",
+    "initiator": "PAYEE",
+    "initiatorType": "BUSINESS",
+    "note": "pisp test payment",
+    "transferId": "ab3532c6-7ca3-461d-b2b9-4235085e7f6e",
+    "currentState": "COMPLETED",
+    "quoteId": "17467236-b6fe-4487-b21d-db9d37fd9128",
+    "quoteResponse": {
+        "transferAmount": {
+            "amount": "18",
+            "currency": "USD"
+        },
+        "expiration": "2020-05-12T09:26:13.967Z",
+        "ilpPacket": "AYICXAAAAAAAAAcIGGcuZGZzcGIubXNpc2RuLjk4NzY1NDMyMYICN2V5SjBjbUZ1YzJGamRHbHZia2xrSWpvaVlXSXpOVE15WXpZdE4yTmhNeTAwTmpGa0xXSXlZamt0TkRJek5UQTROV1UzWmpabElpd2ljWFZ2ZEdWSlpDSTZJakUzTkRZM01qTTJMV0kyWm1VdE5EUTROeTFpTWpGa0xXUmlPV1F6TjJaa09URXlPQ0lzSW5CaGVXVmxJanA3SW5CaGNuUjVTV1JKYm1adklqcDdJbkJoY25SNVNXUlVlWEJsSWpvaVRWTkpVMFJPSWl3aWNHRnlkSGxKWkdWdWRHbG1hV1Z5SWpvaU9UZzNOalUwTXpJeElpd2labk53U1dRaU9pSmtabk53WWlKOWZTd2ljR0Y1WlhJaU9uc2ljR0Z5ZEhsSlpFbHVabThpT25zaWNHRnlkSGxKWkZSNWNHVWlPaUpOVTBsVFJFNGlMQ0p3WVhKMGVVbGtaVzUwYVdacFpYSWlPaUl4TWpNME5UWTNPRGtpTENKbWMzQkpaQ0k2SW1SbWMzQmhJbjE5TENKaGJXOTFiblFpT25zaVlXMXZkVzUwSWpvaU1UZ2lMQ0pqZFhKeVpXNWplU0k2SWxWVFJDSjlMQ0owY21GdWMyRmpkR2x2YmxSNWNHVWlPbnNpYzJObGJtRnlhVzhpT2lKUVFWbE5SVTVVSWl3aWFXNXBkR2xoZEc5eUlqb2lVRUZaUlVVaUxDSnBibWwwYVdGMGIzSlVlWEJsSWpvaVFsVlRTVTVGVTFNaWZYMAA",
+        "condition": "AO5FG1LtEt-NHakXIQoTQVjfnlmNFh6UFRBbW93FVDk",
+        "payeeFspFee": {
+            "amount": "0",
+            "currency": "USD"
+        },
+        "payeeFspCommission": {
+            "amount": "0",
+            "currency": "USD"
+        }
+    },
+    "quoteResponseSource": "dfspb",
+    "fulfil": {
+        "completedTimestamp": "2020-05-12T09:25:27.227Z",
+        "transferState": "COMMITTED",
+        "fulfilment": "PjQaZGeBajwGGv-Oqa2F-gYX21ngMVJZOLc6hxNDS74"
+    }
+}
 ```

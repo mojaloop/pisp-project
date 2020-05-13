@@ -2,10 +2,10 @@
 
 
 ## project documentation
-project documentation, flows, uml diagrams and so on: [docs](./docs/README.md)
+project documentation, flows, uml diagrams and so on: [/docs](./docs/README.md)
 
 ## docker-local
-onboarding environment for local development & testing setup: [docker-local](./docker-local/README.md)
+onboarding environment for local development & testing: [/docker-local](./docker-local/README.md)
 
 ## branching strategy
 naming convention for [git branching](./docs/git_branching.md)

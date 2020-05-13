@@ -2,6 +2,23 @@
 
 The aim of this Document is to have a local mojaloop running with two customs DFSPs (backend plus sdk-adapter) and a PISP represented by a mojaloop simulator (which implements mojaloop api).
 
+## Repo layout
+
+Two custom DFSP & PISP configuration
+- [`dfsp_a`](./dfsp_a) 
+- [`dfsp_b`](./dfsp_b)
+- [`pisp`](./pisp)
+
+Backend components
+- [`docker`](./docker)
+
+Integration tests
+- [`postman`](./postman)
+
+## Context, Parties, Backend components
+
+
+# Onboarding
 
 ## Create host
 

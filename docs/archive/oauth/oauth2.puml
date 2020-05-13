@@ -1,0 +1,32 @@
+@startuml
+autonumber
+title OAuth Stages
+
+actor User
+participant Application as App
+box "Service"
+  participant "Authorization Service" as AuthService
+  participant "Resource Service" as ResourceService
+end box
+
+== Stage 1: Getting consent from the user ==
+
+App -> User: Can I act on your behalf?
+return Sure. Here's an Authorization Grant.
+
+== Stage 2: Obtaining the access token ==
+
+App -> AuthService: Can I get an access token for Resource X?\nHere's my grant from the user.
+return Sure. Here's an Access Token for Resource X.
+
+== Stage 3: Accessing the resource ==
+
+App -> ResourceService: Can I have Resource X?\nHere's my access token.
+return Sure. Here's Resource X.
+
+== Stage 4: Refreshing the access token ==
+
+App -> AuthService: My access token is expiring. Can I have a new one?\nHere's my Refresh Token.
+return Sure. Here's your new Access Token (and new Refresh Token).
+
+@enduml

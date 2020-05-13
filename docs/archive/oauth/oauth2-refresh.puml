@@ -1,0 +1,43 @@
+@startuml
+autonumber
+
+actor User
+
+participant "Web App" as App
+
+box "Service"
+  participant "Authz Server" as AuthService
+  participant "Resource Server" as ResourceService
+end box
+
+...
+
+App -> AuthService: Can I have an access token for Resource #1234?\nHere's my authorization grant.\n""GET /accessToken?resource=1234&authGrant=~*~*~*""
+AuthService --> App: Sure. Here's an access token and a refresh token.\n""200 OK. { accessToken: ~*~*~*, refreshToken: ~*~*~* }""
+
+... 
+
+note over App, AuthService
+  Wait for a long time until this token expires
+end note
+
+...
+
+group Failed retrieval due to expired access token
+  User -> App: I'd like to see Resource #1234.\n""GET /resources/1234""
+  App -> ResourceService: My user wants to see Resource #1234. Here's my access token.\n""GET /resources/1234?accessToken=~*~*~*""
+  ResourceService -->x App: Sorry, that access token has expired.\n""403 Access Denied.""
+end group
+
+group Use refresh token to get new access token
+  App -> AuthService: I'd like to refresh my access token. Here's my refresh token.\n""GET /accessToken?resource=1234&refreshToken=~*~*~*""
+  AuthService --> App: Sure. Here's a new access token.\n""200 OK. { accessToken: "~*~*~*" }""
+end group
+
+...
+
+note over App
+  Continue from here with a valid access token.
+end note
+
+@enduml

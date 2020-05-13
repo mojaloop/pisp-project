@@ -1,0 +1,24 @@
+@startuml
+title PISP Linking: Delegation + Consent
+!include participants_detailed.iuml
+
+...
+autonumber 10 "<b>AUTH-A-#</b>"
+Server -> App: Redirect user to:\n https://dfspa.com/auth?request_uri={ID}
+
+autonumber 1 "<b>DELE-A-#</b>"
+
+    App -> Alice: We are going open a browser so you can login to DFSPA.\nThey'll direct you back here when you're done.
+    App -> Browser: Open the following URL: \nhttps://dfspa.com/auth?request_uri={ID}
+    Browser --> DFSP: GET https://dfspa.com/auth?request_uri={ID}
+    DFSP --> Browser: 200 Success - Login
+    Alice -> Browser: Username & Password
+    Browser -> DFSP: POST https://dfspa.com/login?request_uri={ID}
+    DFSP --> Browser: 302 Location: https://dfspa.com/consent?request_uri={ID}
+    Browser -> DFSP: GET https://dfspa.com/consent?request_uri={ID}
+    DFSP --> Browser: 200 Success - Consent (with account selector)
+    Alice -> Browser: I consent to PISP having access to my Savings account...
+    Browser -> DFSP: POST https://dfspa.com/consent?request_uri={ID}&account=savings
+    DFSP --> Browser: 302 Location: pisp-app://callback?authz_code=abcd
+    Browser -> App: Deeplink: pisp-app://callback?code=abcd
+@enduml

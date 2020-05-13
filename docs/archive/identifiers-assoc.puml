@@ -1,0 +1,37 @@
+@startuml Identifiers_Association
+autonumber
+title Identifiers_Association
+
+actor Ayeesha
+box "PISP"
+  participant "PISP App" as App
+  participant "PISP Server" as PISP
+end box
+participant "Mojaloop Switch" as Switch
+participant "ALS" as ALS
+participant "DFSP A" as DFSP
+
+Ayeesha -> App : I want to register my \nchequing account from DFSP A\n with your wonderful app
+
+...Account Linking steps \nRefer to `PISP Linking` for detail...
+
+note over Ayeesha, PISP
+  __Note:__ All messages between
+  the PISP Server and DFSP are passed
+  via the switch, but this is
+  removed for simplicity
+end note
+
+DFSP -> DFSP: Generate random UUID \n& save internally
+DFSP -> PISP: Here's a Random UUID: ""1111-2222""\nLet's use this to refer to the account Ayeesha just linked
+PISP --> DFSP: Sure
+PISP -> PISP: Internally associate Ayeesha's \nchequing account with ""1111-2222""
+DFSP -> Switch: ""POST /participants/ASSOCIATION/1111-2222""
+Switch --> DFSP: ""201 Accepted""
+Switch -> ALS: Create a new key/value pair: \n""{'ASSOCIATION/1111-2222': 'DFSPA'}""
+ALS --> Switch: OK
+Switch -> DFSP: ""PUT /participants/ASSOCIATION/1111-2222""\nThe Association has been created
+DFSP -> PISP: The association has been created
+
+
+@enduml

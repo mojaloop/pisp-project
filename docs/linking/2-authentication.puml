@@ -1,0 +1,89 @@
+@startuml
+title PISP Linking: Authentication
+box "Mobile device"
+    actor Alice
+    participant "PISP App" as App
+    participant "Browser" as Browser
+    
+end box
+box "PISP"
+participant "PISP Server" as Server
+end box
+box "Mojaloop"
+    participant "FIDO Server" as FIDO
+    participant Switch
+end box
+box "DFSP A"
+    participant "DFSP A" as DFSP
+end box
+
+... Alice chooses DFSP A ...
+
+Alice -> App: My account is with DFSP A.
+
+autonumber 1 "<b>AUTH-#</b>"
+note over Alice, DFSP
+    This flow is based on Pushed Authorization Requests:
+    https://tools.ietf.org/html/draft-ietf-oauth-par-01.
+
+    The PAR interaction should be done via a Mojaloop APIs resource called /authorizationRequests
+end note
+
+    App -> Server: Get authorization to act on behalf of Alice from DFSP A
+    Server -> Switch: POST /authorizationRequests/{ID}\n { supportedAuthenticationChannels: [Web, OTP],\n scopes: [balanceEnquiry, accountList, sendTransfer],\n callbackUrl: pisp-app://callback ... }
+    Switch --> Server: 201 Created
+    Switch -> DFSP: POST /authorizationRequests/{ID}\n { supportedAuthenticationChannels: [Web, OTP],\n scopes: [balanceEnquiry, accountList, sendTransfer],\n callbackUrl: pisp-app://callback ... }
+    DFSP --> Switch: 201 Created
+
+alt OTP-based Authentication and Consent
+    DFSP -> Alice: Via SMS: "PISP has requested authorization\n to do X, Y, Z. Provide the following \nPIN to PISP to enable this: 1234"
+    DFSP -> Switch: GET /authorizations/{ID}?authenticationType=OTP
+    Switch --> DFSP: 200 Success
+    Switch -> Server: GET /authorizations/{ID}?authenticationType=OTP
+    Server --> Switch: 200 Success
+    Server -> App: Get OTP from User
+    App -> Alice: Please provide the OTP sent by DFSP A \nto authroize me to access your account
+    Alice -> App: 1234
+    group FIDO Enrollment
+      App --> App: Invoke platform FIDO enrollment flow
+      App --> Alice: Scan your fingerprint to create a new credential
+      Alice -> App: <scan fingerprint>    
+    end
+    App -> Server: OTP: 1234, FIDO Credential: {...}
+else Web-based Authentication and Consent
+    DFSP -> Switch: GET /authorizations/{ID}\n?authenticationType=Web\n&url=https://dfspa.com/auth?request_uri={ID}
+    Switch --> DFSP: 200 Success
+    Switch -> Server: GET /authorizations/{ID}\n?authenticationType=Web\n&url=https://dfspa.com/auth?request_uri={ID}
+    Server --> Switch: 200 Success
+    Server -> App: Redirect user to:\n https://dfspa.com/auth?request_uri={ID}
+    App -> Alice: We are going open a browser so you can login to DFSPA.\They'll direct you back here when you're done.
+    App -> Browser: Open the following URL: \nhttps://dfspa.com/auth?request_uri={ID}
+    Browser --> DFSP: GET https://dfspa.com/auth?request_uri={ID}
+    DFSP --> Browser: 200 Success - Login
+    Alice -> Browser: Username & Password
+    Browser -> DFSP: POST https://dfspa.com/login?request_uri={ID}
+    DFSP --> Browser: 302 Location: https://dfspa.com/consent?request_uri={ID}
+    Browser -> DFSP: GET https://dfspa.com/consent?request_uri={ID}
+    DFSP --> Browser: 200 Success - Consent (with account selector)
+    Alice -> Browser: I consent to PISP having access to my Savings account...
+    Browser -> DFSP: POST https://dfspa.com/consent?request_uri={ID}&account=savings
+    group FIDO Enrollment
+      DFSP --> Browser: 302 Location: pisp-app://callback?code=abcd
+      Browser -> App: Deeplink: pisp-app://callback?code=abcd
+      App --> App: Invoke platform FIDO enrollment flow
+      App --> Alice: Scan your fingerprint to create a new credential
+      Alice -> App: <scan fingerprint>
+    end
+    App -> Server: Code: xxxx, FIDO Credential: {...} (unless captured by DFSP)
+end
+    Server -> Switch: PUT /authorizations/{ID}\n { authenticationInfo: abcd, \n fidoCredential {...}... }
+    Switch --> Server: 200 Success
+    Switch -> DFSP: PUT /authorizations/{ID}\n { authenticationInfo: abcd, \n fidoCredential {...} ... }
+    DFSP --> Switch: 200 Success
+    DFSP --> Switch: PUT /authorizationRequests/{ID}\n { accessToken: xxxx}
+    Switch -> DFSP: 200 Success
+    Switch --> Server: PUT /authorizationRequests/{ID}\n { accessToken: xxxx}
+    Server -> Switch: 200 Success
+    Server -> App: Success
+    App -> Alice: Success! Now I'm going to fetch a list of your accounts.
+@enduml

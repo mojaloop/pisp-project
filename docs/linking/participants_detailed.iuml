@@ -1,0 +1,16 @@
+box "Mobile device"
+    actor Alice
+    participant "PISP App" as App
+    participant "Browser" as Browser
+    
+end box
+box "PISP"
+participant "PISP Server" as Server
+end box
+box "Mojaloop"
+    participant "FIDO Server" as FIDO
+    participant Switch
+end box
+box "DFSP A"
+    participant "DFSP A" as DFSP
+end box

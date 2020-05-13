@@ -25,8 +25,8 @@
     },
     "SWITCH_ENDPOINT": "http://central-ledger:3001",
     "ERROR_HANDLING": {
-      "includeCauseExtension": true,
+      "includeCauseExtension": false,
       "truncateCause": true
     },
-    "SIMPLE_ROUTING_MODE": false
+    "SIMPLE_ROUTING_MODE": true
   }

@@ -1,0 +1,21 @@
+@startuml
+title PISP Linking: Fido Enrolment
+!include participants_detailed.iuml
+
+...
+Browser -> App: Deeplink: pisp-app://callback?code=abcd
+
+!include enrolment.iuml
+autonumber 1 "<b>FIDO-A-#</b>"
+    App -> Server: AuthZ Code: xxxx, FIDO Credential: {...}
+    Server -> Switch: PUT /authorizations/{ID}\n { authenticationInfo: abcd, \n fidoCredential {...}... }
+    Switch --> Server: 200 Success
+    Switch -> DFSP: PUT /authorizations/{ID}\n { authenticationInfo: abcd, \n fidoCredential {...} ... }
+    DFSP --> Switch: 200 Success
+    DFSP --> Switch: PUT /authorizationRequests/{ID}\n { scopes: [\n     balanceEnquiry:12345-67890,\n     sendTransfer:12345-67890\n   ]\n}
+    Switch -> DFSP: 200 Success
+    Switch --> Server: PUT /authorizationRequests/{ID}\n { scopes: [\n     balanceEnquiry:12345-67890,\n     sendTransfer:12345-67890\n   ]\n}
+    Server -> Switch: 200 Success
+    Server -> App: Success
+    App -> Alice: Success
+@enduml

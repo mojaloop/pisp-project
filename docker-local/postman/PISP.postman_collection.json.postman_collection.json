@@ -108,6 +108,53 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Add PISP account to PISP SIM",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "575ffd01-e396-4e01-bd93-681b6bf1438e",
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"displayName\": \"PISP SIM\",\n    \"firstName\": \"PISP\",\n    \"middleName\": \"O\",\n    \"lastName\": \"SIM\",\n    \"dateOfBirth\": \"1970-01-01\",\n    \"idType\": \"MSISDN\",\n    \"idValue\": \"999999999\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:11003/repository/parties",
+							"host": [
+								"localhost"
+							],
+							"port": "11003",
+							"path": [
+								"repository",
+								"parties"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -177,19 +224,6 @@
 									"        pm.expect(jsonData.quoteResponse.transferAmount.currency).to.eql(pm.environment.get(\"currency\"));",
 									"",
 									"    });",
-									"    ",
-									"    pm.test(\"home transaction id should have the same id as request\", function () {",
-									"        pm.expect(jsonData.homeTransactionId).to.eql(pm.environment.get(\"homeTransactionId\"));",
-									"    });",
-									"    ",
-									"        ",
-									"    pm.test(\"amount type should have the same type as request\", function () {",
-									"        pm.expect(jsonData.amountType).to.eql(pm.environment.get(\"amountType\"));",
-									"    });",
-									"    ",
-									"    pm.test(\"transaction type should have the same type as request\", function () {",
-									"        pm.expect(jsonData.transactionType).to.eql(pm.environment.get(\"transactionType\"));",
-									"    });",
 									"});",
 									""
 								],
@@ -197,9 +231,6 @@
 							}
 						}
 					],
-					"protocolProfileBehavior": {
-						"disabledSystemHeaders": {}
-					},
 					"request": {
 						"method": "POST",
 						"header": [
@@ -211,7 +242,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "[\n    {\n        \"name\": \"scenario1\",\n        \"operation\": \"postTransfers\",\n        \"body\": {\n            \"from\": {\n                \"idType\": \"{{payerIdType}}\",\n                \"idValue\": \"{{payerIdValue}}\"\n            },\n            \"to\": {\n                \"idType\": \"{{payeeIdType}}\",\n                \"idValue\": \"{{payeeIdValue}}\"\n            },\n            \"amountType\": \"{{amountType}}\",\n            \"currency\": \"{{currency}}\",\n            \"amount\": \"{{amount}}\",\n            \"transactionType\": \"{{transactionType}}\",\n            \"note\": \"{{note}}\",\n            \"homeTransactionId\": \"{{homeTransactionId}}\"\n        }\n    }\n]"
+							"raw": "[\n    {\n        \"name\": \"scenario1\",\n        \"operation\": \"postTransfers\",\n        \"body\": {\n\t\t    \"from\": {\n\t\t        \"idType\": \"{{payerIdType}}\",\n\t\t        \"idValue\": \"{{payerIdValue}}\"\n\t\t    },\n\t\t    \"to\": {\n\t\t        \"idType\": \"{{payeeIdType}}\",\n\t\t        \"idValue\": \"{{payeeIdValue}}\"\n\t\t    },\n\t\t    \"amountType\": \"{{amountType}}\",\n\t\t    \"currency\": \"{{currency}}\",\n\t\t    \"amount\":  \"{{amount}}\",\n\t\t    \"transactionType\": \"{{transactionType}}\",\n\t\t    \"note\": \"{{note}}\",\n\t\t    \"homeTransactionId\": \"{{homeTransactionId}}\"\n        }\n    }\n]"
 						},
 						"url": {
 							"raw": "http://localhost:9003/scenarios",
@@ -292,19 +323,6 @@
 									"        pm.expect(transferState.quoteResponse.transferAmount.amount).to.eql(pm.environment.get(\"amount\"));",
 									"        pm.expect(transferState.quoteResponse.transferAmount.currency).to.eql(pm.environment.get(\"currency\"));",
 									"",
-									"    });",
-									"    ",
-									"    pm.test(\"home transaction id should have the same id as request\", function () {",
-									"        pm.expect(transferState.homeTransactionId).to.eql(pm.environment.get(\"homeTransactionId\"));",
-									"    });",
-									"    ",
-									"        ",
-									"    pm.test(\"amount type should have the same type as request\", function () {",
-									"        pm.expect(transferState.amountType).to.eql(pm.environment.get(\"amountType\"));",
-									"    });",
-									"    ",
-									"    pm.test(\"transaction type should have the same type as request\", function () {",
-									"        pm.expect(transferState.transactionType).to.eql(pm.environment.get(\"transactionType\"));",
 									"    });",
 									"});",
 									""
@@ -402,19 +420,6 @@
 									"        pm.expect(jsonData.quoteResponse.transferAmount.currency).to.eql(pm.environment.get(\"currency\"));",
 									"",
 									"    });",
-									"    ",
-									"    pm.test(\"home transaction id should have the same id as request\", function () {",
-									"        pm.expect(jsonData.homeTransactionId).to.eql(pm.environment.get(\"homeTransactionId\"));",
-									"    });",
-									"    ",
-									"        ",
-									"    pm.test(\"amount type should have the same type as request\", function () {",
-									"        pm.expect(jsonData.amountType).to.eql(pm.environment.get(\"amountType\"));",
-									"    });",
-									"    ",
-									"    pm.test(\"transaction type should have the same type as request\", function () {",
-									"        pm.expect(jsonData.transactionType).to.eql(pm.environment.get(\"transactionType\"));",
-									"    });",
 									"});",
 									""
 								],
@@ -444,6 +449,440 @@
 							"port": "10003",
 							"path": [
 								"scenarios"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "PISP-Initiate-TRX-Reqs-Tests",
+			"item": [
+				{
+					"name": "pisp - GET /parties & initiate transactionRequests",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f61eea5b-d7db-4886-bebd-f4671c3a0324",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"let jsonData = pm.response.json();",
+									"",
+									"pm.test(`homeTransactionId is: ${pm.variables.get('homeTransactionId')}`, function () {",
+									"    pm.expect(jsonData.homeTransactionId).to.eql(pm.variables.get('homeTransactionId'));",
+									"});",
+									"",
+									"pm.test(`from.idType is MSISDN`, function () {",
+									"    pm.expect(jsonData.from.idType).to.eql('MSISDN');",
+									"    pm.environment.set('requestToPayInitiatorIdType', jsonData.from.idType);",
+									"});",
+									"",
+									"pm.test(`from.idValue is 987654321`, function () {",
+									"    pm.expect(jsonData.from.idValue).to.eql('987654321');",
+									"    pm.environment.set('requestToPayInitiatorIdValue', jsonData.from.idValue);",
+									"});",
+									"",
+									"pm.test(`from.fspId is pisp`, function () {",
+									"    pm.expect(jsonData.from.fspId).to.eql('pisp');",
+									"    pm.environment.set('requestToPayInitiatorFspId', jsonData.from.fspId);",
+									"});",
+									"",
+									"pm.test(`to.idType is MSISDN`, function () {",
+									"    pm.expect(jsonData.to.idType).to.eql('MSISDN');",
+									"});",
+									"",
+									"pm.test(`to.idValue is ${pm.environment.get('payerfspMSISDN')}`, function () {",
+									"    pm.expect(jsonData.to.idValue).to.eql(pm.environment.get('payerfspMSISDN'));",
+									"});",
+									"",
+									"pm.test(`to.fspId is dfspa`, function () {",
+									"    pm.expect(jsonData.to.fspId).to.eql('dfspa');",
+									"});",
+									"",
+									"pm.test(`amountType is SEND`, function () {",
+									"    pm.expect(jsonData.amountType).to.eql('SEND');",
+									"});",
+									"",
+									"pm.test(`currency is ${pm.environment.get('currency')}`, function () {",
+									"    pm.expect(jsonData.currency).to.eql(pm.environment.get('currency'));",
+									"});",
+									"",
+									"pm.test(`amount is 18`, function () {",
+									"    pm.expect(jsonData.amount).to.eql('18');",
+									"});",
+									"",
+									"pm.test(`scenario is PAYMENT`, function () {",
+									"    pm.expect(jsonData.scenario).to.eql('PAYMENT');",
+									"});",
+									"",
+									"pm.test(`initiator is PAYEE`, function () {",
+									"    pm.expect(jsonData.initiator).to.eql('PAYEE');",
+									"});",
+									"",
+									"pm.test(`initiatorType is BUSINESS`, function () {",
+									"    pm.expect(jsonData.initiatorType).to.eql('BUSINESS');",
+									"});",
+									"",
+									"pm.test(`transactionRequestId is not null`, function () {",
+									"    pm.expect(jsonData.transactionRequestId).to.not.equal('');",
+									"    pm.environment.set('transactionRequestId', jsonData.transactionRequestId);",
+									"});",
+									"",
+									"pm.test(`currentState is COMPLETED`, function () {",
+									"    pm.expect(jsonData.currentState).to.eql('COMPLETED');",
+									"});",
+									"",
+									"pm.test(`requestToPayState is RECEIVED`, function () {",
+									"    pm.expect(jsonData.requestToPayState).to.eql('RECEIVED');",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "fb77a956-6991-461f-9fcb-8a5a31b60cc4",
+								"exec": [
+									"",
+									"var uuid = require('uuid');",
+									"pm.variables.set('homeTransactionId', uuid.v4());",
+									"",
+									"pm.environment.set('transactionRequestDate', (new Date()).toUTCString());",
+									"pm.environment.set('payeefspMSISDN', '987654321');",
+									"pm.environment.set('payerfspMSISDN', '123456789');",
+									"pm.environment.set('currency', 'USD');"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"homeTransactionId\": \"{{homeTransactionId}}\",\n    \"from\": {\n        \"idType\": \"MSISDN\",\n        \"idValue\": \"{{payeefspMSISDN}}\"\n    },\n    \"to\": {\n        \"idType\": \"MSISDN\",\n        \"idValue\": \"{{payerfspMSISDN}}\"\n    },\n    \"amountType\": \"SEND\",\n    \"currency\": \"{{currency}}\",\n    \"amount\": \"18\",\n    \"scenario\":\"PAYMENT\",\n    \"initiator\":\"PAYEE\",\n    \"initiatorType\":\"BUSINESS\",\n    \"note\": \"pisp payment\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:7002/requestToPay",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7002",
+							"path": [
+								"requestToPay"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pisp - payerfsp POST /quotes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ef7a6e05-5fff-41eb-a7a1-1694316beecc",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"let jsonData = pm.response.json();",
+									"",
+									"pm.environment.set('transferId', jsonData.transferId);",
+									"",
+									"pm.test(`requestToPayTransactionId is: ${pm.variables.get('transactionRequestId')}`, function () {",
+									"    pm.expect(jsonData.requestToPayTransactionId).to.eql(pm.variables.get('transactionRequestId'));",
+									"});",
+									"",
+									"pm.test(`from.idType is MSISDN`, function () {",
+									"    pm.expect(jsonData.from.idType).to.eql('MSISDN');",
+									"});",
+									"",
+									"pm.test(`from.idValue is ${pm.environment.get('payerfspMSISDN')}`, function () {",
+									"    pm.expect(jsonData.from.idValue).to.eql(pm.environment.get('payerfspMSISDN'));",
+									"});",
+									"",
+									"pm.test(`to.idType is MSISDN`, function () {",
+									"    pm.expect(jsonData.to.idType).to.eql('MSISDN');",
+									"});",
+									"",
+									"pm.test(`to.idValue 987654321`, function () {",
+									"    pm.expect(jsonData.to.idValue).to.eql('987654321');",
+									"});",
+									"",
+									"pm.test(`to.fspId is dfspb`, function () {",
+									"    pm.expect(jsonData.to.fspId).to.eql('dfspb');",
+									"});",
+									"",
+									"pm.test(`amountType is SEND`, function () {",
+									"    pm.expect(jsonData.amountType).to.eql('SEND');",
+									"});",
+									"",
+									"pm.test(`currency is ${pm.environment.get('currency')}`, function () {",
+									"    pm.expect(jsonData.currency).to.eql(pm.environment.get('currency'));",
+									"});",
+									"",
+									"pm.test(`amount is 18`, function () {",
+									"    pm.expect(jsonData.amount).to.eql('18');",
+									"});",
+									"",
+									"pm.test(`scenario is PAYMENT`, function () {",
+									"    pm.expect(jsonData.scenario).to.eql('PAYMENT');",
+									"});",
+									"",
+									"pm.test(`initiator is PAYEE`, function () {",
+									"    pm.expect(jsonData.initiator).to.eql('PAYEE');",
+									"});",
+									"",
+									"pm.test(`initiatorType is BUSINESS`, function () {",
+									"    pm.expect(jsonData.initiatorType).to.eql('BUSINESS');",
+									"});",
+									"",
+									"pm.test(`currentState is WAITING_FOR_QUOTE_ACCEPTANCE`, function () {",
+									"    pm.expect(jsonData.currentState).to.eql('WAITING_FOR_QUOTE_ACCEPTANCE');",
+									"});",
+									"",
+									"pm.test(`quoteResponse is not null`, function () {",
+									"    pm.expect(jsonData.quoteResponse).to.not.equal(null);",
+									"});",
+									"",
+									"pm.test(`quoteResponse.transferAmount.amount is 18`, function () {",
+									"    pm.expect(jsonData.quoteResponse.transferAmount.amount).to.eql('18');",
+									"});",
+									"",
+									"pm.test(`quoteResponse.transferAmount.currency is ${pm.environment.get('currency')}`, function () {",
+									"    pm.expect(jsonData.quoteResponse.transferAmount.currency).to.eql(pm.environment.get('currency'));",
+									"});",
+									"",
+									"pm.test(`quoteResponse.expiration is not null`, function () {",
+									"    pm.expect(jsonData.quoteResponse.expiration).to.not.equal(null);",
+									"});",
+									"",
+									"pm.test(`quoteResponse.ilpPacket is not null`, function () {",
+									"    pm.expect(jsonData.quoteResponse.ilpPacket).to.not.equal(null);",
+									"});",
+									"",
+									"pm.test(`quoteResponse.condition is not null`, function () {",
+									"    pm.expect(jsonData.quoteResponse.condition).to.not.equal(null);",
+									"});",
+									"",
+									"pm.test(`quoteResponse.payeeFspFee is not null`, function () {",
+									"    pm.expect(jsonData.quoteResponse.payeeFspFee).to.not.equal(null);",
+									"});",
+									"",
+									"pm.test(`quoteResponse.payeeFspCommission is not null`, function () {",
+									"    pm.expect(jsonData.quoteResponse.payeeFspCommission).to.not.equal(null);",
+									"});",
+									"",
+									"pm.test(`fulfil is  null`, function () {",
+									"    pm.expect(jsonData.fulfil).to.equal(undefined);",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "9a2a8eb5-a658-4404-b26c-a7e7f37732ec",
+								"exec": [
+									"pm.environment.set('transactionRequestDate', (new Date()).toUTCString());",
+									"pm.environment.set('payeefspMSISDN', '987654321');",
+									"pm.environment.set('payerfspMSISDN', '123456789');",
+									"pm.environment.set('currency', 'USD');"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"requestToPayTransactionId\": \"{{transactionRequestId}}\",\n  \"from\": {\n    \"idType\": \"MSISDN\",\n    \"idValue\": \"123456789\"\n  },\n  \"to\": {\n    \"idType\": \"MSISDN\",\n    \"idValue\": \"987654321\",\n    \"fspId\":\"dfspb\"\n  },\n  \"amountType\": \"SEND\",\n  \"currency\": \"{{currency}}\",\n  \"amount\": \"18\",\n  \"scenario\":\"PAYMENT\",\n  \"initiator\":\"PAYEE\",\n  \"initiatorType\":\"BUSINESS\",\n  \"note\": \"test payment\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5002//requestToPayTransfer",
+							"host": [
+								"localhost"
+							],
+							"port": "5002",
+							"path": [
+								"requestToPayTransfer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pisp - payerfsp has to accept the transaction",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "931c5aea-658c-4c11-aaf6-cdba22b756a8",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"let jsonData = pm.response.json();",
+									"",
+									"pm.environment.set('transferId', jsonData.transferId);",
+									"",
+									"pm.test(`requestToPayTransactionId is: ${pm.variables.get('transactionRequestId')}`, function () {",
+									"    pm.expect(jsonData.requestToPayTransactionId).to.eql(pm.variables.get('transactionRequestId'));",
+									"});",
+									"",
+									"pm.test(`from.idType is MSISDN`, function () {",
+									"    pm.expect(jsonData.from.idType).to.eql('MSISDN');",
+									"});",
+									"",
+									"pm.test(`from.idValue is ${pm.environment.get('payerfspMSISDN')}`, function () {",
+									"    pm.expect(jsonData.from.idValue).to.eql(pm.environment.get('payerfspMSISDN'));",
+									"});",
+									"",
+									"pm.test(`to.idType is MSISDN`, function () {",
+									"    pm.expect(jsonData.to.idType).to.eql('MSISDN');",
+									"});",
+									"",
+									"pm.test(`to.idValue 987654321`, function () {",
+									"    pm.expect(jsonData.to.idValue).to.eql('987654321');",
+									"});",
+									"",
+									"pm.test(`to.fspId is dfspb`, function () {",
+									"    pm.expect(jsonData.to.fspId).to.eql('dfspb');",
+									"});",
+									"",
+									"pm.test(`amountType is SEND`, function () {",
+									"    pm.expect(jsonData.amountType).to.eql('SEND');",
+									"});",
+									"",
+									"pm.test(`currency is ${pm.environment.get('currency')}`, function () {",
+									"    pm.expect(jsonData.currency).to.eql(pm.environment.get('currency'));",
+									"});",
+									"",
+									"pm.test(`amount is 18`, function () {",
+									"    pm.expect(jsonData.amount).to.eql('18');",
+									"});",
+									"",
+									"pm.test(`scenario is PAYMENT`, function () {",
+									"    pm.expect(jsonData.scenario).to.eql('PAYMENT');",
+									"});",
+									"",
+									"pm.test(`initiator is PAYEE`, function () {",
+									"    pm.expect(jsonData.initiator).to.eql('PAYEE');",
+									"});",
+									"",
+									"pm.test(`initiatorType is BUSINESS`, function () {",
+									"    pm.expect(jsonData.initiatorType).to.eql('BUSINESS');",
+									"});",
+									"",
+									"pm.test(`currentState is COMPLETED`, function () {",
+									"    pm.expect(jsonData.currentState).to.eql('COMPLETED');",
+									"});",
+									"",
+									"pm.test(`quoteResponse is not null`, function () {",
+									"    pm.expect(jsonData.quoteResponse).to.not.equal(null);",
+									"});",
+									"",
+									"pm.test(`quoteResponse.transferAmount.amount is 18`, function () {",
+									"    pm.expect(jsonData.quoteResponse.transferAmount.amount).to.eql('18');",
+									"});",
+									"",
+									"pm.test(`quoteResponse.transferAmount.currency is ${pm.environment.get('currency')}`, function () {",
+									"    pm.expect(jsonData.quoteResponse.transferAmount.currency).to.eql(pm.environment.get('currency'));",
+									"});",
+									"",
+									"pm.test(`quoteResponse.expiration is not null`, function () {",
+									"    pm.expect(jsonData.quoteResponse.expiration).to.not.equal(null);",
+									"});",
+									"",
+									"pm.test(`quoteResponse.ilpPacket is not null`, function () {",
+									"    pm.expect(jsonData.quoteResponse.ilpPacket).to.not.equal(null);",
+									"});",
+									"",
+									"pm.test(`quoteResponse.condition is not null`, function () {",
+									"    pm.expect(jsonData.quoteResponse.condition).to.not.equal(null);",
+									"});",
+									"",
+									"pm.test(`quoteResponse.payeeFspFee is not null`, function () {",
+									"    pm.expect(jsonData.quoteResponse.payeeFspFee).to.not.equal(null);",
+									"});",
+									"",
+									"pm.test(`quoteResponse.payeeFspCommission is not null`, function () {",
+									"    pm.expect(jsonData.quoteResponse.payeeFspCommission).to.not.equal(null);",
+									"});",
+									"",
+									"pm.test(`otpResponse is null`, function () {",
+									"    pm.expect(jsonData.otpResponse).to.eql(undefined);",
+									"});",
+									"",
+									"pm.test(`fulfil is not null`, function () {",
+									"    pm.expect(jsonData.fulfil).to.not.equal(null);",
+									"});",
+									"",
+									"pm.test(`fulfil.completedTimestamp is not null`, function () {",
+									"    pm.expect(jsonData.fulfil.completedTimestamp).to.not.equal(null);",
+									"});",
+									"",
+									"pm.test(`fulfil.transferState is COMMITTED`, function () {",
+									"    pm.expect(jsonData.fulfil.transferState).to.eql('COMMITTED');",
+									"});",
+									"",
+									"pm.test(`fulfil.fulfilment is not null`, function () {",
+									"    pm.expect(jsonData.fulfil.fulfilment).to.not.equal(null);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"acceptQuote\": true\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5002/requestToPayTransfer/{{transactionRequestId}}",
+							"host": [
+								"localhost"
+							],
+							"port": "5002",
+							"path": [
+								"requestToPayTransfer",
+								"{{transactionRequestId}}"
 							]
 						}
 					},

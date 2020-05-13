@@ -16,7 +16,7 @@ Integration tests
 - [`postman`](./postman)
 
 ## Context, Parties, Backend components
-
+![components](./components_layout.png)
 
 # Onboarding
 

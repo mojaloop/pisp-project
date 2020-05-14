@@ -8,15 +8,15 @@ services:
   central-ledger:
     image: mojaloop/central-ledger:v10.1.0
     container_name: central-ledger
-    user: root
-    command: sh -c "/opt/wait-for-node/wait-for.js && node src/api/index.js"
+    command: sh -c "/opt/central-ledger/wait-for.js && node src/api/index.js"
     ports:
       - "3001:3001"
     volumes:
        - ./docker/central-ledger/default.json:/opt/central-ledger/config/default.json
         #  - ./docker/wait-for:/opt/wait-for
         # TODO: update when we're done
-       - ./docker/wait-for-node:/opt/wait-for-node
+      #  - ./docker/wait-for-node:/opt/wait-for-node
+       - ./docker/wait-for-node/wait-for.js:/opt/central-ledger/wait-for.js
     environment:
       - LOG_LEVEL=info
       - CLEDG_SIDECAR__DISABLED=true

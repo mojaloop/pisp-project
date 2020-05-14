@@ -72,11 +72,10 @@ async function wrapWithRetries(func, retries, waitTimeMs) {
  * 
  */
 async function waitForMySQL() {
-  const projectDir = process.env.WAIT_FOR_PROJECT_DIR
+  // const projectDir = process.env.WAIT_FOR_PROJECT_DIR
   // TODO: We need to dynamically set the `CLEDG` prefix here, or perhaps not worry about it
-  const RC = require(projectDir + '/node_modules/rc')('CLEDG', require(`${projectDir}/config/default.json`))
-
-  const knex = require(projectDir + '/node_modules/knex')({
+  const RC = require('rc')('CLEDG', require(`./config/default.json`))
+  const knex = require('knex')({
     client: RC.DATABASE.DIALECT,
     connection: {
       host: RC.DATABASE.HOST.replace(/\/$/, ''),

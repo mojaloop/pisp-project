@@ -2,8 +2,24 @@
 
 The aim of this Document is to have a local mojaloop running with two customs DFSPs (backend plus sdk-adapter) and a PISP represented by a mojaloop simulator (which implements mojaloop api).
 
-## Prerequisites
+## Repo layout
 
+Two custom DFSP & PISP configuration
+- [`dfsp_a`](./dfsp_a) 
+- [`dfsp_b`](./dfsp_b)
+- [`pisp`](./pisp)
+
+Backend components
+- [`docker`](./docker)
+
+Integration tests
+- [`postman`](./postman)
+
+## Context, Parties, Backend components
+
+![components](./components_layout.png)
+
+## Prerequisites
 - `docker` - `v18.06.0` or higher
 - `docker-compose`. We are using a compose file of `v3.7`. So you need at least `docker-compose` `v1.22`
 - `newman` You can install globally from npm if you want:

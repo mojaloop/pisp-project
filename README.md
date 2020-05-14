@@ -1,7 +1,17 @@
 # PISP - Payment Initiation Service Provider integration with Mojaloop
 
-## branch strategy:
-  1. When we are creating a new branch we are using `pisp/` prefix in branch name. 
-  2. We have `pisp/master` leading branch to keep our final feature candidate to be merged with `master`
-  3. Newly created PR for every WIP branch should have `pisp/master` set as target
-  4. When the new version of `master` is published (by other team for example), we should propagate all changes via merge with `pisp/master`
+
+## project documentation
+project documentation, flows, uml diagrams and so on: [/docs](./docs/README.md)
+
+## docker-local
+onboarding environment for local development & testing: [/docker-local](./docker-local/README.md)
+
+## branching strategy
+naming convention for [git branching](./docs/git_branching.md)
+
+## external links
+ - [proposal documentation on google drive](https://docs.google.com/document/d/17rLpCPM2NY-i4oKGxhlBMbQahGY0k83rij2EOiU_OR4/edit)
+ - [Confluence](https://modusbox.atlassian.net/wiki/spaces/GPISP/pages/648774132/Google+PISP+Documentation)
+ - [ZenHub board](https://app.zenhub.com/workspaces/pisp-5e8457b05580fb04a7fd4878/board?repos=106737677)
+  

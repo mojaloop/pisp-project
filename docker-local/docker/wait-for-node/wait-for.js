@@ -16,10 +16,19 @@
  * Define the set of functions to wait for before a given service starts up
  */
 const waitForFunctions = {
+  // TODO: account-lookup-service waits for both SQL instances...
+  // Perhaps we need a way to easily configure _which_ sql it should talk to
+  'account-lookup-service': [
+    // waitForMySQL
+  ],
   'central-ledger': [
     waitForMySQL,
     waitForKafka,
     waitForObjectStore
+  ],
+  'central-settlement': [
+    waitForMySQL,
+    waitForKafka,
   ],
   // Add your service here
 }

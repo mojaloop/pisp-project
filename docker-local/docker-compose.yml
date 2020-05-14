@@ -28,7 +28,7 @@ services:
       - mysql
       - kafka
     healthcheck:
-      test: wget -q http://172.17.0.1:3001/health > /dev/null || exit 1
+      test: wget -q http://172.17.0.1:3001/health -O /dev/null || exit 1
       timeout: 20s
       retries: 30
       interval: 15s
@@ -75,7 +75,7 @@ services:
     depends_on:
       - kafka
     healthcheck:
-      test: wget -q http://172.17.0.1:3000/health > /dev/null || exit 1
+      test: wget -q http://172.17.0.1:3000/health -O /dev/null || exit 1
       timeout: 20s
       retries: 10
       interval: 30s
@@ -128,7 +128,7 @@ services:
     networks:
       - mojaloop-net
     healthcheck:
-      test: wget -q http://172.17.0.1:8444/health > /dev/null || exit 1
+      test: wget -q http://172.17.0.1:8444/health -O /dev/null || exit 1
       timeout: 20s
       retries: 10
       interval: 30s
@@ -161,7 +161,7 @@ services:
     networks:
       - mojaloop-net
     healthcheck:
-      test: wget -q http://172.17.0.1:4003/health > /dev/null || exit 1
+      test: wget -q http://172.17.0.1:4003/health -O /dev/null || exit 1
       timeout: 20s
       retries: 10
       interval: 30s
@@ -246,7 +246,7 @@ services:
       - ./docker/account-lookup-service/default.json:/opt/account-lookup-service/config/default.json
       - ./docker/wait-for:/opt/wait-for
     healthcheck:
-      test: wget -q http://172.17.0.1:4001/health > /dev/null || exit 1
+      test: wget -q http://172.17.0.1:4001/health -O /dev/null || exit 1
       timeout: 20s
       retries: 10
       interval: 60s

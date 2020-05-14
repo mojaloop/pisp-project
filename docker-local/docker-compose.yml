@@ -8,6 +8,7 @@ services:
   central-ledger:
     image: mojaloop/central-ledger:v10.1.0
     container_name: central-ledger
+    user: root
     command:
       - "sh"
       - "-c"
@@ -77,6 +78,7 @@ services:
       timeout: 20s
       retries: 10
       interval: 30s
+      start_period: 30s
     extra_hosts:
       - "central-ledger.local:172.17.0.1"
       - "central-ledger:172.17.0.1"
@@ -184,8 +186,8 @@ services:
     image: johnnypark/kafka-zookeeper:2.3.0
     container_name: kafka
     # Disable logging as it is far too verbose for debugging locally
-    logging:
-      driver: none
+    # logging:
+      # driver: none
     volumes:
       - ./docker/kafka/:/opt/kafka_2.12-2.3.0/config/
     ports:
@@ -205,6 +207,7 @@ services:
   central-settlement:
     image: mojaloop/central-settlement:v9.5.0
     container_name: central-settlement
+    user: root
     command:
       - "sh"
       - "-c"
@@ -223,6 +226,7 @@ services:
   account-lookup-service:
     image: mojaloop/account-lookup-service:v10.1.0
     container_name: account-lookup-service
+    user: root
     command:
       - "sh"
       - "-c"

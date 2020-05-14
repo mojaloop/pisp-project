@@ -1,5 +1,6 @@
 #!/bin/sh
 
+set -e
 echo "** STARTUP - Checking for DB connection..."
 
 source /opt/wait-for/wait-for.env

@@ -2,28 +2,64 @@
 
 The aim of this Document is to have a local mojaloop running with two customs DFSPs (backend plus sdk-adapter) and a PISP represented by a mojaloop simulator (which implements mojaloop api).
 
+## Prerequisites
 
-## Create host
+- `docker` - `v18.06.0` or higher
+- `docker-compose`. We are using a compose file of `v3.7`. So you need at least `docker-compose` `v1.22`
+- `newman` You can install globally from npm if you want:
+```bash
+npm install -g newman
+```
 
-* Add to /etc/hosts
+- A hosts file with the following entries:
 ```
 127.0.0.1       central-ledger.local central-settlement.local ml-api-adapter.local account-lookup-service.local account-lookup-service-admin.local quoting-service.local moja-simulator.local central-ledger central-settlement ml-api-adapter account-lookup-service account-lookup-service-admin quoting-service simulator host.docker.internal
 127.0.0.1 dfspa-backend dfspb-backend pisp-backend dfspa-scheme-adapter dfspb-scheme-adapter pisp-scheme-adapter transaction-request-service
 ```
 
-## Start the compose
+## Start services using `docker-compose`
 
+```bash
+# start all services in background
+docker-compose up -d
 
+# Check to see if they are running and healthy
+docker-compose ps
 ```
-Running the services separately in different terminals is recommended
 
-Run
+It may take a little while for the services to healthy.
 
-docker-compose up account-lookup-service
+### Logging:
 
-Then close once the service is ready.
-Proceed to stop account-lookup-service and proceed with the following commands.
-ALS needs to be run initially so it setups properly.
+Use `docker-compose logs -f` to tail the logs of any given container. 
+
+You may want to do this in separate terminal sessions to easily debug each service.
+
+```bash
+docker-compose logs -f central-ledger
+docker-compose logs -f quoting-service
+docker-compose logs -f ml-api-adapter
+docker-compose logs -f central-settlement
+docker-compose logs -f account-lookup-service
+docker-compose logs -f dfspa-scheme-adapter dfspa-backend
+docker-compose logs -f dfspb-scheme-adapter dfspb-backend
+docker-compose logs -f transaction-requests-service
+docker-compose logs -f pisp-backend  pisp-scheme-adapter pisp-redis
+```
+
+
+```bash
+#Running the services separately in different terminals is recommended
+
+#Run
+
+docker-compose up account-lookup-service #t
+
+# Then close once the service is ready.
+# Proceed to stop account-lookup-service and proceed with the following commands.
+# ALS needs to be run initially so it setups properly.
+
+# [TODO] is this an ubuntu only issue? Perhaps...
 
 docker-compose up central-ledger
 docker-compose up quoting-service

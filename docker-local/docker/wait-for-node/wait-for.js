@@ -110,13 +110,6 @@ async function main() {
     process.exit(1);
   }
 
-
-  // const result = await functionList.reduce(async (acc, curr, idx) => {
-  //   await acc;
-
-  //   return wrapWithRetries(curr, 5, 10)
-  // }, Promise.resolve(true))
-
   console.log("wait-for result is", result)
   process.exit(0)
 }

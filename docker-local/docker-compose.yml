@@ -28,10 +28,10 @@ services:
       - mysql
       - kafka
     healthcheck:
-      test: ["CMD", "bash", "-c" ,"apk --no-cache add curl", ";", "curl", "http://172.17.0.1:3001/health"]
+      test: wget -q http://172.17.0.1:3001/health > /dev/null || exit 1
       timeout: 20s
       retries: 30
-      interval: 30s
+      interval: 15s
     extra_hosts:
       - "moja-simulator.local:172.17.0.1"
       - "simulator:172.17.0.1"
@@ -49,6 +49,7 @@ services:
       - "3002:3002"
     volumes:
       - ./docker/quoting-service/default.json:/opt/quoting-service/config/default.json
+    # TODO: healthcheck
     extra_hosts:
       - "moja-simulator.local:172.17.0.1"
       - "simulator:172.17.0.1"
@@ -74,7 +75,7 @@ services:
     depends_on:
       - kafka
     healthcheck:
-      test: ["CMD", "sh", "-c" ,"apk --no-cache add curl", ";", "curl", "http://172.17.0.1:3000/health"]
+      test: wget -q http://172.17.0.1:3000/health > /dev/null || exit 1
       timeout: 20s
       retries: 10
       interval: 30s
@@ -127,7 +128,7 @@ services:
     networks:
       - mojaloop-net
     healthcheck:
-      test: ["CMD", "sh", "-c" ,"apk --no-cache add curl", ";", "curl", "http://172.17.0.1:8444/health"]
+      test: wget -q http://172.17.0.1:8444/health > /dev/null || exit 1
       timeout: 20s
       retries: 10
       interval: 30s
@@ -160,7 +161,7 @@ services:
     networks:
       - mojaloop-net
     healthcheck:
-      test: ["CMD", "sh", "-c" ,"apk --no-cache add curl", ";", "curl", "http://172.17.0.1:4003/health"]
+      test: wget -q http://172.17.0.1:4003/health > /dev/null || exit 1
       timeout: 20s
       retries: 10
       interval: 30s
@@ -245,7 +246,7 @@ services:
       - ./docker/account-lookup-service/default.json:/opt/account-lookup-service/config/default.json
       - ./docker/wait-for:/opt/wait-for
     healthcheck:
-      test: ["CMD", "sh", "-c" ,"apk --no-cache add curl", ";", "curl", "http://172.17.0.1:4001/health"]
+      test: wget -q http://172.17.0.1:4001/health > /dev/null || exit 1
       timeout: 20s
       retries: 10
       interval: 60s

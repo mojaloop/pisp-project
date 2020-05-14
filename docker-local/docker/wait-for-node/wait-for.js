@@ -1,12 +1,39 @@
 #!/usr/bin/env node
 
 /**
+ * @file wait-for.js
+ * @description Waits for a given service's prerequisite services to be up and running.
+ *   
+ *  Observe the following Environment Variables:
+ *  `WAIT_FOR_PROJECT_DIR`  - REQUIRED  The directory where the project files live. Usually this is, `/opt/<service_name>` or `/opt/<service_name>/src`
+ *  `WAIT_FOR_SERVICE_NAME` - REQUIRED  The name of the service. Must refer to a key in `waitForFunctions` below
+ *  `WAIT_FOR_RETRIES`      - OPTIONAL  How many times should we retry waiting for a service? _optional_ Defaults to 5
+ *  `WAIT_FOR_RETRY_MS`     - OPTIONAL  How many ms to wait before retrying a service connection? _optional_ Defaults to 1000 (1 second)
+ */
+
+/**
+ * waitForFunctions
+ * Define the set of functions to wait for before a given service starts up
+ */
+const waitForFunctions = {
+  'central-ledger': [
+    waitForMySQL,
+    waitForKafka,
+    waitForObjectStore
+  ],
+  // Add your service here
+}
+
+
+/**
  * @function printUsage
  * @description - Prints the usage of this script
  */
 function printUsage() {
-  console.warn('Usage: ./wait-for.js --service=[central-ledger | ]')
+  console.warn(`Usage: ./wait-for.js\nThe following environment variables are required\nWAIT_FOR_PROJECT_DIR, WAIT_FOR_SERVICE_NAME`)
 }
+
+
 
 /**
  * @function wrapWithRetries
@@ -32,8 +59,12 @@ async function wrapWithRetries(func, retries, waitTimeMs) {
   }
 }
 
+/**
+ * 
+ */
 async function waitForMySQL() {
   const projectDir = process.env.WAIT_FOR_PROJECT_DIR
+  // TODO: We need to dynamically set the `CLEDG` prefix here, or perhaps not worry about it
   const RC = require(projectDir + '/node_modules/rc')('CLEDG', require(`${projectDir}/config/default.json`))
 
   const knex = require(projectDir + '/node_modules/knex')({
@@ -51,28 +82,26 @@ async function waitForMySQL() {
   return 'MySQL Connected';
 }
 
+/**
+ * @function waitForKafka
+ * @description Waits for the kafka service to be up and running
+ * TODO: implement
+ */
 async function waitForKafka() {
-  // throw new Error('Could not connect to MySQL')
+  // throw new Error('Could not connect to Kafka')
   return 'Kafka Connected';
 }
 
-async function waitForObjectstore() {
+/**
+ * @function waitForObjectStore
+ * @description Waits for the kafka service to be up and running
+ * TODO: implement
+ */
+async function waitForObjectStore() {
   // throw new Error('Could not connect to Objectstore')
-  return 'Objecstore Connected';
+  return 'ObjectStore Connected';
 }
 
-/**
- * waitForFunctions
- * Define the set of functions to wait for before a given service starts up
- */
-const waitForFunctions = {
-  'central-ledger': [
-    waitForMySQL,
-    // waitForKafka,
-    // waitForObjectstore
-  ],
-  // Add your service here
-}
 
 async function main() {
   console.log("process.env is", process.env)
@@ -82,8 +111,7 @@ async function main() {
   const projectDir = process.env.WAIT_FOR_PROJECT_DIR;
 
   // TODO: error if the above 2 are not set
-  // TODO: check for node_modules
-
+  // TODO: check for node_modules directory, we can't find it at `${projectDir}/node_modules`, exit
 
   const internalServiceRetries = parseInt(process.env.WAIT_FOR_RETRIES || 5)
   const retryWaitMs = parseInt(process.env.WAIT_FOR_RETRY_MS || 1000)

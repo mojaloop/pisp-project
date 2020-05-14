@@ -11,7 +11,8 @@ It is assumed that:
 
 end note
 
-== Discovery ==
+== Discovery (Lookup) ==
+autonumber 1 "<b>LK-#</b>"
 
 CA->App:I would like to transfer\n$100 to ""+44 1234 5678""
 activate App
@@ -131,6 +132,7 @@ deactivate S
 D2->D2:Store this request
 
 == Agreement Phase ==
+autonumber 1 "<b>AG-#</b>"
 
 D2->S:Please provide me with a quotation for this transfer
 activate S
@@ -292,6 +294,7 @@ deactivate S
 D2->D2:Store the transfer request number against\nthe transaction number given in the quote.\nThis will be useful when the transfer comes back 
 
 == Transfer Phase ==
+autonumber 1 "<b>TR-#</b>"
 
 note over D2
 

@@ -5,6 +5,7 @@ title PISP Transfer
 !include participants.iuml
 
 == Agreement Phase ==
+autonumber 1 "<b>AG-#</b>"
 
 D2->S:Please provide me with a quotation for this transfer
 activate S

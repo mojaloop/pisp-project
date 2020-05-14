@@ -11,7 +11,8 @@ It is assumed that:
 
 end note
 
-== Discovery ==
+== Discovery (Lookup) ==
+autonumber 1 "<b>LK-#</b>"
 
 CA->App:I would like to transfer\n$100 to ""+44 1234 5678""
 activate App

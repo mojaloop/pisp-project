@@ -5,6 +5,7 @@ title PISP Transfer
 !include participants.iuml
 
 == Transfer Phase ==
+autonumber 1 "<b>TR-#</b>"
 
 note over D2
 

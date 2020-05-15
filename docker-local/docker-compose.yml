@@ -6,28 +6,24 @@ networks:
 
 services:
   central-ledger:
-    image: mojaloop/central-ledger:v10.1.0
+    image: mojaloop/central-ledger:v10.1.1
     container_name: central-ledger
-    command: sh -c "/opt/central-ledger/wait-for.js && node src/api/index.js"
+    command: sh -c "/opt/central-ledger/wait4/wait4.js central-ledger && node src/api/index.js"
     ports:
       - "3001:3001"
     volumes:
        - ./docker/central-ledger/default.json:/opt/central-ledger/config/default.json
-        #  - ./docker/wait-for:/opt/wait-for
-        # TODO: update when we're done
-      #  - ./docker/wait-for-node:/opt/wait-for-node
-       - ./docker/wait-for-node/wait-for.js:/opt/central-ledger/wait-for.js
+       - ./docker/wait4:/opt/central-ledger/wait4
     environment:
       - LOG_LEVEL=info
       - CLEDG_SIDECAR__DISABLED=true
       - CLEDG_MONGODB__DISABLED=false
-      - WAIT_FOR_SERVICE_NAME=central-ledger
-      - WAIT_FOR_PROJECT_DIR=/opt/central-ledger
     networks:
       - mojaloop-net
     depends_on:
       - mysql
       - kafka
+      - objstore
     healthcheck:
       test: wget -q http://172.17.0.1:3001/health -O /dev/null || exit 1
       timeout: 20s
@@ -38,6 +34,23 @@ services:
       - "simulator:172.17.0.1"
       - "host.docker.internal:172.17.0.1"
       - "simulator.local:172.17.0.1"
+
+  objstore:
+    image: mongo:latest
+    container_name: objstore
+    # Disable logging as it is far too verbose for debugging locally
+    logging:
+      driver: none
+    ports:
+      - "27017:27017"
+    networks:
+      - mojaloop-net
+    healthcheck:
+      test: mongo localhost:27017/test --quiet 1
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
 
   quoting-service:
     image: "mojaloop/quoting-service:v10.1.0"
@@ -60,15 +73,12 @@ services:
   ml-api-adapter:
     image: mojaloop/ml-api-adapter:v10.1.1
     container_name: ml-api-adapter
-    command:
-      - "sh"
-      - "-c"
-      - "sh /opt/wait-for/wait-for-ml-api-adapter.sh && node src/api/index.js"
+    command: sh -c "/opt/ml-api-adapter/wait4/wait4.js ml-api-adapter && node src/api/index.js"
     ports:
       - "3000:3000"
     volumes:
       - ./docker/ml-api-adapter/default.json:/opt/ml-api-adapter/config/default.json
-      - ./docker/wait-for:/opt/wait-for
+      - ./docker/wait4:/opt/ml-api-adapter/wait4
     environment:
       - LOG_LEVEL=info
     networks:
@@ -209,11 +219,7 @@ services:
   central-settlement:
     image: mojaloop/central-settlement:v9.5.0
     container_name: central-settlement
-    user: root
-    command:
-      - "sh"
-      - "-c"
-      - "sh /opt/wait-for/wait-for-central-settlement.sh && node src/api/index.js"
+    command: sh -c "/opt/central-settlement/wait4/wait4.js central-settlement && node src/api/index.js"
     networks:
       - mojaloop-net
     depends_on:
@@ -223,16 +229,12 @@ services:
       - "3007:3007"
     volumes:
        - ./docker/central-settlement/default.json:/opt/central-settlement/config/default.json
-       - ./docker/wait-for:/opt/wait-for
+       - ./docker/wait4:/opt/central-settlement/wait4
 
   account-lookup-service:
     image: mojaloop/account-lookup-service:v10.1.0
     container_name: account-lookup-service
-    user: root
-    command:
-      - "sh"
-      - "-c"
-      - "sh /opt/wait-for/wait-for-account-lookup-service.sh && node src/index.js server"
+    command: sh -c "/opt/central-account-lookup-service/wait4/wait4.js account-lookup-service && node src/index.js server"
     ports:
       - "4001:4001"
       - "4002:4002"
@@ -244,8 +246,8 @@ services:
       - mysql-als
       - central-ledger
     volumes:
-      - ./docker/account-lookup-service/default.json:/opt/account-lookup-service/config/default.json
-      - ./docker/wait-for:/opt/wait-for
+       - ./docker/account-lookup-service/default.json:/opt/account-lookup-service/config/default.json
+       - ./docker/wait4:/opt/central-account-lookup-service/wait4
     healthcheck:
       test: wget -q http://172.17.0.1:4001/health -O /dev/null || exit 1
       timeout: 20s

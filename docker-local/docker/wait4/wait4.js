@@ -9,7 +9,7 @@ const util = require('util')
  *  Observe the following Environment Variables:
  *  `WAIT4_SERVICE`  - REQUIRED  The name of the service. Must refer to any entry of `services.[*].name` in config.json
  *  `WAIT4_CONFIG`   - OPTIONAL path to config.json file, by default `./wait4.config.json`
- *  `WAIT4_RETRIES`  - OPTIONAL  How many times should we retry waiting for a service? _optional_ Defaults to 30
+ *  `WAIT4_RETRIES`  - OPTIONAL  How many times should we retry waiting for a service? _optional_ Defaults to 10
  *  `WAIT4_WAIT_MS`  - OPTIONAL  How many ms to wait before retrying a service connection? _optional_ Defaults to 1000 (1 second)
  * 
  *  To keep the script code simple, we drop any validation, so the format of config file must be perfect!
@@ -20,13 +20,13 @@ async function main() {
   console.log('args are', process.argv)
 
   try {
-    const config = require(process.env.WAIT4_CONFIG || './wait4.config.json')
+    const config = require(process.env.WAIT4_CONFIG || './wait4.config.js')
     const service = getService(config)
     console.info(`wait4 Service: ${service.name}`)
 
     // merge config with environment or defaults
     config.retries = parseInt(process.env.WAIT4_RETRIES || config.retries || 10)
-    config.waitMs = parseInt(process.env.WAIT4_WAIT_MS || config.waitMs || 2500)
+    config.waitMs = parseInt(process.env.WAIT4_WAIT_MS || config.waitMs || 1000)
     
     // wait for services connections or paradox to be ready
     const waitresses = getWaiters(service.wait4, config)

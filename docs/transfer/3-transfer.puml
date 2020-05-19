@@ -7,53 +7,34 @@ title PISP Transfer
 == Transfer Phase ==
 autonumber 1 "<b>TR-#</b>"
 
-note over D2
-
-So now Ayesha's bank knows that she has confirmed
-that she wants to complete the transfer on the terms
-offered by Bhavesh's DFSP. The bank can go ahead
-and request the transfer.
-
-It does this in the normal way, and we pick the story
-up again when the successful transfer message is received
-by DFSP A
-
+...
+note over S
+    A standard Normal P2P Transfer from
+    DFSPA -> DFSPB now takes place
 end note
+...
 
-D2->D2:Do I have a transfer request associated\nwith this transaction?
-note over D2
+
+S->S: Does that transfer that just took place relate to a PISP transfer?
+note over S
 
 We're in the Yes box, so, er, yes.
 
 end note
 
-D2->S:Forward the transfer response to the PISP
-activate S
-S-->D2:200 OK, got it
-deactivate D2
-note over S
+S->S: Lookup the \n""thirdPartyTransferId"" associated with the transfer
 
-This too is syntactically ugly, because you shouldn't send
-a **PUT** except in response to a request. But we'll worry
-about that later...
 
-end note
-S->D1:Here's the status of the transfer you asked for
+S->D1:Here's the status of the transfer you asked for\n""PUT /thirdPartyRequest/transfer/{ID}""
 activate D1
 D1-->S:200 OK, got it
 deactivate S 
-D1->D1:WTF?
-D1->D1:Oh, OK. I can see that this is a response\nto a transfer request.\nI'll look up the quote with this transaction ID\n and use it to find the transfer request
 D1->App:Transfer was successful
 activate App
-App->CA:Your funds were successfully\ntransferred to Bhavesh.
+App->CA:Your funds were successfully transferred to Bhavesh.
 CA-->App:Thank you very much.
 deactivate App
 deactivate D1
-
-
-' end
-' end
 
 
 @enduml

@@ -58,24 +58,22 @@ Supporting documentation for the PISP implementation.
 For the full transfer flows, see the [E2E PISP Transfer Flows](./out/transfer/complete/PISP%20transfer.png).
 
 Edit the transfer flow `.puml` files here: [PISP Transfer Flow UML](./transfer)
-- [`./transfer/complete.puml`](./transfer/complete.puml) Combines the following diagrams into one.
-- [`./transfer/1-discovery.puml`](./transfer/1-discovery.puml)
-- [`./transfer/2-agreement.puml`](./transfer/2-agreement.puml)
-- [`./transfer/3-transfer.puml`](./transfer/3-transfer.puml)
+
+[`./transfer/complete.puml`](./transfer/complete.puml) Combines the following diagrams into one.
 
 
 #### 1. Discovery
+>_[PUML source: `./transfer/1-discovery.puml`](./transfer/1-discovery.puml)_
 ![discovery](./out/transfer/1-discovery/PISP%20Transfer.png)
 
 #### 2. Agreement
+>_[PUML source: `./transfer/2-agreement.puml`](./transfer/2-agreement.puml)_
 
 ![agreement](./out/transfer/2-agreement/PISP%20Transfer.png)
 
 #### 3. Transfer
-
-![transfer](./out/transfer/3-transfer/PISP%20Transfer.png)
-
-> Note: I don't think `TR-1` and `TR-2` are valid any longer as we will be relying on the switch to initiate the `/thirdPartyRequest/transfer/{ID}` callback to the PISP to inform the PISP on the outcome of a transfer.
+>_[PUML source: `./transfer/3-transfer.puml`](./transfer/3-transfer.puml)_
+![tranfer](./out/transfer/3-transfer/PISP%20Transfer.png)
 
 
 #### Transfer - Endpoints 
@@ -101,8 +99,7 @@ Edit the transfer flow `.puml` files here: [PISP Transfer Flow UML](./transfer)
 | `AG-30` | `POST`            | `/performVerification`*3                  | SWITCH | FIDO   |
 | `AG-32` | `PUT`             | `/verificationResult/{ID}`*4              | FIDO   | SWITCH |
 | `AG-34` | `PUT`             | `/authorizations/{ID}`                    | SWITCH | DFSPA  |
-| `TR-2`  | `PUT`             | `/transfers`                              | DFSPA  | SWITCH |
-| `TR-4`  | `PUT`             | `/thirdPartyRequest/transfer/{ID}`*5      | SWITCH | PISP   |
+| `TR-3`  | `PUT`             | `/thirdPartyRequest/transfer/{ID}`*5      | SWITCH | PISP   |
 
 
 > 0. As discussed, for now we will implement this as the existing `/transactionRequest`

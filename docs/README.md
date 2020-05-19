@@ -2,9 +2,23 @@
 
 Supporting documentation for the PISP implementation.
 
+## Overview
+- [Sequence Diagrams](#sequence-diagrams)
+  - [Linking Steps](#linking)
+      - [Linking List of Endpoints](#linking---endpoints)
+  - [Transfer Steps](#transfer)
+    - [Transfer List of Endpoints](#transfer---endpoints)
+- [Design Decisions](./design-decisions/README.md)
+- [Proposed Error Codes](./error_codes.md)
+- [Git Branching Strategy](./git_branching.md)
+- [Mojaloop Roles + Endpoints](./roles_and_endpoints.md)
+- [Tools](#tools)
+
 ## Sequence Diagrams
 
 ### Linking
+
+> Note: This section is currently under revision as of 19/05/2020. Expect changes.
 
 #### 1. Discovery
 ![discovery](./out/linking/1-discovery/PISP%20Linking%20%20Discovery.png)
@@ -30,25 +44,38 @@ Supporting documentation for the PISP implementation.
 
 #### Linking - Endpoints 
 
-DISC-C GET /participants/role/pisp 
+> Note: The linking endpoint list is still a work in progress, and is blocked by [#280](https://app.zenhub.com/workspaces/pisp-5e8457b05580fb04a7fd4878/issues/mojaloop/mojaloop/280)
 
-** does thec allbacul url need to be validated by the switch?
+`DISC-C GET /participants/role/pisp`
+
+** does the callback url need to be validated by the switch?
 ** in delegaction, can the consent/consentRequest time out? 
 ** what happens if the user doesn't give consent?
 
 
 ### Transfer
 
-For the entire flows, see the [PISP Transfer model](./out/transfer/complete/PISP%20transfer.png)
+For the full transfer flows, see the [E2E PISP Transfer Flows](./out/transfer/complete/PISP%20transfer.png).
 
-### 1. Discovery
+Edit the transfer flow `.puml` files here: [PISP Transfer Flow UML](./transfer)
+- [`./transfer/complete.puml`](./transfer/complete.puml) Combines the following diagrams into one.
+
+The others are in:
+- [`./transfer/1-discovery.puml`](./transfer/1-discovery.puml)
+- [`./transfer/1-agreement.puml`](./transfer/1-agreement.puml)
+- [`./transfer/3-transfer.puml`](./transfer/3-transfer.puml)
+
+Respectively.
+
+
+#### 1. Discovery
 ![discovery](./out/transfer/1-discovery/PISP%20Transfer.png)
 
-### 2. Agreement
+#### 2. Agreement
 
 ![agreement](./out/transfer/2-agreement/PISP%20Transfer.png)
 
-### 3. Transfer
+#### 3. Transfer
 
 ![transfer](./out/transfer/3-transfer/PISP%20Transfer.png)
 

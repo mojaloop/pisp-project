@@ -37,6 +37,7 @@ A summary of Mojaloop FSPIOP API Endpoints and Roles as they stand today.
 | Retrieve Bulk Quote Information           | `GET`    | `/bulkQuotes/{ID}`           | ✅ | ❌ |   |
 | Calculate Bulk Quote                      | `POST`   | `/bulkQuotes`                | ✅ | ❌ |   |
 | Perform Authorization                     | `GET`    | `/authorizations/{ID}`       | ✅ | ❌ |   |
+| Update Authorization                      | `PUT`    | `/authorizations/{ID}`       | ✅ | ❌ |   |
 | Retrieve Transfer Information             | `GET`    | `/transfers/{ID}`            | ✅ | ❌ |   |
 | Perform Transfer                          | `POST`   | `/transfers`                 | ✅ | ❌ |   |
 | Retrieve Bulk Transfer Information        | `GET`    | `/bulkTransfers/{ID}`        | ✅ | ❌ |   |
@@ -48,7 +49,7 @@ A summary of Mojaloop FSPIOP API Endpoints and Roles as they stand today.
 | ---- | ------ | --------  | ---- | ---- | ---- |
 | Create Consent Request            | `POST` | `/consentRequests`                         | ❌ | ✅ |  | 
 | Update Consent Request            | `PUT`  | `/consentRequests/{ID}`                    | ✅ | ✅ | Based on our current designs, both a DFSP and PISP use this to callback to one another about the `consentRequest` | 
-| Perform Authorization             | `POST` | `/authorizations/{ID}`                     | ❌ | ✅ |  | 
+| Perform 3rd Party Authorization   | `POST` | `/authorizations`                          | ❌ | ✅ | PISP needs to call this with FIDO Result     | 
 | Create Consent                    | `PUT`  | `/consents/{ID}`                           | ✅ | ❌ | Called after a successful `consentRequest` flow | 
 | Lookup 3rd party Account Metadata | `GET`  | `/thirdPartyRequest/metadata/{Type}/{ID}*` | ❌ | ✅ | I've called this metadata but it could be something else, such as `balances` | 
 | Initiate 3rd party request        | `POST` | `/thirdPartyRequest/transaction`           | ❌ | ✅ |  | 
@@ -90,13 +91,14 @@ A summary of Mojaloop FSPIOP API Endpoints and Roles as they stand today.
 
 | Name | `VERB` | Resource  | DFSP | PISP | Note |
 | ---- | ------ | --------  | ---- | ---- | ---- |
-| Update Consent Request                     | `PUT` | `/consentRequests/{ID`                           | ✅ | ✅ |  | 
-| Update Consent Request Error               | `PUT` | `/consentRequests/{ID}/error`                    | ✅ | ✅ |  | 
-| Create Or Update Consent                   | `PUT` | `/consents/{ID}`                                 | ❌ | ✅ | Callback a PISP gets once `consentRequest` is successful |
-| Return 3rd party Account Metadata          | `PUT` | `/thirdPartyRequest/metadata/{Type}/{ID}*`       | ❌ | ✅ | I've called this metadata but it could be something else, such as `balances` | 
-| Return 3rd party Account Metadata Error    | `PUT` | `/thirdPartyRequest/metadata/{Type}/{ID}/error*` | ❌ | ✅ | I've called this metadata but it could be something else, such as `balances` | 
-| Update 3rd Party Transaction Request       | `PUT` | `/thirdPartyRequest/transaction/{ID}`            | ❌ | ✅ |  | 
-| Update 3rd Party Transaction Request Error | `PUT` | `/thirdPartyRequest/transaction/{ID}/error`      | ❌ | ✅ |  | 
+| Update Consent Request                     | `PUT`  | `/consentRequests/{ID`                           | ✅ | ✅ |  | 
+| Update Consent Request Error               | `PUT`  | `/consentRequests/{ID}/error`                    | ✅ | ✅ |  | 
+| Create Or Update Consent                   | `PUT`  | `/consents/{ID}`                                 | ❌ | ✅ | Callback a PISP gets once `consentRequest` is successful |
+| Return 3rd party Account Metadata          | `PUT`  | `/thirdPartyRequest/metadata/{Type}/{ID}*`       | ❌ | ✅ | I've called this metadata but it could be something else, such as `balances` | 
+| Return 3rd party Account Metadata Error    | `PUT`  | `/thirdPartyRequest/metadata/{Type}/{ID}/error*` | ❌ | ✅ | I've called this metadata but it could be something else, such as `balances` | 
+| Perform Authorization                      | `POST` | `/authorizations/`                               | ❌ | ✅ | Switch requests Authorization for `thirdPartyRequest` from PISP | 
+| Update 3rd Party Transaction Request       | `PUT`  | `/thirdPartyRequest/transaction/{ID}`            | ❌ | ✅ |  | 
+| Update 3rd Party Transaction Request Error | `PUT`  | `/thirdPartyRequest/transaction/{ID}/error`      | ❌ | ✅ |  | 
 
 > \* also:  `{Type}/{ID}/{SubId}`
 

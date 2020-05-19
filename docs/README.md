@@ -59,13 +59,9 @@ For the full transfer flows, see the [E2E PISP Transfer Flows](./out/transfer/co
 
 Edit the transfer flow `.puml` files here: [PISP Transfer Flow UML](./transfer)
 - [`./transfer/complete.puml`](./transfer/complete.puml) Combines the following diagrams into one.
-
-The others are in:
 - [`./transfer/1-discovery.puml`](./transfer/1-discovery.puml)
-- [`./transfer/1-agreement.puml`](./transfer/1-agreement.puml)
+- [`./transfer/2-agreement.puml`](./transfer/2-agreement.puml)
 - [`./transfer/3-transfer.puml`](./transfer/3-transfer.puml)
-
-Respectively.
 
 
 #### 1. Discovery
@@ -105,36 +101,17 @@ Respectively.
 | `AG-30` | `POST`            | `/performVerification`*3                  | SWITCH | FIDO   |
 | `AG-32` | `PUT`             | `/verificationResult/{ID}`*4              | FIDO   | SWITCH |
 | `AG-34` | `PUT`             | `/authorizations/{ID}`                    | SWITCH | DFSPA  |
-| `TR-2`  | `PUT`             | `/transfers`*6                            | DFSPA  | SWITCH |
-| `TR-4`  | `PUT`             | `/thirdPartyRequest/transfer/{ID}`*7      | SWITCH | PISP   |
-| `TR-4`  | `PUT`             | `/thirdPartyRequest/transfer/{ID}/error`  | SWITCH | PISP   |
+| `TR-2`  | `PUT`             | `/transfers`                              | DFSPA  | SWITCH |
+| `TR-4`  | `PUT`             | `/thirdPartyRequest/transfer/{ID}`*5      | SWITCH | PISP   |
 
 
 > 0. As discussed, for now we will implement this as the existing `/transactionRequest`
-> 1. This is a new endpoing the DFSP needs to be able to handle
+> 1. This is a new endpoint the DFSP needs to be able to handle
 > 2. A new VERB for authorizations for the PISP use case 
 > 3. Do we want the FIDO server to be synchronous? I think not because it could be externally hosted in the future, but open for debate.
 > 4. These resource names are up for debate
-> 6. Where does the challenge come from? It should come from the FIDO/auth-service, but we can't alter the `POST /authorizations` in the switch to inject the challenge we could use a hash of the quote or quoteId
->  - Want to digitally sign something _meaningful_
-> 7. We use this endpoint to inform the PISP of the tx status.
+> 5. We use this endpoint to inform the PISP of the tranfer status.
 
-** what happens to the signed challenge? be able to verify that the response was signed with the private key associated to the fido public key
-
-
-** need to figure out notifications/how the switch _knows_ to inform PISP
-- when we issue the /transfer, that's between DFSPA  + DFSPB, 
-- contains a transferId that is related to the `thirdPartyRequest`
-  - how does the PISP know which transaction this transferId related
-  - tx id will be set in the POST Authorizations
-  - how do we get from txid to a transferId relating to a specific transfer 
-    - ILP packet is in transfer request, but encoded... so need to figure this piece out
-
-  - For now, assume that the transaction object will contain the transactionId...
-
-
-- internal fido: failure case for FIDO -> forward error to DFSP
-- external fido: forward whole /authorizations/{id} to the DFSP to take care of
 
 ## Tools
 

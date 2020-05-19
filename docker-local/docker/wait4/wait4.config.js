@@ -54,15 +54,16 @@ module.exports = {
     {
       name: 'account-lookup-service',
       wait4: [
-        {
-          description: 'central-ledger api server',
-          uri: 'central-ledger:3001',
-          method: 'ncat',
+        // TODO: fix!
+        // {
+        //   description: 'central-ledger api server',
+        //   uri: 'central-ledger:3001',
+        //   method: 'ncat',
 
-          // we have to wait much longer for central-ledger
-          // to spin up so we overload `retires` default parameter value
-          retries: 30,
-        },
+        //   // we have to wait much longer for central-ledger
+        //   // to spin up so we overload `retires` default parameter value
+        //   retries: 30,
+        // },
         {
           description: 'MySQL ALS',
           uri: 'mysql-als:3306',

@@ -1,5 +1,6 @@
 # PISP - Payment Initiation Service Provider integration with Mojaloop
 
+[todo: add repo badges etc where relevant]
 
 ## project documentation
 project documentation, flows, uml diagrams and so on: [/docs](./docs/README.md)
@@ -10,7 +11,53 @@ onboarding environment for local development & testing: [/docker-local](./docker
 ## branching strategy
 naming convention for [git branching](./docs/git_branching.md)
 
+## Running Tests
+
+Tests are run automatically by CircleCI.
+
+### End To End tests
+
+```bash
+# install local node modules
+npm install
+
+# start the services
+cd ./docker-local
+docker-compose up -d
+npm run wait-for-docker
+
+# TODO: wait for services to be healthy
+
+# Seed the environment with test data
+npm run reseed
+
+# Run the end to end tests
+npm run test:e2e
+
+```
+
+> Note: You can also invoke these tests using Jest's `watch` mode:
+```bash
+npm run test:e2e -- --watch
+```
+I
+
+### Contract Tests
+> TODO: refer to [#302](https://app.zenhub.com/workspaces/pisp-5e8457b05580fb04a7fd4878/issues/mojaloop/mojaloop/302) for more information
+
+>Proposed steps:
+```bash
+cd ./docker-contract
+docker-compose up -d
+
+# wait for services to be healthy
+# TODO: environment config? Maybe?
+npm run test:contract
+```
+I
+
 ## Writing tests for PISP Features:
+[todo: add notes about where in this repo to put tests]
 
 When working on PISP features, we will follow these test guidelines:
 

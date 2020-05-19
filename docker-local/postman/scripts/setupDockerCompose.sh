@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
 echo "-== Creating Hub Accounts ==-"
-sh ./scripts/setupDockerCompose-HubAccount.sh
+${DIR}/setupDockerCompose-HubAccount.sh
 
 echo "-== Onboarding PayerFSP ==-"
-sh ./scripts/setupDockerCompose-PayerFSP.sh
+${DIR}/setupDockerCompose-PayerFSP.sh
 
 echo "-== Onboarding PayeeFSP ==-"
-sh ./scripts/setupDockerCompose-PayeeFSP.sh
+${DIR}/setupDockerCompose-PayeeFSP.sh

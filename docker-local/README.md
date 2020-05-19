@@ -22,9 +22,15 @@ Integration tests
 ## Prerequisites
 - `docker` - `v18.06.0` or higher
 - `docker-compose`. We are using a compose file of `v3.7`. So you need at least `docker-compose` `v1.22`
+- `node` and `npm`. We are using `node v12.16.1` at the time of writing
 - `newman` You can install globally from npm if you want:
 ```bash
 npm install -g newman
+```
+
+or you can install the `node_modules` in the root of this directory
+```bash
+npm install
 ```
 
 - A hosts file with the following entries:
@@ -45,6 +51,7 @@ docker-compose ps
 
 It may take a little while for the services to healthy.
 
+
 ### Logging:
 
 Use `docker-compose logs -f` to tail the logs of any given container. 
@@ -63,7 +70,7 @@ docker-compose logs -f transaction-requests-service
 docker-compose logs -f pisp-backend  pisp-scheme-adapter pisp-redis
 ```
 
-
+[todo: update these]
 ```bash
 #Running the services separately in different terminals is recommended
 
@@ -90,26 +97,26 @@ docker-compose up pisp-backend  pisp-scheme-adapter pisp-redis
 
 ## Create some initial data
 
-### Prerequisites
+### Set Up Seed Data
 
-* Install newman
-
-```
-npm install -g newman
-```
-
-* cd to the postman folder
-
-* Use this convenience script to run all the setup scripts and forgo having to run the setup scripts individually.
-
-```
-sh scripts/setupDockerCompose-FullSetup.sh
+#### 1. cd to `postman` directory
+```bash
+cd ./postman
 ```
 
-* Setup hub account
+#### 2. Run the FullSetup script
+Use this convenience script to run all the setup scripts and forgo having to run the setup scripts individually.
 
+```bash
+./scripts/setupDockerCompose-FullSetup.sh
 ```
-sh scripts/setupDockerCompose-HubAccount.sh
+> This script runs all of the below `setupDockerCompose*` scripts, so you can skip ahead to [Run P2P E2E tests](#13-run-p2p-e2e-tests)
+
+
+#### 3. Setup hub account
+
+```bash
+./scripts/setupDockerCompose-HubAccount.sh
 ```
 
 ```
@@ -157,8 +164,10 @@ OSS-New-Deployment-FSP-Setup
 └──────────────────────────────────────────────────────────────────┘
 ```
 
-```
-sh scripts/setupDockerCompose-OracleOnboarding.sh
+#### 4. Setup the oracle for ALS
+
+```bash
+./scripts/setupDockerCompose-OracleOnboarding.sh
 ```
 
 ```
@@ -186,9 +195,10 @@ OSS-New-Deployment-FSP-Setup
 │ total data received: 0B (approx)                              │
 ├───────────────────────────────────────────────────────────────┤
 │ average response time: 5.2s [min: 5.2s, max: 5.2s, s.d.: 0µs] │
+└───────────────────────────────────────────────────────────────┘
 ```
 
-### Create DFSP A (use SDK + backend)
+#### 5. Create DFSP A (use SDK + backend)
 
 It will create a new participant with its endpoints and some init data. For this case, name, position, and limits will be
 
@@ -200,11 +210,11 @@ It will create a new participant with its endpoints and some init data. For this
 | `limit.value`   | `1000000` |
 | `initialPosition`     | `0` |`
 
-```
-$ sh scripts/setupDockerCompose-dfspa.sh`
+```bash
+./scripts/setupDockerCompose-DFSP-A.sh
 ```
 
-### Create DFSP B(use SDK + backend)
+#### 6. Create DFSP B(use SDK + backend)
 
 It will create a new participant with its endpoints and some init data. For this case, name, position, and limits will be
 
@@ -216,10 +226,10 @@ It will create a new participant with its endpoints and some init data. For this
 | `limit.value`   | `1000000` |
 | `initialPosition`     | `0` |`
 
+```bash
+./scripts/setupDockerCompose-DFSP-B.sh
 ```
-$ sh scripts/setupDockerCompose-DFSP-B.sh
-```
-### Create a Simulator DFSP (implement mojaloop api)
+#### 7. Create a Simulator DFSP (implement mojaloop api)
 
 It will create a new participant with its endpoints and some init data. For this case, name, position, and limits will be
 
@@ -231,10 +241,10 @@ It will create a new participant with its endpoints and some init data. For this
 | `limit.value`   | `1000000` |
 | `initialPosition`     | `0` |`
 
+```bash
+./scripts/setupDockerCompose-DFSP-SIMULATOR.sh
 ```
-$ sh scripts/setupDockerCompose-DFSP-SIMULATOR.sh
-```
-### Create PISP (use SDK + backend)
+#### 8. Create PISP (use SDK + backend)
 
 It will create a new participant with its endpoints and some init data. For this case, name, position, and limits will be
 
@@ -246,11 +256,11 @@ It will create a new participant with its endpoints and some init data. For this
 | `limit.value`   | `1000000` |
 | `initialPosition`     | `0` |`
 
-```
-$ sh scripts/setupDockerCompose-PISP.sh
+```bash
+./scripts/setupDockerCompose-PISP.sh
 ```
 
-### Add MSISDN (123456789) for DFSP A
+#### 9. Add MSISDN (123456789) for DFSP A
 
 Register a new MSISDN for this dfsp with this initial data
 
@@ -259,11 +269,11 @@ Register a new MSISDN for this dfsp with this initial data
 | `currency`       | `USD`  |
 
 
-```
-$ sh scripts/setupDockerCompose-dfspa-MSISDN.sh
+```bash
+./scripts/setupDockerCompose-DFSP-A-MSISDN.sh
 ```
 
-### Add MSISDN (987654321) for DFSP B
+#### 10. Add MSISDN (987654321) for DFSP B
 
 Register a new MSISDN for this dfsp with this initial data
 
@@ -271,11 +281,11 @@ Register a new MSISDN for this dfsp with this initial data
 |-----------|---------|
 | `currency`       | `USD`  |
 
-```
-$ sh scripts/setupDockerCompose-DFSP-B-MSISDN.sh
+```bash
+./scripts/setupDockerCompose-DFSP-B-MSISDN.sh
 ```
 
-### Add MSISDN (333333333) for Simulator
+#### 11. Add MSISDN (333333333) for Simulator
 
 Register a new MSISDN for this dfsp with this initial data
 
@@ -283,11 +293,11 @@ Register a new MSISDN for this dfsp with this initial data
 |-----------|---------|
 | `currency`       | `USD`  |
 
-```
-$ sh scripts/setupDockerCompose-DFSP-SIMULATOR-MSISDN.sh
+```bash
+./scripts/setupDockerCompose-DFSP-SIMULATOR-MSISDN.sh
 ```
 
-### Add MSISDN (999999999) for PISP
+#### 12. Add MSISDN (999999999) for PISP
 
 Register a new MSISDN for this dfsp with this initial data
 
@@ -295,42 +305,45 @@ Register a new MSISDN for this dfsp with this initial data
 |-----------|---------|
 | `currency`       | `USD`  |
 
-```
-$ sh scripts/setupDockerCompose-PISP-MSISDN.sh
-```
-
-### Add parties to the backend's of DFSP A , DFSP B and PISP.
-
-
-```
-$ sh scripts/setupDockerCompose-dfsp-backend-parties.sh
+```bash
+./scripts/setupDockerCompose-PISP-MSISDN.sh
 ```
 
-### Run P2P E2E tests.
+#### 13. Add parties to the backends of DFSP A, DFSP B and PISP.
 
-
-```
-$ sh scripts/testE2ETransfers.sh
-```
-
-### Run PISP E2E tests.
-
-
-```
-$ sh scripts/test-E2E-transaction-req-initiated-by-PISP.sh
+```bash
+./scripts/setupDockerCompose-dfsp-backend-parties.sh
 ```
 
-### If you restart docker compose you'll need to re-run this command to setup ALS
+#### 13. Run P2P E2E tests.
 
+
+```bash
+./scripts/testE2ETransfers.sh
 ```
-sh scripts/setupDockerCompose-DFSP-B-MSISDN.sh && sh scripts/setupDockerCompose-DFSP-A-MSISDN.sh && sh scripts/setupDockerCompose-DFSP-SIMULATOR-MSISDN.sh && sh scripts/setupDockerCompose-PISP-MSISDN.sh
+
+#### 14. Run PISP E2E tests.
+
+```bash
+./scripts/test-E2E-transaction-req-initiated-by-PISP.sh
+```
+
+
+> **Note: Restarting `docker-compose`**
+>
+> If you restart docker compose you'll need to re-run this command to setup ALS
+```bash
+./scripts/setupDockerCompose-DFSP-B-MSISDN.sh && \
+  ./scripts/setupDockerCompose-DFSP-A-MSISDN.sh && \
+  ./scripts/>setupDockerCompose-DFSP-SIMULATOR-MSISDN.sh && \
+  ./scripts/setupDockerCompose-PISP-MSISDN.sh
 ```
 
 ## P2P Examples
 
-* Transfer USD 100 from MSIDNS 123456789 (DFSP A) to MSIDNS 987654321 (DFSP B)
+### 1. Transfer USD 100 from MSISDN 123456789 (DFSP A) to MSISDN 987654321 (DFSP B)
 
-```
+```bash
 curl -v -X POST http://localhost:9003/scenarios   -H 'Content-Type: application/json'  -d '[
     {
         "name": "scenario1",
@@ -355,8 +368,8 @@ curl -v -X POST http://localhost:9003/scenarios   -H 'Content-Type: application/
 ]'
 ```
 
-### Response: Transfer was completed
-```
+#### Response: Transfer was completed
+```json
 {
     "scenario1": {
         "result": {
@@ -410,9 +423,9 @@ curl -v -X POST http://localhost:9003/scenarios   -H 'Content-Type: application/
 }
 ```
 
-* Transfer USD 90 from MSIDNS 123456789 (DFSP A) to MSIDNS 333333333 (Simulator)
+### 2. Transfer USD 90 from MSISDN 123456789 (DFSP A) to MSISDN 333333333 (Simulator)
 
-```
+```bash
 curl -v -X POST http://localhost:9003/scenarios   -H 'Content-Type: application/json'  -d '[
   {
     "name": "scenario1",
@@ -436,10 +449,15 @@ curl -v -X POST http://localhost:9003/scenarios   -H 'Content-Type: application/
   }
 ]'
 ```
-## PISP Transaction Request Examples
-* 1. The HTTP request `POST /requestToPay` has two stages, Party lookup and initiate Transaction Request
 
-```
+## PISP Transaction Request Examples
+
+
+### 1. `POST /requestToPay`
+
+> Note: The HTTP request `POST /requestToPay` has two stages, (1) Party Lookup and (2) Initiate Transaction Request
+
+```bash
 curl -v  -X  POST http://localhost:7002/requestToPay  -H  'Content-Type: application/json'  -d  '{
     "homeTransactionId": "f0cf62e7-fb15-46a5-9525-37f934d98fcd",
     "from": {
@@ -460,8 +478,8 @@ curl -v  -X  POST http://localhost:7002/requestToPay  -H  'Content-Type: applica
 }'
 ```
 
-##### POST /requestToPay Response:
-````
+##### `POST /requestToPay` Response:
+````json
 {
     "homeTransactionId": "f0cf62e7-fb15-46a5-9525-37f934d98fcd",
     "from": {
@@ -490,8 +508,13 @@ curl -v  -X  POST http://localhost:7002/requestToPay  -H  'Content-Type: applica
     "requestToPayState": "RECEIVED"
 }
 ````
-* 2. The HTTP request `POST /requestToPayTransfer` is used to request the movement of funds from payer DFSP to payee DFSP.The underlying Mojaloop API has three stages for money transfer:Quotation , Authorization and Transfer
-```
+
+### 2. `POST /requestToPayTransfer`
+
+> The HTTP request `POST /requestToPayTransfer` is used to request the movement of funds from payer DFSP to payee DFSP.
+> The underlying Mojaloop API has three stages for money transfer: (1) Quotation, (2) Authorization and (3) Transfer
+
+```bash
 curl -v  -X  POST http://localhost:5002/requestToPayTransfer  -H  'Content-Type: application/json' -d '{
   "requestToPayTransactionId": "70c522c9-0880-40b1-b28f-0c567e0b39aa",
   "from": {
@@ -512,8 +535,9 @@ curl -v  -X  POST http://localhost:5002/requestToPayTransfer  -H  'Content-Type:
   "note": "pisp test payment"
 }'
 ```
-##### POST /requestToPayTransfer Response:
-```
+
+##### `POST /requestToPayTransfer` Response:
+```json
 {
     "requestToPayTransactionId": "70c522c9-0880-40b1-b28f-0c567e0b39aa",
     "from": {
@@ -541,8 +565,7 @@ curl -v  -X  POST http://localhost:5002/requestToPayTransfer  -H  'Content-Type:
             "currency": "USD"
         },
         "expiration": "2020-05-12T09:26:13.967Z",
-        "ilpPacket": "AYICXAAAAAAAAAcIGGcuZGZzcGIubXNpc2RuLjk4NzY1NDMyMYICN2V5SjBjbUZ1YzJGamRHbHZia2xrSWpvaVlXSXpOVE15WXpZdE4yTmhNeTAwTmpGa0xXSXlZamt0TkRJek5UQTROV1UzWmpabElpd2ljWFZ2ZEdWSlpDSTZJakUzTkRZM01qTTJMV0kyWm1VdE5EUTROeTFpTWpGa0xXUmlPV1F6TjJaa09URXlPQ0lzSW5CaGVXVmxJanA3SW5CaGNuUjVTV1JKYm1adklqcDdJbkJoY25SNVNXUlVlWEJsSWpvaVRWTkpVMFJPSWl3aWNHRnlkSGxKWkdWdWRHbG1hV1Z5SWpvaU9UZzNOalUwTXpJeElpd2labk53U1dRaU9pSmtabk53WWlKOWZTd2ljR0Y1WlhJaU9uc2ljR0Z5ZEhsSlpFbHVabThpT25zaWNHRnlkSGxKWkZSNWNHVWlPaUpOVTBsVFJFNGlMQ0p3WVhKMGVVbGtaVzUwYVdacFpYSWlPaUl4TWpNME5UWTNPRGtpTENKbWMzQkpaQ0k2SW1SbWMzQmhJbjE5TENKaGJXOTFiblFpT25zaVlXMXZkVzUwSWpvaU1UZ2lMQ0pqZFhKeVpXNWplU0k2SWxWVFJDSjlMQ0owY21GdWMyRmpkR2x2YmxSNWNHVWlPbnNpYzJObGJtRnlhVzhpT2lKUVFWbE5SVTVVSWl3aWFXNXBkR2xoZEc5eUlqb2lVRUZaUlVVaUxDSnBibWwwYVdGMGIzSlVlWEJsSWpvaVFsVlRTVTVGVTFNaWZYMAA",
-        "condition": "AO5FG1LtEt-NHakXIQoTQVjfnlmNFh6UFRBbW93FVDk",
+        "ilpPacket": "<removed for brevity>",
         "payeeFspFee": {
             "amount": "0",
             "currency": "USD"
@@ -555,14 +578,19 @@ curl -v  -X  POST http://localhost:5002/requestToPayTransfer  -H  'Content-Type:
     "quoteResponseSource": "dfspb"
 }
 ```
-* 3. The HTTP request `POST /requestToPayTransfer/{requestToPayTransactionId}:` is used to Continues a transfer that has paused at the authorization stage in order to accept quote
-```
-curl -v  -X  POST http://localhost:5002/requestToPayTransfer/70c522c9-0880-40b1-b28f-0c567e0b39aa  -H  'Content-Type: application/json'  -d  '{
+
+### 3. `POST /requestToPayTransfer/{requestToPayTransactionId}:`
+
+>The HTTP request `POST /requestToPayTransfer/{requestToPayTransactionId}` is used to Continues a transfer that has paused at the authorization stage in order to accept quote
+
+```bash
+curl -v  -X  \ POST http://localhost:5002/requestToPayTransfer/70c522c9-0880-40b1-b28f-0c567e0b39aa  -H  'Content-Type: application/json'  -d  '{
        "acceptQuote": true
 }'
-````
-##### POST /requestToPayTransfer/{requestToPayTransactionId} Response:
+
 ```
+##### `POST /requestToPayTransfer/{requestToPayTransactionId}` Response:
+```json
 {
     "requestToPayTransactionId": "70c522c9-0880-40b1-b28f-0c567e0b39aa",
     "from": {
@@ -590,8 +618,7 @@ curl -v  -X  POST http://localhost:5002/requestToPayTransfer/70c522c9-0880-40b1-
             "currency": "USD"
         },
         "expiration": "2020-05-12T09:26:13.967Z",
-        "ilpPacket": "AYICXAAAAAAAAAcIGGcuZGZzcGIubXNpc2RuLjk4NzY1NDMyMYICN2V5SjBjbUZ1YzJGamRHbHZia2xrSWpvaVlXSXpOVE15WXpZdE4yTmhNeTAwTmpGa0xXSXlZamt0TkRJek5UQTROV1UzWmpabElpd2ljWFZ2ZEdWSlpDSTZJakUzTkRZM01qTTJMV0kyWm1VdE5EUTROeTFpTWpGa0xXUmlPV1F6TjJaa09URXlPQ0lzSW5CaGVXVmxJanA3SW5CaGNuUjVTV1JKYm1adklqcDdJbkJoY25SNVNXUlVlWEJsSWpvaVRWTkpVMFJPSWl3aWNHRnlkSGxKWkdWdWRHbG1hV1Z5SWpvaU9UZzNOalUwTXpJeElpd2labk53U1dRaU9pSmtabk53WWlKOWZTd2ljR0Y1WlhJaU9uc2ljR0Z5ZEhsSlpFbHVabThpT25zaWNHRnlkSGxKWkZSNWNHVWlPaUpOVTBsVFJFNGlMQ0p3WVhKMGVVbGtaVzUwYVdacFpYSWlPaUl4TWpNME5UWTNPRGtpTENKbWMzQkpaQ0k2SW1SbWMzQmhJbjE5TENKaGJXOTFiblFpT25zaVlXMXZkVzUwSWpvaU1UZ2lMQ0pqZFhKeVpXNWplU0k2SWxWVFJDSjlMQ0owY21GdWMyRmpkR2x2YmxSNWNHVWlPbnNpYzJObGJtRnlhVzhpT2lKUVFWbE5SVTVVSWl3aWFXNXBkR2xoZEc5eUlqb2lVRUZaUlVVaUxDSnBibWwwYVdGMGIzSlVlWEJsSWpvaVFsVlRTVTVGVTFNaWZYMAA",
-        "condition": "AO5FG1LtEt-NHakXIQoTQVjfnlmNFh6UFRBbW93FVDk",
+        "ilpPacket": "<removed for brevity>",
         "payeeFspFee": {
             "amount": "0",
             "currency": "USD"

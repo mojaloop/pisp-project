@@ -1,8 +1,8 @@
 module.exports = {
-  // format version sem-ver 
+  // format version sem-ver
   // `v{major}.${minor}.${patch}`
   wait4: 'v0.1.0',
-  
+
   // How many times should we retry waiting for a service?
   retries: 10,
 
@@ -13,7 +13,7 @@ module.exports = {
   services: [
     {
       name: 'central-ledger',
-      
+
       // list of services to wait for
       wait4: [
         {
@@ -61,15 +61,15 @@ module.exports = {
 
           // we have to wait much longer for central-ledger
           // to spin up so we overload `retires` default parameter value
-          retries: 30,
+          retries: 30
         },
         {
           description: 'MySQL ALS',
           uri: 'mysql-als:3306',
-          
+
           // example of using ncat instead knex,
           // so we don\'t have to know db connection parameters
-          method: 'ncat',
+          method: 'ncat'
         }
       ]
     },

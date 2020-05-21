@@ -2,6 +2,13 @@
 
 const { execSync } = require('child_process')
 
+/**
+ * @file _wait4_all.js
+ * @description Waits for all docker-compose services to be running and healthy
+ */
+
+
+// Define the docker-compose containers you want to monitor here
 const expectedContainers = [
   'account-lookup-service',
   'central-ledger',
@@ -63,6 +70,11 @@ async function main() {
 }
 
 
+/**
+ * @function updateServiceStatus
+ * @description Go through all of the waiting services, and check their status
+ * @param {*} waitingMap 
+ */
 async function updateServiceStatus(waitingMap) {
   Promise.all(Object.keys(waitingMap).map(async serviceName => {
     const currentStatus = waitingMap[serviceName]
@@ -76,6 +88,12 @@ async function updateServiceStatus(waitingMap) {
   }))
 }
 
+/**
+ * @function getProgress
+ * @description Invokes the `docker inspect` command for the given container
+ * @param {string} containerName
+ * @returns {'healthy' | 'unhealthy' | 'starting'}
+ */
 function getProgress(containerName) {
   const command = `docker inspect --format='{{json .State.Health.Status}}' ${containerName}`
   const result = execSync(command).toString().replace(/['"]+|[\n]+/g, '')
@@ -83,6 +101,11 @@ function getProgress(containerName) {
   return result
 }
 
+/**
+ * @function isSystemHealthy
+ * @param {*} waitingMap
+ * @returns {boolean}
+ */
 function isSystemHealthy(waitingMap) {
   const healthyCount = Object
     .keys(waitingMap)
@@ -91,6 +114,11 @@ function isSystemHealthy(waitingMap) {
   return healthyCount === expectedContainers.length
 }
 
+/**
+ * @function isSystemFailing
+ * @param {*} waitingMap 
+ * @returns {boolean}
+ */
 function isSystemFailing(waitingMap) {
   const unhealthyCount = Object
     .keys(waitingMap)
@@ -103,7 +131,10 @@ function isSystemFailing(waitingMap) {
   return false;
 }
 
-
+/**
+ * @function sleep
+ * @param {*} timeMs - how long to sleep for
+ */
 async function sleep(timeMs) {
   console.log(`Sleeping for ${timeMs} ms`);
   return new Promise((resolve, reject) => setTimeout(() => resolve(), timeMs))

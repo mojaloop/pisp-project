@@ -112,7 +112,7 @@ jobs:
             docker-compose up -d mysql-als
             docker-compose up -d account-lookup-service
             docker-compose up -d
-            npm run wait-4-docker
+            npm run wait-4-docker || true
 
             docker-compose stop && docker-compose up -d
             npm run wait-4-docker
@@ -122,7 +122,10 @@ jobs:
           name: Run the E2E tests
           command: |
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            npm run test:e2e
+            npm run test:junit
+      - store_artifacts:
+          path: /home/circleci/project
+          prefix: junit.xml
 
       # - slack/status:
       #   fail_only: true

@@ -8,7 +8,7 @@
     "test": "test"
   },
   "scripts": {
-    "wait-for-docker": "echo \"TODO wait for environment\" ",
+    "wait-for-docker": "node ./scripts/_wait4_all.js",
     "reseed": "echo \"seeding test environment\" && ./docker-local/postman/scripts/setupDockerCompose-FullSetup.sh",
     "test:e2e": "jest --testMatch '**/test/e2e/**/*.(test|spec).ts'",
     "test:unit": "jest --testMatch '**/test/unit/**/*.(test|spec).ts'"

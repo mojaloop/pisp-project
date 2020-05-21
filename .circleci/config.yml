@@ -87,16 +87,14 @@ jobs:
       - run:
           name: Add /etc/hosts entries
           command: |
-            ./scripts/_setup_hosts_file.sh
-            # Tmp testing
-            cat /etc/hosts
+            sudo ./scripts/_setup_hosts_file.sh
       - run:
           name: Set up nvm
           command: |
             echo ${NVM_DIR}
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            nvm install v10.15.3
-            nvm alias default v10.15.3
+            nvm install v12.16.1
+            nvm alias default v12.16.1
       - run: 
           name: install modules
           command: |
@@ -107,11 +105,15 @@ jobs:
           name: Spin up the E2E test environment
           command: |
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            cd ./docker-local/ && docker-compose pull
-            cd ./docker-local/ && docker-compose up -d
-            npm run wait-for-docker
-            # Tmp testing
-            cd ./docker-local/ && docker-compose ps
+            cd ./docker-local/
+            docker-compose pull 
+
+            # Hacky workarounds for some startup failures
+            docker-compose up -d mysql-als
+            docker-compose up -d account-lookup-service
+            docker-compose up -d
+
+            npm run wait-4-docker
             npm run reseed
       - run: 
           name: Run the E2E tests

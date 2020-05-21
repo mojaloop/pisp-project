@@ -1,29 +1,59 @@
 {
-  "name": "pisp-test",
+  "name": "@mojaloop/pisp",
   "version": "0.1.0",
-  "description": "Test scripts and config for mojaloop/pisp",
-  "main": "index.js",
-  "directories": {
-    "doc": "docs",
-    "test": "test"
-  },
+  "description": "Mojaloop PISP project",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "wait-4-docker": "node ./scripts/_wait4_all.js",
+    "pretest": "npm run build",
+    "standard": "echo '\\033[1;33m  This project uses eslint instead of standard. Use `npm run lint` instead.'",
+    "lint": "eslint ./src/**/*.ts *.js",
+    "build": "tsc",
+    "watch": "tsc -w",
     "reseed": "echo \"seeding test environment\" && ./docker-local/postman/scripts/setupDockerCompose-FullSetup.sh",
+    "wait-4-docker": "node ./scripts/_wait4_all.js",
+    "test": "npm run test:unit",
+    "test:bdd": "jest --testMatch '**/test/step-definitions/**/*.step.ts'",
     "test:e2e": "jest --testMatch '**/test/e2e/**/*.(test|spec).ts'",
+    "test:coverage": "jest --coverage --coverageThreshold='{}'",
+    "test:coverage-check": "jest --coverage",
     "test:junit": "jest --reporters=default --reporters=jest-junit",
     "test:unit": "jest --testMatch '**/test/unit/**/*.(test|spec).ts'"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged && npm run test:unit",
+      "post-commit": "git update-index --again"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts}": "eslint --cache --fix"
+  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mojaloop/pisp.git"
+    "url": "git+https://github.com/mojaloop/auth-service.git"
   },
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "metrics",
+    "central",
+    "services"
+  ],
+  "author": "lewisdaly",
+  "contributors": [
+    "Lewis Daly <lewis@vesselstech.com>",
+    "Paweł Marzec <pawel.marzec@modusbox.com>"
+  ],
+  "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/mojaloop/pisp/issues"
+    "url": "https://github.com/mojaloop/auth-service/issues"
   },
-  "homepage": "https://github.com/mojaloop/pisp#readme",
+  "homepage": "https://github.com/mojaloop/auth-service#readme",
+  "dependencies": {
+    "axios": "^0.19.2"
+  },
   "devDependencies": {
     "@types/jest": "25.2.2",
     "@typescript-eslint/eslint-plugin": "1.13.0",
@@ -47,8 +77,5 @@
     "ts-jest": "^26.0.0",
     "ts-node": "8.3.0",
     "typescript": "3.9.2"
-  },
-  "dependencies": {
-    "axios": "^0.19.2"
   }
 }

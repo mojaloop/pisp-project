@@ -83,6 +83,7 @@ jobs:
     executor: default-machine
     steps:
       - checkout
+      # TODO: set up /etc/hosts!
       - run:
           name: Set up nvm
           command: |

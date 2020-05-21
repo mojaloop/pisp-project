@@ -81,9 +81,6 @@ docker-compose up account-lookup-service #t
 # Then close once the service is ready.
 # Proceed to stop account-lookup-service and proceed with the following commands.
 # ALS needs to be run initially so it setups properly.
-
-# [TODO] is this an ubuntu only issue? Perhaps...
-
 docker-compose up central-ledger
 docker-compose up quoting-service
 docker-compose up ml-api-adapter

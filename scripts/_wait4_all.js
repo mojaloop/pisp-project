@@ -44,6 +44,8 @@ async function main() {
         .keys(waitingMap)
         .filter(k => waitingMap[k] === 'healthy').length
       console.log(`${healthyCount} services are healthy. Expected: ${expectedContainers.length}`)
+      console.log('Waiting for', Object.keys(waitingMap).filter(k => waitingMap[k] === 'starting'))
+
 
       await sleep(waitTimeMs)
       retries--

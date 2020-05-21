@@ -109,8 +109,10 @@ jobs:
             docker-compose pull 
 
             # Hacky workarounds for some startup failures
-            docker-compose up -d mysql-als
+            # See PISP-#300 for more info
             docker-compose up -d account-lookup-service
+            sleep 30s
+            docker-compose stop
             docker-compose up -d
             npm run wait-4-docker || true
 
@@ -126,12 +128,6 @@ jobs:
       - store_artifacts:
           path: /home/circleci/project
           prefix: junit.xml
-
-      # - slack/status:
-      #   fail_only: true
-      #   webhook: "$SLACK_WEBHOOK_ANNOUNCMENT_CI_CD"
-      #   failure_message: 'E2E Tests failed for: \`"${DOCKER_ORG}/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_TAG}"\`'
-
 
 ##
 # Workflows

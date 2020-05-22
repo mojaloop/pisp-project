@@ -5,8 +5,8 @@
   3. Newly created PR for every WIP branch should have `pisp/master` set as target
   4. When the new version of `master` is published (by other team for example), we should propagate all changes via merge with `pisp/master`
   
-## PISP changes in other repos
-   1. [#269](https://github.com/mojaloop/mojaloop/issues/269) POST /authorizations swagger changes in `mojaloop-specification` and `transaction-requests-service`
-        - https://github.com/mojaloop/mojaloop-specification/commit/03d63c7d10c5a29a229d0ed8a5d92323489caeda
-        - https://github.com/mojaloop/transaction-requests-service/commit/61196e5bab654c47cb3fe057b296778e5ee68782
+## PISP changes in other Repos :
+   1. POST /authorizations Swagger changes [#269](https://github.com/mojaloop/mojaloop/issues/269)
+        - [mojaloop-specification](https://github.com/mojaloop/mojaloop-specification/commit/6ca00674e96990053926da29a2af3f07cf71b976)
+        - [transaction-requests-service](https://github.com/mojaloop/transaction-requests-service/commit/05c6b822bbb53e5d7eac4003d3369e6c09b67459)
         

@@ -2019,7 +2019,7 @@ components:
       oneOf:
         - $ref: '#/components/schemas/OtpValue'
         - $ref: '#/components/schemas/QRCODE'
-        - $ref: '#/components/schemas/U2FResponse'
+        - $ref: '#/components/schemas/U2FPinValue'
       description: Contains the authentication value. The format depends on the authentication type used in the AuthenticationInfo complex type.
 
     AuthorizationResponse:
@@ -2598,22 +2598,22 @@ components:
       pattern: ^[A-Z_]{1,32}$
       description: The API data type UndefinedEnum is a JSON String consisting of 1 to 32 uppercase characters including an underscore character (_).
     
-    U2FResponse:
-      title: U2FResponse
+    U2FPinValue:
+      title: U2FPinValue
       type: object
       description: U2F challenge-response, where payer FSP verifies if the response provided by end-user device matches the previously registered key.
       properties:
-        challenge:
-          $ref: '#/components/schemas/U2FChallenge'
+        pinValue:
+          $ref: '#/components/schemas/U2FPIN'
           description: U2F challenge-response.
         counter:
           $ref: '#/components/schemas/Counter'
           description: Sequential counter used for cloning detection. Present only for U2F authentication.
       required:
-      - challenge
+      - pinValue
       - counter
-    U2FChallenge:
-      title: U2FChallenge
+    U2FPIN:
+      title: U2FPIN
       type: string
       pattern: ^\S{1,64}$
       minLength: 1

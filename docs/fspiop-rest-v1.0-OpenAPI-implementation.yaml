@@ -1805,7 +1805,10 @@ paths:
             “authenticationInfo”: 
             { 
                 “authentication”: “OTP”, 
-                “authenticationValue”: “1234” 
+                "authenticationValue": {
+                    "pinValue": "1234",
+                    "counter": 1
+                  } 
             },
             "responseType": "ENTERED"
           }
@@ -3101,8 +3104,8 @@ definitions:
       - QRCODE QR code used as One Time Password.
       - U2F challenge-response, where payer FSP verifies if the response provided by end-user device matches the previously registered key. 
   
-  AuthenticationVal:
-    title: AuthenticationVal
+  PinValue:
+    title: PinValue
     #enum: [ $ref: '#/definitions/OtpValue', $ref: '#/definitions/QRCODE', $ref: '#/definitions/U2F']
     #Pattern below just indicates that the value can be an OTP or QRCODE or U2F. Effectively it only evaluates to the second part value QRCODE. This can be replaced by 'oneOf' or 'anyOf' construct once OpenAPI version 3 is released
     type: string
@@ -3662,14 +3665,14 @@ definitions:
     type: object
     description: Data model for the complex type AuthenticationValue
     properties:
-      authenticationVal:
-        $ref: '#/definitions/AuthenticationVal'
+      pinValue:
+        $ref: '#/definitions/PinValue'
         description: Authentication value.
       counter:
         $ref: '#/definitions/Counter'
         description: Sequential counter used for cloning detection. Present only for U2F authentication.
     required:
-    - authenticationVal
+    - pinValue
 
   AuthorizationsPostRequest:
     title: AuthorizationsPostRequest

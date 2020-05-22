@@ -3713,7 +3713,7 @@ definitions:
     properties:
       authenticationInfo:
         $ref: '#/definitions/AuthenticationInfo'
-        description: OTP or QR Code if entered, otherwise empty.
+        description: OTP or QR Code or U2F if entered, otherwise empty.
       responseType:
         $ref: '#/definitions/AuthorizationResponse'
         description: Enum containing response information; if the customer entered the authentication value, rejected the transaction, or requested a resend of the authentication value.
@@ -4455,7 +4455,7 @@ definitions:
         description: Longitude and Latitude of the initiating Party. Can be used to detect fraud.
       authenticationType:
         $ref: '#/definitions/AuthenticationType'
-        description: OTP or QR Code, otherwise empty.
+        description: OTP or QR Code or U2F, otherwise empty.
       expiration:
         $ref: '#/definitions/DateTime'
         description: Can be set to get a quick failure in case the peer FSP takes too long to respond. Also, it may be beneficial for Consumer, Agent, Merchant to know that their request has a time limit.

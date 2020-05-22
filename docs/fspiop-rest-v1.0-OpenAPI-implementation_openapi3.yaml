@@ -2683,7 +2683,7 @@ components:
       properties:
         authenticationInfo:
           $ref: '#/components/schemas/AuthenticationInfo'
-          description: OTP or QR Code if entered, otherwise empty.
+          description: OTP or QR Code or U2F if entered, otherwise empty.
         responseType:
           type: string
           description: Enum containing response information; if the customer entered the authentication value, rejected the transaction, or requested a resend of the authentication value.
@@ -3626,7 +3626,7 @@ components:
           description: Longitude and Latitude of the initiating Party. Can be used to detect fraud.
         authenticationType:
           type: string
-          description: OTP or QR Code, otherwise empty.
+          description: OTP or QR Code or U2F, otherwise empty.
           example: OTP
         expiration:
           type: string

@@ -24,9 +24,9 @@ npm install
 # start the services
 cd ./docker-local
 docker-compose up -d
-# wait for services to be healthy
-npm run wait-for-docker
 
+# wait for services to be healthy
+npm run wait-4-docker
 
 # Seed the environment with test data
 npm run reseed

@@ -26,45 +26,57 @@ const waitTimeMs = 10000
 
 async function main () {
   const waitingMap = {}
-  // serviceName => status, where status is unknown, healthy, unhealthy or starting
+  // serviceName => status, where status is healthy, unhealthy or starting
   expectedContainers.forEach(serviceName => {
-    waitingMap[serviceName] = 'unknown'
+    waitingMap[serviceName] = 'starting'
   })
 
   try {
-    while (retries > 0) {
-      await updateServiceStatus(waitingMap)
+    let allHealthy = await areAllServicesHealthy(waitingMap, waitTimeMs)
 
-      if (isSystemHealthy(waitingMap)) {
-        console.log('Services are healthy. Time to get to work!')
-        process.exit(0)
-      }
+    while (!allHealthy && retries > 0) {
+      allHealthy = await areAllServicesHealthy(waitingMap, waitTimeMs)
+      console.log('allHealthy is', allHealthy)
 
-      if (isSystemFailing(waitingMap)) {
-        console.error('Services went to unhealthy', Object.keys(waitingMap).filter(k => waitingMap[k] === 'unhealthy'))
-        process.exit(1)
+      if (retries === 0) {
+        throw new Error(`Out of retries waiting for service health.\nStill waiting for: ${getServicesForStatus(waitingMap, 'starting')}`)
       }
 
       console.log('Still waiting for service health. Retries', retries)
-      const healthyCount = Object
-        .keys(waitingMap)
-        .filter(k => waitingMap[k] === 'healthy').length
-      console.log(`${healthyCount} services are healthy. Expected: ${expectedContainers.length}`)
-      console.log('Waiting for', Object.keys(waitingMap).filter(k => waitingMap[k] === 'starting'))
+      console.log(`${getServicesForStatus(waitingMap, 'healthy').length} services are healthy. Expected: ${expectedContainers.length}`)
+      console.log('Waiting for', getServicesForStatus(waitingMap, 'starting'))
 
       await sleep(waitTimeMs)
       retries--
     }
 
-    console.error('Out of retries waiting for service health')
-    console.error('These services didn\'t start up in time:')
-    console.error(Object.keys(waitingMap).filter(k => waitingMap[k] === 'starting'))
-
-    process.exit(1)
+    console.log('All services are healthy. Time to get to work!')
+    process.exit(0)
   } catch (error) {
-    console.error(`wait4_all Error: ${error}`)
+    console.error(`_wait4_all: ${error}`)
     process.exit(1)
   }
+}
+
+
+/**
+ * @function areAllServicesHealthy
+ * @description Get Update the service status, and sleep for `waitTimeMs` if the services aren't healthy
+ * @param {*} waitingMap
+ * @returns boolean
+ */
+async function areAllServicesHealthy(waitingMap) {
+  await updateServiceStatus(waitingMap)
+
+  if (isSystemHealthy(waitingMap)) {
+    return true;
+  }
+
+  if (isSystemFailing(waitingMap)) {
+    throw new Error(`One or more services went to unhealthy: \n\t${getServicesForStatus(waitingMap, 'unhealthy')}\n`)
+  }
+
+  return false
 }
 
 /**
@@ -74,13 +86,10 @@ async function main () {
  * @returns void
  */
 async function updateServiceStatus (waitingMap) {
-  Promise.all(Object.keys(waitingMap).map(async serviceName => {
-    const currentStatus = waitingMap[serviceName]
-    if (currentStatus === 'healthy' || currentStatus === 'unhealthy') {
-      // Do nothing, we already have a final state for this container
-      return
-    }
+  const startingServices = getServicesForStatus(waitingMap, 'starting')
 
+  Promise.all(startingServices.map(async serviceName => {
+    const currentStatus = waitingMap[serviceName]
     const progress = await getProgress(serviceName)
     waitingMap[serviceName] = progress
   }))
@@ -94,9 +103,7 @@ async function updateServiceStatus (waitingMap) {
  */
 function getProgress (containerName) {
   const command = `docker inspect --format='{{json .State.Health.Status}}' ${containerName}`
-  const result = execSync(command).toString().replace(/['"]+|[\n]+/g, '')
-
-  return result
+  return execSync(command).toString().replace(/['"]+|[\n]+/g, '')
 }
 
 /**
@@ -105,11 +112,7 @@ function getProgress (containerName) {
  * @returns {boolean}
  */
 function isSystemHealthy (waitingMap) {
-  const healthyCount = Object
-    .keys(waitingMap)
-    .filter(k => waitingMap[k] === 'healthy').length
-
-  return healthyCount === expectedContainers.length
+  return getServicesForStatus(waitingMap, 'healthy').length === expectedContainers.length
 }
 
 /**
@@ -118,15 +121,19 @@ function isSystemHealthy (waitingMap) {
  * @returns {boolean}
  */
 function isSystemFailing (waitingMap) {
-  const unhealthyCount = Object
+  return getServicesForStatus(waitingMap, 'unhealthy').length > 0
+}
+
+/**
+ * @function getServicesForStatus
+ * @param {*} waitingMap
+ * @param {'healthy' | 'unhealthy' | 'starting'} status
+ * @returns {Array<string>}
+ */
+function getServicesForStatus(waitingMap, status) {
+  return Object
     .keys(waitingMap)
-    .filter(k => waitingMap[k] === 'unhealthy').length
-
-  if (unhealthyCount > 0) {
-    return true
-  }
-
-  return false
+    .filter(k => waitingMap[k] === status)
 }
 
 /**
@@ -139,3 +146,4 @@ async function sleep (timeMs) {
 }
 
 main()
+

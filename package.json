@@ -13,12 +13,15 @@
     "lint": "eslint ./src/**/*.ts *.js",
     "build": "tsc",
     "watch": "tsc -w",
+    "reseed": "echo \"seeding test environment\" && ./docker-local/postman/scripts/setupDockerCompose-FullSetup.sh",
+    "wait-4-docker": "node ./scripts/_wait4_all.js",
     "test": "npm run test:unit",
-    "test:unit": "jest --testMatch '**/test/unit/**/*.(test|spec).ts'",
     "test:bdd": "jest --testMatch '**/test/step-definitions/**/*.step.ts'",
-    "test:junit": "jest --reporters=default --reporters=jest-junit",
+    "test:e2e": "jest --testMatch '**/test/e2e/**/*.(test|spec).ts'",
     "test:coverage": "jest --coverage --coverageThreshold='{}'",
-    "test:coverage-check": "jest --coverage"
+    "test:coverage-check": "jest --coverage",
+    "test:junit": "jest --reporters=default --reporters=jest-junit",
+    "test:unit": "jest --testMatch '**/test/unit/**/*.(test|spec).ts'"
   },
   "husky": {
     "hooks": {
@@ -48,6 +51,9 @@
     "url": "https://github.com/mojaloop/auth-service/issues"
   },
   "homepage": "https://github.com/mojaloop/auth-service#readme",
+  "dependencies": {
+    "axios": "^0.19.2"
+  },
   "devDependencies": {
     "@types/jest": "25.2.2",
     "@typescript-eslint/eslint-plugin": "1.13.0",
@@ -66,6 +72,7 @@
     "jest-cucumber": "^2.0.11",
     "jest-junit": "10.0.0",
     "lint-staged": "^10.2.3",
+    "newman": "^5.0.1",
     "source-map-support": "0.5.12",
     "ts-jest": "^26.0.0",
     "ts-node": "8.3.0",

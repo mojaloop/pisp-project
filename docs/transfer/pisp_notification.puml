@@ -1,0 +1,155 @@
+@startuml
+' declate title
+title send_notification_to_pisp
+
+autonumber
+
+' Actor Keys:
+'   actor - PISP
+'   boundary - APIs/Interfaces, etc
+'   collections - Kafka Topics
+'   control - Kafka Consumers
+'   entity - Database Access Objects
+'   database - Database Persistance Store
+
+' declare actors
+actor "PISP\nParticipant" as PISP
+control "ML API Notification Event Handler" as NOTIFY_HANDLER
+
+boundary "Quoting Service API" as QUOTES_API
+boundary "ThirdPartyRequests Service API" as 3P_API
+collections "Notification-Topic" as TOPIC_NOTIFICATIONS
+' entity "Quotes DAO" as QUOTES_DAO
+' database "Quotes Store" as DB
+
+box "Payment Initiation Service Provider" #lightGray
+	participant PISP
+end box
+
+box "ML API Adapter Service" #LightBlue
+	participant NOTIFY_HANDLER
+end box
+
+box "Central Service" #LightYellow
+    participant TOPIC_NOTIFICATIONS
+    participant CSAPI
+end box
+
+box "Quoting Service" #LightPink
+    participant QUOTES_API
+end box
+
+box "ThirdPartyRequests Service" #LightPink
+    participant 3P_API
+end box
+
+
+'start flow
+activate NOTIFY_HANDLER
+group Send notification to PISP
+
+    note right of NOTIFY_HANDLER #lightgray
+        Event is emitted after a Transfer state has changed
+    end note
+
+    note left of TOPIC_NOTIFICATIONS
+        Example payload:
+        ""{ transferId: "1111-2222",""
+        ""  quoteId: "9999-8888",""
+        ""  transferState: "COMMITTED" }""
+      end note
+    NOTIFY_HANDLER -> TOPIC_NOTIFICATIONS: Consume Notification event
+    activate TOPIC_NOTIFICATIONS
+    deactivate TOPIC_NOTIFICATIONS
+
+
+    group Persist Event Information
+      note right of NOTIFY_HANDLER #lightgray
+        Process not shown here  
+      end note
+
+    '     NOTIFY_HANDLER -> CSAPI: Request to persist event information - POST - /events
+    '     activate CSAPI
+    '     CSAPI -> TOPIC_EVENTS: Publish event information
+    '     activate TOPIC_EVENTS
+    '     |||
+    '     ref over TOPIC_EVENTS :  Event Handler Consume\n
+    '     |||
+    '     TOPIC_EVENTS --> CSAPI: Return success
+    '     deactivate TOPIC_EVENTS
+    '     CSAPI --> NOTIFY_HANDLER: Return success
+    '     deactivate CSAPI
+    end
+
+    group Lookup Quote
+      NOTIFY_HANDLER -> NOTIFY_HANDLER: Get ""quoteId""" from event\n(""9999-8888"")
+      NOTIFY_HANDLER -> QUOTES_API: Lookup original Quote\n ""GET /quote/9999-8888""
+      note over QUOTES_API #lightGray
+        Process not shown here
+      end note
+
+      ' QUOTES_API -> QUOTES_DAO: """GetQuoteForId()""""
+      ' QUOTES_DAO -> DB: ""select * from ...""
+      ' DB -> QUOTES_DAO: ""QuoteObject""
+      ' QUOTES_DAO -> QUOTES_API: ""QuoteResponse""
+      QUOTES_API -> NOTIFY_HANDLER: ""QuoteResponse""
+      NOTIFY_HANDLER -> NOTIFY_HANDLER: Does this ""QuoteResponse"" \nhave a ""transactionRequestId""?
+      note over QUOTES_API #lightGray
+        Assumption: The ""Quote.transferRequestId"" is valid for a ""thirdPartyRequestId""
+        Otherwise, we can always update the quote object.
+      end note
+      NOTIFY_HANDLER -> NOTIFY_HANDLER: Yep, it's ""5555-6666""
+    end
+
+    group Lookup thirdPartyRequest
+      NOTIFY_HANDLER -> 3P_API: Lookup original thirdPartyRequest\n ""GET /thirdPartyRequest/transfer/5555-6666""
+      note over 3P_API #lightGray
+        Process not shown here
+      end note
+
+      ' QUOTES_API -> QUOTES_DAO: """GetQuoteForId()""""
+      ' QUOTES_DAO -> DB: ""select * from ...""
+      ' DB -> QUOTES_DAO: ""QuoteObject""
+      ' QUOTES_DAO -> QUOTES_API: ""QuoteResponse""
+      3P_API -> NOTIFY_HANDLER: ""TransctionRequestResponse""
+    end
+
+    NOTIFY_HANDLER -> NOTIFY_HANDLER: Who is the PISP who initiated the request?
+    NOTIFY_HANDLER -> NOTIFY_HANDLER: It's PISPA
+
+    group Lookup PISP Endpoints
+      note right of NOTIFY_HANDLER #lightgray
+        Process not shown here  
+      end note
+    end
+    ' note right of NOTIFY_HANDLER #lightgray
+    '     The endpoint details are cached, when the cache
+    '     expires, the details are fetched again
+    ' end note
+    ' NOTIFY_HANDLER -> CSAPI: Request Endpoint details for Participant - GET - /participants/{{fsp}}/endpoints\n<color #FF0000><b>Error code:</b> 2003</color>
+
+    ' activate CSAPI
+    ' CSAPI -> PARTICIPANT_DAO: Fetch Endpoint details for Participant\n<color #FF0000><b>Error code:</b> 2003</color>
+    ' activate PARTICIPANT_DAO
+    ' PARTICIPANT_DAO -> DB: Fetch Endpoint details for Participant
+    ' activate DB
+    ' hnote over DB #lightyellow
+    '     participantEndpoint
+    ' end note
+    ' DB -> PARTICIPANT_DAO: Retrieved Endpoint details for Participant
+    ' deactivate DB
+    ' PARTICIPANT_DAO --> CSAPI: Return Endpoint details for Participant
+    ' deactivate PARTICIPANT_DAO
+    ' CSAPI --> NOTIFY_HANDLER: Return Endpoint details for Participant\n<color #FF0000><b>Error codes:</b> 3202, 3203</color>
+    ' deactivate CSAPI
+    ' NOTIFY_HANDLER -> PAYER_DFSP: Notification with Prepare/fulfil result/error to \nPayer DFSP to specified Endpoint - PUT \n<color #FF0000><b>Error code:</b> 1001</color>
+    ' NOTIFY_HANDLER <-- PAYER_DFSP: HTTP 200 OK 
+    ' alt Config.SEND_TRANSFER_CONFIRMATION_TO_PAYEE === true
+    NOTIFY_HANDLER -> PISP: Notification to with fulfil result\nto Payee DFSP to specified Endpoint\n""PUT /thirdPartyRequest/transfer/5555-6666""
+    '     |||
+    '     NOTIFY_HANDLER <-- PAYEE_DFSP: HTTP 200 OK 
+    ' end
+end
+deactivate NOTIFY_HANDLER
+
+@enduml

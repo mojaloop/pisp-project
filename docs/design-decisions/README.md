@@ -19,6 +19,9 @@
 - Q. Should the PISP Facing API be a completely separate API, and not a modification to the FSPIOP-API?
   - We would still need to make modifications to the existing API to cater for DFSPs to be able to talk to PISPs, but PISP-facing resources would be contained in the ThirdParty-API (for lack of a better name)
   - This would also imply a new `thirdparty-api-adapter`, to compliment the `ml-api-adapter`
+  - The Current Mojaloop API caters to both a bilateral and optional switch mode, and PISP would break this principle
+  - The PISP API as part of the existing api would make for a more rigorous and thoroughly designed API, since it has to go though many reviews and approval steps
+  
 
 
 ## Decisions Made

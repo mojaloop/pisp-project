@@ -2,15 +2,25 @@
 
 [#273](https://app.zenhub.com/workspaces/pisp-5e8457b05580fb04a7fd4878/issues/mojaloop/mojaloop/273) As a `PISP` I want to `be informed of the outcome of a transaction` so that `I can inform my customer`.
 
-- Will use the PUT /thirdPartyRequest/transfer/{ID}
+- Will use the `PUT /thirdPartyRequest/transfer/{ID}`
 - The switch will initiate this call (not the DFSP)
-- The challenge here is how the switch will know that a given transfer relates to a thirdPartyRequest/transfer/{ID}
-
+- The challenge here is how the switch will know that a given transfer relates to a `thirdPartyRequest/transfer/{ID}`
 
 ## Questions:
 - How will we implement these notifications?
-  - And where should the notifications live? Should they be a part of the PISP Adapter? ml-api-adapter? central-event-processor?
-  - This will depend on whether or not the 
+  - The existing notifications (to Payer and Payee DFSPS) are taken from the `notifications` topic by the ml-api-adapter
+  - As the current `PUT /transfer/{ID}` notifications live in the `ml-api-adapter`, it makes sense for the new PISP notifications to also live here
+  - Depending on the [_new ThirdParty-API design decision_](./design-decisions/README.md), we could put this functionality in a `thirdparty-api-adapter`
+  - For now, let's just say we are going to use the `ml-api-adapter`
+
+- Where should the lookup (to get from a `Transfer.quoteId` -> `ThirdPartyRequestId`) logic live? I think the existing ml-api-adapter has no real state attached to it, and has to talk to `central-ledger`
+  - Do we _really_ want to be storing stuff about thirdPartyRequests in the central-ledger? That sounds like a bad idea.
+  - Perhaps if we implement this separately in a `thirdparty-api-adapter`, it doesn't need to be stateless
+
+- Does it make sense to have a more generic implementation to contain both the `v1.1` `PATCH` changes and the `PUT /thirdPartyRequest/transfer/{ID}`?
+  - This is what Michael suggested originally, and the answer to this probably depends on the decision on whether or not we use a new ThirdParty-API, or add to the existing API
+
+- If we implement a new api, or even a new endpoint (`/thirdPartyRequest/transfer`), can we still use the `QuoteRequest.transactionRequestId` field? Or should it be a new field
 
 
 ## Current Notifications
@@ -42,19 +52,25 @@
 
 ## Proposed PISP/3rd Party Notification Design
 
-- As the current `PUT /transfer/{ID}` notifications live in the `ml-api-adapter`, it makes sense for the new PISP notifications to also live here
-  - Depending on the [_new ThirdParty-API design decision_](./design-decisions/README.md), we could put this functionality in a `thirdparty-api-adapter`
-  - For now, let's just say we are going to use the `ml-api-adapter`
+- The `ml-api-adapter` will use the `PUT /thirdPartyRequest/transfer/{ID}` from the Switch to the PISP
 
-- The ml-api-adapter will use the `PUT /thirdPartyRequest/transfer/{ID}` from the Switch to the PISP
-- 
+[todo: sequence diagram for this]
 
 
-
+<img src="./out/transfer/pisp_notification/send_notification_to_pisp.png" width=1000/>
 
 ## From a `thirdPartyRequest/transfer/{ID}` to a `/transfer/{ID}`
 
-[todo: 
-  - how do we do this? This is hard...
-  - need to read more about v2.0 changes to spec
-]
+The API adapter will need to perform the following tasks:
+
+On a `2.6 Fulfil Notification` event
+1. Get `transferId` from the notification body
+2. Lookup the `quoteId` for the given `transferId`? _Note: this could be contained in the message body of the event_
+> According to [6.8.3.1](https://docs.mojaloop.io/mojaloop-specification/documents/API%20Definition%20v1.0.html#6831-put-transactionsid) of the spec, the `transactionRequestId` is an optional parameter when a PayerDFSP creates a `Quote`
+> As of `v1.1` of the mojaloop spec, the `transfer` doesn't contain a reference to a `quoteId`, but will from `v2.0` _todo: link, once we have one_.
+3. Lookup `thirdPartyRequests/transfer` objects, does one exist with that given `transactionId`? If so, continue.
+> This is based on the assumption that the `QuoteRequest.transactionRequestId` is going to be the same as `/thirdPartyRequest/transfer/{ID}`. Is this valid?
+4. From the original `thirdPartyRequests`, lookup the PISP and get their endpoints
+5. Send a `PUT /thirdPartyRequest/transfer/{ID}` to the PISP
+
+

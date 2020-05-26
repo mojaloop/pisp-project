@@ -16,6 +16,9 @@
 
 - Q. How does the switch determine whether or not a DFSP is using their own FIDO service? Do we want to use the ALS or some other method?
 
+- Q. Should the PISP Facing API be a completely separate API, and not a modification to the FSPIOP-API?
+  - We would still need to make modifications to the existing API to cater for DFSPs to be able to talk to PISPs, but PISP-facing resources would be contained in the ThirdParty-API (for lack of a better name)
+  - This would also imply a new `thirdparty-api-adapter`, to compliment the `ml-api-adapter`
 
 
 ## Decisions Made

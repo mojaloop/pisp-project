@@ -5,18 +5,18 @@ const util = require('util')
 /**
  * @file wait4.js
  * @description Waits for a given service's prerequisite services to be up and running.
- *   
+ *
  *  Observe the following Environment Variables:
  *  `WAIT4_SERVICE`  - REQUIRED  The name of the service. Must refer to any entry of `services.[*].name` in config.json
  *  `WAIT4_CONFIG`   - OPTIONAL path to config.json file, by default `./wait4.config.json`
  *  `WAIT4_RETRIES`  - OPTIONAL  How many times should we retry waiting for a service? _optional_ Defaults to 10
  *  `WAIT4_WAIT_MS`  - OPTIONAL  How many ms to wait before retrying a service connection? _optional_ Defaults to 1000 (1 second)
- * 
+ *
  *  To keep the script code simple, we drop any validation, so the format of config file must be perfect!
- * 
- * 
+ *
+ *
  */
-async function main() {
+async function main () {
   console.log('args are', process.argv)
 
   try {
@@ -27,14 +27,14 @@ async function main() {
     // merge config with environment or defaults
     config.retries = parseInt(process.env.WAIT4_RETRIES || config.retries || 10)
     config.waitMs = parseInt(process.env.WAIT4_WAIT_MS || config.waitMs || 1000)
-    
+
     // wait for services connections or paradox to be ready
     const waitresses = getWaiters(service.wait4, config)
     const report = await Promise.all(waitresses)
-    
+
     console.info(`wait4 Report:\n${util.inspect(report, false, 5, true)}`)
     process.exit(0)
-  } catch(error) {
+  } catch (error) {
     console.error(`wait4 Error: ${error}`)
     process.exit(1)
   }
@@ -42,9 +42,9 @@ async function main() {
 
 main()
 
-function getService(config) {
-  const serviceName = process.argv.slice(-1).pop() || process.env.WAIT4_SERVICE;
-  if(!serviceName) {
+function getService (config) {
+  const serviceName = process.argv.slice(-1).pop() || process.env.WAIT4_SERVICE
+  if (!serviceName) {
     console.error('wait4 Environment variable WAIT4_SERVICE or service name parameter are required')
     process.exit(1)
   }
@@ -52,11 +52,11 @@ function getService(config) {
 }
 /**
  * @function getWaiters
- * @description - generates the list of promises of doing the wait job 
+ * @description - generates the list of promises of doing the wait job
  * @param {array} wait4 - list of wait job descriptions
  * @param {object} config - configuration
  */
-function getWaiters(wait4, config) {
+function getWaiters (wait4, config) {
   const methods = {
     mongo: methodMongoDB,
     mysql: methodMySQL,
@@ -68,9 +68,8 @@ function getWaiters(wait4, config) {
     waitJob,
     waitJob.retries || config.retries,
     waitJob.waitMs || config.waitMs
-  ));
+  ))
 }
-
 
 /**
  * @function wrapWithRetries
@@ -80,7 +79,7 @@ function getWaiters(wait4, config) {
  * @param {number} retries - Number of times to retry before returning an error if the func fails
  * @param {number} waitTimeMs - Ms time to wait before trying again
  */
-async function wrapWithRetries(method, waitJob, retries, waitTimeMs) {
+async function wrapWithRetries (method, waitJob, retries, waitTimeMs) {
   try {
     // generate method's RC config
     const RC = getRC(waitJob)
@@ -104,57 +103,52 @@ async function wrapWithRetries(method, waitJob, retries, waitTimeMs) {
   }
 }
 
-
 /**
  * @function getRC
  * @description - create RC config instance
  * @param {object} waitJob
  */
-function getRC(waitJob) {
+function getRC (waitJob) {
   // acquire rc parameters
-  const namespace = waitJob.rc && waitJob.rc.namespace || 'CLEDG'
-  const configPath = waitJob.rc && waitJob.rc.configPath || `../config/default.json`
+  const namespace = (waitJob.rc && waitJob.rc.namespace) || 'CLEDG'
+  const configPath = (waitJob.rc && waitJob.rc.configPath) || '../config/default.json'
 
   // require rc to deliver config
   try {
     return require('rc')(namespace, require(configPath))
-  } catch(err) {
+  } catch (err) {
     return waitJob.rc || {}
   }
 }
 
-
 /**
  * @function methodMongoDB
  * @description Waits for the MongoDB service to be up and running
- * @param {object} waitJob 
- * @param {object} RC 
+ * @param {object} waitJob
+ * @param {object} RC
  */
-async function methodMongoDB(waitJob, RC) {
-
+async function methodMongoDB (waitJob, RC) {
   const isDisabled = RC.MONGODB.DISABLED && RC.MONGODB.DISABLED.toString().trim().toLowerCase() === 'true'
-  if(isDisabled) {
-    return `MongoDB(${waitJob.uri}) Disabled`;
+  if (isDisabled) {
+    return `MongoDB(${waitJob.uri}) Disabled`
   }
 
   // make connection to MongoDB using `Mongoose`
   const mongoose = require('mongoose')
-  const model = mongoose.model('test', mongoose.Schema({name: 'string'}))
+  const model = mongoose.model('test', mongoose.Schema({ name: 'string' }))
   await mongoose.connect(waitJob.uri, { useUnifiedTopology: true, promiseLibrary: global.Promise })
-  await model.findOne({name:'x'}).exec()
+  await model.findOne({ name: 'x' }).exec()
   return waitJob
 }
-
 
 /**
  * @function methodMySQL
  * @description Waits for the MySQL service to be up and running
- * @param {*} waitJob 
- * @param {*} RC 
+ * @param {*} waitJob
+ * @param {*} RC
  */
-async function methodMySQL(waitJob, RC) {
-
-  // make connection to MySQL using `knex` 
+async function methodMySQL (waitJob, RC) {
+  // make connection to MySQL using `knex`
   const knex = require('knex')({
     client: RC.DATABASE.DIALECT,
     connection: {
@@ -164,23 +158,22 @@ async function methodMySQL(waitJob, RC) {
       password: RC.DATABASE.PASSWORD,
       database: RC.DATABASE.SCHEMA
     }
-  });
+  })
   await knex.select(1)
 
   return waitJob
 }
 
-
 /**
  * @function methodNCat
  * @description checks is any TCP network stream up on given host:port
- * @param {*} waitJob 
- * @param {*} RC 
+ * @param {*} waitJob
+ * @param {*} RC
  */
-async function methodNCat(waitJob, RC) {
-  const [ host, port ] = waitJob.uri.toString().split(':').map(x => x.trim())
+async function methodNCat (waitJob) {
+  const [host, port] = waitJob.uri.toString().split(':').map(x => x.trim())
   const { execSync } = require('child_process')
   const command = `nc -z ${host} ${port}`
   execSync(command)
-  return waitJob;
+  return waitJob
 }

@@ -1,3 +1,11 @@
 #!/usr/bin/env bash
 
-newman run --delay-request=2000 --folder='Oracle Onboarding-MSISDN-DFSP-A' --environment=environments/Mojaloop-Local-Docker-Compose.postman_environment.json OSS-New-Deployment-FSP-Setup.postman_collection_DFSPs.json
+PATH=$(npm bin):$PATH
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+POSTMAN_DIR="${DIR}/.."
+
+newman run \
+  --delay-request=2000 \
+  --folder='Oracle Onboarding-MSISDN-DFSP-A' \
+  --environment="${POSTMAN_DIR}/environments/Mojaloop-Local-Docker-Compose.postman_environment.json" \
+  ${POSTMAN_DIR}/OSS-New-Deployment-FSP-Setup.postman_collection_DFSPs.json

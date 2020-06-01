@@ -17,7 +17,7 @@ Integration tests
 
 ## Context, Parties, Backend components
 
-![components](./components_layout.png)
+![components](./components_layout.drawio.svg)
 
 ## Prerequisites
 - `docker` - `v18.06.0` or higher

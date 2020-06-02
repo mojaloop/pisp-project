@@ -29,7 +29,8 @@ module.exports = {
           rc: {
             namespace: 'CLEDG',
             configPath: '../config/default.json'
-          }
+          },
+          retries: 30
         },
         {
           description: 'MongoDB object store',

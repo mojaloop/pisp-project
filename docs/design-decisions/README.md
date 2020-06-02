@@ -16,6 +16,8 @@
 
 - Q. How does the switch determine whether or not a DFSP is using their own FIDO service? Do we want to use the ALS or some other method?
 
+- Q. How should we implement the changes required for the PISP role? Should we extend the existing APIs or should we create one or more new APIs to manage the specialised PISP interactions?
+
 
 
 ## Decisions Made

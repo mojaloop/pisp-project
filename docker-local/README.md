@@ -70,28 +70,6 @@ docker-compose logs -f transaction-requests-service
 docker-compose logs -f pisp-backend  pisp-scheme-adapter pisp-redis
 ```
 
-[todo: update these]
-```bash
-#Running the services separately in different terminals is recommended
-
-#Run
-
-docker-compose up account-lookup-service #t
-
-# Then close once the service is ready.
-# Proceed to stop account-lookup-service and proceed with the following commands.
-# ALS needs to be run initially so it setups properly.
-docker-compose up central-ledger
-docker-compose up quoting-service
-docker-compose up ml-api-adapter
-docker-compose up central-settlement
-docker-compose up account-lookup-service
-docker-compose up dfspa-scheme-adapter dfspa-backend
-docker-compose up dfspb-scheme-adapter dfspb-backend
-docker-compose up transaction-requests-service
-docker-compose up pisp-backend  pisp-scheme-adapter pisp-redis
-```
-
 ## Create some initial data
 
 ### Set Up Seed Data

@@ -66,10 +66,12 @@ module.exports = {
         {
           description: 'MySQL ALS',
           uri: 'mysql-als:3306',
-
-          // example of using ncat instead knex,
-          // so we don\'t have to know db connection parameters
-          method: 'ncat'
+          method: 'mysql',
+          // customized RC setup
+          rc: {
+            namespace: 'ALS',
+            configPath: '../config/default.json'
+          }
         }
       ]
     },

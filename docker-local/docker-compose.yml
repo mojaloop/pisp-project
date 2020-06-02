@@ -229,20 +229,21 @@ services:
   account-lookup-service:
     image: mojaloop/account-lookup-service:v10.1.0
     container_name: account-lookup-service
-    command: sh -c "/opt/central-account-lookup-service/wait4/wait4.js account-lookup-service && node src/index.js server"
+    command: sh -c "/opt/account-lookup-service/wait4/wait4.js account-lookup-service && npm run migrate && node src/index.js server"
     ports:
       - "4001:4001"
       - "4002:4002"
     environment:
       - LOG_LEVEL=info
+      - ALS_DISPLAY_ROUTES=false
     networks:
       - mojaloop-net
     depends_on:
       - mysql-als
       - central-ledger
     volumes:
-       - ./docker/account-lookup-service/default.json:/opt/account-lookup-service/config/default.json
-       - ./docker/wait4:/opt/central-account-lookup-service/wait4
+      - ./docker/account-lookup-service/default.json:/opt/account-lookup-service/config/default.json
+      - ./docker/wait4:/opt/account-lookup-service/wait4
     healthcheck:
       test: wget -q http://172.17.0.1:4001/health -O /dev/null || exit 1
       timeout: 20s

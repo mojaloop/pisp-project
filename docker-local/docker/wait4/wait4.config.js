@@ -71,7 +71,8 @@ module.exports = {
           rc: {
             namespace: 'ALS',
             configPath: '../config/default.json'
-          }
+          },
+          retries: 30
         }
       ]
     },

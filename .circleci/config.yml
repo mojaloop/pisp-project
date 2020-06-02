@@ -114,9 +114,9 @@ jobs:
             # sleep 30s
             # docker-compose stop
             docker-compose up -d
-            npm run wait-4-docker || true
+            # npm run wait-4-docker || true
 
-            docker-compose stop && docker-compose up -d
+            # docker-compose stop && docker-compose up -d
             npm run wait-4-docker
 
             npm run reseed

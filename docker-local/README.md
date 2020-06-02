@@ -18,7 +18,7 @@ Integration tests
 ## Context, Parties, Backend components
 The purpose of this setup is to run an example of mojaloop arrangement locally using docker-compose.
 
-Parties in the testing layout are:
+Services are composed in the testing layout as:
 
 - _MojaloopHub_ is a set of microservices and their dependencies, including:
     - [central-ledger](https://github.com/mojaloop/central-ledger): (mysql, objstore (mongoDB), kafka)

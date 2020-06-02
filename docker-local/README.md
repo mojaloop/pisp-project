@@ -35,13 +35,13 @@ Parties in the testing layout are:
     - pisp-redis: redisDB
   > configuration folder: [pisp](./pisp)
 
-- _DFSP A_ is a Payer's bank account holder
+- _DFSP A_ is a bank account holder
     - dfspa-backend: [mojaloop-simulator](https://github.com/mojaloop/mojaloop-simulator)
     - dfspa-scheme-adapter: [scheme-adapter](https://github.com/mojaloop/sdk-scheme-adapter)
     - dfspa-redis: redisDB
   > configuration folder: [dfsp_a](./dfsp_a)
 
-- _DFSP B_ is a Payee's bank account holder
+- _DFSP B_ is a bank account holder
     - dfspb-backend: [mojaloop-simulator](https://github.com/mojaloop/mojaloop-simulator)
     - dfspb-scheme-adapter: [scheme-adapter](https://github.com/mojaloop/sdk-scheme-adapter)
     - dfspb-redis: redisDB

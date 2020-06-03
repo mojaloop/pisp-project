@@ -3,7 +3,6 @@
 > For now, let's place the decisions inline for ease of reference, but we may want each decision to have it's own `.md` file in the future.
 
 ## Outstanding Questions
-- Q: Should the `mojaloop/auth-service` API be Sync or Async?
 
 - Q: How does the switch _know_ to send a callback to the PISP after a sucessful transfer?
   - when DFSPA issues `POST /transfer`, that's between DFSPA  + DFSPB
@@ -13,14 +12,32 @@
     - how do we get from a `transactionId` to a `transferId`?
       - ILP packet is in transfer request, but encoded... so need to figure this piece out
     - For now, assume that the `Transaction` object will contain the `transferId`
+  > Note: this is being tracked in [#270](https://app.zenhub.com/workspaces/pisp-5e8457b05580fb04a7fd4878/issues/mojaloop/mojaloop/270)
 
 - Q. How does the switch determine whether or not a DFSP is using their own FIDO service? Do we want to use the ALS or some other method?
 
-- Q. How should we implement the changes required for the PISP role? Should we extend the existing APIs or should we create one or more new APIs to manage the specialised PISP interactions?
-
+- Q. Which api should the DFSP need to implement for PISP functionaliy? We have a few options:
+    1. Add the DFSP changes to the existing FSPIOP-API
+    2. Add the DFSP changes to the new `thirdparty-api`
+    3. Divide the `thirdparty-api` into 2 parts: 
+        - `thirdparty-pisp-api` for the PISP to implement
+        - `thirdparty-dfsp-api` for the DFSP to implement
 
 
 ## Decisions Made
+
+###  How should we implement the changes required for the PISP role? 
+ - Should we extend the existing APIs or should we create one or more new APIs to manage the specialised PISP interactions?
+
+We are going to add a new api, called the `thirdparty-api` to cover at least the PISP's interactions with the switch.
+
+There is still the outstanding question for the DFSP side of the equation (See above)
+
+
+### Should the `mojaloop/auth-service` API be Sync or Async?
+
+It will be Async
+
 
 ### What is the challenge that is being signed during the transfer flow?
 

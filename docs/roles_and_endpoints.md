@@ -21,7 +21,7 @@ A summary of Mojaloop FSPIOP API Endpoints and Roles as they stand today.
 
 ## API Calls - Outbound (From Participant -> Switch)
 
-### Existing
+### FSPIOP-API (DFSP -> Switch)
 
 | Name | `VERB` | Resource  | DFSP | PISP | Note |
 | ---- | ------ | --------  | ---- | ---- | ---- |
@@ -37,32 +37,51 @@ A summary of Mojaloop FSPIOP API Endpoints and Roles as they stand today.
 | Retrieve Bulk Quote Information           | `GET`    | `/bulkQuotes/{ID}`           | ✅ | ❌ |   |
 | Calculate Bulk Quote                      | `POST`   | `/bulkQuotes`                | ✅ | ❌ |   |
 | Perform Authorization                     | `GET`    | `/authorizations/{ID}`       | ✅ | ❌ |   |
-| Update Authorization                      | `PUT`    | `/authorizations/{ID}`       | ✅ | ❌ |   |
+| Update Authorization                      | `PUT`    | `/authorizations/{ID}`       | ✅ | ✅ |   |
 | Retrieve Transfer Information             | `GET`    | `/transfers/{ID}`            | ✅ | ❌ |   |
 | Perform Transfer                          | `POST`   | `/transfers`                 | ✅ | ❌ |   |
 | Retrieve Bulk Transfer Information        | `GET`    | `/bulkTransfers/{ID}`        | ✅ | ❌ |   |
 | Perform Bulk Transfer                     | `POST`   | `/bulkTransfers`             | ✅ | ❌ |   |
 | Retrieve Transaction Information          | `GET`    | `/transactions/{ID}`         | ✅ | ❌ |   |
 
-### New 
-| Name | `VERB` | Resource  | DFSP | PISP | Note |
-| ---- | ------ | --------  | ---- | ---- | ---- |
-| Create Consent Request            | `POST` | `/consentRequests`                         | ❌ | ✅ |  | 
-| Update Consent Request            | `PUT`  | `/consentRequests/{ID}`                    | ✅ | ✅ | Based on our current designs, both a DFSP and PISP use this to callback to one another about the `consentRequest` | 
-| Perform 3rd Party Authorization   | `POST` | `/authorizations`                          | ❌ | ✅ | PISP needs to call this with FIDO Result     | 
-| Create Consent                    | `PUT`  | `/consents/{ID}`                           | ✅ | ❌ | Called after a successful `consentRequest` flow | 
-| Lookup 3rd party Account Metadata | `GET`  | `/thirdPartyRequest/metadata/{Type}/{ID}*` | ❌ | ✅ | I've called this metadata but it could be something else, such as `balances` | 
-| Initiate 3rd party request        | `POST` | `/thirdPartyRequest/transaction`           | ❌ | ✅ |  | 
-| Get 3rd party request information | `GET`  | `/thirdPartyRequest/transaction/{ID}`      | ❌ | ✅ |  | 
+> \* also:  `{Type}/{ID}/{SubId}`
+
+
+### ThirdParty-API (PISP -> Switch)
+
+| Name | isNew? | `VERB` | Resource  | DFSP | PISP | Note |
+| ---- | ------ | ------ | --------  | ---- | ---- | ---- |
+| Lookup Party Information          | N | `GET`  | `/parties/{Type}/{ID}*`                    | ✅ | ✅ |  |
+| Update Authorization              | N | `PUT`  | `/authorizations/{ID}`                     | ✅ | ✅ | PISP calls this with signed challenge during a transaction  |
+| Create Consent Request            | Y | `POST` | `/consentRequests`                         | ❌ | ✅ |  | 
+| Update Consent Request            | Y | `PUT`  | `/consentRequests/{ID}`                    | ✅ | ✅ | Based on our current designs, both a DFSP and PISP use this to callback to one another about the `consentRequest` | 
+| Request Challenge                 | Y | `PUT`  | `/consents/{ID}/createCredential`          | ❌ | ✅ | PISP needs to request a challenge for the given consent | 
+| Lookup Consent                    | Y | `GET`  | `/consents/{ID}`                           | ✅ | ✅ |  | 
+| Update Consent                    | Y | `PUT`  | `/consents/{ID}`                           | ✅ | ✅ | To update add a credential or verify a credential, setting the status to `VERIFIED` | 
+| Initiate 3rd party request        | Y | `POST` | `/thirdPartyRequest/transaction`           | ❌ | ✅ |  | 
+| Get 3rd party request information | Y | `GET`  | `/thirdPartyRequest/transaction/{ID}`      | ❌ | ✅ |  | 
 
 > \* also:  `{Type}/{ID}/{SubId}`
 
+
+### Undecided (DFSP -> Switch)
+> These changes for DFSP could live in the FSPIOP-API, the ThirdParty-API, or even a new API
+
+| Name | isNew? | `VERB` | Resource  | DFSP | PISP | Note |
+| ---- | ------ | ------ | --------  | ---- | ---- | ---- |
+| Perform 3rd Party Authorization  | Y | `POST` | `/authorizations`                          | ✅ | ❌ | DFSP needs to call this with FIDO Result     | 
+| Update Consent Request           | Y | `PUT`  | `/consentRequests/{ID}`                    | ✅ | ✅ | Based on our current designs, both a DFSP and PISP use this to callback to one another about the `consentRequest` | 
+| Create Consent                   | Y | `POST` | `/consents`                                | ✅ | ❌ | Called by DFSP after a successful `consentRequest` flow | 
+| Lookup Consent                   | Y | `GET`  | `/consents/{ID}`                           | ✅ | ✅ |  | 
+| Update Consent                   | Y | `PUT`  | `/consents/{ID}`*                          | ✅ | ✅ | To update add a credential or verify a credential, setting the status to `VERIFIED` | 
+
+> \* `PUT /consents/{ID}` from the DFSP may not be required. 
+
+
+
 ## API Calls - Inbound (From Switch -> Participant)
 
-> Note: since these are callbacks from the switch to a participant, the access controls will be different from the Outbound.
-> I suppose this list can also act as a list of _what requests a PISP needs to listen for_.
-
-### Existing
+### FSPIOP-API (Switch -> DFSP)
 
 | Name | `VERB` | Resource  | DFSP | PISP | Note |
 | ---- | ------ | --------  | ---- | ---- | ---- |
@@ -72,6 +91,7 @@ A summary of Mojaloop FSPIOP API Endpoints and Roles as they stand today.
 | Return Participant Information Error          | `PUT` |  `/participants/{Type}/{ID}/error*` | ✅ | ❌ |  |
 | Return Party Information                      | `PUT` |  `/parties/{Type}/{ID}*`            | ✅ | ✅ | PISP needs to get result of party lookup |
 | Return Party Information Error                | `PUT` |  `/parties/{Type}/{ID}/error*`      | ✅ | ✅ | PISP needs to get result of party lookup |
+| Lookup Party Information                      | `GET` | `/parties/{Type}/{ID}*`             | ✅ | ✅ |   |
 | Return Transaction Request Information        | `PUT` |  `/transactionRequests/{ID}`        | ✅ | ❌ |  |
 | Return Transaction Request Information Error  | `PUT` |  `/transactionRequests/{ID}/error`  | ✅ | ❌ |  |
 | Return Quote Information                      | `PUT` |  `/quotes/{ID}`                     | ✅ | ❌ |  |
@@ -87,32 +107,46 @@ A summary of Mojaloop FSPIOP API Endpoints and Roles as they stand today.
 | Return Transaction Information                | `PUT` |  `/transactions/{ID}`               | ✅ | ❌ |  |
 | Return Transaction Information Error          | `PUT` |  `/transactions/{ID}/error`         | ✅ | ❌ |  |
 
-### New
+### ThirdParty-API (Switch -> PISP)
 
-| Name | `VERB` | Resource  | DFSP | PISP | Note |
-| ---- | ------ | --------  | ---- | ---- | ---- |
-| Update Consent Request                     | `PUT`  | `/consentRequests/{ID`                           | ✅ | ✅ |  | 
-| Update Consent Request Error               | `PUT`  | `/consentRequests/{ID}/error`                    | ✅ | ✅ |  | 
-| Create Or Update Consent                   | `PUT`  | `/consents/{ID}`                                 | ❌ | ✅ | Callback a PISP gets once `consentRequest` is successful |
-| Return 3rd party Account Metadata          | `PUT`  | `/thirdPartyRequest/metadata/{Type}/{ID}*`       | ❌ | ✅ | I've called this metadata but it could be something else, such as `balances` | 
-| Return 3rd party Account Metadata Error    | `PUT`  | `/thirdPartyRequest/metadata/{Type}/{ID}/error*` | ❌ | ✅ | I've called this metadata but it could be something else, such as `balances` | 
-| Perform Authorization                      | `POST` | `/authorizations/`                               | ❌ | ✅ | Switch requests Authorization for `thirdPartyRequest` from PISP | 
-| Update 3rd Party Transaction Request       | `PUT`  | `/thirdPartyRequest/transaction/{ID}`            | ❌ | ✅ |  | 
-| Update 3rd Party Transaction Request Error | `PUT`  | `/thirdPartyRequest/transaction/{ID}/error`      | ❌ | ✅ |  | 
+| Name | isNew? | `VERB` | Resource  | DFSP | PISP | Note |
+| ---- | ------ | ------ | --------  | ---- | ---- | ---- |
+| Return Party Information                      | N | `PUT`  |  `/parties/{Type}/{ID}*`                         | ✅ | ✅ | PISP needs to get result of party lookup |
+| Return Party Information Error                | N | `PUT`  |  `/parties/{Type}/{ID}/error*`                   | ✅ | ✅ | PISP needs to get result of party lookup |
+| Return Authorization Result                   | N | `PUT`  |  `/authorizations/{ID}`                          | ✅ | ✅ |  |
+| Return Authorization Error                    | N | `PUT`  |  `/authorizations/{ID}/error`                    | ✅ | ✅ |  |
+| Update Consent Request                        | Y | `PUT`  | `/consentRequests/{ID}`                          | ✅ | ✅ |  | 
+| Update Consent Request Error                  | Y | `PUT`  | `/consentRequests/{ID}/error`                    | ✅ | ✅ |  | 
+| Create Consent                                | Y | `POST` | `/consents/`*2                                   | ❌ | ✅ | Callback a PISP gets once `consentRequest` is successful |
+| Create Or Update Consent                      | Y | `PUT`  | `/consents/{ID}`*2                               | ❌ | ✅ | Callback a PISP gets once consent's challenge has been added |
+| Perform Authorization                         | Y | `POST` | `/authorizations/`                               | ❌ | ✅ | Requests Authorization for a `thirdPartyRequest` from DFSP | 
+| Update 3rd Party Transaction Request          | Y | `PUT`  | `/thirdPartyRequest/transaction/{ID}`            | ❌ | ✅ | Called at the end of the transaction flow, to inform PISP of final result | 
+| Update 3rd Party Transaction Request Error    | Y | `PUT`  | `/thirdPartyRequest/transaction/{ID}/error`      | ❌ | ✅ |  | 
 
-> \* also:  `{Type}/{ID}/{SubId}`
+> \* also: `{Type}/{ID}/{SubId}`
+> \*2 We may want this to be _only_ be a POST to create a consent, to keep things consistent
 
-## Questions:
 
-- In the FSPIOP API Definition v1.1, `/authorizations` resource is used solely in conjunction with internal transaction requests. With the addition of a new PISP transaction requests `/thirdPartyRequests/transaction`, we may need to reconsider how `/authorizations` is defined so that it covers both the 'internal' (or existing) transaction request scenario, as well as the new 'Third Party' scenario
-  - Michael: "We could distinguish between the authorizations forms for DFSP and PISP by allowing only a DFSP to issue a GET /authorizations, and only a PISP to issue a POST /authorizations"
+### Undecided (Switch -> DFSP)
+> These changes for DFSP could live in the FSPIOP-API, the ThirdParty-API, or even a new API
 
-## Performance Considerations:
+| Name | isNew? | `VERB` | Resource  | DFSP | PISP | Note |
+| ---- | ------ | ------ | --------  | ---- | ---- | ---- |
+| Lookup Party Information         | N | `GET`  | `/parties/{Type}/{ID}*`                    | ✅ | ✅ |   |
+| Calculate Quote                  | N | `POST` | `/quotes`                                  | ✅ | ❌ |   |
+| Perform Transfer                 | N | `POST` | `/transfers`                               | ✅ | ❌ |   |
+| Update Authorization             | N | `PUT`  | `/authorizations/{ID}`                     | ✅ | ❌ | PISP calls this with signed challenge during a transaction  |
+| Create Consent Request           | Y | `POST` | `/consentRequests`                         | ✅ | ✅ |  | 
+| Update Consent Request           | Y | `PUT`  | `/consentRequests/{ID}`                    | ✅ | ✅ | Based on our current designs, both a DFSP and PISP use this to callback to one another about the `consentRequest` | 
+| Lookup Consent                   | Y | `GET`  | `/consents/{ID}`                           | ✅ | ✅ |  | 
+| Update Consent                   | Y | `PUT`  | `/consents/{ID}`*                          | ✅ | ✅ | Only in the case of 3rd party FIDO service, DFSP can opt to verify the signature themselves | 
+| Initiate 3rd party request       | Y | `POST` | `/thirdPartyRequest/transaction`           | ✅ | ❌ | Handle the 3rd party request, and ask Payee FSP for quote | 
 
-We assume Role Based Access Controls will be implemented at an API Gateway.
+> \* `PUT /consents/{ID}` from the DFSP may not be required. 
 
-In order to ensure such an implementation won't greatly affect performance, the goal is to have RBAC that need not inspect the _body_ of the API call (or at least minimize the number of API calls that depend on inspecting the body).
 
-This is possible with the PISP Case by using the a new resource for transaction requests: `thirdparty
+## Security Considerations:
+
+We assume an API Gateway will be able to distinguish between the participant's role (DFSP or PISP), and whether or not they have the access to call the given API.
 
 

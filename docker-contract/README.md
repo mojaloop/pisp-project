@@ -5,7 +5,7 @@ The aim of this document is to configure API contract tests between the PISP sim
 ## Repo layout
 
  PISP Simulator and mojaloop-testing-toolkit configuration
-- [`mojaloop-testing-toolkit`](./mojaloop-testing-toolkit)
+- [`mojaloop-testing-toolkit`](./ml-testing-toolkit)
 - [`pisp-sim`](./pisp-sim)
 
 ## Services and Backend components

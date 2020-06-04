@@ -49,9 +49,9 @@
   ],
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/mojaloop/pisp.git/issues"
+    "url": "https://github.com/mojaloop/pisp/issues"
   },
-  "homepage": "https://github.com/mojaloop/pisp.git#readme",
+  "homepage": "https://github.com/mojaloop/pisp#readme",
   "dependencies": {
     "axios": "^0.19.2"
   },

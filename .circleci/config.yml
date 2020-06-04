@@ -122,6 +122,25 @@ jobs:
       - store_artifacts:
           path: /home/circleci/project/junit.xml
 
+  test-contract:
+    executor: default-machine
+    steps:
+      - checkout
+      - run:
+          name: Spin up the contract test environment
+          command: |
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            cd ./docker-contract/
+            docker-compose pull 
+            docker-compose up -d
+      - run: 
+          name: Run the contract tests
+          command: |
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            npm run test:contract
+      - store_artifacts:
+          path: /home/circleci/project/contract_test.xml
+
 ##
 # Workflows
 #
@@ -152,15 +171,16 @@ workflows:
               ignore:
                 - /feature*/
                 - /bugfix*/
-      # - test-contract:
-      #     context: org-global
-      #     requires:
-      #       - setup
-      #     filters:
-      #       tags:
-      #         only: /.*/
-      #       branches:
-      #         ignore:
-      #           - /feature*/
-      #           - /bugfix*/
+      - test-contract:
+          context: org-global
+          requires:
+            - setup
+            - test-e2e
+          filters:
+            tags:
+              only: /.*/
+            branches:
+              ignore:
+                - /feature*/
+                - /bugfix*/
   

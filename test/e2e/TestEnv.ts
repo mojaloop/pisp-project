@@ -1,29 +1,29 @@
 
-// TODO: load these more intelligently to allow for better configuration
+//TODO: load these more intelligently to allow for better configuration
 
-export interface UserIdType {
+export type UserIdType = {
   idType: 'MSISDN';
   idValue: string;
 }
 
-export interface TestEnvType {
-  amount: string;
-  amountType: string;
+export type TestEnvType = {
+  amount: string,
+  amountType: string,
   baseUrls: {
-    dfspa: string;
-    dfspb: string;
-    pisp: string;
-    pispContract: string;
-    dfspaSchemeAdapter: string;
-    dfspbSchemeAdapter: string;
-    pispSchemeAdapter: string;
-    pispContractSchemeAdapter: string;
-    mlTestingToolkit: string;
-  };
-  currency: string;
+    dfspa: string,
+    dfspb: string,
+    pisp: string,
+    pispContract: string,
+    dfspaSchemeAdapter: string,
+    dfspbSchemeAdapter: string,
+    pispSchemeAdapter: string,
+    pispContractSchemeAdapter: string,
+    mlTestingToolkit: string,
+  }
+  currency: string,
   users: {
-    [index: string]: UserIdType;
-  };
+    [index: string]: UserIdType,
+  }
 }
 
 const TestEnv: TestEnvType = {
@@ -44,13 +44,13 @@ const TestEnv: TestEnvType = {
   users: {
     alice: {
       idType: 'MSISDN',
-      idValue: '123456789'
+      idValue: '123456789',
     },
     bob: {
       idType: 'MSISDN',
-      idValue: '987654321'
+      idValue: '987654321',
     }
   }
 }
 
-export default TestEnv
+export default TestEnv;

@@ -146,6 +146,7 @@ jobs:
             cd ./docker-contract/
             docker-compose pull 
             docker-compose up -d
+            sleep 45s
       - run:
           name: Run the contract tests
           command: |

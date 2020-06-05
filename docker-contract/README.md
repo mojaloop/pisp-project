@@ -16,9 +16,9 @@ The aim of this document is to configure API contract tests between the PISP sim
 - [_ml-testing-toolkit_](https://github.com/mojaloop/ml-testing-toolkit) :  Mojaloop Testing Toolkit is a standard integration testing tool between a Digital Financial Service Provider (DFSP) and the Mojaloop Switch (Hub), to facilitate testing. This tool set can potentially be used by both the DFSP and the Mojaloop Switch to verify the integration between the 2 entities.
 - [_ml-testing-toolkit-ui_](https://github.com/mojaloop/ml-testing-toolkit-ui) : This is front end application(Web UI) to access Mojaloop Testing Toolkit.
 - _PISP-SIM_ :  It is customized mojaloop-simulator to represent Payment Initiate System Provider where its dependencies are:
-    - pisp-backend: [mojaloop-simulator](https://github.com/mojaloop/mojaloop-simulator/tree/pisp/master)
-    - pisp-scheme-adapter: [scheme-adapter](https://github.com/mojaloop/sdk-scheme-adapter/tree/pisp/master)
-    - pisp-redis: redisDB
+    - pisp-sim-backend: [mojaloop-simulator](https://github.com/mojaloop/mojaloop-simulator/tree/pisp/master)
+    - pisp-sim-scheme-adapter: [scheme-adapter](https://github.com/mojaloop/sdk-scheme-adapter/tree/pisp/master)
+    - pisp-sim-redis: redisDB
   > configuration folder: [pisp](./pisp-sim)
 
 ![components](./components_layout.png)
@@ -52,7 +52,7 @@ You may want to do this in separate terminal sessions to easily debug each servi
 ```bash
 docker-compose logs -f mojaloop-testing-toolkit
 docker-compose logs -f ml-testing-toolkit-ui
-docker-compose logs -f pisp-backend pisp-scheme-adapter pisp-redis
+docker-compose logs -f pisp-sim-backend pisp-sim-scheme-adapter pisp-sim-redis
 ```
 ## ml-testing-toolkit configuration
 

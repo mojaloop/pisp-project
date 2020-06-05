@@ -34,11 +34,11 @@ describe('PISP initiated transfer', () => {
       const expected = {
         from: expect.objectContaining({
           ...TestEnv.users.bob,
-          fspId: 'pisp'
+          fspId: 'pisp-sim'
         }),
         to: expect.objectContaining({
           ...TestEnv.users.alice,
-          fspId: 'pisp'
+          fspId: 'pisp-sim'
         }),
         amountType: 'SEND',
         currency: 'USD',
@@ -110,7 +110,7 @@ describe('PISP initiated transfer', () => {
             currency: TestEnv.currency
           }
         }),
-        quoteResponseSource: 'pisp'
+        quoteResponseSource: 'pisp-sim'
       }
 
       // Act

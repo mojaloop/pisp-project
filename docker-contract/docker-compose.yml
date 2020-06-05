@@ -22,7 +22,7 @@ services:
     networks:
       - mojaloop-pisp-net
     extra_hosts:
-      - "pisp-scheme-adapter:172.17.0.1"
+      - "pisp-sim-scheme-adapter:172.17.0.1"
       
   ml-testing-toolkit-ui:
     image: mojaloop/ml-testing-toolkit-ui:v10.3.3-snapshot
@@ -37,19 +37,19 @@ services:
       - mojaloop-pisp-net       
 
  ## PISP Simulator
-  pisp-backend:
+  pisp-sim-backend:
     image: "mojaloop/mojaloop-simulator:v0.1.0-pisp"
-    container_name: pisp-backend
+    container_name: pisp-sim-backend
     env_file: ./pisp-sim/pisp_backend.env
     ports:
       - "12000:3000"
       - "12002:3002"
       - "12003:3003"
     extra_hosts:
-      - "pisp-scheme-adapter:172.17.0.1"
-  pisp-scheme-adapter:
+      - "pisp-sim-scheme-adapter:172.17.0.1"
+  pisp-sim-scheme-adapter:
     image: "mojaloop/sdk-scheme-adapter:v0.1.0-pisp"
-    container_name: pisp-scheme-adapter
+    container_name: pisp-sim-scheme-adapter
     env_file: ./pisp-sim/pisp_scheme_adapter.env
     volumes:
       - "./pisp-sim/secrets:/secrets"
@@ -60,13 +60,13 @@ services:
     networks:
       - mojaloop-pisp-net
     depends_on:
-      - pisp-redis
+      - pisp-sim-redis
     restart: always
     extra_hosts:
-      - "pisp-backend:172.17.0.1"
+      - "pisp-sim-backend:172.17.0.1"
       - "mojaloop-testing-toolkit:172.17.0.1"
-  pisp-redis:
-    container_name: pisp-redis
+  pisp-sim-redis:
+    container_name: pisp-sim-redis
     image: "redis:5.0.4-alpine"
     networks:
       - mojaloop-pisp-net

@@ -59,7 +59,7 @@ docker-compose logs -f pisp-backend pisp-scheme-adapter pisp-redis
 `ml-testing-toolkit` has capabilities to perform Schema and Content Validation.  It reads the current API definition being used, and based on that validates the incoming and outgoing messages.
 To configure new resource or modify existing API definition, update [api_spec.yaml and callback_map.json](./ml-testing-toolkit/spec_files/api_definitions/fspiop_1.1) files.
 And add new callback response in [default.json](./ml-testing-toolkit/spec_files/rules_callback).This can be either FIXED_CALLBACK or MOCK_CALLBACK (based on rules).
-We can do these changes from front end also using web interface (http://localhost:6060/).
+We can do these changes from front end also using web interface (http://mojaloop-testing-toolkit:6060/).
 
 ![components](./callback-rules-screen.png)
 

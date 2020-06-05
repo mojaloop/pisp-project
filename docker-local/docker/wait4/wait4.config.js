@@ -29,7 +29,8 @@ module.exports = {
           rc: {
             namespace: 'CLEDG',
             configPath: '../config/default.json'
-          }
+          },
+          retries: 30
         },
         {
           description: 'MongoDB object store',
@@ -71,7 +72,8 @@ module.exports = {
           rc: {
             namespace: 'ALS',
             configPath: '../config/default.json'
-          }
+          },
+          retries: 30
         }
       ]
     },
@@ -80,7 +82,9 @@ module.exports = {
       wait4: [
         {
           uri: 'kafka:29092',
-          method: 'ncat'
+          method: 'ncat',
+          // Seems to take longer on circleci to start up
+          retries: 30
         }
       ]
     }

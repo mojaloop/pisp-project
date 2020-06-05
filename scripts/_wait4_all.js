@@ -35,8 +35,8 @@ async function main () {
     let allHealthy = await areAllServicesHealthy(waitingMap, waitTimeMs)
 
     while (!allHealthy && retries > 0) {
+      await sleep(waitTimeMs)
       allHealthy = await areAllServicesHealthy(waitingMap, waitTimeMs)
-      console.log('allHealthy is', allHealthy)
 
       if (retries === 0) {
         throw new Error(`Out of retries waiting for service health.\nStill waiting for: ${getServicesForStatus(waitingMap, 'starting')}`)
@@ -46,7 +46,6 @@ async function main () {
       console.log(`${getServicesForStatus(waitingMap, 'healthy').length} services are healthy. Expected: ${expectedContainers.length}`)
       console.log('Waiting for', getServicesForStatus(waitingMap, 'starting'))
 
-      await sleep(waitTimeMs)
       retries--
     }
 

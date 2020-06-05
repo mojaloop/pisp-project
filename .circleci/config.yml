@@ -107,18 +107,12 @@ jobs:
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             cd ./docker-local/
             docker-compose pull 
-
-            # Hacky workarounds for some startup failures
-            # See PISP-#300 for more info
-            # docker-compose up -d account-lookup-service
-            # sleep 30s
-            # docker-compose stop
             docker-compose up -d
-            # npm run wait-4-docker || true
-
-            # docker-compose stop && docker-compose up -d
+            
+            # wait for services to be up and running
             npm run wait-4-docker
 
+            # seed the environment
             npm run reseed
       - run: 
           name: Run the E2E tests

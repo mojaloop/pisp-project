@@ -16,6 +16,36 @@ Integration tests
 - [`postman`](./postman)
 
 ## Context, Parties, Backend components
+The purpose of this setup is to run an example of mojaloop arrangement locally using docker-compose.
+
+Services are composed in the testing layout as:
+
+- _MojaloopHub_ is a set of microservices and their dependencies, including:
+    - [central-ledger](https://github.com/mojaloop/central-ledger): (mysql, objstore (mongoDB), kafka)
+    - [account-lookup-service](https://github.com/mojaloop/account-lookup-service) - als: (mysql-als)
+    - [central-settlement](https://github.com/mojaloop/central-settlement): (mysql-als, kafka)
+    - [quoting-service](https://github.com/mojaloop/quoting-service): (central-ledger, mysql-als, kafka)
+    - [transaction-request-service](https://github.com/mojaloop/transaction-requests-service): (cental-ledger)
+    - [ml-api-adapter](https://github.com/mojaloop/ml-api-adapter): wrapper to expose MojaloopHub
+  > configuration folder: [docker](./docker)
+
+- _PISP_  is a new party in Mojaloop system to represent Payment Initiate System Provider where its dependencies are:
+    - pisp-backend: [mojaloop-simulator](https://github.com/mojaloop/mojaloop-simulator)
+    - pisp-scheme-adapter: [scheme-adapter](https://github.com/mojaloop/sdk-scheme-adapter)
+    - pisp-redis: redisDB
+  > configuration folder: [pisp](./pisp)
+
+- _DFSP A_ is a bank account holder
+    - dfspa-backend: [mojaloop-simulator](https://github.com/mojaloop/mojaloop-simulator)
+    - dfspa-scheme-adapter: [scheme-adapter](https://github.com/mojaloop/sdk-scheme-adapter)
+    - dfspa-redis: redisDB
+  > configuration folder: [dfsp_a](./dfsp_a)
+
+- _DFSP B_ is a bank account holder
+    - dfspb-backend: [mojaloop-simulator](https://github.com/mojaloop/mojaloop-simulator)
+    - dfspb-scheme-adapter: [scheme-adapter](https://github.com/mojaloop/sdk-scheme-adapter)
+    - dfspb-redis: redisDB
+  > configuration folder: [dfsp_b](./dfsp_b)
 
 ![components](./components_layout.png)
 
@@ -68,28 +98,6 @@ docker-compose logs -f dfspa-scheme-adapter dfspa-backend
 docker-compose logs -f dfspb-scheme-adapter dfspb-backend
 docker-compose logs -f transaction-requests-service
 docker-compose logs -f pisp-backend  pisp-scheme-adapter pisp-redis
-```
-
-[todo: update these]
-```bash
-#Running the services separately in different terminals is recommended
-
-#Run
-
-docker-compose up account-lookup-service #t
-
-# Then close once the service is ready.
-# Proceed to stop account-lookup-service and proceed with the following commands.
-# ALS needs to be run initially so it setups properly.
-docker-compose up central-ledger
-docker-compose up quoting-service
-docker-compose up ml-api-adapter
-docker-compose up central-settlement
-docker-compose up account-lookup-service
-docker-compose up dfspa-scheme-adapter dfspa-backend
-docker-compose up dfspb-scheme-adapter dfspb-backend
-docker-compose up transaction-requests-service
-docker-compose up pisp-backend  pisp-scheme-adapter pisp-redis
 ```
 
 ## Create some initial data

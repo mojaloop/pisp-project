@@ -9,4 +9,3 @@ authorizationReceived --> transactionSuccess: ask user to sign with FIDO credent
 transactionSuccess --> [*]
 
 @enduml
-

@@ -43,16 +43,17 @@ npm run test:e2e -- --watch
 I
 
 ### Contract Tests
-> TODO: refer to [#302](https://app.zenhub.com/workspaces/pisp-5e8457b05580fb04a7fd4878/issues/mojaloop/mojaloop/302) for more information
 
->Proposed steps:
 ```bash
+# start the services
 cd ./docker-contract
 docker-compose up -d
 
-# wait for services to be healthy
-# TODO: environment config? Maybe?
 npm run test:contract
+```
+> Note: You can also invoke these tests using Jest's `watch` mode:
+```bash
+npm run test:contract -- --watch
 ```
 I
 

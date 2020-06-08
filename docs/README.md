@@ -86,8 +86,8 @@ Edit the transfer flow `.puml` files here: [PISP Transfer Flow UML](./transfer)
 | `LK-8`  | `GET`             | `/parties/{Type}/{ID}`                    | SWITCH | DFSPB  |
 | `LK-11` | `PUT`             | `/parties/{Type}/{ID}`                    | DFSPB  | SWITCH |
 | `LK-13` | `PUT`             | `/parties/{Type}/{ID}`                    | SWITCH | PISP   |
-| `LK-19` | `POST`            | `/thirdPartyRequests/transfer`*0          | PISP   | SWITCH |
-| `LK-22` | `POST`            | `/thirdPartyRequests/transfer`*1          | SWITCH | DFSPA  |
+| `LK-19` | `POST`            | `/thirdPartyRequests/transactions`*0          | PISP   | SWITCH |
+| `LK-22` | `POST`            | `/thirdPartyRequests/transactions`*1          | SWITCH | DFSPA  |
 | `AG-1`  | `POST`            | `/quotes`                                 | DFSPA  | SWITCH |
 | `AG-3`  | `POST`            | `/quotes`                                 | SWITCH | DFSPB  |
 | `AG-6`  | `PUT`             | `/quotes/{ID}`                            | DFSPB | SWITCH  |
@@ -99,7 +99,7 @@ Edit the transfer flow `.puml` files here: [PISP Transfer Flow UML](./transfer)
 | `AG-30` | `POST`            | `/performVerification`*3                  | SWITCH | FIDO   |
 | `AG-32` | `PUT`             | `/verificationResult/{ID}`*4              | FIDO   | SWITCH |
 | `AG-34` | `PUT`             | `/authorizations/{ID}`                    | SWITCH | DFSPA  |
-| `TR-3`  | `PUT`             | `/thirdPartyRequest/transfer/{ID}`*5      | SWITCH | PISP   |
+| `TR-3`  | `PUT`             | `/thirdPartyRequests/transactions/{ID}`*5      | SWITCH | PISP   |
 
 
 > 0. As discussed, for now we will implement this as the existing `/transactionRequest`

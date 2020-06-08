@@ -2666,7 +2666,6 @@ components:
       - authenticationType
       - retriesLeft
       - amount
-      - currency
       - transactionId
       - transactionRequestId
       - quote

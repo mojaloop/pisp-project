@@ -55,25 +55,12 @@ Supporting documentation for the PISP implementation.
 
 ### Transfer
 
-For the full transfer flows, see the [E2E PISP Transfer Flows](./out/transfer/complete/PISP%20transfer.png).
+For the full transfer flows in detail, see the [E2E PISP Transfer Flows](./out/transfer/complete/PISP%20transfer.png).
 
 Edit the transfer flow `.puml` files here: [PISP Transfer Flow UML](./transfer)
 
-[`./transfer/complete.puml`](./transfer/complete.puml) Combines the following diagrams into one.
-
-
-#### 1. Discovery
->_[PUML source: `./transfer/1-discovery.puml`](./transfer/1-discovery.puml)_
-![discovery](./out/transfer/1-discovery/PISP%20Transfer.png)
-
-#### 2. Agreement
->_[PUML source: `./transfer/2-agreement.puml`](./transfer/2-agreement.puml)_
-
-![agreement](./out/transfer/2-agreement/PISP%20Transfer.png)
-
-#### 3. Transfer
->_[PUML source: `./transfer/3-transfer.puml`](./transfer/3-transfer.puml)_
-![tranfer](./out/transfer/3-transfer/PISP%20Transfer.png)
+![PISPTransferSimpleAPI](./out/transfer/simple_api_calls/PISPTransferSimpleAPI.png)
+> Puml source: [`./transfer/simple_api_calls.puml`]
 
 
 #### Transfer - Endpoints 

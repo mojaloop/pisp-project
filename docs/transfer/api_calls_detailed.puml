@@ -1,0 +1,248 @@
+@startuml
+
+title PISPTransferDetailedAPI
+
+!include participants_api.iuml
+
+== Discovery (Lookup) ==
+rnote right of D1 #Light
+**""GET /parties/MSISDN/+4412345678""**
+""FSPIOP-Source: pispa""
+""FSPIOP-Destination: switch""
+end note
+D1 -> S: ""GET /parties/MSISDN/+4412345678""
+S --> D1: ""202 Accepted""
+
+... Get participants/parties flow not shown here ...
+
+rnote over S #Light
+**""GET /parties/MSISDN/+4412345678""**
+""FSPIOP-Source: pispa""
+""FSPIOP-Destination: dfspb""
+end note
+S -> D3: ""GET /parties/MSISDN/+4412345678""
+D3 --> S: ""202 Accepted""
+
+rnote left of D3 #Light
+**""PUT /parties/MSISDN/+4412345678""**
+""FSPIOP-Source: dfspb""
+""FSPIOP-Destination: pispa""
+{
+  partyIdType: "MSISDN",
+  partyIdentifier: "+4412345678",
+  party: {
+    partyIdInfo: {
+      partyIdType: "MSISDN",
+      partyIdentifier: "+4412345678",
+      fspId: 'dfspb",
+    },
+    name: "Bhavesh S.",
+    accounts: [
+      {
+        "address": "dfspb.8f027046-b82a-4fa9-838b-70210fcf8137",
+        "currency": "USD"
+      }
+    ]
+  }
+}
+end note
+D3 -> S: ""PUT /parties/MSISDN/+4412345678""
+S --> D3: ""202 Accepted""
+
+rnote over S #Light
+**""PUT /parties/MSISDN/+4412345678""**
+""FSPIOP-Source: dfspb""
+""FSPIOP-Destination: pispa""
+{
+  partyIdType: "MSISDN",
+  partyIdentifier: "+4412345678",
+  party: {
+    partyIdInfo: {
+      partyIdType: "MSISDN",
+      partyIdentifier: "+4412345678",
+      fspId: 'dfspb",
+    },
+    name: "Bhavesh S.",
+    accounts: [
+      {
+        "address": "dfspb.8f027046-b82a-4fa9-838b-70210fcf8137",
+        "currency": "USD"
+      }
+    ]
+  }
+}
+end note
+S -> D1: ""PUT /parties/MSISDN/+4412345678""
+D1 --> S: ""202 Accepted""
+
+... PISP confirms payee party with their user ...
+
+== Agreement Phase ==
+rnote right of D1 #Light
+""POST /thirdpartyRequests/transfers""
+[todo]
+
+""FSPIOP-Source: pispa""
+""FSPIOP-Destination: dfspa""
+end note
+D1 -> S: ""POST /thirdpartyRequests/transfers""
+S --> D1: ""202 Accepted""
+
+rnote over S #Light
+""POST /thirdpartyRequests/transfers""
+[todo]
+
+""FSPIOP-Source: pispa""
+""FSPIOP-Destination: dfspa""
+end note
+S -> D2: ""POST /thirdpartyRequests/transfers""
+D2 --> S: ""202 Accepted""
+
+rnote left of D2 #Light
+""POST /quotes""
+""FSPIOP-Source: dfspa""
+""FSPIOP-Destination: dfspb""
+[todo]
+end note
+D2 -> S: ""POST /quotes""
+S --> D2: ""202 Accepted""
+
+rnote over S #Light
+""POST /quotes""
+""FSPIOP-Source: dfspa""
+""FSPIOP-Destination: dfspb""
+[todo]
+end note
+S -> D3: ""POST /quotes""
+S --> D2: ""202 Accepted""
+
+rnote left of D2 #Light
+""PUT /quotes/456""
+""FSPIOP-Source: dfspb""
+""FSPIOP-Destination: dfspa""
+[todo]
+end note
+D3 -> S: ""PUT /quotes/456""
+S --> D3: ""202 Accepted""
+
+rnote left of D2 #Light
+""PUT /quotes/456""
+""FSPIOP-Source: dfspb""
+""FSPIOP-Destination: dfspa""
+[todo]
+end note
+S -> D2: ""PUT /quotes/456""
+D2 --> S: ""202 Accepted""
+
+rnote left of D2 #Light
+""POST /authorizations""
+""FSPIOP-Source: dfspa""
+""FSPIOP-Destination: pispa""
+[todo]
+end note
+D2 -> S: ""POST /authorizations""
+S --> D2: ""202 Accepted""
+
+rnote over S #Light
+""POST /authorizations""
+""FSPIOP-Source: dfspa""
+""FSPIOP-Destination: pispa""
+[todo]
+end note
+S -> D1: ""POST /authorizations""
+D1 --> S: ""202 Accepted""
+
+...PISP checks the quote with the user, and uses FIDO to sign the ""quote.condition""...
+rnote right of D1 #Light
+""POST /authorizations""
+""FSPIOP-Source: pispa""
+""FSPIOP-Destination: dfspa""
+[todo]
+end note
+D1 -> S: ""PUT /authorizations/789""
+S --> D1: ""202 Accepted""
+
+rnote over S #Light
+""GET /participants/auth-service/dfspa""
+""FSPIOP-Source: switch""
+""FSPIOP-Destination: todo""
+[todo]
+end note
+S -> A: ""GET /participants/auth-service/dfspa""
+rnote over A #Light
+[TODO: formatting]
+""{"baseUrl":"authservice.internal"}""
+end note
+A --> S: ""{"baseUrl":"authservice.internal"}""
+
+rnote over S #Light
+""PUT /authorizations/789""
+""FSPIOP-Source: switch""
+""FSPIOP-Destination: todo""
+[todo]
+end note
+S -> AUTHS: ""PUT /authorizations/789""
+AUTHS --> S: ""202 Accepted""
+
+...Auth Service checks the signed challenge against the previously registered public key...
+
+rnote over AUTHS #Light
+""PUT /authorizations/789""
+""FSPIOP-Source: todo""
+""FSPIOP-Destination: todo""
+[todo]
+end note
+AUTHS -> S: ""PUT /authorizations/789""
+S --> AUTHS: ""202 Accepted""
+S -> D2: ""PUT /authorizations/789""
+
+== Transfer Phase ==
+
+rnote over D2 #Light
+""POST /transfers""
+""FSPIOP-Source: dfspa""
+""FSPIOP-Destination: dfspb""
+[todo]
+end note
+D2 -> S: ""POST /transfers""
+S --> D2: ""202 Accepted""
+
+rnote over S #Light
+""POST /transfers""
+""FSPIOP-Source: dfspa""
+""FSPIOP-Destination: dfspb""
+[todo]
+end note
+S -> D3: ""POST /transfers""
+D3 --> S: ""202 Accepted""
+
+rnote left of D3 #Light
+""PUT /transfers/321""
+""FSPIOP-Source: dfspb""
+""FSPIOP-Destination: dfspa""
+[todo]
+end note
+D3 -> S: ""PUT /transfers/321""
+S --> D3: ""202 Accepted""
+
+rnote over S #Light
+""PUT /transfers/321""
+""FSPIOP-Source: dfspb""
+""FSPIOP-Destination: dfspa""
+[todo]
+end note
+S -> D2: ""PUT /transfers/321""
+D2 --> S: ""202 Accepted""
+
+
+rnote over S #Light
+""PUT /thirdpartyRequests/transactions/123""
+""FSPIOP-Source: switch""
+""FSPIOP-Destination: pispa""
+[todo]
+end note
+S -> D1: ""PUT /thirdpartyRequests/transactions/123""
+D1 --> S: ""202 Accepted""
+
+
+@enduml

@@ -59,8 +59,8 @@ For the full transfer flows in detail, see the [E2E PISP Transfer Flows](./out/t
 
 Edit the transfer flow `.puml` files here: [PISP Transfer Flow UML](./transfer)
 
-![PISPTransferSimpleAPI](./out/transfer/simple_api_calls/PISPTransferSimpleAPI.png)
-> Puml source: [`./transfer/simple_api_calls.puml`]
+![PISPTransferSimpleAPI](./out/transfer/api_calls_simple/PISPTransferSimpleAPI.png)
+> Puml source: [`./transfer/api_calls_simple.puml`]
 
 
 #### Transfer - Endpoints 

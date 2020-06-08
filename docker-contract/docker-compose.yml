@@ -15,10 +15,7 @@ services:
     ports:
       - "15000:5000"
       - "5050:5050"
-    command:
-      - sh
-      - -c
-      - "npm start"
+    command: npm start
     networks:
       - mojaloop-pisp-net
     extra_hosts:
@@ -29,10 +26,7 @@ services:
     container_name: ml-testing-toolkit-ui
     ports:
       - "6060:6060"
-    command:
-      - nginx
-      - -g
-      - "daemon off;"
+    command: nginx -g "daemon off;"
     networks:
       - mojaloop-pisp-net       
 

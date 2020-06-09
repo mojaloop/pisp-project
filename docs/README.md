@@ -65,40 +65,6 @@ Edit the transfer flow `.puml` files here: [PISP Transfer Flow UML](./transfer)
 For a more detailed breakdown of the api calls, Refer to the [detailed API flows](./out/transfer/api_calls_detailed/PISPTransferDetailedAPI.png)
 
 
-#### Transfer - Endpoints 
-> Note: this could maybe move to a better place, but it's here for now.
-
-| ID      | VERB              | URI                                       | `Source` | `Destination`  |
-| ------- | ----------------- | ----------------------------------------- | ---- | --- |
-| `LK-4`  | `GET`             | `/parties`                                | PISP   | SWITCH |
-| `LK-6`  | `GET`             | `/parties/{Type}/{ID}`                    | SWITCH | ALS    |
-| `LK-8`  | `GET`             | `/parties/{Type}/{ID}`                    | SWITCH | DFSPB  |
-| `LK-11` | `PUT`             | `/parties/{Type}/{ID}`                    | DFSPB  | SWITCH |
-| `LK-13` | `PUT`             | `/parties/{Type}/{ID}`                    | SWITCH | PISP   |
-| `LK-19` | `POST`            | `/thirdPartyRequests/transactions`*0          | PISP   | SWITCH |
-| `LK-22` | `POST`            | `/thirdPartyRequests/transactions`*1          | SWITCH | DFSPA  |
-| `AG-1`  | `POST`            | `/quotes`                                 | DFSPA  | SWITCH |
-| `AG-3`  | `POST`            | `/quotes`                                 | SWITCH | DFSPB  |
-| `AG-6`  | `PUT`             | `/quotes/{ID}`                            | DFSPB | SWITCH  |
-| `AG-8`  | `PUT`             | `/quotes/{ID}`                            | SWITCH | DFSPA  |
-| `AG-15` | `POST`            | `/authorizations`                         | DFSPA  | SWITCH |
-| `AG-17` | `POST`            | `/authorizations`*2                       | SWITCH | PISP   |
-| `AG-26` | `PUT`             | `/authorizations/{ID}`                    | PISP   | SWITCH |
-| `AG-28` | `GET`             | `/endpoints/FIDO/{ID}`                    | SWITCH | ALS?   |
-| `AG-30` | `POST`            | `/performVerification`*3                  | SWITCH | FIDO   |
-| `AG-32` | `PUT`             | `/verificationResult/{ID}`*4              | FIDO   | SWITCH |
-| `AG-34` | `PUT`             | `/authorizations/{ID}`                    | SWITCH | DFSPA  |
-| `TR-3`  | `PUT`             | `/thirdPartyRequests/transactions/{ID}`*5      | SWITCH | PISP   |
-
-
-> 0. As discussed, for now we will implement this as the existing `/transactionRequest`
-> 1. This is a new endpoint the DFSP needs to be able to handle
-> 2. A new VERB for authorizations for the PISP use case 
-> 3. Do we want the FIDO server to be synchronous? I think not because it could be externally hosted in the future, but open for debate.
-> 4. These resource names are up for debate
-> 5. We use this endpoint to inform the PISP of the tranfer status.
-
-
 ## Tools
 
 To update the sequence diagrams in `./docs/out`, ensure you have the [PlantUML vscode plugin](https://marketplace.visualstudio.com/items?itemName=jebbs.plantuml&ssr=false#overview) installed.

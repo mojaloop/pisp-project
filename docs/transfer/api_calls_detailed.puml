@@ -13,7 +13,7 @@ end note
 D1 -> S: ""GET /parties/MSISDN/+4412345678""
 S --> D1: ""202 Accepted""
 
-... Get participants/parties flow not shown here ...
+... ALS lookup flow not shown here ...
 
 rnote over S #Light
 **""GET /parties/MSISDN/+4412345678""**
@@ -108,7 +108,7 @@ rnote right of D1 #Light
       "fspId": "dfspa"
     }
   },
-  "amountType": "RECEIVE",
+  "amountType": "SEND",
   "amount": {
     "amount": "100",
     "currency": "USD"
@@ -157,7 +157,7 @@ rnote over S #Light
     //This tells dfspa and auth-service which consent allows the pisp to initiate this tx
     **"consentId": "111"**
   },
-  "amountType": "RECEIVE",
+  "amountType": "SEND",
   "amount": {
     "amount": "100",
     "currency": "USD"
@@ -200,7 +200,7 @@ rnote left of D2 #Light
       "fspId": "dfspa"
     },
   },
-  "amountType": "RECEIVE",
+  "amountType": "SEND",
   "amount": {
     "amount": "100",
     "currency": "USD"
@@ -243,7 +243,7 @@ rnote over S #Light
       "fspId": "dfspa"
     },
   },
-  "amountType": "RECEIVE",
+  "amountType": "SEND",
   "amount": {
     "amount": "100",
     "currency": "USD"
@@ -257,7 +257,7 @@ rnote over S #Light
 }
 end note
 S -> D3: ""POST /quotes""
-S --> D2: ""202 Accepted""
+D2 --> S: ""202 Accepted""
 
 rnote left of D2 #Light
 **""PUT /quotes/456""**
@@ -439,9 +439,10 @@ end note
 
 rnote over AUTHS #Light
 //TODO: The AuthService has no context about the ""thirdpartyRequest"" or ""quote""!!
-how can it get:
-1. the consentId?
-2. the condition (challenge) that has been signed?
+how can it:
+1. get the consentId?
+2. get the condition (challenge) that has been signed?
+3. check that the condition matches a quote?
 
 **""PUT /authorizations/123""**
 ""FSPIOP-Source: pispa""
@@ -484,44 +485,79 @@ rnote over D2 #Light
 **""POST /transfers""**
 ""FSPIOP-Source: dfspa""
 ""FSPIOP-Destination: dfspb""
-[todo]
+{
+  "transferId": "321",
+  "quoteId": "456",
+  "payerFsp": "dfspa",
+  "payeeFsp": "dfspb",
+  "amount": {
+    "amount": "100",
+    "currency": "USD"
+  },
+  "expiration": "2020-06-15T13:00:00.000",
+  "ilpPacket": "...",
+  "condition": "...",
+}
 end note
 D2 -> S: ""POST /transfers""
 S --> D2: ""202 Accepted""
 
 rnote over S #Light
-""POST /transfers""
+**""POST /transfers""**
 ""FSPIOP-Source: dfspa""
 ""FSPIOP-Destination: dfspb""
-[todo]
+{
+  "transferId": "321",
+  "quoteId": "456",
+  "payerFsp": "dfspa",
+  "payeeFsp": "dfspb",
+  "amount": {
+    "amount": "100",
+    "currency": "USD"
+  },
+  "expiration": "2020-06-15T13:00:00.000",
+  "ilpPacket": "...",
+  "condition": "...",
+}
 end note
 S -> D3: ""POST /transfers""
 D3 --> S: ""202 Accepted""
 
 rnote left of D3 #Light
-""PUT /transfers/321""
+**""PUT /transfers/321""**
 ""FSPIOP-Source: dfspb""
 ""FSPIOP-Destination: dfspa""
-[todo]
+{
+  "fulfilment": "...",
+  "completedTimestamp": "2020-06-15T12:01:00.000",
+  "transferState": "COMMITTED"
+}
 end note
 D3 -> S: ""PUT /transfers/321""
 S --> D3: ""202 Accepted""
 
 rnote over S #Light
-""PUT /transfers/321""
+**""PUT /transfers/321""**
 ""FSPIOP-Source: dfspb""
 ""FSPIOP-Destination: dfspa""
-[todo]
+{
+  "fulfilment": "...",
+  "completedTimestamp": "2020-06-15T12:01:00.000",
+  "transferState": "COMMITTED"
+}
 end note
 S -> D2: ""PUT /transfers/321""
 D2 --> S: ""202 Accepted""
 
 
 rnote over S #Light
-""PUT /thirdpartyRequests/transactions/123""
+**""PUT /thirdpartyRequests/transactions/123""**
 ""FSPIOP-Source: switch""
 ""FSPIOP-Destination: pispa""
-[todo]
+{
+  "transactionId": "987",
+  "transactionRequestState": "ACCEPTED"
+}
 end note
 S -> D1: ""PUT /thirdpartyRequests/transactions/123""
 D1 --> S: ""202 Accepted""

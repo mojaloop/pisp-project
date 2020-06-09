@@ -62,6 +62,8 @@ Edit the transfer flow `.puml` files here: [PISP Transfer Flow UML](./transfer)
 ![PISPTransferSimpleAPI](./out/transfer/api_calls_simple/PISPTransferSimpleAPI.png)
 > Puml source: [`./transfer/api_calls_simple.puml`]
 
+For a more detailed breakdown of the api calls, Refer to the [detailed API flows](./out/transfer/api_calls_detailed/PISPTransferDetailedAPI.png)
+
 
 #### Transfer - Endpoints 
 > Note: this could maybe move to a better place, but it's here for now.

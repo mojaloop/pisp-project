@@ -1,0 +1,47 @@
+@startuml
+
+title PISPTransferSimpleAPI
+
+!include participants_api.iuml
+
+note over S
+This document aims to demonstrate the high level API Calls between the PISP, Mojaloop Hub and DFSPs.
+end note
+
+
+== Discovery (Lookup) ==
+D1 -> S: ""GET /parties/MSISDN/+4412345678""
+... Get participants/parties flow not shown here ...
+S -> D3: ""GET /parties/MSISDN/+4412345678""
+D3 -> S: ""PUT /parties/MSISDN/+4412345678""
+S -> D1: ""PUT /parties/MSISDN/+4412345678""
+... PISP confirms payee party with their user ...
+
+== Agreement Phase ==
+D1 -> S: ""POST /thirdpartyRequests/transfers""
+S -> D2: ""POST /thirdpartyRequests/transfers""
+D2 -> S: ""POST /quotes""
+S -> D3: ""POST /quotes""
+D3 -> S: ""PUT /quotes/456""
+S -> D2: ""PUT /quotes/456""
+D2 -> S: ""POST /authorizations""
+S -> D1: ""POST /authorizations""
+...PISP checks the quote with the user, and uses FIDO to sign the ""quote.condition""...
+D1 -> S: ""PUT /authorizations/789""
+
+S -> A: ""GET /participants/auth-service/dfspa""
+A --> S: ""{"baseUrl":"authservice.internal"}""
+S -> AUTHS: ""PUT /authorizations/789""
+...Auth Service checks the signed challenge against the previously registered public key...
+AUTHS -> S: ""PUT /authorizations/789""
+S -> D2: ""PUT /authorizations/789""
+
+== Transfer Phase ==
+
+D2 -> S: ""POST /transfers""
+S -> D3: ""POST /transfers""
+D3 -> S: ""PUT /transfers/321""
+S -> D2: ""PUT /transfers/321""
+S -> D1: ""PUT /thirdpartyRequests/transactions/123""
+
+@enduml

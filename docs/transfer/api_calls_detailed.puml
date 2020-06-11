@@ -77,10 +77,11 @@ D1 --> S: ""202 Accepted""
 
 ... PISP confirms payee party with their user ...
 
+newpage
+
 == Agreement Phase ==
 rnote right of D1 #Light
 **""POST /thirdpartyRequests/transfers""**
-//TODO is this right? Michael had source as dfspa...
 ""FSPIOP-Source: pispa""
 ""FSPIOP-Destination: dfspa""
 {
@@ -94,7 +95,6 @@ rnote right of D1 #Light
       "fspId": "dfspb"
     }
   },
-  //TODO: source account id!
   "payer": {
     "personalInfo": {
       "complexName": {
@@ -108,6 +108,11 @@ rnote right of D1 #Light
       "fspId": "dfspa"
     }
   },
+  //This tells dfspa which account to deduct funds from
+  //it's an opaque identifier that the DFSP knows about
+  **"sourceAccountId": "dfspa.1111-2222",**
+  //This tells dfspa and auth-service which consent allows the pisp to initiate this tx
+  **"consentId": "111"**
   "amountType": "SEND",
   "amount": {
     "amount": "100",
@@ -126,7 +131,6 @@ S --> D1: ""202 Accepted""
 
 rnote over S #Light
 **""POST /thirdpartyRequests/transfers""**
-//TODO is this right? Michael had source as dfspa...
 ""FSPIOP-Source: pispa""
 ""FSPIOP-Destination: dfspa""
 {
@@ -153,7 +157,8 @@ rnote over S #Light
       "fspId": "dfspa"
     },
     //This tells dfspa which account to deduct funds from
-    **"sourceAccountId": "dfspa",**
+    //it's an opaque identifier that the DFSP knows about
+    **"sourceAccountId": "dfspa.1111-2222",**
     //This tells dfspa and auth-service which consent allows the pisp to initiate this tx
     **"consentId": "111"**
   },
@@ -257,7 +262,7 @@ rnote over S #Light
 }
 end note
 S -> D3: ""POST /quotes""
-D2 --> S: ""202 Accepted""
+D3 --> S: ""202 Accepted""
 
 rnote left of D2 #Light
 **""PUT /quotes/456""**
@@ -315,7 +320,7 @@ rnote left of D2 #Light
 ""FSPIOP-Destination: pispa""
 {      
   "authenticationType": "U2F",
-  "retriesLeft": 1,
+  "retriesLeft": "1",
   "amount": {
     "amount": "100",
     "currency": "USD"
@@ -350,7 +355,7 @@ rnote over S #Light
 ""FSPIOP-Destination: pispa""
 {      
   "authenticationType": "U2F",
-  "retriesLeft": 1,
+  "retriesLeft": "1",
   "amount": {
     "amount": "100",
     "currency": "USD"
@@ -380,16 +385,48 @@ S -> D1: ""POST /authorizations""
 D1 --> S: ""202 Accepted""
 
 ...PISP checks the quote with the user, and uses FIDO to sign the ""quote.condition""...
+
+note right of D1
+  PISP finds out who takes care of the auth-service for dfspa
+end note
+
+rnote right of D1 #Light
+**""GET /participants/AUTHSERVICE/dfspa""**
+""FSPIOP-Source: pispa""
+""FSPIOP-Destination: switch""
+end note
+D1 -> S: ""GET /participants/AUTHSERVICE/dfspa""
+S --> D1: ""202 Accepted""
+
+
+note right of S
+  Switch performs synchronous account lookup
+end note
+S -> A: ""GET /participants/AUTHSERVICE/dfspa""
+A --> S: ""{ "fspId":"central-auth" }""
+
+
+rnote over S #Light
+**""PUT /participants/AUTHSERVICE/dfspa""**
+""FSPIOP-Source: pispa""
+""FSPIOP-Destination: switch""
+{
+  "fspId":"central-auth"
+}
+end note
+S -> D1: ""PUT /participants/AUTHSERVICE/dfspa""
+D1 --> S: ""202 Accepted""
+
 rnote right of D1 #Light
 **""PUT /authorizations/123""**
 ""FSPIOP-Source: pispa""
-""FSPIOP-Destination: dfspa""
+""FSPIOP-Destination: central-auth""
 {
   "authenticationInfo": {
     "authentication": "U2F",
     "authenticationValue": {
       "pinValue": "<base64 encoded binary - the signed condition>",
-      "counter": 1
+      "counter": "1"
     }
   }
   "responseType": "ENTERED"
@@ -397,39 +434,27 @@ rnote right of D1 #Light
 end note
 D1 -> S: ""PUT /authorizations/123""
 note right of D1 
-  Note! we use the ""transactionRequestId"" here in the ""PUT""
+  **Note!** we use the same ""transactionRequestId"" here as the authorization.id
 end note
 S --> D1: ""202 Accepted""
 
-note over S
-  Switch finds out who takes care of the auth-service for dfspa
-end note
-
-rnote over S #Light
-**""GET /participants/AUTHSERVICE/dfspa""**
-end note
-S -> A: ""GET /participants/AUTHSERVICE/dfspa""
-rnote over A #Light
-  ""{"fspId":"switch"}""
-end note
-A --> S: ""{"fspId":"switch"}""
 
 rnote over S #Light
 **""PUT /authorizations/123""**
 ""FSPIOP-Source: pispa""
-""FSPIOP-Destination: dfspa""
+""FSPIOP-Destination: central-auth""
 {
   "authenticationInfo": {
     "authentication": "U2F",
     "authenticationValue": {
       "pinValue": "<base64 encoded binary - the signed condition>",
-      "counter": 1
+      "counter": "1"
     }
   }
   "responseType": "ENTERED"
 }
 end note
-S -> AUTHS: ""PUT /authorizations/789""
+S -> AUTHS: ""PUT /authorizations/123""
 AUTHS --> S: ""202 Accepted""
 
 note over AUTHS
@@ -443,16 +468,17 @@ how can it:
 1. get the consentId?
 2. get the condition (challenge) that has been signed?
 3. check that the condition matches a quote?
+4. Know where to get the ""FSPIOP-Destination: dfspa"" header from?
 
 **""PUT /authorizations/123""**
-""FSPIOP-Source: pispa""
+""FSPIOP-Source: central-auth""
 ""FSPIOP-Destination: dfspa""
 {
   "authenticationInfo": {
     "authentication": "U2F",
     "authenticationValue": {
       "pinValue": "<base64 encoded binary - the signed condition>",
-      "counter": 1
+      "counter": "1"
     }
   }
   "responseType": "ENTERED"
@@ -478,6 +504,8 @@ rnote over S #Light
 end note
 S -> D2: ""PUT /authorizations/123""
 D2 --> S: ""202 Accepted""
+
+newpage
 
 == Transfer Phase ==
 

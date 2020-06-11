@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "a9e5e624-ed85-4861-bf83-99a853328454",
+		"_postman_id": "4782e366-cbc6-45c0-b9c4-557042912b53",
 		"name": "PISP.postman_collection.json",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -41,7 +41,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"displayName\": \"Alice Alpaca\",\n    \"firstName\": \"Alice\",\n    \"middleName\": \"K\",\n    \"lastName\": \"Alpaca\",\n    \"dateOfBirth\": \"1970-01-01\",\n    \"idType\": \"MSISDN\",\n    \"idValue\": \"123456789\"\n}",
+							"raw": "{\n    \"displayName\": \"Alice Alpaca\",\n    \"firstName\": \"Alice\",\n    \"middleName\": \"K\",\n    \"lastName\": \"Alpaca\",\n    \"dateOfBirth\": \"1970-01-01\",\n    \"idType\": \"MSISDN\",\n    \"idValue\": \"123456789\",\n    \"accounts\": [\n\t\t{ \"currency\": \"USD\",\n\t\t  \"description\": \"savings\",\n\t\t  \"address\": \"moja.amber.53451233-b82a5456a-4fa9-838b-123456789\"\n\t\t},\n\t\t{ \"currency\": \"USD\",\n\t\t  \"description\": \"checkings\",\n\t\t  \"address\": \"moja.amber.8f027046-b8236345a-4fa9-838b-123456789\"\n\t\t}\n\t]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -88,7 +88,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"displayName\": \"Bob Babirusa\",\n    \"firstName\": \"Bob\",\n    \"middleName\": \"O\",\n    \"lastName\": \"Babirusa\",\n    \"dateOfBirth\": \"1970-01-01\",\n    \"idType\": \"MSISDN\",\n    \"idValue\": \"987654321\"\n}",
+							"raw": "{\n    \"displayName\": \"Bob Babirusa\",\n    \"firstName\": \"Bob\",\n    \"middleName\": \"O\",\n    \"lastName\": \"Babirusa\",\n    \"dateOfBirth\": \"1970-01-01\",\n    \"idType\": \"MSISDN\",\n    \"idValue\": \"987654321\",\n    \"accounts\": [\n\t\t{ \"currency\": \"USD\",\n\t\t  \"description\": \"savings\",\n\t\t  \"address\": \"moja.burgundy.76542756-f49gk439f-6a5f-543d-987654321\"\n\t\t},\n\t\t{ \"currency\": \"USD\",\n\t\t  \"description\": \"checkings\",\n\t\t  \"address\": \"moja.burgundy.43638980-f49gk439f-6a5f-543d-987654321\"\n\t\t}\n\t]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -726,7 +726,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5002//requestToPayTransfer",
+							"raw": "localhost:5002/requestToPayTransfer",
 							"host": [
 								"localhost"
 							],
@@ -875,7 +875,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5002/requestToPayTransfer/{{transactionRequestId}}",
+							"raw": "localhost:5002/requestToPayTransfer/{{transactionRequestId}}",
 							"host": [
 								"localhost"
 							],
@@ -883,6 +883,124 @@
 							"path": [
 								"requestToPayTransfer",
 								"{{transactionRequestId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "ALS - GET parties",
+			"item": [
+				{
+					"name": "ALS GET /parties - MSISDN 123456789 Alice",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "90425afb-686d-4075-b678-cd357b2c9261",
+								"exec": [
+									"pm.test(\"Status code is 202\", function () {",
+									"    pm.response.to.have.status(202);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.interoperability.parties+json;version=1.0",
+								"type": "text"
+							},
+							{
+								"key": "date",
+								"value": "{{dateHeader}}",
+								"type": "text"
+							},
+							{
+								"key": "fspiop-source",
+								"value": "pisp",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/vnd.interoperability.parties+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:5002/parties/MSISDN/123456789",
+							"host": [
+								"localhost"
+							],
+							"port": "5002",
+							"path": [
+								"parties",
+								"MSISDN",
+								"123456789"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ALS GET /parties - MSISDN 987654321 Bob",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "90425afb-686d-4075-b678-cd357b2c9261",
+								"exec": [
+									"pm.test(\"Status code is 202\", function () {",
+									"    pm.response.to.have.status(202);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/vnd.interoperability.parties+json;version=1.0"
+							},
+							{
+								"key": "date",
+								"type": "text",
+								"value": "{{dateHeader}}"
+							},
+							{
+								"key": "fspiop-source",
+								"type": "text",
+								"value": "pisp"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/vnd.interoperability.parties+json"
+							}
+						],
+						"url": {
+							"raw": "localhost:4002/parties/MSISDN/987654321",
+							"host": [
+								"localhost"
+							],
+							"port": "4002",
+							"path": [
+								"parties",
+								"MSISDN",
+								"987654321"
 							]
 						}
 					},

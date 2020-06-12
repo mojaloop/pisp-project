@@ -161,7 +161,7 @@ services:
       - "transaction-request-service:172.17.0.1"
 
   transaction-requests-service:
-    image: mojaloop/transaction-requests-service:v10.1.0
+    image: mojaloop/transaction-requests-service:v10.4.0.0-pisp
     container_name: transaction-requests-service
     ports:
       - "4003:4003"

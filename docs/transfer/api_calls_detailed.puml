@@ -8,7 +8,6 @@ title PISPTransferDetailedAPI
 rnote right of D1 #Light
 **""GET /parties/MSISDN/+4412345678""**
 ""FSPIOP-Source: pispa""
-""FSPIOP-Destination: switch""
 end note
 D1 -> S: ""GET /parties/MSISDN/+4412345678""
 S --> D1: ""202 Accepted""
@@ -47,7 +46,7 @@ rnote left of D3 #Light
 }
 end note
 D3 -> S: ""PUT /parties/MSISDN/+4412345678""
-S --> D3: ""202 Accepted""
+S --> D3: ""200 OK""
 
 rnote over S #Light
 **""PUT /parties/MSISDN/+4412345678""**
@@ -73,7 +72,7 @@ rnote over S #Light
 }
 end note
 S -> D1: ""PUT /parties/MSISDN/+4412345678""
-D1 --> S: ""202 Accepted""
+D1 --> S: ""200 OK""
 
 ... PISP confirms payee party with their user ...
 
@@ -81,13 +80,16 @@ newpage
 
 == Agreement Phase ==
 rnote right of D1 #Light
-**""POST /thirdpartyRequests/transfers""**
+**""POST /thirdpartyRequests/transactions""**
 ""FSPIOP-Source: pispa""
 ""FSPIOP-Destination: dfspa""
 {
-  "quoteId": "456",
-  "transactionId": "85feac2f-39b2-491b-817e-4a03203d4f14",
   "transactionRequestId": "123",
+  //This tells dfspa which account to deduct funds from
+  //it's an opaque identifier that the DFSP knows about
+  **"sourceAccountId": "dfspa.1111-2222",**
+  //This tells dfspa and auth-service which consent allows the pisp to initiate this tx
+  **"consentId": "111"**
   "payee": {
     "partyIdInfo": {
       "partyIdType": "MSISDN",
@@ -108,11 +110,6 @@ rnote right of D1 #Light
       "fspId": "dfspa"
     }
   },
-  //This tells dfspa which account to deduct funds from
-  //it's an opaque identifier that the DFSP knows about
-  **"sourceAccountId": "dfspa.1111-2222",**
-  //This tells dfspa and auth-service which consent allows the pisp to initiate this tx
-  **"consentId": "111"**
   "amountType": "SEND",
   "amount": {
     "amount": "100",
@@ -126,17 +123,20 @@ rnote right of D1 #Light
   "expiration": "2020-06-15T22:17:28.985-01:00"
 }
 end note
-D1 -> S: ""POST /thirdpartyRequests/transfers""
+D1 -> S: ""POST /thirdpartyRequests/transactions""
 S --> D1: ""202 Accepted""
 
 rnote over S #Light
-**""POST /thirdpartyRequests/transfers""**
+**""POST /thirdpartyRequests/transactions""**
 ""FSPIOP-Source: pispa""
 ""FSPIOP-Destination: dfspa""
 {
-  "quoteId": "456",
-  "transactionId": "987",
   "transactionRequestId": "123",
+  //This tells dfspa which account to deduct funds from
+  //it's an opaque identifier that the DFSP knows about
+  **"sourceAccountId": "dfspa.1111-2222",**
+  //This tells dfspa and auth-service which consent allows the pisp to initiate this tx
+  **"consentId": "111"**
   "payee": {
     "partyIdInfo": {
       "partyIdType": "MSISDN",
@@ -156,11 +156,6 @@ rnote over S #Light
       "partyIdentifier": "+44 8765 4321",
       "fspId": "dfspa"
     },
-    //This tells dfspa which account to deduct funds from
-    //it's an opaque identifier that the DFSP knows about
-    **"sourceAccountId": "dfspa.1111-2222",**
-    //This tells dfspa and auth-service which consent allows the pisp to initiate this tx
-    **"consentId": "111"**
   },
   "amountType": "SEND",
   "amount": {
@@ -175,16 +170,19 @@ rnote over S #Light
   "expiration": "2020-06-15T00:00:00.000"
 }
 end note
-S -> D2: ""POST /thirdpartyRequests/transfers""
+S -> D2: ""POST /thirdpartyRequests/transactions""
 D2 --> S: ""202 Accepted""
+D2 -> D2: Lookup this ""consentId"", ""sourceAccountId"" \nand ""pispId"". Verify that they exist, and consent \nis granted with a valid credential
+
 
 rnote left of D2 #Light
 **""POST /quotes""**
 ""FSPIOP-Source: dfspa""
 ""FSPIOP-Destination: dfspb""
 {
-  "quoteId": "456",
-  "transactionId": "987",
+  "quoteId": "456", //Set by the payer dfsp
+  "transactionId": "987", //Set by the payer dfsp
+  *"transactionRequestId": "123", //Relates to the original thirdpartyRequest!*
   "payee": {
     "partyIdInfo": {
       "partyIdType": "MSISDN",
@@ -226,8 +224,9 @@ rnote over S #Light
 ""FSPIOP-Source: dfspa""
 ""FSPIOP-Destination: dfspb""
 {
-  "quoteId": "456",
-  "transactionId": "987",
+  "quoteId": "456", //Set by the payer dfsp
+  "transactionId": "987", //Set by the payer dfsp
+  *"transactionRequestId": "123", //Relates to the original thirdpartyRequest!*
   "payee": {
     "partyIdInfo": {
       "partyIdType": "MSISDN",
@@ -287,7 +286,7 @@ rnote left of D2 #Light
 }
 end note
 D3 -> S: ""PUT /quotes/456""
-S --> D3: ""202 Accepted""
+S --> D3: ""200 OK""
 
 rnote left of D2 #Light
 **""PUT /quotes/456""**
@@ -312,13 +311,21 @@ rnote left of D2 #Light
 }
 end note
 S -> D2: ""PUT /quotes/456""
-D2 --> S: ""202 Accepted""
+D2 --> S: ""200 OK""
+
+note left of D2
+  DFSPA has the quote, they can now ask 
+  the PISP for authorization
+end note
 
 rnote left of D2 #Light
 **""POST /authorizations""**
 ""FSPIOP-Source: dfspa""
 ""FSPIOP-Destination: pispa""
 {      
+  //transactionRequestId is our 'primary key' 
+  //to refer to this authorization
+  **"transactionRequestId": "123",**
   "authenticationType": "U2F",
   "retriesLeft": "1",
   "amount": {
@@ -326,8 +333,8 @@ rnote left of D2 #Light
     "currency": "USD"
   },
   "transactionId": "987",
-  "transactionRequestId": "123",
   "quote": {
+    //TODO: do we need quoteId here?
     "transferAmount": {
       "amount": "100",
       "currency": "USD"
@@ -354,6 +361,9 @@ rnote over S #Light
 ""FSPIOP-Source: dfspa""
 ""FSPIOP-Destination: pispa""
 {      
+  //transactionRequestId is our 'primary key' 
+  //to refer to this authorization
+  **"transactionRequestId": "123",**
   "authenticationType": "U2F",
   "retriesLeft": "1",
   "amount": {
@@ -361,8 +371,8 @@ rnote over S #Light
     "currency": "USD"
   },
   "transactionId": "987",
-  "transactionRequestId": "123",
   "quote": {
+    //TODO: do we need quoteId here?
     "transferAmount": {
       "amount": "100",
       "currency": "USD"
@@ -384,48 +394,20 @@ end note
 S -> D1: ""POST /authorizations""
 D1 --> S: ""202 Accepted""
 
-...PISP checks the quote with the user, and uses FIDO to sign the ""quote.condition""...
-
 note right of D1
-  PISP finds out who takes care of the auth-service for dfspa
+  PISP checks the quote with the user, 
+  and uses FIDO to sign the the QuoteResponse object 
 end note
-
-rnote right of D1 #Light
-**""GET /participants/AUTHSERVICE/dfspa""**
-""FSPIOP-Source: pispa""
-""FSPIOP-Destination: switch""
-end note
-D1 -> S: ""GET /participants/AUTHSERVICE/dfspa""
-S --> D1: ""202 Accepted""
-
-
-note right of S
-  Switch performs synchronous account lookup
-end note
-S -> A: ""GET /participants/AUTHSERVICE/dfspa""
-A --> S: ""{ "fspId":"central-auth" }""
-
-
-rnote over S #Light
-**""PUT /participants/AUTHSERVICE/dfspa""**
-""FSPIOP-Source: pispa""
-""FSPIOP-Destination: switch""
-{
-  "fspId":"central-auth"
-}
-end note
-S -> D1: ""PUT /participants/AUTHSERVICE/dfspa""
-D1 --> S: ""202 Accepted""
 
 rnote right of D1 #Light
 **""PUT /authorizations/123""**
 ""FSPIOP-Source: pispa""
-""FSPIOP-Destination: central-auth""
+""FSPIOP-Destination: dfspa""
 {
   "authenticationInfo": {
     "authentication": "U2F",
     "authenticationValue": {
-      "pinValue": "<base64 encoded binary - the signed condition>",
+      "pinValue": "<base64 encoded binary - the signed QuoteResponse>",
       "counter": "1"
     }
   }
@@ -433,59 +415,9 @@ rnote right of D1 #Light
 }
 end note
 D1 -> S: ""PUT /authorizations/123""
-note right of D1 
-  **Note!** we use the same ""transactionRequestId"" here as the authorization.id
-end note
-S --> D1: ""202 Accepted""
 
+S --> D1: ""200 OK""
 
-rnote over S #Light
-**""PUT /authorizations/123""**
-""FSPIOP-Source: pispa""
-""FSPIOP-Destination: central-auth""
-{
-  "authenticationInfo": {
-    "authentication": "U2F",
-    "authenticationValue": {
-      "pinValue": "<base64 encoded binary - the signed condition>",
-      "counter": "1"
-    }
-  }
-  "responseType": "ENTERED"
-}
-end note
-S -> AUTHS: ""PUT /authorizations/123""
-AUTHS --> S: ""202 Accepted""
-
-note over AUTHS
-  Auth Service checks the signed challenge against the
-  previously registered public key
-end note
-
-rnote over AUTHS #Light
-//TODO: The AuthService has no context about the ""thirdpartyRequest"" or ""quote""!!
-how can it:
-1. get the consentId?
-2. get the condition (challenge) that has been signed?
-3. check that the condition matches a quote?
-4. Know where to get the ""FSPIOP-Destination: dfspa"" header from?
-
-**""PUT /authorizations/123""**
-""FSPIOP-Source: central-auth""
-""FSPIOP-Destination: dfspa""
-{
-  "authenticationInfo": {
-    "authentication": "U2F",
-    "authenticationValue": {
-      "pinValue": "<base64 encoded binary - the signed condition>",
-      "counter": "1"
-    }
-  }
-  "responseType": "ENTERED"
-}
-end note
-AUTHS -> S: ""PUT /authorizations/123""
-S --> AUTHS: ""202 Accepted""
 
 rnote over S #Light
 **""PUT /authorizations/123""**
@@ -495,15 +427,123 @@ rnote over S #Light
   "authenticationInfo": {
     "authentication": "U2F",
     "authenticationValue": {
-      "pinValue": "<base64 encoded binary - the signed condition>",
-      "counter": 1
+      "pinValue": "<base64 encoded binary - the signed QuoteResponse>",
+      "counter": "1"
     }
   }
   "responseType": "ENTERED"
 }
 end note
 S -> D2: ""PUT /authorizations/123""
-D2 --> S: ""202 Accepted""
+D2 --> S: ""200 OK""
+
+
+D2 -> D2: Lookup the ""thirdpartyRequests/transaction""\nrequest, and get the ""consentId""
+D2 -> D2: Confirm pispId from ""PUT /authorizations/123""\n matches the ""thirdpartyRequests/transaction""
+
+note over D2
+  Switch has the signed condition
+  For 3rd party FIDO, it now needs to make sure everything checks out
+end note
+
+rnote left of D2 #Light
+**""POST /thirdpartyRequests/transactions/123/authorizations""**
+""FSPIOP-Source: dfspa""
+""FSPIOP-Destination: central-auth""
+{
+  //from the ""PUT /quotes/456"" callback
+  "challenge": "<QuoteResponse object>",
+
+  //from the ""PUT /authorizations/123"" callback
+  "value": "<base64 encoded binary - the signed quote response object>",
+
+  //from the ""thirdpartyRequests/transactions"" body
+  "consentId": "111",
+
+  //from the ""thirdpartyRequests/transactions"" body
+  "sourceAccountId": "dfspa.1111-2222"
+}
+end note
+D2 -> S: ""POST /thirdpartyRequests/transactions/123/authorizations""
+S --> D2: ""202 Accepted""
+
+rnote over S #Light
+**""POST /thirdpartyRequests/transactions/123/authorizations""**
+""FSPIOP-Source: dfspa""
+""FSPIOP-Destination: central-auth""
+{
+  //from the ""PUT /quotes/456"" callback
+  "challenge": "<QuoteResponse object>",
+
+  //from the ""PUT /authorizations/123"" callback
+  "value": "<base64 encoded binary - the signed quote response object>",
+
+  //from the ""thirdpartyRequests/transactions"" body
+  "consentId": "111",
+
+  //from the ""thirdpartyRequests/transactions"" body
+  "sourceAccountId": "dfspa.1111-2222",
+
+  "status": "PENDING"
+}
+end note
+S -> AUTHS: ""POST /thirdpartyRequests/transactions/123/authorizations""
+AUTHS --> S: ""202 Accepted""
+
+AUTHS -> AUTHS: Lookup this consent based on consentId
+AUTHS -> AUTHS: Ensure the sourceAccountId matches what is in Consent
+AUTHS -> AUTHS: Check that the signed bytes match the \npublickey we have stored for the consent
+
+rnote right of AUTHS #Light
+**""PUT /thirdpartyRequests/transactions/123/authorizations""**
+""FSPIOP-Source: central-auth""
+""FSPIOP-Destination: dfspa""
+{
+  //from the ""PUT /quotes/456"" callback
+  "challenge": "<QuoteResponse object>",
+
+  //from the ""PUT /authorizations/123"" callback
+  "value": "<base64 encoded binary - the signed quote response object>",
+
+  //from the ""thirdpartyRequests/transactions"" body
+  "consentId": "111",
+
+  //from the ""thirdpartyRequests/transactions"" body
+  "sourceAccountId": "dfspa.1111-2222"
+  "status": "VERIFIED"
+}
+end note
+AUTHS -> S: ""PUT /thirdpartyRequests/transactions/123/authorizations""
+S --> AUTHS: ""200 OK""
+
+rnote over S #Light
+**""PUT /thirdpartyRequests/transactions/123/authorizations""**
+""FSPIOP-Source: central-auth""
+""FSPIOP-Destination: dfspa""
+{
+  //from the ""PUT /quotes/456"" callback
+  "challenge": "<QuoteResponse object>",
+
+  //from the ""PUT /authorizations/123"" callback
+  "value": "<base64 encoded binary - the signed quote response object>",
+
+  //from the ""thirdpartyRequests/transactions"" body
+  "consentId": "111",
+
+  //from the ""thirdpartyRequests/transactions"" body
+  "sourceAccountId": "dfspa.1111-2222"
+  "status": "VERIFIED"
+}
+end note
+S -> D2: ""PUT /thirdpartyRequests/transactions/123/authorizations""
+D2 --> S: ""200 OK""
+
+' TODO: add failure condition here: PUT /thirdpartyRequests/transactions/123/authorizations/error
+
+note over D2
+  DFSPA now knows that the user signed this transaction
+  and can go ahead and initiate the transfer
+end note
 
 newpage
 
@@ -562,7 +602,7 @@ rnote left of D3 #Light
 }
 end note
 D3 -> S: ""PUT /transfers/321""
-S --> D3: ""202 Accepted""
+S --> D3: ""200 OK""
 
 rnote over S #Light
 **""PUT /transfers/321""**
@@ -575,7 +615,7 @@ rnote over S #Light
 }
 end note
 S -> D2: ""PUT /transfers/321""
-D2 --> S: ""202 Accepted""
+D2 --> S: ""200 OK""
 
 
 rnote over S #Light
@@ -588,7 +628,7 @@ rnote over S #Light
 }
 end note
 S -> D1: ""PUT /thirdpartyRequests/transactions/123""
-D1 --> S: ""202 Accepted""
+D1 --> S: ""200 OK""
 
 
 @enduml

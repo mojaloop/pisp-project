@@ -1,0 +1,21 @@
+
+| # | From -> To  | Verb | Resource | Note
+| --- | --- | --- | --- | --- |
+| 1.  | PISPA -> Switch       | POST | `/thirdpartyRequests/transfers` |   |
+| 2.  | Switch -> DFSPA       | POST | `/thirdpartyRequests/transfers` |   |
+| 3.  | DFSPA ->  Switch      | POST | `/quotes` |   |
+| 4.  | Switch ->  DFSPB      | POST | `/quotes` |   |
+| 5.  | DFSPB ->  Switch      | PUT | `/quotes/456` |   |
+| 6.  | Switch ->  DFSPA      | PUT | `/quotes/456` |   |
+| 7.  | DFSPA ->  Switch      | POST | `/authorizations` |   |
+| 8.  | Switch ->  PISPA      | POST | `/authorizations` |   |
+| 9.  | PISPA -> Switch       | GET | `/participants/AUTHSERVICE/dfspa` | PISPA looks up to see where to who takes care of the auth-service for dfspa  |
+| 10. | Switch -> ALS         | GET | `/participants/AUTHSERVICE/dfspa` |   |
+| 11. | Switch -> PISPA       | PUT | `/participants/AUTHSERVICE/dfspa` |   |
+| 12. | PISP -> Switch        | PUT | `/authorizations/123` |   |
+| 13. | Switch -> AuthService | PUT | `/authorizations/123` |   |
+| 14. | AuthService -> Switch | PUT | `/authorizations/123` | AuthService is happy that the quote was signed correctly  |
+| 15. | Switch -> DFSPA       | PUT | `/authorizations/123` |   |
+
+
+

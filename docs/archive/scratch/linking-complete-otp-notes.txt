@@ -1,0 +1,99 @@
+Ahead of time, we do a List of accounts for a given ID (e.g., `GET /parties/<type>/<ID>`
+Then the user chooses a specific account (e.g., dfsp.a.lewis.1234)
+
+GET /parties/MSISDN/+123456789
+GET /parties/email/
+
+I have an account with Citibank, my username is lewis.
+I need to know which accounts of mine are available for pairing.
+
+Headers have destination == DFSP A
+FSPIOP-Source: pispa
+FSPIOP-Dest: dfspa
+GET /parties/<opaque identifier> //anything the DFSP wants
+    returns {
+        accounts: [
+            {
+                id: "dfspa.lewis.1234"
+                currency: "ZAR"
+            },
+            {
+                id: "dfspa.lewis.5678"
+                currency: "USD"
+            },
+        ]
+    }
+//Is this possible? need to double check
+
+User would choose the account(s) that they're interested in
+
+---
+
+PISP -> Switch: POST /consentRequests
+    ConsentRequest {
+        id: "456",
+        initiatorId: "PISP", // Do we want/need this?
+        accountIds: [ "dfspa.lewis.1234", "dfspa.lewis.5678" ], //required even for Web...
+        authChannels: [ "Web", "OTP" ],
+        scopes: [ "accounts.getBalance", "accounts.transfer" ],
+        callbackUri: "pisp-app://callback..."
+    }
+    "I would like to create a new consent resource."
+    return 202 Accepted
+
+Switch -> DFSP: POST /consentRequests
+    ConsentRequest {
+        id: "456",
+        initiatorId: "PISP",
+        accountIds: [ "dfspa.lewis.1234", "dfspa.lewis.5678" ]
+        authChannels: [ "Web", "OTP" ],
+        scopes: [ "accounts.getBalance", "accounts.transfer" ],
+        callbackUri: "pisp-app://callback..."
+    }
+    "PISP would like to create a new consent resource"
+    return 200 OK
+
+DFSP -> DFSP: Lookup user@dfsp.accountId get the communication channel
+    return e.g., "+1-123-456-7890" or "jimmy@example.com"
+
+DFSP -> DFSP: Check which channel we want to use. Email? OTP? Web?
+
+DFSP -> User (via their own channel): <OTP> "Did you mean to grant PISP access?"
+
+DFSP -> Switch: PUT /consentRequests/456
+    ConsentRequest {
+        initiatorId: "PISP",
+        accountIds: [ "dfspa.lewis.1234", "dfspa.lewis.5678" ],
+        authChannels: [ "OTP" ], // This has been updated to JUST "OTP"
+        scopes: [ "accounts.getBalance", "accounts.transfer" ],
+        callbackUri: "pisp-app://callback...",
+        authorizationUri: "pisp-app://callback" // This is new!
+    }
+    "The user needs to approve this consent request before it becomes real."
+    @PISP: Prompt your user to enter the OTP we sent them!
+    return 202 Accepted
+
+Switch -> PISP: PUT /consentRequests/456
+    ConsentRequest {
+        initiatorId: "PISP",
+        accountIds: [ "dfspa.lewis.1234", "dfspa.lewis.5678" ],
+        authChannels: [ "OTP" ],
+        scopes: [ "accounts.getBalance",  "accounts.transfer" ],
+        callbackUri: "pisp-app://callback...",
+        authorizationUri: "pisp-app://callback" // This is new!
+    }
+    "Your user needs to approve this consent record. Prompt them to enter the OTP we sent them."
+    return 202 Accepted
+
+PISP -> Switch: PUT /consentRequests/456
+    ConsentRequest {
+        initiatorId: "PISP",
+        accountIds: [ "dfspa.lewis.1234", "dfspa.lewis.5678" ],
+        authChannels: [ "OTP" ],
+        scopes: [ "accounts.getBalance", "accounts.transfer" ],
+        callbackUri: "pisp-app://callback...",
+        authorizationUri: "pisp-app://callback",
+        authToken: "000-111" // This is new !
+    }
+    return 202 Accepted
+

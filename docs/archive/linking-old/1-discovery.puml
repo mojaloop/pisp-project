@@ -1,0 +1,32 @@
+@startuml
+autonumber
+
+title PISP Linking: Discovery
+!include participants.iuml
+
+note over Alice, Server
+    During registration, DFSPs provide Auth URLs and PISPs provide redirect domains.
+end note
+
+autonumber 1 "<b>DISC-#</b>"
+group Discovery: Which DFSP do we link with?
+    Alice -> App: I'd like to link an account please.
+    ' TODO: Add a loading screen that's shown?
+    activate App
+    App -> Server: What DFSPs are available for linking?
+    activate Server
+    Server -> Switch: What DFSPs are available for linking?
+    activate Switch
+    Switch --> Server: We have DFSP A, B, and C.\n(and metadata on each)
+    deactivate Switch
+    Server --> App: We have DFSP A, B, and C.\n(and metadata on each)
+    deactivate Server
+    App --> Alice: No problem. Which FSP?\nSupported options are: A, B, and C.
+    deactivate App
+    activate Alice
+    Alice -> App: My account is with DFSP A.
+    deactivate Alice
+    activate App
+end group
+
+@enduml

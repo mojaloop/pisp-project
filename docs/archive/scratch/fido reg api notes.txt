@@ -1,0 +1,316 @@
+PISP -> Switch: POST /consentRequests
+    ConsentRequest {
+        id: "456",
+        initiatorId: "PISP", // Do we want/need this?
+        authChannels: [ "Web", "OTP" ],
+        scopes: [ "accounts.getBalance", "accounts.list", "accounts.transfer" ],
+        callbackUri: "pisp-app://callback..."
+    }
+    "I would like to create a new consent resource."
+    return 202 Accepted
+
+Switch -> DFSP: POST /consentRequests
+    ConsentRequest {
+        id: "456",
+        initiatorId: "PISP",
+        authChannels: [ "Web", "OTP" ],
+        scopes: [ "accounts.getBalance", "accounts.list", "accounts.transfer" ],
+        callbackUri: "pisp-app://callback...",
+    }
+    "PISP would like to create a new consent resource"
+    return 200 OK
+
+DFSP -> Switch: PUT /consentRequests/456
+    ConsentRequest {
+        initiatorId: "PISP",
+        authChannels: [ "Web", "OTP" ],
+        scopes: [ "accounts.getBalance", "accounts.list", "accounts.transfer" ],
+        callbackUri: "pisp-app://callback...",
+        authorizationUri: "https://dfspa.com/authorize?consentRequestId=456" // This is new!
+    }
+    "The user needs to approve this consent request before it becomes real."
+    return 202 Accepted
+
+Switch -> PISP: PUT /consentRequests/456
+    ConsentRequest {
+        initiatorId: "PISP",
+        authChannels: [ "Web", "OTP" ],
+        scopes: [ "accounts.getBalance", "accounts.list", "accounts.transfer" ],
+        callbackUri: "pisp-app://callback...",
+        authorizationUri: "https://dfspa.com/authorize?consentRequestId=456" // This is new to the PISP!
+    }
+    "Your user needs to approve this consent record. Send them here to do so."
+    return 202 Accepted
+
+... Auth song and dance. Ultimately, the user gets redirected back to the PISP app ...
+
+PISP -> Switch: PUT /consentRequests/456
+    ConsentRequest {
+        initiatorId: "PISP",
+        authChannels: [ "Web", "OTP" ],
+        scopes: [ "accounts.getBalance", "accounts.list", "accounts.transfer" ],
+        callbackUri: "pisp-app://callback...",
+        authorizationUri: "https://dfspa.com/authorize?consentRequestId=456",
+        authToken: "secret" // This is new !
+    }
+    return 202 Accepted
+
+Switch -> DFSP: PUT /consentRequests/456
+    ConsentRequest {
+        initiatorId: "PISP",
+        authChannels: [ "Web", "OTP" ],
+        scopes: [ "accounts.getBalance", "accounts.list", "accounts.transfer" ],
+        callbackUri: "pisp-app://callback...",
+        authorizationUri: "https://dfspa.com/authorize?consentRequestId=456",
+        authToken: "secret" // This is new to the DFSP !
+    }
+    return 202 Accepted
+
+// DFSP verifies the auth token to ensure it's correct. If it is, it now goes
+// about creating the Consent resource.
+
+DFSP -> Switch: POST /consents
+    Consent {
+        id: "123",
+        requestId: "456",
+        initiatorId: "PISP A",
+        participantId: "DFSP A",
+        scopes: {
+            balanceInquiry: 12345-67890,
+            sendTransfer: 12345-67890,
+            sendTransfer: 77777-38937
+        },
+        credential: null,
+    }
+    return 200 OK
+
+Switch -> PISP: POST /consents
+    Consent {
+        id: "123",
+        requestId: "456",
+        initiatorId: "PISP A",
+        participantId: "DFSP A",
+        scopes: {
+            balanceInquiry: 12345-67890,
+            sendTransfer: 12345-67890,
+            sendTransfer: 77777-38937
+        },
+        credential: null
+    }
+    return 200 OK
+
+// Switch checks which Auth server is responsible for DFSP. If it's the central
+// one, then we notify that auth server of the existence of this consent resource.
+Switch -> Auth: POST /consents
+    Consent {
+        id: "123",
+        requestId: "456",
+        initiatorId: "PISP A",
+        participantId: "DFSP A",
+        scopes: {
+            balanceInquiry: 12345-67890,
+            sendTransfer: 12345-67890,
+            sendTransfer: 77777-38937
+        },
+        credential: null
+    }
+    return 200 OK
+
+// ---
+
+// ENROL-1 (but server talking, TODO: Fix this)
+PISP -> Switch: POST /consents/123/createCredential
+    CreateCredentialRequest {
+        credentialType: FIDO
+    }
+    "I would like to create a new FIDO credential for Consent 123"
+    return 202 Accepted
+
+// ENROL-4 + ENROL-5
+Switch -> Auth: POST /consents/123/createCredential
+    CreateCredentialRequest {
+        credentialType: FIDO,
+        // Do we include the PISP ID? - maybe not, it's in the FSIOP-Source/Destination headers...
+    }
+    "We need to register a new credential for this consent."
+    return 202 Accepted.
+
+Auth -> Switch: PUT /consents/123
+    Consent {
+        id: "123",
+        requestId: "456",
+        initiatorId: "PISP A",
+        participantId: "DFSP A",
+        scopes: {
+            balanceInquiry: 12345-67890,
+            sendTransfer: 12345-67890,
+            sendTransfer: 77777-38937
+        },
+        credential: { // This is new!
+            id: "5678", // TODO: Do we need this?
+            credentialType: FIDO,
+            credentialStatus: PENDING,
+            challenge: {
+                payload: base64(...),
+                signature: null
+            },
+            payload: null, // This is where the public key goes.
+        }
+    }
+    return 202 Accepted
+
+Switch -> PISP: PUT /consents/123
+    Consent {
+        id: "123",
+        requestId: "456",
+        initiatorId: "PISP A",
+        participantId: "DFSP A",
+        scopes: {
+            balanceInquiry: 12345-67890,
+            sendTransfer: 12345-67890,
+            sendTransfer: 77777-38937
+        },
+        credential: { // This is new to the PISP!
+            id: "5678", // TODO: Do we need this?
+            credentialType: FIDO,
+            credentialStatus: PENDING,
+            challenge: {
+                payload: base64(...),
+                signature: null
+            },
+            payload: null,
+        }
+    }
+    return 202 Accepted
+
+// PISP app does the fingerprint song and dance here.
+
+// FIDO-A-2
+PISP -> Switch: PUT /consents/123
+    "The user generated a public key and signed your challenege."
+    Consent {
+        id: "123",
+        requestId: "456",
+        initiatorId: "PISP A",
+        participantId: "DFSP A",
+        scopes: {
+            balanceInquiry: 12345-67890,
+            sendTransfer: 12345-67890,
+            sendTransfer: 77777-38937
+        },
+        credential: {
+            id: "5678",
+            credentialType: FIDO,
+            credentialStatus: PENDING, // Output only. The PISP doesn't update this.
+            challenge: {
+                payload: base64(...),
+                signature: base64(...), // This is new and should be evaluated...
+            },
+            payload: base64(...), // ... against this. (Also new)
+        }
+    }
+    return 202 Accepted
+
+Switch -> Auth: PUT /consents/123
+    "The user generated a public key + signed your challenege. Please validate."
+    Consent {
+        id: "123",
+        requestId: "456",
+        initiatorId: "PISP A",
+        participantId: "DFSP A",
+        scopes: {
+            balanceInquiry: 12345-67890,
+            sendTransfer: 12345-67890,
+            sendTransfer: 77777-38937
+        },
+        credential: {
+            id: "5678",
+            credentialType: FIDO,
+            credentialStatus: PENDING, // Output only. The PISP doesn't update this.
+            challenge: {
+                payload: base64(...),
+                signature: base64(...), // This is new and should be evaluated...
+            },
+            payload: base64(...), // ... against this. (Also new)
+        }
+    }
+    return 202 Accepted
+
+Auth -> Switch: PUT /consents/123
+    // 1. Evaluate the signature of the challenege against the payload.
+    // 2. Update the status.
+    Consent {
+        id: "123",
+        requestId: "456",
+        initiatorId: "PISP A",
+        participantId: "DFSP A",
+        scopes: {
+            balanceInquiry: 12345-67890,
+            sendTransfer: 12345-67890,
+            sendTransfer: 77777-38937
+        },
+        credential: {
+            id: "5678",
+            credentialType: FIDO,
+            credentialStatus: ACTIVE, // This is new!
+            challenge: {
+                payload: base64(...),
+                signature: base64(...),
+            },
+            payload: base64(...),
+        }
+    }
+
+// Notify the world that the consent is good to go!
+
+Switch -> PISP: PUT /consents/123
+    "The consent is all ready."
+    Consent {
+        id: "123",
+        requestId: "456",
+        initiatorId: "PISP A",
+        participantId: "DFSP A",
+        scopes: {
+            balanceInquiry: 12345-67890,
+            sendTransfer: 12345-67890,
+            sendTransfer: 77777-38937
+        },
+        credential: {
+            id: "5678",
+            credentialType: FIDO,
+            credentialStatus: ACTIVE, // This is new!
+            challenge: {
+                payload: base64(...),
+                signature: base64(...),
+            },
+            payload: base64(...),
+        }
+    }
+    return 200 OK
+
+// ---
+
+Switch -> DFSP: PUT /consents/123
+    "The consent is all ready."
+    Consent {
+        id: "123",
+        requestId: "456",
+        initiatorId: "PISP A",
+        participantId: "DFSP A",
+        scopes: {
+            balanceInquiry: 12345-67890,
+            sendTransfer: 12345-67890,
+            sendTransfer: 77777-38937
+        },
+        credential: {
+            id: "5678",
+            credentialType: FIDO,
+            credentialStatus: ACTIVE, // This is new!
+            challenge: {
+                payload: base64(...),
+                signature: base64(...),
+            },
+            payload: base64(...),
+        }
+    }
+    return 200 OK

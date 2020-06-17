@@ -372,7 +372,6 @@ rnote over S #Light
   },
   "transactionId": "987",
   "quote": {
-    //TODO: do we need quoteId here?
     "transferAmount": {
       "amount": "100",
       "currency": "USD"
@@ -438,7 +437,7 @@ S -> D2: ""PUT /authorizations/123""
 D2 --> S: ""200 OK""
 
 
-D2 -> D2: Lookup the ""thirdpartyRequests/transaction""\nrequest, and get the ""consentId""
+D2 -> D2: Lookup the ""thirdpartyRequests/transaction""\nrequest, get the ""consentId"" and ""sourceAccountId""
 D2 -> D2: Confirm pispId from ""PUT /authorizations/123""\n matches the ""thirdpartyRequests/transaction""
 
 note over D2
@@ -451,16 +450,16 @@ rnote left of D2 #Light
 ""FSPIOP-Source: dfspa""
 ""FSPIOP-Destination: central-auth""
 {
-  //from the ""PUT /quotes/456"" callback
+  //from ""PUT /quotes/456"" callback
   "challenge": "<QuoteResponse object>",
 
-  //from the ""PUT /authorizations/123"" callback
+  //from ""PUT /authorizations/123"" callback: .authenticationInfo.authenticationValue.pinValue
   "value": "<base64 encoded binary - the signed quote response object>",
 
-  //from the ""thirdpartyRequests/transactions"" body
+  //from ""thirdpartyRequests/transactions"" body
   "consentId": "111",
 
-  //from the ""thirdpartyRequests/transactions"" body
+  //from ""thirdpartyRequests/transactions"" body
   "sourceAccountId": "dfspa.1111-2222"
 }
 end note
@@ -472,16 +471,16 @@ rnote over S #Light
 ""FSPIOP-Source: dfspa""
 ""FSPIOP-Destination: central-auth""
 {
-  //from the ""PUT /quotes/456"" callback
+  //from ""PUT /quotes/456"" callback
   "challenge": "<QuoteResponse object>",
 
-  //from the ""PUT /authorizations/123"" callback
+  //from ""PUT /authorizations/123"" callback: .authenticationInfo.authenticationValue.pinValue
   "value": "<base64 encoded binary - the signed quote response object>",
 
-  //from the ""thirdpartyRequests/transactions"" body
+  //from ""thirdpartyRequests/transactions"" body
   "consentId": "111",
 
-  //from the ""thirdpartyRequests/transactions"" body
+  //from ""thirdpartyRequests/transactions"" body
   "sourceAccountId": "dfspa.1111-2222",
 
   "status": "PENDING"

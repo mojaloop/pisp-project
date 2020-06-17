@@ -1,0 +1,67 @@
+version: "3.7"
+
+networks:
+  mojaloop-pisp-net:
+    name: mojaloop-pisp-net
+
+services:
+  mojaloop-testing-toolkit:
+    image: mojaloop/ml-testing-toolkit:v10.3.3-snapshot
+    container_name: mojaloop-testing-toolkit
+    env_file: ./ml-testing-toolkit/local.env    
+    volumes:
+      - "./ml-testing-toolkit/spec_files:/opt/mojaloop-testing-toolkit/spec_files"
+      - "./ml-testing-toolkit/secrets:/opt/mojaloop-testing-toolkit/secrets"
+    ports:
+      - "15000:5000"
+      - "5050:5050"
+    command: npm start
+    networks:
+      - mojaloop-pisp-net
+    extra_hosts:
+      - "pisp-sim-scheme-adapter:172.17.0.1"
+      
+  ml-testing-toolkit-ui:
+    image: mojaloop/ml-testing-toolkit-ui:v10.3.3-snapshot
+    container_name: ml-testing-toolkit-ui
+    ports:
+      - "6060:6060"
+    command: nginx -g "daemon off;"
+    networks:
+      - mojaloop-pisp-net       
+
+ ## PISP Simulator
+  pisp-sim-backend:
+    image: "mojaloop/mojaloop-simulator:v0.1.0-pisp"
+    container_name: pisp-sim-backend
+    env_file: ./pisp-sim/pisp_backend.env
+    ports:
+      - "12000:3000"
+      - "12002:3002"
+      - "12003:3003"
+    extra_hosts:
+      - "pisp-sim-scheme-adapter:172.17.0.1"
+  pisp-sim-scheme-adapter:
+    image: "mojaloop/sdk-scheme-adapter:v0.1.0-pisp"
+    container_name: pisp-sim-scheme-adapter
+    env_file: ./pisp-sim/pisp_scheme_adapter.env
+    volumes:
+      - "./pisp-sim/secrets:/secrets"
+      - "./pisp-sim/jwsVerificationKeys:/jwsVerificationKeys"
+    ports:
+      - "8000:4000"
+      - "8002:4001"
+    networks:
+      - mojaloop-pisp-net
+    depends_on:
+      - pisp-sim-redis
+    restart: always
+    extra_hosts:
+      - "pisp-sim-backend:172.17.0.1"
+      - "mojaloop-testing-toolkit:172.17.0.1"
+  pisp-sim-redis:
+    container_name: pisp-sim-redis
+    image: "redis:5.0.4-alpine"
+    networks:
+      - mojaloop-pisp-net
+    restart: always

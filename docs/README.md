@@ -54,15 +54,15 @@ Supporting documentation for the PISP implementation.
 
 
 ### Transfer
-
-For the full transfer flows in detail, see the [E2E PISP Transfer Flows](./out/transfer/complete/PISP%20transfer.png).
-
-Edit the transfer flow `.puml` files here: [PISP Transfer Flow UML](./transfer)
+Edit the transfer flow `.puml` files here: [PISP Transfer Api Calls Detailed](./transfer/api_calls_detailed.puml)
 
 ![PISPTransferSimpleAPI](./out/transfer/api_calls_simple/PISPTransferSimpleAPI.png)
 > Puml source: [`./transfer/api_calls_simple.puml`]
 
-For a more detailed breakdown of the api calls, Refer to the [detailed API flows](./out/transfer/api_calls_detailed/PISPTransferDetailedAPI.png)
+For a more detailed breakdown of the api calls, Refer to the detailed API flows:
+ - [Discovery](./out/transfer/api_calls_detailed/PISPTransferDetailedAPI-page1.png)
+ - [Agreement](./out/transfer/api_calls_detailed/PISPTransferDetailedAPI-page2.png)
+ - [Transfer](./out/transfer/api_calls_detailed/PISPTransferDetailedAPI-page3.png)
 
 
 ## Tools

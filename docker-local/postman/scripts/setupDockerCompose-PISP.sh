@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-PATH=$(npm bin):$PATH
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+PATH=$(cd ${DIR} && npm bin):$PATH
 POSTMAN_DIR="${DIR}/.."
 
 newman run \

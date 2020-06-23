@@ -56,7 +56,7 @@ npm install -g newman
 #### 4.2.1 Hub Account
 
 ```bash
-./postman/scripts/setupDockerCompose-HubAccount.sh
+./postman/scripts/_01_seed_hub_account.sh
 ```
 
 Or alternatively use newman directly...

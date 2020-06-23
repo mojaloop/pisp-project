@@ -1,0 +1,11 @@
+@startuml OutboundThirdpartyTransactionModel
+
+title OutboundThirdpartyTransactionModel
+
+[*] --> start: on creation of state machine
+start --> payeeResolved: call ""resolvePayee()""\nwait for ""PUT /parties/{type}/{ID}""
+payeeResolved --> authorizationReceived: call ""executeThirdPartyTransaction()""\nwait for ""POST /authorization""
+authorizationReceived --> transactionSuccess: ask user to sign with FIDO credential\ncall""signChallenge()""\nwait for ""PUT /thirdpartyRequests/transaction/{ID}""
+transactionSuccess --> [*]
+
+@enduml

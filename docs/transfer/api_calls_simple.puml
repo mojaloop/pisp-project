@@ -1,0 +1,78 @@
+@startuml
+
+title PISPTransferSimpleAPI
+
+!include participants_api.iuml
+
+note over S
+This document aims to demonstrate the high level API Calls between the PISP, Mojaloop Hub and DFSPs.
+end note
+
+
+== Discovery (Lookup) ==
+D1 -> S: ""GET /parties/MSISDN/+4412345678""
+... Get participants/parties flow not shown here ...
+S -> D3: ""GET /parties/MSISDN/+4412345678""
+D3 -> S: ""PUT /parties/MSISDN/+4412345678""
+S -> D1: ""PUT /parties/MSISDN/+4412345678""
+... PISP confirms payee party with their user ...
+
+== Agreement Phase ==
+D1 -> S: ""POST /thirdpartyRequests/transactions""
+S -> D2: ""POST /thirdpartyRequests/transactions""
+
+D2 -> D2: Lookup this ""consentId"", ""sourceAccountId"" \nand ""pispId"". Verify that they exist, and consent \nis granted with a valid credential
+
+D2 -> S: ""POST /quotes""
+S -> D3: ""POST /quotes""
+D3 -> S: ""PUT /quotes/456""
+S -> D2: ""PUT /quotes/456""
+
+note left of D2
+  DFSPA has the quote, they can now ask 
+  the PISP for authorization
+end note
+
+D2 -> S: ""POST /authorizations""
+S -> D1: ""POST /authorizations""
+
+note right of D1
+  PISP checks the quote with the user, 
+  and uses FIDO to sign the the QuoteResponse object 
+end note
+
+D1 -> S: ""PUT /authorizations/123""
+S -> D2: ""PUT /authorizations/123""
+
+D2 -> D2: Lookup the ""thirdpartyRequests/transaction""\nrequest, get the ""consentId"" and ""sourceAccountId""
+D2 -> D2: Confirm pispId from ""PUT /authorizations/123""\n matches the ""thirdpartyRequests/transaction""
+
+note over D2
+  Switch has the signed condition
+  For 3rd party FIDO, it now needs to make sure everything checks out
+end note
+
+D2 -> S: ""POST /thirdpartyRequests/transactions""\n""     /123/authorizations""
+S -> AUTHS: ""POST /thirdpartyRequests/transactions""\n""     /123/authorizations""
+
+AUTHS -> AUTHS: Lookup this consent based on consentId
+AUTHS -> AUTHS: Ensure the sourceAccountId matches what is in Consent
+AUTHS -> AUTHS: Check that the signed bytes match the \npublickey we have stored for the consent
+
+AUTHS -> S: ""PUT /thirdpartyRequests/transactions""\n""    /123/authorizations""
+S -> D2: ""PUT /thirdpartyRequests/transactions""\n""    /123/authorizations""
+
+note over D2
+  DFSPA now knows that the user signed this transaction
+  and can go ahead and initiate the transfer
+end note
+
+== Transfer Phase ==
+
+D2 -> S: ""POST /transfers""
+S -> D3: ""POST /transfers""
+D3 -> S: ""PUT /transfers/321""
+S -> D2: ""PUT /transfers/321""
+S -> D1: ""PUT /thirdpartyRequests/transactions/123""
+
+@enduml

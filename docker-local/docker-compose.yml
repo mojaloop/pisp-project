@@ -75,7 +75,7 @@ services:
       - "simulator.local:172.17.0.1"
 
   ml-api-adapter:
-    image: mojaloop/ml-api-adapter:v10.1.1
+    image: mojaloop/ml-api-adapter:v10.3.1.2-pisp
     container_name: ml-api-adapter
     command: sh -c "/opt/ml-api-adapter/wait4/wait4.js ml-api-adapter && node src/api/index.js"
     ports:
@@ -164,7 +164,7 @@ services:
       - "transaction-request-service:172.17.0.1"
 
   transaction-requests-service:
-    image: mojaloop/transaction-requests-service:v10.1.0
+    image: mojaloop/transaction-requests-service:v10.4.0.0-pisp
     container_name: transaction-requests-service
     ports:
       - "4003:4003"
@@ -230,7 +230,7 @@ services:
        - ./docker/wait4:/opt/central-settlement/wait4
 
   account-lookup-service:
-    image: mojaloop/account-lookup-service:v10.1.0
+    image: mojaloop/account-lookup-service:v10.3.0.2-pisp
     container_name: account-lookup-service
     command: sh -c "/opt/account-lookup-service/wait4/wait4.js account-lookup-service && npm run migrate && node src/index.js server"
     ports:
@@ -281,9 +281,9 @@ services:
       start_period: 40s
       interval: 30s
 
-## DFSP A
+  ## DFSP A
   dfspa-backend:
-    image: "mojaloop/mojaloop-simulator:v9.4.1"
+    image: "mojaloop/mojaloop-simulator:v9.4.1.1-pisp"
     container_name: dfspa-backend
     env_file: ./dfsp_a/dfsp_a_backend.env
     volumes:
@@ -296,7 +296,7 @@ services:
       - "dfspa-scheme-adapter:172.17.0.1"
 
   dfspa-scheme-adapter:
-    image: "mojaloop/sdk-scheme-adapter:v9.4.11"
+    image: "mojaloop/sdk-scheme-adapter:v9.4.11.1-pisp"
     container_name: dsfpa-scheme-adapter
     env_file: ./dfsp_a/dfsp_a_scheme_adapter.env
     volumes:
@@ -339,7 +339,7 @@ services:
 
   ## DFSP B
   dfspb-backend:
-    image: "mojaloop/mojaloop-simulator:v9.4.1"
+    image: "mojaloop/mojaloop-simulator:v9.4.1.1-pisp"
     container_name: dfspb-backend
     env_file: ./dfsp_b/dfsp_b_backend.env
     volumes:
@@ -352,7 +352,7 @@ services:
       - "dfspb-scheme-adapter:172.17.0.1"
 
   dfspb-scheme-adapter:
-    image: "mojaloop/sdk-scheme-adapter:v9.4.11"
+    image: "mojaloop/sdk-scheme-adapter:v9.4.11.1-pisp"
     container_name: dfspb-scheme-adapter
     env_file: ./dfsp_b/dfsp_b_scheme_adapter.env
     volumes:
@@ -395,7 +395,7 @@ services:
 
  ## PISP
   pisp-backend:
-    image: "mojaloop/mojaloop-simulator:v9.4.1"
+    image: "mojaloop/mojaloop-simulator:v9.4.1.1-pisp"
     container_name: pisp-backend
     env_file: ./pisp/pisp_backend.env
     ports:
@@ -406,7 +406,7 @@ services:
       - "pisp-scheme-adapter:172.17.0.1"
 
   pisp-scheme-adapter:
-    image: "mojaloop/sdk-scheme-adapter:v9.4.11"
+    image: "mojaloop/sdk-scheme-adapter:v9.4.11.1-pisp"
     container_name: pisp-scheme-adapter
     env_file: ./pisp/pisp_scheme_adapter.env
     volumes:

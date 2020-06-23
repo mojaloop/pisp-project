@@ -1,0 +1,18 @@
+@startuml InboundThirdpartyTransactionModel
+
+title InboundThirdpartyTransactionModel
+
+state isValid <<choice>>
+
+[*] --> transactionRequestReceived: on ""POST /thirdpartyRequests/transaction""
+transactionRequestReceived --> quoteReceived: call ""getQuote()""\nwait for ""PUT /quotes/{ID}""
+quoteReceived --> authorizationReceived: call ""authorizeTransaction()""\nwait for ""PUT /authorizations/{ID}""
+authorizationReceived --> isValid: isValid?
+isValid --> transactionSuccess:**TRUE**\ncall ""executeTransfer()""\nwait for ""PUT /transfers/{ID}""
+isValid --> authorizationReceived:**FALSE**\ncall ""authorizeTransaction()""\nwait for ""PUT /authorizations/{ID}""
+transactionSuccess --> [*]
+
+note left of isValid : This check could be done by\ncentral auth-service, or DFSP's own
+
+@enduml
+

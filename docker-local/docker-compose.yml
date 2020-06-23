@@ -6,7 +6,7 @@ networks:
 
 services:
   central-ledger:
-    image: mojaloop/central-ledger:v10.1.1
+    image: mojaloop/central-ledger:v10.3.1.2-pisp
     container_name: central-ledger
     command: sh -c "/opt/central-ledger/wait4/wait4.js central-ledger && node src/api/index.js"
     ports:
@@ -38,6 +38,9 @@ services:
   objstore:
     image: mongo:latest
     container_name: objstore
+    # Disable logging, this container is not that important and rather verbose
+    logging:
+      driver: none
     ports:
       - "27017:27017"
     networks:

@@ -13,7 +13,7 @@
     "lint": "eslint ./src/**/*.ts *.js",
     "build": "tsc",
     "watch": "tsc -w",
-    "reseed": "echo \"seeding test environment\" && ./docker-local/postman/scripts/_seed_all.sh",
+    "reseed": "echo \"seeding test environment\" && ./docker-local/postman/scripts/_00_seed_all.sh",
     "wait-4-docker": "node ./scripts/_wait4_all.js",
     "test": "npm run test:unit",
     "test:bdd": "jest --testMatch '**/test/step-definitions/**/*.step.ts'",

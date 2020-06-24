@@ -54,60 +54,15 @@ Supporting documentation for the PISP implementation.
 
 
 ### Transfer
+Edit the transfer flow `.puml` files here: [PISP Transfer Api Calls Detailed](./transfer/api_calls_detailed.puml)
 
-For the full transfer flows, see the [E2E PISP Transfer Flows](./out/transfer/complete/PISP%20transfer.png).
+![PISPTransferSimpleAPI](./out/transfer/api_calls_simple/PISPTransferSimpleAPI.png)
+> Puml source: [`./transfer/api_calls_simple.puml`]
 
-Edit the transfer flow `.puml` files here: [PISP Transfer Flow UML](./transfer)
-
-[`./transfer/complete.puml`](./transfer/complete.puml) Combines the following diagrams into one.
-
-
-#### 1. Discovery
->_[PUML source: `./transfer/1-discovery.puml`](./transfer/1-discovery.puml)_
-![discovery](./out/transfer/1-discovery/PISP%20Transfer.png)
-
-#### 2. Agreement
->_[PUML source: `./transfer/2-agreement.puml`](./transfer/2-agreement.puml)_
-
-![agreement](./out/transfer/2-agreement/PISP%20Transfer.png)
-
-#### 3. Transfer
->_[PUML source: `./transfer/3-transfer.puml`](./transfer/3-transfer.puml)_
-![tranfer](./out/transfer/3-transfer/PISP%20Transfer.png)
-
-
-#### Transfer - Endpoints 
-> Note: this could maybe move to a better place, but it's here for now.
-
-| ID      | VERB              | URI                                       | `Source` | `Destination`  |
-| ------- | ----------------- | ----------------------------------------- | ---- | --- |
-| `LK-4`  | `GET`             | `/parties`                                | PISP   | SWITCH |
-| `LK-6`  | `GET`             | `/parties/{Type}/{ID}`                    | SWITCH | ALS    |
-| `LK-8`  | `GET`             | `/parties/{Type}/{ID}`                    | SWITCH | DFSPB  |
-| `LK-11` | `PUT`             | `/parties/{Type}/{ID}`                    | DFSPB  | SWITCH |
-| `LK-13` | `PUT`             | `/parties/{Type}/{ID}`                    | SWITCH | PISP   |
-| `LK-19` | `POST`            | `/thirdPartyRequests/transfer`*0          | PISP   | SWITCH |
-| `LK-22` | `POST`            | `/thirdPartyRequests/transfer`*1          | SWITCH | DFSPA  |
-| `AG-1`  | `POST`            | `/quotes`                                 | DFSPA  | SWITCH |
-| `AG-3`  | `POST`            | `/quotes`                                 | SWITCH | DFSPB  |
-| `AG-6`  | `PUT`             | `/quotes/{ID}`                            | DFSPB | SWITCH  |
-| `AG-8`  | `PUT`             | `/quotes/{ID}`                            | SWITCH | DFSPA  |
-| `AG-15` | `POST`            | `/authorizations`                         | DFSPA  | SWITCH |
-| `AG-17` | `POST`            | `/authorizations`*2                       | SWITCH | PISP   |
-| `AG-26` | `PUT`             | `/authorizations/{ID}`                    | PISP   | SWITCH |
-| `AG-28` | `GET`             | `/endpoints/FIDO/{ID}`                    | SWITCH | ALS?   |
-| `AG-30` | `POST`            | `/performVerification`*3                  | SWITCH | FIDO   |
-| `AG-32` | `PUT`             | `/verificationResult/{ID}`*4              | FIDO   | SWITCH |
-| `AG-34` | `PUT`             | `/authorizations/{ID}`                    | SWITCH | DFSPA  |
-| `TR-3`  | `PUT`             | `/thirdPartyRequest/transfer/{ID}`*5      | SWITCH | PISP   |
-
-
-> 0. As discussed, for now we will implement this as the existing `/transactionRequest`
-> 1. This is a new endpoint the DFSP needs to be able to handle
-> 2. A new VERB for authorizations for the PISP use case 
-> 3. Do we want the FIDO server to be synchronous? I think not because it could be externally hosted in the future, but open for debate.
-> 4. These resource names are up for debate
-> 5. We use this endpoint to inform the PISP of the tranfer status.
+For a more detailed breakdown of the api calls, Refer to the detailed API flows:
+ - [Discovery](./out/transfer/api_calls_detailed/PISPTransferDetailedAPI-page1.png)
+ - [Agreement](./out/transfer/api_calls_detailed/PISPTransferDetailedAPI-page2.png)
+ - [Transfer](./out/transfer/api_calls_detailed/PISPTransferDetailedAPI-page3.png)
 
 
 ## Tools

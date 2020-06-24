@@ -13,11 +13,12 @@
     "lint": "eslint ./src/**/*.ts *.js",
     "build": "tsc",
     "watch": "tsc -w",
-    "reseed": "echo \"seeding test environment\" && ./docker-local/postman/scripts/setupDockerCompose-FullSetup.sh",
+    "reseed": "echo \"seeding test environment\" && ./docker-local/postman/scripts/_00_seed_all.sh",
     "wait-4-docker": "node ./scripts/_wait4_all.js",
     "test": "npm run test:unit",
     "test:bdd": "jest --testMatch '**/test/step-definitions/**/*.step.ts'",
     "test:e2e": "jest --testMatch '**/test/e2e/**/*.(test|spec).ts'",
+    "test:contract": "jest --testMatch '**/test/contract/**/*.(test|spec).ts'",
     "test:coverage": "jest --coverage --coverageThreshold='{}'",
     "test:coverage-check": "jest --coverage",
     "test:junit": "jest --reporters=default --reporters=jest-junit",
@@ -34,7 +35,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mojaloop/auth-service.git"
+    "url": "git+https://github.com/mojaloop/pisp.git"
   },
   "keywords": [
     "metrics",
@@ -48,9 +49,9 @@
   ],
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/mojaloop/auth-service/issues"
+    "url": "https://github.com/mojaloop/pisp/issues"
   },
-  "homepage": "https://github.com/mojaloop/auth-service#readme",
+  "homepage": "https://github.com/mojaloop/pisp#readme",
   "dependencies": {
     "axios": "^0.19.2"
   },

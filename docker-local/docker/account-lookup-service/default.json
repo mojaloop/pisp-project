@@ -24,6 +24,10 @@
       "expiresIn": 180000,
       "generateTimeout": 30000
     },
+    "ERROR_HANDLING": {
+      "includeCauseExtension": false,
+      "truncateExtensions": true
+    },
     "SWITCH_ENDPOINT": "http://central-ledger:3001",
     "INSTRUMENTATION": {
       "METRICS": {
@@ -38,6 +42,13 @@
             "serviceName": "account-lookup-service"
           }
         }
+      }
+    },
+    "ENDPOINT_SECURITY":{
+      "JWS": {
+        "JWS_SIGN": false,
+        "FSPIOP_SOURCE_TO_SIGN": "switch",
+        "JWS_SIGNING_KEY_PATH": "secrets/jwsSigningKey.key"
       }
     }
   }

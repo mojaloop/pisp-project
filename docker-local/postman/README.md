@@ -52,12 +52,11 @@ npm install -g newman
 ### 4.2 Pre-loading Test Data
 
 >Note: Ensure that you execute the following commands in your project folder after running `npm install`.
->Note: Ensure that you are in the project root folder
 
 #### 4.2.1 Hub Account
 
 ```bash
-sh scripts/setupDockerCompose-HubAccount.sh
+./postman/scripts/_01_seed_hub_account.sh
 ```
 
 Or alternatively use newman directly...
@@ -82,7 +81,7 @@ OSS-New-Deployment-FSP-Setup
 #### 4.2.2 Onboard PayerFSP
 
 ```bash
-sh scripts/setupDockerCompose-PayerFSP.sh
+./postman/scripts/setupDockerCompose-PayerFSP.sh
 ```
 
 Or alternatively use newman directly...
@@ -108,7 +107,7 @@ OSS-New-Deployment-FSP-Setup
 #### 4.2.3 Onboard PayeeFSP
 
 ```bash
-sh scripts/setupDockerCompose-PayeeFSP.sh
+./postman/scripts/setupDockerCompose-PayeeFSP.sh
 ```
 
 Or alternatively use newman directly...

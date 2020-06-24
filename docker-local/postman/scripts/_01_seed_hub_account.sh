@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
-PATH=$(npm bin):$PATH
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+PATH=$(cd ${DIR} && npm bin):$PATH
 POSTMAN_DIR="${DIR}/.."
 
 newman run \
   --delay-request=2000 \
   --folder='Hub Account' \
   --environment=${POSTMAN_DIR}/environments/Mojaloop-Local-Docker-Compose.postman_environment.json \
-  ${POSTMAN_DIR}/OSS-New-Deployment-FSP-Setup.postman_collection.json
+  ${POSTMAN_DIR}/OSS-New-Deployment-FSP-Setup-DFSPS.postman_collection.json

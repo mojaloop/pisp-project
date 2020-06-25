@@ -62,7 +62,7 @@ The end-goal of this phase is for the PISP Server to have a final list of DFSPs
 available and any relevant metadata about those DFPSs that are necessary to
 begin the linking process.
 
-![Pre-linking](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/jgeewax/pisp/master/docs/linking/0-pre-linking.puml)
+![Pre-linking](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/mojaloop/pisp/master/docs/linking/0-pre-linking.puml)
 
 ## 1.2. Discovery
 
@@ -81,7 +81,7 @@ that they actually would like to link a different account than those chosen at
 the very beginning. This is perfectly acceptable and should be expected from
 time to time.
 
-![Discovery](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/jgeewax/pisp/master/docs/linking/1-discovery.puml)
+![Discovery](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/mojaloop/pisp/master/docs/linking/1-discovery.puml)
 
 ## 1.3. Request consent
 
@@ -114,7 +114,7 @@ In the web authentication channel, the result is the PISP being instructed on
 a specific URL where this supposed user should be redirected. This URL should be
 a place where the user can prove their identity (e.g., by logging in).
 
-![Request consent](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/jgeewax/pisp/master/docs/linking/2-request-consent-web.puml)
+![Request consent](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/mojaloop/pisp/master/docs/linking/2-request-consent-web.puml)
 
 ### 1.3.2. OTP / SMS
 
@@ -122,7 +122,7 @@ In the OTP authentication channel, the result is the PISP being instructed on
 a specific URL where this supposed user should be redirected. This URL should be
 a place where the user can prove their identity (e.g., by logging in).
 
-![Request consent](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/jgeewax/pisp/master/docs/linking/2-request-consent-otp.puml)
+![Request consent](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/mojaloop/pisp/master/docs/linking/2-request-consent-otp.puml)
 
 ## 1.4. Authentication
 
@@ -155,7 +155,7 @@ which accounts to link with. The result of this will be seen later on when
 during the Grant consent phase, where the DFSP will provide the correct values
 to the PISP in the `scopes` field.
 
-![Authentication (Web)](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/jgeewax/pisp/master/docs/linking/3-authentication-web.puml)
+![Authentication (Web)](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/mojaloop/pisp/master/docs/linking/3-authentication-web.puml)
 
 ### 1.4.2. OTP
 
@@ -163,7 +163,7 @@ When using the OTP authentication channel, the DFSP will send the User some sort
 of one-time password over a pre-established channel (most likely SMS). The PISP
 should prompt the user for this secret and then provide that back to the DFSP.
 
-![Authentication (OTP)](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/jgeewax/pisp/master/docs/linking/3-authentication-otp.puml)
+![Authentication (OTP)](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/mojaloop/pisp/master/docs/linking/3-authentication-otp.puml)
 
 ## 1.5. Grant consent
 
@@ -178,7 +178,7 @@ This phase consists exclusively of the DFSP requesting that a new consent be
 created. This request must be conveyed both to the PISP itself and the Auth
 service which will be the record of trust for these resources.
 
-![Grant consent](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/jgeewax/pisp/master/docs/linking/4-grant-consent.puml)
+![Grant consent](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/mojaloop/pisp/master/docs/linking/4-grant-consent.puml)
 
 ## 1.6. Credential registration
 
@@ -199,7 +199,7 @@ and finalizing the signature.
 In this sub-phase, the PISP requests a challenge from the Auth service, which
 will be returned to the PISP via a `PUT /consents/{ID}` API call.
 
-![Credential registration: Challenge](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/jgeewax/pisp/master/docs/linking/5a-credential-registration.puml)
+![Credential registration: Challenge](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/mojaloop/pisp/master/docs/linking/5a-credential-registration.puml)
 
 ### 1.6.2. Finalizing the credential
 
@@ -216,7 +216,7 @@ the signature is correct. It then updates the status of the credential to
 `"VERIFIED"`, and notifies both the PISP and the DFSP about these new changes
 to the Consent resource.
 
-![Credential registration: Register](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/jgeewax/pisp/master/docs/linking/5b-credential-registration.puml)
+![Credential registration: Register](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/mojaloop/pisp/master/docs/linking/5b-credential-registration.puml)
 
 # 2. Unlinking
 
@@ -229,7 +229,7 @@ device, the PISP, and the DFSP.
 To make this work, we simply need to provide a way for a member on the network
 to remove the Consent resourse and notify the other parties about the removal.
 
-![Credential registration: Register](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/jgeewax/pisp/master/docs/linking/unlinking.puml)
+![Credential registration: Register](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/mojaloop/pisp/master/docs/linking/unlinking.puml)
 
 # 3. Third-party credential registration
 
@@ -248,7 +248,7 @@ The authentication phase becomes very minimal. Since the credential will be
 collected by the DFSP itself (for use later by the PISP), there's no need to
 send back any sort of secret and no need to pass a secret back to the DFSP.
 
-![Credential registration: Register](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/jgeewax/pisp/master/docs/linking/3-authentication-third-party-fido.puml)
+![Credential registration: Register](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/mojaloop/pisp/master/docs/linking/3-authentication-third-party-fido.puml)
 
 ## 3.2. Credential registration
 

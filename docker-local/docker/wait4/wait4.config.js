@@ -87,6 +87,15 @@ module.exports = {
           retries: 30
         }
       ]
+    },
+    {
+      name: 'thirdparty-api-adapter',
+      wait4: [
+        {
+          uri: 'kafka:29092',
+          method: 'ncat'
+        }
+      ]
     }
   ]
 }

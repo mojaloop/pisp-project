@@ -25,8 +25,13 @@ end note
 PISP -> Switch ++: ""POST /consentRequests {""\n\
   ""  id: "456",""\n\
   ""  initiatorId: "PISP",""\n\
+  ""  scopes: [ ""\n\
+  ""    { **accountId: "dfsp.username.1234", // This is *optional* for web.**""\n\
+  ""      actions: "accounts.transfer", "accounts.getBalance" },""\n\
+  ""    { accountId: "dfsp.username.5678",""\n\
+  ""      actions: "accounts.transfer", "accounts.getBalance" },""\n\
+  ""  ],""\n\
   ""  authChannels: [ "Web", "OTP" ],""\n\
-  ""  scopes: [ "accounts.getBalance", "accounts.transfer" ],""\n\
   ""  callbackUri: "pisp-app://callback..."""\n\
   ""}""
 Switch --> PISP: ""202 Accepted""
@@ -35,7 +40,12 @@ deactivate PISP
 Switch -> DFSP ++:  ""POST /consentRequests {""\n\
   ""  id: "456",""\n\
   ""  initiatorId: "PISP",""\n\
-  ""  scopes: [ "accounts.getBalance", "accounts.transfer" ],""\n\
+  ""  scopes: [ ""\n\
+  ""    { accountId: "dfsp.username.1234",""\n\
+  ""      actions: "accounts.transfer", "accounts.getBalance" },""\n\
+  ""    { accountId: "dfsp.username.5678",""\n\
+  ""      actions: "accounts.transfer", "accounts.getBalance" },""\n\
+  ""  ],""\n\
   ""  authChannels: [ "Web", "OTP" ],""\n\
   ""  callbackUri: "pisp-app://callback..."""\n\
   ""}""
@@ -44,7 +54,12 @@ deactivate Switch
 
 DFSP -> Switch ++: ""PUT /consentRequests/456 {""\n\
   ""  initiatorId: "PISP",""\n\
-  ""  scopes: [ "accounts.getBalance", "accounts.transfer" ],""\n\
+  ""  scopes: [ ""\n\
+  ""    { accountId: "dfsp.username.1234",""\n\
+  ""      actions: "accounts.transfer", "accounts.getBalance" },""\n\
+  ""    { accountId: "dfsp.username.5678",""\n\
+  ""      actions: "accounts.transfer", "accounts.getBalance" },""\n\
+  ""  ],""\n\
   ""  authChannels: [ "Web", "OTP" ],""\n\
   ""  callbackUri: "pisp-app://callback..."""\n\
   ""  **authUri: "dfspa.com/authorize?consentRequestId=456" // This is new!**""\n\
@@ -55,7 +70,12 @@ deactivate DFSP
 
 Switch -> PISP ++: ""PUT /consentRequests/456 {""\n\
   ""  initiatorId: "PISP",""\n\
-  ""  scopes: [ "accounts.getBalance", "accounts.transfer" ],""\n\
+  ""  scopes: [ ""\n\
+  ""    { accountId: "dfsp.username.1234",""\n\
+  ""      actions: "accounts.transfer", "accounts.getBalance" },""\n\
+  ""    { accountId: "dfsp.username.5678",""\n\
+  ""      actions: "accounts.transfer", "accounts.getBalance" },""\n\
+  ""  ],""\n\
   ""  authChannels: [ "Web", "OTP" ],""\n\
   ""  callbackUri: "pisp-app://callback..."""\n\
   ""  **authUri: "dfspa.com/authorize?consentRequestId=456" // This is new!**""\n\

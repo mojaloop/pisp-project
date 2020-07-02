@@ -22,7 +22,7 @@ end note
 
 PISP -> Switch ++: ""PUT /consentRequests/456 {""\n\
     ""  initiatorId: "PISP",""\n\
-    ""  authChannels: [ "Web", "OTP" ],""\n\
+    ""  authChannels: [ "OTP" ],""\n\
     ""  scopes: [ ""\n\
     ""    { accountId: "dfsp.username.1234",""\n\
     ""      actions: "accounts.transfer", "accounts.getBalance" },""\n\
@@ -31,14 +31,14 @@ PISP -> Switch ++: ""PUT /consentRequests/456 {""\n\
     ""  ],""\n\
     ""  callbackUri: "pisp-app://callback..."""\n\
     ""  authUri: "dfspa.com/authorize?consentRequestId=456",""\n\
-    ""  **authToken: "<OTP or SECRET>" // This is new !**""\n\
+    ""  **authToken: "<OTP>" // This is new !**""\n\
     ""}""
 Switch --> PISP: ""202 Accepted""
 deactivate PISP
 
 Switch -> DFSP ++: ""PUT /consentRequests/456 {""\n\
     ""  initiatorId: "PISP",""\n\
-    ""  authChannels: [ "Web", "OTP" ],""\n\
+    ""  authChannels: [ "OTP" ],""\n\
     ""  scopes: [ ""\n\
     ""    { accountId: "dfsp.username.1234",""\n\
     ""      actions: "accounts.transfer", "accounts.getBalance" },""\n\
@@ -47,12 +47,12 @@ Switch -> DFSP ++: ""PUT /consentRequests/456 {""\n\
     ""  ],""\n\
     ""  callbackUri: "pisp-app://callback..."""\n\
     ""  authUri: "dfspa.com/authorize?consentRequestId=456",""\n\
-    ""  **authToken: "<OTP or SECRET>" // This is new !**""\n\
+    ""  **authToken: "<OTP>" // This is new !**""\n\
     ""}""
 DFSP --> Switch: ""202 Accepted""
 deactivate Switch
 
-DFSP -> DFSP: Verify the auth token is correct.
+DFSP -> DFSP: Verify the OTP is correct.
 
 note over PISP, DFSP
   At this point, the DFSP believes that the User is their customer and that User trusts the PISP. This means that the DFSP can continue by granting consent.

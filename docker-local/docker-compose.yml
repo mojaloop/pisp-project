@@ -441,8 +441,7 @@ services:
       - "pisp-backend:172.17.0.1"
 
   pisp-thirdparty-api-adapter:
-    build:
-      context: https://github.com/mojaloop/thirdparty-api-adapter.git#master
+    image: "mojaloop/thirdparty-api-adapter:v10.4.2"
     container_name: pisp-thirdparty-api-adapter
     command: sh -c "/opt/thirdparty-api-adapter/wait4/wait4.js thirdparty-api-adapter && npm run start"
     ports:

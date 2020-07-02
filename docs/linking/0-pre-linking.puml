@@ -27,7 +27,7 @@ Switch --> PISP: ""202 Accepted""
 deactivate PISP
 
 Switch -> PISP ++: ""PUT /participants [""\n\
-  ""  { DFSP A, DFSP B, ...}]""
+  ""  { DFSP A }, { DFSP B }, ... ]""
 PISP --> Switch: ""200 OK""
 
 PISP --> App --: We have DFSP A, B, and C.\n(and metadata on each)

@@ -1,0 +1,110 @@
+@startuml
+
+!pragma teoz true
+
+participant "PISP" as PISP
+
+box "Mojaloop"
+    participant Switch
+    participant "Auth Service" as Auth
+end box
+
+participant "DFSP" as DFSP
+
+activate PISP
+
+...
+
+note over PISP, DFSP
+    The user initiated some sort of account linking by choosing the appropriate DFSP from a screen inside the PISP application.
+end note
+
+...
+
+group PISP requests the DFSP initiates consent
+    PISP -> Switch ++: I'd like to get consent to initiate payments for one of DFSP's customers.
+    Switch --> PISP: I'll get back to you.
+    deactivate PISP
+
+    Switch -> DFSP ++: PISP would like to get consent to initiate payments for one of your customers.
+    DFSP --> Switch: I'll get back to you.
+    deactivate Switch
+
+    DFSP -> Switch ++: Here's how the PISP should prove this is my customer.
+    Switch --> DFSP: I'll get back to you.
+    deactivate DFSP
+
+    Switch -> PISP ++: Here's how you should prove this is DFSP's customer.
+    PISP --> Switch: I'll get back to you.
+    deactivate Switch
+end
+
+...
+
+note over PISP, DFSP
+    The PISP does the auth song-and-dance, resulting in the user being redirected back to the PISP app with some form of auth token.
+end note
+
+...
+
+group DFSP grants consent to PISP
+    PISP -> Switch ++: Here's the auth token the DFSP gave their customer.
+    Switch --> PISP: I'll get back to you.
+    deactivate PISP
+
+    Switch -> DFSP ++: Here's the auth token the PISP says you gave your customer.
+    DFSP --> Switch: I'll get back to you
+    deactivate Switch
+
+    DFSP -> DFSP: Verify the auth token is correct.
+
+    DFSP -> Switch ++: I'd like to authorize PISP to do stuff for my customer.
+    Switch --> DFSP: I'll get back to you.
+    deactivate DFSP
+
+    group Switch asks Auth service to generate a challenge for a credential
+        Switch -> Auth ++: DFSP would like to authorize PISP to do stuff for their customer.
+        Auth --> Switch: I'll get back to you.
+        deactivate Switch
+
+        Auth -> Auth: Generate a new challenge.
+        Auth -> Switch ++: I've generated a challenge for a credential whenever it's ready.
+        Switch --> Auth: I'll get back to you.
+        deactivate Auth
+    end
+
+    Switch -> PISP ++: The DFSP would like to authorize you to do stuff for their customer.\nHere's a challenge to register a new credential.
+    PISP --> Switch: I'll get back to you.
+    deactivate Switch
+end
+
+...
+
+note over PISP, DFSP
+    The PISP uses the FIDO registration flow to generate a new keypair and sign the challenge, relying on the user performing an "unlock action" on their mobile device.
+end note
+
+...
+
+group PISP provides credential to complete the consent grant
+    PISP -> Switch ++: I've signed the challenge with this credential. Can you save that?
+    Switch --> PISP: I'll get back to you.
+    deactivate PISP
+
+    Switch -> Auth ++: The user signed the challenge with this credential. Can you save that?
+    Auth --> Switch: I'll get back to you.
+    deactivate Switch
+
+    Auth -> Auth: Verify the signature checks out.\nSave the credential.
+    Auth -> Switch ++: The credential looks good to me. This should be good to go!
+    Switch --> Auth: OK, thanks!
+    deactivate Auth
+
+    Switch -> PISP ++: Consent has been granted and credentials are verified.
+    & Switch -> DFSP ++: Consent has been granted and credentials are verified.
+    PISP --> Switch --: OK, thanks!
+    & DFSP --> Switch --: OK, thanks!
+    deactivate Switch
+end
+
+@enduml

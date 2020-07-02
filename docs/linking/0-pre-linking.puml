@@ -1,0 +1,35 @@
+@startuml
+
+title PISP Linking: Pre-linking
+
+box "Mobile device"
+    participant App
+end box
+
+box "PISP"
+    participant PISP
+end box
+
+box "Mojaloop"
+    participant Switch
+end box
+
+autonumber 1 "<b>PRE-#</b>"
+activate App
+App -> PISP ++: What DFSPs are available to link with?
+
+note over PISP, Switch
+  TODO: What is the right URL path for this?
+end note
+
+PISP -> Switch ++: ""GET /participants""
+Switch --> PISP: ""202 Accepted""
+deactivate PISP
+
+Switch -> PISP ++: ""PUT /participants [""\n\
+  ""  { DFSP A }, { DFSP B }, ... ]""
+PISP --> Switch: ""200 OK""
+
+PISP --> App --: We have DFSP A, B, and C.\n(and metadata on each)
+
+@enduml

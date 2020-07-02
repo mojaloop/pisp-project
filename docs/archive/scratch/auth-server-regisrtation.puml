@@ -1,0 +1,270 @@
+@startuml Auth Server Registration
+
+!define MS(x) <font:Consolas>x</font>
+
+' Participants
+participant PISP
+box Mojaloop
+    participant Switch
+    participant Auth
+end box
+participant DFSP
+
+autonumber 1 "<b>REG-#</b>"
+
+PISP -> Switch: ""POST /consents/123/registerCredential""\nRegister credential for an existing consent.
+note over Switch
+    RegisterCredentialRequest {
+        credentialType: FIDO
+    }
+end note
+
+activate PISP
+activate Switch
+    Switch --> PISP: ""202 Accepted""
+    deactivate PISP
+
+    Switch -> Auth: ""POST /consents/123/registerCredential""\nCan you generate a challenge?
+    note over Auth
+        RegisterCredentialRequest {
+            credentialType: FIDO
+        }
+    end note
+    activate Auth
+        Auth --> Switch: ""202 Accepted""
+        deactivate Switch
+        Auth -> Auth: Generate a challenge and save it.
+        Auth -> Switch: ""PUT /consents/123""\nSure, here's the consent (I added a challenge).
+        activate Switch
+        note over Switch
+            Consent {
+                id: 123,
+                participantId: DFSP A,
+                authToken: null,
+                consentStatus: PENDING,
+                scopes: null,
+                credential: {
+                    credentialType: FIDO,
+                    credentialStatus: PENDING,
+                    challenge: {
+                        payload: base64(...),
+                        signature: null
+                    },
+                    payload: null,
+                }
+            }
+        end note
+        deactivate Auth
+
+    Switch -> PISP: ""PUT /consents/123""\nHere's the consent and challenge.
+    activate PISP
+        note over PISP
+            Consent {
+                id: 123,
+                participantId: DFSP A,
+                authToken: null,
+                consentStatus: PENDING,
+                scopes: null,
+                credential: {
+                    credentialType: FIDO,
+                    credentialStatus: PENDING,
+                    challenge: {
+                        payload: base64(...),
+                        signature: null
+                    },
+                    payload: null,
+                }
+            }
+        end note
+        return ""200 OK""
+
+deactivate Switch
+
+...
+
+note over PISP, Switch: Here we use the FIDO API to generate a credential and sign the challenge.
+
+PISP -> Switch: ""PUT /consents/123""\nI signed the challenge. Here's the credential and DFSP auth token.
+activate PISP
+activate Switch
+    note over Switch
+        Consent {
+            id: 123,
+            participantId: DFSP A,
+            **authToken: "abcd", ~/~/ This is new and should be evaluated.**
+            consentStatus: PENDING,
+            scopes: null,
+            credential: {
+                id: 5678,
+                credentialType: FIDO,
+                credentialStatus: PENDING, // ~/~/ Output only. The PISP doesn't update this.//
+                challenge: {
+                    payload: base64(...),
+                    **signature: base64(...),  ~/~/ This is new and should be evaluated...**
+                },
+                **payload: base64(...),  ~/~/ against this (also new).**
+            }
+        }
+    end note
+    Switch --> PISP: ""202 Accepted""
+    deactivate PISP
+    Switch -> DFSP: ""PUT /consents/123""\nCan you verify the auth token on this consent?
+    activate DFSP
+        note over DFSP
+            Consent {
+                id: 123,
+                participantId: DFSP A,
+                **authToken: "abcd", // ~/~/ This should be evaluated now.//**
+                consentStatus: PENDING,
+                scopes: null,
+                credential: {
+                    id: 5678,
+                    credentialType: FIDO,
+                    credentialStatus: PENDING,
+                    challenge: {
+                        payload: base64(...),
+                        signature: base64(...), // ~/~/ This not yet evaluated...//
+                    },
+                    payload: base64(...), // ~/~/ against this. (Also new)//
+                }
+            }
+        end note
+        DFSP --> Switch: ""202 Accepted""
+        deactivate Switch
+        DFSP -> DFSP: Verify auth token in the consent.
+        DFSP -> Switch: ""PUT /consents/123""\nToken is OK. I updated the consent with scopes.
+        activate Switch
+            note over Switch
+                Consent {
+                    id: 123,
+                    participantId: DFSP A,
+                    authToken: "abcd",
+                    **consentStatus: ACTIVE, ~/~/ This is new!**
+                    **scopes: { ~/~/ This is new! They make the consent actually work.**
+                        // ~/~/ These are unique IDs for accounts. They MUST NOT be real account numbers.//
+                        balanceInquiry: 12345-67890,
+                        sendTransfer: 12345-67890,
+                        sendTransfer: 77777-38937,
+                    },
+                    credential: {
+                        id: 5678,
+                        credentialType: FIDO,
+                        credentialStatus: PENDING,
+                        challenge: {
+                            payload: base64(...),
+                            signature: base64(...), // ~/~/ This is still not yet evaluated...//
+                        },
+                        payload: base64(...), // ~/~/ against this.//
+                    }
+                }
+            end note
+            Switch --> DFSP: ""200 OK""
+            deactivate DFSP
+            Switch -> Auth: ""PUT /consents/123""\nConsent has a credential and signed challenge.\nPlease validate?
+            activate Auth
+                note over Auth
+                    Consent {
+                        id: 123,
+                        participantId: DFSP A,
+                        authToken: "abcd",
+                        consentStatus: ACTIVE,
+                        scopes: {
+                            balanceInquiry: 12345-67890,
+                            sendTransfer: 12345-67890,
+                        },
+                        credential: {
+                            id: 5678,
+                            credentialType: FIDO,
+                            credentialStatus: PENDING,
+                            challenge: {
+                                payload: base64(...),
+                                **signature: base64(...), // ~/~/ This should be evaluated now...//**
+                            },
+                            **payload: base64(...), // ~/~/ against this.//**
+                        }
+                    }
+                end note
+                Auth --> Switch: ""202 Accepted""
+                deactivate Switch
+                Auth -> Auth: Validate the signature against the challenge.
+                Auth -> Switch: ""PUT /consents/123""\nConsent looks OK. Marking as active.
+                activate Switch
+                note over Switch
+                    Consent {
+                        id: 123,
+                        participantId: DFSP A,
+                        authToken: "abcd",
+                        consentStatus: ACTIVE,
+                        scopes: {
+                            balanceInquiry: 12345-67890,
+                            sendTransfer: 12345-67890,
+                        },
+                        credential: {
+                            id: 5678,
+                            credentialType: FIDO,
+                            **credentialStatus: ACTIVE, // ~/~/ This is new!//**
+                            challenge: {
+                                payload: base64(...),
+                                signature: base64(...),
+                            },
+                            payload: base64(...),
+                        }
+                    }
+                end note
+                Switch --> Auth: ""200 OK""
+                deactivate Auth
+
+            Switch -> PISP: ""PUT /consents/123""\nThe consent is all ready.
+            activate PISP
+                note over PISP
+                    Consent {
+                        id: 123,
+                        participantId: DFSP A,
+                        authToken: "abcd",
+                        consentStatus: ACTIVE,
+                        scopes: {
+                            balanceInquiry: 12345-67890,
+                            sendTransfer: 12345-67890,
+                        },
+                        credential: {
+                            id: 5678,
+                            credentialType: FIDO,
+                            **credentialStatus: ACTIVE, // ~/~/ This is new!//**
+                            challenge: {
+                                payload: base64(...),
+                                signature: base64(...),
+                            },
+                            payload: base64(...),
+                        }
+                    }
+                end note
+                return ""200 OK""
+
+            Switch -> DFSP: ""PUT /consents/123""\nThe consent is all ready.
+            activate DFSP
+                note over DFSP
+                    Consent {
+                        id: 123,
+                        participantId: DFSP A,
+                        authToken: "abcd",
+                        consentStatus: ACTIVE,
+                        scopes: {
+                            balanceInquiry: 12345-67890,
+                            sendTransfer: 12345-67890,
+                        },
+                        credential: {
+                            id: 5678,
+                            credentialType: FIDO,
+                            **credentialStatus: ACTIVE, // ~/~/ This is new!//**
+                            challenge: {
+                                payload: base64(...),
+                                signature: base64(...),
+                            },
+                            payload: base64(...),
+                        }
+                    }
+                end note
+                return ""200 OK""
+
+
+@enduml

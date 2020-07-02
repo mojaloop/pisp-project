@@ -1,0 +1,113 @@
+PISP -> Switch: POST /consentRequests
+    ConsentRequest {
+        id: "456",
+        initiator: "PISP", // Do we want/need this?
+        authChannels: [ "Web", "OTP" ],
+        scopes: [ "accounts.getBalance", "accounts.list", "accounts.transfer" ],
+        callbackUri: "pisp-app://callback..."
+    }
+    "I would like to create a new consent resource."
+    return 202 Accepted
+
+Switch -> DFSP: POST /consentRequests
+    ConsentRequest {
+        id: "456",
+        initiator: "PISP",
+        authChannels: [ "Web", "OTP" ],
+        scopes: [ "accounts.getBalance", "accounts.list", "accounts.transfer" ],
+        callbackUri: "pisp-app://callback...",
+    }
+    "PISP would like to create a new consent resource"
+    return 200 OK
+
+DFSP -> Switch: PUT /consentRequests/456
+    ConsentRequest {
+        initiator: "PISP",
+        authChannels: [ "Web", "OTP" ],
+        scopes: [ "accounts.getBalance", "accounts.list", "accounts.transfer" ],
+        callbackUri: "pisp-app://callback...",
+        authorizationUri: "https://dfspa.com/authorize?consentRequestId=456" // This is new!
+    }
+    "The user needs to approve this consent request before it becomes real."
+    return 202 Accepted
+
+Switch -> PISP: PUT /consentRequests/456
+    ConsentRequest {
+        initiator: "PISP",
+        authChannels: [ "Web", "OTP" ],
+        scopes: [ "accounts.getBalance", "accounts.list", "accounts.transfer" ],
+        callbackUri: "pisp-app://callback...",
+        authorizationUri: "https://dfspa.com/authorize?consentRequestId=456" // This is new to the PISP!
+    }
+    "Your user needs to approve this consent record. Send them here to do so."
+    return 202 Accepted
+
+... Auth song and dance. Ultimately, the user gets redirected back to the PISP app ...
+
+PISP -> Switch: PUT /consentRequests/456
+    ConsentRequest {
+        initiator: "PISP",
+        authChannels: [ "Web", "OTP" ],
+        scopes: [ "accounts.getBalance", "accounts.list", "accounts.transfer" ],
+        callbackUri: "pisp-app://callback...",
+        authorizationUri: "https://dfspa.com/authorize?consentRequestId=456",
+        authToken: "secret" // This is new !
+    }
+    return 202 Accepted
+
+Switch -> DFSP: PUT /consentRequests/456
+    ConsentRequest {
+        initiator: "PISP",
+        authChannels: [ "Web", "OTP" ],
+        scopes: [ "accounts.getBalance", "accounts.list", "accounts.transfer" ],
+        callbackUri: "pisp-app://callback...",
+        authorizationUri: "https://dfspa.com/authorize?consentRequestId=456",
+        authToken: "secret" // This is new to the DFSP !
+    }
+    return 202 Accepted
+
+// DFSP verifies the auth token to ensure it's correct.
+
+DFSP -> Switch: POST /consents
+    Consent {
+        id: "123",
+        requestId: "456",
+        participantId: DFSP A,
+        scopes: {
+            balanceInquiry: 12345-67890,
+            sendTransfer: 12345-67890,
+            sendTransfer: 77777-38937
+        },
+        credental: null,
+    }
+    return 200 OK
+
+Switch -> PISP: POST /consents
+    Consent {
+        id: "123",
+        requestId: "456",
+        participantId: DFSP A,
+        scopes: {
+            balanceInquiry: 12345-67890,
+            sendTransfer: 12345-67890,
+            sendTransfer: 77777-38937
+        },
+        credental: null
+    }
+    return 200 OK
+
+// Switch checks which Auth server is responsible for DFSP. If it's the central
+// one, then we notify that auth server of the existence of this consent resource.
+Switch -> Auth: POST /consents
+    Consent {
+        id: "123",
+        requestId: "456",
+        participantId: DFSP A,
+        scopes: {
+            balanceInquiry: 12345-67890,
+            sendTransfer: 12345-67890,
+            sendTransfer: 77777-38937
+        },
+        credental: null,
+    }
+    return 200 OK

@@ -1,0 +1,90 @@
+@startuml
+
+title PISP Linking: Request consent (Web)
+
+participant "PISP" as PISP
+
+box "Mojaloop"
+    participant Switch
+end box
+
+participant DFSP
+
+autonumber 1 "<b>REQ-#</b>"
+
+activate PISP
+
+...
+
+note over PISP, DFSP
+    The user initiated some sort of account linking by choosing the appropriate DFSP from a screen inside the PISP application.
+end note
+
+...
+
+PISP -> Switch ++: ""POST /consentRequests {""\n\
+  ""  id: "456",""\n\
+  ""  initiatorId: "PISP",""\n\
+  ""  scopes: [ ""\n\
+  ""    { **accountId: "dfsp.username.1234", // This is *optional* for web.**""\n\
+  ""      actions: [ "accounts.transfer", "accounts.getBalance" ] },""\n\
+  ""    { accountId: "dfsp.username.5678",""\n\
+  ""      actions: [ "accounts.transfer", "accounts.getBalance" ] },""\n\
+  ""  ],""\n\
+  ""  authChannels: [ "Web", "OTP" ],""\n\
+  ""  callbackUri: "pisp-app://callback..."""\n\
+  ""}""
+Switch --> PISP: ""202 Accepted""
+deactivate PISP
+
+Switch -> DFSP ++:  ""POST /consentRequests {""\n\
+  ""  id: "456",""\n\
+  ""  initiatorId: "PISP",""\n\
+  ""  scopes: [ ""\n\
+  ""    { accountId: "dfsp.username.1234",""\n\
+  ""      actions: [ "accounts.transfer", "accounts.getBalance" ] },""\n\
+  ""    { accountId: "dfsp.username.5678",""\n\
+  ""      actions: [ "accounts.transfer", "accounts.getBalance" ] },""\n\
+  ""  ],""\n\
+  ""  authChannels: [ "Web", "OTP" ],""\n\
+  ""  callbackUri: "pisp-app://callback..."""\n\
+  ""}""
+DFSP --> Switch: ""202 Accepted""
+deactivate Switch
+
+DFSP -> Switch ++: ""PUT /consentRequests/456 {""\n\
+  ""  initiatorId: "PISP",""\n\
+  ""  scopes: [ ""\n\
+  ""    { accountId: "dfsp.username.1234",""\n\
+  ""      actions: [ "accounts.transfer", "accounts.getBalance" ] },""\n\
+  ""    { accountId: "dfsp.username.5678",""\n\
+  ""      actions: [ "accounts.transfer", "accounts.getBalance" ] },""\n\
+  ""  ],""\n\
+  ""  authChannels: [ "Web" ],""\n\
+  ""  callbackUri: "pisp-app://callback..."""\n\
+  ""  **authUri: "dfspa.com/authorize?consentRequestId=456" // This is new!**""\n\
+  ""}""
+' TODO: Should this be 200 OK? or 202 Accepted?
+Switch --> DFSP: ""202 Accepted""
+deactivate DFSP
+
+Switch -> PISP ++: ""PUT /consentRequests/456 {""\n\
+  ""  initiatorId: "PISP",""\n\
+  ""  scopes: [ ""\n\
+  ""    { accountId: "dfsp.username.1234",""\n\
+  ""      actions: [ "accounts.transfer", "accounts.getBalance" ] },""\n\
+  ""    { accountId: "dfsp.username.5678",""\n\
+  ""      actions: [ "accounts.transfer", "accounts.getBalance" ] },""\n\
+  ""  ],""\n\
+  ""  authChannels: [ "Web" ],""\n\
+  ""  callbackUri: "pisp-app://callback..."""\n\
+  ""  **authUri: "dfspa.com/authorize?consentRequestId=456" // This is new!**""\n\
+  ""}""
+PISP --> Switch: ""200 OK""
+deactivate Switch
+
+note over PISP, DFSP
+  At this point, the PISP knows that the Web authChannel is in use and the PISP App should redirect the user to the provided ""authUri"".
+end note
+
+@enduml

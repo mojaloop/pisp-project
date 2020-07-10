@@ -34,16 +34,5 @@ module.exports = {
     'cucumber/expression-type': 2,
     'cucumber/no-restricted-tags': [2, 'wip', 'broken', 'foo'],
     'cucumber/no-arrow-functions': 2
-  },
-  overrides: [
-    {
-      // Disable some rules that we abuse in unit tests.
-      files: [
-        'test /**/*.ts'
-      ],
-      rules: {
-        '@typescript-eslint/explicit-function-return-type': 'off',
-      },
-    },
-  ],
+  }
 };

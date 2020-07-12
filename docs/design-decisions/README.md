@@ -5,26 +5,64 @@
 ## Outstanding Questions
 
 - Q: How does the switch _know_ to send a callback to the PISP after a sucessful transfer?
-  - when DFSPA issues `POST /transfer`, that's between DFSPA  + DFSPB
-  - It should have a `transferId` that is related to the `thirdPartyRequest`
-    - how does the PISP or Switch know which transaction this `transferId` is related?
-    - tx id will be set in the `POST /authorizations` (when the authorization is created by the DFSP)
-    - how do we get from a `transactionId` to a `transferId`?
-      - ILP packet is in transfer request, but encoded... so need to figure this piece out
-    - For now, assume that the `Transaction` object will contain the `transferId`
-  > Note: this is being tracked in [#270](https://app.zenhub.com/workspaces/pisp-5e8457b05580fb04a7fd4878/issues/mojaloop/mojaloop/270)
+    - Refer to [#42](https://github.com/mojaloop/pisp/issues/42)
 
-- Q. How does the switch determine whether or not a DFSP is using their own FIDO service? Do we want to use the ALS or some other method?
-
-- Q. Which api should the DFSP need to implement for PISP functionaliy? We have a few options:
-    1. Add the DFSP changes to the existing FSPIOP-API
-    2. Add the DFSP changes to the new `thirdparty-api`
-    3. Divide the `thirdparty-api` into 2 parts: 
-        - `thirdparty-pisp-api` for the PISP to implement
-        - `thirdparty-dfsp-api` for the DFSP to implement
-
+- Q: Will we make a new `thirdparty-scheme-adapter` to handle thirdparty requests?
+    - Signs point to yes at the moment, but the challenge is how to divide between the existing `sdk-scheme-adapter` and a new `thirdparty-scheme-adapter`
 
 ## Decisions Made
+
+### How does the switch determine whether or not a DFSP is using their own FIDO service? Do we want to use the ALS or some other method?
+
+We will use the ALS to record the auth service for a given participant
+
+For example, to find the Auth service for `dfspa`, a participant can call `GET /participants/AUTHSERVICE/dfspa`
+
+#### Example 1. internal auth-service
+
+**request**
+```
+GET /participants/AUTHSERVICE/dfspa
+```
+**response**
+```
+{
+  "fspId": "switch"
+}
+```
+
+#### Example 2. dfsp's own auth service
+**request**
+```
+GET /participants/AUTHSERVICE/dfspb
+```
+**response**
+```
+{
+  "fspId": "dfspb"
+}
+```
+
+
+
+
+### Will the `pisp-demo-server` use the `sdk-scheme-adapter`/`thirdparty-scheme-adapter`? Or will it speak native async mojaloop?
+It will speak native async mojaloop, so will not be using any adapter. It will however use the `sdk-standard-components` which is currently being updated for 
+
+For now, we are adding PISP functionality to the sdk-scheme-adapter primarily because the mojaloop-simulator requires it for our end to end tests.
+
+
+### Which api should the DFSP need to implement for PISP functionaliy? We have a few options:
+  1. Add the DFSP changes to the existing FSPIOP-API
+  2. Add the DFSP changes to the new `thirdparty-api`
+  3. Divide the `thirdparty-api` into 2 parts: 
+      - `thirdparty-pisp-api` for the PISP to implement
+      - `thirdparty-dfsp-api` for the DFSP to implement
+
+A: Option 3: We are going to 
+
+Refer to [DA issue #]() for more information
+
 
 ###  How should we implement the changes required for the PISP role? 
  - Should we extend the existing APIs or should we create one or more new APIs to manage the specialised PISP interactions?

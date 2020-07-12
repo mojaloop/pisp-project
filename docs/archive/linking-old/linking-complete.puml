@@ -1,0 +1,302 @@
+@startuml linking-complete
+
+!pragma teoz true
+
+participant "PISP" as PISP
+
+box "Mojaloop"
+    participant Switch
+    participant "Auth Service" as Auth
+end box
+
+participant "DFSP" as DFSP
+
+activate PISP
+
+...
+
+note over PISP, DFSP
+    The user initiated some sort of account linking by choosing the appropriate DFSP from a screen inside the PISP application.
+end note
+
+...
+
+group PISP requests the DFSP initiates consent
+    PISP -> Switch ++: ""POST /consentRequests {""\n\
+      ""  id: "456",""\n\
+      ""  initiatorId: "PISP",""\n\
+      ""  authChannels: [ "Web", "OTP" ],""\n\
+      ""  scopes: [ "accounts.getBalance", "accounts.list", "accounts.transfer" ],""\n\
+      ""  callbackUri: "pisp-app://callback..."""\n\
+      ""}""
+    Switch --> PISP: ""202 Accepted""
+    deactivate PISP
+
+    Switch -> DFSP ++:  ""POST /consentRequests {""\n\
+      ""  id: "456",""\n\
+      ""  initiatorId: "PISP",""\n\
+      ""  scopes: [ "accounts.getBalance", "accounts.list", "accounts.transfer" ],""\n\
+      ""  authChannels: [ "Web", "OTP" ],""\n\
+      ""  callbackUri: "pisp-app://callback..."""\n\
+      ""}""
+    DFSP --> Switch: ""202 Accepted""
+    deactivate Switch
+
+    DFSP -> Switch ++: ""PUT /consentRequests/456 {""\n\
+      ""  initiatorId: "PISP",""\n\
+      ""  scopes: [ "accounts.getBalance", "accounts.list", "accounts.transfer" ],""\n\
+      ""  authChannels: [ "Web", "OTP" ],""\n\
+      ""  callbackUri: "pisp-app://callback..."""\n\
+      ""  **authUri: "dfspa.com/authorize?consentRequestId=456" // This is new!**""\n\
+      ""}""
+    Switch --> DFSP: ""202 Accepted""
+    deactivate DFSP
+
+    Switch -> PISP ++: ""PUT /consentRequests/456 {""\n\
+      ""  initiatorId: "PISP",""\n\
+      ""  scopes: [ "accounts.getBalance", "accounts.list", "accounts.transfer" ],""\n\
+      ""  authChannels: [ "Web", "OTP" ],""\n\
+      ""  callbackUri: "pisp-app://callback..."""\n\
+      ""  **authUri: "dfspa.com/authorize?consentRequestId=456" // This is new!**""\n\
+      ""}""
+    PISP --> Switch: ""202 Accepted""
+    deactivate Switch
+end
+
+...
+
+note over PISP, DFSP
+    The PISP does the auth song-and-dance, resulting in the user being redirected back to the PISP app with some form of auth token.
+end note
+
+...
+
+group DFSP grants consent to PISP
+    PISP -> Switch ++: ""PUT /consentRequests/456 {""\n\
+      ""  initiatorId: "PISP",""\n\
+      ""  authChannels: [ "Web", "OTP" ],""\n\
+      ""  scopes: [ "accounts.getBalance", "accounts.list", "accounts.transfer" ],""\n\
+      ""  callbackUri: "pisp-app://callback..."""\n\
+      ""  authUri: "dfspa.com/authorize?consentRequestId=456",""\n\
+      ""  **authToken: "secret" // This is new !**""\n\
+      ""}""
+    Switch --> PISP: ""202 Accepted""
+    deactivate PISP
+
+    Switch -> DFSP ++: ""PUT /consentRequests/456 {""\n\
+      ""  initiatorId: "PISP",""\n\
+      ""  authChannels: [ "Web", "OTP" ],""\n\
+      ""  scopes: [ "accounts.getBalance", "accounts.list", "accounts.transfer" ],""\n\
+      ""  callbackUri: "pisp-app://callback..."""\n\
+      ""  authUri: "dfspa.com/authorize?consentRequestId=456",""\n\
+      ""  **authToken: "secret" // This is new !**""\n\
+      ""}""
+    DFSP --> Switch: ""202 Accepted""
+    deactivate Switch
+
+    DFSP -> DFSP: Verify the auth token is correct.
+
+    DFSP -> Switch ++: ""POST /consents {""\n\
+      ""  id: "123",""\n\
+      ""  requestId: "456",""\n\
+      ""  initiatorId: "PISP",""\n\
+      ""  participantId: "DFSP",""\n\
+      ""  scopes: {""\n\
+      ""    accounts.getBalance: "12345-67890",""\n\
+      ""    accounts.transfer: "12345-67890",""\n\
+      ""  }""\n\
+      ""  credential: null""\n\
+      ""}""
+    Switch --> DFSP: ""202 Accepted""
+    deactivate DFSP
+
+    Switch -> PISP ++: ""POST /consents {""\n\
+      ""  id: "123",""\n\
+      ""  requestId: "456",""\n\
+      ""  initiatorId: "PISP",""\n\
+      ""  participantId: "DFSP",""\n\
+      ""  scopes: {""\n\
+      ""    accounts.getBalance: "12345-67890",""\n\
+      ""    accounts.transfer: "12345-67890",""\n\
+      ""  }""\n\
+      ""  credential: null""\n\
+      ""}""
+    PISP --> Switch: ""202 Accepted""
+    deactivate Switch
+
+    group PISP asks Auth service to generate a challenge for a credential
+        PISP -> Switch ++: ""POST /consents/123/generateChallenge {}""
+        Switch --> PISP: ""202 Accepted""
+        deactivate PISP
+
+        Switch -> Auth ++: ""POST /consents/123/generateChallenge {}""
+        Auth --> Switch: ""202 Accepted""
+        deactivate Switch
+
+        Auth -> Auth: Generate a new challenge.
+        Auth -> Switch ++: ""PUT /consents/123 {""\n\
+          ""  requestId: "456",""\n\
+          ""  initiatorId: "PISP",""\n\
+          ""  participantId: "DFSP",""\n\
+          ""  scopes: {""\n\
+          ""    accounts.getBalance: "12345-67890",""\n\
+          ""    accounts.transfer: "12345-67890",""\n\
+          ""  }""\n\
+          ""  **credential: { // This is new!**""\n\
+          ""    **id: null,**""\n\
+          ""    **credentialType: "FIDO",**""\n\
+          ""    **status: "PENDING",**""\n\
+          ""    **challenge: {**""\n\
+          ""      **payload: base64(...),**""\n\
+          ""      **signature: null,**""\n\
+          ""    **},**""\n\
+          ""    **payload: null,**""\n\
+          ""  **}**""\n\
+          ""}""
+        Switch --> Auth: ""202 Accepted""
+        deactivate Auth
+    end
+
+    Switch -> PISP ++: ""PUT /consents/123 {""\n\
+      ""  requestId: "456",""\n\
+      ""  initiatorId: "PISP",""\n\
+      ""  participantId: "DFSP",""\n\
+      ""  scopes: {""\n\
+      ""    accounts.getBalance: "12345-67890",""\n\
+      ""    accounts.transfer: "12345-67890",""\n\
+      ""  }""\n\
+      ""  **credential: { // This is new!**""\n\
+      ""    **id: null,**""\n\
+      ""    **credentialType: "FIDO",**""\n\
+      ""    **status: "PENDING",**""\n\
+      ""    **challenge: {**""\n\
+      ""      **payload: base64(...),**""\n\
+      ""      **signature: null,**""\n\
+      ""    **},**""\n\
+      ""    **payload: null,**""\n\
+      ""  **}**""\n\
+      ""}""
+    PISP --> Switch: ""202 Accepted""
+    deactivate Switch
+end
+
+...
+
+note over PISP, DFSP
+    The PISP uses the FIDO registration flow to generate a new keypair and sign the challenge, relying on the user performing an "unlock action" on their mobile device.
+end note
+
+...
+
+group PISP provides credential to complete the consent grant
+    PISP -> Switch ++: ""PUT /consents/123 {""\n\
+      ""  requestId: "456",""\n\
+      ""  initiatorId: "PISP",""\n\
+      ""  participantId: "DFSP",""\n\
+      ""  scopes: {""\n\
+      ""    accounts.getBalance: "12345-67890",""\n\
+      ""    accounts.transfer: "12345-67890",""\n\
+      ""  }""\n\
+      ""  credential: {""\n\
+      ""    **id: "9876", // This is new!**""\n\
+      ""    credentialType: "FIDO",""\n\
+      ""    status: "PENDING",""\n\
+      ""    challenge: {""\n\
+      ""      payload: base64(...),""\n\
+      ""      **signature: base64(...), // This is new!**""\n\
+      ""    },""\n\
+      ""    **payload: base64(...), // This is new!**""\n\
+      ""  }""\n\
+      ""}""
+    Switch --> PISP: ""202 Accepted""
+    deactivate PISP
+
+    Switch -> Auth ++: ""PUT /consents/123 {""\n\
+      ""  requestId: "456",""\n\
+      ""  initiatorId: "PISP",""\n\
+      ""  participantId: "DFSP",""\n\
+      ""  scopes: {""\n\
+      ""    accounts.getBalance: "12345-67890",""\n\
+      ""    accounts.transfer: "12345-67890",""\n\
+      ""  }""\n\
+      ""  credential: {""\n\
+      ""    **id: "9876", // This is new!**""\n\
+      ""    credentialType: "FIDO",""\n\
+      ""    status: "PENDING",""\n\
+      ""    challenge: {""\n\
+      ""      payload: base64(...),""\n\
+      ""      **signature: base64(...), // This is new!**""\n\
+      ""    },""\n\
+      ""    **payload: base64(...), // This is new!**""\n\
+      ""  }""\n\
+      ""}""
+    Auth --> Switch: ""202 Accepted""
+    deactivate Switch
+
+    Auth -> Auth: Verify the signature checks out.\nSave the credential.
+    Auth -> Switch ++: ""PUT /consents/123 {""\n\
+      ""  requestId: "456",""\n\
+      ""  initiatorId: "PISP",""\n\
+      ""  participantId: "DFSP",""\n\
+      ""  scopes: {""\n\
+      ""    accounts.getBalance: "12345-67890",""\n\
+      ""    accounts.transfer: "12345-67890",""\n\
+      ""  }""\n\
+      ""  credential: {""\n\
+      ""    id: "9876",""\n\
+      ""    credentialType: "FIDO",""\n\
+      ""    **status: "VERIFIED", // This is new!**""\n\
+      ""    challenge: {""\n\
+      ""      payload: base64(...),""\n\
+      ""      signature: base64(...),""\n\
+      ""    },""\n\
+      ""    payload: base64(...),""\n\
+      ""  }""\n\
+      ""}""
+    Switch --> Auth: ""200 OK""
+    deactivate Auth
+
+    Switch -> PISP ++: ""PUT /consents/123 {""\n\
+      ""  requestId: "456",""\n\
+      ""  initiatorId: "PISP",""\n\
+      ""  participantId: "DFSP",""\n\
+      ""  scopes: {""\n\
+      ""    accounts.getBalance: "12345-67890",""\n\
+      ""    accounts.transfer: "12345-67890",""\n\
+      ""  }""\n\
+      ""  credential: {""\n\
+      ""    id: "9876",""\n\
+      ""    credentialType: "FIDO",""\n\
+      ""    status: "VERIFIED",""\n\
+      ""    challenge: {""\n\
+      ""      payload: base64(...),""\n\
+      ""      signature: base64(...),""\n\
+      ""    },""\n\
+      ""    payload: base64(...),""\n\
+      ""  }""\n\
+      ""}""
+    & Switch -> DFSP ++: ""PUT /consents/123 {""\n\
+      ""  requestId: "456",""\n\
+      ""  initiatorId: "PISP",""\n\
+      ""  participantId: "DFSP",""\n\
+      ""  scopes: {""\n\
+      ""    accounts.getBalance: "12345-67890",""\n\
+      ""    accounts.transfer: "12345-67890",""\n\
+      ""  }""\n\
+      ""  credential: {""\n\
+      ""    id: "9876",""\n\
+      ""    credentialType: "FIDO",""\n\
+      ""    status: "VERIFIED",""\n\
+      ""    challenge: {""\n\
+      ""      payload: base64(...),""\n\
+      ""      signature: base64(...),""\n\
+      ""    },""\n\
+      ""    payload: base64(...),""\n\
+      ""  }""\n\
+      ""}""
+    PISP --> Switch --: ""200 OK""
+    & DFSP --> Switch --: ""200 OK""
+    deactivate Switch
+end
+
+@enduml

@@ -1,0 +1,69 @@
+@startuml
+
+!pragma teoz true
+
+title PISP Linking: Grant consent
+
+participant "PISP" as PISP
+
+box "Mojaloop"
+    participant Switch
+end box
+
+participant "DFSP" as DFSP
+
+autonumber 1 "<b>GRANT-#</b>"
+
+DFSP -> Switch ++: ""POST /consents {""\n\
+    ""  id: "123",""\n\
+    ""  requestId: "456",""\n\
+    ""  initiatorId: "PISP",""\n\
+    ""  participantId: "DFSP",""\n\
+    ""  scopes: [ ""\n\
+    ""    { **accountId: "dfsp.username.1234", // If web, these may change!**""\n\
+    ""      actions: [ "accounts.transfer", "accounts.getBalance" ] },""\n\
+    ""    { accountId: "dfsp.username.5678",""\n\
+    ""      actions: [ "accounts.transfer", "accounts.getBalance" ] },""\n\
+    ""  ],""\n\
+    ""  credential: null""\n\
+    ""}""
+Switch --> DFSP: ""202 Accepted""
+deactivate DFSP
+
+note over Switch
+  The Switch must inform both the PISP and the Auth service about the consent.
+end note
+
+Switch -> PISP ++: ""POST /consents {""\n\
+    ""  id: "123",""\n\
+    ""  requestId: "456",""\n\
+    ""  initiatorId: "PISP",""\n\
+    ""  participantId: "DFSP",""\n\
+    ""  scopes: [ ""\n\
+    ""    { accountId: "dfsp.username.1234",""\n\
+    ""      actions: [ "accounts.transfer", "accounts.getBalance" ] },""\n\
+    ""    { accountId: "dfsp.username.5678",""\n\
+    ""      actions: [ "accounts.transfer", "accounts.getBalance" ] },""\n\
+    ""  ],""\n\
+    ""  credential: null""\n\
+    ""}""
+& Switch -> Auth ++: ""POST /consents {""\n\
+    ""  id: "123",""\n\
+    ""  requestId: "456",""\n\
+    ""  initiatorId: "PISP",""\n\
+    ""  participantId: "DFSP",""\n\
+    ""  scopes: [ ""\n\
+    ""    { accountId: "dfsp.username.1234",""\n\
+    ""      actions: [ "accounts.transfer", "accounts.getBalance" ] },""\n\
+    ""    { accountId: "dfsp.username.5678",""\n\
+    ""      actions: [ "accounts.transfer", "accounts.getBalance" ] },""\n\
+    ""  ],""\n\
+    ""  credential: null""\n\
+    ""}""
+
+PISP --> Switch: ""202 Accepted""
+& Auth --> Switch: ""202 Accepted""
+
+deactivate Switch
+
+@enduml

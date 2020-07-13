@@ -59,9 +59,9 @@ For now, we are adding PISP functionality to the sdk-scheme-adapter primarily be
       - `thirdparty-pisp-api` for the PISP to implement
       - `thirdparty-dfsp-api` for the DFSP to implement
 
-A: Option 3: We are going to 
+A: Option 3: We are going to divide the new thirdparty-api into 2 parts.
 
-Refer to [DA issue #]() for more information
+Refer to [DA issue #47](https://github.com/mojaloop/design-authority/issues/47) for more information about this decision.
 
 
 ###  How should we implement the changes required for the PISP role? 

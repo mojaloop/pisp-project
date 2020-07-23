@@ -298,7 +298,7 @@ services:
       - "dfspa-scheme-adapter:172.17.0.1"
 
   dfspa-scheme-adapter:
-    image: "mojaloop/sdk-scheme-adapter:v10.6.0.1-pisp"
+    image: "mojaloop/sdk-scheme-adapter:v10.6.2.1-pisp"
     container_name: dsfpa-scheme-adapter
     env_file: ./dfsp_a/dfsp_a_scheme_adapter.env
     volumes:
@@ -354,7 +354,7 @@ services:
       - "dfspb-scheme-adapter:172.17.0.1"
 
   dfspb-scheme-adapter:
-    image: "mojaloop/sdk-scheme-adapter:v10.6.0.1-pisp"
+    image: "mojaloop/sdk-scheme-adapter:v10.6.2.1-pisp"
     container_name: dfspb-scheme-adapter
     env_file: ./dfsp_b/dfsp_b_scheme_adapter.env
     volumes:
@@ -410,7 +410,7 @@ services:
       - "pisp-scheme-adapter:172.17.0.1"
 
   pisp-scheme-adapter:
-    image: "mojaloop/sdk-scheme-adapter:v10.6.0.1-pisp"
+    image: "mojaloop/sdk-scheme-adapter:v10.6.2.1-pisp"
     container_name: pisp-scheme-adapter
     env_file: ./pisp/pisp_scheme_adapter.env
     volumes:

@@ -1,0 +1,44 @@
+{
+	"info": {
+		"_postman_id": "75e90dcb-9438-4f70-acaf-5f4e56933baa",
+		"name": "PISP Local Playground",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "POST /authorization",
+			"item": [
+				{
+					"name": "fire POST /authorization on dfsp B scheme adapter",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"toParticipantId\": \"pisp\",\n\t\"authenticationType\": \"U2F\",\n\t\"retriesLeft\": \"1\",\n\t\"amount\": {\n\t\t\"currency\": \"USD\",\n\t\t\"amount\": \"100\"\n\t},\n\t\"transactionId\": \"c87e9f61-e0d1-4a1c-a992-002718daf402\",\n\t\"transactionRequestId\": \"aca279be-60c6-42ff-aab5-901d61b5e35c\",\n\t\"quote\": {\n\t\t\"transferAmount\": {\n\t\t\t\"currency\": \"USD\",\n\t\t\t\"amount\": \"105\"\n\t\t},\n\t\t\"expiration\": \"2020-07-15T09:48:54.961Z\",\n\t\t\"ilpPacket\": \"ilp-packet-value\",\n\t\t\"condition\": \"condition-000000000-111111111-222222222-abc\"\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:6002/authorizations",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6002",
+							"path": [
+								"authorizations"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

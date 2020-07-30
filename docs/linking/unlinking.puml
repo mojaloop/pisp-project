@@ -38,12 +38,12 @@ deactivate Switch
 
 Auth -> Auth: Delete the record of the consent.
 
-Auth -> Switch ++: ""PUT /consents/123 { state: REVOKED }""
+Auth -> Switch ++: ""PATCH /consents/123 { consentStatus: REVOKED, consentRevokedAt: `timestamp` }""
 Switch --> Auth: ""200 OK""
 deactivate Auth
 
-Switch -> PISP ++: ""DELETE /consents/123""
-& Switch -> DFSP ++: ""DELETE /consents/123""
+Switch -> PISP ++: ""PATCH /consents/123""
+& Switch -> DFSP ++: ""PATCH /consents/123""
 
 PISP --> Switch: ""200 OK""
 & DFSP --> Switch: ""200 OK""

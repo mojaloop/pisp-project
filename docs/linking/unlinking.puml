@@ -38,7 +38,7 @@ deactivate Switch
 
 Auth -> Auth: Delete the record of the consent.
 
-Auth -> Switch ++: ""PATCH /consents/123 { consentStatus: REVOKED, consentRevokedAt: `timestamp` }""
+Auth -> Switch ++: ""PATCH /consents/123 \n{ consent: {\n  id: 1234,\n  status: REVOKED,\n  revokedAt: `Date`}\n}""
 Switch --> Auth: ""200 OK""
 deactivate Auth
 

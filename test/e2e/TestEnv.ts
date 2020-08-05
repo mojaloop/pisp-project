@@ -24,6 +24,9 @@ export interface TestEnvType {
   users: {
     [index: string]: UserIdType;
   };
+  parties: {
+    [index: string]: string;
+  };
 }
 
 const TestEnv: TestEnvType = {
@@ -50,6 +53,9 @@ const TestEnv: TestEnvType = {
       idType: 'MSISDN',
       idValue: '987654321'
     }
+  },
+  parties: {
+    pisp: 'pisp'
   }
 }
 

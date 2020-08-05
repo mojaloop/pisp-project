@@ -164,7 +164,8 @@ services:
       - "transaction-request-service:172.17.0.1"
 
   transaction-requests-service:
-    image: mojaloop/transaction-requests-service:v10.4.0.0-pisp
+    image: mojaloop/transaction-requests-service:v10.6.1.1-pisp
+
     container_name: transaction-requests-service
     ports:
       - "4003:4003"
@@ -194,6 +195,7 @@ services:
       - "simulator:172.17.0.1"
       - "host.docker.internal:172.17.0.1"
       - "simulator.local:172.17.0.1"
+
 
   kafka:
     image: johnnypark/kafka-zookeeper:2.3.0
@@ -283,7 +285,7 @@ services:
 
   ## DFSP A
   dfspa-backend:
-    image: "mojaloop/mojaloop-simulator:v9.4.1.1-pisp"
+    image: "mojaloop/mojaloop-simulator:v9.4.1.7-pisp"
     container_name: dfspa-backend
     env_file: ./dfsp_a/dfsp_a_backend.env
     volumes:
@@ -296,7 +298,7 @@ services:
       - "dfspa-scheme-adapter:172.17.0.1"
 
   dfspa-scheme-adapter:
-    image: "mojaloop/sdk-scheme-adapter:v9.4.11.1-pisp"
+    image: "mojaloop/sdk-scheme-adapter:v10.6.2.1-pisp"
     container_name: dsfpa-scheme-adapter
     env_file: ./dfsp_a/dfsp_a_scheme_adapter.env
     volumes:
@@ -339,7 +341,7 @@ services:
 
   ## DFSP B
   dfspb-backend:
-    image: "mojaloop/mojaloop-simulator:v9.4.1.1-pisp"
+    image: "mojaloop/mojaloop-simulator:v9.4.1.7-pisp"
     container_name: dfspb-backend
     env_file: ./dfsp_b/dfsp_b_backend.env
     volumes:
@@ -352,7 +354,7 @@ services:
       - "dfspb-scheme-adapter:172.17.0.1"
 
   dfspb-scheme-adapter:
-    image: "mojaloop/sdk-scheme-adapter:v9.4.11.1-pisp"
+    image: "mojaloop/sdk-scheme-adapter:v10.6.2.1-pisp"
     container_name: dfspb-scheme-adapter
     env_file: ./dfsp_b/dfsp_b_scheme_adapter.env
     volumes:
@@ -393,11 +395,13 @@ services:
       - mojaloop-net
     restart: always
 
- ## PISP
+  ## PISP
   pisp-backend:
-    image: "mojaloop/mojaloop-simulator:v9.4.1.1-pisp"
+    image: "mojaloop/mojaloop-simulator:v9.4.1.7-pisp"
     container_name: pisp-backend
     env_file: ./pisp/pisp_backend.env
+    volumes:
+       - ./pisp/pisp_rules.json:/src/rules.json
     ports:
       - "11000:3000"
       - "11002:3002"
@@ -406,7 +410,7 @@ services:
       - "pisp-scheme-adapter:172.17.0.1"
 
   pisp-scheme-adapter:
-    image: "mojaloop/sdk-scheme-adapter:v9.4.11.1-pisp"
+    image: "mojaloop/sdk-scheme-adapter:v10.6.2.1-pisp"
     container_name: pisp-scheme-adapter
     env_file: ./pisp/pisp_scheme_adapter.env
     volumes:

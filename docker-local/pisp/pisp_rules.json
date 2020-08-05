@@ -1,0 +1,28 @@
+[
+  {
+    "ruleId": 1,
+    "description": "Successfully accepting request",
+    "conditions": {
+      "all": [
+        {
+          "fact": "path",
+          "operator": "equal",
+          "value": "/authorizations"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "POST"
+        }
+        
+      ]
+    },
+    "event": {
+      "type": "FIXED_CALLBACK",
+      "params": {
+        "statusCode": 202,
+        "body": ""
+      }
+    }
+  }
+]

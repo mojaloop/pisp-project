@@ -32,18 +32,18 @@ deactivate PISP
 ' TODO: Do we include the ALS lookup here to figure out which Auth service is
 ' responsible for the given Consent?
 
-Switch -> Auth ++:  ""DELETE /consents/123""
+Switch -> Auth ++:  ""POST /consents/123/revoke""
 Auth --> Switch: ""202 Accepted""
 deactivate Switch
 
 Auth -> Auth: Delete the record of the consent.
 
-Auth -> Switch ++: ""DELETE /consents/123""
+Auth -> Switch ++: ""PATCH /consents/123 \n{ status: string,\n  revokedAt: string (of timestamp)}""
 Switch --> Auth: ""200 OK""
 deactivate Auth
 
-Switch -> PISP ++: ""DELETE /consents/123""
-& Switch -> DFSP ++: ""DELETE /consents/123""
+Switch -> PISP ++: ""PATCH /consents/123 \n{ status: string,\n  revokedAt: string}""
+& Switch -> DFSP ++: ""PATCH /consents/123 \n{ status: string,\n  revokedAt: string}""
 
 PISP --> Switch: ""200 OK""
 & DFSP --> Switch: ""200 OK""

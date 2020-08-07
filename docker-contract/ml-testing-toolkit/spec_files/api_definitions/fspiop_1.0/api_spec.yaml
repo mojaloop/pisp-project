@@ -632,7 +632,7 @@ paths:
     get:
       description: >-
         The HTTP request GET /parties// (or GET /parties///) is used to lookup
-        information regarding the requested Party, defined by ,  and optionally 
+        information regarding the requested Party, defined by ,  and optionally
         (for example, GET /parties/MSISDN/123456789, or GET
         /parties/BUSINESS/shoecompany/employee1).
       summary: PartiesByTypeAndID
@@ -779,7 +779,7 @@ paths:
     get:
       description: >-
         The HTTP request GET /parties// (or GET /parties///) is used to lookup
-        information regarding the requested Party, defined by ,  and optionally 
+        information regarding the requested Party, defined by ,  and optionally
         (for example, GET /parties/MSISDN/123456789, or GET
         /parties/BUSINESS/shoecompany/employee1).
       summary: PartiesSubIdByTypeAndID
@@ -2446,7 +2446,7 @@ paths:
         If the server is unable to find or create a bulk transfer, or another
         processing error occurs, the error callback PUT /bulkTransfers//error is
         used. The  in the URI should contain the bulkTransferId that was used
-        for the creation of the bulk transfer (POST /bulkTransfers), or the 
+        for the creation of the bulk transfer (POST /bulkTransfers), or the
         that was used in the GET /bulkTransfers/.
       summary: BulkTransfersErrorByID
       tags:
@@ -2529,6 +2529,214 @@ paths:
             application/json:
               schema:
                 type: object
+  # note: using fspiop to test thirdparty endpoints which are not part of the spec
+  /thirdpartyRequests/transactions:
+    post:
+      description: |
+        The HTTP request `POST /thirdpartyRequests/transactions` is used to request the creation of a third party transaction.
+        - Called by a `PISP` to initiate a third party transaction flow
+      summary: CreateThirdpartyTransactionRequests
+      tags:
+        - thirdpartyRequests
+      operationId: CreateThirdpartyTransactionRequests
+      parameters:
+        #Headers
+        - $ref: '#/components/parameters/Accept'
+        - $ref: '#/components/parameters/Content-Length'
+        - $ref: '#/components/parameters/Content-Type'
+        - $ref: '#/components/parameters/Date'
+        - $ref: '#/components/parameters/X-Forwarded-For'
+        - $ref: '#/components/parameters/FSPIOP-Source'
+        - $ref: '#/components/parameters/FSPIOP-Destination'
+        - $ref: '#/components/parameters/FSPIOP-Encryption'
+        - $ref: '#/components/parameters/FSPIOP-Signature'
+        - $ref: '#/components/parameters/FSPIOP-URI'
+        - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
+      requestBody:
+        description: Transaction request to be created.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ThirdpartyRequestsTransactionRequest'
+            example:
+              transactionRequestId: '8d34f91d-d078-4077-8263-2c047876fcf6'
+              sourceAccountId: 'dfspa.alice.1234'
+              consentId: '111'
+              payee:
+                partyIdInfo:
+                  partyIdType: 'MSISDN'
+                  partyIdentifier: '+44 1234 5678'
+                  fspId: 'dfspb'
+              payer:
+                personalInfo:
+                  complexName:
+                    firstName: 'Alice'
+                    lastName: 'K'
+                partyIdInfo:
+                  partyIdType: 'MSISDN'
+                  partyIdentifier: '+44 8765 4321'
+                  fspId: 'dfspa'
+              amountType: 'SEND'
+              amount:
+                amount: '100'
+                currency: 'USD'
+              transactionType:
+                scenario: 'TRANSFER'
+                initiator: 'PAYER'
+                initiatorType: 'CONSUMER'
+              expiration: '2020-07-15T22:17:28.985-01:00'
+      responses:
+        202:
+          $ref: '#/components/responses/Response202'
+        400:
+          $ref: '#/components/responses/ErrorResponse400'
+        401:
+          $ref: '#/components/responses/ErrorResponse401'
+        403:
+          $ref: '#/components/responses/ErrorResponse403'
+        404:
+          $ref: '#/components/responses/ErrorResponse404'
+        405:
+          $ref: '#/components/responses/ErrorResponse405'
+        406:
+          $ref: '#/components/responses/ErrorResponse406'
+        501:
+          $ref: '#/components/responses/ErrorResponse501'
+        503:
+          $ref: '#/components/responses/ErrorResponse503'
+
+  /thirdpartyRequests/transactions/{ID}:
+    get:
+      description: >
+        The callback `GET /thirdpartyRequests/transactions/{ID}` is used to get
+        information about a thirdparty request transaction.
+      summary: Get third party transaction requests
+      tags:
+        - thirdpartyRequests
+      operationId: GetThirdpartyTransactionRequests
+      parameters:
+        - $ref: '#/components/parameters/ID'
+      responses:
+        202:
+          $ref: '#/components/responses/Response200'
+        400:
+          $ref: '#/components/responses/ErrorResponse400'
+        401:
+          $ref: '#/components/responses/ErrorResponse401'
+        403:
+          $ref: '#/components/responses/ErrorResponse403'
+        404:
+          $ref: '#/components/responses/ErrorResponse404'
+        405:
+          $ref: '#/components/responses/ErrorResponse405'
+        406:
+          $ref: '#/components/responses/ErrorResponse406'
+        501:
+          $ref: '#/components/responses/ErrorResponse501'
+        503:
+          $ref: '#/components/responses/ErrorResponse503'
+    put:
+      description: >
+        The callback `PUT /thirdpartyRequests/transactions/{ID}` is used to inform the client of the result of a
+        previously-requested transaction. The `{ID}` in the URI should contain the `transactionRequestId` that was used for
+        the creation of the transaction request.
+      summary: Update third party transaction requests
+      tags:
+        - thirdpartyRequests
+      operationId: UpdateThirdpartyTransactionRequests
+      parameters:
+        #Path
+        - $ref: '#/components/parameters/ID'
+        #Headers
+        - $ref: '#/components/parameters/Content-Type'
+        - $ref: '#/components/parameters/Date'
+        - $ref: '#/components/parameters/X-Forwarded-For'
+        - $ref: '#/components/parameters/FSPIOP-Source'
+        - $ref: '#/components/parameters/FSPIOP-Destination'
+        - $ref: '#/components/parameters/FSPIOP-Encryption'
+        - $ref: '#/components/parameters/FSPIOP-Signature'
+        - $ref: '#/components/parameters/FSPIOP-URI'
+        - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
+        - $ref: '#/components/parameters/Content-Length'
+      requestBody:
+        description: Transaction request result returned.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ThirdpartyRequestsTransactionResponse'
+      responses:
+        202:
+          $ref: '#/components/responses/Response200'
+        400:
+          $ref: '#/components/responses/ErrorResponse400'
+        401:
+          $ref: '#/components/responses/ErrorResponse401'
+        403:
+          $ref: '#/components/responses/ErrorResponse403'
+        404:
+          $ref: '#/components/responses/ErrorResponse404'
+        405:
+          $ref: '#/components/responses/ErrorResponse405'
+        406:
+          $ref: '#/components/responses/ErrorResponse406'
+        501:
+          $ref: '#/components/responses/ErrorResponse501'
+        503:
+          $ref: '#/components/responses/ErrorResponse503'
+
+  /thirdpartyRequests/transactions/{ID}/error:
+    put:
+      description: >
+        If the server is unable to find the transaction request, or another processing error occurs,
+        the error callback `PUT /thirdpartyRequests/transactions/{ID}/error` is used.
+        The `{ID}` in the URI should contain the `transactionRequestId` that was used for the creation of the transaction request.
+      summary: Return transaction error
+      tags:
+        - thirdpartyRequests
+      operationId: UpdateThirdpartyTransactionRequestsError
+      parameters:
+        #Path
+        - $ref: '#/components/parameters/ID'
+        #Headers
+        - $ref: '#/components/parameters/Content-Length'
+        - $ref: '#/components/parameters/Content-Type'
+        - $ref: '#/components/parameters/Date'
+        - $ref: '#/components/parameters/X-Forwarded-For'
+        - $ref: '#/components/parameters/FSPIOP-Source'
+        - $ref: '#/components/parameters/FSPIOP-Destination'
+        - $ref: '#/components/parameters/FSPIOP-Encryption'
+        - $ref: '#/components/parameters/FSPIOP-Signature'
+        - $ref: '#/components/parameters/FSPIOP-URI'
+        - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
+      requestBody:
+        description: Details of the error returned.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ErrorInformationObject'
+      responses:
+        202:
+          $ref: '#/components/responses/Response202'
+        400:
+          $ref: '#/components/responses/ErrorResponse400'
+        401:
+          $ref: '#/components/responses/ErrorResponse401'
+        403:
+          $ref: '#/components/responses/ErrorResponse403'
+        404:
+          $ref: '#/components/responses/ErrorResponse404'
+        405:
+          $ref: '#/components/responses/ErrorResponse405'
+        406:
+          $ref: '#/components/responses/ErrorResponse406'
+        501:
+          $ref: '#/components/responses/ErrorResponse501'
+        503:
+          $ref: '#/components/responses/ErrorResponse503'
+
 components:
   parameters:
     Accept:
@@ -2859,6 +3067,13 @@ components:
             $ref: '#/components/schemas/PartiesTypeIDPutResponse'
       required: true
   schemas:
+    AccountAddress:
+      title: accountAddress
+      type: string
+      description: Unique routable address which is DFSP specific.
+      pattern: ^([0-9A-Za-z_~\-\.]+[0-9A-Za-z_~\-])$
+      minLength: 1
+      maxLength: 1023
     Amount:
       title: Amount
       type: string
@@ -3168,7 +3383,7 @@ components:
         restricted by a regular expression for interoperability reasons. The
         format is according to ISO 8601, expressed in a combined date, time and
         time zone format. A more readable version of the format is
-        yyyy-MM-ddTHH:mm:ss.SSS[-HH:MM]. Examples - 
+        yyyy-MM-ddTHH:mm:ss.SSS[-HH:MM]. Examples -
         "2016-05-24T08:38:08.699-04:00", "2016-05-24T08:38:08.699Z" (where Z
         indicates Zulu time zone, same as UTC).
     ErrorCode:
@@ -4027,6 +4242,52 @@ components:
           $ref: '#/components/schemas/RefundReason'
       required:
         - originalTransactionId
+    ThirdpartyRequestsTransactionRequest:
+      title: ThirdpartyRequestTransaction
+      type: object
+      description: Object.
+      properties:
+        transactionRequestId:
+          $ref: '#/components/schemas/CorrelationId'
+        sourceAccountId:
+          $ref: '#/components/schemas/AccountAddress'
+        consentId:
+          allOf:
+            - $ref: '#/components/schemas/CorrelationId'
+        payee:
+          $ref: '#/components/schemas/Party'
+        payer:
+          $ref: '#/components/schemas/Party'
+        amountType:
+          $ref: '#/components/schemas/AmountType'
+        amount:
+          $ref: '#/components/schemas/Money'
+        transactionType:
+          $ref: '#/components/schemas/TransactionType'
+        expiration:
+          $ref: '#/components/schemas/DateTime'
+      required:
+        - transactionRequestId
+        - sourceAccountId
+        - consentId
+        - payee
+        - payer
+        - amountType
+        - amount
+        - transactionType
+        - expiration
+    ThirdpartyRequestsTransactionResponse:
+      title: ThirdpartyRequestsTransactionResponse
+      type: object
+      description: The object sent in the PUT /thirdPartyRequests/transactions/{ID} request.
+      properties:
+        transactionId:
+          $ref: '#/components/schemas/CorrelationId'
+          description: >
+            Identifies a related transaction (if a transaction has been created)
+        transactionRequestState:
+          $ref: '#/components/schemas/TransactionRequestState'
+          description: State of the transaction request`
     Transaction:
       title: Transaction
       type: object

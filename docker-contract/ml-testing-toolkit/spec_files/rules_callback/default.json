@@ -699,5 +699,89 @@
       "delay": 0,
       "type": "FIXED_CALLBACK"
     }
+  },
+  {
+    "ruleId": 21,
+    "priority": 1,
+    "description": "post /thirdpartyRequests/transactions",
+    "apiVersion": {
+      "minorVersion": 0,
+      "majorVersion": 1,
+      "type": "fspiop",
+      "asynchronous": true
+    },
+    "conditions": {
+      "all": [
+        {
+          "fact": "operationPath",
+          "operator": "equal",
+          "value": "/thirdpartyRequests/transactions"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "post"
+        }
+      ]
+    },
+    "event": {
+      "method": "put",
+      "path": "/thirdpartyRequests/transactions/{ID}",
+      "params": {
+        "headers": {
+          "Content-Type": "application/vnd.interoperability.thirdparty+json;version=1.0",
+          "Date": "Wed, 27 May 2020 11:13:34 GMT",
+          "FSPIOP-Source": "DFSPA"
+        },
+        "body": {
+          "transactionId": "5a2ad5dc-4ab1-4a22-8c5b-62f75252a8d5",
+          "transactionRequestState": "RECEIVED"
+        }
+      },
+      "delay": 0,
+      "type": "FIXED_CALLBACK"
+    }
+  },
+  {
+    "ruleId": 22,
+    "priority": 1,
+    "description": "get /thirdpartyRequests/transactions/{ID}",
+    "apiVersion": {
+      "minorVersion": 0,
+      "majorVersion": 1,
+      "type": "fspiop",
+      "asynchronous": true
+    },
+    "conditions": {
+      "all": [
+        {
+          "fact": "operationPath",
+          "operator": "equal",
+          "value": "/thirdpartyRequests/transactions/{ID}"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "get"
+        }
+      ]
+    },
+    "event": {
+      "method": "put",
+      "path": "/thirdpartyRequests/transactions/{ID}",
+      "params": {
+        "headers": {
+          "Content-Type": "application/vnd.interoperability.thirdparty+json;version=1.0",
+          "Date": "Wed, 27 May 2020 11:13:34 GMT",
+          "FSPIOP-Source": "DFSPA"
+        },
+        "body": {
+          "transactionId": "5a2ad5dc-4ab1-4a22-8c5b-62f75252a8d5",
+          "transactionRequestState": "RECEIVED"
+        }
+      },
+      "delay": 0,
+      "type": "FIXED_CALLBACK"
+    }
   }
 ]

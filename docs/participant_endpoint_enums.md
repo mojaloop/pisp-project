@@ -19,7 +19,7 @@ These endpoints should be added to the enums of `central-services-shared`, and t
 ## DFSP:
 
 - `THIRDPARTY_CALLBACK_URL_TRANSACTION_REQUEST_POST`
-- `THIRDPARTY_CALLBACL_URL_CONSENT_REQUEST_PUT`
+- `THIRDPARTY_CALLBACK_URL_CONSENT_REQUEST_PUT`
 - `THIRDPARTY_CALLBACK_URL_CONSENT_REQUEST_PUT_ERROR`
 - `THIRDPARTY_CALLBACK_URL_CONSENT_POST`
     > Point to central-auth to get the final consent creation - see [GRANT-4](https://github.com/mojaloop/pisp/tree/master/docs/linking#15-grant-consent)

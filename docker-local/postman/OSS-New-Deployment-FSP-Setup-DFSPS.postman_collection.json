@@ -1020,7 +1020,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"type\": \"THIRDPARTY_CALLBACK_URL_TRX_REQ_POST\",\n  \"value\": \"{{HOST_SIMULATOR_K8S_CLUSTER}}/thirdpartyRequests/transactions\"\n}"
+									"raw": "{\n  \"type\": \"THIRDPARTY_CALLBACK_URL_TRX_REQ_POST\",\n  \"value\": \"{{HOST_SIMULATOR_K8S_CLUSTER}}\"\n}"
 								},
 								"url": {
 									"raw": "{{HOST_CENTRAL_LEDGER}}/participants/{{payerfsp}}/endpoints",
@@ -2228,6 +2228,50 @@
 								"body": {
 									"mode": "raw",
 									"raw": "{\n  \"type\": \"FSPIOP_CALLBACK_URL_TRANSFER_ERROR\",\n  \"value\": \"{{HOST_SIMULATOR_K8S_CLUSTER}}/transfers/{{transferId}}/error\"\n}"
+								},
+								"url": {
+									"raw": "{{HOST_CENTRAL_LEDGER}}/participants/{{payeefsp}}/endpoints",
+									"host": [
+										"{{HOST_CENTRAL_LEDGER}}"
+									],
+									"path": [
+										"participants",
+										"{{payeefsp}}",
+										"endpoints"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add payeefsp callback - THIRDPARTY_CALLBACK_URL_TRX_REQ_POST",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "932779c6-d88b-4db0-b3a7-541ea1828ae7",
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {",
+											"    pm.response.to.have.status(201);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"type\": \"THIRDPARTY_CALLBACK_URL_TRX_REQ_POST\",\n  \"value\": \"{{HOST_SIMULATOR_K8S_CLUSTER}}\"\n}"
 								},
 								"url": {
 									"raw": "{{HOST_CENTRAL_LEDGER}}/participants/{{payeefsp}}/endpoints",
@@ -3523,6 +3567,50 @@
 								"body": {
 									"mode": "raw",
 									"raw": "{\n  \"type\": \"FSPIOP_CALLBACK_URL_TRANSFER_ERROR\",\n  \"value\": \"{{HOST_SIMULATOR_K8S_CLUSTER}}/transfers/{{transferId}}/error\"\n}"
+								},
+								"url": {
+									"raw": "{{HOST_CENTRAL_LEDGER}}/participants/{{payerfsp}}/endpoints",
+									"host": [
+										"{{HOST_CENTRAL_LEDGER}}"
+									],
+									"path": [
+										"participants",
+										"{{payerfsp}}",
+										"endpoints"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add payerfsp callback - THIRDPARTY_CALLBACK_URL_TRX_REQ_POST",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "3dc6e9d3-a553-46de-9f05-598c20695012",
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {",
+											"    pm.response.to.have.status(201);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"type\": \"THIRDPARTY_CALLBACK_URL_TRX_REQ_POST\",\n  \"value\": \"{{HOST_SIMULATOR_K8S_CLUSTER}}\"\n}"
 								},
 								"url": {
 									"raw": "{{HOST_CENTRAL_LEDGER}}/participants/{{payerfsp}}/endpoints",

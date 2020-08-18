@@ -60,8 +60,8 @@ Api for a PISP to implement to allow PISP functionality.
 | Request Challenge                 | Y | `PUT`  | `/consents/{ID}/createCredential`          | ❌ | ✅ | PISP needs to request a challenge for the given consent | 
 | Lookup Consent                    | Y | `GET`  | `/consents/{ID}`                           | ✅ | ✅ |  | 
 | Update Consent                    | Y | `PUT`  | `/consents/{ID}`                           | ✅ | ✅ | To update add a credential or verify a credential, setting the status to `VERIFIED` | 
-| Initiate 3rd party request        | Y | `POST` | `/thirdPartyRequest/transactions`           | ❌ | ✅ |  | 
-| Get 3rd party request information | Y | `GET`  | `/thirdPartyRequest/transactions/{ID}`      | ❌ | ✅ |  | 
+| Initiate 3rd party request        | Y | `POST` | `/thirdpartyRequests/transactions`           | ❌ | ✅ |  | 
+| Get 3rd party request information | Y | `GET`  | `/thirdpartyRequests/transactions/{ID}`      | ❌ | ✅ |  | 
 
 > \* also:  `{Type}/{ID}/{SubId}`
 
@@ -77,7 +77,7 @@ Api for a DFSP to implement to allow PISP functionality.
 | Create Consent                   | Y | `POST` | `/consents`                                          | ✅ | ❌ | Called by DFSP after a successful `consentRequest` flow | 
 | Lookup Consent                   | Y | `GET`  | `/consents/{ID}`                                     | ✅ | ✅ |  | 
 | Update Consent                   | Y | `PUT`  | `/consents/{ID}`*                                    | ✅ | ✅ | To update add a credential or verify a credential, setting the status to `VERIFIED` |
-| Verify a 3rd party transaction   | Y | `POST` | `/thirdPartyRequest/transactions/{ID/authorizations` | ❌ | ✅ | Called by a DFSP to check the authorization it gets back from a PISP | 
+| Verify a 3rd party transaction   | Y | `POST` | `/thirdpartyRequests/transactions/{ID/authorizations` | ❌ | ✅ | Called by a DFSP to check the authorization it gets back from a PISP | 
 
 
 > \* `PUT /consents/{ID}` from the DFSP may not be required. 
@@ -123,9 +123,9 @@ Api for a DFSP to implement to allow PISP functionality.
 | Update Consent Request Error                  | Y | `PUT`  | `/consentRequests/{ID}/error`                    | ✅ | ✅ |  | 
 | Create Consent                                | Y | `POST` | `/consents/`*2                                   | ❌ | ✅ | Callback a PISP gets once `consentRequest` is successful |
 | Create Or Update Consent                      | Y | `PUT`  | `/consents/{ID}`*2                               | ❌ | ✅ | Callback a PISP gets once consent's challenge has been added |
-| Perform Authorization                         | Y | `POST` | `/authorizations/`                               | ❌ | ✅ | Requests Authorization for a `thirdPartyRequests/transaction` from DFSP | 
-| Update 3rd Party Transaction Request          | Y | `PUT`  | `/thirdPartyRequest/transactions/{ID}`           | ❌ | ✅ | Called at the end of the transaction flow, to inform PISP of final result | 
-| Update 3rd Party Transaction Request Error    | Y | `PUT`  | `/thirdPartyRequest/transactions/{ID}/error`     | ❌ | ✅ | Inform PISP of an error during the `thirdPartyRequests/transaction` | 
+| Perform Authorization                         | Y | `POST` | `/authorizations/`                               | ❌ | ✅ | Requests Authorization for a `thirdpartyRequests/transaction` from DFSP | 
+| Update 3rd Party Transaction Request          | Y | `PUT`  | `/thirdpartyRequests/transactions/{ID}`           | ❌ | ✅ | Called at the end of the transaction flow, to inform PISP of final result | 
+| Update 3rd Party Transaction Request Error    | Y | `PUT`  | `/thirdpartyRequests/transactions/{ID}/error`     | ❌ | ✅ | Inform PISP of an error during the `thirdpartyRequests/transaction` | 
 
 > \* also: `{Type}/{ID}/{SubId}`
 > \*2 We may want this to be _only_ be a POST to create a consent, to keep things consistent
@@ -145,9 +145,9 @@ DFSP inbound API calls required for PISP functionality.
 | Update Consent Request                | Y | `PUT`  | `/consentRequests/{ID}`                                   | ✅ | ✅ | Based on our current designs, both a DFSP and PISP use this to callback to one another about the `consentRequest` | 
 | Lookup Consent                        | Y | `GET`  | `/consents/{ID}`                                          | ✅ | ✅ |  | 
 | Update Consent                        | Y | `PUT`  | `/consents/{ID}`*2                                        | ✅ | ✅ | Only in the case of 3rd party FIDO service, DFSP can opt to verify the signature themselves | 
-| Initiate 3rd party request            | Y | `POST` | `/thirdPartyRequest/transaction`                          | ✅ | ❌ | Handle the 3rd party request, and ask Payee FSP for quote | 
-| Update a 3rd party verification       | Y | `PUT`  | `/thirdPartyRequest/transactions/{ID/authorizations`      | ✅ | ❌ | Called by the auth service on successful validation of authorization | 
-| Update a 3rd party verification error | Y | `PUT`  | `/thirdPartyRequest/transactions/{ID/authorizations/error`| ✅ | ❌ | Called by the auth service on unsuccesful validation of authorization | 
+| Initiate 3rd party request            | Y | `POST` | `/thirdpartyRequests/transactions`                          | ✅ | ❌ | Handle the 3rd party request, and ask Payee FSP for quote | 
+| Update a 3rd party verification       | Y | `PUT`  | `/thirdpartyRequests/transactions/{ID/authorizations`      | ✅ | ❌ | Called by the auth service on successful validation of authorization | 
+| Update a 3rd party verification error | Y | `PUT`  | `/thirdpartyRequests/transactions/{ID/authorizations/error`| ✅ | ❌ | Called by the auth service on unsuccesful validation of authorization | 
 
 
 > \* also: `{Type}/{ID}/{SubId}`

@@ -23,5 +23,8 @@
       "version": "9.3",
       "folderPath": "central_admin_9.3"
     }
-  ]
+  ],
+  "OAUTH": {
+    "AUTH_ENABLED": false
+  }
 }

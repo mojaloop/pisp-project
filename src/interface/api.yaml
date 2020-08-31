@@ -29,12 +29,7 @@ paths:
       description: |
         Get the party information from a known participant
       parameters:
-        - name: ID
-          in: path
-          required: true
-          schema:
-            type: string
-          description: The identifier value.
+        - $ref: '#/paths/~1consents~1%7BID%7D/put/parameters/0'
         - $ref: '#/paths/~1consentRequests/post/parameters/0'
         - $ref: '#/paths/~1consentRequests/post/parameters/1'
         - $ref: '#/paths/~1consentRequests/post/parameters/2'
@@ -295,78 +290,78 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/paths/~1consentRequests/post/responses/400/content/application~1json/schema'
+                $ref: '#/paths/~1consents~1%7BID%7D/put/responses/400/content/application~1json/schema'
           headers:
             Content-Length:
-              $ref: '#/paths/~1consentRequests/post/responses/400/headers/Content-Length'
+              $ref: '#/paths/~1consents~1%7BID%7D/put/responses/400/headers/Content-Length'
             Content-Type:
-              $ref: '#/paths/~1consentRequests/post/responses/400/headers/Content-Type'
+              $ref: '#/paths/~1consents~1%7BID%7D/put/responses/400/headers/Content-Type'
         '403':
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '#/paths/~1consentRequests/post/responses/400/content/application~1json/schema'
+                $ref: '#/paths/~1consents~1%7BID%7D/put/responses/400/content/application~1json/schema'
           headers:
             Content-Length:
-              $ref: '#/paths/~1consentRequests/post/responses/400/headers/Content-Length'
+              $ref: '#/paths/~1consents~1%7BID%7D/put/responses/400/headers/Content-Length'
             Content-Type:
-              $ref: '#/paths/~1consentRequests/post/responses/400/headers/Content-Type'
+              $ref: '#/paths/~1consents~1%7BID%7D/put/responses/400/headers/Content-Type'
         '404':
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: '#/paths/~1consentRequests/post/responses/400/content/application~1json/schema'
+                $ref: '#/paths/~1consents~1%7BID%7D/put/responses/400/content/application~1json/schema'
           headers:
             Content-Length:
-              $ref: '#/paths/~1consentRequests/post/responses/400/headers/Content-Length'
+              $ref: '#/paths/~1consents~1%7BID%7D/put/responses/400/headers/Content-Length'
             Content-Type:
-              $ref: '#/paths/~1consentRequests/post/responses/400/headers/Content-Type'
+              $ref: '#/paths/~1consents~1%7BID%7D/put/responses/400/headers/Content-Type'
         '405':
           description: Method Not Allowed
           content:
             application/json:
               schema:
-                $ref: '#/paths/~1consentRequests/post/responses/400/content/application~1json/schema'
+                $ref: '#/paths/~1consents~1%7BID%7D/put/responses/400/content/application~1json/schema'
           headers:
             Content-Length:
-              $ref: '#/paths/~1consentRequests/post/responses/400/headers/Content-Length'
+              $ref: '#/paths/~1consents~1%7BID%7D/put/responses/400/headers/Content-Length'
             Content-Type:
-              $ref: '#/paths/~1consentRequests/post/responses/400/headers/Content-Type'
+              $ref: '#/paths/~1consents~1%7BID%7D/put/responses/400/headers/Content-Type'
         '406':
           description: Not Acceptable
           content:
             application/json:
               schema:
-                $ref: '#/paths/~1consentRequests/post/responses/400/content/application~1json/schema'
+                $ref: '#/paths/~1consents~1%7BID%7D/put/responses/400/content/application~1json/schema'
           headers:
             Content-Length:
-              $ref: '#/paths/~1consentRequests/post/responses/400/headers/Content-Length'
+              $ref: '#/paths/~1consents~1%7BID%7D/put/responses/400/headers/Content-Length'
             Content-Type:
-              $ref: '#/paths/~1consentRequests/post/responses/400/headers/Content-Type'
+              $ref: '#/paths/~1consents~1%7BID%7D/put/responses/400/headers/Content-Type'
         '501':
           description: Not Implemented
           content:
             application/json:
               schema:
-                $ref: '#/paths/~1consentRequests/post/responses/400/content/application~1json/schema'
+                $ref: '#/paths/~1consents~1%7BID%7D/put/responses/400/content/application~1json/schema'
           headers:
             Content-Length:
-              $ref: '#/paths/~1consentRequests/post/responses/400/headers/Content-Length'
+              $ref: '#/paths/~1consents~1%7BID%7D/put/responses/400/headers/Content-Length'
             Content-Type:
-              $ref: '#/paths/~1consentRequests/post/responses/400/headers/Content-Type'
+              $ref: '#/paths/~1consents~1%7BID%7D/put/responses/400/headers/Content-Type'
         '503':
           description: Service Unavailable
           content:
             application/json:
               schema:
-                $ref: '#/paths/~1consentRequests/post/responses/400/content/application~1json/schema'
+                $ref: '#/paths/~1consents~1%7BID%7D/put/responses/400/content/application~1json/schema'
           headers:
             Content-Length:
-              $ref: '#/paths/~1consentRequests/post/responses/400/headers/Content-Length'
+              $ref: '#/paths/~1consents~1%7BID%7D/put/responses/400/headers/Content-Length'
             Content-Type:
-              $ref: '#/paths/~1consentRequests/post/responses/400/headers/Content-Type'
+              $ref: '#/paths/~1consents~1%7BID%7D/put/responses/400/headers/Content-Type'
   '/consentRequests/{ID}':
     put:
       tags:
@@ -376,7 +371,7 @@ paths:
       description: |
         PISP updates the consentRequest to include authorization from their user
       parameters:
-        - $ref: '#/paths/~1parties~1OPAQUE~1%7BID%7D/get/parameters/0'
+        - $ref: '#/paths/~1consents~1%7BID%7D/put/parameters/0'
         - $ref: '#/paths/~1consentRequests/post/parameters/0'
         - $ref: '#/paths/~1consentRequests/post/parameters/1'
         - $ref: '#/paths/~1consentRequests/post/parameters/2'
@@ -440,7 +435,7 @@ paths:
       description: |
         PISP requests a challenge from the auth service
       parameters:
-        - $ref: '#/paths/~1parties~1OPAQUE~1%7BID%7D/get/parameters/0'
+        - $ref: '#/paths/~1consents~1%7BID%7D/put/parameters/0'
         - $ref: '#/paths/~1consentRequests/post/parameters/0'
         - $ref: '#/paths/~1consentRequests/post/parameters/1'
         - $ref: '#/paths/~1consentRequests/post/parameters/2'
@@ -474,6 +469,140 @@ paths:
                     - "FIDO" - A FIDO public/private keypair.
               required:
                 - type
+            example:
+              type: FIDO
+      responses:
+        '202':
+          $ref: '#/paths/~1participants/get/responses/200'
+        '400':
+          $ref: '#/paths/~1consentRequests/post/responses/400'
+        '401':
+          $ref: '#/paths/~1consentRequests/post/responses/401'
+        '403':
+          $ref: '#/paths/~1consentRequests/post/responses/403'
+        '404':
+          $ref: '#/paths/~1consentRequests/post/responses/404'
+        '405':
+          $ref: '#/paths/~1consentRequests/post/responses/405'
+        '406':
+          $ref: '#/paths/~1consentRequests/post/responses/406'
+        '501':
+          $ref: '#/paths/~1consentRequests/post/responses/501'
+        '503':
+          $ref: '#/paths/~1consentRequests/post/responses/503'
+  '/consents/{ID}':
+    put:
+      tags:
+        - consents
+      operationId: UpdateConsentRequest
+      summary: UpdateConsentRequest
+      description: |
+        PISP updates consent object with signed challenge and key information
+      parameters:
+        - name: ID
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The identifier value.
+        - $ref: '#/paths/~1consentRequests/post/parameters/0'
+        - $ref: '#/paths/~1consentRequests/post/parameters/1'
+        - $ref: '#/paths/~1consentRequests/post/parameters/2'
+        - $ref: '#/paths/~1consentRequests/post/parameters/3'
+        - $ref: '#/paths/~1consentRequests/post/parameters/4'
+        - $ref: '#/paths/~1consentRequests/post/parameters/5'
+        - $ref: '#/paths/~1consentRequests/post/parameters/6'
+        - $ref: '#/paths/~1consentRequests/post/parameters/7'
+        - $ref: '#/paths/~1consentRequests/post/parameters/8'
+        - $ref: '#/paths/~1consentRequests/post/parameters/9'
+        - $ref: '#/paths/~1consentRequests/post/parameters/10'
+      requestBody:
+        description: GenerateChallengeRequest Body
+        required: true
+        content:
+          application/json:
+            schema:
+              title: ConsentIDPutRequest
+              type: object
+              description: Data model for the complex type Consent.
+              properties:
+                requestId:
+                  allOf:
+                    - $ref: '#/components/schemas/ThirdpartyTransactionRequest/properties/consentId/allOf/0'
+                  description: |
+                    The id of the ConsentRequest that was used to initiate the
+                    creation of this Consent.
+                participantId:
+                  title: FspId
+                  type: string
+                  minLength: 1
+                  maxLength: 32
+                  description: FSP identifier.
+                  example: 1234
+                initiatorId:
+                  allOf:
+                    - $ref: '#/paths/~1consents~1%7BID%7D/put/requestBody/content/application~1json/schema/properties/participantId'
+                  description: PISP identifier who uses this Consent.
+                scopes:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/CreateConsentRequest/properties/scopes/items'
+                credential:
+                  title: UpdatedCredential
+                  type: object
+                  description: |
+                    A credential used to allow a user to prove their identity and access
+                    to an account with a DFSP.
+
+                    UpdatedCredential is a special formatting of the credential to allow us to be
+                    more explict about the `status` field - it should only ever be PENDING when updating
+                    a credential.
+                  properties:
+                    id:
+                      type: string
+                      description: The id of a Credential.
+                    type:
+                      $ref: '#/paths/~1consents~1%7BID%7D~1generateChallenge/post/requestBody/content/application~1json/schema/properties/type'
+                    status:
+                      title: CredentialStatusType
+                      type: string
+                      enum:
+                        - PENDING
+                        - ACTIVE
+                      description: |
+                        The status of the Credential's creation
+                        - "PENDING" - The PISP has requested a challenge, or the challenge has
+                                      initialized but not yet answered by the PISP.
+                        - "VERIFIED" - The Credential is valid, and ready to be used by the PISP.
+                    challenge:
+                      title: CredentialChallenge
+                      type: object
+                      description: |
+                        The challenge issued by a DFSP that must be answered by the PISP.
+                      properties:
+                        payload:
+                          type: string
+                          description: Base64 encoded binary of the challenge that must be answered by the PISP.
+                        signature:
+                          type: string
+                          description: Base64 encoded binary string or result of the payload signed by the PISP using the private key.
+                      required:
+                        - payload
+                    payload:
+                      type: string
+                      description: Base64 encoded bytes - The public key of the Public/Private keypair.
+                  required:
+                    - id
+                    - type
+                    - status
+                    - challenge
+                    - payload
+              required:
+                - requestId
+                - participantId
+                - initiatorId
+                - scopes
+                - credential
             example:
               type: FIDO
       responses:
@@ -580,7 +709,7 @@ paths:
       description: |
         The HTTP request `POST /thirdpartyRequests/transactions/{id}/authorizations` is used by the DFSP to verify a third party authorization.
       parameters:
-        - $ref: '#/paths/~1parties~1OPAQUE~1%7BID%7D/get/parameters/0'
+        - $ref: '#/paths/~1consents~1%7BID%7D/put/parameters/0'
         - $ref: '#/paths/~1consentRequests/post/parameters/0'
         - $ref: '#/paths/~1consentRequests/post/parameters/1'
         - $ref: '#/paths/~1consentRequests/post/parameters/2'
@@ -634,7 +763,7 @@ paths:
         The HTTP request `PUT /thirdpartyRequests/transactions/{id}/authorizations` is used by the auth-service to update a thirdparty authorization after successful validation.
         For an unsuccessful authorization result, the `PUT /thirdpartyRequests/transactions/{id}/authorizations/error` will be called by the auth-service, instead of this endpoint.
       parameters:
-        - $ref: '#/paths/~1parties~1OPAQUE~1%7BID%7D/get/parameters/0'
+        - $ref: '#/paths/~1consents~1%7BID%7D/put/parameters/0'
         - $ref: '#/paths/~1consentRequests/post/parameters/1'
         - $ref: '#/paths/~1consentRequests/post/parameters/2'
         - $ref: '#/paths/~1consentRequests/post/parameters/3'
@@ -798,12 +927,7 @@ components:
                         PartyIdType, normally a PersonalIdentifierType.
                       example: DRIVING_LICENSE
                     fspId:
-                      title: FspId
-                      type: string
-                      minLength: 1
-                      maxLength: 32
-                      description: FSP identifier.
-                      example: 1234
+                      $ref: '#/paths/~1consents~1%7BID%7D/put/requestBody/content/application~1json/schema/properties/participantId'
                   required:
                     - partyIdType
                     - partyIdentifier

@@ -251,7 +251,6 @@ paths:
         503:
           $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/503'
 
-
   /consents/{ID}:
     put:
       tags:

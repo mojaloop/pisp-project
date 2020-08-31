@@ -25,7 +25,7 @@ end note
 
 ...
 
-PISP -> Switch ++: ""DELETE /consents/123""
+PISP -> Switch ++: ""POST /consents/123/revoke""
 Switch --> PISP: ""202 Accepted""
 deactivate PISP
 

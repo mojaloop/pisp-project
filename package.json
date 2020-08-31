@@ -12,7 +12,7 @@
     "standard": "echo '\\033[1;33m  This project uses eslint instead of standard. Use `npm run lint` instead.'",
     "lint": "eslint ./src/**/*.ts *.js",
     "build": "tsc",
-    "build:openapi": "swagger-cli bundle -o ./src/interface/api.yaml -t yaml ./src/interface/api-template.yaml && swagger-cli validate ./src/interface/api.yaml",
+    "build:openapi": "swagger-cli bundle -o ./src/interface/api.yaml -t yaml ./src/interface/api-template.yaml && swagger-cli validate ./src/interface/api.yaml && cp ./src/interface/api.yaml ./docker-contract/ml-testing-toolkit/spec_files/api_definitions/thirdparty_pisp/api_spec.yaml",
     "watch": "tsc -w",
     "reseed": "echo \"seeding test environment\" && ./docker-local/postman/scripts/_00_seed_all.sh",
     "wait-4-docker": "node ./scripts/_wait4_all.js",

@@ -1,0 +1,42 @@
+@startuml
+
+hide empty description
+
+''' txReq
+[*] --> txReqCreated: **ThirdpartyTransactionRequest Subscription**
+txReqCreated: Listeners:
+txReqCreated: ""transactionRequestId""
+
+txReqCreated -> txReqFailed: ""PUT /thirdpartyRequests/transaction/{id}/error""
+
+''' auth
+txReqCreated --> authWaiting: **ThirdpartyAuthorizationRequest**
+
+authWaiting: Listeners:
+authWaiting: ""transactionRequestId""
+authWaiting: ""transactionId""
+
+authWaiting -> txReqFailed: ""PUT /thirdpartyRequests/transaction/{id}/error""
+authWaiting -> authFailed: ""PUT /authorizations/{id}/error""
+
+''' transfer
+authWaiting --> transferWaiting: **Transfer Prepare Notification**
+
+transferWaiting: Listeners:
+transferWaiting: ""transactionRequestId""
+transferWaiting: ""transferId""
+
+transferWaiting -> transferFailed: ""PUT/transfer/{id}/error""\nTimeout Notification, Rejected Notification
+
+
+transferWaiting --> transferComplete: **Transfer Fulfil Notification**
+
+transferComplete --> [*]
+
+
+' txReqFailed --> [*]
+' authFailed --> [*]
+' transferFailed --> [*]
+
+
+@enduml

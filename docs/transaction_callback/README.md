@@ -3,28 +3,28 @@
 
 ## 1. Subscription
 
-The goal of subscription is to allow the Central-Event-Processor (CEP) to listen for **Transfer Fulfil Notification Events** on the Notifications Topic, and deliver them to the Thirdparty-API-Adapter.
+The goal of subscription is to allow the Central-Event-Processor (CEP) to listen for **ThirdpartyAuthorizationRequest** Events on the Notifications Topic, and deliver them to the Thirdparty-API-Adapter.
 
 # 1.1 `POST /thirdpartyRequests/transactions`
 
-The PISP issues a `POST /thirdpartyRequests/transactions` request to dfspA, asking to transfer funds from their users funds to dfspB.
+The PISP issues a `POST /thirdpartyRequests/transactions` request to dfspA, asking to transfer funds from their users' account to dfspB.
 
 The Thirdparty-API-Adapter recieves this request, and emits a **ThirdpartyTransactionRequest Subscription** event
  
-The CEP recieves this event, and starts listening for other events related to `transferRequestId=1234` on the notifications topic.
+The CEP recieves this event, and starts listening for other events related to `transferRequestId=1234` on the Notifications Topic.
 
 ![subscription](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/mojaloop/pisp/feature/273-tx-notif-design-3/docs/transaction_callback/1_subscription.puml)
 
 
 ## 2. Context Gathering
 
-The CEP is listening for events related to a `transactionRequestId=1234`. In order to listen for the Notification Event related to a given `transferId` that will be the result of a successful 3rd party initiation, it needs to gather more context.
+The CEP is listening for events related to a `transactionRequestId=1234`. In order to listen for the **Transfer Fulfil Notification** Events related to a given `transferId` that will be the result of a successful 3rd party initiation, it needs to gather more context.
 
 ### 2.1 `POST /authorizations`
 
 > Maybe this should be on the quote you say? See [outstanding-questions](#outstanding-questions)
 
-The Thirdparty-API-Adapter recieves a `POST /authorizations` request, and before forwarding it to the PISP, it puts a **ThirdpartyAuthorizationRequest** event onto the notifications kafka topic.
+The Thirdparty-API-Adapter recieves a `POST /authorizations` request, and before forwarding it to the PISP, it emits a **ThirdpartyAuthorizationRequest** Event to the notifications kafka topic.
 
 The since the CEP is listening for events related to `transactionRequestId=1234`, is observes that this event is related.
 
@@ -61,14 +61,14 @@ The Thirdparty-API-Adapter sees this event, and sends a `PATCH /thirdpartyReques
 
 ## Outstanding Questions
 
-1. Should the CEP be listening for `POST /quotes` (probably from the quoting-service) or for  `POST /authorizations` (probably from the 3p-api-adapter?)
-  - `POST /authorizations` is more efficent, since it certainly `transactionRequestId`, whereas quotes _may_ contain a `transactionRequestId`
+1. Should the CEP be listening for `POST /quotes` (probably emitted by the quoting-service) or for  `POST /authorizations` (probably emitted by the 3p-api-adapter?)
+  - `POST /authorizations` is more efficent, since it certainly contains a `transactionRequestId`, whereas a quote _may_ contain a `transactionRequestId`
   - `POST /quotes` is more generic, and could lead us to better design decisions (such as not including the quote response _in_ the `POST /authorizations` body) in the future
     - does the `quoting-service` publish to kafka at the moment? No.
 
 2. Can we generalize this pattern better and make it more applicable to other use cases?
   - e.g. `PISP Consents`, `FX`, `Cross-network`?
-    - Probably, we should go through this design process with those use cases and see the commonalities
+    - Probably, we should go through this design process with those use cases and see the commonalities. That can be covered in a separate document.
 
 3. When should does the CEP _stop listening_?
   - We need to enumerate the error conditions a little better
@@ -87,16 +87,6 @@ The Thirdparty-API-Adapter sees this event, and sends a `PATCH /thirdpartyReques
 7. What database should the CEP use to store these subscriptions?
   - It currently uses Mongo, but that may be unsuitable
   - Multiple listeners referring to 1 shared object may also be tricky, but likely necessary... so we may want some transaction guarantees
-
-
-## TODO:
-
-- [x] More detail on different listeners and their interactions
-- [x] tidy up the transfers section
-- [x] finish breaking down seq diagram into inline doc
-- [ ] enuerate through the error conditions
-- [x] enumerate and clarify all kafka events that are involved in this process
-- [x] listeners/context body diagram
 
 
 ## Appendix A - List of Kafka Events
@@ -257,27 +247,8 @@ The Thirdparty-API-Adapter sees this event, and sends a `PATCH /thirdpartyReques
 }
 ```
 
-<!-- ### A.n Authorization Failure Event
 
-[ todo ]
-
-### A.n Thirdparty Transaction Request Error Event
-
-[ todo ]
-
-- User rejects
-- Fails authorization?
-- DFSP rejects
-
-### A.n Transfer Request Error Event
-
-[ todo ]
-
-- transfer timeout
-- rejection from Payee `PUT /transfers/{id}/error` -->
-
-
-## Appendix B - CEP ThirdpartyTransactionRequest Subscription States
+## Appendix B - CEP ThirdpartyTransactionRequest Subscription Listeners + Object
 
 ```js
 Active Listeners:
@@ -322,3 +293,14 @@ Subscription Object:
   transferId: '9876'
 }
 ```
+
+
+## Appendix C - CEP State Transitions
+
+### Simplified
+
+![listener_states_simple](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/mojaloop/pisp/feature/273-tx-notif-design-3/docs/transaction_callback/listener_states_simple.puml)
+
+### With Errors
+
+![listener_states_errors](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/mojaloop/pisp/feature/273-tx-notif-design-3/docs/transaction_callback/listener_states_errors.puml)

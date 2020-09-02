@@ -5,6 +5,6 @@ PATH=$(cd ${DIR} && npm bin):$PATH
 POSTMAN_DIR="${DIR}/.."
 
 newman run \
-  --delay-request=2000 \
+  --delay-request=100 \
   --folder='PISP-Initiate-TRX-Reqs-Tests' \
   ${POSTMAN_DIR}/PISP.postman_collection.json.postman_collection.json

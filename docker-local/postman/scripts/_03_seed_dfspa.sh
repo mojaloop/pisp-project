@@ -5,7 +5,7 @@ PATH=$(cd ${DIR} && npm bin):$PATH
 POSTMAN_DIR="${DIR}/.."
 
 newman run \
-  --delay-request=2000 \
+  --delay-request=100 \
   --folder='payerfsp (p2p transfers)' \
   --environment=${POSTMAN_DIR}/environments/Mojaloop-Local-Docker-Compose.postman_environment_DFSP_PAYER.json \
   ${POSTMAN_DIR}/OSS-New-Deployment-FSP-Setup-DFSPS.postman_collection.json

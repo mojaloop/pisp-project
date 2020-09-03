@@ -14,11 +14,14 @@ participant "DFSP" as DFSP
 
 autonumber 1 "<b>GRANT-#</b>"
 
-DFSP -> Switch ++: ""POST /consents {""\n\
+DFSP -> Switch ++: ""POST /consents""\n\
+""  FSIOP-Source: dfspa""\n\
+""  FSIOP-Destination: auth.dfspa**""\n\
+""  {""\n\
     ""  id: "123",""\n\
     ""  requestId: "456",""\n\
-    ""  initiatorId: "PISP",""\n\
-    ""  participantId: "DFSP",""\n\
+    ""  initiatorId: "pispa",""\n\
+    ""  participantId: "dfspa",""\n\
     ""  scopes: [ ""\n\
     ""    { **accountId: "dfsp.username.1234", // If web, these may change!**""\n\
     ""      actions: [ "accounts.transfer", "accounts.getBalance" ] },""\n\
@@ -34,11 +37,14 @@ note over Switch
   The Switch must inform both the PISP and the Auth service about the consent.
 end note
 
-Switch -> PISP ++: ""POST /consents {""\n\
+Switch -> PISP ++: ""POST /consents""\n\
+""  FSIOP-Source: dfspa""\n\
+""  FSIOP-Destination: pispa""\n\
+""   {""\n\
     ""  id: "123",""\n\
     ""  requestId: "456",""\n\
-    ""  initiatorId: "PISP",""\n\
-    ""  participantId: "DFSP",""\n\
+    ""  initiatorId: "pispa",""\n\
+    ""  participantId: "dfspa",""\n\
     ""  scopes: [ ""\n\
     ""    { accountId: "dfsp.username.1234",""\n\
     ""      actions: [ "accounts.transfer", "accounts.getBalance" ] },""\n\
@@ -47,11 +53,14 @@ Switch -> PISP ++: ""POST /consents {""\n\
     ""  ],""\n\
     ""  credential: null""\n\
     ""}""
-& Switch -> Auth ++: ""POST /consents {""\n\
+& Switch -> Auth ++: ""POST /consents""\n\
+""  FSIOP-Source: dfspa""\n\
+""  FSIOP-Destination: auth.dfspa**""\n\
+"" {""\n\
     ""  id: "123",""\n\
     ""  requestId: "456",""\n\
-    ""  initiatorId: "PISP",""\n\
-    ""  participantId: "DFSP",""\n\
+    ""  initiatorId: "pispa",""\n\
+    ""  participantId: "dfspa",""\n\
     ""  scopes: [ ""\n\
     ""    { accountId: "dfsp.username.1234",""\n\
     ""      actions: [ "accounts.transfer", "accounts.getBalance" ] },""\n\

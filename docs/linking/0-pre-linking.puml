@@ -22,12 +22,14 @@ note over PISP, Switch
   TODO: What is the right URL path for this?
 end note
 
-PISP -> Switch ++: ""GET /participants""
+PISP -> Switch ++: ""GET /participants""\n""FSPIOP-Source: pispa""\n""FSPIOP-Destination: switch""
 Switch --> PISP: ""202 Accepted""
 deactivate PISP
 
-Switch -> PISP ++: ""PUT /participants [""\n\
-  ""  { DFSP A }, { DFSP B }, ... ]""
+Switch -> PISP ++: ""PUT /participants""\n""FSPIOP-Source: switch""\n""FSPIOP-Destination: pispa""\n\
+ ""[""\n\
+  ""  { DFSP A }, { DFSP B }, ..."" \n\
+ ""]""
 PISP --> Switch: ""200 OK""
 
 PISP --> App --: We have DFSP A, B, and C.\n(and metadata on each)

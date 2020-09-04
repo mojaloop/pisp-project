@@ -23,8 +23,11 @@ end note
 
 autonumber 1 "<b>AUTH-#</b>"
 
-PISP -> Switch ++: ""PUT /consentRequests/456 {""\n\
-    ""  initiatorId: "PISP",""\n\
+PISP -> Switch ++: ""PUT /consentRequests/456""\n\
+    ""  FSIOP-Source: pispa""\n\
+    ""  FSIOP-Destination: dfspa""\n\
+""  {""\n\
+    ""  initiatorId: "pispa",""\n\
     ""  authChannels: [ "Web", "OTP" ],""\n\
     ""  scopes: [ ""\n\
     ""    { accountId: "dfsp.username.1234",""\n\
@@ -39,8 +42,11 @@ PISP -> Switch ++: ""PUT /consentRequests/456 {""\n\
 Switch --> PISP: ""202 Accepted""
 deactivate PISP
 
-Switch -> DFSP ++: ""PUT /consentRequests/456 {""\n\
-    ""  initiatorId: "PISP",""\n\
+Switch -> DFSP ++: ""PUT /consentRequests/456""\n\
+    ""  FSIOP-Source: pispa""\n\
+    ""  FSIOP-Destination: dfspa""\n\
+""  {""\n\
+    ""  initiatorId: "pispa",""\n\
     ""  authChannels: [ "Web", "OTP" ],""\n\
     ""  scopes: [ ""\n\
     ""    { accountId: "dfsp.username.1234",""\n\

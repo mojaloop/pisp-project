@@ -1,0 +1,44 @@
+@startuml
+
+box "PISP"
+    participant "PISP Server" as D1
+end box
+box "Mojaloop"
+    participant "Thirdparty API Adapter" as 3P
+    participant "Central Event Processor" as CEP
+end box
+box "DFSP A"
+    participant "DFSP A\n(Payer)" as D2
+end box
+
+
+' I think this should be the authorizations, since it hits
+' the 3p api adapter already, but it could be on the quote
+' response
+rnote over D2 #Light
+**""POST /authorizations""**
+""FSPIOP-Source: pispa""
+""FSPIOP-Destination: dfspa""
+{
+    transactionRequestId: "1234",
+    quote
+    ...
+}
+end note
+D2 -> 3P: ""POST /authorizations""
+
+' 3P Just publishes all events onto kafka for later consumption
+3P -> CEP: Here's an event... not sure if it means anything to you
+3P --> D2: ""202 Accepted""
+
+3P -> D1: ""POST /authorizations""
+D1 --> 3P: ""202 Accepted""
+
+CEP -> CEP: That event was related to the \ntransactionRequestId of ""1234""\nlet's save it for later
+CEP -> CEP: It had a quote with a transactionId  of ""5678""\nlet's now listen for transactionIds of ""5678""
+
+'did Michael say we should also listen for `POST /transfers`?
+
+... **User signs the authorization, DFSPA verifies it, and issues a ""POST /transfers""** ...
+
+@enduml

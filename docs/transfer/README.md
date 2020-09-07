@@ -1,6 +1,6 @@
 ### Transfer
 
-Edit the transfer flow `.puml` files here: [PISP Transfer Api Calls Detailed](./transfer/api_calls_detailed.puml)
+Edit the transfer flow `.puml` files here: [PISP Transfer Api Calls Detailed](./api_calls_detailed.puml)
 
 ![PISPTransferSimpleAPI](../out/transfer/api_calls_simple/PISPTransferSimpleAPI.png)
 > Puml source: [`./transfer/api_calls_simple.puml`]

@@ -528,7 +528,7 @@ paths:
               properties:
                 requestId:
                   allOf:
-                    - $ref: '#/components/schemas/ThirdpartyTransactionRequest/properties/consentId/allOf/0'
+                    - $ref: '#/components/schemas/CreateConsentRequest/properties/id'
                   description: |
                     The id of the ConsentRequest that was used to initiate the
                     creation of this Consent.
@@ -652,7 +652,502 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ThirdpartyTransactionRequest'
+              title: ThirdpartyTransactionPostRequest
+              type: object
+              description: The object sent in the POST /thirdpartyRequests/transactions request.
+              properties:
+                transactionRequestId:
+                  allOf:
+                    - $ref: '#/components/schemas/CreateConsentRequest/properties/id'
+                  description: |
+                    Common ID between the FSPs for the transaction request object. The ID should be reused for resends of the same transaction request. A new ID should be generated for each new transaction request.
+                sourceAccountId:
+                  allOf:
+                    - title: AccountAddress
+                      type: string
+                      description: |
+                        A long-lived unique account identifier provided by the DFSP. This MUST NOT
+                        be Bank Account Number or anything that may expose a User's private bank
+                        account information.
+                      pattern: '^([0-9A-Za-z_~\-\.]+[0-9A-Za-z_~\-])$'
+                      minLength: 1
+                      maxLength: 1023
+                  description: 'DFSP specific account identifiers, e.g. `dfspa.alice.1234`'
+                consentId:
+                  allOf:
+                    - $ref: '#/components/schemas/CreateConsentRequest/properties/id'
+                  description: |
+                    Common ID between the PISP and FSP for the Consent object This tells DFSP and auth-service which constent allows the PISP to initiate transaction.
+                payee:
+                  allOf:
+                    - title: Party
+                      type: object
+                      description: Data model for the complex type Party.
+                      properties:
+                        partyIdInfo:
+                          title: PartyIdInfo
+                          type: object
+                          description: Data model for the complex type PartyIdInfo.
+                          properties:
+                            partyIdType:
+                              title: PartyIdType
+                              type: string
+                              enum:
+                                - MSISDN
+                                - EMAIL
+                                - PERSONAL_ID
+                                - BUSINESS
+                                - DEVICE
+                                - ACCOUNT_ID
+                                - IBAN
+                                - ALIAS
+                              description: |
+                                Below are the allowed values for the enumeration.
+                                - MSISDN - An MSISDN (Mobile Station International Subscriber Directory
+                                Number, that is, the phone number) is used as reference to a participant.
+                                The MSISDN identifier should be in international format according to the
+                                [ITU-T E.164 standard](https://www.itu.int/rec/T-REC-E.164/en).
+                                Optionally, the MSISDN may be prefixed by a single plus sign, indicating the
+                                international prefix.
+                                - EMAIL - An email is used as reference to a
+                                participant. The format of the email should be according to the informational
+                                [RFC 3696](https://tools.ietf.org/html/rfc3696).
+                                - PERSONAL_ID - A personal identifier is used as reference to a participant.
+                                Examples of personal identification are passport number, birth certificate
+                                number, and national registration number. The identifier number is added in
+                                the PartyIdentifier element. The personal identifier type is added in the
+                                PartySubIdOrType element.
+                                - BUSINESS - A specific Business (for example, an organization or a company)
+                                is used as reference to a participant. The BUSINESS identifier can be in any
+                                format. To make a transaction connected to a specific username or bill number
+                                in a Business, the PartySubIdOrType element should be used.
+                                - DEVICE - A specific device (for example, a POS or ATM) ID connected to a
+                                specific business or organization is used as reference to a Party.
+                                For referencing a specific device under a specific business or organization,
+                                use the PartySubIdOrType element.
+                                - ACCOUNT_ID - A bank account number or FSP account ID should be used as
+                                reference to a participant. The ACCOUNT_ID identifier can be in any format,
+                                as formats can greatly differ depending on country and FSP.
+                                - IBAN - A bank account number or FSP account ID is used as reference to a
+                                participant. The IBAN identifier can consist of up to 34 alphanumeric
+                                characters and should be entered without whitespace.
+                                - ALIAS An alias is used as reference to a participant. The alias should be
+                                created in the FSP as an alternative reference to an account owner.
+                                Another example of an alias is a username in the FSP system.
+                                The ALIAS identifier can be in any format. It is also possible to use the
+                                PartySubIdOrType element for identifying an account under an Alias defined
+                                by the PartyIdentifier.
+                              example: PERSONAL_ID
+                            partyIdentifier:
+                              title: PartyIdentifier
+                              type: string
+                              minLength: 1
+                              maxLength: 128
+                              description: Identifier of the Party.
+                              example: 16135551212
+                            partySubIdOrType:
+                              title: PartySubIdOrType
+                              type: string
+                              minLength: 1
+                              maxLength: 128
+                              description: |
+                                Either a sub-identifier of a PartyIdentifier, or a sub-type of the
+                                PartyIdType, normally a PersonalIdentifierType.
+                              example: DRIVING_LICENSE
+                            fspId:
+                              $ref: '#/paths/~1consents~1%7BID%7D/put/requestBody/content/application~1json/schema/properties/participantId'
+                          required:
+                            - partyIdType
+                            - partyIdentifier
+                        merchantClassificationCode:
+                          title: MerchantClassificationCode
+                          type: string
+                          pattern: '^[\d]{1,4}$'
+                          description: |
+                            A limited set of pre-defined numbers. This list would be a limited set of
+                            numbers identifying a set of popular merchant types like School Fees,
+                            Pubs and Restaurants, Groceries, etc.
+                          example: 4321
+                        name:
+                          title: PartyName
+                          type: string
+                          minLength: 1
+                          maxLength: 128
+                          description: Name of the Party. Could be a real name or a nickname.
+                          example: Henrik Karlsson
+                        personalInfo:
+                          title: PartyPersonalInfo
+                          type: object
+                          description: Data model for the complex type PartyPersonalInfo.
+                          properties:
+                            complexName:
+                              title: PartyComplexName
+                              type: object
+                              description: Data model for the complex type PartyComplexName.
+                              properties:
+                                firstName:
+                                  title: FirstName
+                                  type: string
+                                  minLength: 1
+                                  maxLength: 128
+                                  pattern: '^(?!\s*$)[\w .,''-]{1,128}$'
+                                  description: First name of the Party (Name Type).
+                                  example: Henrik
+                                middleName:
+                                  title: MiddleName
+                                  type: string
+                                  minLength: 1
+                                  maxLength: 128
+                                  pattern: '^(?!\s*$)[\w .,''-]{1,128}$'
+                                  description: Middle name of the Party (Name Type).
+                                  example: Johannes
+                                lastName:
+                                  title: LastName
+                                  type: string
+                                  minLength: 1
+                                  maxLength: 128
+                                  pattern: '^(?!\s*$)[\w .,''-]{1,128}$'
+                                  description: Last name of the Party (Name Type).
+                                  example: Karlsson
+                            dateOfBirth:
+                              title: DateofBirth (type Date)
+                              type: string
+                              pattern: '^(?:[1-9]\d{3}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\d|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[1-9]\d(?:0[48]|[2468][048]|[13579][26])|(?:[2468][048]|[13579][26])00)-02-29)$'
+                              description: Date of Birth of the Party.
+                              example: '1966-06-16'
+                      required:
+                        - partyIdInfo
+                  description: Information about the Payee in the proposed financial transaction.
+                payer:
+                  allOf:
+                    - $ref: '#/paths/~1thirdpartyRequests~1transactions/post/requestBody/content/application~1json/schema/properties/payee/allOf/0'
+                  description: Information about the Payer in the proposed financial transaction.
+                amountType:
+                  allOf:
+                    - title: AmountType
+                      type: string
+                      enum:
+                        - SEND
+                        - RECEIVE
+                      description: |
+                        Below are the allowed values for the enumeration AmountType.
+                        - SEND - Amount the Payer would like to send, that is, the amount that should
+                        be withdrawn from the Payer account including any fees.
+                        - RECEIVE - Amount the Payer would like the Payee to receive, that is,
+                        the amount that should be sent to the receiver exclusive of any fees.
+                      example: RECEIVE
+                  description: 'SEND for sendAmount, RECEIVE for receiveAmount.'
+                amount:
+                  allOf:
+                    - title: Money
+                      type: object
+                      description: Data model for the complex type Money.
+                      properties:
+                        currency:
+                          title: Currency
+                          description: |
+                            The currency codes defined in
+                            [ISO 4217](https://www.iso.org/iso-4217-currency-codes.html)
+                            as three-letter alphabetic codes are used as the standard naming representation for currencies.
+                          type: string
+                          minLength: 3
+                          maxLength: 3
+                          enum:
+                            - AED
+                            - AFN
+                            - ALL
+                            - AMD
+                            - ANG
+                            - AOA
+                            - ARS
+                            - AUD
+                            - AWG
+                            - AZN
+                            - BAM
+                            - BBD
+                            - BDT
+                            - BGN
+                            - BHD
+                            - BIF
+                            - BMD
+                            - BND
+                            - BOB
+                            - BRL
+                            - BSD
+                            - BTN
+                            - BWP
+                            - BYN
+                            - BZD
+                            - CAD
+                            - CDF
+                            - CHF
+                            - CLP
+                            - CNY
+                            - COP
+                            - CRC
+                            - CUC
+                            - CUP
+                            - CVE
+                            - CZK
+                            - DJF
+                            - DKK
+                            - DOP
+                            - DZD
+                            - EGP
+                            - ERN
+                            - ETB
+                            - EUR
+                            - FJD
+                            - FKP
+                            - GBP
+                            - GEL
+                            - GGP
+                            - GHS
+                            - GIP
+                            - GMD
+                            - GNF
+                            - GTQ
+                            - GYD
+                            - HKD
+                            - HNL
+                            - HRK
+                            - HTG
+                            - HUF
+                            - IDR
+                            - ILS
+                            - IMP
+                            - INR
+                            - IQD
+                            - IRR
+                            - ISK
+                            - JEP
+                            - JMD
+                            - JOD
+                            - JPY
+                            - KES
+                            - KGS
+                            - KHR
+                            - KMF
+                            - KPW
+                            - KRW
+                            - KWD
+                            - KYD
+                            - KZT
+                            - LAK
+                            - LBP
+                            - LKR
+                            - LRD
+                            - LSL
+                            - LYD
+                            - MAD
+                            - MDL
+                            - MGA
+                            - MKD
+                            - MMK
+                            - MNT
+                            - MOP
+                            - MRO
+                            - MUR
+                            - MVR
+                            - MWK
+                            - MXN
+                            - MYR
+                            - MZN
+                            - NAD
+                            - NGN
+                            - NIO
+                            - NOK
+                            - NPR
+                            - NZD
+                            - OMR
+                            - PAB
+                            - PEN
+                            - PGK
+                            - PHP
+                            - PKR
+                            - PLN
+                            - PYG
+                            - QAR
+                            - RON
+                            - RSD
+                            - RUB
+                            - RWF
+                            - SAR
+                            - SBD
+                            - SCR
+                            - SDG
+                            - SEK
+                            - SGD
+                            - SHP
+                            - SLL
+                            - SOS
+                            - SPL
+                            - SRD
+                            - STD
+                            - SVC
+                            - SYP
+                            - SZL
+                            - THB
+                            - TJS
+                            - TMT
+                            - TND
+                            - TOP
+                            - TRY
+                            - TTD
+                            - TVD
+                            - TWD
+                            - TZS
+                            - UAH
+                            - UGX
+                            - USD
+                            - UYU
+                            - UZS
+                            - VEF
+                            - VND
+                            - VUV
+                            - WST
+                            - XAF
+                            - XCD
+                            - XDR
+                            - XOF
+                            - XPF
+                            - YER
+                            - ZAR
+                            - ZMW
+                            - ZWD
+                          example: USD
+                        amount:
+                          title: Amount
+                          type: string
+                          pattern: '^([0]|([1-9][0-9]{0,17}))([.][0-9]{0,3}[1-9])?$'
+                          description: |
+                            The API data type Amount is a JSON String in a canonical format that is
+                            restricted by a regular expression for interoperability reasons.
+                            This pattern does not allow any trailing zeroes at all, but allows an amount
+                            without a minor currency unit. It also only allows four digits in the minor
+                            currency unit; a negative value is not allowed. Using more than 18 digits
+                            in the major currency unit is not allowed.
+                          example: 123.45
+                      required:
+                        - currency
+                        - amount
+                  description: Requested amount to be transferred from the Payer to Payee.
+                transactionType:
+                  allOf:
+                    - title: TransactionType
+                      type: object
+                      description: Data model for the complex type TransactionType.
+                      properties:
+                        scenario:
+                          title: TransactionScenario
+                          type: string
+                          enum:
+                            - DEPOSIT
+                            - WITHDRAWAL
+                            - TRANSFER
+                            - PAYMENT
+                            - REFUND
+                          description: |
+                            Below are the allowed values for the enumeration.
+                            - DEPOSIT - Used for performing a Cash-In (deposit) transaction.
+                            In a normal scenario, electronic funds are transferred from a
+                            Business account to a Consumer account, and physical cash is given
+                            from the Consumer to the Business User.
+                            - WITHDRAWAL - Used for performing a Cash-Out (withdrawal) transaction.
+                            In a normal scenario, electronic funds are transferred from a Consumer’s
+                            account to a Business account, and physical cash is given from the Business
+                            User to the Consumer.
+                            - TRANSFER - Used for performing a P2P (Peer to Peer, or Consumer to Consumer)
+                            transaction.
+                            - PAYMENT - Usually used for performing a transaction from a Consumer to a
+                            Merchant or Organization, but could also be for a B2B (Business to Business)
+                            payment. The transaction could be online for a purchase in an Internet store,
+                            in a physical store where both the Consumer and Business User are present, a
+                            bill payment, a donation, and so on.
+                            - REFUND - Used for performing a refund of transaction.
+                          example: DEPOSIT
+                        subScenario:
+                          title: TransactionSubScenario
+                          type: string
+                          pattern: '^[A-Z_]{1,32}$'
+                          description: 'Possible sub-scenario, defined locally within the scheme (UndefinedEnum Type).'
+                          example: LOCALLY_DEFINED_SUBSCENARIO
+                        initiator:
+                          title: TransactionInitiator
+                          type: string
+                          enum:
+                            - PAYER
+                            - PAYEE
+                          description: |
+                            Below are the allowed values for the enumeration.
+                            - PAYER - Sender of funds is initiating the transaction.
+                            The account to send from is either owned by the Payer or is connected to the
+                            Payer in some way.
+                            - PAYEE - Recipient of the funds is initiating the transaction by sending a
+                            transaction request. The Payer must approve the transaction, either
+                            automatically by a pre-generated OTP or by pre-approval of the Payee,
+                            or by manually approving in his or her own Device.
+                          example: PAYEE
+                        initiatorType:
+                          title: TransactionInitiatorType
+                          type: string
+                          enum:
+                            - CONSUMER
+                            - AGENT
+                            - BUSINESS
+                            - DEVICE
+                          description: |
+                            Below are the allowed values for the enumeration.
+                            - CONSUMER - Consumer is the initiator of the transaction.
+                            - AGENT - Agent is the initiator of the transaction.
+                            - BUSINESS - Business is the initiator of the transaction.
+                            - DEVICE - Device is the initiator of the transaction.
+                          example: CONSUMER
+                        refundInfo:
+                          title: Refund
+                          type: object
+                          description: Data model for the complex type Refund.
+                          properties:
+                            originalTransactionId:
+                              $ref: '#/components/schemas/CreateConsentRequest/properties/id'
+                            refundReason:
+                              title: RefundReason
+                              type: string
+                              minLength: 1
+                              maxLength: 128
+                              description: Reason for the refund.
+                              example: Free text indicating reason for the refund.
+                          required:
+                            - originalTransactionId
+                        balanceOfPayments:
+                          title: BalanceOfPayments
+                          type: string
+                          pattern: '^[1-9]\d{2}$'
+                          description: |
+                            (BopCode) The API data type [BopCode](https://www.imf.org/external/np/sta/bopcode/)
+                            is a JSON String of 3 characters, consisting of digits only.
+                            Negative numbers are not allowed. A leading zero is not allowed.
+                          example: 123
+                      required:
+                        - scenario
+                        - initiator
+                        - initiatorType
+                  description: Type of transaction.
+                expiration:
+                  type: string
+                  description: |
+                    Date and time until when the transaction request is valid. It can be set to get a quick failure in case the peer FSP takes too long to respond.
+                  example: '2016-05-24T08:38:08.699-04:00'
+              required:
+                - transactionRequestId
+                - sourceAccountId
+                - consentId
+                - payee
+                - payer
+                - amountType
+                - amount
+                - transactionType
+                - expiration
             example:
               transactionRequestId: 8d34f91d-d078-4077-8263-2c047876fcf6
               sourceAccountId: dfspa.alice.1234
@@ -699,6 +1194,91 @@ paths:
           $ref: '#/paths/~1consentRequests/post/responses/501'
         '503':
           $ref: '#/paths/~1consentRequests/post/responses/503'
+  '/thirdpartyRequests/transactions/{ID}':
+    get:
+      description: |
+        The callback `GET /thirdpartyRequests/transactions/{ID}` is used to get information about a thirdparty request transaction.
+      summary: Get third party transaction requests
+      tags:
+        - thirdpartyRequests
+      operationId: GetThirdpartyTransactionRequests
+      parameters:
+        - $ref: '#/paths/~1consents~1%7BID%7D/put/parameters/0'
+        - $ref: '#/paths/~1consentRequests/post/parameters/0'
+        - $ref: '#/paths/~1consentRequests/post/parameters/1'
+        - $ref: '#/paths/~1consentRequests/post/parameters/2'
+        - $ref: '#/paths/~1consentRequests/post/parameters/3'
+        - $ref: '#/paths/~1consentRequests/post/parameters/4'
+        - $ref: '#/paths/~1consentRequests/post/parameters/5'
+        - $ref: '#/paths/~1consentRequests/post/parameters/6'
+        - $ref: '#/paths/~1consentRequests/post/parameters/7'
+        - $ref: '#/paths/~1consentRequests/post/parameters/8'
+        - $ref: '#/paths/~1consentRequests/post/parameters/9'
+        - $ref: '#/paths/~1consentRequests/post/parameters/10'
+      responses:
+        '200':
+          description: OK
+        '400':
+          $ref: '#/paths/~1consentRequests/post/responses/400'
+        '401':
+          $ref: '#/paths/~1consentRequests/post/responses/401'
+        '403':
+          $ref: '#/paths/~1consentRequests/post/responses/403'
+        '404':
+          $ref: '#/paths/~1consentRequests/post/responses/404'
+        '405':
+          $ref: '#/paths/~1consentRequests/post/responses/405'
+        '406':
+          $ref: '#/paths/~1consentRequests/post/responses/406'
+        '501':
+          $ref: '#/paths/~1consentRequests/post/responses/501'
+        '503':
+          $ref: '#/paths/~1consentRequests/post/responses/503'
+    put:
+      description: |
+        The callback `PUT /thirdpartyRequests/transactions/{ID}` is used to inform the client of the result of a previously-requested transaction. The `{ID}` in the URI should contain the `transactionRequestId` that was used for the creation of the transaction request.
+      summary: Update third party transaction requests
+      tags:
+        - thirdpartyRequests
+      operationId: UpdateThirdpartyTransactionRequests
+      parameters:
+        - $ref: '#/paths/~1consents~1%7BID%7D/put/parameters/0'
+        - $ref: '#/paths/~1consentRequests/post/parameters/1'
+        - $ref: '#/paths/~1consentRequests/post/parameters/2'
+        - $ref: '#/paths/~1consentRequests/post/parameters/3'
+        - $ref: '#/paths/~1consentRequests/post/parameters/4'
+        - $ref: '#/paths/~1consentRequests/post/parameters/5'
+        - $ref: '#/paths/~1consentRequests/post/parameters/6'
+        - $ref: '#/paths/~1consentRequests/post/parameters/7'
+        - $ref: '#/paths/~1consentRequests/post/parameters/8'
+        - $ref: '#/paths/~1consentRequests/post/parameters/9'
+        - $ref: '#/paths/~1consentRequests/post/parameters/10'
+      requestBody:
+        description: Transaction request result returned.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ThirdpartyRequestsTransactionResponse'
+      responses:
+        '200':
+          $ref: '#/paths/~1thirdpartyRequests~1transactions~1%7BID%7D/get/responses/200'
+        '400':
+          $ref: '#/paths/~1consentRequests/post/responses/400'
+        '401':
+          $ref: '#/paths/~1consentRequests/post/responses/401'
+        '403':
+          $ref: '#/paths/~1consentRequests/post/responses/403'
+        '404':
+          $ref: '#/paths/~1consentRequests/post/responses/404'
+        '405':
+          $ref: '#/paths/~1consentRequests/post/responses/405'
+        '406':
+          $ref: '#/paths/~1consentRequests/post/responses/406'
+        '501':
+          $ref: '#/paths/~1consentRequests/post/responses/501'
+        '503':
+          $ref: '#/paths/~1consentRequests/post/responses/503'
   '/thirdpartyRequests/transactions/{ID}/authorizations':
     post:
       tags:
@@ -727,7 +1307,37 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/VerifyThirdPartyAuthorizationRequest'
+              title: ThirdpartyAuthorizationIDPostRequest
+              type: object
+              description: 'The object sent in the POST /thirdpartyRequests/transactions/{id}/authorizations request.'
+              properties:
+                challenge:
+                  type: string
+                  description: The original Challenge Object as a JSON string
+                value:
+                  allOf:
+                    - $ref: '#/paths/~1thirdpartyRequests~1transactions~1%7BID%7D~1authorizations/put/requestBody/content/application~1json/schema/properties/value/allOf/0'
+                  description: Base64 encoded binary string - the signed challenge
+                consentId:
+                  allOf:
+                    - $ref: '#/components/schemas/CreateConsentRequest/properties/id'
+                  description: |
+                    Common ID between the PISP and FSP for the Consent object This tells DFSP and auth-service which constent allows the PISP to initiate transaction.
+                sourceAccountId:
+                  allOf:
+                    - $ref: '#/paths/~1thirdpartyRequests~1transactions/post/requestBody/content/application~1json/schema/properties/sourceAccountId/allOf/0'
+                  description: 'DFSP specific account identifiers, e.g. `dfspa.alice.1234`'
+                status:
+                  type: string
+                  enum:
+                    - PENDING
+                  description: The status of the authorization. This MUST be PENDING for a POST request
+              required:
+                - challenge
+                - value
+                - consentId
+                - sourceAccountId
+                - status
             example:
               challenge: <QuoteResponse object>
               value: <base64 encoded binary - the signed quote response object>
@@ -780,7 +1390,44 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateThirdpartyAuthorizationRequest'
+              title: ThirdpartyAuthorizationIDPutRequest
+              type: object
+              description: 'The object sent in the PUT /thirdpartyRequests/transactions/{id}/authorizations request.'
+              properties:
+                challenge:
+                  type: string
+                  description: The original Challenge Object as a JSON string
+                value:
+                  allOf:
+                    - type: string
+                      pattern: '^[A-Za-z0-9-_]+[=]{0,2}$'
+                      description: |
+                        The API data type BinaryString is a JSON String.
+                        The string is a base64url  encoding of a string of raw bytes,
+                        where padding (character ‘=’) is added at the end of the data if
+                        needed to ensure that the string is a multiple of 4 characters.
+                        The length restriction indicates the allowed number of characters.
+                  description: Base64 encoded binary string - the signed challenge
+                consentId:
+                  allOf:
+                    - $ref: '#/components/schemas/CreateConsentRequest/properties/id'
+                  description: |
+                    Common ID between the PISP and FSP for the Consent object This tells DFSP and auth-service which constent allows the PISP to initiate transaction.
+                sourceAccountId:
+                  allOf:
+                    - $ref: '#/paths/~1thirdpartyRequests~1transactions/post/requestBody/content/application~1json/schema/properties/sourceAccountId/allOf/0'
+                  description: 'DFSP specific account identifiers, e.g. `dfspa.alice.1234`'
+                status:
+                  type: string
+                  enum:
+                    - VERIFIED
+                  description: The status of the authorization. This value must be `VERIFIED` for a PUT request
+              required:
+                - challenge
+                - value
+                - consentId
+                - sourceAccountId
+                - status
             example:
               challenge: <QuoteResponse object>
               value: <base64 encoded binary - the signed quote response object>
@@ -789,7 +1436,7 @@ paths:
               status: VERIFIED
       responses:
         '200':
-          description: OK
+          $ref: '#/paths/~1thirdpartyRequests~1transactions~1%7BID%7D/get/responses/200'
         '400':
           $ref: '#/paths/~1consentRequests/post/responses/400'
         '401':
@@ -818,587 +1465,22 @@ components:
         The auth channel being used for the consentRequest
         - "WEB" - The Web auth channel
         - "OTP" - The OTP auth channel
-    AccountId:
-      type: string
-      description: |
-        A long-lived account identifier provided by the DFSP this MUST NOT be Bank Account Number or anything that may expose a User's private bank account information
-    ThirdpartyTransactionRequest:
-      title: ThirdpartyTransactionRequest
-      type: object
-      description: The object sent in the POST /thirdpartyRequests/transactions request.
-      properties:
-        transactionRequestId:
-          allOf:
-            - $ref: '#/components/schemas/ThirdpartyTransactionRequest/properties/consentId/allOf/0'
-          description: |
-            Common ID between the FSPs for the transaction request object. The ID should be reused for resends of the same transaction request. A new ID should be generated for each new transaction request.
-        sourceAccountId:
-          allOf:
-            - $ref: '#/components/schemas/AccountId'
-          description: 'DFSP specific account identifiers, e.g. `dfspa.alice.1234`'
-        consentId:
-          allOf:
-            - title: CorrelationId
-              type: string
-              pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$'
-              description: |
-                Identifier that correlates all messages of the same sequence.
-                The API data type UUID (Universally Unique Identifier) is a JSON String
-                in canonical format, conforming to [RFC 4122](https://tools.ietf.org/html/rfc4122),
-                that is restricted by a regular expression for interoperability reasons.
-                A UUID is always 36 characters long, 32 hexadecimal symbols and 4 dashes (‘-‘).
-              example: b51ec534-ee48-4575-b6a9-ead2955b8069
-          description: |
-            Common ID between the PISP and FSP for the Consent object This tells DFSP and auth-service which constent allows the PISP to initiate transaction.
-        payee:
-          allOf:
-            - title: Party
-              type: object
-              description: Data model for the complex type Party.
-              properties:
-                partyIdInfo:
-                  title: PartyIdInfo
-                  type: object
-                  description: Data model for the complex type PartyIdInfo.
-                  properties:
-                    partyIdType:
-                      title: PartyIdType
-                      type: string
-                      enum:
-                        - MSISDN
-                        - EMAIL
-                        - PERSONAL_ID
-                        - BUSINESS
-                        - DEVICE
-                        - ACCOUNT_ID
-                        - IBAN
-                        - ALIAS
-                      description: |
-                        Below are the allowed values for the enumeration.
-                        - MSISDN - An MSISDN (Mobile Station International Subscriber Directory
-                        Number, that is, the phone number) is used as reference to a participant.
-                        The MSISDN identifier should be in international format according to the
-                        [ITU-T E.164 standard](https://www.itu.int/rec/T-REC-E.164/en).
-                        Optionally, the MSISDN may be prefixed by a single plus sign, indicating the
-                        international prefix.
-                        - EMAIL - An email is used as reference to a
-                        participant. The format of the email should be according to the informational
-                        [RFC 3696](https://tools.ietf.org/html/rfc3696).
-                        - PERSONAL_ID - A personal identifier is used as reference to a participant.
-                        Examples of personal identification are passport number, birth certificate
-                        number, and national registration number. The identifier number is added in
-                        the PartyIdentifier element. The personal identifier type is added in the
-                        PartySubIdOrType element.
-                        - BUSINESS - A specific Business (for example, an organization or a company)
-                        is used as reference to a participant. The BUSINESS identifier can be in any
-                        format. To make a transaction connected to a specific username or bill number
-                        in a Business, the PartySubIdOrType element should be used.
-                        - DEVICE - A specific device (for example, a POS or ATM) ID connected to a
-                        specific business or organization is used as reference to a Party.
-                        For referencing a specific device under a specific business or organization,
-                        use the PartySubIdOrType element.
-                        - ACCOUNT_ID - A bank account number or FSP account ID should be used as
-                        reference to a participant. The ACCOUNT_ID identifier can be in any format,
-                        as formats can greatly differ depending on country and FSP.
-                        - IBAN - A bank account number or FSP account ID is used as reference to a
-                        participant. The IBAN identifier can consist of up to 34 alphanumeric
-                        characters and should be entered without whitespace.
-                        - ALIAS An alias is used as reference to a participant. The alias should be
-                        created in the FSP as an alternative reference to an account owner.
-                        Another example of an alias is a username in the FSP system.
-                        The ALIAS identifier can be in any format. It is also possible to use the
-                        PartySubIdOrType element for identifying an account under an Alias defined
-                        by the PartyIdentifier.
-                      example: PERSONAL_ID
-                    partyIdentifier:
-                      title: PartyIdentifier
-                      type: string
-                      minLength: 1
-                      maxLength: 128
-                      description: Identifier of the Party.
-                      example: 16135551212
-                    partySubIdOrType:
-                      title: PartySubIdOrType
-                      type: string
-                      minLength: 1
-                      maxLength: 128
-                      description: |
-                        Either a sub-identifier of a PartyIdentifier, or a sub-type of the
-                        PartyIdType, normally a PersonalIdentifierType.
-                      example: DRIVING_LICENSE
-                    fspId:
-                      $ref: '#/paths/~1consents~1%7BID%7D/put/requestBody/content/application~1json/schema/properties/participantId'
-                  required:
-                    - partyIdType
-                    - partyIdentifier
-                merchantClassificationCode:
-                  title: MerchantClassificationCode
-                  type: string
-                  pattern: '^[\d]{1,4}$'
-                  description: |
-                    A limited set of pre-defined numbers. This list would be a limited set of
-                    numbers identifying a set of popular merchant types like School Fees,
-                    Pubs and Restaurants, Groceries, etc.
-                  example: 4321
-                name:
-                  title: PartyName
-                  type: string
-                  minLength: 1
-                  maxLength: 128
-                  description: Name of the Party. Could be a real name or a nickname.
-                  example: Henrik Karlsson
-                personalInfo:
-                  title: PartyPersonalInfo
-                  type: object
-                  description: Data model for the complex type PartyPersonalInfo.
-                  properties:
-                    complexName:
-                      title: PartyComplexName
-                      type: object
-                      description: Data model for the complex type PartyComplexName.
-                      properties:
-                        firstName:
-                          title: FirstName
-                          type: string
-                          minLength: 1
-                          maxLength: 128
-                          pattern: '^(?!\s*$)[\w .,''-]{1,128}$'
-                          description: First name of the Party (Name Type).
-                          example: Henrik
-                        middleName:
-                          title: MiddleName
-                          type: string
-                          minLength: 1
-                          maxLength: 128
-                          pattern: '^(?!\s*$)[\w .,''-]{1,128}$'
-                          description: Middle name of the Party (Name Type).
-                          example: Johannes
-                        lastName:
-                          title: LastName
-                          type: string
-                          minLength: 1
-                          maxLength: 128
-                          pattern: '^(?!\s*$)[\w .,''-]{1,128}$'
-                          description: Last name of the Party (Name Type).
-                          example: Karlsson
-                    dateOfBirth:
-                      title: DateofBirth (type Date)
-                      type: string
-                      pattern: '^(?:[1-9]\d{3}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\d|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[1-9]\d(?:0[48]|[2468][048]|[13579][26])|(?:[2468][048]|[13579][26])00)-02-29)$'
-                      description: Date of Birth of the Party.
-                      example: '1966-06-16'
-              required:
-                - partyIdInfo
-          description: Information about the Payee in the proposed financial transaction.
-        payer:
-          allOf:
-            - $ref: '#/components/schemas/ThirdpartyTransactionRequest/properties/payee/allOf/0'
-          description: Information about the Payer in the proposed financial transaction.
-        amountType:
-          allOf:
-            - title: AmountType
-              type: string
-              enum:
-                - SEND
-                - RECEIVE
-              description: |
-                Below are the allowed values for the enumeration AmountType.
-                - SEND - Amount the Payer would like to send, that is, the amount that should
-                be withdrawn from the Payer account including any fees.
-                - RECEIVE - Amount the Payer would like the Payee to receive, that is,
-                the amount that should be sent to the receiver exclusive of any fees.
-              example: RECEIVE
-          description: 'SEND for sendAmount, RECEIVE for receiveAmount.'
-        amount:
-          allOf:
-            - title: Money
-              type: object
-              description: Data model for the complex type Money.
-              properties:
-                currency:
-                  title: Currency
-                  description: |
-                    The currency codes defined in
-                    [ISO 4217](https://www.iso.org/iso-4217-currency-codes.html)
-                    as three-letter alphabetic codes are used as the standard naming representation for currencies.
-                  type: string
-                  minLength: 3
-                  maxLength: 3
-                  enum:
-                    - AED
-                    - AFN
-                    - ALL
-                    - AMD
-                    - ANG
-                    - AOA
-                    - ARS
-                    - AUD
-                    - AWG
-                    - AZN
-                    - BAM
-                    - BBD
-                    - BDT
-                    - BGN
-                    - BHD
-                    - BIF
-                    - BMD
-                    - BND
-                    - BOB
-                    - BRL
-                    - BSD
-                    - BTN
-                    - BWP
-                    - BYN
-                    - BZD
-                    - CAD
-                    - CDF
-                    - CHF
-                    - CLP
-                    - CNY
-                    - COP
-                    - CRC
-                    - CUC
-                    - CUP
-                    - CVE
-                    - CZK
-                    - DJF
-                    - DKK
-                    - DOP
-                    - DZD
-                    - EGP
-                    - ERN
-                    - ETB
-                    - EUR
-                    - FJD
-                    - FKP
-                    - GBP
-                    - GEL
-                    - GGP
-                    - GHS
-                    - GIP
-                    - GMD
-                    - GNF
-                    - GTQ
-                    - GYD
-                    - HKD
-                    - HNL
-                    - HRK
-                    - HTG
-                    - HUF
-                    - IDR
-                    - ILS
-                    - IMP
-                    - INR
-                    - IQD
-                    - IRR
-                    - ISK
-                    - JEP
-                    - JMD
-                    - JOD
-                    - JPY
-                    - KES
-                    - KGS
-                    - KHR
-                    - KMF
-                    - KPW
-                    - KRW
-                    - KWD
-                    - KYD
-                    - KZT
-                    - LAK
-                    - LBP
-                    - LKR
-                    - LRD
-                    - LSL
-                    - LYD
-                    - MAD
-                    - MDL
-                    - MGA
-                    - MKD
-                    - MMK
-                    - MNT
-                    - MOP
-                    - MRO
-                    - MUR
-                    - MVR
-                    - MWK
-                    - MXN
-                    - MYR
-                    - MZN
-                    - NAD
-                    - NGN
-                    - NIO
-                    - NOK
-                    - NPR
-                    - NZD
-                    - OMR
-                    - PAB
-                    - PEN
-                    - PGK
-                    - PHP
-                    - PKR
-                    - PLN
-                    - PYG
-                    - QAR
-                    - RON
-                    - RSD
-                    - RUB
-                    - RWF
-                    - SAR
-                    - SBD
-                    - SCR
-                    - SDG
-                    - SEK
-                    - SGD
-                    - SHP
-                    - SLL
-                    - SOS
-                    - SPL
-                    - SRD
-                    - STD
-                    - SVC
-                    - SYP
-                    - SZL
-                    - THB
-                    - TJS
-                    - TMT
-                    - TND
-                    - TOP
-                    - TRY
-                    - TTD
-                    - TVD
-                    - TWD
-                    - TZS
-                    - UAH
-                    - UGX
-                    - USD
-                    - UYU
-                    - UZS
-                    - VEF
-                    - VND
-                    - VUV
-                    - WST
-                    - XAF
-                    - XCD
-                    - XDR
-                    - XOF
-                    - XPF
-                    - YER
-                    - ZAR
-                    - ZMW
-                    - ZWD
-                  example: USD
-                amount:
-                  title: Amount
-                  type: string
-                  pattern: '^([0]|([1-9][0-9]{0,17}))([.][0-9]{0,3}[1-9])?$'
-                  description: |
-                    The API data type Amount is a JSON String in a canonical format that is
-                    restricted by a regular expression for interoperability reasons.
-                    This pattern does not allow any trailing zeroes at all, but allows an amount
-                    without a minor currency unit. It also only allows four digits in the minor
-                    currency unit; a negative value is not allowed. Using more than 18 digits
-                    in the major currency unit is not allowed.
-                  example: 123.45
-              required:
-                - currency
-                - amount
-          description: Requested amount to be transferred from the Payer to Payee.
-        transactionType:
-          allOf:
-            - title: TransactionType
-              type: object
-              description: Data model for the complex type TransactionType.
-              properties:
-                scenario:
-                  title: TransactionScenario
-                  type: string
-                  enum:
-                    - DEPOSIT
-                    - WITHDRAWAL
-                    - TRANSFER
-                    - PAYMENT
-                    - REFUND
-                  description: |
-                    Below are the allowed values for the enumeration.
-                    - DEPOSIT - Used for performing a Cash-In (deposit) transaction.
-                    In a normal scenario, electronic funds are transferred from a
-                    Business account to a Consumer account, and physical cash is given
-                    from the Consumer to the Business User.
-                    - WITHDRAWAL - Used for performing a Cash-Out (withdrawal) transaction.
-                    In a normal scenario, electronic funds are transferred from a Consumer’s
-                    account to a Business account, and physical cash is given from the Business
-                    User to the Consumer.
-                    - TRANSFER - Used for performing a P2P (Peer to Peer, or Consumer to Consumer)
-                    transaction.
-                    - PAYMENT - Usually used for performing a transaction from a Consumer to a
-                    Merchant or Organization, but could also be for a B2B (Business to Business)
-                    payment. The transaction could be online for a purchase in an Internet store,
-                    in a physical store where both the Consumer and Business User are present, a
-                    bill payment, a donation, and so on.
-                    - REFUND - Used for performing a refund of transaction.
-                  example: DEPOSIT
-                subScenario:
-                  title: TransactionSubScenario
-                  type: string
-                  pattern: '^[A-Z_]{1,32}$'
-                  description: 'Possible sub-scenario, defined locally within the scheme (UndefinedEnum Type).'
-                  example: LOCALLY_DEFINED_SUBSCENARIO
-                initiator:
-                  title: TransactionInitiator
-                  type: string
-                  enum:
-                    - PAYER
-                    - PAYEE
-                  description: |
-                    Below are the allowed values for the enumeration.
-                    - PAYER - Sender of funds is initiating the transaction.
-                    The account to send from is either owned by the Payer or is connected to the
-                    Payer in some way.
-                    - PAYEE - Recipient of the funds is initiating the transaction by sending a
-                    transaction request. The Payer must approve the transaction, either
-                    automatically by a pre-generated OTP or by pre-approval of the Payee,
-                    or by manually approving in his or her own Device.
-                  example: PAYEE
-                initiatorType:
-                  title: TransactionInitiatorType
-                  type: string
-                  enum:
-                    - CONSUMER
-                    - AGENT
-                    - BUSINESS
-                    - DEVICE
-                  description: |
-                    Below are the allowed values for the enumeration.
-                    - CONSUMER - Consumer is the initiator of the transaction.
-                    - AGENT - Agent is the initiator of the transaction.
-                    - BUSINESS - Business is the initiator of the transaction.
-                    - DEVICE - Device is the initiator of the transaction.
-                  example: CONSUMER
-                refundInfo:
-                  title: Refund
-                  type: object
-                  description: Data model for the complex type Refund.
-                  properties:
-                    originalTransactionId:
-                      $ref: '#/components/schemas/ThirdpartyTransactionRequest/properties/consentId/allOf/0'
-                    refundReason:
-                      title: RefundReason
-                      type: string
-                      minLength: 1
-                      maxLength: 128
-                      description: Reason for the refund.
-                      example: Free text indicating reason for the refund.
-                  required:
-                    - originalTransactionId
-                balanceOfPayments:
-                  title: BalanceOfPayments
-                  type: string
-                  pattern: '^[1-9]\d{2}$'
-                  description: |
-                    (BopCode) The API data type [BopCode](https://www.imf.org/external/np/sta/bopcode/)
-                    is a JSON String of 3 characters, consisting of digits only.
-                    Negative numbers are not allowed. A leading zero is not allowed.
-                  example: 123
-              required:
-                - scenario
-                - initiator
-                - initiatorType
-          description: Type of transaction.
-        expiration:
-          type: string
-          description: |
-            Date and time until when the transaction request is valid. It can be set to get a quick failure in case the peer FSP takes too long to respond.
-          example: '2016-05-24T08:38:08.699-04:00'
-      required:
-        - transactionRequestId
-        - sourceAccountId
-        - consentId
-        - payee
-        - payer
-        - amountType
-        - amount
-        - transactionType
-        - expiration
-    VerifyThirdPartyAuthorizationRequest:
-      title: VerifyThirdPartyAuthorizationRequest
-      type: object
-      description: 'The object sent in the POST /thirdpartyRequests/transactions/{id}/authorizations request.'
-      properties:
-        challenge:
-          type: string
-          description: The original Challenge Object as a JSON string
-        value:
-          allOf:
-            - type: string
-              pattern: '^[A-Za-z0-9-_]+[=]{0,2}$'
-              description: |
-                The API data type BinaryString is a JSON String.
-                The string is a base64url  encoding of a string of raw bytes,
-                where padding (character ‘=’) is added at the end of the data if
-                needed to ensure that the string is a multiple of 4 characters.
-                The length restriction indicates the allowed number of characters.
-          description: Base64 encoded binary string - the signed challenge
-        consentId:
-          allOf:
-            - $ref: '#/components/schemas/ThirdpartyTransactionRequest/properties/consentId/allOf/0'
-          description: |
-            Common ID between the PISP and FSP for the Consent object This tells DFSP and auth-service which constent allows the PISP to initiate transaction.
-        sourceAccountId:
-          allOf:
-            - $ref: '#/components/schemas/AccountId'
-          description: 'DFSP specific account identifiers, e.g. `dfspa.alice.1234`'
-        status:
-          type: string
-          enum:
-            - PENDING
-          description: The status of the authorization. This MUST be PENDING for a POST request
-      required:
-        - challenge
-        - value
-        - consentId
-        - sourceAccountId
-        - status
-    UpdateThirdpartyAuthorizationRequest:
-      title: UpdateThirdpartyAuthorizationRequest
-      type: object
-      description: 'The object sent in the PUT /thirdpartyRequests/transactions/{id}/authorizations request.'
-      properties:
-        challenge:
-          type: string
-          description: The original Challenge Object as a JSON string
-        value:
-          allOf:
-            - $ref: '#/components/schemas/VerifyThirdPartyAuthorizationRequest/properties/value/allOf/0'
-          description: Base64 encoded binary string - the signed challenge
-        consentId:
-          allOf:
-            - $ref: '#/components/schemas/ThirdpartyTransactionRequest/properties/consentId/allOf/0'
-          description: |
-            Common ID between the PISP and FSP for the Consent object This tells DFSP and auth-service which constent allows the PISP to initiate transaction.
-        sourceAccountId:
-          allOf:
-            - $ref: '#/components/schemas/AccountId'
-          description: 'DFSP specific account identifiers, e.g. `dfspa.alice.1234`'
-        status:
-          type: string
-          enum:
-            - VERIFIED
-          description: The status of the authorization. This value must be `VERIFIED` for a PUT request
-      required:
-        - challenge
-        - value
-        - consentId
-        - sourceAccountId
-        - status
     CreateConsentRequest:
       title: CreateConsentRequest
       type: object
       description: The object sent in a `POST /consentRequests` request
       properties:
         id:
+          title: CorrelationId
           type: string
-          description: The id of the consentRequest
+          pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$'
+          description: |
+            Identifier that correlates all messages of the same sequence.
+            The API data type UUID (Universally Unique Identifier) is a JSON String
+            in canonical format, conforming to [RFC 4122](https://tools.ietf.org/html/rfc4122),
+            that is restricted by a regular expression for interoperability reasons.
+            A UUID is always 36 characters long, 32 hexadecimal symbols and 4 dashes (‘-‘).
+          example: b51ec534-ee48-4575-b6a9-ead2955b8069
         initiatorId:
           type: string
           description: The id of the PISP who will initiate transactions on a user's behalf
@@ -1420,15 +1502,7 @@ components:
                   - "accounts.getBalance" - Get the balance of a given account.
                   - "accounts.transfer" - Initiate a transfer from an account.
               accountId:
-                title: AccountAddress
-                type: string
-                description: |
-                  A long-lived unique account identifier provided by the DFSP. This MUST NOT
-                  be Bank Account Number or anything that may expose a User's private bank
-                  account information.
-                pattern: '^([0-9A-Za-z_~\-\.]+[0-9A-Za-z_~\-])$'
-                minLength: 1
-                maxLength: 1023
+                $ref: '#/paths/~1thirdpartyRequests~1transactions/post/requestBody/content/application~1json/schema/properties/sourceAccountId/allOf/0'
             required:
               - scope
               - accountId
@@ -1451,8 +1525,7 @@ components:
       description: The object sent in a `PUT /consentRequests` request
       properties:
         id:
-          type: string
-          description: The id of the consentRequest
+          $ref: '#/components/schemas/CreateConsentRequest/properties/id'
         initiatorId:
           type: string
           description: The id of the PISP who will initiate transactions on a user's behalf
@@ -1481,3 +1554,22 @@ components:
         - callbackUri
         - authUri
         - authToken
+    ThirdpartyRequestsTransactionResponse:
+      title: ThirdpartyRequestsTransactionResponse
+      type: object
+      description: 'The object sent in the PUT /thirdPartyRequests/transactions/{ID} request.'
+      properties:
+        transactionId:
+          $ref: '#/components/schemas/CreateConsentRequest/properties/id'
+          description: |
+            Identifies a related transaction (if a transaction has been created)
+        transactionRequestState:
+          description: State of the transaction request`
+          title: TransactionRequestState
+          type: string
+          enum:
+            - RECEIVED
+            - PENDING
+            - ACCEPTED
+            - REJECTED
+          example: RECEIVED

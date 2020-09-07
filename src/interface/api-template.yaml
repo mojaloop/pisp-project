@@ -333,7 +333,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ThirdpartyTransactionRequest'
+              $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/schemas/ThirdpartyTransactionPostRequest.yaml'
             example:
               transactionRequestId: '8d34f91d-d078-4077-8263-2c047876fcf6'
               sourceAccountId: 'dfspa.alice.1234'
@@ -380,6 +380,98 @@ paths:
           $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/501'
         503:
           $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/503'
+  /thirdpartyRequests/transactions/{ID}:
+    get:
+      description: >
+        The callback `GET /thirdpartyRequests/transactions/{ID}` is used to get
+        information about a thirdparty request transaction.
+      summary: Get third party transaction requests
+      tags:
+        - thirdpartyRequests
+      operationId: GetThirdpartyTransactionRequests
+      parameters:
+        #Path
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/ID.yaml'
+        #Headers
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/Accept.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/Content-Length.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/Content-Type.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/Date.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/X-Forwarded-For.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/FSPIOP-Source.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/FSPIOP-Destination.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/FSPIOP-Encryption.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/FSPIOP-Signature.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/FSPIOP-URI.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/FSPIOP-HTTP-Method.yaml'
+      responses:
+        200:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/200'
+        400:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/400'
+        401:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/401'
+        403:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/403'
+        404:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/404'
+        405:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/405'
+        406:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/406'
+        501:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/501'
+        503:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/503'
+    put:
+      description: >
+        The callback `PUT /thirdpartyRequests/transactions/{ID}` is used to inform the client of the result of a
+        previously-requested transaction. The `{ID}` in the URI should contain the `transactionRequestId` that was used for
+        the creation of the transaction request.
+      summary: Update third party transaction requests
+      tags:
+        - thirdpartyRequests
+      operationId: UpdateThirdpartyTransactionRequests
+      parameters:
+        #Path
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/ID.yaml'
+        #Headers
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/Content-Length.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/Content-Type.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/Date.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/X-Forwarded-For.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/FSPIOP-Source.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/FSPIOP-Destination.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/FSPIOP-Encryption.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/FSPIOP-Signature.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/FSPIOP-URI.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/FSPIOP-HTTP-Method.yaml'
+      requestBody:
+        description: Transaction request result returned.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/schemas/ThirdpartyTransactionIDPutResponse.yaml'
+      responses:
+        200:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/200'
+        400:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/400'
+        401:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/401'
+        403:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/403'
+        404:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/404'
+        405:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/405'
+        406:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/406'
+        501:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/501'
+        503:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/503'
   /thirdpartyRequests/transactions/{ID}/authorizations:
     post:
       tags:
@@ -410,7 +502,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/VerifyThirdPartyAuthorizationRequest'
+              $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/schemas/ThirdpartyAuthorizationIDPostRequest.yaml'
             example:
               challenge: '<QuoteResponse object>'
               value: '<base64 encoded binary - the signed quote response object>'
@@ -465,7 +557,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateThirdpartyAuthorizationRequest'
+              $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/schemas/ThirdpartyAuthorizationIDPutRequest.yaml'
             example:
               challenge: '<QuoteResponse object>'
               value: '<base64 encoded binary - the signed quote response object>'
@@ -493,157 +585,15 @@ paths:
           $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/503'
 
 components:
+  # TODO: Move to `mojaloop/api-snippets.
   schemas:
-    AuthChannelsType:
-      title: AuthChannelsType
-      type: string
-      enum:
-        - WEB
-        - OTP
-      description: |
-        The auth channel being used for the consentRequest
-        - "WEB" - The Web auth channel
-        - "OTP" - The OTP auth channel
-    AccountId:
-      type: string
-      description: >
-        A long-lived account identifier provided by the DFSP
-        this MUST NOT be Bank Account Number or anything that
-        may expose a User's private bank account information
-    ThirdpartyTransactionRequest:
-      title: ThirdpartyTransactionRequest
-      type: object
-      description: The object sent in the POST /thirdpartyRequests/transactions request.
-      properties:
-        transactionRequestId:
-          allOf:
-            - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/schemas/CorrelationId.yaml'
-          description: >
-            Common ID between the FSPs for the transaction request object.
-            The ID should be reused for resends of the same transaction request.
-            A new ID should be generated for each new transaction request.
-        sourceAccountId:
-          allOf:
-            - $ref: '#/components/schemas/AccountId'
-          description: DFSP specific account identifiers, e.g. `dfspa.alice.1234`
-        consentId:
-          allOf:
-            - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/schemas/CorrelationId.yaml'
-          description: >
-            Common ID between the PISP and FSP for the Consent object
-            This tells DFSP and auth-service which constent allows the PISP to initiate transaction.
-        payee:
-          allOf:
-            - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/schemas/Party.yaml'
-          description: Information about the Payee in the proposed financial transaction.
-        payer:
-          allOf:
-            - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/schemas/Party.yaml'
-          description: Information about the Payer in the proposed financial transaction.
-        amountType:
-          allOf:
-            - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/schemas/AmountType.yaml'
-          description: SEND for sendAmount, RECEIVE for receiveAmount.
-        amount:
-          allOf:
-            - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/schemas/Money.yaml'
-          description: Requested amount to be transferred from the Payer to Payee.
-        transactionType:
-          allOf:
-            - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/schemas/TransactionType.yaml'
-          description: Type of transaction.
-        expiration:
-          type: string
-          description: >
-            Date and time until when the transaction request is valid.
-            It can be set to get a quick failure in case the peer FSP takes too long to respond.
-          example: '2016-05-24T08:38:08.699-04:00'
-      required:
-        - transactionRequestId
-        - sourceAccountId
-        - consentId
-        - payee
-        - payer
-        - amountType
-        - amount
-        - transactionType
-        - expiration
-    VerifyThirdPartyAuthorizationRequest:
-      title: VerifyThirdPartyAuthorizationRequest
-      type: object
-      description: The object sent in the POST /thirdpartyRequests/transactions/{id}/authorizations request.
-      properties:
-        challenge:
-          type: string
-          description: The original Challenge Object as a JSON string
-        value:
-          allOf:
-            - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/schemas/BinaryString.yaml'
-          description: 'Base64 encoded binary string - the signed challenge'
-        consentId:
-          allOf:
-            - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/schemas/CorrelationId.yaml'
-          description: >
-            Common ID between the PISP and FSP for the Consent object
-            This tells DFSP and auth-service which constent allows the PISP to initiate transaction.
-        sourceAccountId:
-          allOf:
-            - $ref: '#/components/schemas/AccountId'
-          description: DFSP specific account identifiers, e.g. `dfspa.alice.1234`
-        status:
-          type: string
-          enum:
-            - PENDING
-          description: The status of the authorization. This MUST be PENDING for a POST request
-      required:
-        - challenge
-        - value
-        - consentId
-        - sourceAccountId
-        - status
-    UpdateThirdpartyAuthorizationRequest:
-      title: UpdateThirdpartyAuthorizationRequest
-      type: object
-      description: The object sent in the PUT /thirdpartyRequests/transactions/{id}/authorizations request.
-      properties:
-        challenge:
-          type: string
-          description: The original Challenge Object as a JSON string
-        value:
-          allOf:
-            - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/schemas/BinaryString.yaml'
-          description: 'Base64 encoded binary string - the signed challenge'
-        consentId:
-          allOf:
-            - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/schemas/CorrelationId.yaml'
-          description: >
-            Common ID between the PISP and FSP for the Consent object
-            This tells DFSP and auth-service which constent allows the PISP to initiate transaction.
-        sourceAccountId:
-          allOf:
-            - $ref: '#/components/schemas/AccountId'
-          description: DFSP specific account identifiers, e.g. `dfspa.alice.1234`
-        status:
-          type: string
-          enum:
-            - VERIFIED
-          description: The status of the authorization. This value must be `VERIFIED` for a PUT request
-      required:
-        - challenge
-        - value
-        - consentId
-        - sourceAccountId
-        - status
-
     CreateConsentRequest:
       title: CreateConsentRequest
       type: object
       description: The object sent in a `POST /consentRequests` request
       properties:
         id:
-          # TODO: correlationId
-          type: string
-          description: The id of the consentRequest
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/schemas/CorrelationId.yaml'
         initiatorId:
           type: string
           description: The id of the PISP who will initiate transactions on a user's behalf
@@ -654,7 +604,7 @@ components:
         authChannels:
           type: array
           items:
-            $ref: '#/components/schemas/AuthChannelsType'
+            $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/schemas/AuthChannelsType.yaml'
           # TODO: min and max
         callbackUri:
           # TODO: enforce uri type
@@ -673,9 +623,7 @@ components:
       description: The object sent in a `PUT /consentRequests` request
       properties:
         id:
-          # TODO: correlationId
-          type: string
-          description: The id of the consentRequest
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/schemas/CorrelationId.yaml'
         initiatorId:
           type: string
           description: The id of the PISP who will initiate transactions on a user's behalf
@@ -686,7 +634,7 @@ components:
         authChannels:
           type: array
           items:
-            $ref: '#/components/schemas/AuthChannelsType'
+            $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/schemas/AuthChannelsType.yaml'
           # TODO: min and max
         callbackUri:
           # TODO: enforce uri type
@@ -707,7 +655,3 @@ components:
         - callbackUri
         - authUri
         - authToken
-
-
-
-

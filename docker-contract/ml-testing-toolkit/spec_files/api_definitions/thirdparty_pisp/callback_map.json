@@ -50,5 +50,55 @@
         }
       }
     }
+  },
+  "/thirdpartyRequests/transactions/{ID}/authorizations": {
+    "post": {
+      "successCallback": {
+        "method": "put",
+        "path": "/thirdpartyRequests/transactions/{ID}/authorizations",
+        "pathPattern": "/thirdpartyRequests/transactions/{$request.body.transactionRequestId}/authorizations",
+        "headerOverride": {
+          "FSPIOP-Source": "{$config.FSPID}",
+          "FSPIOP-Destination": "{$request.headers.fspiop-source}",
+          "Content-Type": "{$session.negotiatedContentType}",
+          "Date": "{$request.headers.date}"
+        }
+      },
+      "errorCallback": {
+        "method": "put",
+        "path": "/thirdpartyRequests/transactions/{ID}/authorizations/error",
+        "pathPattern": "/thirdpartyRequests/transactions/{$request.body.transactionRequestId}/authorizations/error",
+        "headerOverride": {
+          "FSPIOP-Source": "{$config.FSPID}",
+          "FSPIOP-Destination": "{$request.headers.fspiop-source}",
+          "Content-Type": "{$session.negotiatedContentType}",
+          "Date": "{$request.headers.date}"
+        }
+      }
+    },
+    "put": {
+      "successCallback": {
+        "method": "put",
+        "path": "/thirdpartyRequests/transactions/{ID}/authorizations",
+        "pathPattern": "/thirdpartyRequests/transactions/{$request.body.transactionRequestId}",
+        "headerOverride": {
+          "FSPIOP-Source": "{$config.FSPID}",
+          "FSPIOP-Destination": "{$request.headers.fspiop-source}",
+          "Content-Type": "{$session.negotiatedContentType}",
+          "Date": "{$request.headers.date}"
+        }
+      },
+      "errorCallback": {
+        "method": "put",
+        "path": "/thirdpartyRequests/transactions/{ID}/authorizations/error",
+        "pathPattern": "/thirdpartyRequests/transactions/{$request.body.transactionRequestId}/error",
+        "headerOverride": {
+          "FSPIOP-Source": "{$config.FSPID}",
+          "FSPIOP-Destination": "{$request.headers.fspiop-source}",
+          "Content-Type": "{$session.negotiatedContentType}",
+          "Date": "{$request.headers.date}"
+        }
+      }
+    }
   }
 }

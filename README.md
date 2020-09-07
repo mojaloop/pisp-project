@@ -151,6 +151,6 @@ Corresponding excerpt from package.json:
 
 1. Edit `src/interface/api-template.yaml`.
 
-2. Whereever possible use snippets defined in https://github.com/mojaloop/api-snippets
+2. Wherever possible use snippets defined in https://github.com/mojaloop/api-snippets
 
 3. Run `npm run build:openapi` to bundle, render and validate the generated api.

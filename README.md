@@ -118,7 +118,7 @@ npm run lint
 ```
 
 #### linting & auto fixing via pre-commit `husky` hook
-Committing untested and bad formatted code to repo is bad behavior, so we use [husky](https://www.npmjs.com/package/husky) integrated with [lint-staged](https://www.npmjs.com/package/lint-staged). 
+Committing untested and bad formatted code to repo is bad behavior, so we use [husky](https://www.npmjs.com/package/husky) integrated with [lint-staged](https://www.npmjs.com/package/lint-staged).
 
 There is defined `pre-commit` hook which runs linting only for staged files, so execution time is as fast as possible - only staged files are linted and if possible automatically fixed.
 
@@ -136,7 +136,7 @@ Corresponding excerpt from package.json:
   }
 ```
 
-1. Demos - End to End demos/examples 
+1. Demos - End to End demos/examples
    - We should maintain a simple end to end postman collection for demo and illustration purposes
    - These tests can be a subset of what we implement in the `#3 End to End Tests`, and are _not_ used to evaluate CI/CD passes or failure
    - For now, this should be a part of _this_ repo, but upon the release of the PISP Features, they can be included in the `mojaloop/postman` Golden Path tests.
@@ -146,4 +146,11 @@ Corresponding excerpt from package.json:
  - [proposal documentation on google drive](https://docs.google.com/document/d/17rLpCPM2NY-i4oKGxhlBMbQahGY0k83rij2EOiU_OR4/edit)
  - [Confluence](https://modusbox.atlassian.net/wiki/spaces/GPISP/pages/648774132/Google+PISP+Documentation)
  - [ZenHub board](https://app.zenhub.com/workspaces/pisp-5e8457b05580fb04a7fd4878/board?repos=106737677)
-  
+
+## Updating Thirdparty API Specification
+
+1. Edit `src/interface/api-template.yaml`.
+
+2. Whereever possible use snippets defined in https://github.com/mojaloop/api-snippets
+
+3. Run `npm run build:openapi` to bundle, render and validate the generated api.

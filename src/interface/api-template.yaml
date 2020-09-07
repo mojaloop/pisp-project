@@ -452,7 +452,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/schemas/ThirdpartyTransactionIDPutResponse.yaml'
+              $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/schemas/ThirdpartyTransactionIDPutResponse.yaml'
       responses:
         200:
           $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/200'

@@ -6,7 +6,7 @@ networks:
 
 services:
   ml-testing-toolkit:
-    image: mojaloop/ml-testing-toolkit:v10.6.1
+    image: mojaloop/ml-testing-toolkit:v11.1.0
     container_name: dl_ml-testing-toolkit
     env_file: ./ml-testing-toolkit/local.env
     volumes:
@@ -22,7 +22,7 @@ services:
       - "pisp-sim-scheme-adapter:172.17.0.1"
 
   ml-testing-toolkit-ui:
-    image: mojaloop/ml-testing-toolkit-ui:v10.6.1
+    image: mojaloop/ml-testing-toolkit-ui:v11.0.9
     container_name: dl_ml-testing-toolkit-ui
     ports:
       - "6060:6060"

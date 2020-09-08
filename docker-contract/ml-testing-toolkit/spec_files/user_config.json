@@ -2,8 +2,11 @@
   "CALLBACK_ENDPOINT": "http://pisp-sim-scheme-adapter:8000",
   "CALLBACK_RESOURCE_ENDPOINTS": {
     "enabled": false,
-    "endpoints": [
-    ]
+    "endpoints": []
+  },
+  "HUB_ONLY_MODE": false,
+  "ENDPOINTS_DFSP_WISE": {
+    "dfsps": {}
   },
   "SEND_CALLBACK_ENABLE": true,
   "FSPID": "pisp-sim",

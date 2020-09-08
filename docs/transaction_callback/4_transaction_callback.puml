@@ -1,0 +1,52 @@
+@startuml
+
+
+box "PISP"
+    participant "PISP Server" as D1
+end box
+box "Mojaloop"
+    participant "Thirdparty API Adapter" as 3P
+    participant "Central Event Processor" as CEP
+    participant "ML API Adapter" as ML
+    participant "Central Ledger" as CL
+end box
+
+box "DFSP B"
+    participant "DFSP B\n(Payee)" as D3
+end box
+
+... **Transaction agreement takes place**\n**DFSPA intiates transfer, and now waits to hear back from DFSPB** ...
+
+rnote over D3 #Light
+**""PUT /transfers/9876""**
+""FSPIOP-Source: dfspb""
+""FSPIOP-Destination: dfspa""
+{
+    transferState: "COMMITTED"
+}
+end note
+
+D3 -> ML: ""PUT /transfers/9876""
+
+ML -> CL: Transfer accepted by the Payee DFSP
+
+CL -> ML: Please notify the DFSPA
+CL -> CEP: Here's a notification as well, since we're all talking over Kafka.\nThe transferId is ""9876""
+
+CEP -> CEP: We were waiting for a transfer with a tranferId of ""9876""
+CEP -> 3P: A transfer you subscribed to just occurred
+
+rnote over 3P #Light
+**""PATCH /thirdpartyRequests/transactions/1234""**
+""FSPIOP-Source: pispa""
+""FSPIOP-Destination: dfspa""
+{
+    state: "ACCEPTED"
+    ...
+}
+end note
+3P -> D1: ""PATCH /thirdpartyRequests/transactions/1234""
+
+CEP -> CEP: Stop listening for transfers with transferId of ""9876""
+
+@enduml

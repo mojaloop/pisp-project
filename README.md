@@ -1,15 +1,17 @@
-# PISP - Payment Initiation Service Provider integration with Mojaloop
+# PISP - Payment Initiation Service Providers
 
-[todo: add repo badges etc where relevant]
+This repo contains the documentation, specifications and tests for the Mojaloop-PISP workstream.
 
-## project documentation
-project documentation, flows, uml diagrams and so on: [/docs](./docs/README.md)
+## Overview
+- [Project Documentation](./docs/README.md) - Project Documentation, flows, uml diagrams and so on
+- [Docker-Local](./docker-local/README.md) - Onboarding environment for local development & end to end testing
+- [Docker-Contract](./docker-contract/README.md) - Environment for testing with ml-testing-toolkit
 
-## docker-local
-onboarding environment for local development & testing: [/docker-local](./docker-local/README.md)
 
-## branching strategy
-naming convention for [git branching](./docs/git_branching.md)
+## External Links
+ - [Proposal Documentation on Google drive](https://docs.google.com/document/d/17rLpCPM2NY-i4oKGxhlBMbQahGY0k83rij2EOiU_OR4/edit)
+ - [ZenHub board](https://app.zenhub.com/workspaces/mojaloop-project-59edee71d1407922110cf083/board?labels=oss-pisp,oss-pisp-ref&filterLogic=any&useDefaultFilterLogic=false&repos=116650553,106737677)
+  
 
 ## Running Tests
 
@@ -40,7 +42,6 @@ npm run test:e2e
 ```bash
 npm run test:e2e -- --watch
 ```
-I
 
 ### Contract Tests
 
@@ -55,10 +56,8 @@ npm run test:contract
 ```bash
 npm run test:contract -- --watch
 ```
-I
 
 ## Writing tests for PISP Features:
-[todo: add notes about where in this repo to put tests]
 
 When working on PISP features, we will follow these test guidelines:
 
@@ -106,7 +105,7 @@ npm run test:junit
 
 There is `mojaloop` convention to use `test/unit` path to keep tests. The placement of test folder should be similar to placement of tested code in `src` folder
 
-### Source code linting
+### Source Code Linting
 
 [eslint]() setup compatible with javascript [standard](https://standardjs.com/) and dedicated for TypeScript [typescript-eslint](https://github.com/typescript-eslint/typescript-eslint).
   - it is much more flexible
@@ -117,8 +116,8 @@ To lint all files simply run
 npm run lint
 ```
 
-#### linting & auto fixing via pre-commit `husky` hook
-Committing untested and bad formatted code to repo is bad behavior, so we use [husky](https://www.npmjs.com/package/husky) integrated with [lint-staged](https://www.npmjs.com/package/lint-staged).
+#### Linting & Auto fixing via pre-commit `husky` hook
+Committing untested and bad formatted code to repo is bad behavior, so we use [husky](https://www.npmjs.com/package/husky) integrated with [lint-staged](https://www.npmjs.com/package/lint-staged). 
 
 There is defined `pre-commit` hook which runs linting only for staged files, so execution time is as fast as possible - only staged files are linted and if possible automatically fixed.
 
@@ -136,7 +135,7 @@ Corresponding excerpt from package.json:
   }
 ```
 
-1. Demos - End to End demos/examples
+1. Demos - End to End demos/examples 
    - We should maintain a simple end to end postman collection for demo and illustration purposes
    - These tests can be a subset of what we implement in the `#3 End to End Tests`, and are _not_ used to evaluate CI/CD passes or failure
    - For now, this should be a part of _this_ repo, but upon the release of the PISP Features, they can be included in the `mojaloop/postman` Golden Path tests.

@@ -29,7 +29,7 @@ D3 -> S: ""PUT /quotes/456""
 S -> D2: ""PUT /quotes/456""
 
 note left of D2
-  DFSPA has the quote, they can now ask 
+  DFSPA has the quote, they can now ask
   the PISP for authorization
 end note
 
@@ -37,8 +37,8 @@ D2 -> S: ""POST /authorizations""
 S -> D1: ""POST /authorizations""
 
 note right of D1
-  PISP checks the quote with the user, 
-  and uses FIDO to sign the the QuoteResponse object 
+  PISP checks the quote with the user,
+  and uses FIDO to sign the the QuoteResponse object
 end note
 
 D1 -> S: ""PUT /authorizations/123""
@@ -73,6 +73,6 @@ D2 -> S: ""POST /transfers""
 S -> D3: ""POST /transfers""
 D3 -> S: ""PUT /transfers/321""
 S -> D2: ""PUT /transfers/321""
-S -> D1: ""PUT /thirdpartyRequests/transactions/123""
+S -> D1: ""PATCH /thirdpartyRequests/transactions/123""
 
 @enduml

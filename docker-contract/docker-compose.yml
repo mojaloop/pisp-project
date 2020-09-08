@@ -20,6 +20,7 @@ services:
       - mojaloop-pisp-net
     extra_hosts:
       - "pisp-sim-scheme-adapter:172.17.0.1"
+      - "ml-testing-toolkit:172.17.0.1"
 
   ml-testing-toolkit-ui:
     image: mojaloop/ml-testing-toolkit-ui:v11.0.9
@@ -29,6 +30,14 @@ services:
     command: nginx -g "daemon off;"
     networks:
       - mojaloop-pisp-net
+
+  mongo:
+    image: mongo
+    # Disable logging as it is far too verbose for debugging locally
+    logging:
+      driver: none
+    ports:
+      - "27017:27017"
 
  ## PISP Simulator
   pisp-sim-backend:

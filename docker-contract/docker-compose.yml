@@ -5,9 +5,9 @@ networks:
     name: mojaloop-pisp-net
 
 services:
-  mojaloop-testing-toolkit:
-    image: mojaloop/ml-testing-toolkit:v10.6.1
-    container_name: mojaloop-testing-toolkit
+  ml-testing-toolkit:
+    image: mojaloop/ml-testing-toolkit:v11.1.0
+    container_name: dl_ml-testing-toolkit
     env_file: ./ml-testing-toolkit/local.env
     volumes:
       - "./ml-testing-toolkit/spec_files:/opt/mojaloop-testing-toolkit/spec_files"
@@ -20,15 +20,24 @@ services:
       - mojaloop-pisp-net
     extra_hosts:
       - "pisp-sim-scheme-adapter:172.17.0.1"
+      - "ml-testing-toolkit:172.17.0.1"
 
   ml-testing-toolkit-ui:
-    image: mojaloop/ml-testing-toolkit-ui:v10.6.1
-    container_name: ml-testing-toolkit-ui
+    image: mojaloop/ml-testing-toolkit-ui:v11.0.9
+    container_name: dl_ml-testing-toolkit-ui
     ports:
       - "6060:6060"
     command: nginx -g "daemon off;"
     networks:
       - mojaloop-pisp-net
+
+  mongo:
+    image: mongo
+    # Disable logging as it is far too verbose for debugging locally
+    logging:
+      driver: none
+    ports:
+      - "27017:27017"
 
  ## PISP Simulator
   pisp-sim-backend:
@@ -41,6 +50,7 @@ services:
       - "12003:3003"
     extra_hosts:
       - "pisp-sim-scheme-adapter:172.17.0.1"
+
   pisp-sim-scheme-adapter:
     image: "mojaloop/sdk-scheme-adapter:v10.6.2.3-pisp"
     container_name: pisp-sim-scheme-adapter
@@ -59,6 +69,7 @@ services:
     extra_hosts:
       - "pisp-sim-backend:172.17.0.1"
       - "mojaloop-testing-toolkit:172.17.0.1"
+
   pisp-sim-redis:
     container_name: pisp-sim-redis
     image: "redis:5.0.4-alpine"

@@ -28,23 +28,31 @@ end note
 ...
 
 PISP -> Switch ++: ""GET /parties/OPAQUE/username1234""\n\
-  ""  FSIOP-Source: PISP""\n\
-  ""  FSIOP-Destination: DFSP""
+  ""  FSIOP-Source: pispa""\n\
+  ""  FSIOP-Destination: dfspa""
 Switch --> PISP: ""202 Accepted""
 deactivate PISP
 
-Switch -> DFSP ++: ""GET /parties/OPAQUE/username1234""
+Switch -> DFSP ++: ""GET /parties/OPAQUE/username1234""\n\
+  ""  FSIOP-Source: pispa""\n\
+  ""  FSIOP-Destination: dfspa""
 DFSP --> Switch: ""202 Accepted""
 deactivate Switch
 
-DFSP -> Switch ++: ""PUT /parties/OPAQUE/username1234 { [""\n\
+DFSP -> Switch ++: ""PUT /parties/OPAQUE/username1234""\n\
+  ""  FSIOP-Source: dfspa""\n\
+  ""  FSIOP-Destination: pispa""\n\
+  ""{ [""\n\
   ""  { id: "dfspa.username.1234", currency: "ZAR" },""\n\
   ""  { id: "dfspa.username.5678", currency: "USD" }""\n\
   ""] }""
 Switch --> DFSP: ""200 OK""
 deactivate DFSP
 
-Switch -> PISP ++: ""PUT /parties/OPAQUE/username1234 { [""\n\
+Switch -> PISP ++: ""PUT /parties/OPAQUE/username1234""\n\
+  ""  FSIOP-Source: dfspa""\n\
+  ""  FSIOP-Destination: pispa""\n\
+  ""{ [""\n\
   ""  { id: "dfspa.username.1234", currency: "ZAR" },""\n\
   ""  { id: "dfspa.username.5678", currency: "USD" }""\n\
   ""] }""

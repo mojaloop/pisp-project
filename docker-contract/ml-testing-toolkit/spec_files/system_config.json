@@ -1,5 +1,27 @@
 {
   "API_PORT": 5000,
+  "HOSTING_ENABLED": false,
+  "CONFIG_VERSIONS": {
+    "response": 1,
+    "callback": 1,
+    "validation": 1,
+    "forward": 1,
+    "userSettings": 1
+  },
+  "DB": {
+    "URI": "mongodb://mongo:27017/dfsps"
+  },
+  "OAUTH": {
+    "AUTH_ENABLED": false,
+    "APP_OAUTH_CLIENT_KEY": "asdf",
+    "APP_OAUTH_CLIENT_SECRET": "asdf",
+    "MTA_ROLE": "Application/MTA",
+    "PTA_ROLE": "Application/PTA",
+    "EVERYONE_ROLE": "Internal/everyone",
+    "OAUTH2_ISSUER": "http://ml-testing-toolkit:5050/api/oauth2/token",
+    "JWT_COOKIE_NAME": "TTK-API_ACCESS_TOKEN",
+    "EMBEDDED_CERTIFICATE": "password"
+  },
   "API_DEFINITIONS": [
     {
       "type": "fspiop",
@@ -22,9 +44,12 @@
       "type": "central_admin",
       "version": "9.3",
       "folderPath": "central_admin_9.3"
+    },
+    {
+      "type": "thirdparty_pisp",
+      "version": "0.1",
+      "folderPath": "thirdparty_pisp",
+        "asynchronous": true
     }
-  ],
-  "OAUTH": {
-    "AUTH_ENABLED": false
-  }
+  ]
 }

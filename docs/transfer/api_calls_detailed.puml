@@ -117,7 +117,7 @@ rnote right of D1 #Light
   },
   "transactionType": {
     "scenario": "TRANSFER",
-    "initiator": "PAYER", 
+    "initiator": "PAYER",
     "initiatorType": "CONSUMER"
   },
   "expiration": "2020-06-15T22:17:28.985-01:00"
@@ -164,7 +164,7 @@ rnote over S #Light
   },
   "transactionType": {
     "scenario": "TRANSFER",
-    "initiator": "PAYER", 
+    "initiator": "PAYER",
     "initiatorType": "CONSUMER"
   },
   "expiration": "2020-06-15T00:00:00.000"
@@ -314,7 +314,7 @@ S -> D2: ""PUT /quotes/456""
 D2 --> S: ""200 OK""
 
 note left of D2
-  DFSPA has the quote, they can now ask 
+  DFSPA has the quote, they can now ask
   the PISP for authorization
 end note
 
@@ -322,8 +322,8 @@ rnote left of D2 #Light
 **""POST /authorizations""**
 ""FSPIOP-Source: dfspa""
 ""FSPIOP-Destination: pispa""
-{      
-  //transactionRequestId is our 'primary key' 
+{
+  //transactionRequestId is our 'primary key'
   //to refer to this authorization
   **"transactionRequestId": "123",**
   "authenticationType": "U2F",
@@ -360,8 +360,8 @@ rnote over S #Light
 **""POST /authorizations""**
 ""FSPIOP-Source: dfspa""
 ""FSPIOP-Destination: pispa""
-{      
-  //transactionRequestId is our 'primary key' 
+{
+  //transactionRequestId is our 'primary key'
   //to refer to this authorization
   **"transactionRequestId": "123",**
   "authenticationType": "U2F",
@@ -394,8 +394,8 @@ S -> D1: ""POST /authorizations""
 D1 --> S: ""202 Accepted""
 
 note right of D1
-  PISP checks the quote with the user, 
-  and uses FIDO to sign the the QuoteResponse object 
+  PISP checks the quote with the user,
+  and uses FIDO to sign the the QuoteResponse object
 end note
 
 rnote right of D1 #Light
@@ -618,7 +618,7 @@ D2 --> S: ""200 OK""
 
 
 rnote over S #Light
-**""PUT /thirdpartyRequests/transactions/123""**
+**""PATCH /thirdpartyRequests/transactions/123""**
 ""FSPIOP-Source: switch""
 ""FSPIOP-Destination: pispa""
 {
@@ -626,7 +626,7 @@ rnote over S #Light
   "transactionRequestState": "ACCEPTED"
 }
 end note
-S -> D1: ""PUT /thirdpartyRequests/transactions/123""
+S -> D1: ""PATCH /thirdpartyRequests/transactions/123""
 D1 --> S: ""200 OK""
 
 

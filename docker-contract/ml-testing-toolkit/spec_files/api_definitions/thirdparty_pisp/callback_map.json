@@ -2,9 +2,9 @@
   "/thirdpartyRequests/transactions": {
     "post": {
       "successCallback": {
-        "method": "put",
-        "path": "/thirdpartyRequests/transactions/{ID}",
-        "pathPattern": "/thirdpartyRequests/transactions/{$request.body.transactionRequestId}",
+        "method": "post",
+        "path": "/authorizations",
+        "pathPattern": "/authorizations",
         "headerOverride": {
           "FSPIOP-Source": "{$config.FSPID}",
           "FSPIOP-Destination": "{$request.headers.fspiop-source}",
@@ -13,9 +13,35 @@
         }
       },
       "errorCallback": {
-        "method": "put",
+        "method": "post",
+        "path": "/authorizations/{ID}/error",
+        "pathPattern": "/authorizations/{$request.params.ID}/error",
+        "headerOverride": {
+          "FSPIOP-Source": "{$config.FSPID}",
+          "FSPIOP-Destination": "{$request.headers.fspiop-source}",
+          "Content-Type": "{$session.negotiatedContentType}",
+          "Date": "{$request.headers.date}"
+        }
+      }
+    }
+  },
+  "/authorizations/{ID}": {
+    "put": {
+      "successCallback": {
+        "method": "patch",
+        "path": "/thirdpartyRequests/transactions/{ID}",
+        "pathPattern": "/thirdpartyRequests/transactions/{$request.params.ID}",
+        "headerOverride": {
+          "FSPIOP-Source": "{$config.FSPID}",
+          "FSPIOP-Destination": "{$request.headers.fspiop-source}",
+          "Content-Type": "{$session.negotiatedContentType}",
+          "Date": "{$request.headers.date}"
+        }
+      },
+      "errorCallback": {
+        "method": "patch",
         "path": "/thirdpartyRequests/transactions/{ID}/error",
-        "pathPattern": "/thirdpartyRequests/transactions/{$request.body.transactionRequestId}/error",
+        "pathPattern": "/thirdpartyRequests/transactions/{{$request.params.ID}}/error",
         "headerOverride": {
           "FSPIOP-Source": "{$config.FSPID}",
           "FSPIOP-Destination": "{$request.headers.fspiop-source}",
@@ -56,7 +82,7 @@
       "successCallback": {
         "method": "put",
         "path": "/thirdpartyRequests/transactions/{ID}/authorizations",
-        "pathPattern": "/thirdpartyRequests/transactions/{$request.body.transactionRequestId}/authorizations",
+        "pathPattern": "/thirdpartyRequests/transactions/{$request.params.ID}/authorizations",
         "headerOverride": {
           "FSPIOP-Source": "{$config.FSPID}",
           "FSPIOP-Destination": "{$request.headers.fspiop-source}",
@@ -67,7 +93,7 @@
       "errorCallback": {
         "method": "put",
         "path": "/thirdpartyRequests/transactions/{ID}/authorizations/error",
-        "pathPattern": "/thirdpartyRequests/transactions/{$request.body.transactionRequestId}/authorizations/error",
+        "pathPattern": "/thirdpartyRequests/transactions/{$request.params.ID}/authorizations/error",
         "headerOverride": {
           "FSPIOP-Source": "{$config.FSPID}",
           "FSPIOP-Destination": "{$request.headers.fspiop-source}",
@@ -80,7 +106,7 @@
       "successCallback": {
         "method": "put",
         "path": "/thirdpartyRequests/transactions/{ID}/authorizations",
-        "pathPattern": "/thirdpartyRequests/transactions/{$request.body.transactionRequestId}",
+        "pathPattern": "/thirdpartyRequests/transactions/{$request.params.ID}",
         "headerOverride": {
           "FSPIOP-Source": "{$config.FSPID}",
           "FSPIOP-Destination": "{$request.headers.fspiop-source}",
@@ -91,7 +117,7 @@
       "errorCallback": {
         "method": "put",
         "path": "/thirdpartyRequests/transactions/{ID}/authorizations/error",
-        "pathPattern": "/thirdpartyRequests/transactions/{$request.body.transactionRequestId}/error",
+        "pathPattern": "/thirdpartyRequests/transactions/{$request.params.ID}/error",
         "headerOverride": {
           "FSPIOP-Source": "{$config.FSPID}",
           "FSPIOP-Destination": "{$request.headers.fspiop-source}",

@@ -8,7 +8,6 @@ services:
   ml-testing-toolkit:
     image: mojaloop/ml-testing-toolkit:v11.1.0
     container_name: dl_ml-testing-toolkit
-    env_file: ./ml-testing-toolkit/local.env
     volumes:
       - "./ml-testing-toolkit/spec_files:/opt/mojaloop-testing-toolkit/spec_files"
       - "./ml-testing-toolkit/secrets:/opt/mojaloop-testing-toolkit/secrets"

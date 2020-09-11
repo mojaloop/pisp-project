@@ -13,7 +13,7 @@ The Thirdparty-API-Adapter recieves this request, and emits a **ThirdpartyTransa
  
 The CEP recieves this event, and starts listening for other events related to `transferRequestId=1234` on the Notifications Topic.
 
-![subscription](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/mojaloop/pisp/master/transaction_callback/1_subscription.puml)
+![subscription](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/mojaloop/pisp/master/docs/transaction_callback/1_subscription.puml)
 
 
 ## 2. Context Gathering

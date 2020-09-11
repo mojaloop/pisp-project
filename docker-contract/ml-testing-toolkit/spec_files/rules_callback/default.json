@@ -703,7 +703,7 @@
   {
     "ruleId": 21,
     "priority": 1,
-    "description": "post /thirdpartyRequests/transactions. Sent from PISP to Switch.",
+    "description": "post /thirdpartyRequests/transactions",
     "apiVersion": {
       "minorVersion": 1,
       "majorVersion": 0,
@@ -725,57 +725,18 @@
       ]
     },
     "event": {
-      "method": "post",
-      "path": "/authorizations",
+      "method": "put",
+      "path": "/thirdpartyRequests/transactions/{ID}",
       "params": {
         "headers": {
-          "Accept": "application/vnd.interoperability.authorizations+json;version=1.0",
-          "Content-Type": "application/vnd.interoperability.authorizations+json;version=1.0",
+          "Accept": "application/vnd.interoperability.thirdparty+json;version=1.0",
+          "Content-Type": "application/vnd.interoperability.thirdparty+json;version=1.0",
           "Date": "Wed, 27 May 2020 11:13:34 GMT",
           "FSPIOP-Source": "DFSPA"
         },
         "body": {
-          "authenticationType": "U2F",
-          "retriesLeft": "1",
-          "amount": {
-            "currency": "USD",
-            "amount": "124.45"
-          },
-          "transactionId": "2f169631-ef99-4cb1-96dc-91e8fc08f539",
-          "transactionRequestId": "02e28448-3c05-4059-b5f7-d518d0a2d8ea",
-          "quote": {
-            "transferAmount": {
-              "currency": "USD",
-              "amount": "124.45"
-            },
-            "payeeReceiveAmount": {
-              "currency": "USD",
-              "amount": "123.45"
-            },
-            "payeeFspFee": {
-              "currency": "USD",
-              "amount": "1"
-            },
-            "payeeFspCommission": {
-              "currency": "USD",
-              "amount": "0"
-            },
-            "expiration": "2020-08-24T08:38:08.699-04:00",
-            "geoCode": {
-              "latitude": "+45.4215",
-              "longitude": "+75.6972"
-            },
-            "ilpPacket": "AYIBgQAAAAAAAASwNGxldmVsb25lLmRmc3AxLm1lci45T2RTOF81MDdqUUZ",
-            "condition": "f5sqb7tBTWPd5Y8BDFdMm9BJR_MNI4isf8p8n4D5pHA",
-            "extensionList": {
-              "extension": [
-                {
-                  "key": "errorDescription",
-                  "value": "This is a more detailed error description"
-                }
-              ]
-            }
-          }
+          "transactionId": "5a2ad5dc-4ab1-4a22-8c5b-62f75252a8d5",
+          "transactionRequestState": "RECEIVED"
         }
       },
       "delay": 0,
@@ -906,49 +867,6 @@
           "FSPIOP-Source": "DFSPA"
         },
         "body": {}
-      },
-      "delay": 0,
-      "type": "FIXED_CALLBACK"
-    }
-  },
-  {
-    "ruleId": 25,
-    "priority": 1,
-    "description": "put /authorizations/{ID}. Sent from PISP to Switch.",
-    "apiVersion": {
-      "minorVersion": 1,
-      "majorVersion": 0,
-      "type": "thirdparty_pisp",
-      "asynchronous": true
-    },
-    "conditions": {
-      "all": [
-        {
-          "fact": "operationPath",
-          "operator": "equal",
-          "value": "/authorizations/{ID}"
-        },
-        {
-          "fact": "method",
-          "operator": "equal",
-          "value": "put"
-        }
-      ]
-    },
-    "event": {
-      "method": "patch",
-      "path": "/thirdpartyRequests/transactions/{ID}",
-      "params": {
-        "headers": {
-          "Accept": "application/vnd.interoperability.thirdparty+json;version=1.0",
-          "Content-Type": "application/vnd.interoperability.thirdparty+json;version=1.0",
-          "Date": "Wed, 27 May 2020 11:13:34 GMT",
-          "FSPIOP-Source": "DFSPA"
-        },
-        "body": {
-          "transactionId": "2f169631-ef99-4cb1-96dc-91e8fc08f539",
-          "transactionRequestState": "ACCEPTED"
-        }
       },
       "delay": 0,
       "type": "FIXED_CALLBACK"

@@ -6,7 +6,7 @@ networks:
 
 services:
   ml-testing-toolkit:
-    image: mojaloop/ml-testing-toolkit:v11.1.0
+    image: mojaloop/ml-testing-toolkit:v11.1.1
     container_name: dl_ml-testing-toolkit
     volumes:
       - "./ml-testing-toolkit/spec_files:/opt/mojaloop-testing-toolkit/spec_files"
@@ -22,7 +22,7 @@ services:
       - "ml-testing-toolkit:172.17.0.1"
 
   ml-testing-toolkit-ui:
-    image: mojaloop/ml-testing-toolkit-ui:v11.0.9
+    image: mojaloop/ml-testing-toolkit-ui:v11.2.0
     container_name: dl_ml-testing-toolkit-ui
     ports:
       - "6060:6060"
@@ -38,7 +38,7 @@ services:
     ports:
       - "27017:27017"
 
- ## PISP Simulator
+  ## PISP Simulator
   pisp-sim-backend:
     image: "mojaloop/mojaloop-simulator:v9.4.1.7-pisp"
     container_name: pisp-sim-backend

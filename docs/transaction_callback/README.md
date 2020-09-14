@@ -13,7 +13,7 @@ The Thirdparty-API-Adapter recieves this request, and emits a **ThirdpartyTransa
  
 The CEP recieves this event, and starts listening for other events related to `transferRequestId=1234` on the Notifications Topic.
 
-![subscription](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/mojaloop/pisp/feature/273-tx-notif-design-3/docs/transaction_callback/1_subscription.puml)
+![subscription](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/mojaloop/pisp/master/docs/transaction_callback/1_subscription.puml)
 
 
 ## 2. Context Gathering
@@ -30,7 +30,7 @@ The since the CEP is listening for events related to `transactionRequestId=1234`
 
 It inspects the event body, and sees the `body.transactionId` of `5678`. CEP starts listening for events related to the `transactionId=5678`.
 
-![context_auth](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/mojaloop/pisp/feature/273-tx-notif-design-3/docs/transaction_callback/2_context_auth.puml)
+![context_auth](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/mojaloop/pisp/master/docs/transaction_callback/2_context_auth.puml)
 
 
 ### 2.2 `POST /transfers`
@@ -43,7 +43,7 @@ The CEP observes this event (as it contains either a request body or encoded int
 
 The **Transfer Prepare Notification** event contains a `transferId` of `9876`. CEP starts listening for events related to `transferId=9876`.
 
-![context_transfer](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/mojaloop/pisp/feature/273-tx-notif-design-3/docs/transaction_callback/3_context_transfer.puml)
+![context_transfer](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/mojaloop/pisp/master/docs/transaction_callback/3_context_transfer.puml)
 
 
 ## 3. Notification
@@ -56,7 +56,7 @@ The CEP sees this **Transfer Fulfil Notification** event, with a `transferId=987
 
 The Thirdparty-API-Adapter sees this event, and sends a `PATCH /thirdpartyRequests/transactions/1234` request to the PISP.
 
-![transaction_callback](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/mojaloop/pisp/feature/273-tx-notif-design-3/docs/transaction_callback/4_transaction_callback.puml)
+![transaction_callback](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/mojaloop/pisp/master/docs/transaction_callback/4_transaction_callback.puml)
 
 
 ## Outstanding Questions

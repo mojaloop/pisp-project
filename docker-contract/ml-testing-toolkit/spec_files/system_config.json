@@ -49,7 +49,7 @@
       "type": "thirdparty_pisp",
       "version": "0.1",
       "folderPath": "thirdparty_pisp",
-        "asynchronous": true
+      "asynchronous": true
     }
   ]
 }

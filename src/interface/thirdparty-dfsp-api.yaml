@@ -33,6 +33,28 @@ paths:
           schema:
             type: string
           description: 'The type of the party identifier. For example, `MSISDN`, `PERSONAL_ID`.'
+        - name: FSPIOP-Source
+          in: header
+          schema:
+            type: string
+          required: true
+          description: |
+            The `FSPIOP-Source` header field is a non-HTTP standard field
+            used by the API for identifying the sender of the HTTP request.
+            The field should be set by the original sender of the request.
+            Required for routing and signature verification
+            (see header field `FSPIOP-Signature`).
+        - name: FSPIOP-Destination
+          in: header
+          schema:
+            type: string
+          required: false
+          description: |
+            The `FSPIOP-Destination` header field is a non-HTTP standard field used by
+            the API for HTTP header based routing of requests and responses to the
+            destination. The field should be set by the original sender of the request
+            (if known), so that any entities between the client and the server do not
+            need to parse the payload for routing purposes.
       responses:
         '202':
           description: Accepted
@@ -209,15 +231,8 @@ paths:
       tags:
         - parties
       parameters:
-        - name: Content-Length
-          in: header
-          required: false
-          schema:
-            type: integer
-          description: |
-            The `Content-Length` header field indicates the anticipated size of the
-            payload body. Only sent if there is a body.
-            **Note:** The API supports a maximum size of 5242880 bytes (5 Megabytes).
+        - $ref: '#/paths/~1parties~1%7BType%7D~1%7BID%7D/get/parameters/2'
+        - $ref: '#/paths/~1parties~1%7BType%7D~1%7BID%7D/get/parameters/3'
       requestBody:
         description: Party information returned.
         required: true

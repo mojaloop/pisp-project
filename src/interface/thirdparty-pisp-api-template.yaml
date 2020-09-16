@@ -19,7 +19,7 @@ paths:
 
         PISP -> Switch(Account Lookup Service).
       tags:
-        - Parties
+        - parties
       parameters:
         - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/ID.yaml'
         - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/Type.yaml'
@@ -62,6 +62,52 @@ paths:
           application/json:
             schema:
               $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/schemas/PartiesTypeIDPutResponse.yaml'
+      responses:
+        200:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/200'
+        400:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/400'
+        401:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/401'
+        403:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/403'
+        404:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/404'
+        405:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/405'
+        406:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/406'
+        501:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/501'
+        503:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/503'
+  /thirdpartyRequests/transactions/{ID}:
+    patch:
+      tags:
+        - thirdpartyRequests
+        - sampled
+      operationId: NotifyThirdpartyTransactionRequests
+      summary: NotifyThirdpartyTransactionRequests
+      description: |
+        The HTTP request `PATCH /thirdpartyRequests/transactions/{ID}` is used to
+        notify a thirdparty of the outcome of a transaction request.
+
+        Switch(Thirdparty API Adapter) -> PISP
+      parameters:
+        #Path
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/ID.yaml'
+        #Headers
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/Content-Length.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/Content-Type.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/Date.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/FSPIOP-Source.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/FSPIOP-Destination.yaml'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/schemas/ThirdpartyTransactionIDPatchResponse.yaml'
       responses:
         200:
           $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/200'

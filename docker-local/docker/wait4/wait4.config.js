@@ -96,6 +96,36 @@ module.exports = {
           method: 'ncat'
         }
       ]
+    },
+    {
+      name: 'pisp-thirdparty-scheme-adapter',
+      wait4: [
+        {
+          description: 'PISP Redis Cache',
+          uri: 'pisp-redis:6379',
+          method: 'ncat'
+        }
+      ]
+    },
+    {
+      name: 'dfspa-thirdparty-scheme-adapter',
+      wait4: [
+        {
+          description: 'DFSP A Redis Cache',
+          uri: 'dfspa-redis:6379',
+          method: 'ncat'
+        }
+      ]
+    },
+    {
+      name: 'dfspb-thirdparty-scheme-adapter',
+      wait4: [
+        {
+          description: 'DFSP B Redis Cache',
+          uri: 'dfspb-redis:6379',
+          method: 'ncat'
+        }
+      ]
     }
   ]
 }

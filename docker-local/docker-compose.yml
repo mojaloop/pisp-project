@@ -297,9 +297,9 @@ services:
     extra_hosts:
       - "dfspa-scheme-adapter:172.17.0.1"
 
-  dfspa-scheme-adapter:
+  dfspa-sdk-scheme-adapter:
     image: "mojaloop/sdk-scheme-adapter:v10.6.2.1-pisp"
-    container_name: dsfpa-scheme-adapter
+    container_name: dsfpa-sdk-scheme-adapter
     env_file: ./dfsp_a/dfsp_a_scheme_adapter.env
     volumes:
       - "./dfsp_a/secrets:/secrets"
@@ -312,6 +312,92 @@ services:
     depends_on:
       - dfspa-redis
     restart: always
+    extra_hosts:
+      - "central-ledger.local:172.17.0.1"
+      - "central-settlement.local:172.17.0.1"
+      - "ml-api-adapter.local:172.17.0.1"
+      - "account-lookup-service.local:172.17.0.1"
+      - "account-lookup-service-admin.local:172.17.0.1"
+      - "quoting-service.local:172.17.0.1"
+      - "moja-simulator.local:172.17.0.1"
+      - "central-ledger:172.17.0.1"
+      - "central-settlement:172.17.0.1"
+      - "ml-api-adapter:172.17.0.1"
+      - "account-lookup-service:172.17.0.1"
+      - "account-lookup-service-admin:172.17.0.1"
+      - "quoting-service:172.17.0.1"
+      - "simulator:172.17.0.1"
+      - "host.docker.internal:172.17.0.1"
+      - "simulator.local:172.17.0.1"
+      - "transaction-request-service:172.17.0.1"
+      - "dfspa-backend:172.17.0.1"
+
+  dfspa-thirdparty-scheme-adapter-inbound:
+    image: "mojaloop/thirdparty-scheme-adapter:v11.15.0"
+    container_name: dfspa-thirdparty-scheme-adapter-inbound
+    environment:
+      - NODE_ENV=development
+    command: sh -c "/opt/thirdparty-scheme-adapter/wait4/wait4.js dfspa-thirdparty-scheme-adapter && npm run start:inbound"
+    volumes:
+      - "./dfsp_a/secrets:/opt/thirdparty-scheme-adapter/secrets"
+      - "./dfsp_a/dfsp_a_thirdparty_scheme_adapter.json:/opt/thirdparty-scheme-adapter/config/development.json"
+      - "./docker/wait4:/opt/thirdparty-scheme-adapter/wait4"
+    ports:
+      - "5005:4005"
+    networks:
+      - mojaloop-net
+    depends_on:
+      - dfspa-redis
+    restart: always
+    healthcheck:
+      test: wget -q http://172.17.0.1:4005/health -O /dev/null || exit 1
+      timeout: 3s
+      retries: 10
+      start_period: 10s
+      interval: 30s
+    extra_hosts:
+      - "central-ledger.local:172.17.0.1"
+      - "central-settlement.local:172.17.0.1"
+      - "ml-api-adapter.local:172.17.0.1"
+      - "account-lookup-service.local:172.17.0.1"
+      - "account-lookup-service-admin.local:172.17.0.1"
+      - "quoting-service.local:172.17.0.1"
+      - "moja-simulator.local:172.17.0.1"
+      - "central-ledger:172.17.0.1"
+      - "central-settlement:172.17.0.1"
+      - "ml-api-adapter:172.17.0.1"
+      - "account-lookup-service:172.17.0.1"
+      - "account-lookup-service-admin:172.17.0.1"
+      - "quoting-service:172.17.0.1"
+      - "simulator:172.17.0.1"
+      - "host.docker.internal:172.17.0.1"
+      - "simulator.local:172.17.0.1"
+      - "transaction-request-service:172.17.0.1"
+      - "dfspa-backend:172.17.0.1"
+
+  dfspa-thirdparty-scheme-adapter-outbound:
+    image: "mojaloop/thirdparty-scheme-adapter:v11.15.0"
+    container_name: dfspa-thirdparty-scheme-adapter-outbound
+    environment:
+      - NODE_ENV=development
+    command: sh -c "/opt/thirdparty-scheme-adapter/wait4/wait4.js dfspa-thirdparty-scheme-adapter && npm run start:outbound"
+    volumes:
+      - "./dfsp_a/secrets:/opt/thirdparty-scheme-adapter/secrets"
+      - "./dfsp_a/dfsp_a_thirdparty_scheme_adapter.json:/opt/thirdparty-scheme-adapter/config/development.json"
+      - "./docker/wait4:/opt/thirdparty-scheme-adapter/wait4"
+    ports:
+      - "5006:4006"
+    networks:
+      - mojaloop-net
+    depends_on:
+      - dfspa-redis
+    restart: always
+    healthcheck:
+      test: wget -q http://172.17.0.1:4006/health -O /dev/null || exit 1
+      timeout: 3s
+      retries: 10
+      start_period: 10s
+      interval: 30s
     extra_hosts:
       - "central-ledger.local:172.17.0.1"
       - "central-settlement.local:172.17.0.1"
@@ -353,9 +439,9 @@ services:
     extra_hosts:
       - "dfspb-scheme-adapter:172.17.0.1"
 
-  dfspb-scheme-adapter:
+  dfspb-sdk-scheme-adapter:
     image: "mojaloop/sdk-scheme-adapter:v10.6.2.1-pisp"
-    container_name: dfspb-scheme-adapter
+    container_name: dfspb-sdk-scheme-adapter
     env_file: ./dfsp_b/dfsp_b_scheme_adapter.env
     volumes:
       - "./dfsp_b/secrets:/secrets"
@@ -388,6 +474,93 @@ services:
       - "transaction-request-service:172.17.0.1"
       - "dfspb-backend:172.17.0.1"
 
+  dfspb-thirdparty-scheme-adapter-inbound:
+    image: "mojaloop/thirdparty-scheme-adapter:v11.15.0"
+    container_name: dfspb-thirdparty-scheme-adapter-inbound
+    environment:
+      - NODE_ENV=development
+    command: sh -c "/opt/thirdparty-scheme-adapter/wait4/wait4.js dfspb-thirdparty-scheme-adapter && npm run start:inbound"
+    volumes:
+      - "./dfsp_b/secrets:/opt/thirdparty-scheme-adapter/secrets"
+      - "./dfsp_b/dfsp_b_thirdparty_scheme_adapter.json:/opt/thirdparty-scheme-adapter/config/development.json"
+      - "./docker/wait4:/opt/thirdparty-scheme-adapter/wait4"
+    ports:
+      - "6005:4005"
+    networks:
+      - mojaloop-net
+    depends_on:
+      - dfspb-redis
+    restart: always
+    healthcheck:
+      test: wget -q http://172.17.0.1:4005/health -O /dev/null || exit 1
+      timeout: 3s
+      retries: 10
+      start_period: 10s
+      interval: 30s
+    extra_hosts:
+      - "central-ledger.local:172.17.0.1"
+      - "central-settlement.local:172.17.0.1"
+      - "ml-api-adapter.local:172.17.0.1"
+      - "account-lookup-service.local:172.17.0.1"
+      - "account-lookup-service-admin.local:172.17.0.1"
+      - "quoting-service.local:172.17.0.1"
+      - "moja-simulator.local:172.17.0.1"
+      - "central-ledger:172.17.0.1"
+      - "central-settlement:172.17.0.1"
+      - "ml-api-adapter:172.17.0.1"
+      - "account-lookup-service:172.17.0.1"
+      - "account-lookup-service-admin:172.17.0.1"
+      - "quoting-service:172.17.0.1"
+      - "simulator:172.17.0.1"
+      - "host.docker.internal:172.17.0.1"
+      - "simulator.local:172.17.0.1"
+      - "transaction-request-service:172.17.0.1"
+      - "dfspb-backend:172.17.0.1"
+
+  dfspb-thirdparty-scheme-adapter-outbound:
+    image: "mojaloop/thirdparty-scheme-adapter:v11.15.0"
+    container_name: dfspb-thirdparty-scheme-adapter-outbound
+    environment:
+      - NODE_ENV=development
+    command: sh -c "/opt/thirdparty-scheme-adapter/wait4/wait4.js dfspb-thirdparty-scheme-adapter && npm run start:outbound"
+    volumes:
+      - "./dfsp_b/secrets:/opt/thirdparty-scheme-adapter/secrets"
+      - "./dfsp_b/dfsp_b_thirdparty_scheme_adapter.json:/opt/thirdparty-scheme-adapter/config/development.json"
+      - "./docker/wait4:/opt/thirdparty-scheme-adapter/wait4"
+    ports:
+      - "6006:4006"
+    networks:
+      - mojaloop-net
+    depends_on:
+      - dfspb-redis
+    restart: always
+    healthcheck:
+      test: wget -q http://172.17.0.1:4006/health -O /dev/null || exit 1
+      timeout: 3s
+      retries: 10
+      start_period: 10s
+      interval: 30s
+    extra_hosts:
+      - "central-ledger.local:172.17.0.1"
+      - "central-settlement.local:172.17.0.1"
+      - "ml-api-adapter.local:172.17.0.1"
+      - "account-lookup-service.local:172.17.0.1"
+      - "account-lookup-service-admin.local:172.17.0.1"
+      - "quoting-service.local:172.17.0.1"
+      - "moja-simulator.local:172.17.0.1"
+      - "central-ledger:172.17.0.1"
+      - "central-settlement:172.17.0.1"
+      - "ml-api-adapter:172.17.0.1"
+      - "account-lookup-service:172.17.0.1"
+      - "account-lookup-service-admin:172.17.0.1"
+      - "quoting-service:172.17.0.1"
+      - "simulator:172.17.0.1"
+      - "host.docker.internal:172.17.0.1"
+      - "simulator.local:172.17.0.1"
+      - "transaction-request-service:172.17.0.1"
+      - "dfspb-backend:172.17.0.1"
+
+
   dfspb-redis:
     container_name: dfspb-redis
     image: "redis:5.0.4-alpine"
@@ -409,9 +582,9 @@ services:
     extra_hosts:
       - "pisp-scheme-adapter:172.17.0.1"
 
-  pisp-scheme-adapter:
+  pisp-sdk-scheme-adapter:
     image: "mojaloop/sdk-scheme-adapter:v10.6.2.1-pisp"
-    container_name: pisp-scheme-adapter
+    container_name: pisp-sdk-scheme-adapter
     env_file: ./pisp/pisp_scheme_adapter.env
     volumes:
       - "./pisp/secrets:/secrets"
@@ -424,6 +597,92 @@ services:
     depends_on:
       - pisp-redis
     restart: always
+    extra_hosts:
+      - "central-ledger.local:172.17.0.1"
+      - "central-settlement.local:172.17.0.1"
+      - "ml-api-adapter.local:172.17.0.1"
+      - "account-lookup-service.local:172.17.0.1"
+      - "account-lookup-service-admin.local:172.17.0.1"
+      - "quoting-service.local:172.17.0.1"
+      - "moja-simulator.local:172.17.0.1"
+      - "central-ledger:172.17.0.1"
+      - "central-settlement:172.17.0.1"
+      - "ml-api-adapter:172.17.0.1"
+      - "account-lookup-service:172.17.0.1"
+      - "account-lookup-service-admin:172.17.0.1"
+      - "quoting-service:172.17.0.1"
+      - "simulator:172.17.0.1"
+      - "host.docker.internal:172.17.0.1"
+      - "simulator.local:172.17.0.1"
+      - "transaction-request-service:172.17.0.1"
+      - "pisp-backend:172.17.0.1"
+
+  pisp-thirdparty-scheme-adapter-inbound:
+    image: "mojaloop/thirdparty-scheme-adapter:v11.15.0"
+    container_name: pisp-thirdparty-scheme-adapter-inbound
+    environment:
+      - NODE_ENV=development
+    command: sh -c "/opt/thirdparty-scheme-adapter/wait4/wait4.js pisp-thirdparty-scheme-adapter && npm run start:inbound"
+    volumes:
+      - "./pisp/secrets:/opt/thirdparty-scheme-adapter/secrets"
+      - "./pisp/pisp_thirdparty_scheme_adapter.json:/opt/thirdparty-scheme-adapter/config/development.json"
+      - "./docker/wait4:/opt/thirdparty-scheme-adapter/wait4"
+    ports:
+      - "7005:4005"
+    networks:
+      - mojaloop-net
+    depends_on:
+      - pisp-redis
+    restart: always
+    healthcheck:
+      test: wget -q http://172.17.0.1:4005/health -O /dev/null || exit 1
+      timeout: 3s
+      retries: 10
+      start_period: 10s
+      interval: 30s
+    extra_hosts:
+      - "central-ledger.local:172.17.0.1"
+      - "central-settlement.local:172.17.0.1"
+      - "ml-api-adapter.local:172.17.0.1"
+      - "account-lookup-service.local:172.17.0.1"
+      - "account-lookup-service-admin.local:172.17.0.1"
+      - "quoting-service.local:172.17.0.1"
+      - "moja-simulator.local:172.17.0.1"
+      - "central-ledger:172.17.0.1"
+      - "central-settlement:172.17.0.1"
+      - "ml-api-adapter:172.17.0.1"
+      - "account-lookup-service:172.17.0.1"
+      - "account-lookup-service-admin:172.17.0.1"
+      - "quoting-service:172.17.0.1"
+      - "simulator:172.17.0.1"
+      - "host.docker.internal:172.17.0.1"
+      - "simulator.local:172.17.0.1"
+      - "transaction-request-service:172.17.0.1"
+      - "pisp-backend:172.17.0.1"
+
+  pisp-thirdparty-scheme-adapter-outbound:
+    image: "mojaloop/thirdparty-scheme-adapter:v11.15.0"
+    container_name: pisp-thirdparty-scheme-adapter-outbound
+    environment:
+      - NODE_ENV=development
+    command: sh -c "/opt/thirdparty-scheme-adapter/wait4/wait4.js pisp-thirdparty-scheme-adapter && npm run start:outbound"
+    volumes:
+      - "./pisp/secrets:/opt/thirdparty-scheme-adapter/secrets"
+      - "./pisp/pisp_thirdparty_scheme_adapter.json:/opt/thirdparty-scheme-adapter/config/development.json"
+      - "./docker/wait4:/opt/thirdparty-scheme-adapter/wait4"
+    ports:
+      - "7006:4006"
+    networks:
+      - mojaloop-net
+    depends_on:
+      - pisp-redis
+    restart: always
+    healthcheck:
+      test: wget -q http://172.17.0.1:4006/health -O /dev/null || exit 1
+      timeout: 3s
+      retries: 10
+      start_period: 10s
+      interval: 30s
     extra_hosts:
       - "central-ledger.local:172.17.0.1"
       - "central-settlement.local:172.17.0.1"

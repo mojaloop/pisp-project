@@ -423,9 +423,9 @@ paths:
           $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/501'
         503:
           $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/503'
-    put:
+    patch:
       description: >
-        The callback `PUT /thirdpartyRequests/transactions/{ID}` is used to inform the client of the result of a
+        The callback `PATCH /thirdpartyRequests/transactions/{ID}` is used to inform the client of the result of a
         previously-requested transaction. The `{ID}` in the URI should contain the `transactionRequestId` that was used for
         the creation of the transaction request.
       summary: Update third party transaction requests
@@ -453,6 +453,9 @@ paths:
           application/json:
             schema:
               $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/schemas/ThirdpartyTransactionIDPutResponse.yaml'
+            example:
+              transactionId: '2f169631-ef99-4cb1-96dc-91e8fc08f539'
+              transactionRequestState: 'ACCEPTED'
       responses:
         200:
           $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/200'
@@ -584,9 +587,187 @@ paths:
         503:
           $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/503'
 
+  /authorizations:
+    post:
+      tags:
+        - authorizations
+      operationId: OutboundAuthorizationsPost
+      summary: Outbound Authorizations endpoint
+      description: DFSP Requests Authorization of Transaction from the End User
+      parameters:
+        #Headers
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/Accept.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/Content-Length.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/Content-Type.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/Date.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/X-Forwarded-For.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/FSPIOP-Source.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/FSPIOP-Destination.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/FSPIOP-Encryption.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/FSPIOP-Signature.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/FSPIOP-URI.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/FSPIOP-HTTP-Method.yaml'
+      requestBody:
+        description: Authorization request details
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OutboundAuthorizationsPostRequest'
+            example:
+              application/json:   
+                authenticationType: 'U2F'
+                retriesLeft: '1'
+                amount:
+                  currency: USD
+                  amount: '124.45'
+                transactionId: 2f169631-ef99-4cb1-96dc-91e8fc08f539
+                transactionRequestId: 02e28448-3c05-4059-b5f7-d518d0a2d8ea
+                quote:
+                  transferAmount:
+                    currency: USD
+                    amount: '124.45'
+                  payeeReceiveAmount:
+                    currency: USD
+                    amount: '123.45'
+                  payeeFspFee:
+                    currency: USD
+                    amount: '1.00'
+                  payeeFspCommission:
+                    currency: USD
+                    amount: '0'
+                  expiration: '2020-08-24T08:38:08.699-04:00'
+                  geoCode:
+                    latitude: '+45.4215'
+                    longitude: '+75.6972'
+                  ilpPacket: >-
+                    AYIBgQAAAAAAAASwNGxldmVsb25lLmRmc3AxLm1lci45T2RTOF81MDdqUUZ
+                  condition: f5sqb7tBTWPd5Y8BDFdMm9BJR_MNI4isf8p8n4D5pHA            
+                  extensionList:
+                    extension:
+                      - key: errorDescription
+                        value: This is a more detailed error description
+      responses:
+        202:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/202'
+        400:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/400'
+        401:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/401'
+        403:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/403'
+        404:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/404'
+        405:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/405'
+        406:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/406'
+        501:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/501'
+        503:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/503'
+  /authorizations/{ID}:
+    put:
+      tags:
+        - authorizations
+      operationId: InboundAuthorizationsIDPutResponse
+      summary: Inbound Authorizations endpoint
+      description: |
+        The callback PUT /authorizations/ is used to inform the client of the
+        result of a previously-requested authorization. The ID in the URI should
+        contain the one that was used in the POST /authorizations/ requestBody.transactionRequestId @ OUTBOUND
+      parameters:
+        #Path
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/ID.yaml'
+        #Headers
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/Content-Length.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/Content-Type.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/Date.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/X-Forwarded-For.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/FSPIOP-Source.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/FSPIOP-Destination.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/FSPIOP-Encryption.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/FSPIOP-Signature.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/FSPIOP-URI.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/FSPIOP-HTTP-Method.yaml'
+      requestBody:
+        description: Authorization request details
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/schemas/AuthorizationsIDPutResponse.yaml'
+            example:
+              application/json:   
+                authenticationInfo:
+                  authentication: U2F
+                  authenticationValue:
+                    pinValue: '233133331'
+                    counter: '1'
+                responseType: ENTERED
+      responses:
+        200:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/200'
+        400:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/400'
+        401:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/401'
+        403:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/403'
+        404:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/404'
+        405:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/405'
+        406:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/406'
+        501:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/501'
+        503:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/503'
+
 components:
   # TODO: Move to `mojaloop/api-snippets.
   schemas:
+    OutboundAuthorizationsPostRequest:
+      title: authorizationsRequest
+      description: POST /authorizations Request object
+      type: object
+      properties:
+        toParticipantId: 
+          type: string
+        authenticationType:
+          $ref: '#/components/schemas/AuthenticationType'
+        retriesLeft:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/schemas/Integer.yaml'
+        amount:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/schemas/Money.yaml'
+        transactionId:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/schemas/CorrelationId.yaml'
+        transactionRequestId:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/schemas/CorrelationId.yaml'
+        quote:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/schemas/QuotesIDPutResponse.yaml'
+      required:
+        - authenticationType
+        - retriesLeft
+        - amount
+        - transactionId
+        - transactionRequestId
+        - quote
+      additionalProperties: false
+    AuthenticationType:
+      title: AuthenticationType
+      type: string
+      enum:
+        - OTP
+        - QRCODE
+        - U2F
+      description: |
+        Below are the allowed values for the enumeration AuthenticationType.
+        - OTP - One-time password generated by the Payer FSP.
+        - QRCODE - QR code used as One Time Password.
+        - U2F
+      example: U2F
     CreateConsentRequest:
       title: CreateConsentRequest
       type: object

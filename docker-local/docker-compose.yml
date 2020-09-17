@@ -295,7 +295,9 @@ services:
       - "9002:3002"
       - "9003:3003"
     extra_hosts:
-      - "dfspa-scheme-adapter:172.17.0.1"
+      - "dfspa-sdk-scheme-adapter:172.17.0.1"
+      - "dfspa-thirdparty-scheme-adapter-inbound:172.17.0.1"
+      - "dfspa-thirdparty-scheme-adapter-outbound:172.17.0.1"
 
   dfspa-sdk-scheme-adapter:
     image: "mojaloop/sdk-scheme-adapter:v10.6.2.1-pisp"
@@ -437,7 +439,9 @@ services:
       - "10002:3002"
       - "10003:3003"
     extra_hosts:
-      - "dfspb-scheme-adapter:172.17.0.1"
+      - "dfspb-sdk-scheme-adapter:172.17.0.1"
+      - "dfspb-thirdparty-scheme-adapter-inbound:172.17.0.1"
+      - "dfspb-thirdparty-scheme-adapter-outbound:172.17.0.1"
 
   dfspb-sdk-scheme-adapter:
     image: "mojaloop/sdk-scheme-adapter:v10.6.2.1-pisp"
@@ -580,7 +584,9 @@ services:
       - "11002:3002"
       - "11003:3003"
     extra_hosts:
-      - "pisp-scheme-adapter:172.17.0.1"
+      - "pisp-sdk-scheme-adapter:172.17.0.1"
+      - "pisp-thirdparty-scheme-adapter-inbound:172.17.0.1"
+      - "pisp-thirdparty-scheme-adapter-outbound:172.17.0.1"
 
   pisp-sdk-scheme-adapter:
     image: "mojaloop/sdk-scheme-adapter:v10.6.2.1-pisp"

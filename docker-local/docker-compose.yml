@@ -350,7 +350,7 @@ services:
       - dfspa-redis
     restart: always
     healthcheck:
-      test: wget -q http://172.17.0.1:4005/health -O /dev/null || exit 1
+      test: wget -q http://172.17.0.1:5005/health -O /dev/null || exit 1
       timeout: 3s
       retries: 10
       start_period: 10s
@@ -393,7 +393,7 @@ services:
       - dfspa-redis
     restart: always
     healthcheck:
-      test: wget -q http://172.17.0.1:4006/health -O /dev/null || exit 1
+      test: wget -q http://172.17.0.1:5006/health -O /dev/null || exit 1
       timeout: 3s
       retries: 10
       start_period: 10s
@@ -492,7 +492,7 @@ services:
       - dfspb-redis
     restart: always
     healthcheck:
-      test: wget -q http://172.17.0.1:4005/health -O /dev/null || exit 1
+      test: wget -q http://172.17.0.1:6005/health -O /dev/null || exit 1
       timeout: 3s
       retries: 10
       start_period: 10s
@@ -535,7 +535,7 @@ services:
       - dfspb-redis
     restart: always
     healthcheck:
-      test: wget -q http://172.17.0.1:4006/health -O /dev/null || exit 1
+      test: wget -q http://172.17.0.1:6006/health -O /dev/null || exit 1
       timeout: 3s
       retries: 10
       start_period: 10s
@@ -635,7 +635,7 @@ services:
       - pisp-redis
     restart: always
     healthcheck:
-      test: wget -q http://172.17.0.1:4005/health -O /dev/null || exit 1
+      test: wget -q http://172.17.0.1:7005/health -O /dev/null || exit 1
       timeout: 3s
       retries: 10
       start_period: 10s
@@ -678,7 +678,7 @@ services:
       - pisp-redis
     restart: always
     healthcheck:
-      test: wget -q http://172.17.0.1:4006/health -O /dev/null || exit 1
+      test: wget -q http://172.17.0.1:7006/health -O /dev/null || exit 1
       timeout: 3s
       retries: 10
       start_period: 10s

@@ -261,6 +261,7 @@ services:
       - "host.docker.internal:172.17.0.1"
       - "simulator.local:172.17.0.1"
       - "transaction-request-service:172.17.0.1"
+      - "central-ledger:172.17.0.1"
 
   mysql-als:
     image: mysql/mysql-server

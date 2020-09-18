@@ -102,7 +102,7 @@ jobs:
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             cd ./docker-local/
             docker-compose pull
-            docker-compose up
+            docker-compose up -d
 
             # wait for services to be up and running
             npm run wait-4-docker

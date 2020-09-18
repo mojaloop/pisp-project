@@ -21,8 +21,8 @@ const expectedContainers = [
   'transaction-requests-service'
 ]
 
-let retries = 15
-const waitTimeMs = 15000
+let retries = 20
+const waitTimeMs = 25000
 
 async function main () {
   const waitingMap = {}

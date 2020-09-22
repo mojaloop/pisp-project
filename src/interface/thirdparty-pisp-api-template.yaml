@@ -107,7 +107,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/schemas/ThirdpartyTransactionIDPatchResponse.yaml'
+              $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/schemas/ThirdpartyRequestsTransactionsIDPatchResponse.yaml'
       responses:
         200:
           $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/200'
@@ -158,7 +158,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/schemas/ThirdpartyTransactionPostRequest.yaml'
+              $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/schemas/ThirdpartyRequestsTransactionsPostRequest.yaml'
             example:
               transactionRequestId: '8d34f91d-d078-4077-8263-2c047876fcf6'
               sourceAccountId: 'dfspa.alice.1234'
@@ -227,7 +227,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/schemas/AuthorizationPostRequest.yaml'
+              $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/schemas/AuthorizationsPostRequest.yaml'
       responses:
         202:
           $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/202'
@@ -275,7 +275,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateConsentRequest'
+              $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/schemas/ConsentRequestsPostRequest.yaml'
             example:
               id: '456'
               initiatorId: 'pispA'
@@ -338,7 +338,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateConsentRequest'
+              $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/schemas/ConsentRequestsIDPutResponse.yaml'
             example:
               id: '456'
               initiatorId: 'pispA'
@@ -389,7 +389,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Consent'
+              $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/schemas/ConsentsPostRequest.yaml'
       parameters:
         - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/Accept.yaml'
         - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/Content-Length.yaml'
@@ -450,7 +450,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/schemas/ConsentGenerateChallengeIDPostRequest.yaml'
+              $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/schemas/ConsentsIDGenerateChallengePostRequest.yaml'
             example:
               type: 'FIDO'
       responses:

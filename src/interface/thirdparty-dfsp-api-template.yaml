@@ -528,9 +528,3 @@ paths:
           $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/501'
         503:
           $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/503'
-
-components:
-  parameters:
-    $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/index.yaml'
-  responses:
-    $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml'

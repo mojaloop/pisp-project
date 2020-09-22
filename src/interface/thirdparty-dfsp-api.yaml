@@ -21,7 +21,7 @@ paths:
       tags:
         - parties
       parameters:
-        - $ref: '#/paths/~1consentRequests~1%7BID%7D/put/parameters/0'
+        - $ref: '#/paths/~1consents~1%7BID%7D/put/parameters/0'
         - name: Type
           in: path
           required: true
@@ -32,23 +32,23 @@ paths:
         - $ref: '#/paths/~1consents/post/parameters/6'
       responses:
         '202':
-          $ref: '#/paths/~1consents/post/responses/202'
+          $ref: '#/components/responses/202'
         '400':
-          $ref: '#/paths/~1consents/post/responses/400'
+          $ref: '#/components/responses/400'
         '401':
-          $ref: '#/paths/~1consents/post/responses/401'
+          $ref: '#/components/responses/401'
         '403':
-          $ref: '#/paths/~1consents/post/responses/403'
+          $ref: '#/components/responses/403'
         '404':
-          $ref: '#/paths/~1consents/post/responses/404'
+          $ref: '#/components/responses/404'
         '405':
-          $ref: '#/paths/~1consents/post/responses/405'
+          $ref: '#/components/responses/405'
         '406':
-          $ref: '#/paths/~1consents/post/responses/406'
+          $ref: '#/components/responses/406'
         '501':
-          $ref: '#/paths/~1consents/post/responses/501'
+          $ref: '#/components/responses/501'
         '503':
-          $ref: '#/paths/~1consents/post/responses/503'
+          $ref: '#/components/responses/503'
     put:
       description: |
         The callback `PUT /parties/{Type}/{ID}` is used to inform the
@@ -260,23 +260,23 @@ paths:
                 - party
       responses:
         '200':
-          description: OK
+          $ref: '#/components/responses/200'
         '400':
-          $ref: '#/paths/~1consents/post/responses/400'
+          $ref: '#/components/responses/400'
         '401':
-          $ref: '#/paths/~1consents/post/responses/401'
+          $ref: '#/components/responses/401'
         '403':
-          $ref: '#/paths/~1consents/post/responses/403'
+          $ref: '#/components/responses/403'
         '404':
-          $ref: '#/paths/~1consents/post/responses/404'
+          $ref: '#/components/responses/404'
         '405':
-          $ref: '#/paths/~1consents/post/responses/405'
+          $ref: '#/components/responses/405'
         '406':
-          $ref: '#/paths/~1consents/post/responses/406'
+          $ref: '#/components/responses/406'
         '501':
-          $ref: '#/paths/~1consents/post/responses/501'
+          $ref: '#/components/responses/501'
         '503':
-          $ref: '#/paths/~1consents/post/responses/503'
+          $ref: '#/components/responses/503'
   /thirdpartyRequests/transactions:
     post:
       tags:
@@ -518,23 +518,23 @@ paths:
               expiration: '2020-07-15T22:17:28.985-01:00'
       responses:
         '202':
-          $ref: '#/paths/~1consents/post/responses/202'
+          $ref: '#/components/responses/202'
         '400':
-          $ref: '#/paths/~1consents/post/responses/400'
+          $ref: '#/components/responses/400'
         '401':
-          $ref: '#/paths/~1consents/post/responses/401'
+          $ref: '#/components/responses/401'
         '403':
-          $ref: '#/paths/~1consents/post/responses/403'
+          $ref: '#/components/responses/403'
         '404':
-          $ref: '#/paths/~1consents/post/responses/404'
+          $ref: '#/components/responses/404'
         '405':
-          $ref: '#/paths/~1consents/post/responses/405'
+          $ref: '#/components/responses/405'
         '406':
-          $ref: '#/paths/~1consents/post/responses/406'
+          $ref: '#/components/responses/406'
         '501':
-          $ref: '#/paths/~1consents/post/responses/501'
+          $ref: '#/components/responses/501'
         '503':
-          $ref: '#/paths/~1consents/post/responses/503'
+          $ref: '#/components/responses/503'
   /authorizations:
     post:
       operationId: OutboundAuthorizationsPost
@@ -883,23 +883,23 @@ paths:
               additionalProperties: false
       responses:
         '202':
-          $ref: '#/paths/~1consents/post/responses/202'
+          $ref: '#/components/responses/202'
         '400':
-          $ref: '#/paths/~1consents/post/responses/400'
+          $ref: '#/components/responses/400'
         '401':
-          $ref: '#/paths/~1consents/post/responses/401'
+          $ref: '#/components/responses/401'
         '403':
-          $ref: '#/paths/~1consents/post/responses/403'
+          $ref: '#/components/responses/403'
         '404':
-          $ref: '#/paths/~1consents/post/responses/404'
+          $ref: '#/components/responses/404'
         '405':
-          $ref: '#/paths/~1consents/post/responses/405'
+          $ref: '#/components/responses/405'
         '406':
-          $ref: '#/paths/~1consents/post/responses/406'
+          $ref: '#/components/responses/406'
         '501':
-          $ref: '#/paths/~1consents/post/responses/501'
+          $ref: '#/components/responses/501'
         '503':
-          $ref: '#/paths/~1consents/post/responses/503'
+          $ref: '#/components/responses/503'
   '/thirdpartyRequests/transactions/{ID}/authorizations':
     post:
       operationId: VerifyThirdPartyAuthorization
@@ -910,7 +910,7 @@ paths:
 
         DFSP -> Switch
       parameters:
-        - $ref: '#/paths/~1consentRequests~1%7BID%7D/put/parameters/0'
+        - $ref: '#/paths/~1consents~1%7BID%7D/put/parameters/0'
       requestBody:
         description: The thirdparty authorization details to verify
         required: true
@@ -956,23 +956,23 @@ paths:
               status: PENDING
       responses:
         '202':
-          $ref: '#/paths/~1consents/post/responses/202'
+          $ref: '#/components/responses/202'
         '400':
-          $ref: '#/paths/~1consents/post/responses/400'
+          $ref: '#/components/responses/400'
         '401':
-          $ref: '#/paths/~1consents/post/responses/401'
+          $ref: '#/components/responses/401'
         '403':
-          $ref: '#/paths/~1consents/post/responses/403'
+          $ref: '#/components/responses/403'
         '404':
-          $ref: '#/paths/~1consents/post/responses/404'
+          $ref: '#/components/responses/404'
         '405':
-          $ref: '#/paths/~1consents/post/responses/405'
+          $ref: '#/components/responses/405'
         '406':
-          $ref: '#/paths/~1consents/post/responses/406'
+          $ref: '#/components/responses/406'
         '501':
-          $ref: '#/paths/~1consents/post/responses/501'
+          $ref: '#/components/responses/501'
         '503':
-          $ref: '#/paths/~1consents/post/responses/503'
+          $ref: '#/components/responses/503'
     put:
       operationId: UpdateThirdpartyAuthorization
       summary: UpdateThirdpartyAuthorization
@@ -982,7 +982,7 @@ paths:
 
         PISP -> Switch
       parameters:
-        - $ref: '#/paths/~1consentRequests~1%7BID%7D/put/parameters/0'
+        - $ref: '#/paths/~1consents~1%7BID%7D/put/parameters/0'
         - $ref: '#/paths/~1consents/post/parameters/1'
         - $ref: '#/paths/~1consents/post/parameters/2'
         - $ref: '#/paths/~1consents/post/parameters/3'
@@ -1039,23 +1039,23 @@ paths:
                 - status
       responses:
         '200':
-          $ref: '#/paths/~1parties~1%7BType%7D~1%7BID%7D/put/responses/200'
+          $ref: '#/components/responses/200'
         '400':
-          $ref: '#/paths/~1consents/post/responses/400'
+          $ref: '#/components/responses/400'
         '401':
-          $ref: '#/paths/~1consents/post/responses/401'
+          $ref: '#/components/responses/401'
         '403':
-          $ref: '#/paths/~1consents/post/responses/403'
+          $ref: '#/components/responses/403'
         '404':
-          $ref: '#/paths/~1consents/post/responses/404'
+          $ref: '#/components/responses/404'
         '405':
-          $ref: '#/paths/~1consents/post/responses/405'
+          $ref: '#/components/responses/405'
         '406':
-          $ref: '#/paths/~1consents/post/responses/406'
+          $ref: '#/components/responses/406'
         '501':
-          $ref: '#/paths/~1consents/post/responses/501'
+          $ref: '#/components/responses/501'
         '503':
-          $ref: '#/paths/~1consents/post/responses/503'
+          $ref: '#/components/responses/503'
   /consentRequests:
     post:
       tags:
@@ -1064,7 +1064,9 @@ paths:
       operationId: CreateConsentRequest
       summary: CreateConsentRequest
       description: |
-        A request from a PISP to a DFSP to start the process of delegating consent
+        A request from a PISP to a DFSP to start the process of delegating consent.
+
+        Switch -> DFSP
       parameters:
         - $ref: '#/paths/~1consents/post/parameters/0'
         - $ref: '#/paths/~1consents/post/parameters/1'
@@ -1136,23 +1138,23 @@ paths:
               callbackUri: 'pisp-app://callback.com'
       responses:
         '202':
-          $ref: '#/paths/~1consents/post/responses/202'
+          $ref: '#/components/responses/202'
         '400':
-          $ref: '#/paths/~1consents/post/responses/400'
+          $ref: '#/components/responses/400'
         '401':
-          $ref: '#/paths/~1consents/post/responses/401'
+          $ref: '#/components/responses/401'
         '403':
-          $ref: '#/paths/~1consents/post/responses/403'
+          $ref: '#/components/responses/403'
         '404':
-          $ref: '#/paths/~1consents/post/responses/404'
+          $ref: '#/components/responses/404'
         '405':
-          $ref: '#/paths/~1consents/post/responses/405'
+          $ref: '#/components/responses/405'
         '406':
-          $ref: '#/paths/~1consents/post/responses/406'
+          $ref: '#/components/responses/406'
         '501':
-          $ref: '#/paths/~1consents/post/responses/501'
+          $ref: '#/components/responses/501'
         '503':
-          $ref: '#/paths/~1consents/post/responses/503'
+          $ref: '#/components/responses/503'
   '/consentRequests/{ID}':
     put:
       tags:
@@ -1160,14 +1162,16 @@ paths:
       operationId: UpdateConsentRequest
       summary: UpdateConsentRequest
       description: |
-        PISP updates the consentRequest to include authorization from their user
+        DFSP updates auth channels and/or auth uri in response to consentRequest.
+
+        DFSP -> Switch
+
+        PISP updates the consentRequest to include authorization token from their user,
+        which the DFSP is to then verify.
+
+        Switch -> DFSP
       parameters:
-        - name: ID
-          in: path
-          required: true
-          schema:
-            type: string
-          description: The identifier value.
+        - $ref: '#/paths/~1consents~1%7BID%7D/put/parameters/0'
         - $ref: '#/paths/~1consents/post/parameters/0'
         - $ref: '#/paths/~1consents/post/parameters/1'
         - $ref: '#/paths/~1consents/post/parameters/2'
@@ -1238,27 +1242,28 @@ paths:
               authToken: abcde-12345
       responses:
         '202':
-          $ref: '#/paths/~1consents/post/responses/202'
+          $ref: '#/components/responses/202'
         '400':
-          $ref: '#/paths/~1consents/post/responses/400'
+          $ref: '#/components/responses/400'
         '401':
-          $ref: '#/paths/~1consents/post/responses/401'
+          $ref: '#/components/responses/401'
         '403':
-          $ref: '#/paths/~1consents/post/responses/403'
+          $ref: '#/components/responses/403'
         '404':
-          $ref: '#/paths/~1consents/post/responses/404'
+          $ref: '#/components/responses/404'
         '405':
-          $ref: '#/paths/~1consents/post/responses/405'
+          $ref: '#/components/responses/405'
         '406':
-          $ref: '#/paths/~1consents/post/responses/406'
+          $ref: '#/components/responses/406'
         '501':
-          $ref: '#/paths/~1consents/post/responses/501'
+          $ref: '#/components/responses/501'
         '503':
-          $ref: '#/paths/~1consents/post/responses/503'
+          $ref: '#/components/responses/503'
   /consents:
     post:
       description: |
         Create a consent object. Called by DFSP after the successful creation and validation of a consentRequest.
+        DFSP -> Switch
       summary: CreateConsent
       operationId: CreateConsent
       tags:
@@ -1345,7 +1350,13 @@ paths:
                       type: string
                       description: The id of a Credential.
                     type:
-                      $ref: '#/paths/~1consents~1%7BID%7D~1generateChallenge/post/requestBody/content/application~1json/schema/properties/type'
+                      title: CredentialType
+                      type: string
+                      enum:
+                        - FIDO
+                      description: |
+                        The type of the Credential.
+                        - "FIDO" - A FIDO public/private keypair.
                     status:
                       title: CredentialStatusType
                       type: string
@@ -1490,150 +1501,110 @@ paths:
             [the API Signature document](https://github.com/mojaloop/docs/tree/master/Specification%20Document%20Set).
       responses:
         '202':
-          description: Accepted
+          $ref: '#/components/responses/202'
         '400':
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                title: ErrorInformationResponse
-                type: object
-                description: Data model for the complex type object that contains an optional element ErrorInformation used along with 4xx and 5xx responses.
-                properties:
-                  errorInformation:
-                    title: ErrorInformation
-                    type: object
-                    description: Data model for the complex type ErrorInformation.
-                    properties:
-                      errorCode:
-                        title: ErrorCode
-                        type: string
-                        pattern: '^[1-9]\d{3}$'
-                        description: |
-                          The API data type ErrorCode is a JSON String of four characters,
-                          consisting of digits only. Negative numbers are not allowed.
-                          A leading zero is not allowed. Each error code in the API is a
-                          four-digit number, for example, 1234, where the first number
-                          (1 in the example) represents the high-level error category,
-                          the second number (2 in the example) represents the low-level error category,
-                          and the last two numbers (34 in the example) represent the specific error.
-                        example: 5100
-                      errorDescription:
-                        title: ErrorDescription
-                        type: string
-                        minLength: 1
-                        maxLength: 128
-                        description: Error description string.
-                        example: This is an error description.
-                      extensionList:
-                        $ref: '#/paths/~1authorizations/post/requestBody/content/application~1json/schema/properties/quote/properties/extensionList'
-                    required:
-                      - errorCode
-                      - errorDescription
-          headers:
-            Content-Length:
-              required: false
-              schema:
-                type: integer
-              description: |
-                The `Content-Length` header field indicates the anticipated
-                size of the payload body. Only sent if there is a body.
-                **Note:** The API supports a maximum size of 5242880 bytes
-                (5 Megabytes).
-            Content-Type:
-              schema:
-                type: string
-              required: true
-              description: The `Content-Type` header indicates the specific version of the API used to send the payload body.
+          $ref: '#/components/responses/400'
         '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/paths/~1consents/post/responses/400/content/application~1json/schema'
-          headers:
-            Content-Length:
-              $ref: '#/paths/~1consents/post/responses/400/headers/Content-Length'
-            Content-Type:
-              $ref: '#/paths/~1consents/post/responses/400/headers/Content-Type'
+          $ref: '#/components/responses/401'
         '403':
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                $ref: '#/paths/~1consents/post/responses/400/content/application~1json/schema'
-          headers:
-            Content-Length:
-              $ref: '#/paths/~1consents/post/responses/400/headers/Content-Length'
-            Content-Type:
-              $ref: '#/paths/~1consents/post/responses/400/headers/Content-Type'
+          $ref: '#/components/responses/403'
         '404':
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                $ref: '#/paths/~1consents/post/responses/400/content/application~1json/schema'
-          headers:
-            Content-Length:
-              $ref: '#/paths/~1consents/post/responses/400/headers/Content-Length'
-            Content-Type:
-              $ref: '#/paths/~1consents/post/responses/400/headers/Content-Type'
+          $ref: '#/components/responses/404'
         '405':
-          description: Method Not Allowed
-          content:
-            application/json:
-              schema:
-                $ref: '#/paths/~1consents/post/responses/400/content/application~1json/schema'
-          headers:
-            Content-Length:
-              $ref: '#/paths/~1consents/post/responses/400/headers/Content-Length'
-            Content-Type:
-              $ref: '#/paths/~1consents/post/responses/400/headers/Content-Type'
+          $ref: '#/components/responses/405'
         '406':
-          description: Not Acceptable
-          content:
-            application/json:
-              schema:
-                $ref: '#/paths/~1consents/post/responses/400/content/application~1json/schema'
-          headers:
-            Content-Length:
-              $ref: '#/paths/~1consents/post/responses/400/headers/Content-Length'
-            Content-Type:
-              $ref: '#/paths/~1consents/post/responses/400/headers/Content-Type'
+          $ref: '#/components/responses/406'
         '501':
-          description: Not Implemented
-          content:
-            application/json:
-              schema:
-                $ref: '#/paths/~1consents/post/responses/400/content/application~1json/schema'
-          headers:
-            Content-Length:
-              $ref: '#/paths/~1consents/post/responses/400/headers/Content-Length'
-            Content-Type:
-              $ref: '#/paths/~1consents/post/responses/400/headers/Content-Type'
+          $ref: '#/components/responses/501'
         '503':
-          description: Service Unavailable
-          content:
-            application/json:
-              schema:
-                $ref: '#/paths/~1consents/post/responses/400/content/application~1json/schema'
-          headers:
-            Content-Length:
-              $ref: '#/paths/~1consents/post/responses/400/headers/Content-Length'
-            Content-Type:
-              $ref: '#/paths/~1consents/post/responses/400/headers/Content-Type'
-  '/consents/{ID}/generateChallenge':
-    post:
-      tags:
-        - consents
-      operationId: GenerateChallengeRequest
-      summary: GenerateChallengeRequest
+          $ref: '#/components/responses/503'
+  '/consents/{ID}':
+    put:
       description: |
-        PISP requests a challenge from the auth service
+        The HTTP request `PUT /consents/{ID}` is used to update a specified consent object.
+        The `{ID}` in the URI should contain the `{ID}` that was used in the `POST /consents`.
+        - Called by a `auth-service` to add the credential details.
+
+        - Called by a `PISP` to add a signature of the challenge.
+
+        Switch -> DFSP
+      summary: UpdateConsent
+      tags:
+        - consent
+      operationId: UpdateConsent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              title: ConsentsIDPutResponse
+              type: object
+              description: |
+                The HTTP request `PUT /consents/{ID}` is used to update a specified consent object.
+                The `{ID}` in the URI should contain the `{ID}` that was used in the `POST /consents`.
+
+                - Called by a `auth-service` to add the credential details
+
+                - Called by a `PISP` to add a signature of the challenge
+              properties:
+                requestId:
+                  allOf:
+                    - $ref: '#/paths/~1consentRequests/post/requestBody/content/application~1json/schema/properties/id'
+                  description: |
+                    The id of the ConsentRequest that was used to initiate the
+                    creation of this Consent.
+                participantId:
+                  $ref: '#/paths/~1consents/post/requestBody/content/application~1json/schema/properties/participantId'
+                initiatorId:
+                  allOf:
+                    - $ref: '#/paths/~1consents/post/requestBody/content/application~1json/schema/properties/participantId'
+                  description: PISP identifier who uses this Consent.
+                scopes:
+                  type: array
+                  items:
+                    $ref: '#/paths/~1consents/post/requestBody/content/application~1json/schema/properties/scopes/items'
+                credential:
+                  title: UpdatedCredential
+                  type: object
+                  description: |
+                    A credential used to allow a user to prove their identity and access
+                    to an account with a DFSP.
+
+                    UpdatedCredential is a special formatting of the credential to allow us to be
+                    more explicit about the `status` field - it should only ever be PENDING when updating
+                    a credential.
+                  properties:
+                    id:
+                      type: string
+                      description: The id of a Credential.
+                    type:
+                      $ref: '#/paths/~1consents/post/requestBody/content/application~1json/schema/properties/credential/properties/type'
+                    status:
+                      $ref: '#/paths/~1consents/post/requestBody/content/application~1json/schema/properties/credential/properties/status'
+                    challenge:
+                      $ref: '#/paths/~1consents/post/requestBody/content/application~1json/schema/properties/credential/properties/challenge'
+                    payload:
+                      type: string
+                      description: Base64 encoded bytes - The public key of the Public/Private keypair.
+                  required:
+                    - id
+                    - type
+                    - status
+                    - challenge
+                    - payload
+              required:
+                - requestId
+                - participantId
+                - initiatorId
+                - scopes
+                - credential
       parameters:
-        - $ref: '#/paths/~1consentRequests~1%7BID%7D/put/parameters/0'
-        - $ref: '#/paths/~1consents/post/parameters/0'
-        - $ref: '#/paths/~1consents/post/parameters/1'
+        - name: ID
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The identifier value.
         - $ref: '#/paths/~1consents/post/parameters/2'
         - $ref: '#/paths/~1consents/post/parameters/3'
         - $ref: '#/paths/~1consents/post/parameters/4'
@@ -1643,46 +1614,195 @@ paths:
         - $ref: '#/paths/~1consents/post/parameters/8'
         - $ref: '#/paths/~1consents/post/parameters/9'
         - $ref: '#/paths/~1consents/post/parameters/10'
-      requestBody:
-        description: GenerateChallengeRequest Body
-        required: true
-        content:
-          application/json:
-            schema:
-              title: ConsentsIDGenerateChallengePostRequest
-              type: object
-              description: |
-                A credential used to allow a user to prove their identity
-                and access to an account with a DFSP.
-              properties:
-                type:
-                  title: CredentialType
-                  type: string
-                  enum:
-                    - FIDO
-                  description: |
-                    The type of the Credential.
-                    - "FIDO" - A FIDO public/private keypair.
-              required:
-                - type
-            example:
-              type: FIDO
       responses:
-        '202':
-          $ref: '#/paths/~1consents/post/responses/202'
+        '200':
+          $ref: '#/components/responses/200'
         '400':
-          $ref: '#/paths/~1consents/post/responses/400'
+          $ref: '#/components/responses/400'
         '401':
-          $ref: '#/paths/~1consents/post/responses/401'
+          $ref: '#/components/responses/401'
         '403':
-          $ref: '#/paths/~1consents/post/responses/403'
+          $ref: '#/components/responses/403'
         '404':
-          $ref: '#/paths/~1consents/post/responses/404'
+          $ref: '#/components/responses/404'
         '405':
-          $ref: '#/paths/~1consents/post/responses/405'
+          $ref: '#/components/responses/405'
         '406':
-          $ref: '#/paths/~1consents/post/responses/406'
+          $ref: '#/components/responses/406'
         '501':
-          $ref: '#/paths/~1consents/post/responses/501'
+          $ref: '#/components/responses/501'
         '503':
-          $ref: '#/paths/~1consents/post/responses/503'
+          $ref: '#/components/responses/503'
+components:
+  parameters:
+    Accept:
+      $ref: '#/paths/~1consents/post/parameters/0'
+    Content-Length:
+      $ref: '#/paths/~1consents/post/parameters/1'
+    Content-Type:
+      $ref: '#/paths/~1consents/post/parameters/2'
+    Date:
+      $ref: '#/paths/~1consents/post/parameters/3'
+    FSPIOP-Destination:
+      $ref: '#/paths/~1consents/post/parameters/6'
+    FSPIOP-Encryption:
+      $ref: '#/paths/~1consents/post/parameters/7'
+    FSPIOP-HTTP-Method:
+      $ref: '#/paths/~1consents/post/parameters/10'
+    FSPIOP-Signature:
+      $ref: '#/paths/~1consents/post/parameters/8'
+    FSPIOP-Source:
+      $ref: '#/paths/~1consents/post/parameters/5'
+    FSPIOP-URI:
+      $ref: '#/paths/~1consents/post/parameters/9'
+    ID:
+      $ref: '#/paths/~1consents~1%7BID%7D/put/parameters/0'
+    SubId:
+      name: SubId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: |
+        A sub-identifier of the party identifier, or a sub-type of the party
+        identifier's type. For example, `PASSPORT`, `DRIVING_LICENSE`.
+    Type:
+      $ref: '#/paths/~1parties~1%7BType%7D~1%7BID%7D/get/parameters/1'
+    X-Forwarded-For:
+      $ref: '#/paths/~1consents/post/parameters/4'
+  responses:
+    '200':
+      description: OK
+    '202':
+      description: Accepted
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            title: ErrorInformationResponse
+            type: object
+            description: Data model for the complex type object that contains an optional element ErrorInformation used along with 4xx and 5xx responses.
+            properties:
+              errorInformation:
+                title: ErrorInformation
+                type: object
+                description: Data model for the complex type ErrorInformation.
+                properties:
+                  errorCode:
+                    title: ErrorCode
+                    type: string
+                    pattern: '^[1-9]\d{3}$'
+                    description: |
+                      The API data type ErrorCode is a JSON String of four characters,
+                      consisting of digits only. Negative numbers are not allowed.
+                      A leading zero is not allowed. Each error code in the API is a
+                      four-digit number, for example, 1234, where the first number
+                      (1 in the example) represents the high-level error category,
+                      the second number (2 in the example) represents the low-level error category,
+                      and the last two numbers (34 in the example) represent the specific error.
+                    example: 5100
+                  errorDescription:
+                    title: ErrorDescription
+                    type: string
+                    minLength: 1
+                    maxLength: 128
+                    description: Error description string.
+                    example: This is an error description.
+                  extensionList:
+                    $ref: '#/paths/~1authorizations/post/requestBody/content/application~1json/schema/properties/quote/properties/extensionList'
+                required:
+                  - errorCode
+                  - errorDescription
+      headers:
+        Content-Length:
+          required: false
+          schema:
+            type: integer
+          description: |
+            The `Content-Length` header field indicates the anticipated
+            size of the payload body. Only sent if there is a body.
+            **Note:** The API supports a maximum size of 5242880 bytes
+            (5 Megabytes).
+        Content-Type:
+          schema:
+            type: string
+          required: true
+          description: The `Content-Type` header indicates the specific version of the API used to send the payload body.
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/400/content/application~1json/schema'
+      headers:
+        Content-Length:
+          $ref: '#/components/responses/400/headers/Content-Length'
+        Content-Type:
+          $ref: '#/components/responses/400/headers/Content-Type'
+    '403':
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/400/content/application~1json/schema'
+      headers:
+        Content-Length:
+          $ref: '#/components/responses/400/headers/Content-Length'
+        Content-Type:
+          $ref: '#/components/responses/400/headers/Content-Type'
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/400/content/application~1json/schema'
+      headers:
+        Content-Length:
+          $ref: '#/components/responses/400/headers/Content-Length'
+        Content-Type:
+          $ref: '#/components/responses/400/headers/Content-Type'
+    '405':
+      description: Method Not Allowed
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/400/content/application~1json/schema'
+      headers:
+        Content-Length:
+          $ref: '#/components/responses/400/headers/Content-Length'
+        Content-Type:
+          $ref: '#/components/responses/400/headers/Content-Type'
+    '406':
+      description: Not Acceptable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/400/content/application~1json/schema'
+      headers:
+        Content-Length:
+          $ref: '#/components/responses/400/headers/Content-Length'
+        Content-Type:
+          $ref: '#/components/responses/400/headers/Content-Type'
+    '501':
+      description: Not Implemented
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/400/content/application~1json/schema'
+      headers:
+        Content-Length:
+          $ref: '#/components/responses/400/headers/Content-Length'
+        Content-Type:
+          $ref: '#/components/responses/400/headers/Content-Type'
+    '503':
+      description: Service Unavailable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/responses/400/content/application~1json/schema'
+      headers:
+        Content-Length:
+          $ref: '#/components/responses/400/headers/Content-Length'
+        Content-Type:
+          $ref: '#/components/responses/400/headers/Content-Type'

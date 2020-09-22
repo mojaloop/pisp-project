@@ -299,7 +299,9 @@ paths:
       operationId: CreateConsentRequest
       summary: CreateConsentRequest
       description: |
-        A request from a PISP to a DFSP to start the process of delegating consent
+        A request from a PISP to a DFSP to start the process of delegating consent.
+
+        Switch -> DFSP
       parameters:
         #Headers
         - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/Accept.yaml'
@@ -360,7 +362,14 @@ paths:
       operationId: UpdateConsentRequest
       summary: UpdateConsentRequest
       description: |
-        PISP updates the consentRequest to include authorization from their user
+        DFSP updates auth channels and/or auth uri in response to consentRequest.
+
+        DFSP -> Switch
+
+        PISP updates the consentRequest to include authorization token from their user,
+        which the DFSP is to then verify.
+
+        Switch -> DFSP
       parameters:
         #Path
         - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/ID.yaml'
@@ -423,6 +432,8 @@ paths:
       description: >
         Create a consent object. Called by DFSP after the successful creation
         and validation of a consentRequest.
+
+        DFSP -> Switch
       summary: CreateConsent
       operationId: CreateConsent
       tags:
@@ -465,21 +476,30 @@ paths:
           $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/501'
         503:
           $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/503'
-
-  /consents/{ID}/generateChallenge:
-    post:
-      tags:
-        - consents
-      operationId: GenerateChallengeRequest
-      summary: GenerateChallengeRequest
+  /consents/{ID}:
+    put:
       description: |
-        PISP requests a challenge from the auth service
+        The HTTP request `PUT /consents/{ID}` is used to update a specified consent object.
+        The `{ID}` in the URI should contain the `{ID}` that was used in the `POST /consents`.
+        - Called by a `auth-service` to add the credential details.
+
+        - Called by a `PISP` to add a signature of the challenge.
+
+        Switch -> DFSP
+      summary: UpdateConsent
+      tags:
+        - consent
+      operationId: UpdateConsent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/schemas/ConsentsIDPutResponse.yaml'
       parameters:
         #Path
         - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/ID.yaml'
         #Headers
-        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/Accept.yaml'
-        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/Content-Length.yaml'
         - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/Content-Type.yaml'
         - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/Date.yaml'
         - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/X-Forwarded-For.yaml'
@@ -489,18 +509,9 @@ paths:
         - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/FSPIOP-Signature.yaml'
         - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/FSPIOP-URI.yaml'
         - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/FSPIOP-HTTP-Method.yaml'
-      requestBody:
-        description: GenerateChallengeRequest Body
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/schemas/ConsentsIDGenerateChallengePostRequest.yaml'
-            example:
-              type: 'FIDO'
       responses:
-        202:
-          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/202'
+        200:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/200'
         400:
           $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/400'
         401:
@@ -517,3 +528,9 @@ paths:
           $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/501'
         503:
           $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/503'
+
+components:
+  parameters:
+    $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/index.yaml'
+  responses:
+    $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml'

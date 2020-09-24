@@ -5,7 +5,7 @@ The aim of this Document is to have a local mojaloop running with two customs DF
 ## Repo layout
 
 Two custom DFSP & PISP configuration
-- [`dfsp_a`](./dfsp_a) 
+- [`dfsp_a`](./dfsp_a)
 - [`dfsp_b`](./dfsp_b)
 - [`pisp`](./pisp)
 
@@ -31,19 +31,22 @@ Services are composed in the testing layout as:
 
 - _PISP_  is a new party in Mojaloop system to represent Payment Initiate System Provider where its dependencies are:
     - pisp-backend: [mojaloop-simulator](https://github.com/mojaloop/mojaloop-simulator)
-    - pisp-scheme-adapter: [scheme-adapter](https://github.com/mojaloop/sdk-scheme-adapter)
+    - pisp-sdk-scheme-adapter: [scheme-adapter](https://github.com/mojaloop/sdk-scheme-adapter)
+    - pisp-thirdparty-scheme-adapter: [thirdparty-scheme-adapter](https://github.com/mojaloop/thirdparty-scheme-adapter)
     - pisp-redis: redisDB
   > configuration folder: [pisp](./pisp)
 
 - _DFSP A_ is a bank account holder
     - dfspa-backend: [mojaloop-simulator](https://github.com/mojaloop/mojaloop-simulator)
-    - dfspa-scheme-adapter: [scheme-adapter](https://github.com/mojaloop/sdk-scheme-adapter)
+    - dfspa-sdk-scheme-adapter: [scheme-adapter](https://github.com/mojaloop/sdk-scheme-adapter)
+    - dfspa-thirdparty-scheme-adapter: [thirdparty-scheme-adapter](https://github.com/mojaloop/thirdparty-scheme-adapter)
     - dfspa-redis: redisDB
   > configuration folder: [dfsp_a](./dfsp_a)
 
 - _DFSP B_ is a bank account holder
     - dfspb-backend: [mojaloop-simulator](https://github.com/mojaloop/mojaloop-simulator)
-    - dfspb-scheme-adapter: [scheme-adapter](https://github.com/mojaloop/sdk-scheme-adapter)
+    - dfspb-sdk-scheme-adapter: [scheme-adapter](https://github.com/mojaloop/sdk-scheme-adapter)
+    - dfspb-thirdparty-scheme-adapter: [thirdparty-scheme-adapter](https://github.com/mojaloop/thirdparty-scheme-adapter)
     - dfspb-redis: redisDB
   > configuration folder: [dfsp_b](./dfsp_b)
 
@@ -65,8 +68,10 @@ npm install
 
 - A hosts file with the following entries:
 ```
-127.0.0.1       central-ledger.local central-settlement.local ml-api-adapter.local account-lookup-service.local account-lookup-service-admin.local quoting-service.local moja-simulator.local central-ledger central-settlement ml-api-adapter account-lookup-service account-lookup-service-admin quoting-service simulator host.docker.internal
-127.0.0.1 dfspa-backend dfspb-backend pisp-backend dfspa-scheme-adapter dfspb-scheme-adapter pisp-scheme-adapter transaction-request-service
+127.0.0.1       central-ledger.local central-settlement.local ml-api-adapter.local account-lookup-service.local account-lookup-service-admin.local quoting-service.local moja-simulator.local central-ledger central-settlement ml-api-adapter account-lookup-service account-lookup-service-admin quoting-service simulator host.docker.internal transaction-request-service
+127.0.0.1 dfspa-backend dfspa-thirdparty-scheme-adapter-inbound dfspa-thirdparty-scheme-adapter-outbound dfspa-sdk-scheme-adapter
+127.0.0.1 dfspb-backend dfspb-thirdparty-scheme-adapter-inbound dfspb-thirdparty-scheme-adapter-outbound dfspb-sdk-scheme-adapter
+127.0.0.1 pisp-backend pisp-thirdparty-scheme-adapter-inbound pisp-thirdparty-scheme-adapter-outbound pisp-sdk-scheme-adapter
 ```
 
 ## Start services using `docker-compose`
@@ -84,7 +89,7 @@ It may take a little while for the services to healthy.
 
 ### Logging:
 
-Use `docker-compose logs -f` to tail the logs of any given container. 
+Use `docker-compose logs -f` to tail the logs of any given container.
 
 You may want to do this in separate terminal sessions to easily debug each service.
 
@@ -94,10 +99,10 @@ docker-compose logs -f quoting-service
 docker-compose logs -f ml-api-adapter
 docker-compose logs -f central-settlement
 docker-compose logs -f account-lookup-service
-docker-compose logs -f dfspa-scheme-adapter dfspa-backend
-docker-compose logs -f dfspb-scheme-adapter dfspb-backend
+docker-compose logs -f dfspa-sdk-scheme-adapter dfspa-backend dfspa-thirdparty-scheme-adapter-inbound dfspa-thirdparty-scheme-adapter-outbound
+docker-compose logs -f dfspb-sdk-scheme-adapter dfspb-backend dfspb-thirdparty-scheme-adapter-inbound dfspb-thirdparty-scheme-adapter-outbound
 docker-compose logs -f transaction-requests-service
-docker-compose logs -f pisp-backend  pisp-scheme-adapter pisp-redis
+docker-compose logs -f pisp-backend  pisp-sdk-scheme-adapter pisp-redis pisp-thirdparty-scheme-adapter-inbound pisp-thirdparty-scheme-adapter-outbound
 ```
 
 ## Create some initial data

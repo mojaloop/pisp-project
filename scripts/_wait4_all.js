@@ -21,8 +21,8 @@ const expectedContainers = [
   'transaction-requests-service'
 ]
 
-let retries = 15
-const waitTimeMs = 10000
+let retries = 40
+const waitTimeMs = 60000
 
 async function main () {
   const waitingMap = {}
@@ -57,18 +57,17 @@ async function main () {
   }
 }
 
-
 /**
  * @function areAllServicesHealthy
  * @description Get Update the service status, and sleep for `waitTimeMs` if the services aren't healthy
  * @param {*} waitingMap
  * @returns boolean
  */
-async function areAllServicesHealthy(waitingMap) {
+async function areAllServicesHealthy (waitingMap) {
   await updateServiceStatus(waitingMap)
 
   if (isSystemHealthy(waitingMap)) {
-    return true;
+    return true
   }
 
   if (isSystemFailing(waitingMap)) {
@@ -129,7 +128,7 @@ function isSystemFailing (waitingMap) {
  * @param {'healthy' | 'unhealthy' | 'starting'} status
  * @returns {Array<string>}
  */
-function getServicesForStatus(waitingMap, status) {
+function getServicesForStatus (waitingMap, status) {
   return Object
     .keys(waitingMap)
     .filter(k => waitingMap[k] === status)
@@ -145,4 +144,3 @@ async function sleep (timeMs) {
 }
 
 main()
-

@@ -6,7 +6,7 @@ set -u
 set -e
 
 HOSTS_FILE=/etc/hosts
-touch ${HOSTS_FILE} #only useful if we are
+touch ${HOSTS_FILE}
 
 if [ `cat ${HOSTS_FILE} | grep 'central-ledger.local' | wc -l`  -gt 0 ]; then
   echo "[WARN] Already found Mojaloop hosts in ${HOSTS_FILE}"

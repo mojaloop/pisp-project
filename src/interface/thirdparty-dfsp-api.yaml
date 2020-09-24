@@ -1887,11 +1887,9 @@ paths:
                   title: ConsentStatusType
                   type: string
                   enum:
-                    - ACTIVE
                     - REVOKED
                   description: |
                     The status of the Consent.
-                    - "ACTIVE" - The Consent is valid, and ready to be used by the PISP.
                     - "REVOKED" - The Consent is no longer valid and has been revoked.
                 revokedAt:
                   $ref: '#/paths/~1consents/post/requestBody/content/application~1json/schema/properties/revokedAt'

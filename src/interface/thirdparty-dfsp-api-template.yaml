@@ -391,23 +391,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/schemas/ConsentRequestsIDPutResponse.yaml'
-            example:
-              id: '456'
-              initiatorId: 'pispA'
-              authChannels: ['WEB']
-              scopes:
-                - accountId: dfspa.username.1234
-                  actions:
-                    - accounts.transfer
-                    - accounts.getBalance
-                - accountId: dfspa.username.5678
-                  actions:
-                    - accounts.transfer
-                    - accounts.getBalance
-              callbackUri: 'pisp-app://callback.com'
-              authUri: 'https://dfspa.com/login'
-              authToken: 'abcde-12345'
+              oneOf:
+                - $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/schemas/ConsentRequestsIDPutResponseWeb.yaml'
+                - $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/schemas/ConsentRequestsIDPutResponseWebAuth.yaml'
+                - $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/schemas/ConsentRequestsIDPutResponseOTP.yaml'
+                - $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/schemas/ConsentRequestsIDPutResponseOTPAuth.yaml'
       responses:
         202:
           $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/202'

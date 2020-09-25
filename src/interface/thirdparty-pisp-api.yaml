@@ -1129,8 +1129,6 @@ paths:
                     supposed user should be redirected. This URL should be a place where
                     the user can prove their identity (e.g., by logging in).
                   properties:
-                    id:
-                      $ref: '#/paths/~1consentRequests/post/requestBody/content/application~1json/schema/properties/id'
                     initiatorId:
                       type: string
                       description: The id of the PISP who will initiate transactions on a user's behalf.
@@ -1154,12 +1152,12 @@ paths:
                       type: string
                       description: The callback uri that the pisp app redirects to for user to complete their login.
                   required:
-                    - id
                     - initiatorId
                     - scopes
                     - authChannels
                     - callbackUri
                     - authUri
+                  additionalProperties: false
                 - title: ConsentRequestsIDPutResponseWebAuth
                   type: object
                   description: |
@@ -1169,8 +1167,6 @@ paths:
                     the user is expected to prove their identity to the DFSP by passing a OTP
                     or secret to the PISP.
                   properties:
-                    id:
-                      $ref: '#/paths/~1consentRequests/post/requestBody/content/application~1json/schema/properties/id'
                     initiatorId:
                       type: string
                       description: The id of the PISP who will initiate transactions on a user's behalf.
@@ -1192,13 +1188,13 @@ paths:
                       type: string
                       description: The Auth token from the OTP or redirect to pisp app.
                   required:
-                    - id
                     - initiatorId
                     - scopes
                     - authChannels
                     - callbackUri
                     - authUri
                     - authToken
+                  additionalProperties: false
                 - title: ConsentRequestsIDPutResponseOTP
                   type: object
                   description: |
@@ -1206,8 +1202,6 @@ paths:
 
                     Schema used in the request consent phase of the account linking OTP/SMS flow.
                   properties:
-                    id:
-                      $ref: '#/paths/~1consentRequests/post/requestBody/content/application~1json/schema/properties/id'
                     initiatorId:
                       type: string
                       description: The id of the PISP who will initiate transactions on a user's behalf.
@@ -1228,11 +1222,11 @@ paths:
                       type: string
                       description: The callback uri that the user will be redirected to after completing the WEB auth channel.
                   required:
-                    - id
                     - initiatorId
                     - scopes
                     - authChannels
                     - callbackUri
+                  additionalProperties: false
                 - title: ConsentRequestsIDPutResponseOTPAuth
                   type: object
                   description: |
@@ -1242,8 +1236,6 @@ paths:
                     the user is expected to prove their identity to the DFSP by passing a OTP
                     or secret to the PISP.
                   properties:
-                    id:
-                      $ref: '#/paths/~1consentRequests/post/requestBody/content/application~1json/schema/properties/id'
                     initiatorId:
                       type: string
                       description: The id of the PISP who will initiate transactions on a user's behalf.
@@ -1262,12 +1254,12 @@ paths:
                       type: string
                       description: The Auth token from the OTP or redirect to pisp app.
                   required:
-                    - id
                     - initiatorId
                     - scopes
                     - authChannels
                     - callbackUri
                     - authToken
+                  additionalProperties: false
       responses:
         '200':
           $ref: '#/paths/~1consents~1%7BID%7D/put/responses/200'

@@ -8,6 +8,13 @@ info:
     url: TBD
 servers:
   - url: /
+components:
+  parameters:
+    $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/index.yaml'
+  responses:
+    $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml'
+  schemas:
+    $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/schemas/index.yaml'
 paths:
   /parties/{Type}/{ID}:
     get:

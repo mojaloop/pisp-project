@@ -13,7 +13,7 @@ DIR = $(shell pwd)
 ##
 
 install: .add-repos .install-base 
-	helm upgrade --install pisp-poc ./helm
+	helm upgrade --install pisp-poc ./charts
 
 
 # Older install, which packaged and ran a local web server, we don't need to do that here
@@ -51,8 +51,8 @@ uninstall-all: uninstall-poc clean-install-base clean-add-repos
 ## 
 .add-repos:
 	helm repo add public http://storage.googleapis.com/kubernetes-charts-incubator
-	helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
-	helm repo add local http://localhost:8000
+	#	Todo - fix versions here
+	# helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 	@touch .add-repos
 
 .install-base:

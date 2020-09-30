@@ -6,17 +6,27 @@ A live lab environment for PISP Demos
 ## Prerequisites
 - `helm` v3 or later
 - `kubectl`
-- a kubeconfig file and access to a cluster 
+- `kubens`
+- a kubeconfig file (e.g. `~/.kube/config`)
+- a running kubernetes cluster `>1.16.0`
+- a kubectl namespace, for this example, we will use `pisp-lab`
 
 
 ## Installing
 
-
 ```bash
+cd ./docker-live
+
+# create and switch to namespace
+kubectl create namespace pisp-lab
+kubens pisp-lab
+
+# install the prerequisites, then install the application
 make install
+
 # wait for pods to be up and running
 
-# check the health
+# check the health of the services
 make health-check
 
 # seed the database
@@ -25,5 +35,18 @@ make seed
 # run a test transaction
 make script:transaction
 
-
 ```
+
+## Kubecl .yaml files + Helm Charts
+
+For this lab, we use a simplified version of the Mojaloop Helm charts. 
+
+- single instance MySQL
+- simplified Kafka with readymade `public/kafka` chart
+- 
+
+
+Additionally, the install happens in stages:
+
+1. Prerequisites: mysql, kafka, with a combination of helm and kafka (see `.install-base` in the [`./Makefile`](./Makefile))
+2. Application: The application expressed as helm charts in [`./charts`](./charts)

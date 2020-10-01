@@ -12,10 +12,10 @@ DIR = $(shell pwd)
 # Runners
 ##
 install: .add-repos .install-base 
-	helm upgrade --install pisp-poc ./charts
+	helm upgrade --install pisp-poc-switch ./charts-switch
 
 uninstall-helm: mysql-drop-database
-	@helm del pisp-poc || echo 'pisp-poc not found'
+	@helm del pisp-poc-switch || echo 'pisp-poc-switch not found'
 
 uninstall-all: uninstall-helm clean-install-base clean-add-repos
 

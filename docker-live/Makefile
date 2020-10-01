@@ -33,7 +33,7 @@ uninstall-all: uninstall-helm clean-install-base clean-add-repos
 
 .install-base:
 	kubectl apply -f ./deployment_setup.yaml
-	kubectl apply -f ./deployment_simulator.yaml
+	# kubectl apply -f ./deployment_simulator.yaml
 	helm install kafka public/kafka --values ./kafka_values.yaml
 	helm install nginx ingress-nginx/ingress-nginx --version 2.16.0
 	@touch .install-base
@@ -44,7 +44,7 @@ clean-add-repos:
 clean-install-base:
 	@helm del nginx || echo 'helm del nginx failed - continuing anyway'
 	@helm del kafka || echo 'helm del kafka failed - continuing anyway'
-	@kubectl delete -f ./deployment_simulator.yaml || echo 'kubectl del simulator failed - continuing anyway'
+	# @kubectl delete -f ./deployment_simulator.yaml || echo 'kubectl del simulator failed - continuing anyway'
 	@kubectl delete -f ./deployment_setup.yaml || echo 'kubectl del kafka failed - continuing anyway'
 	@rm -rf .install-base
 
@@ -77,7 +77,8 @@ mysql-login:
 	kubectl exec -it pod/mysql-0 -- mysql -u root -ppassword central_ledger
 
 mysql-drop-database:
-	kubectl exec -it pod/mysql-0 -- mysql -u root -ppassword -e "drop database central_ledger; create database central_ledger"
+	kubectl exec -it pod/mysql-cl-0 -- mysql -u root -ppassword -e "drop database central_ledger; create database central_ledger"
+	kubectl exec -it pod/mysql-als-0 -- mysql -u root -ppassword -e "drop database account_lookup; create database account_lookup"
 
 health-check: health-check-central-ledger health-check-quoting-service health-check-ml-api-adapter
 
@@ -89,6 +90,11 @@ health-check-quoting-service:
 
 health-check-ml-api-adapter:
 	curl -s $(ELB_URL)/ml-api-adapter/health | jq
+
+health-check-als:
+	curl -s $(ELB_URL)/account-lookup-service/health | jq
+	curl -s $(ELB_URL)/account-lookup-service-admin/health | jq
+
 
 # transfer-api-v1.0:
 # 	./scripts/_test_transfer_api_v1.0.sh

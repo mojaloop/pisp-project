@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: ml-api-adapter
-        image: mojaloop/ml-api-adapter:v10.5.1-versioning-poc-v1.0.0
+        image: mojaloop/ml-api-adapter:v11.0.3.0-pisp
         livenessProbe:
           initialDelaySeconds: 30
           httpGet:

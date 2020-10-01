@@ -1,3 +1,4 @@
+# mysql: central-ledger
 ---
 # MySQL 
 # apiVersion: v1
@@ -76,7 +77,68 @@ spec:
       - name: mysql-persistent-storage
         persistentVolumeClaim:
           claimName: mysql-pv-claim
-
+---
+# mysql-als
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-als-pv-claim
+spec:
+  storageClassName: awsgp2
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-als
+spec:
+  ports:
+  - port: 3306
+  selector:
+    app: mysql-als
+  clusterIP: None
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mysql-als
+spec:
+  selector:
+    matchLabels:
+      app: mysql-als
+  serviceName: mysql-als-service
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mysql-als
+    spec:
+      containers:
+      - image: mysql:5.6
+        name: mysql-als
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: password
+        - name: MYSQL_USER
+          value: account_lookup
+        - name: MYSQL_PASSWORD
+          value: password
+        - name: MYSQL_DATABASE
+          value: account_lookup
+        ports:
+        - containerPort: 3306
+          name: mysql
+        volumeMounts:
+        - name: mysql-persistent-storage
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: mysql-als-persistent-storage
+        persistentVolumeClaim:
+          claimName: mysql-als-pv-claim
 ---
 # Kafka util:
 apiVersion: v1
@@ -90,4 +152,3 @@ spec:
     command: [ "sh", "-c", "tail -f /dev/null" ]
 
 ---
-# Mojaloop Simulators

@@ -25,6 +25,16 @@ kubens pisp-lab
 make install
 
 # wait for pods to be up and running
+kubectl get po
+
+# find the IP address of the load balancer and set ELB_URL variable
+make get-elb
+
+# Will print something like the following
+# ****.elb.amazonaws.com
+
+# Export
+export ELB_URL=****.elb.amazonaws.com
 
 # check the health of the services
 make health-check
@@ -50,3 +60,12 @@ Additionally, the install happens in stages:
 
 1. Prerequisites: mysql, kafka, with a combination of helm and kafka (see `.install-base` in the [`./Makefile`](./Makefile))
 2. Application: The application expressed as helm charts in [`./charts`](./charts)
+
+
+
+## Todo:
+
+- [ ] clean up makefile and docs
+- [ ] set up proper dns or something
+- [ ] port across docker-compose stuff
+- [ ] 

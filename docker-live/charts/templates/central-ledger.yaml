@@ -10,7 +10,6 @@ spec:
     type: RollingUpdate
     rollingUpdate:
       maxSurge: 1 # exeed the replicas by 1 pod
-      # maxUnavailable: 25% #25% of pods can be unavailable during an upgrade
   selector:
     matchLabels:
       app: centralledger
@@ -21,7 +20,7 @@ spec:
     spec:
       containers:
       - name: central-ledger
-        image: mojaloop/central-ledger:v10.5.2-versioning-poc-v2.1.0
+        image: mojaloop/central-ledger:v11.1.4.0-pisp
         livenessProbe:
           initialDelaySeconds: 30
           httpGet:
@@ -79,3 +78,19 @@ spec:
   selector:
     app: centralledger
   clusterIP: None
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: centralledger
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    nginx.ingress.kubernetes.io/use-regex: "true"
+spec:
+  rules:
+    - http:
+        paths: 
+          - path: /central-ledger(/|$)(.*)
+            backend:
+              serviceName: centralledger
+              servicePort: 3001

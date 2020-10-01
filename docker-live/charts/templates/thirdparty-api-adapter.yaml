@@ -39,7 +39,7 @@ spec:
               # value: kafka:9092
           volumeMounts:
             - name: thirdpartyapiadapter-config-volume
-            mountPath: /opt/thirdparty-api-adapter/config
+              mountPath: /opt/thirdparty-api-adapter/config
       volumes:
         - name: thirdpartyapiadapter-config-volume
           configMap:
@@ -47,21 +47,13 @@ spec:
             items:
             - key: default.json
               path: default.json
-            - key: knexfile.js
-              path: knexfile.js
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: thirdparty-api-adapter-config
-  # labels:
-  #   app.kubernetes.io/name: {{ include "centralledger-handler-transfer-get.name" . }}
-  #   app.kubernetes.io/instance: {{ .Release.Name }}
-  #   app.kubernetes.io/version: {{ .Chart.AppVersion }}
-  #   app.kubernetes.io/managed-by: {{ .Release.Service }}
-  #   helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
 data:
-  default.json: {{ (tpl (.Files.Get "configs/thirdparty-api-adapter.json") . ) | quote }}
+  default.json: {{ (.Files.Get "configs/thirdparty-api-adapter.json") | quote }}
 
 ---
 apiVersion: v1

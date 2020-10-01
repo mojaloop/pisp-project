@@ -5,12 +5,10 @@ A live lab environment for PISP Demos
 
 ## Prerequisites
 - `helm` v3 or later
-- `kubectl`
+- `kubectl` and access to a running cluster
 - `kubens`
 - a kubeconfig file (e.g. `~/.kube/config`)
-- a running kubernetes cluster `>1.16.0`
 - a kubectl namespace, for this example, we will use `pisp-lab`
-
 
 ## Installing
 
@@ -49,23 +47,13 @@ make script:transaction
 
 ## Kubecl .yaml files + Helm Charts
 
-For this lab, we use a simplified version of the Mojaloop Helm charts. 
-
+For this lab, we use a simplified version of the Mojaloop Helm charts. This includes:
 - single instance MySQL
 - simplified Kafka with readymade `public/kafka` chart
-- 
 
 
-Additionally, the install happens in stages:
+Additionally, the install is broken into separate pieces:
 
-1. Prerequisites: mysql, kafka, with a combination of helm and kafka (see `.install-base` in the [`./Makefile`](./Makefile))
-2. Application: The application expressed as helm charts in [`./charts`](./charts)
-
-
-
-## Todo:
-
-- [ ] clean up makefile and docs
-- [ ] set up proper dns or something
-- [ ] port across docker-compose stuff
-- [ ] 
+1. **Prerequisites:** mysql, kafka, with a combination of helm and kafka (see `.install-base` in the [`./Makefile`](./Makefile))
+2. **Switch:** The application expressed as helm charts in [`./charts-switch`](./charts-switch)
+3. **Participants:** The DFSP and PISP participants. Defined in helm charts at [`./charts-participant`](./charts-participant), and customized using `values.yml` files for either a PISP or DFSP

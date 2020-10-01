@@ -4,9 +4,6 @@
 SHELL := /bin/bash
 PROJECT = "PISP Development Lab"
 DIR = $(shell pwd)
-#REPO_DIR := $(DIR)/repo
-#SCRIPTS_DIR := $(DIR)/scripts
-#ELB_URL = "a2c25768ab0194fe187d21c903b78bf1-475140305.eu-west-2.elb.amazonaws.com"
 
 ##
 # Runners
@@ -18,7 +15,6 @@ uninstall-helm: mysql-drop-database
 	@helm del pisp-poc-switch || echo 'pisp-poc-switch not found'
 
 uninstall-all: uninstall-helm clean-install-base clean-add-repos
-
 
 ##
 # Stateful make commands
@@ -33,7 +29,6 @@ uninstall-all: uninstall-helm clean-install-base clean-add-repos
 
 .install-base:
 	kubectl apply -f ./deployment_setup.yaml
-	# kubectl apply -f ./deployment_simulator.yaml
 	helm install kafka public/kafka --values ./kafka_values.yaml
 	helm install nginx ingress-nginx/ingress-nginx --version 2.16.0
 	@touch .install-base
@@ -44,7 +39,6 @@ clean-add-repos:
 clean-install-base:
 	@helm del nginx || echo 'helm del nginx failed - continuing anyway'
 	@helm del kafka || echo 'helm del kafka failed - continuing anyway'
-	# @kubectl delete -f ./deployment_simulator.yaml || echo 'kubectl del simulator failed - continuing anyway'
 	@kubectl delete -f ./deployment_setup.yaml || echo 'kubectl del kafka failed - continuing anyway'
 	@rm -rf .install-base
 
@@ -52,7 +46,7 @@ clean-install-base:
 ##
 # Repo Tools
 ## 
-.PHONY: clean-repo
+.PHONY: clean-repo get-elb
 
 get-elb:
 	@kubectl get service/nginx-ingress-nginx-controller -o json | jq -r .status.loadBalancer.ingress[0].hostname
@@ -68,13 +62,13 @@ kafka-list:
 	kubectl exec testclient -- kafka-topics --zookeeper kafka-zookeeper:2181 --list
 
 mysql-show-tables:
-	kubectl exec -it pod/mysql-0 -- mysql -u root -ppassword central_ledger -e "show tables"
+	kubectl exec -it pod/mysql-cl-0 -- mysql -u root -ppassword central_ledger -e "show tables"
 
 mysql-describe-transfer:
-	kubectl exec -it pod/mysql-0 -- mysql -u root -ppassword central_ledger -e "describe transfer"
+	kubectl exec -it pod/mysql-cl-0 -- mysql -u root -ppassword central_ledger -e "describe transfer"
 
 mysql-login:
-	kubectl exec -it pod/mysql-0 -- mysql -u root -ppassword central_ledger
+	kubectl exec -it pod/mysql-cl-0 -- mysql -u root -ppassword central_ledger
 
 mysql-drop-database:
 	kubectl exec -it pod/mysql-cl-0 -- mysql -u root -ppassword -e "drop database central_ledger; create database central_ledger"
@@ -96,11 +90,9 @@ health-check-als:
 	curl -s $(ELB_URL)/account-lookup-service-admin/health | jq
 
 
-# transfer-api-v1.0:
+# TODO: enable these later
+# transfer-api:
 # 	./scripts/_test_transfer_api_v1.0.sh
-
-# transfer-api-v2.0:
-# 	./scripts/_test_transfer_api_v2.0.sh
 
 ##
 # Kube Tools
@@ -114,5 +106,5 @@ watch-all:
 # Convenience function to switch back to the kubectx and ns we want
 switch-kube:
 	kubectx test-scaling
-	kubens test-da
+	kubens pisp-lab
 	helm list

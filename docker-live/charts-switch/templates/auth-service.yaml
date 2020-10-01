@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: authservice
+  labels:
+    app: authservice
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1 # exeed the replicas by 1 pod
+  selector:
+    matchLabels:
+      app: authservice
+  template:
+    metadata:
+      labels:
+        app: authservice
+    spec:
+      containers:
+      - name: auth-service
+        image: mojaloop/auth-service:v11.2.2
+        livenessProbe:
+          initialDelaySeconds: 30
+          httpGet:
+            path: /health
+            port: 4004
+        readinessProbe:
+          initialDelaySeconds: 30
+          httpGet:
+            path: /health
+            port: 4004
+        env:
+          - name: PARTICIPANT_ID
+            value: central-auth
+          # TODO: add endpoint config - see https://github.com/mojaloop/auth-service/issues/51
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: authservice
+spec:
+  ports:
+  - port: 4004
+  selector:
+    app: authservice
+  clusterIP: None
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: authservice
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    nginx.ingress.kubernetes.io/use-regex: "true"
+spec:
+  rules:
+    - http:
+        paths: 
+          - path: /auth-service(/|$)(.*)
+            backend:
+              serviceName: authservice
+              servicePort: 4004

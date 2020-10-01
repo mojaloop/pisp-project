@@ -1,0 +1,482 @@
+---
+# Source: mojaloop-simulator/templates/secret.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mojaloop-simulator-sim-dfspa-tls-creds
+  labels:
+    app.kubernetes.io/name: mojaloop-simulator-sim-dfspa-tls-creds
+    app.kubernetes.io/instance: mojaloop-simulator
+    app.kubernetes.io/version: "10.4.1"
+    app.kubernetes.io/managed-by: Helm
+    helm.sh/chart: mojaloop-simulator-10.4.0
+data:
+  "inbound-cacert.pem": LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURCekNDQWUrZ0F3SUJBZ0lSQUo0TlAvN1ZIOXhsZ0ZRRmJrNldwQ3N3RFFZSktvWklodmNOQVFFTEJRQXcKSFRFYk1Ca0dBMVVFQXhNU2JXOXFZV3h2YjNBdGMybHRkV3hoZEc5eU1CNFhEVEl3TURjeE56QTFNakkwTUZvWApEVE13TURjeE5UQTFNakkwTUZvd0hURWJNQmtHQTFVRUF4TVNiVzlxWVd4dmIzQXRjMmx0ZFd4aGRHOXlNSUlCCklqQU5CZ2txaGtpRzl3MEJBUUVGQUFPQ0FROEFNSUlCQ2dLQ0FRRUFzNUlOVmozV3I2V0EzQnd0SGpkMmVzWWwKdWQwLzZHL0RTajd4QnB6enR2QzdmTXY1TW1zSnVMa3UyTFg0U0NiTjdCZVQveTVtRnl4WnVNTUI4WENOd3dTUgpNNUpEdnlTeEJCeDVhYjlaQ08yWFBiQ3ZOWWlOTUVwWCtzT0dOVU5FTExzUmhsQm81ZEVyY29tT2ZkWlpTYlZlCndWRTN5Y3dLNFRzNDZ0M29FTjIzZjdlUnByWmdpd1UvWVVSbVhHajQzZlRZMGVmVlVQRDBWWlBIOUp3VmZkRTAKTGhBYVArN0hxaldxRjkzSkZIWUpoUHRPa2xvWWlkVkZZZHRENnVGTDdueVVVWDBiejFYWkRvMjkrOVlaZ0pBNwpHbURteHdFVnpQcFkyRktDZ0JFNXMrRlBCQlVVZWdjeG9XcmI1QlY5UHQ3NG5jQi9EclowNHVYZkdzaHNud0lECkFRQUJvMEl3UURBT0JnTlZIUThCQWY4RUJBTUNBcVF3SFFZRFZSMGxCQll3RkFZSUt3WUJCUVVIQXdFR0NDc0cKQVFVRkJ3TUNNQThHQTFVZEV3RUIvd1FGTUFNQkFmOHdEUVlKS29aSWh2Y05BUUVMQlFBRGdnRUJBSVRvRkJjUQp0aW50bVF5bEZ2eGo3RnlqWVE2VWo4MGRzVnBBMFlpYjQzazVLVGhBZDM5V1V6QndTek1QaFhIUVVpaEhBNHZ3CmduNzJrSE5lMXN0SDlnMFcveU9mYTZTMURpNGNFSjVrQ0Z2eStwQ1NORGRBcTN3cVhtbjJxbXAwWitmek1hZisKQWlTcm1wQ01UZUhQZFpPWEJhWmZrQWdlZ0o5emVQTWNRL0pRSGgreDhXZkt6VHltMkp5ZDhIQk84RXVrVnJjcgpIZzhBU0E0QUloUVlNZWlJdjE2T0xyVENoaVlQOGlzdUk3b2NKOE1MdUoxRnFISk8yYllVU1ovVDlMUFJOckJDCnEwTTBLWi9XcFBiMDVBZVpFd0VOVFdpMjNyVEo3dmFid2dML081Z0Y1NzVrZVRaY1ZId2dZNkhvREdZWXc1TDAKaUNjZFBvWnFPaC9Ia2s4PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
+  "inbound-cert.pem": LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURIRENDQWdTZ0F3SUJBZ0lRZXlxb1NNdHhVeTJhckZ2MFpMZTBiREFOQmdrcWhraUc5dzBCQVFzRkFEQWQKTVJzd0dRWURWUVFERXhKdGIycGhiRzl2Y0MxemFXMTFiR0YwYjNJd0hoY05NakF3TnpFM01EVXlNalF3V2hjTgpNekF3TnpFMU1EVXlNalF3V2pBMk1UUXdNZ1lEVlFRREV5dHRiMnBoYkc5dmNDMXphVzExYkdGMGIzSXRjMmx0CkxXUm1jM0JoTFhOamFHVnRaUzFoWkdGd2RHVnlNSUlCSWpBTkJna3Foa2lHOXcwQkFRRUZBQU9DQVE4QU1JSUIKQ2dLQ0FRRUEzdURjazdnWTdrVWtvbmNRZ1R2ZXc4Mzd0OHpkMDU5cUR4Qk1nUVg3dmZIdWxyRXBnaXJ6S0ZLZgpIRy9qWk14dGxzN294dEhWRE9zeE5taDd0WGIrY09OeWs5bksySkxYWkRnMzNkbVdGdWxCN00vMzhlZmNQdk1HCklNM3o5aWgyRmVkMnVTR3BZMTVKeGhaSVRCSXhBdlEvMjU1Vy8xSlN5RGxHTUJpU0hiTVRoMWxrTWVINVBRM0IKbHMxNDJOcWg4cW1sKzF1d2ZGU0k3eWdVL3M5U1U2N01NUVo0SkpNWE5ZTFYra1RXSmVHRkRvcU1GU05zZjJTRworUE4vLzgvTVM3aDZvTHUvSDhoZkNIWjhBWkRMM1hIOW15Ym9jSkNrK3ZnT1htczM3ZGpKN3BvR2VMMXhla3BYCnNGWis1dnRlR0w3WmdOaTlxNkxzL0x0dG1ONGJnd0lEQVFBQm96OHdQVEFPQmdOVkhROEJBZjhFQkFNQ0JhQXcKSFFZRFZSMGxCQll3RkFZSUt3WUJCUVVIQXdFR0NDc0dBUVVGQndNQ01Bd0dBMVVkRXdFQi93UUNNQUF3RFFZSgpLb1pJaHZjTkFRRUxCUUFEZ2dFQkFJZzEzM0lxOTlDcmt5bmdweE42cXBEdW9kejlSUGZ4a0R3aHkwZElMV3dSCnp2MHYvREtwZlpTOWpQaFJFWnkyRk9xWUJ3eHQrVko4UUY5bzRIR3k1RGlYdkx1Z0E5THp1ekg1REJDMXpBWHIKL2xVWXMyN3JJRDlQeGNIU2dSZS9sN0RYdjRPU09DRzlsTHBHbUJnV1NUbEJEdWNXSllROFJwM0hWUmFaeWdqcwpCWW1uUml4cFpFSUEvdGN4aTRMdTBQb2kvaHRXRkdUc056MUxLY1lrdGlheFlHSXJESVMyMlBjYnMrZDNYL0x0CjlPemFFMGtOQ3VOeTJieGdZbzgvNHpTTmJVOTR3S3VBOHM2VEtLaVR0aDRvSkxtODJiK055MUd3bUIwejlqZU8KeWRqcmdTTXZCR09sOSt5MDFtTDlDTXU4dzQ0M0NDbXo0STJITmxUY3h1OD0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+  "inbound-key.pem": LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFb3dJQkFBS0NBUUVBM3VEY2s3Z1k3a1Vrb25jUWdUdmV3ODM3dDh6ZDA1OXFEeEJNZ1FYN3ZmSHVsckVwCmdpcnpLRktmSEcvalpNeHRsczdveHRIVkRPc3hObWg3dFhiK2NPTnlrOW5LMkpMWFpEZzMzZG1XRnVsQjdNLzMKOGVmY1B2TUdJTTN6OWloMkZlZDJ1U0dwWTE1SnhoWklUQkl4QXZRLzI1NVcvMUpTeURsR01CaVNIYk1UaDFsawpNZUg1UFEzQmxzMTQyTnFoOHFtbCsxdXdmRlNJN3lnVS9zOVNVNjdNTVFaNEpKTVhOWUxWK2tUV0plR0ZEb3FNCkZTTnNmMlNHK1BOLy84L01TN2g2b0x1L0g4aGZDSFo4QVpETDNYSDlteWJvY0pDayt2Z09YbXMzN2RqSjdwb0cKZUwxeGVrcFhzRlorNXZ0ZUdMN1pnTmk5cTZMcy9MdHRtTjRiZ3dJREFRQUJBb0lCQUMzdGhtYkdYQlRWbUx3Rgo3eGZDZjZBMzFUUkYrancrc0h0VUwzK3kvUEppWlhrV0h1aWM4eWlQQmd5MUhkWEtycGFTSXJPOXo3cHV5T0JlClhZZkNjcUpPckhDOVE2aW5jYzFNTEc4Q0JJVEtJblNyVW51OS9NdllCcDVCOHBENk80TStCR0FZQ0xEYVlEZDYKcGdGUENseUNlcHBHSWNWUmNJK2tCY3VwZElxNzFxL1FzRy81blJsR0Y3V0xweGF1dk05azY5UFdLVXVMcmIrNwpXbVhBOElzdEx5YVpuMXVFOUIxY1Uva1hpbHZOa1BwSy9wZzRVTytVclR4MFdtWXlMSjBCcUVsV0d2MmcyNWo3CmV0WFliN2Z0S3oxZ0xTaFFJTHBNQTFqNHc3Y3E1U1J4K3YvbnNhTmNwTmNGbHkrb1lSM0FMTEs2bnFLV0dnUSsKV1pnSG0rRUNnWUVBK2tIdE5mSW4xb3BBdjhGQ0g1ZmdTaHBiUEtoMVV5c0wrbmF3K2RHZ2oxNjluOUcyTmxqMgpnQzFwRGZLRHlmQVo1bU5veEdlbnE0WVJsalFWSkFXY0wxS0pRbEpsR0ZkYUNKL3pyR08zWEpvTmVQbk1jTVBrCkRWSTZ6T2pXR0laTVNQZFRlVXYzN3BWNlN1RStaaHg0WFJhRllGcU9uWUFUaVY1YVQ2ekhnRE1DZ1lFQTQvNGEKYXp5UGU3ZTV5VUh0Yzl5U1VwS2NRbCs3dGc1TEtyZDBOQlVqNEExT1BhVXdmTmNtWXp6eEJROTZkMWV4Z0p0bQpKLzBlZC9uK3FuVjlKKzdSTXBIN3NUQXNFZnZjZ1ZQWStCNkpQWVFYWnZRenNVVzRGRFhvdW5sdHJtak9yRS9NCktka1JZYk50VjdYUlZKTEtIS20ydE9hSTRjTm05ckQzMjR6ZVozRUNnWUVBenhITHlDNUZQbVNJN09GbzZDRlAKNmFEalMwNk1QYlBKcG9XZExDaUM5UDVNWXJnd1Q4bk90UUplQWJkZnlyQ0xqYkZGbC9XNHE5azBKaGVVUW9rTgowYTQyZXBVWXAwcG42ZWtIdytXQ2EvSGdJZkIzYy9yeWNQOVFQZ3FPVkI2VGNuQ0xOanRndTU0ZFlXWDhycHJ5CkVQdzRnaUNNRHRCUjJnRWpNdmZnM3pjQ2dZQlM5TlJjREk4UXJ3c1VwYjVtbCsxTnlqYTlGK1JQRytoUnhLcXQKZ0x1cS9HeHBsYitNelNRVW04biswMkQySjV4WWRUSzRmaXNsOEhxdlAweW95UWFwWmVDMDJoaE8rdHVDMnlWcApNb014Tk96bTh4Z1QrcEErR2xkeDhsanNTd3BZUERqSFNVby95RytTcUg5Z1RJRHA2UDZuMS9JYVkyVUZnZUxOCnFmWUtvUUtCZ0FRVVV3aVQwVElvMFZSa2lQSDVWQVJJVW9BUi9QZDhmMC9kWVhCbEZReExSdVJOeWpPSS9KOUwKRFIveCtueGduWWlPNVZwVEd3djVOOFNZclVGT3A3SGxEMW9lQnQ0S0EvajVBM1ZoTGtqaHArYjJJMVV5ditybApobXM3ZVp2MkNwZExHYzcyWE45aGFaRS9tQXUwbC81T3JicjFXazRqQ2NhbFRNQ2l6Q25PCi0tLS0tRU5EIFJTQSBQUklWQVRFIEtFWS0tLS0tCg==
+  "outbound-cacert.pem": LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURCekNDQWUrZ0F3SUJBZ0lSQUo0TlAvN1ZIOXhsZ0ZRRmJrNldwQ3N3RFFZSktvWklodmNOQVFFTEJRQXcKSFRFYk1Ca0dBMVVFQXhNU2JXOXFZV3h2YjNBdGMybHRkV3hoZEc5eU1CNFhEVEl3TURjeE56QTFNakkwTUZvWApEVE13TURjeE5UQTFNakkwTUZvd0hURWJNQmtHQTFVRUF4TVNiVzlxWVd4dmIzQXRjMmx0ZFd4aGRHOXlNSUlCCklqQU5CZ2txaGtpRzl3MEJBUUVGQUFPQ0FROEFNSUlCQ2dLQ0FRRUFzNUlOVmozV3I2V0EzQnd0SGpkMmVzWWwKdWQwLzZHL0RTajd4QnB6enR2QzdmTXY1TW1zSnVMa3UyTFg0U0NiTjdCZVQveTVtRnl4WnVNTUI4WENOd3dTUgpNNUpEdnlTeEJCeDVhYjlaQ08yWFBiQ3ZOWWlOTUVwWCtzT0dOVU5FTExzUmhsQm81ZEVyY29tT2ZkWlpTYlZlCndWRTN5Y3dLNFRzNDZ0M29FTjIzZjdlUnByWmdpd1UvWVVSbVhHajQzZlRZMGVmVlVQRDBWWlBIOUp3VmZkRTAKTGhBYVArN0hxaldxRjkzSkZIWUpoUHRPa2xvWWlkVkZZZHRENnVGTDdueVVVWDBiejFYWkRvMjkrOVlaZ0pBNwpHbURteHdFVnpQcFkyRktDZ0JFNXMrRlBCQlVVZWdjeG9XcmI1QlY5UHQ3NG5jQi9EclowNHVYZkdzaHNud0lECkFRQUJvMEl3UURBT0JnTlZIUThCQWY4RUJBTUNBcVF3SFFZRFZSMGxCQll3RkFZSUt3WUJCUVVIQXdFR0NDc0cKQVFVRkJ3TUNNQThHQTFVZEV3RUIvd1FGTUFNQkFmOHdEUVlKS29aSWh2Y05BUUVMQlFBRGdnRUJBSVRvRkJjUQp0aW50bVF5bEZ2eGo3RnlqWVE2VWo4MGRzVnBBMFlpYjQzazVLVGhBZDM5V1V6QndTek1QaFhIUVVpaEhBNHZ3CmduNzJrSE5lMXN0SDlnMFcveU9mYTZTMURpNGNFSjVrQ0Z2eStwQ1NORGRBcTN3cVhtbjJxbXAwWitmek1hZisKQWlTcm1wQ01UZUhQZFpPWEJhWmZrQWdlZ0o5emVQTWNRL0pRSGgreDhXZkt6VHltMkp5ZDhIQk84RXVrVnJjcgpIZzhBU0E0QUloUVlNZWlJdjE2T0xyVENoaVlQOGlzdUk3b2NKOE1MdUoxRnFISk8yYllVU1ovVDlMUFJOckJDCnEwTTBLWi9XcFBiMDVBZVpFd0VOVFdpMjNyVEo3dmFid2dML081Z0Y1NzVrZVRaY1ZId2dZNkhvREdZWXc1TDAKaUNjZFBvWnFPaC9Ia2s4PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
+  "outbound-cert.pem": LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURIRENDQWdTZ0F3SUJBZ0lRZXlxb1NNdHhVeTJhckZ2MFpMZTBiREFOQmdrcWhraUc5dzBCQVFzRkFEQWQKTVJzd0dRWURWUVFERXhKdGIycGhiRzl2Y0MxemFXMTFiR0YwYjNJd0hoY05NakF3TnpFM01EVXlNalF3V2hjTgpNekF3TnpFMU1EVXlNalF3V2pBMk1UUXdNZ1lEVlFRREV5dHRiMnBoYkc5dmNDMXphVzExYkdGMGIzSXRjMmx0CkxXUm1jM0JoTFhOamFHVnRaUzFoWkdGd2RHVnlNSUlCSWpBTkJna3Foa2lHOXcwQkFRRUZBQU9DQVE4QU1JSUIKQ2dLQ0FRRUEzdURjazdnWTdrVWtvbmNRZ1R2ZXc4Mzd0OHpkMDU5cUR4Qk1nUVg3dmZIdWxyRXBnaXJ6S0ZLZgpIRy9qWk14dGxzN294dEhWRE9zeE5taDd0WGIrY09OeWs5bksySkxYWkRnMzNkbVdGdWxCN00vMzhlZmNQdk1HCklNM3o5aWgyRmVkMnVTR3BZMTVKeGhaSVRCSXhBdlEvMjU1Vy8xSlN5RGxHTUJpU0hiTVRoMWxrTWVINVBRM0IKbHMxNDJOcWg4cW1sKzF1d2ZGU0k3eWdVL3M5U1U2N01NUVo0SkpNWE5ZTFYra1RXSmVHRkRvcU1GU05zZjJTRworUE4vLzgvTVM3aDZvTHUvSDhoZkNIWjhBWkRMM1hIOW15Ym9jSkNrK3ZnT1htczM3ZGpKN3BvR2VMMXhla3BYCnNGWis1dnRlR0w3WmdOaTlxNkxzL0x0dG1ONGJnd0lEQVFBQm96OHdQVEFPQmdOVkhROEJBZjhFQkFNQ0JhQXcKSFFZRFZSMGxCQll3RkFZSUt3WUJCUVVIQXdFR0NDc0dBUVVGQndNQ01Bd0dBMVVkRXdFQi93UUNNQUF3RFFZSgpLb1pJaHZjTkFRRUxCUUFEZ2dFQkFJZzEzM0lxOTlDcmt5bmdweE42cXBEdW9kejlSUGZ4a0R3aHkwZElMV3dSCnp2MHYvREtwZlpTOWpQaFJFWnkyRk9xWUJ3eHQrVko4UUY5bzRIR3k1RGlYdkx1Z0E5THp1ekg1REJDMXpBWHIKL2xVWXMyN3JJRDlQeGNIU2dSZS9sN0RYdjRPU09DRzlsTHBHbUJnV1NUbEJEdWNXSllROFJwM0hWUmFaeWdqcwpCWW1uUml4cFpFSUEvdGN4aTRMdTBQb2kvaHRXRkdUc056MUxLY1lrdGlheFlHSXJESVMyMlBjYnMrZDNYL0x0CjlPemFFMGtOQ3VOeTJieGdZbzgvNHpTTmJVOTR3S3VBOHM2VEtLaVR0aDRvSkxtODJiK055MUd3bUIwejlqZU8KeWRqcmdTTXZCR09sOSt5MDFtTDlDTXU4dzQ0M0NDbXo0STJITmxUY3h1OD0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+  "outbound-key.pem": LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFb3dJQkFBS0NBUUVBM3VEY2s3Z1k3a1Vrb25jUWdUdmV3ODM3dDh6ZDA1OXFEeEJNZ1FYN3ZmSHVsckVwCmdpcnpLRktmSEcvalpNeHRsczdveHRIVkRPc3hObWg3dFhiK2NPTnlrOW5LMkpMWFpEZzMzZG1XRnVsQjdNLzMKOGVmY1B2TUdJTTN6OWloMkZlZDJ1U0dwWTE1SnhoWklUQkl4QXZRLzI1NVcvMUpTeURsR01CaVNIYk1UaDFsawpNZUg1UFEzQmxzMTQyTnFoOHFtbCsxdXdmRlNJN3lnVS9zOVNVNjdNTVFaNEpKTVhOWUxWK2tUV0plR0ZEb3FNCkZTTnNmMlNHK1BOLy84L01TN2g2b0x1L0g4aGZDSFo4QVpETDNYSDlteWJvY0pDayt2Z09YbXMzN2RqSjdwb0cKZUwxeGVrcFhzRlorNXZ0ZUdMN1pnTmk5cTZMcy9MdHRtTjRiZ3dJREFRQUJBb0lCQUMzdGhtYkdYQlRWbUx3Rgo3eGZDZjZBMzFUUkYrancrc0h0VUwzK3kvUEppWlhrV0h1aWM4eWlQQmd5MUhkWEtycGFTSXJPOXo3cHV5T0JlClhZZkNjcUpPckhDOVE2aW5jYzFNTEc4Q0JJVEtJblNyVW51OS9NdllCcDVCOHBENk80TStCR0FZQ0xEYVlEZDYKcGdGUENseUNlcHBHSWNWUmNJK2tCY3VwZElxNzFxL1FzRy81blJsR0Y3V0xweGF1dk05azY5UFdLVXVMcmIrNwpXbVhBOElzdEx5YVpuMXVFOUIxY1Uva1hpbHZOa1BwSy9wZzRVTytVclR4MFdtWXlMSjBCcUVsV0d2MmcyNWo3CmV0WFliN2Z0S3oxZ0xTaFFJTHBNQTFqNHc3Y3E1U1J4K3YvbnNhTmNwTmNGbHkrb1lSM0FMTEs2bnFLV0dnUSsKV1pnSG0rRUNnWUVBK2tIdE5mSW4xb3BBdjhGQ0g1ZmdTaHBiUEtoMVV5c0wrbmF3K2RHZ2oxNjluOUcyTmxqMgpnQzFwRGZLRHlmQVo1bU5veEdlbnE0WVJsalFWSkFXY0wxS0pRbEpsR0ZkYUNKL3pyR08zWEpvTmVQbk1jTVBrCkRWSTZ6T2pXR0laTVNQZFRlVXYzN3BWNlN1RStaaHg0WFJhRllGcU9uWUFUaVY1YVQ2ekhnRE1DZ1lFQTQvNGEKYXp5UGU3ZTV5VUh0Yzl5U1VwS2NRbCs3dGc1TEtyZDBOQlVqNEExT1BhVXdmTmNtWXp6eEJROTZkMWV4Z0p0bQpKLzBlZC9uK3FuVjlKKzdSTXBIN3NUQXNFZnZjZ1ZQWStCNkpQWVFYWnZRenNVVzRGRFhvdW5sdHJtak9yRS9NCktka1JZYk50VjdYUlZKTEtIS20ydE9hSTRjTm05ckQzMjR6ZVozRUNnWUVBenhITHlDNUZQbVNJN09GbzZDRlAKNmFEalMwNk1QYlBKcG9XZExDaUM5UDVNWXJnd1Q4bk90UUplQWJkZnlyQ0xqYkZGbC9XNHE5azBKaGVVUW9rTgowYTQyZXBVWXAwcG42ZWtIdytXQ2EvSGdJZkIzYy9yeWNQOVFQZ3FPVkI2VGNuQ0xOanRndTU0ZFlXWDhycHJ5CkVQdzRnaUNNRHRCUjJnRWpNdmZnM3pjQ2dZQlM5TlJjREk4UXJ3c1VwYjVtbCsxTnlqYTlGK1JQRytoUnhLcXQKZ0x1cS9HeHBsYitNelNRVW04biswMkQySjV4WWRUSzRmaXNsOEhxdlAweW95UWFwWmVDMDJoaE8rdHVDMnlWcApNb014Tk96bTh4Z1QrcEErR2xkeDhsanNTd3BZUERqSFNVby95RytTcUg5Z1RJRHA2UDZuMS9JYVkyVUZnZUxOCnFmWUtvUUtCZ0FRVVV3aVQwVElvMFZSa2lQSDVWQVJJVW9BUi9QZDhmMC9kWVhCbEZReExSdVJOeWpPSS9KOUwKRFIveCtueGduWWlPNVZwVEd3djVOOFNZclVGT3A3SGxEMW9lQnQ0S0EvajVBM1ZoTGtqaHArYjJJMVV5ditybApobXM3ZVp2MkNwZExHYzcyWE45aGFaRS9tQXUwbC81T3JicjFXazRqQ2NhbFRNQ2l6Q25PCi0tLS0tRU5EIFJTQSBQUklWQVRFIEtFWS0tLS0tCg==
+  "test-cacert.pem": LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURCekNDQWUrZ0F3SUJBZ0lSQUo0TlAvN1ZIOXhsZ0ZRRmJrNldwQ3N3RFFZSktvWklodmNOQVFFTEJRQXcKSFRFYk1Ca0dBMVVFQXhNU2JXOXFZV3h2YjNBdGMybHRkV3hoZEc5eU1CNFhEVEl3TURjeE56QTFNakkwTUZvWApEVE13TURjeE5UQTFNakkwTUZvd0hURWJNQmtHQTFVRUF4TVNiVzlxWVd4dmIzQXRjMmx0ZFd4aGRHOXlNSUlCCklqQU5CZ2txaGtpRzl3MEJBUUVGQUFPQ0FROEFNSUlCQ2dLQ0FRRUFzNUlOVmozV3I2V0EzQnd0SGpkMmVzWWwKdWQwLzZHL0RTajd4QnB6enR2QzdmTXY1TW1zSnVMa3UyTFg0U0NiTjdCZVQveTVtRnl4WnVNTUI4WENOd3dTUgpNNUpEdnlTeEJCeDVhYjlaQ08yWFBiQ3ZOWWlOTUVwWCtzT0dOVU5FTExzUmhsQm81ZEVyY29tT2ZkWlpTYlZlCndWRTN5Y3dLNFRzNDZ0M29FTjIzZjdlUnByWmdpd1UvWVVSbVhHajQzZlRZMGVmVlVQRDBWWlBIOUp3VmZkRTAKTGhBYVArN0hxaldxRjkzSkZIWUpoUHRPa2xvWWlkVkZZZHRENnVGTDdueVVVWDBiejFYWkRvMjkrOVlaZ0pBNwpHbURteHdFVnpQcFkyRktDZ0JFNXMrRlBCQlVVZWdjeG9XcmI1QlY5UHQ3NG5jQi9EclowNHVYZkdzaHNud0lECkFRQUJvMEl3UURBT0JnTlZIUThCQWY4RUJBTUNBcVF3SFFZRFZSMGxCQll3RkFZSUt3WUJCUVVIQXdFR0NDc0cKQVFVRkJ3TUNNQThHQTFVZEV3RUIvd1FGTUFNQkFmOHdEUVlKS29aSWh2Y05BUUVMQlFBRGdnRUJBSVRvRkJjUQp0aW50bVF5bEZ2eGo3RnlqWVE2VWo4MGRzVnBBMFlpYjQzazVLVGhBZDM5V1V6QndTek1QaFhIUVVpaEhBNHZ3CmduNzJrSE5lMXN0SDlnMFcveU9mYTZTMURpNGNFSjVrQ0Z2eStwQ1NORGRBcTN3cVhtbjJxbXAwWitmek1hZisKQWlTcm1wQ01UZUhQZFpPWEJhWmZrQWdlZ0o5emVQTWNRL0pRSGgreDhXZkt6VHltMkp5ZDhIQk84RXVrVnJjcgpIZzhBU0E0QUloUVlNZWlJdjE2T0xyVENoaVlQOGlzdUk3b2NKOE1MdUoxRnFISk8yYllVU1ovVDlMUFJOckJDCnEwTTBLWi9XcFBiMDVBZVpFd0VOVFdpMjNyVEo3dmFid2dML081Z0Y1NzVrZVRaY1ZId2dZNkhvREdZWXc1TDAKaUNjZFBvWnFPaC9Ia2s4PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
+  "test-cert.pem": LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURIRENDQWdTZ0F3SUJBZ0lRZXlxb1NNdHhVeTJhckZ2MFpMZTBiREFOQmdrcWhraUc5dzBCQVFzRkFEQWQKTVJzd0dRWURWUVFERXhKdGIycGhiRzl2Y0MxemFXMTFiR0YwYjNJd0hoY05NakF3TnpFM01EVXlNalF3V2hjTgpNekF3TnpFMU1EVXlNalF3V2pBMk1UUXdNZ1lEVlFRREV5dHRiMnBoYkc5dmNDMXphVzExYkdGMGIzSXRjMmx0CkxXUm1jM0JoTFhOamFHVnRaUzFoWkdGd2RHVnlNSUlCSWpBTkJna3Foa2lHOXcwQkFRRUZBQU9DQVE4QU1JSUIKQ2dLQ0FRRUEzdURjazdnWTdrVWtvbmNRZ1R2ZXc4Mzd0OHpkMDU5cUR4Qk1nUVg3dmZIdWxyRXBnaXJ6S0ZLZgpIRy9qWk14dGxzN294dEhWRE9zeE5taDd0WGIrY09OeWs5bksySkxYWkRnMzNkbVdGdWxCN00vMzhlZmNQdk1HCklNM3o5aWgyRmVkMnVTR3BZMTVKeGhaSVRCSXhBdlEvMjU1Vy8xSlN5RGxHTUJpU0hiTVRoMWxrTWVINVBRM0IKbHMxNDJOcWg4cW1sKzF1d2ZGU0k3eWdVL3M5U1U2N01NUVo0SkpNWE5ZTFYra1RXSmVHRkRvcU1GU05zZjJTRworUE4vLzgvTVM3aDZvTHUvSDhoZkNIWjhBWkRMM1hIOW15Ym9jSkNrK3ZnT1htczM3ZGpKN3BvR2VMMXhla3BYCnNGWis1dnRlR0w3WmdOaTlxNkxzL0x0dG1ONGJnd0lEQVFBQm96OHdQVEFPQmdOVkhROEJBZjhFQkFNQ0JhQXcKSFFZRFZSMGxCQll3RkFZSUt3WUJCUVVIQXdFR0NDc0dBUVVGQndNQ01Bd0dBMVVkRXdFQi93UUNNQUF3RFFZSgpLb1pJaHZjTkFRRUxCUUFEZ2dFQkFJZzEzM0lxOTlDcmt5bmdweE42cXBEdW9kejlSUGZ4a0R3aHkwZElMV3dSCnp2MHYvREtwZlpTOWpQaFJFWnkyRk9xWUJ3eHQrVko4UUY5bzRIR3k1RGlYdkx1Z0E5THp1ekg1REJDMXpBWHIKL2xVWXMyN3JJRDlQeGNIU2dSZS9sN0RYdjRPU09DRzlsTHBHbUJnV1NUbEJEdWNXSllROFJwM0hWUmFaeWdqcwpCWW1uUml4cFpFSUEvdGN4aTRMdTBQb2kvaHRXRkdUc056MUxLY1lrdGlheFlHSXJESVMyMlBjYnMrZDNYL0x0CjlPemFFMGtOQ3VOeTJieGdZbzgvNHpTTmJVOTR3S3VBOHM2VEtLaVR0aDRvSkxtODJiK055MUd3bUIwejlqZU8KeWRqcmdTTXZCR09sOSt5MDFtTDlDTXU4dzQ0M0NDbXo0STJITmxUY3h1OD0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+  "test-key.pem": LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFb3dJQkFBS0NBUUVBM3VEY2s3Z1k3a1Vrb25jUWdUdmV3ODM3dDh6ZDA1OXFEeEJNZ1FYN3ZmSHVsckVwCmdpcnpLRktmSEcvalpNeHRsczdveHRIVkRPc3hObWg3dFhiK2NPTnlrOW5LMkpMWFpEZzMzZG1XRnVsQjdNLzMKOGVmY1B2TUdJTTN6OWloMkZlZDJ1U0dwWTE1SnhoWklUQkl4QXZRLzI1NVcvMUpTeURsR01CaVNIYk1UaDFsawpNZUg1UFEzQmxzMTQyTnFoOHFtbCsxdXdmRlNJN3lnVS9zOVNVNjdNTVFaNEpKTVhOWUxWK2tUV0plR0ZEb3FNCkZTTnNmMlNHK1BOLy84L01TN2g2b0x1L0g4aGZDSFo4QVpETDNYSDlteWJvY0pDayt2Z09YbXMzN2RqSjdwb0cKZUwxeGVrcFhzRlorNXZ0ZUdMN1pnTmk5cTZMcy9MdHRtTjRiZ3dJREFRQUJBb0lCQUMzdGhtYkdYQlRWbUx3Rgo3eGZDZjZBMzFUUkYrancrc0h0VUwzK3kvUEppWlhrV0h1aWM4eWlQQmd5MUhkWEtycGFTSXJPOXo3cHV5T0JlClhZZkNjcUpPckhDOVE2aW5jYzFNTEc4Q0JJVEtJblNyVW51OS9NdllCcDVCOHBENk80TStCR0FZQ0xEYVlEZDYKcGdGUENseUNlcHBHSWNWUmNJK2tCY3VwZElxNzFxL1FzRy81blJsR0Y3V0xweGF1dk05azY5UFdLVXVMcmIrNwpXbVhBOElzdEx5YVpuMXVFOUIxY1Uva1hpbHZOa1BwSy9wZzRVTytVclR4MFdtWXlMSjBCcUVsV0d2MmcyNWo3CmV0WFliN2Z0S3oxZ0xTaFFJTHBNQTFqNHc3Y3E1U1J4K3YvbnNhTmNwTmNGbHkrb1lSM0FMTEs2bnFLV0dnUSsKV1pnSG0rRUNnWUVBK2tIdE5mSW4xb3BBdjhGQ0g1ZmdTaHBiUEtoMVV5c0wrbmF3K2RHZ2oxNjluOUcyTmxqMgpnQzFwRGZLRHlmQVo1bU5veEdlbnE0WVJsalFWSkFXY0wxS0pRbEpsR0ZkYUNKL3pyR08zWEpvTmVQbk1jTVBrCkRWSTZ6T2pXR0laTVNQZFRlVXYzN3BWNlN1RStaaHg0WFJhRllGcU9uWUFUaVY1YVQ2ekhnRE1DZ1lFQTQvNGEKYXp5UGU3ZTV5VUh0Yzl5U1VwS2NRbCs3dGc1TEtyZDBOQlVqNEExT1BhVXdmTmNtWXp6eEJROTZkMWV4Z0p0bQpKLzBlZC9uK3FuVjlKKzdSTXBIN3NUQXNFZnZjZ1ZQWStCNkpQWVFYWnZRenNVVzRGRFhvdW5sdHJtak9yRS9NCktka1JZYk50VjdYUlZKTEtIS20ydE9hSTRjTm05ckQzMjR6ZVozRUNnWUVBenhITHlDNUZQbVNJN09GbzZDRlAKNmFEalMwNk1QYlBKcG9XZExDaUM5UDVNWXJnd1Q4bk90UUplQWJkZnlyQ0xqYkZGbC9XNHE5azBKaGVVUW9rTgowYTQyZXBVWXAwcG42ZWtIdytXQ2EvSGdJZkIzYy9yeWNQOVFQZ3FPVkI2VGNuQ0xOanRndTU0ZFlXWDhycHJ5CkVQdzRnaUNNRHRCUjJnRWpNdmZnM3pjQ2dZQlM5TlJjREk4UXJ3c1VwYjVtbCsxTnlqYTlGK1JQRytoUnhLcXQKZ0x1cS9HeHBsYitNelNRVW04biswMkQySjV4WWRUSzRmaXNsOEhxdlAweW95UWFwWmVDMDJoaE8rdHVDMnlWcApNb014Tk96bTh4Z1QrcEErR2xkeDhsanNTd3BZUERqSFNVby95RytTcUg5Z1RJRHA2UDZuMS9JYVkyVUZnZUxOCnFmWUtvUUtCZ0FRVVV3aVQwVElvMFZSa2lQSDVWQVJJVW9BUi9QZDhmMC9kWVhCbEZReExSdVJOeWpPSS9KOUwKRFIveCtueGduWWlPNVZwVEd3djVOOFNZclVGT3A3SGxEMW9lQnQ0S0EvajVBM1ZoTGtqaHArYjJJMVV5ditybApobXM3ZVp2MkNwZExHYzcyWE45aGFaRS9tQXUwbC81T3JicjFXazRqQ2NhbFRNQ2l6Q25PCi0tLS0tRU5EIFJTQSBQUklWQVRFIEtFWS0tLS0tCg==
+---
+# Source: mojaloop-simulator/templates/config-jws-public-keys.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mojaloop-simulator-sim-jws-public-keys
+  labels:
+    app.kubernetes.io/name: mojaloop-simulator-sim-jws-public-keys
+    app.kubernetes.io/instance: mojaloop-simulator
+    app.kubernetes.io/version: "10.4.1"
+    app.kubernetes.io/managed-by: Helm
+    helm.sh/chart: mojaloop-simulator-10.4.0
+data:
+---
+# Source: mojaloop-simulator/templates/config-rules.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mojaloop-simulator-sim-dfspa-rules
+  labels:
+    app.kubernetes.io/name: mojaloop-simulator-sim-dfspa-rules
+    app.kubernetes.io/instance: mojaloop-simulator
+    app.kubernetes.io/version: "10.4.1"
+    app.kubernetes.io/managed-by: Helm
+    helm.sh/chart: mojaloop-simulator-10.4.0
+data:
+  rules.json: "[]"
+---
+# Source: mojaloop-simulator/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: mojaloop-simulator-sim-dfspa-scheme-adapter
+  labels:
+    app.kubernetes.io/name: mojaloop-simulator-sim-dfspa-scheme-adapter
+    app.kubernetes.io/instance: mojaloop-simulator
+    app.kubernetes.io/version: "10.4.1"
+    app.kubernetes.io/managed-by: Helm
+    helm.sh/chart: mojaloop-simulator-10.4.0
+spec:
+   type: ClusterIP
+   ports:
+     - port: 4000
+       protocol: TCP
+       name: inboundapi
+       targetPort: inboundapi
+     - port: 4001
+       protocol: TCP
+       name: outboundapi
+       targetPort: outboundapi
+     - port: 4002
+       protocol: TCP
+       name: testapi
+       targetPort: testapi
+   selector:
+      app.kubernetes.io/name: mojaloop-simulator-sim-dfspa-scheme-adapter
+      app.kubernetes.io/instance: mojaloop-simulator
+---
+# Source: mojaloop-simulator/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: mojaloop-simulator-sim-dfspa-cache
+  labels:
+    app.kubernetes.io/name: mojaloop-simulator-sim-dfspa-cache
+    app.kubernetes.io/instance: mojaloop-simulator
+    app.kubernetes.io/version: "10.4.1"
+    app.kubernetes.io/managed-by: Helm
+    helm.sh/chart: mojaloop-simulator-10.4.0
+spec:
+   type: ClusterIP
+   ports:
+     - port: 6379
+       protocol: TCP
+       name: redis
+       targetPort: redis
+   selector:
+      app.kubernetes.io/name: mojaloop-simulator-sim-dfspa-cache
+      app.kubernetes.io/instance: mojaloop-simulator
+---
+# Source: mojaloop-simulator/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: mojaloop-simulator-sim-dfspa-backend
+  labels:
+    app.kubernetes.io/name: mojaloop-simulator-sim-dfspa-backend
+    app.kubernetes.io/instance: mojaloop-simulator
+    app.kubernetes.io/version: "10.4.1"
+    app.kubernetes.io/managed-by: Helm
+    helm.sh/chart: mojaloop-simulator-10.4.0
+spec:
+   type: ClusterIP
+   ports:
+     - port: 3000
+       protocol: TCP
+       name: simapi
+       targetPort: simapi
+     - port: 3002
+       protocol: TCP
+       name: reportapi
+       targetPort: reportapi
+     - port: 3003
+       protocol: TCP
+       name: testapi
+       targetPort: testapi
+   selector:
+      app.kubernetes.io/name: mojaloop-simulator-sim-dfspa-backend
+      app.kubernetes.io/instance: mojaloop-simulator
+---
+# Source: mojaloop-simulator/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mojaloop-simulator-sim-dfspa-scheme-adapter
+  labels:
+    app.kubernetes.io/name: mojaloop-simulator-sim-dfspa-scheme-adapter
+    app.kubernetes.io/instance: mojaloop-simulator
+    app.kubernetes.io/version: "10.4.1"
+    app.kubernetes.io/managed-by: Helm
+    helm.sh/chart: mojaloop-simulator-10.4.0
+spec:
+  replicas: 
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: mojaloop-simulator-sim-dfspa-scheme-adapter
+      app.kubernetes.io/instance: mojaloop-simulator
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: mojaloop-simulator-sim-dfspa-scheme-adapter
+        app.kubernetes.io/instance: mojaloop-simulator
+        app.kubernetes.io/version: "10.4.1"
+        app.kubernetes.io/managed-by: Helm
+        helm.sh/chart: mojaloop-simulator-10.4.0
+    spec:
+      volumes:
+      - name: jws-public-keys
+        configMap:
+          name: mojaloop-simulator-sim-jws-public-keys
+      - name: tls-secrets
+        secret:
+          secretName: mojaloop-simulator-sim-dfspa-tls-creds
+      initContainers:
+      
+      containers:
+      - name: scheme-adapter
+        image: "mojaloop/sdk-scheme-adapter:v10.5.0"
+        imagePullPolicy: Always
+        ports:
+          - name: inboundapi
+            containerPort: 4000
+            protocol: TCP
+          - name: outboundapi
+            containerPort: 4001
+            protocol: TCP
+          - name: testapi
+            containerPort: 4002
+            protocol: TCP
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 4001
+            scheme: HTTP
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 4001
+            scheme: HTTP
+        volumeMounts:
+        # - name: jws-public-keys
+          # mountPath: /jwsVerificationKeys
+        - name: tls-secrets
+          mountPath: "/secrets/"
+        env:
+        - name: CACHE_HOST
+          value: mojaloop-simulator-sim-dfspa-cache
+        - name: BACKEND_ENDPOINT
+          value: mojaloop-simulator-sim-dfspa-backend:3000
+        - name: DFSP_ID
+          value: "dfspa"
+        - name: IN_CA_CERT_PATH
+          value: "/secrets/inbound-cacert.pem"
+        - name: IN_SERVER_CERT_PATH
+          value: "/secrets/inbound-cert.pem"
+        - name: IN_SERVER_KEY_PATH
+          value: "/secrets/inbound-key.pem"
+        - name: OUT_CA_CERT_PATH
+          value: "/secrets/outbound-cacert.pem"
+        - name: OUT_CLIENT_CERT_PATH
+          value: "/secrets/outbound-cert.pem"
+        - name: OUT_CLIENT_KEY_PATH
+          value: "/secrets/outbound-key.pem"
+        - name: TEST_CA_CERT_PATH
+          value: "/secrets/test-cacert.pem"
+        - name: TEST_CLIENT_CERT_PATH
+          value: "/secrets/test-cert.pem"
+        - name: TEST_CLIENT_KEY_PATH
+          value: "/secrets/test-key.pem"
+        # - name: JWS_SIGNING_KEY_PATH
+          # value: "/jwsSigningKey/private.key"
+        - name: ALLOW_TRANSFER_WITHOUT_QUOTE
+          value: "false"
+        - name: AUTO_ACCEPT_PARTY
+          value: "false"
+        - name: AUTO_ACCEPT_QUOTES
+          value: "false"
+        - name: CACHE_PORT
+          value: "6379"
+        - name: CHECK_ILP
+          value: "true"
+        - name: ENABLE_OAUTH_TOKEN_ENDPOINT
+          value: "false"
+        - name: ENABLE_TEST_FEATURES
+          value: "true"
+        - name: EXPIRY_SECONDS
+          value: "60"
+        - name: ILP_SECRET
+          value: "Quaixohyaesahju3thivuiChai5cahng"
+        - name: INBOUND_LISTEN_PORT
+          value: "4000"
+        - name: INBOUND_MUTUAL_TLS_ENABLED
+          value: "false"
+        - name: JWS_SIGN
+          value: "false"
+        - name: JWS_SIGN_PUT_PARTIES
+          value: "false"
+        # - name: JWS_VERIFICATION_KEYS_DIRECTORY
+          # value: "/jwsVerificationKeys"
+        - name: LOG_INDENT
+          value: "0"
+        - name: OAUTH_CLIENT_KEY
+          value: ""
+        - name: OAUTH_CLIENT_SECRET
+          value: ""
+        - name: OAUTH_REFRESH_SECONDS
+          value: "3600"
+        - name: OAUTH_TOKEN_ENDPOINT
+          value: ""
+        - name: OAUTH_TOKEN_ENDPOINT_CLIENT_KEY
+          value: "test-client-key"
+        - name: OAUTH_TOKEN_ENDPOINT_CLIENT_SECRET
+          value: "test-client-secret"
+        - name: OAUTH_TOKEN_ENDPOINT_LISTEN_PORT
+          value: "6000"
+        - name: OUTBOUND_LISTEN_PORT
+          value: "4001"
+        - name: OUTBOUND_MUTUAL_TLS_ENABLED
+          value: "false"
+        - name: PEER_ENDPOINT
+          value: "mojaloop-switch"
+        - name: REJECT_EXPIRED_QUOTE_RESPONSES
+          value: "false"
+        - name: REJECT_EXPIRED_TRANSFER_FULFILS
+          value: "false"
+        - name: REJECT_TRANSFERS_ON_EXPIRED_QUOTES
+          value: "false"
+        - name: REQUEST_PROCESSING_TIMEOUT_SECONDS
+          value: "30"
+        - name: TEST_LISTEN_PORT
+          value: "4002"
+        - name: TEST_MUTUAL_TLS_ENABLED
+          value: "false"
+        - name: USE_QUOTE_SOURCE_FSP_AS_TRANSFER_PAYEE_FSP
+          value: "false"
+        - name: VALIDATE_INBOUND_JWS
+          value: "false"
+        - name: VALIDATE_INBOUND_PUT_PARTIES_JWS
+          value: "false"
+        - name: WS02_BEARER_TOKEN
+          value: "7718fa9b-be13-3fe7-87f0-a12cf1628168"
+        resources:
+          null
+      imagePullSecrets:
+        - name: dock-casa-secret
+---
+# Source: mojaloop-simulator/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mojaloop-simulator-sim-dfspa-backend
+  labels:
+    app.kubernetes.io/name: mojaloop-simulator-sim-dfspa-backend
+    app.kubernetes.io/instance: mojaloop-simulator
+    app.kubernetes.io/version: "10.4.1"
+    app.kubernetes.io/managed-by: Helm
+    helm.sh/chart: mojaloop-simulator-10.4.0
+spec:
+  replicas: 
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: mojaloop-simulator-sim-dfspa-backend
+      app.kubernetes.io/instance: mojaloop-simulator
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: mojaloop-simulator-sim-dfspa-backend
+        app.kubernetes.io/instance: mojaloop-simulator
+        app.kubernetes.io/version: "10.4.1"
+        app.kubernetes.io/managed-by: Helm
+        helm.sh/chart: mojaloop-simulator-10.4.0
+    spec:
+      initContainers:
+      
+      containers:
+      - name: backend
+        image: "mojaloop/mojaloop-simulator:v10.4.1"
+        imagePullPolicy: Always
+        ports:
+          - name: simapi
+            containerPort: 3000 # these are hard-coded in the service
+            protocol: TCP
+          - name: reportapi
+            containerPort: 3002 # these are hard-coded in the service
+            protocol: TCP
+          - name: testapi
+            containerPort: 3003 # these are hard-coded in the service
+            protocol: TCP
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 3000
+            scheme: HTTP
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 3000
+            scheme: HTTP
+        env:
+        - name: OUTBOUND_ENDPOINT
+          value: "http://mojaloop-simulator-sim-dfspa-scheme-adapter:4001"
+        - name: SCHEME_NAME
+          value: "mojaloop-simulator-sim-dfspa"
+        - name: DFSP_ID
+          value: "dfspa"
+        - name: CA_CERT_PATH
+          value: "./secrets/cacert.pem"
+        - name: FEE_MULTIPLIER
+          value: "0.05"
+        - name: HTTPS_ENABLED
+          value: "false"
+        - name: LOG_INDENT
+          value: "0"
+        - name: MODEL_DATABASE
+          value: "./model.sqlite"
+        - name: MUTUAL_TLS_ENABLED
+          value: "false"
+        - name: RULES_FILE
+          value: "/rules/rules.json"
+        - name: SERVER_CERT_PATH
+          value: "./secrets/servercert.pem"
+        - name: SERVER_KEY_PATH
+          value: "./secrets/serverkey.pem"
+        - name: SIM_BACKEND_SERVICE_NAME
+          value: "sim-dfspa-backend"
+        - name: SIM_CACHE_SERVICE_NAME
+          value: "sim-dfspa-cache"
+        - name: SIM_NAME
+          value: "dfspa"
+        - name: SIM_SCHEME_ADAPTER_SERVICE_NAME
+          value: "sim-dfspa-scheme-adapter"
+        - name: SQLITE_LOG_FILE
+          value: "./log.sqlite"
+        resources:
+          null
+        volumeMounts:
+        - name: mojaloop-simulator-sim-rules
+          mountPath: /rules/
+      volumes:
+      - name: mojaloop-simulator-sim-rules
+        configMap:
+          name: mojaloop-simulator-sim-dfspa-rules
+      imagePullSecrets:
+        - name: dock-casa-secret
+---
+# Source: mojaloop-simulator/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mojaloop-simulator-sim-dfspa-cache
+  labels:
+    app.kubernetes.io/name: mojaloop-simulator-sim-dfspa-cache
+    app.kubernetes.io/instance: mojaloop-simulator
+    app.kubernetes.io/version: "10.4.1"
+    app.kubernetes.io/managed-by: Helm
+    helm.sh/chart: mojaloop-simulator-10.4.0
+spec:
+  replicas: 
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: mojaloop-simulator-sim-dfspa-cache
+      app.kubernetes.io/instance: mojaloop-simulator
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: mojaloop-simulator-sim-dfspa-cache
+        app.kubernetes.io/instance: mojaloop-simulator
+        app.kubernetes.io/version: "10.4.1"
+        app.kubernetes.io/managed-by: Helm
+        helm.sh/chart: mojaloop-simulator-10.4.0
+    spec:
+      initContainers:
+      
+      containers:
+      - name: cache
+        image: "redis:5.0.4-alpine"
+        imagePullPolicy: Always
+        ports:
+        - name: redis
+          containerPort: 6379
+          protocol: TCP
+        livenessProbe:
+          exec:
+            command:
+            - sh
+            - -c
+            - redis-cli ping 5
+        readinessProbe:
+          exec:
+            command:
+            - sh
+            - -c
+            - redis-cli ping 5
+        resources:
+            null
+---
+# Source: mojaloop-simulator/templates/ingress.yaml
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: mojaloop-simulator-sim-simulators
+  labels:
+    app.kubernetes.io/name: simulators
+    app.kubernetes.io/instance: mojaloop-simulator
+    app.kubernetes.io/version: "10.4.1"
+    app.kubernetes.io/managed-by: Helm
+    helm.sh/chart: mojaloop-simulator-10.4.0
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+      - host: simulator.local
+        http:
+          paths:
+          - path: /sim/dfspa/outbound/
+            backend:
+              serviceName: mojaloop-simulator-sim-dfspa-scheme-adapter
+              servicePort: outboundapi
+          - path: /sim/dfspa/inbound/
+            backend:
+              serviceName: mojaloop-simulator-sim-dfspa-scheme-adapter
+              servicePort: inboundapi
+          - path: /sim/dfspa/sdktest/
+            backend:
+              serviceName: mojaloop-simulator-sim-dfspa-scheme-adapter
+              servicePort: testapi
+          - path: /sim/dfspa/test/
+            backend:
+              serviceName: mojaloop-simulator-sim-dfspa-backend
+              servicePort: testapi

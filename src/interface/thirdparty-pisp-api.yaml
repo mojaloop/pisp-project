@@ -2283,57 +2283,11 @@ paths:
                     required:
                       - accountId
                       - actions
-                credential:
-                  nullable: true
-                  title: Credential
-                  type: object
-                  description: |
-                    A credential used to allow a user to prove their identity and
-                    access to an account with a DFSP.
-                  properties:
-                    id:
-                      type: string
-                      description: The id of a Credential.
-                    type:
-                      $ref: '#/paths/~1consents~1%7BID%7D~1generateChallenge/post/requestBody/content/application~1json/schema/properties/type'
-                    status:
-                      title: CredentialStatusType
-                      type: string
-                      enum:
-                        - PENDING
-                        - ACTIVE
-                      description: |
-                        The status of the Credential's creation
-                        - "PENDING" - The PISP has requested a challenge, or the challenge has
-                                      initialized but not yet answered by the PISP.
-                        - "VERIFIED" - The Credential is valid, and ready to be used by the PISP.
-                    challenge:
-                      title: CredentialChallenge
-                      type: object
-                      description: |
-                        The challenge issued by a DFSP that must be answered by the PISP.
-                      properties:
-                        payload:
-                          type: string
-                          description: Base64 encoded binary of the challenge that must be answered by the PISP.
-                        signature:
-                          type: string
-                          description: Base64 encoded binary string or result of the payload signed by the PISP using the private key.
-                      required:
-                        - payload
-                    payload:
-                      type: string
-                      description: Base64 encoded bytes - The public key of the Public/Private keypair.
-                  required:
-                    - id
-                    - type
-                    - status
               required:
                 - id
                 - scopes
                 - participantId
                 - initiatorId
-                - credential
       parameters:
         - name: Accept
           in: header
@@ -2520,9 +2474,30 @@ paths:
                     type:
                       $ref: '#/paths/~1consents~1%7BID%7D~1generateChallenge/post/requestBody/content/application~1json/schema/properties/type'
                     status:
-                      $ref: '#/paths/~1consents/post/requestBody/content/application~1json/schema/properties/credential/properties/status'
+                      title: CredentialStatusType
+                      type: string
+                      enum:
+                        - PENDING
+                        - ACTIVE
+                      description: |
+                        The status of the Credential's creation
+                        - "PENDING" - The PISP has requested a challenge, or the challenge has
+                                      initialized but not yet answered by the PISP.
+                        - "VERIFIED" - The Credential is valid, and ready to be used by the PISP.
                     challenge:
-                      $ref: '#/paths/~1consents/post/requestBody/content/application~1json/schema/properties/credential/properties/challenge'
+                      title: CredentialChallenge
+                      type: object
+                      description: |
+                        The challenge issued by a DFSP that must be answered by the PISP.
+                      properties:
+                        payload:
+                          type: string
+                          description: Base64 encoded binary of the challenge that must be answered by the PISP.
+                        signature:
+                          type: string
+                          description: Base64 encoded binary string or result of the payload signed by the PISP using the private key.
+                      required:
+                        - payload
                     payload:
                       type: string
                       description: Base64 encoded bytes - The public key of the Public/Private keypair.

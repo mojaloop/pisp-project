@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: accountlookupservice
+  name: authservice
   labels:
-    app: accountlookupservice
+    app: authservice
 spec:
   replicas: 1
   strategy:
@@ -12,57 +12,45 @@ spec:
       maxSurge: 1 # exeed the replicas by 1 pod
   selector:
     matchLabels:
-      app: accountlookupservice
+      app: authservice
   template:
     metadata:
       labels:
-        app: accountlookupservice
+        app: authservice
     spec:
       containers:
-      - name: account-lookup-service
-        image: mojaloop/account-lookup-service:v10.3.0.2-pisp
+      - name: auth-service
+        image: mojaloop/auth-service:v11.2.2
         livenessProbe:
           initialDelaySeconds: 30
           httpGet:
             path: /health
-            port: 4001
+            port: 4004
         readinessProbe:
           initialDelaySeconds: 30
           httpGet:
             path: /health
-            port: 4001
+            port: 4004
         env:
-          - name: ALS_SWITCH_ENDPOINT
-            value: http://centralledger:3001
-          - name: ALS_DATABASE__HOST
-            value: mysql-als
+          - name: PARTICIPANT_ID
+            value: central-auth
+          # TODO: add endpoint config - see https://github.com/mojaloop/auth-service/issues/51
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: accountlookupservice
+  name: authservice
 spec:
   ports:
-  - port: 4001
+  - port: 4004
   selector:
-    app: accountlookupservice
-  clusterIP: None
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: accountlookupserviceadmin
-spec:
-  ports:
-  - port: 4002
-  selector:
-    app: accountlookupservice
+    app: authservice
   clusterIP: None
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: accountlookupservice
+  name: authservice
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$2
     nginx.ingress.kubernetes.io/use-regex: "true"
@@ -70,11 +58,7 @@ spec:
   rules:
     - http:
         paths: 
-          - path: /account-lookup-service(/|$)(.*)
+          - path: /auth-service(/|$)(.*)
             backend:
-              serviceName: accountlookupservice
-              servicePort: 4001
-          - path: /account-lookup-service-admin(/|$)(.*)
-            backend:
-              serviceName: accountlookupserviceadmin
-              servicePort: 4002
+              serviceName: authservice
+              servicePort: 4004

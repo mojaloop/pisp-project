@@ -9,7 +9,7 @@ import axios from 'axios'
 describe('PISP Authorizations flow', (): void => {
   it('DFSPB asks via scheme adapter the PISP to deliver Authorization from User', async (): Promise<void> => {
     // Arrange
-    const scenariosURI = `${TestEnv.baseUrls.dfspbSchemeAdapter}/authorizations`
+    const scenariosURI = `${TestEnv.baseUrls.dfspbThirdpartySchemeAdapterOutbound}/authorizations`
     const options = {
       toParticipantId: TestEnv.parties.pisp,
       authenticationType: 'U2F',

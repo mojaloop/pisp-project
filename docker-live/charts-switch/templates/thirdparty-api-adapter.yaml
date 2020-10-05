@@ -1,0 +1,84 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: thirdpartyapiadapter
+  labels:
+    app: thirdpartyapiadapter
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1 # exeed the replicas by 1 pod
+  selector:
+    matchLabels:
+      app: thirdpartyapiadapter
+  template:
+    metadata:
+      labels:
+        app: thirdpartyapiadapter
+    spec:
+      containers:
+        - name: thirdparty-api-adapter
+          image: mojaloop/thirdparty-api-adapter:v11.8.0
+          livenessProbe:
+            initialDelaySeconds: 30
+            httpGet:
+              path: /health
+              port: 3008
+          readinessProbe:
+            initialDelaySeconds: 30
+            httpGet:
+              path: /health
+              port: 3008
+          # todo - we need to specify a proper file here :( 
+          # env:
+            # - name: THIRD_PARTY_ENDPOINT_SERVICE_URL
+              # value: http://centralledger:3001
+            # - name: THIRD_PARTY_KAFKA__CONSUMER__0__rdkafkaConf__metadata.broker.list
+              # value: kafka:9092
+          volumeMounts:
+            - name: thirdpartyapiadapter-config-volume
+              mountPath: /opt/thirdparty-api-adapter/config
+      volumes:
+        - name: thirdpartyapiadapter-config-volume
+          configMap:
+            name: thirdpartyapiadapter-config
+            items:
+            - key: default.json
+              path: default.json
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: thirdparty-api-adapter-config
+data:
+  default.json: {{ (.Files.Get "configs/thirdparty-api-adapter.json") | quote }}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: thirdpartyapiadapter
+spec:
+  ports:
+  - port: 3008
+  selector:
+    app: thirdpartyapiadapter
+  clusterIP: None
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: thirdpartyapiadapter
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    nginx.ingress.kubernetes.io/use-regex: "true"
+spec:
+  rules:
+    - http:
+        paths: 
+          - path: /thirdparty-api-adapter(/|$)(.*)
+            backend:
+              serviceName: thirdpartyapiadapter
+              servicePort: 4004

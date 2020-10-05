@@ -1,0 +1,6 @@
+
+# Ignore state files made by make
+.*
+
+# allow gitignore
+!.gitignore

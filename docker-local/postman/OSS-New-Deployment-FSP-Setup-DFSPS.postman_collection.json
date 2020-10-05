@@ -1641,7 +1641,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"type\": \"TP_CB_URL_TRANSACTION_REQUEST_POST\",\n  \"value\": \"{{HOST_SIMULATOR_K8S_CLUSTER}}\"\n}"
+									"raw": "{\n  \"type\": \"TP_CB_URL_TRANSACTION_REQUEST_POST\",\n  \"value\": \"{{THIRDPARTY_SCHEME_ADAPTER_INBOUND}}\"\n}"
 								},
 								"url": {
 									"raw": "{{HOST_CENTRAL_LEDGER}}/participants/{{payerfsp}}/endpoints",
@@ -1671,7 +1671,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"type\": \"TP_CB_URL_TRANSACTION_REQUEST_PUT\",\n  \"value\": \"{{HOST_SIMULATOR_K8S_CLUSTER}}\"\n}"
+									"raw": "{\n  \"type\": \"TP_CB_URL_TRANSACTION_REQUEST_PUT\",\n  \"value\": \"{{THIRDPARTY_SCHEME_ADAPTER_INBOUND}}\"\n}"
 								},
 								"url": {
 									"raw": "{{HOST_CENTRAL_LEDGER}}/participants/{{payerfsp}}/endpoints",
@@ -1701,7 +1701,37 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"type\": \"TP_CB_URL_TRANSACTION_REQUEST_PUT_ERROR\",\n  \"value\": \"{{HOST_SIMULATOR_K8S_CLUSTER}}\"\n}"
+									"raw": "{\n  \"type\": \"TP_CB_URL_TRANSACTION_REQUEST_PUT_ERROR\",\n  \"value\": \"{{THIRDPARTY_SCHEME_ADAPTER_INBOUND}}\"\n}"
+								},
+								"url": {
+									"raw": "{{HOST_CENTRAL_LEDGER}}/participants/{{payerfsp}}/endpoints",
+									"host": [
+										"{{HOST_CENTRAL_LEDGER}}"
+									],
+									"path": [
+										"participants",
+										"{{payerfsp}}",
+										"endpoints"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add payerfsp callback - TP_CB_URL_TRANSACTION_REQUEST_PATCH",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"type\": \"TP_CB_URL_TRANSACTION_REQUEST_PATCH\",\n  \"value\": \"{{THIRDPARTY_SCHEME_ADAPTER_INBOUND}}\"\n}"
 								},
 								"url": {
 									"raw": "{{HOST_CENTRAL_LEDGER}}/participants/{{payerfsp}}/endpoints",
@@ -1731,7 +1761,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"type\": \"TP_CB_URL_TRANSACTION_REQUEST_AUTH_POST\",\n  \"value\": \"{{HOST_SIMULATOR_K8S_CLUSTER}}\"\n}"
+									"raw": "{\n  \"type\": \"TP_CB_URL_TRANSACTION_REQUEST_AUTH_POST\",\n  \"value\": \"{{THIRDPARTY_SCHEME_ADAPTER_INBOUND}}\"\n}"
 								},
 								"url": {
 									"raw": "{{HOST_CENTRAL_LEDGER}}/participants/{{payerfsp}}/endpoints",
@@ -1761,7 +1791,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"type\": \"TP_CB_URL_TRANSACTION_REQUEST_AUTH_PUT\",\n  \"value\": \"{{HOST_SIMULATOR_K8S_CLUSTER}}\"\n}"
+									"raw": "{\n  \"type\": \"TP_CB_URL_TRANSACTION_REQUEST_AUTH_PUT\",\n  \"value\": \"{{THIRDPARTY_SCHEME_ADAPTER_INBOUND}}\"\n}"
 								},
 								"url": {
 									"raw": "{{HOST_CENTRAL_LEDGER}}/participants/{{payerfsp}}/endpoints",
@@ -1791,7 +1821,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"type\": \"TP_CB_URL_TRANSACTION_REQUEST_AUTH_PUT_ERROR\",\n  \"value\": \"{{HOST_SIMULATOR_K8S_CLUSTER}}\"\n}"
+									"raw": "{\n  \"type\": \"TP_CB_URL_TRANSACTION_REQUEST_AUTH_PUT_ERROR\",\n  \"value\": \"{{THIRDPARTY_SCHEME_ADAPTER_INBOUND}}\"\n}"
 								},
 								"url": {
 									"raw": "{{HOST_CENTRAL_LEDGER}}/participants/{{payerfsp}}/endpoints",
@@ -1821,7 +1851,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"type\": \"TP_CB_URL_CONSENT_REQUEST_POST\",\n  \"value\": \"{{HOST_SIMULATOR_K8S_CLUSTER}}\"\n}"
+									"raw": "{\n  \"type\": \"TP_CB_URL_CONSENT_REQUEST_POST\",\n  \"value\": \"{{THIRDPARTY_SCHEME_ADAPTER_INBOUND}}\"\n}"
 								},
 								"url": {
 									"raw": "{{HOST_CENTRAL_LEDGER}}/participants/{{payerfsp}}/endpoints",
@@ -1851,7 +1881,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"type\": \"TP_CB_URL_CONSENT_REQUEST_PUT\",\n  \"value\": \"{{HOST_SIMULATOR_K8S_CLUSTER}}\"\n}"
+									"raw": "{\n  \"type\": \"TP_CB_URL_CONSENT_REQUEST_PUT\",\n  \"value\": \"{{THIRDPARTY_SCHEME_ADAPTER_INBOUND}}\"\n}"
 								},
 								"url": {
 									"raw": "{{HOST_CENTRAL_LEDGER}}/participants/{{payerfsp}}/endpoints",
@@ -1881,7 +1911,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"type\": \"TP_CB_URL_CONSENT_REQUEST_PUT_ERROR\",\n  \"value\": \"{{HOST_SIMULATOR_K8S_CLUSTER}}\"\n}"
+									"raw": "{\n  \"type\": \"TP_CB_URL_CONSENT_REQUEST_PUT_ERROR\",\n  \"value\": \"{{THIRDPARTY_SCHEME_ADAPTER_INBOUND}}\"\n}"
 								},
 								"url": {
 									"raw": "{{HOST_CENTRAL_LEDGER}}/participants/{{payerfsp}}/endpoints",
@@ -1911,7 +1941,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"type\": \"TP_CB_URL_CREATE_CREDENTIAL_POST\",\n  \"value\": \"{{HOST_SIMULATOR_K8S_CLUSTER}}\"\n}"
+									"raw": "{\n  \"type\": \"TP_CB_URL_CREATE_CREDENTIAL_POST\",\n  \"value\": \"{{THIRDPARTY_SCHEME_ADAPTER_INBOUND}}\"\n}"
 								},
 								"url": {
 									"raw": "{{HOST_CENTRAL_LEDGER}}/participants/{{payerfsp}}/endpoints",
@@ -1941,7 +1971,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"type\": \"TP_CB_URL_CONSENT_POST\",\n  \"value\": \"{{HOST_SIMULATOR_K8S_CLUSTER}}\"\n}"
+									"raw": "{\n  \"type\": \"TP_CB_URL_CONSENT_POST\",\n  \"value\": \"{{THIRDPARTY_SCHEME_ADAPTER_INBOUND}}\"\n}"
 								},
 								"url": {
 									"raw": "{{HOST_CENTRAL_LEDGER}}/participants/{{payerfsp}}/endpoints",
@@ -1971,7 +2001,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"type\": \"TP_CB_URL_CONSENT_GET\",\n  \"value\": \"{{HOST_SIMULATOR_K8S_CLUSTER}}\"\n}"
+									"raw": "{\n  \"type\": \"TP_CB_URL_CONSENT_GET\",\n  \"value\": \"{{THIRDPARTY_SCHEME_ADAPTER_INBOUND}}\"\n}"
 								},
 								"url": {
 									"raw": "{{HOST_CENTRAL_LEDGER}}/participants/{{payerfsp}}/endpoints",
@@ -2001,7 +2031,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"type\": \"TP_CB_URL_CONSENT_PUT\",\n  \"value\": \"{{HOST_SIMULATOR_K8S_CLUSTER}}\"\n}"
+									"raw": "{\n  \"type\": \"TP_CB_URL_CONSENT_PUT\",\n  \"value\": \"{{THIRDPARTY_SCHEME_ADAPTER_INBOUND}}\"\n}"
 								},
 								"url": {
 									"raw": "{{HOST_CENTRAL_LEDGER}}/participants/{{payerfsp}}/endpoints",
@@ -2031,7 +2061,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"type\": \"TP_CB_URL_CONSENT_PUT_ERROR\",\n  \"value\": \"{{HOST_SIMULATOR_K8S_CLUSTER}}\"\n}"
+									"raw": "{\n  \"type\": \"TP_CB_URL_CONSENT_PUT_ERROR\",\n  \"value\": \"{{THIRDPARTY_SCHEME_ADAPTER_INBOUND}}\"\n}"
 								},
 								"url": {
 									"raw": "{{HOST_CENTRAL_LEDGER}}/participants/{{payerfsp}}/endpoints",
@@ -3317,7 +3347,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"type\": \"TP_CB_URL_TRANSACTION_REQUEST_POST\",\n  \"value\": \"{{HOST_SIMULATOR_K8S_CLUSTER}}\"\n}"
+									"raw": "{\n  \"type\": \"TP_CB_URL_TRANSACTION_REQUEST_POST\",\n  \"value\": \"{{THIRDPARTY_SCHEME_ADAPTER_INBOUND}}\"\n}"
 								},
 								"url": {
 									"raw": "{{HOST_CENTRAL_LEDGER}}/participants/{{payeefsp}}/endpoints",
@@ -3347,7 +3377,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"type\": \"TP_CB_URL_TRANSACTION_REQUEST_PUT\",\n  \"value\": \"{{HOST_SIMULATOR_K8S_CLUSTER}}\"\n}"
+									"raw": "{\n  \"type\": \"TP_CB_URL_TRANSACTION_REQUEST_PUT\",\n  \"value\": \"{{THIRDPARTY_SCHEME_ADAPTER_INBOUND}}\"\n}"
 								},
 								"url": {
 									"raw": "{{HOST_CENTRAL_LEDGER}}/participants/{{payeefsp}}/endpoints",
@@ -3377,7 +3407,37 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"type\": \"TP_CB_URL_TRANSACTION_REQUEST_PUT_ERROR\",\n  \"value\": \"{{HOST_SIMULATOR_K8S_CLUSTER}}\"\n}"
+									"raw": "{\n  \"type\": \"TP_CB_URL_TRANSACTION_REQUEST_PUT_ERROR\",\n  \"value\": \"{{THIRDPARTY_SCHEME_ADAPTER_INBOUND}}\"\n}"
+								},
+								"url": {
+									"raw": "{{HOST_CENTRAL_LEDGER}}/participants/{{payeefsp}}/endpoints",
+									"host": [
+										"{{HOST_CENTRAL_LEDGER}}"
+									],
+									"path": [
+										"participants",
+										"{{payeefsp}}",
+										"endpoints"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add payeefsp callback - TP_CB_URL_TRANSACTION_REQUEST_PATCH",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"type\": \"TP_CB_URL_TRANSACTION_REQUEST_PATCH\",\n  \"value\": \"{{THIRDPARTY_SCHEME_ADAPTER_INBOUND}}\"\n}"
 								},
 								"url": {
 									"raw": "{{HOST_CENTRAL_LEDGER}}/participants/{{payeefsp}}/endpoints",
@@ -3407,7 +3467,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"type\": \"TP_CB_URL_TRANSACTION_REQUEST_AUTH_POST\",\n  \"value\": \"{{HOST_SIMULATOR_K8S_CLUSTER}}\"\n}"
+									"raw": "{\n  \"type\": \"TP_CB_URL_TRANSACTION_REQUEST_AUTH_POST\",\n  \"value\": \"{{THIRDPARTY_SCHEME_ADAPTER_INBOUND}}\"\n}"
 								},
 								"url": {
 									"raw": "{{HOST_CENTRAL_LEDGER}}/participants/{{payeefsp}}/endpoints",
@@ -3437,7 +3497,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"type\": \"TP_CB_URL_TRANSACTION_REQUEST_AUTH_PUT\",\n  \"value\": \"{{HOST_SIMULATOR_K8S_CLUSTER}}\"\n}"
+									"raw": "{\n  \"type\": \"TP_CB_URL_TRANSACTION_REQUEST_AUTH_PUT\",\n  \"value\": \"{{THIRDPARTY_SCHEME_ADAPTER_INBOUND}}\"\n}"
 								},
 								"url": {
 									"raw": "{{HOST_CENTRAL_LEDGER}}/participants/{{payeefsp}}/endpoints",
@@ -3467,7 +3527,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"type\": \"TP_CB_URL_TRANSACTION_REQUEST_AUTH_PUT_ERROR\",\n  \"value\": \"{{HOST_SIMULATOR_K8S_CLUSTER}}\"\n}"
+									"raw": "{\n  \"type\": \"TP_CB_URL_TRANSACTION_REQUEST_AUTH_PUT_ERROR\",\n  \"value\": \"{{THIRDPARTY_SCHEME_ADAPTER_INBOUND}}\"\n}"
 								},
 								"url": {
 									"raw": "{{HOST_CENTRAL_LEDGER}}/participants/{{payeefsp}}/endpoints",
@@ -3497,7 +3557,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"type\": \"TP_CB_URL_CONSENT_REQUEST_POST\",\n  \"value\": \"{{HOST_SIMULATOR_K8S_CLUSTER}}\"\n}"
+									"raw": "{\n  \"type\": \"TP_CB_URL_CONSENT_REQUEST_POST\",\n  \"value\": \"{{THIRDPARTY_SCHEME_ADAPTER_INBOUND}}\"\n}"
 								},
 								"url": {
 									"raw": "{{HOST_CENTRAL_LEDGER}}/participants/{{payeefsp}}/endpoints",
@@ -3527,7 +3587,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"type\": \"TP_CB_URL_CONSENT_REQUEST_PUT\",\n  \"value\": \"{{HOST_SIMULATOR_K8S_CLUSTER}}\"\n}"
+									"raw": "{\n  \"type\": \"TP_CB_URL_CONSENT_REQUEST_PUT\",\n  \"value\": \"{{THIRDPARTY_SCHEME_ADAPTER_INBOUND}}\"\n}"
 								},
 								"url": {
 									"raw": "{{HOST_CENTRAL_LEDGER}}/participants/{{payeefsp}}/endpoints",
@@ -3557,7 +3617,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"type\": \"TP_CB_URL_CONSENT_REQUEST_PUT_ERROR\",\n  \"value\": \"{{HOST_SIMULATOR_K8S_CLUSTER}}\"\n}"
+									"raw": "{\n  \"type\": \"TP_CB_URL_CONSENT_REQUEST_PUT_ERROR\",\n  \"value\": \"{{THIRDPARTY_SCHEME_ADAPTER_INBOUND}}\"\n}"
 								},
 								"url": {
 									"raw": "{{HOST_CENTRAL_LEDGER}}/participants/{{payeefsp}}/endpoints",
@@ -3587,7 +3647,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"type\": \"TP_CB_URL_CREATE_CREDENTIAL_POST\",\n  \"value\": \"{{HOST_SIMULATOR_K8S_CLUSTER}}\"\n}"
+									"raw": "{\n  \"type\": \"TP_CB_URL_CREATE_CREDENTIAL_POST\",\n  \"value\": \"{{THIRDPARTY_SCHEME_ADAPTER_INBOUND}}\"\n}"
 								},
 								"url": {
 									"raw": "{{HOST_CENTRAL_LEDGER}}/participants/{{payeefsp}}/endpoints",
@@ -3617,7 +3677,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"type\": \"TP_CB_URL_CONSENT_POST\",\n  \"value\": \"{{HOST_SIMULATOR_K8S_CLUSTER}}\"\n}"
+									"raw": "{\n  \"type\": \"TP_CB_URL_CONSENT_POST\",\n  \"value\": \"{{THIRDPARTY_SCHEME_ADAPTER_INBOUND}}\"\n}"
 								},
 								"url": {
 									"raw": "{{HOST_CENTRAL_LEDGER}}/participants/{{payeefsp}}/endpoints",
@@ -3647,7 +3707,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"type\": \"TP_CB_URL_CONSENT_GET\",\n  \"value\": \"{{HOST_SIMULATOR_K8S_CLUSTER}}\"\n}"
+									"raw": "{\n  \"type\": \"TP_CB_URL_CONSENT_GET\",\n  \"value\": \"{{THIRDPARTY_SCHEME_ADAPTER_INBOUND}}\"\n}"
 								},
 								"url": {
 									"raw": "{{HOST_CENTRAL_LEDGER}}/participants/{{payeefsp}}/endpoints",
@@ -3677,7 +3737,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"type\": \"TP_CB_URL_CONSENT_PUT\",\n  \"value\": \"{{HOST_SIMULATOR_K8S_CLUSTER}}\"\n}"
+									"raw": "{\n  \"type\": \"TP_CB_URL_CONSENT_PUT\",\n  \"value\": \"{{THIRDPARTY_SCHEME_ADAPTER_INBOUND}}\"\n}"
 								},
 								"url": {
 									"raw": "{{HOST_CENTRAL_LEDGER}}/participants/{{payeefsp}}/endpoints",
@@ -3707,7 +3767,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"type\": \"TP_CB_URL_CONSENT_PUT_ERROR\",\n  \"value\": \"{{HOST_SIMULATOR_K8S_CLUSTER}}\"\n}"
+									"raw": "{\n  \"type\": \"TP_CB_URL_CONSENT_PUT_ERROR\",\n  \"value\": \"{{THIRDPARTY_SCHEME_ADAPTER_INBOUND}}\"\n}"
 								},
 								"url": {
 									"raw": "{{HOST_CENTRAL_LEDGER}}/participants/{{payeefsp}}/endpoints",
@@ -4993,7 +5053,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"type\": \"TP_CB_URL_TRANSACTION_REQUEST_POST\",\n  \"value\": \"{{HOST_SIMULATOR_K8S_CLUSTER}}\"\n}"
+									"raw": "{\n  \"type\": \"TP_CB_URL_TRANSACTION_REQUEST_POST\",\n  \"value\": \"{{THIRDPARTY_SCHEME_ADAPTER_INBOUND}}\"\n}"
 								},
 								"url": {
 									"raw": "{{HOST_CENTRAL_LEDGER}}/participants/{{payerfsp}}/endpoints",
@@ -5023,7 +5083,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"type\": \"TP_CB_URL_TRANSACTION_REQUEST_PUT\",\n  \"value\": \"{{HOST_SIMULATOR_K8S_CLUSTER}}\"\n}"
+									"raw": "{\n  \"type\": \"TP_CB_URL_TRANSACTION_REQUEST_PUT\",\n  \"value\": \"{{THIRDPARTY_SCHEME_ADAPTER_INBOUND}}\"\n}"
 								},
 								"url": {
 									"raw": "{{HOST_CENTRAL_LEDGER}}/participants/{{payerfsp}}/endpoints",
@@ -5053,7 +5113,37 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"type\": \"TP_CB_URL_TRANSACTION_REQUEST_PUT_ERROR\",\n  \"value\": \"{{HOST_SIMULATOR_K8S_CLUSTER}}\"\n}"
+									"raw": "{\n  \"type\": \"TP_CB_URL_TRANSACTION_REQUEST_PUT_ERROR\",\n  \"value\": \"{{THIRDPARTY_SCHEME_ADAPTER_INBOUND}}\"\n}"
+								},
+								"url": {
+									"raw": "{{HOST_CENTRAL_LEDGER}}/participants/{{payerfsp}}/endpoints",
+									"host": [
+										"{{HOST_CENTRAL_LEDGER}}"
+									],
+									"path": [
+										"participants",
+										"{{payerfsp}}",
+										"endpoints"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add pispfsp callback - TP_CB_URL_TRANSACTION_REQUEST_PATCH",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"type\": \"TP_CB_URL_TRANSACTION_REQUEST_PATCH\",\n  \"value\": \"{{THIRDPARTY_SCHEME_ADAPTER_INBOUND}}\"\n}"
 								},
 								"url": {
 									"raw": "{{HOST_CENTRAL_LEDGER}}/participants/{{payerfsp}}/endpoints",
@@ -5083,7 +5173,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"type\": \"TP_CB_URL_TRANSACTION_REQUEST_AUTH_POST\",\n  \"value\": \"{{HOST_SIMULATOR_K8S_CLUSTER}}\"\n}"
+									"raw": "{\n  \"type\": \"TP_CB_URL_TRANSACTION_REQUEST_AUTH_POST\",\n  \"value\": \"{{THIRDPARTY_SCHEME_ADAPTER_INBOUND}}\"\n}"
 								},
 								"url": {
 									"raw": "{{HOST_CENTRAL_LEDGER}}/participants/{{payerfsp}}/endpoints",
@@ -5113,7 +5203,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"type\": \"TP_CB_URL_TRANSACTION_REQUEST_AUTH_PUT\",\n  \"value\": \"{{HOST_SIMULATOR_K8S_CLUSTER}}\"\n}"
+									"raw": "{\n  \"type\": \"TP_CB_URL_TRANSACTION_REQUEST_AUTH_PUT\",\n  \"value\": \"{{THIRDPARTY_SCHEME_ADAPTER_INBOUND}}\"\n}"
 								},
 								"url": {
 									"raw": "{{HOST_CENTRAL_LEDGER}}/participants/{{payerfsp}}/endpoints",
@@ -5143,7 +5233,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"type\": \"TP_CB_URL_TRANSACTION_REQUEST_AUTH_PUT_ERROR\",\n  \"value\": \"{{HOST_SIMULATOR_K8S_CLUSTER}}\"\n}"
+									"raw": "{\n  \"type\": \"TP_CB_URL_TRANSACTION_REQUEST_AUTH_PUT_ERROR\",\n  \"value\": \"{{THIRDPARTY_SCHEME_ADAPTER_INBOUND}}\"\n}"
 								},
 								"url": {
 									"raw": "{{HOST_CENTRAL_LEDGER}}/participants/{{payerfsp}}/endpoints",
@@ -5173,7 +5263,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"type\": \"TP_CB_URL_CONSENT_REQUEST_POST\",\n  \"value\": \"{{HOST_SIMULATOR_K8S_CLUSTER}}\"\n}"
+									"raw": "{\n  \"type\": \"TP_CB_URL_CONSENT_REQUEST_POST\",\n  \"value\": \"{{THIRDPARTY_SCHEME_ADAPTER_INBOUND}}\"\n}"
 								},
 								"url": {
 									"raw": "{{HOST_CENTRAL_LEDGER}}/participants/{{payerfsp}}/endpoints",
@@ -5203,7 +5293,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"type\": \"TP_CB_URL_CONSENT_REQUEST_PUT\",\n  \"value\": \"{{HOST_SIMULATOR_K8S_CLUSTER}}\"\n}"
+									"raw": "{\n  \"type\": \"TP_CB_URL_CONSENT_REQUEST_PUT\",\n  \"value\": \"{{THIRDPARTY_SCHEME_ADAPTER_INBOUND}}\"\n}"
 								},
 								"url": {
 									"raw": "{{HOST_CENTRAL_LEDGER}}/participants/{{payerfsp}}/endpoints",
@@ -5233,7 +5323,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"type\": \"TP_CB_URL_CONSENT_REQUEST_PUT_ERROR\",\n  \"value\": \"{{HOST_SIMULATOR_K8S_CLUSTER}}\"\n}"
+									"raw": "{\n  \"type\": \"TP_CB_URL_CONSENT_REQUEST_PUT_ERROR\",\n  \"value\": \"{{THIRDPARTY_SCHEME_ADAPTER_INBOUND}}\"\n}"
 								},
 								"url": {
 									"raw": "{{HOST_CENTRAL_LEDGER}}/participants/{{payerfsp}}/endpoints",
@@ -5263,7 +5353,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"type\": \"TP_CB_URL_CREATE_CREDENTIAL_POST\",\n  \"value\": \"{{HOST_SIMULATOR_K8S_CLUSTER}}\"\n}"
+									"raw": "{\n  \"type\": \"TP_CB_URL_CREATE_CREDENTIAL_POST\",\n  \"value\": \"{{THIRDPARTY_SCHEME_ADAPTER_INBOUND}}\"\n}"
 								},
 								"url": {
 									"raw": "{{HOST_CENTRAL_LEDGER}}/participants/{{payerfsp}}/endpoints",
@@ -5293,7 +5383,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"type\": \"TP_CB_URL_CONSENT_POST\",\n  \"value\": \"{{HOST_SIMULATOR_K8S_CLUSTER}}\"\n}"
+									"raw": "{\n  \"type\": \"TP_CB_URL_CONSENT_POST\",\n  \"value\": \"{{THIRDPARTY_SCHEME_ADAPTER_INBOUND}}\"\n}"
 								},
 								"url": {
 									"raw": "{{HOST_CENTRAL_LEDGER}}/participants/{{payerfsp}}/endpoints",
@@ -5323,7 +5413,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"type\": \"TP_CB_URL_CONSENT_GET\",\n  \"value\": \"{{HOST_SIMULATOR_K8S_CLUSTER}}\"\n}"
+									"raw": "{\n  \"type\": \"TP_CB_URL_CONSENT_GET\",\n  \"value\": \"{{THIRDPARTY_SCHEME_ADAPTER_INBOUND}}\"\n}"
 								},
 								"url": {
 									"raw": "{{HOST_CENTRAL_LEDGER}}/participants/{{payerfsp}}/endpoints",
@@ -5353,7 +5443,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"type\": \"TP_CB_URL_CONSENT_PUT\",\n  \"value\": \"{{HOST_SIMULATOR_K8S_CLUSTER}}\"\n}"
+									"raw": "{\n  \"type\": \"TP_CB_URL_CONSENT_PUT\",\n  \"value\": \"{{THIRDPARTY_SCHEME_ADAPTER_INBOUND}}\"\n}"
 								},
 								"url": {
 									"raw": "{{HOST_CENTRAL_LEDGER}}/participants/{{payerfsp}}/endpoints",
@@ -5383,7 +5473,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"type\": \"TP_CB_URL_CONSENT_PUT_ERROR\",\n  \"value\": \"{{HOST_SIMULATOR_K8S_CLUSTER}}\"\n}"
+									"raw": "{\n  \"type\": \"TP_CB_URL_CONSENT_PUT_ERROR\",\n  \"value\": \"{{THIRDPARTY_SCHEME_ADAPTER_INBOUND}}\"\n}"
 								},
 								"url": {
 									"raw": "{{HOST_CENTRAL_LEDGER}}/participants/{{payerfsp}}/endpoints",

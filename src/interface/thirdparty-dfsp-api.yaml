@@ -1110,7 +1110,15 @@ paths:
                 authChannels:
                   type: array
                   items:
-                    $ref: '#/paths/~1authorizations/post/requestBody/content/application~1json/schema/properties/authenticationType'
+                    title: ConsentRequestChannelType
+                    type: string
+                    enum:
+                      - WEB
+                      - OTP
+                    description: |
+                      The auth channel being used for the consentRequest.
+                      - "WEB" - The Web auth channel.
+                      - "OTP" - The OTP auth channel.
                 callbackUri:
                   type: string
                   description: The callback uri that the user will be redirected to after completing the WEB auth channel.
@@ -1189,57 +1197,148 @@ paths:
         content:
           application/json:
             schema:
-              title: ConsentRequestsIDPutResponse
-              type: object
-              description: 'The object sent in a `PUT /consentRequests/{ID}` request.'
-              properties:
-                id:
-                  $ref: '#/paths/~1consentRequests/post/requestBody/content/application~1json/schema/properties/id'
-                initiatorId:
-                  type: string
-                  description: The id of the PISP who will initiate transactions on a user's behalf.
-                scopes:
-                  type: array
-                  items:
-                    $ref: '#/paths/~1consents/post/requestBody/content/application~1json/schema/properties/scopes/items'
-                authChannels:
-                  type: array
-                  items:
-                    $ref: '#/paths/~1authorizations/post/requestBody/content/application~1json/schema/properties/authenticationType'
-                callbackUri:
-                  type: string
-                  description: The callback uri that the user will be redirected to after completing the WEB auth channel.
-                authUri:
-                  type: string
-                  description: The callback uri that the pisp app redirects to for user to complete their login.
-                authToken:
-                  type: string
-                  description: The Auth token from the OTP or redirect to pisp app.
-              required:
-                - id
-                - initiatorId
-                - scopes
-                - authChannels
-                - callbackUri
-                - authUri
-                - authToken
-            example:
-              id: '456'
-              initiatorId: pispA
-              authChannels:
-                - WEB
-              scopes:
-                - accountId: dfspa.username.1234
-                  actions:
-                    - accounts.transfer
-                    - accounts.getBalance
-                - accountId: dfspa.username.5678
-                  actions:
-                    - accounts.transfer
-                    - accounts.getBalance
-              callbackUri: 'pisp-app://callback.com'
-              authUri: 'https://dfspa.com/login'
-              authToken: abcde-12345
+              oneOf:
+                - title: ConsentRequestsIDPutResponseWeb
+                  type: object
+                  description: |
+                    The object sent in a `PUT /consentRequests/{ID}` request.
+
+                    Schema used in the request consent phase of the account linking web flow,
+                    the result is the PISP being instructed on a specific URL where this
+                    supposed user should be redirected. This URL should be a place where
+                    the user can prove their identity (e.g., by logging in).
+                  properties:
+                    initiatorId:
+                      type: string
+                      description: The id of the PISP who will initiate transactions on a user's behalf.
+                    scopes:
+                      type: array
+                      items:
+                        $ref: '#/paths/~1consents/post/requestBody/content/application~1json/schema/properties/scopes/items'
+                    authChannels:
+                      type: array
+                      items:
+                        title: ConsentRequestChannelTypeWeb
+                        type: string
+                        enum:
+                          - WEB
+                        description: |
+                          The web auth channel being used for PUT consentRequest/{ID} request.
+                    callbackUri:
+                      type: string
+                      description: The callback uri that the user will be redirected to after completing the WEB auth channel.
+                    authUri:
+                      type: string
+                      description: The callback uri that the pisp app redirects to for user to complete their login.
+                  required:
+                    - initiatorId
+                    - scopes
+                    - authChannels
+                    - callbackUri
+                    - authUri
+                  additionalProperties: false
+                - title: ConsentRequestsIDPutResponseWebAuth
+                  type: object
+                  description: |
+                    The object sent in a `PUT /consentRequests/{ID}` request.
+
+                    Schema used in the authentication phase of the account linking flow,
+                    the user is expected to prove their identity to the DFSP by passing a OTP
+                    or secret to the PISP.
+                  properties:
+                    initiatorId:
+                      type: string
+                      description: The id of the PISP who will initiate transactions on a user's behalf.
+                    scopes:
+                      type: array
+                      items:
+                        $ref: '#/paths/~1consents/post/requestBody/content/application~1json/schema/properties/scopes/items'
+                    authChannels:
+                      type: array
+                      items:
+                        $ref: '#/paths/~1consentRequests~1%7BID%7D/put/requestBody/content/application~1json/schema/oneOf/0/properties/authChannels/items'
+                    callbackUri:
+                      type: string
+                      description: The callback uri that the user will be redirected to after completing the WEB auth channel.
+                    authUri:
+                      type: string
+                      description: The callback uri that the pisp app redirects to for user to complete their login.
+                    authToken:
+                      type: string
+                      description: The Auth token from the OTP or redirect to pisp app.
+                  required:
+                    - initiatorId
+                    - scopes
+                    - authChannels
+                    - callbackUri
+                    - authUri
+                    - authToken
+                  additionalProperties: false
+                - title: ConsentRequestsIDPutResponseOTP
+                  type: object
+                  description: |
+                    The object sent in a `PUT /consentRequests/{ID}` request.
+
+                    Schema used in the request consent phase of the account linking OTP/SMS flow.
+                  properties:
+                    initiatorId:
+                      type: string
+                      description: The id of the PISP who will initiate transactions on a user's behalf.
+                    scopes:
+                      type: array
+                      items:
+                        $ref: '#/paths/~1consents/post/requestBody/content/application~1json/schema/properties/scopes/items'
+                    authChannels:
+                      type: array
+                      items:
+                        title: ConsentRequestChannelTypeOTP
+                        type: string
+                        enum:
+                          - OTP
+                        description: |
+                          The OTP auth channel being used for PUT consentRequest/{ID} request.
+                    callbackUri:
+                      type: string
+                      description: The callback uri that the user will be redirected to after completing the WEB auth channel.
+                  required:
+                    - initiatorId
+                    - scopes
+                    - authChannels
+                    - callbackUri
+                  additionalProperties: false
+                - title: ConsentRequestsIDPutResponseOTPAuth
+                  type: object
+                  description: |
+                    The object sent in a `PUT /consentRequests/{ID}` request.
+
+                    Schema used in the authentication phase of the account linking flow,
+                    the user is expected to prove their identity to the DFSP by passing a OTP
+                    or secret to the PISP.
+                  properties:
+                    initiatorId:
+                      type: string
+                      description: The id of the PISP who will initiate transactions on a user's behalf.
+                    scopes:
+                      type: array
+                      items:
+                        $ref: '#/paths/~1consents/post/requestBody/content/application~1json/schema/properties/scopes/items'
+                    authChannels:
+                      type: array
+                      items:
+                        $ref: '#/paths/~1consentRequests~1%7BID%7D/put/requestBody/content/application~1json/schema/oneOf/2/properties/authChannels/items'
+                    callbackUri:
+                      type: string
+                      description: The callback uri that the user will be redirected to after completing the WEB auth channel.
+                    authToken:
+                      type: string
+                      description: The Auth token from the OTP or redirect to pisp app.
+                  required:
+                    - initiatorId
+                    - scopes
+                    - authChannels
+                    - callbackUri
+                    - authToken
+                  additionalProperties: false
       responses:
         '202':
           $ref: '#/paths/~1consents/post/responses/202'
@@ -1322,79 +1421,34 @@ paths:
                     title: Scope
                     type: object
                     description: Scope + Account Identifier mapping for a Consent.
+                    example: |
+                      {
+                        accountId: "dfsp.username.5678",
+                        actions: [ "accounts.transfer", "accounts.getBalance" ]
+                      }
                     properties:
-                      scope:
-                        title: ConsentScopeType
-                        type: string
-                        enum:
-                          - accounts.getBalance
-                          - accounts.transfer
-                        description: |
-                          The scopes requested for a ConsentRequest.
-                          - "accounts.getBalance" - Get the balance of a given account.
-                          - "accounts.transfer" - Initiate a transfer from an account.
                       accountId:
                         $ref: '#/paths/~1thirdpartyRequests~1transactions/post/requestBody/content/application~1json/schema/properties/sourceAccountId/allOf/0'
+                      actions:
+                        type: array
+                        items:
+                          title: ConsentScopeType
+                          type: string
+                          enum:
+                            - accounts.getBalance
+                            - accounts.transfer
+                          description: |
+                            The scopes requested for a ConsentRequest.
+                            - "accounts.getBalance" - Get the balance of a given account.
+                            - "accounts.transfer" - Initiate a transfer from an account.
                     required:
-                      - scope
                       - accountId
-                credential:
-                  nullable: true
-                  title: Credential
-                  type: object
-                  description: |
-                    A credential used to allow a user to prove their identity and
-                    access to an account with a DFSP.
-                  properties:
-                    id:
-                      type: string
-                      description: The id of a Credential.
-                    type:
-                      title: CredentialType
-                      type: string
-                      enum:
-                        - FIDO
-                      description: |
-                        The type of the Credential.
-                        - "FIDO" - A FIDO public/private keypair.
-                    status:
-                      title: CredentialStatusType
-                      type: string
-                      enum:
-                        - PENDING
-                        - ACTIVE
-                      description: |
-                        The status of the Credential's creation
-                        - "PENDING" - The PISP has requested a challenge, or the challenge has
-                                      initialized but not yet answered by the PISP.
-                        - "VERIFIED" - The Credential is valid, and ready to be used by the PISP.
-                    challenge:
-                      title: CredentialChallenge
-                      type: object
-                      description: |
-                        The challenge issued by a DFSP that must be answered by the PISP.
-                      properties:
-                        payload:
-                          type: string
-                          description: Base64 encoded binary of the challenge that must be answered by the PISP.
-                        signature:
-                          type: string
-                          description: Base64 encoded binary string or result of the payload signed by the PISP using the private key.
-                      required:
-                        - payload
-                    payload:
-                      type: string
-                      description: Base64 encoded bytes - The public key of the Public/Private keypair.
-                  required:
-                    - id
-                    - type
-                    - status
+                      - actions
               required:
                 - id
                 - scopes
                 - participantId
                 - initiatorId
-                - credential
       parameters:
         - name: Accept
           in: header
@@ -1693,11 +1747,38 @@ paths:
                       type: string
                       description: The id of a Credential.
                     type:
-                      $ref: '#/paths/~1consents/post/requestBody/content/application~1json/schema/properties/credential/properties/type'
+                      title: CredentialType
+                      type: string
+                      enum:
+                        - FIDO
+                      description: |
+                        The type of the Credential.
+                        - "FIDO" - A FIDO public/private keypair.
                     status:
-                      $ref: '#/paths/~1consents/post/requestBody/content/application~1json/schema/properties/credential/properties/status'
+                      title: CredentialStatusType
+                      type: string
+                      enum:
+                        - PENDING
+                        - ACTIVE
+                      description: |
+                        The status of the Credential's creation
+                        - "PENDING" - The PISP has requested a challenge, or the challenge has
+                                      initialized but not yet answered by the PISP.
+                        - "VERIFIED" - The Credential is valid, and ready to be used by the PISP.
                     challenge:
-                      $ref: '#/paths/~1consents/post/requestBody/content/application~1json/schema/properties/credential/properties/challenge'
+                      title: CredentialChallenge
+                      type: object
+                      description: |
+                        The challenge issued by a DFSP that must be answered by the PISP.
+                      properties:
+                        payload:
+                          type: string
+                          description: Base64 encoded binary of the challenge that must be answered by the PISP.
+                        signature:
+                          type: string
+                          description: Base64 encoded binary string or result of the payload signed by the PISP using the private key.
+                      required:
+                        - payload
                     payload:
                       type: string
                       description: Base64 encoded bytes - The public key of the Public/Private keypair.
@@ -1732,6 +1813,112 @@ paths:
       responses:
         '200':
           description: OK
+        '400':
+          $ref: '#/paths/~1consents/post/responses/400'
+        '401':
+          $ref: '#/paths/~1consents/post/responses/401'
+        '403':
+          $ref: '#/paths/~1consents/post/responses/403'
+        '404':
+          $ref: '#/paths/~1consents/post/responses/404'
+        '405':
+          $ref: '#/paths/~1consents/post/responses/405'
+        '406':
+          $ref: '#/paths/~1consents/post/responses/406'
+        '501':
+          $ref: '#/paths/~1consents/post/responses/501'
+        '503':
+          $ref: '#/paths/~1consents/post/responses/503'
+    patch:
+      description: |
+        The HTTP request `PATCH /consents/{ID}` is used to notify the PISP and DFSP of revoked consent.
+
+        Switch -> DFSP
+      summary: NotifyConsent
+      tags:
+        - consent
+      operationId: NotifyConsent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              title: ConsentsIDPatchResponse
+              description: |
+                PATCH /consents/{ID} request object.
+
+                Sent to both the PISP and DFSP when a consent is revoked.
+              type: object
+              properties:
+                status:
+                  title: ConsentStatusType
+                  type: string
+                  enum:
+                    - REVOKED
+                  description: |
+                    The status of the Consent.
+                    - "REVOKED" - The Consent is no longer valid and has been revoked.
+                revokedAt:
+                  $ref: '#/paths/~1consents/post/requestBody/content/application~1json/schema/properties/revokedAt'
+              required:
+                - status
+                - revokedAt
+      parameters:
+        - $ref: '#/paths/~1consents~1%7BID%7D/put/parameters/0'
+        - $ref: '#/paths/~1consents/post/parameters/2'
+        - $ref: '#/paths/~1consents/post/parameters/3'
+        - $ref: '#/paths/~1consents/post/parameters/4'
+        - $ref: '#/paths/~1consents/post/parameters/5'
+        - $ref: '#/paths/~1consents/post/parameters/6'
+        - $ref: '#/paths/~1consents/post/parameters/7'
+        - $ref: '#/paths/~1consents/post/parameters/8'
+        - $ref: '#/paths/~1consents/post/parameters/9'
+        - $ref: '#/paths/~1consents/post/parameters/10'
+      responses:
+        '200':
+          $ref: '#/paths/~1consents~1%7BID%7D/put/responses/200'
+        '202':
+          $ref: '#/paths/~1consents/post/responses/202'
+        '400':
+          $ref: '#/paths/~1consents/post/responses/400'
+        '401':
+          $ref: '#/paths/~1consents/post/responses/401'
+        '403':
+          $ref: '#/paths/~1consents/post/responses/403'
+        '404':
+          $ref: '#/paths/~1consents/post/responses/404'
+        '405':
+          $ref: '#/paths/~1consents/post/responses/405'
+        '406':
+          $ref: '#/paths/~1consents/post/responses/406'
+        '501':
+          $ref: '#/paths/~1consents/post/responses/501'
+        '503':
+          $ref: '#/paths/~1consents/post/responses/503'
+  '/consents/{ID}/revoke':
+    post:
+      description: |
+        The HTTP request `POST /consents/{ID}/revoke` is used to revoke a previously created consent.
+        - Called by a PISP when a user wants to unlink their account(s).
+        - Called by a DFSP when a dfsp wants to unlink user's account(s).
+
+        DFSP -> Switch
+      parameters:
+        - $ref: '#/paths/~1consents~1%7BID%7D/put/parameters/0'
+        - $ref: '#/paths/~1consents/post/parameters/1'
+        - $ref: '#/paths/~1consents/post/parameters/2'
+        - $ref: '#/paths/~1consents/post/parameters/3'
+        - $ref: '#/paths/~1consents/post/parameters/4'
+        - $ref: '#/paths/~1consents/post/parameters/5'
+        - $ref: '#/paths/~1consents/post/parameters/6'
+        - $ref: '#/paths/~1consents/post/parameters/7'
+        - $ref: '#/paths/~1consents/post/parameters/8'
+        - $ref: '#/paths/~1consents/post/parameters/9'
+        - $ref: '#/paths/~1consents/post/parameters/10'
+      operationId: RevokeConsent
+      responses:
+        '202':
+          $ref: '#/paths/~1consents/post/responses/202'
         '400':
           $ref: '#/paths/~1consents/post/responses/400'
         '401':

@@ -4,7 +4,7 @@ module.exports = {
   wait4: 'v0.1.0',
 
   // How many times should we retry waiting for a service?
-  retries: 10,
+  retries: 60,
 
   // How many ms to wait before retrying a service connection?
   waitMs: 2500,
@@ -30,7 +30,7 @@ module.exports = {
             namespace: 'CLEDG',
             configPath: '../config/default.json'
           },
-          retries: 30
+          retries: 60
         },
         {
           description: 'MongoDB object store',
@@ -62,7 +62,7 @@ module.exports = {
 
           // we have to wait much longer for central-ledger
           // to spin up so we overload `retires` default parameter value
-          retries: 30
+          retries: 60
         },
         {
           description: 'MySQL ALS',
@@ -73,7 +73,7 @@ module.exports = {
             namespace: 'ALS',
             configPath: '../config/default.json'
           },
-          retries: 30
+          retries: 60
         }
       ]
     },
@@ -84,7 +84,7 @@ module.exports = {
           uri: 'kafka:29092',
           method: 'ncat',
           // Seems to take longer on circleci to start up
-          retries: 30
+          retries: 60
         }
       ]
     },
@@ -93,6 +93,36 @@ module.exports = {
       wait4: [
         {
           uri: 'kafka:29092',
+          method: 'ncat'
+        }
+      ]
+    },
+    {
+      name: 'pisp-thirdparty-scheme-adapter',
+      wait4: [
+        {
+          description: 'PISP Redis Cache',
+          uri: 'pisp-redis:6379',
+          method: 'ncat'
+        }
+      ]
+    },
+    {
+      name: 'dfspa-thirdparty-scheme-adapter',
+      wait4: [
+        {
+          description: 'DFSP A Redis Cache',
+          uri: 'dfspa-redis:6379',
+          method: 'ncat'
+        }
+      ]
+    },
+    {
+      name: 'dfspb-thirdparty-scheme-adapter',
+      wait4: [
+        {
+          description: 'DFSP B Redis Cache',
+          uri: 'dfspb-redis:6379',
           method: 'ncat'
         }
       ]

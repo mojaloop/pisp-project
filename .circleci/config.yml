@@ -101,7 +101,7 @@ jobs:
           command: |
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             cd ./docker-local/
-            docker-compose pull 
+            docker-compose pull
             docker-compose up -d
 
             # wait for services to be up and running
@@ -138,13 +138,13 @@ jobs:
             echo ${NVM_DIR}
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             nvm install v12.16.1
-            nvm alias default v12.16.1            
+            nvm alias default v12.16.1
       - run:
           name: Spin up the contract test environment
           command: |
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             cd ./docker-contract/
-            docker-compose pull 
+            docker-compose pull
             docker-compose up -d
             sleep 45s
       - run:

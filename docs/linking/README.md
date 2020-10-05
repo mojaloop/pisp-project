@@ -216,7 +216,7 @@ the signature is correct. It then updates the status of the credential to
 `"VERIFIED"`, and notifies both the PISP and the DFSP about these new changes
 to the Consent resource.
 
-![Credential registration: Register](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/mojaloop/pisp/master/docs/linking/5b-credential-registration.puml)
+![Credential registration: Register](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/mojaloop/pisp/master/docs/linking/5b-credential-registration.puml&cache=no)
 
 # 2. Unlinking
 

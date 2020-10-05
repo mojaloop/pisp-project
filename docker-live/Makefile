@@ -8,13 +8,18 @@ DIR = $(shell pwd)
 ##
 # Runners
 ##
-install: .add-repos .install-base 
+install: .add-repos .install-base install-switch install-participants
+
+install-switch:
 	helm upgrade --install pisp-poc-switch ./charts-switch
 
-uninstall-helm: mysql-drop-database
+install-participants:
+	helm upgrade --install pisp-poc-dfspa ./charts-participant -f ./charts-participant/values_dfspa.yml
+
+uninstall-switch: mysql-drop-database
 	@helm del pisp-poc-switch || echo 'pisp-poc-switch not found'
 
-uninstall-all: uninstall-helm clean-install-base clean-add-repos
+uninstall-all: uninstall-switch clean-install-base clean-add-repos
 
 ##
 # Stateful make commands
@@ -88,6 +93,9 @@ health-check-ml-api-adapter:
 health-check-als:
 	curl -s $(ELB_URL)/account-lookup-service/health | jq
 	curl -s $(ELB_URL)/account-lookup-service-admin/health | jq
+
+health-check-dsfpa:
+	curl -s $(ELB_URL)/mojaloop-simulator/dfspa/api1/health | jq
 
 
 # TODO: enable these later

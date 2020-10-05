@@ -1,0 +1,80 @@
+{{- $participantId := .Values.participantId }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $participantId }}-thirdparty-scheme-adapter
+  labels:
+    app: {{ $participantId }}-thirdparty-scheme-adapter
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1 # exeed the replicas by 1 pod
+  selector:
+    matchLabels:
+      app: {{ $participantId }}-thirdparty-scheme-adapter
+  template:
+    metadata:
+      labels:
+        app: {{ $participantId }}-thirdparty-scheme-adapter
+    spec:
+      containers:
+        - name: sdk-scheme-adapter
+          image: mojaloop/thirdparty-scheme-adapter:v11.15.0
+          livenessProbe:
+            initialDelaySeconds: 30
+            httpGet:
+              path: /
+              port: 4005
+          readinessProbe:
+            initialDelaySeconds: 30
+            httpGet:
+              path: /
+              port: 4006
+        # env:
+        #   - name: ALS_SWITCH_ENDPOINT
+        #     value: http://centralledger:3001
+        #   - name: ALS_DATABASE__HOST
+        #     value: mysql-als
+
+      # TODO: env file
+      # volumes:
+      # - "./dfsp_a/secrets:/secrets"
+      # - "./dfsp_a/jwsVerificationKeys:/jwsVerificationKeys"
+      # TODO: rules file
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ $participantId }}-thirdparty-scheme-adapter
+spec:
+  ports:
+    - port: 4005
+      name: inbound
+    - port: 4006
+      name: outbound
+  selector:
+    app: {{ $participantId }}-thirdparty-scheme-adapter
+  clusterIP: None
+---
+# TODO: ingress rules for each of the 3 apis...
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: mojaloop-simulator
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    nginx.ingress.kubernetes.io/use-regex: "true"
+spec:
+  rules:
+    - http:
+        paths: 
+          - path: /{{ $participantId }}/thirdparty-scheme-adapter/inbound(/|$)(.*)
+            backend:
+              serviceName: {{ $participantId }}-thirdparty-scheme-adapter
+              servicePort: 4005
+          - path: /{{ $participantId }}/thirdparty-scheme-adapter/outbound(/|$)(.*)
+            backend:
+              serviceName: {{ $participantId }}-thirdparty-scheme-adapter
+              servicePort: 4006

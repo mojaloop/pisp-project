@@ -28,12 +28,13 @@
     "wait-4-docker": "node ./scripts/_wait4_all.js",
     "test": "npm run test:unit",
     "test:bdd": "jest --testMatch '**/test/step-definitions/**/*.step.ts'",
-    "test:e2e": "jest --testMatch '**/test/e2e/**/*.(test|spec).ts'",
+    "test:e2e": "jest --runInBand --testMatch '**/test/e2e/**/*.(test|spec).ts'",
     "test:contract": "jest --testMatch '**/test/contract/**/*.(test|spec).ts'",
     "test:coverage": "jest --coverage --coverageThreshold='{}'",
     "test:coverage-check": "jest --coverage",
     "test:junit": "jest --reporters=default --reporters=jest-junit",
-    "test:unit": "jest --testMatch '**/test/unit/**/*.(test|spec).ts'"
+    "test:unit": "jest --testMatch '**/test/unit/**/*.(test|spec).ts'",
+    "docker:clean:all": "docker rm -f $(docker ps -a -q); docker volume rm (docker volume ls -q)"
   },
   "husky": {
     "hooks": {

@@ -15,8 +15,14 @@ export interface TestEnvType {
     pisp: string;
     pispContract: string;
     dfspaSchemeAdapter: string;
+    dfspaThirdpartySchemeAdapterInbound: string;
+    dfspaThirdpartySchemeAdapterOutbound: string;
     dfspbSchemeAdapter: string;
+    dfspbThirdpartySchemeAdapterInbound: string;
+    dfspbThirdpartySchemeAdapterOutbound: string;
     pispSchemeAdapter: string;
+    pispThirdpartySchemeAdapterInbound: string;
+    pispThirdpartySchemeAdapterOutbound: string;
     pispContractSchemeAdapter: string;
     mlTestingToolkit: string;
   };
@@ -38,8 +44,14 @@ const TestEnv: TestEnvType = {
     pisp: 'http://localhost:11003',
     pispContract: 'http://localhost:12003',
     dfspaSchemeAdapter: 'http://localhost:5002',
+    dfspaThirdpartySchemeAdapterInbound: 'http://localhost:5005',
+    dfspaThirdpartySchemeAdapterOutbound: 'http://localhost:5006',
     dfspbSchemeAdapter: 'http://localhost:6002',
+    dfspbThirdpartySchemeAdapterInbound: 'http://localhost:6005',
+    dfspbThirdpartySchemeAdapterOutbound: 'http://localhost:6006',
     pispSchemeAdapter: 'http://localhost:7002',
+    pispThirdpartySchemeAdapterInbound: 'http://localhost:7005',
+    pispThirdpartySchemeAdapterOutbound: 'http://localhost:7006',
     pispContractSchemeAdapter: 'http://localhost:8002',
     mlTestingToolkit: 'http://localhost:15000'
   },

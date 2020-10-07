@@ -1,3 +1,4 @@
+{{- if .Values.thirdpartyApiSupport }}
 {{- $participantId := .Values.participantId }}
 apiVersion: apps/v1
 kind: Deployment
@@ -20,29 +21,49 @@ spec:
         app: {{ $participantId }}-thirdparty-scheme-adapter
     spec:
       containers:
-        - name: sdk-scheme-adapter
+        - name: inbound
           image: mojaloop/thirdparty-scheme-adapter:v11.15.0
           livenessProbe:
             initialDelaySeconds: 30
             httpGet:
-              path: /
+              path: /health
               port: 4005
           readinessProbe:
             initialDelaySeconds: 30
             httpGet:
-              path: /
-              port: 4006
-        # env:
-        #   - name: ALS_SWITCH_ENDPOINT
-        #     value: http://centralledger:3001
-        #   - name: ALS_DATABASE__HOST
-        #     value: mysql-als
+              path: /health
+              port: 4005
+          env:
+            - name: NODE_ENV
+              # set to development so we don't need to specify a
+              # config file from scratch
+              value: development
+            - name: REDIS_HOST
+              value: {{ $participantId }}-redis
+          command: [ "npm", "run", "start:inbound" ]
+        # TODO: config file
 
-      # TODO: env file
-      # volumes:
-      # - "./dfsp_a/secrets:/secrets"
-      # - "./dfsp_a/jwsVerificationKeys:/jwsVerificationKeys"
-      # TODO: rules file
+        - name: outbound
+          image: mojaloop/thirdparty-scheme-adapter:v11.15.0
+          livenessProbe:
+            initialDelaySeconds: 30
+            httpGet:
+              path: /health
+              port: 4006
+          readinessProbe:
+            initialDelaySeconds: 30
+            httpGet:
+              path: /health
+              port: 4006
+          env:
+            - name: NODE_ENV
+              # set to development so we don't need to specify a
+              # config file from scratch
+              value: development
+            - name: REDIS_HOST
+              value: {{ $participantId }}-redis
+          command: [ "npm", "run", "start:outbound" ]
+        # TODO: config file?
 ---
 apiVersion: v1
 kind: Service
@@ -62,14 +83,14 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: mojaloop-simulator
+  name: {{ $participantId }}-thirdparty-scheme-adapter
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$2
     nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
   rules:
     - http:
-        paths: 
+        paths:
           - path: /{{ $participantId }}/thirdparty-scheme-adapter/inbound(/|$)(.*)
             backend:
               serviceName: {{ $participantId }}-thirdparty-scheme-adapter
@@ -78,3 +99,5 @@ spec:
             backend:
               serviceName: {{ $participantId }}-thirdparty-scheme-adapter
               servicePort: 4006
+
+{{- end }}

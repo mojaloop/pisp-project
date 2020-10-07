@@ -1,5 +1,5 @@
-{{- if .Values.mojaloopApiSupport }}
 {{- $participantId := .Values.participantId }}
+{{- if .Values.mojaloopApiSupport }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -27,19 +27,24 @@ spec:
             initialDelaySeconds: 30
             httpGet:
               path: /
-              port: 4000
+              port: 4001
           readinessProbe:
             initialDelaySeconds: 30
             httpGet:
               path: /
-              port: 4000
-        # env:
-        #   - name: ALS_SWITCH_ENDPOINT
-        #     value: http://centralledger:3001
-        #   - name: ALS_DATABASE__HOST
-        #     value: mysql-als
-
-      # TODO: env file
+              port: 4001
+          env:
+          - name: CACHE_HOST
+            value: {{ $participantId }}-redis
+          - name: BACKEND_ENDPOINT
+            value: {{ $participantId }}-mojaloop-simulator:6000
+          - name: DFSP_ID
+            value: {{ $participantId | quote }}
+          {{- range $k, $v := .Values.sdk_scheme_adapter.env }}
+          - name: {{ $k }}
+            value: {{ $v | quote }}
+          {{- end }}
+      # TODO: volumes setup?
       # volumes:
       # - "./dfsp_a/secrets:/secrets"
       # - "./dfsp_a/jwsVerificationKeys:/jwsVerificationKeys"
@@ -59,18 +64,17 @@ spec:
     app: {{ $participantId }}-sdk-scheme-adapter
   clusterIP: None
 ---
-# TODO: ingress rules for each of the 3 apis...
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: mojaloop-simulator
+  name: {{ $participantId }}-sdk-scheme-adapter
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$2
     nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
   rules:
     - http:
-        paths: 
+        paths:
           - path: /{{ $participantId }}/sdk-scheme-adapter/inbound(/|$)(.*)
             backend:
               serviceName: {{ $participantId }}-sdk-scheme-adapter

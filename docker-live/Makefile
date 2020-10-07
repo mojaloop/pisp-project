@@ -8,20 +8,30 @@ DIR = $(shell pwd)
 ##
 # Runners
 ##
-install: .add-repos .install-base 
+install: .add-repos .install-base install-switch install-participants
+
+install-switch:
 	helm upgrade --install pisp-poc-switch ./charts-switch
 
-uninstall-helm: mysql-drop-database
+install-participants:
+	helm upgrade --install pisp-poc-dfspa ./charts-participant -f ./charts-participant/values_dfspa.yml
+	helm upgrade --install pisp-poc-dfspb ./charts-participant -f ./charts-participant/values_dfspb.yml
+	helm upgrade --install pisp-poc-pispa ./charts-participant -f ./charts-participant/values_pispa.yml
+
+uninstall-switch: mysql-drop-database
 	@helm del pisp-poc-switch || echo 'pisp-poc-switch not found'
 
-uninstall-all: uninstall-helm clean-install-base clean-add-repos
+uninstall-participants:
+	helm del pisp-poc-dfspa
+
+uninstall-all: uninstall-switch clean-install-base clean-add-repos
 
 ##
 # Stateful make commands
 #
 # These create respective `.command-name` files to stop make from
 # running the same command multiple times
-## 
+##
 .add-repos:
 	helm repo add public http://storage.googleapis.com/kubernetes-charts-incubator
 	helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
@@ -45,11 +55,14 @@ clean-install-base:
 
 ##
 # Repo Tools
-## 
+##
 .PHONY: clean-repo get-elb
 
+
+# Get the url of the loadbalancer created by nginx for us
 get-elb:
-	@kubectl get service/nginx-ingress-nginx-controller -o json | jq -r .status.loadBalancer.ingress[0].hostname
+	$(eval ELB=$(shell kubectl get service/nginx-ingress-nginx-controller -o json | jq -r .status.loadBalancer.ingress[0].hostname))
+	@echo -e "Run:\n\n    export ELB_URL=$(ELB)\n\nto configure the load balancer url"
 
 clean-repo:
 	rm -rf $(REPO_DIR)
@@ -88,6 +101,13 @@ health-check-ml-api-adapter:
 health-check-als:
 	curl -s $(ELB_URL)/account-lookup-service/health | jq
 	curl -s $(ELB_URL)/account-lookup-service-admin/health | jq
+
+health-check-dsfpa:
+	# curl -s $(ELB_URL)/dfspa/mojaloop-simulator/api1/health | jq
+	curl -s $(ELB_URL)/dfspa/sdk-scheme-adapter/inbound | jq
+	curl -s $(ELB_URL)/dfspa/sdk-scheme-adapter/outbound | jq
+	curl -s $(ELB_URL)/dfspa/thirdparty-scheme-adapter/inbound/health | jq
+	curl -s $(ELB_URL)/dfspa/thirdparty-scheme-adapter/outbound/health | jq
 
 
 # TODO: enable these later

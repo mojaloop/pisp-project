@@ -22,27 +22,6 @@ spec:
       containers:
         - name: redis
           image: redis:5.0.4-alpine
-          # livenessProbe:
-          #   initialDelaySeconds: 30
-          #   httpGet:
-          #     path: /
-          #     port: 4000
-          # readinessProbe:
-          #   initialDelaySeconds: 30
-          #   httpGet:
-          #     path: /
-          #     port: 4000
-        # env:
-        #   - name: ALS_SWITCH_ENDPOINT
-        #     value: http://centralledger:3001
-        #   - name: ALS_DATABASE__HOST
-        #     value: mysql-als
-
-      # TODO: env file
-      # volumes:
-      # - "./dfsp_a/secrets:/secrets"
-      # - "./dfsp_a/jwsVerificationKeys:/jwsVerificationKeys"
-      # TODO: rules file
 ---
 apiVersion: v1
 kind: Service
@@ -54,24 +33,3 @@ spec:
   selector:
     app: {{ $participantId }}-redis
   clusterIP: None
-# ---
-
-# apiVersion: extensions/v1beta1
-# kind: Ingress
-# metadata:
-#   name: {{ $participantId }}-redis
-#   annotations:
-#     nginx.ingress.kubernetes.io/rewrite-target: /$2
-#     nginx.ingress.kubernetes.io/use-regex: "true"
-# spec:
-#   rules:
-#     - http:
-#         paths:
-#           - path: /{{ $participantId }}/sdk-scheme-adapter/inbound(/|$)(.*)
-#             backend:
-#               serviceName: {{ $participantId }}-sdk-scheme-adapter
-#               servicePort: 4000
-#           - path: /{{ $participantId }}/sdk-scheme-adapter/outbound(/|$)(.*)
-#             backend:
-#               serviceName: {{ $participantId }}-sdk-scheme-adapter
-#               servicePort: 4001

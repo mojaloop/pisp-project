@@ -19,8 +19,12 @@ cd ./docker-live
 kubectl create namespace pisp-lab
 kubens pisp-lab
 
-# install the prerequisites, then install the application
-make install
+# install the switch
+make install-switch
+
+# install the participants
+# Currently dfspa, dfspb, pispa
+make install-participants
 
 # wait for pods to be up and running
 kubectl get po

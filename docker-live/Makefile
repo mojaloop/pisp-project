@@ -15,6 +15,8 @@ install-switch:
 
 install-participants:
 	helm upgrade --install pisp-poc-dfspa ./charts-participant -f ./charts-participant/values_dfspa.yml
+	helm upgrade --install pisp-poc-dfspb ./charts-participant -f ./charts-participant/values_dfspb.yml
+	helm upgrade --install pisp-poc-pispa ./charts-participant -f ./charts-participant/values_pispa.yml
 
 uninstall-switch: mysql-drop-database
 	@helm del pisp-poc-switch || echo 'pisp-poc-switch not found'

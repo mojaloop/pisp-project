@@ -37,7 +37,8 @@ spec:
           - name: CACHE_HOST
             value: {{ $participantId }}-redis
           - name: BACKEND_ENDPOINT
-            value: {{ $participantId }}-mojaloop-simulator:6000
+            # TODO this is the /simulator api, not sure if that's correct
+            value: {{ $participantId }}-mojaloop-simulator:3000
           - name: DFSP_ID
             value: {{ $participantId | quote }}
           {{- range $k, $v := .Values.sdk_scheme_adapter.env }}

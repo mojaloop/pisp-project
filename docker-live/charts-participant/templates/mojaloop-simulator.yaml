@@ -32,14 +32,14 @@ spec:
             httpGet:
               path: /
               port: 3000
-        # env:
-        #   - name: ALS_SWITCH_ENDPOINT
-        #     value: http://centralledger:3001
-        #   - name: ALS_DATABASE__HOST
-        #     value: mysql-als
+          env:
+            - name: DFSP_ID
+              value: {{ $participantId }}
+            - name: OUTBOUND_ENDPOINT
+              value: {{ $participantId }}-sdk-scheme-adapter:4001
+            - name: THIRDPARTY_OUTBOUND_ENDPOINT
+              value: {{ $participantId }}-thirdparty-scheme-adapter:4005
 
-      # TODO: env file
-      # TODO: rules file
 ---
 apiVersion: v1
 kind: Service
@@ -57,7 +57,6 @@ spec:
     app: {{ $participantId }}-mojaloop-simulator
   clusterIP: None
 ---
-# TODO: ingress rules for each of the 3 apis...
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
@@ -68,7 +67,7 @@ metadata:
 spec:
   rules:
     - http:
-        paths: 
+        paths:
           - path: /{{ $participantId }}/mojaloop-simulator/simulator(/|$)(.*)
             backend:
               serviceName: {{ $participantId }}-mojaloop-simulator

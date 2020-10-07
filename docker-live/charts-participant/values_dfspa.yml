@@ -63,13 +63,20 @@ sdk_scheme_adapter:
     # CACHE_SHOULD_EXPIRE=false
     # CACHE_EXPIRY_SECONDS=3600
 
-    # Switch or DFSP system under test Mojaloop API endpoint
-    # The option 'PEER_ENDPOINT' has no effect if the remaining three options 'ALS_ENDPOINT', 'QUOTES_ENDPOINT', 'TRANSFERS_ENDPOINT' are specified.
-    # Do not include the protocol, i.e. http.
-    PEER_ENDPOINT: "mojaloop-switch"
-    # ALS_ENDPOINT="mojaloop-switch-als"
-    # QUOTES_ENDPOINT="mojaloop-switch-quotes"
-    # TRANSFERS_ENDPOINT="mojaloop-switch-transfers"
+    # TODO: these values only work for the sdk-scheme-adapter running inside the same
+    # cluster as the switch
+    #
+    # ideally we would deploy this with proper dns, and be able to
+    # give these better values
+
+    ALS_ENDPOINT: "accountlookupservice:4001"
+    QUOTES_ENDPOINT: "quotingservice:3002"
+    TRANSFERS_ENDPOINT: "mlapiadapter:3000"
+    # using in place of Transaction request service
+    # TODO: double check, maybe this env has been fixed
+    PEER_ENDPOINT: "transactionrequestsservice:4003"
+
+    # PEER_ENDPOINT: "mlapiadapter"
     # BULK_TRANSFERS_ENDPOINT="mojaloop-switch-bulk-transfers"
     # BULK_QUOTES_ENDPOINT="mojaloop-switch-bulk-quotes"
 

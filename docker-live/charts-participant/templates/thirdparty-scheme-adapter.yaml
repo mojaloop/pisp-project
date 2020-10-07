@@ -21,6 +21,7 @@ spec:
         app: {{ $participantId }}-thirdparty-scheme-adapter
     spec:
       containers:
+        # Inbound Container
         - name: inbound
           image: mojaloop/thirdparty-scheme-adapter:v11.15.0
           livenessProbe:
@@ -35,14 +36,16 @@ spec:
               port: 4005
           env:
             - name: NODE_ENV
-              # set to development so we don't need to specify a
-              # config file from scratch
-              value: development
+              value: production
             - name: REDIS_HOST
               value: {{ $participantId }}-redis
+          volumeMounts:
+            - name: {{ $participantId }}-config-volume
+              mountPath: /opt/thirdparty-scheme-adapter/config
           command: [ "npm", "run", "start:inbound" ]
-        # TODO: config file
+          # command: [ "tail", "-f", "/dev/null" ]
 
+        # Outbound Container
         - name: outbound
           image: mojaloop/thirdparty-scheme-adapter:v11.15.0
           livenessProbe:
@@ -59,11 +62,28 @@ spec:
             - name: NODE_ENV
               # set to development so we don't need to specify a
               # config file from scratch
-              value: development
+              value: production
             - name: REDIS_HOST
               value: {{ $participantId }}-redis
+          volumeMounts:
+            - name: {{ $participantId }}-config-volume
+              mountPath: /opt/thirdparty-scheme-adapter/config
           command: [ "npm", "run", "start:outbound" ]
-        # TODO: config file?
+          # command: [ "tail", "-f", "/dev/null" ]
+      volumes:
+        - name: {{ $participantId }}-config-volume
+          configMap:
+            name: {{ $participantId }}-config-map
+            items:
+            - key: production.json
+              path: production.json
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ $participantId }}-config-map
+data:
+  production.json: {{ (tpl (.Files.Get "configs/thirdparty-scheme-adapter.json") . ) | quote }}
 ---
 apiVersion: v1
 kind: Service

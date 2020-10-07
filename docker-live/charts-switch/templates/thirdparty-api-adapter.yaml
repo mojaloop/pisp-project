@@ -31,7 +31,7 @@ spec:
             httpGet:
               path: /health
               port: 3008
-          # todo - we need to specify a proper file here :( 
+          # todo - we need to specify a proper file here :(
           # env:
             # - name: THIRD_PARTY_ENDPOINT_SERVICE_URL
               # value: http://centralledger:3001
@@ -54,7 +54,6 @@ metadata:
   name: thirdparty-api-adapter-config
 data:
   default.json: {{ (.Files.Get "configs/thirdparty-api-adapter.json") | quote }}
-
 ---
 apiVersion: v1
 kind: Service
@@ -77,7 +76,7 @@ metadata:
 spec:
   rules:
     - http:
-        paths: 
+        paths:
           - path: /thirdparty-api-adapter(/|$)(.*)
             backend:
               serviceName: thirdpartyapiadapter

@@ -173,6 +173,33 @@ end note
 S -> D2: ""POST /thirdpartyRequests/transactions""
 D2 --> S: ""202 Accepted""
 D2 -> D2: Lookup this ""consentId"", ""sourceAccountId"" \nand ""pispId"". Verify that they exist, and consent \nis granted with a valid credential
+D2 -> D2: Generate a unique transactionId for this transaction request: ""987""
+
+
+rnote left of D2 #Light
+**""PUT /thirdpartyRequests/transactions/123""**
+""FSPIOP-Source: dfspa""
+""FSPIOP-Destination: pispa""
+{
+  "transactionId": "987",
+  "transactionRequestState": "RECEIVED"
+}
+end note
+D2 -> S: ""PUT /thirdpartyRequests/transactions/123""
+S --> D2: ""200 OK""
+
+rnote over S #Light
+**""PUT /thirdpartyRequests/transactions/123""**
+""FSPIOP-Source: dfspa""
+""FSPIOP-Destination: pispa""
+{
+  "transactionId": "987",
+  "transactionRequestState": "RECEIVED"
+}
+end note
+S -> D1: ""PUT /thirdpartyRequests/transactions/123""
+D1 --> S: ""200 OK""
+
 
 
 rnote left of D2 #Light
@@ -537,8 +564,6 @@ end note
 S -> D2: ""PUT /thirdpartyRequests/transactions/123/authorizations""
 D2 --> S: ""200 OK""
 
-' TODO: add failure condition here: PUT /thirdpartyRequests/transactions/123/authorizations/error
-
 note over D2
   DFSPA now knows that the user signed this transaction
   and can go ahead and initiate the transfer
@@ -623,7 +648,8 @@ rnote over S #Light
 ""FSPIOP-Destination: pispa""
 {
   "transactionId": "987",
-  "transactionRequestState": "ACCEPTED"
+  "transactionRequestState": "ACCEPTED",
+  "transactionState": "COMMITTED"
 }
 end note
 S -> D1: ""PATCH /thirdpartyRequests/transactions/123""

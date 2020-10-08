@@ -182,7 +182,7 @@ rnote left of D2 #Light
 ""FSPIOP-Destination: pispa""
 {
   "transactionId": "987",
-  "transactionRequestState": "ACCEPTED"
+  "transactionRequestState": "RECEIVED"
 }
 end note
 D2 -> S: ""PUT /thirdpartyRequests/transactions/123""
@@ -194,7 +194,7 @@ rnote over S #Light
 ""FSPIOP-Destination: pispa""
 {
   "transactionId": "987",
-  "transactionRequestState": "ACCEPTED"
+  "transactionRequestState": "RECEIVED"
 }
 end note
 S -> D1: ""PUT /thirdpartyRequests/transactions/123""
@@ -648,6 +648,7 @@ rnote over S #Light
 ""FSPIOP-Destination: pispa""
 {
   "transactionId": "987",
+  "transactionRequestState": "ACCEPTED",
   "transactionState": "COMMITTED"
 }
 end note

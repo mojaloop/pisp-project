@@ -301,7 +301,11 @@ services:
       - "dfspa-thirdparty-scheme-adapter-outbound:172.17.0.1"
 
   dfspa-sdk-scheme-adapter:
-    image: "mojaloop/sdk-scheme-adapter:v10.6.2.1-pisp"
+    image: "mojaloop/sdk-scheme-adapter:v10.6.2.4-pisp"
+    # build: 
+    #     context: ../../sdk-scheme-adapter
+    #     dockerfile: ./Dockerfile
+
     container_name: dsfpa-sdk-scheme-adapter
     env_file: ./dfsp_a/dfsp_a_scheme_adapter.env
     volumes:
@@ -451,7 +455,10 @@ services:
       - "dfspb-thirdparty-scheme-adapter-outbound:172.17.0.1"
 
   dfspb-sdk-scheme-adapter:
-    image: "mojaloop/sdk-scheme-adapter:v10.6.2.1-pisp"
+    image: "mojaloop/sdk-scheme-adapter:v10.6.2.4-pisp"
+    # build: 
+    #   context: ../../sdk-scheme-adapter
+    #   dockerfile: ./Dockerfile
     container_name: dfspb-sdk-scheme-adapter
     env_file: ./dfsp_b/dfsp_b_scheme_adapter.env
     volumes:
@@ -602,7 +609,10 @@ services:
       - "pisp-thirdparty-scheme-adapter-outbound:172.17.0.1"
 
   pisp-sdk-scheme-adapter:
-    image: "mojaloop/sdk-scheme-adapter:v10.6.2.1-pisp"
+    image: "mojaloop/sdk-scheme-adapter:v10.6.2.4-pisp"
+    # build: 
+    #   context: ../../sdk-scheme-adapter
+    #   dockerfile: ./Dockerfile
     container_name: pisp-sdk-scheme-adapter
     env_file: ./pisp/pisp_scheme_adapter.env
     volumes:

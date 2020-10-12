@@ -1,6 +1,6 @@
 # Docker-Live
 
-A live lab environment for PISP Demos
+A live lab environment for PISP Demos. Deployed using K8s + Helm
 
 
 ## Prerequisites
@@ -42,10 +42,10 @@ export ELB_URL=****.elb.amazonaws.com
 make health-check
 
 # seed the database
-make seed
+npm run reseed:docker-live
 
 # run a test transaction
-make script:transaction
+make transfer-p2p
 
 ```
 

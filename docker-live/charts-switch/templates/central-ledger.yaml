@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: centralledger
+  name: central-ledger
   labels:
-    app: centralledger
+    app: central-ledger
 spec:
   replicas: 1
   strategy:
@@ -12,11 +12,11 @@ spec:
       maxSurge: 1 # exeed the replicas by 1 pod
   selector:
     matchLabels:
-      app: centralledger
+      app: central-ledger
   template:
     metadata:
       labels:
-        app: centralledger
+        app: central-ledger
     spec:
       containers:
       - name: central-ledger
@@ -44,15 +44,17 @@ spec:
             value: kafka:9092
           - name: CLEDG_KAFKA__PRODUCER__TRANSFER__POSITION__config__rdkafkaConf__metadata.broker.list
             value: kafka:9092
-          - name: CLEDG_KAFKA__PRODUCER__TRANSFER__NOTIFICATION__EVENT__config__rdkafkaConf__metadata.broker.list
+          - name: CLEDG_KAFKA__PRODUCER__NOTIFICATION__EVENT__config__rdkafkaConf__metadata.broker.list
             value: kafka:9092
-          - name: CLEDG_KAFKA__PRODUCER__TRANSFER__ADMIN__TRANSFER__config__rdkafkaConf__metadata.broker.list
+          - name: CLEDG_KAFKA__PRODUCER__ADMIN__TRANSFER__config__rdkafkaConf__metadata.broker.list
             value: kafka:9092
           - name: CLEDG_KAFKA__CONSUMER__BULK__PREPARE__config__rdkafkaConf__metadata.broker.list
             value: kafka:9092
           - name: CLEDG_KAFKA__CONSUMER__BULK__PROCESSING__config__rdkafkaConf__metadata.broker.list
             value: kafka:9092
           - name: CLEDG_KAFKA__CONSUMER__BULK__FULFIL__config__rdkafkaConf__metadata.broker.list
+            value: kafka:9092
+          - name: CLEDG_KAFKA__CONSUMER__BULK__GET__config__rdkafkaConf__metadata.broker.list
             value: kafka:9092
           - name: CLEDG_KAFKA__CONSUMER__TRANSFER__PREPARE__config__rdkafkaConf__metadata.broker.list
             value: kafka:9092
@@ -64,6 +66,8 @@ spec:
             value: kafka:9092
           - name: CLEDG_KAFKA__CONSUMER__ADMIN__TRANSFER__config__rdkafkaConf__metadata.broker.list
             value: kafka:9092
+          # - name: LOG_LEVEL
+            # value: debug
         # command: [ "sh", "-c", "tail -f /dev/null" ]
         securityContext:
           runAsUser: 0
@@ -71,26 +75,26 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: centralledger
+  name: central-ledger
 spec:
   ports:
   - port: 3001
   selector:
-    app: centralledger
+    app: central-ledger
   clusterIP: None
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: centralledger
+  name: central-ledger
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$2
     nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
   rules:
     - http:
-        paths: 
+        paths:
           - path: /central-ledger(/|$)(.*)
             backend:
-              serviceName: centralledger
+              serviceName: central-ledger
               servicePort: 3001

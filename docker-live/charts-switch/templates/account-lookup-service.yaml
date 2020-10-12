@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: accountlookupservice
+  name: account-lookup-service
   labels:
-    app: accountlookupservice
+    app: account-lookup-service
 spec:
   replicas: 1
   strategy:
@@ -12,11 +12,11 @@ spec:
       maxSurge: 1 # exeed the replicas by 1 pod
   selector:
     matchLabels:
-      app: accountlookupservice
+      app: account-lookup-service
   template:
     metadata:
       labels:
-        app: accountlookupservice
+        app: account-lookup-service
     spec:
       containers:
       - name: account-lookup-service
@@ -33,48 +33,48 @@ spec:
             port: 4001
         env:
           - name: ALS_SWITCH_ENDPOINT
-            value: http://centralledger:3001
+            value: http://central-ledger:3001
           - name: ALS_DATABASE__HOST
             value: mysql-als
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: accountlookupservice
+  name: account-lookup-service-admin
 spec:
   ports:
   - port: 4001
   selector:
-    app: accountlookupservice
+    app: account-lookup-service
   clusterIP: None
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: accountlookupserviceadmin
+  name: account-lookup-service
 spec:
   ports:
   - port: 4002
   selector:
-    app: accountlookupservice
+    app: account-lookup-service
   clusterIP: None
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: accountlookupservice
+  name: account-lookup-service
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$2
     nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
   rules:
     - http:
-        paths: 
-          - path: /account-lookup-service(/|$)(.*)
-            backend:
-              serviceName: accountlookupservice
-              servicePort: 4001
+        paths:
           - path: /account-lookup-service-admin(/|$)(.*)
             backend:
-              serviceName: accountlookupserviceadmin
+              serviceName: account-lookup-service-admin
+              servicePort: 4001
+          - path: /account-lookup-service(/|$)(.*)
+            backend:
+              serviceName: account-lookup-service
               servicePort: 4002

@@ -1,4 +1,5 @@
 {{- $participantId := .Values.participantId }}
+{{- $jwsSigningKey := .Values.mojaloop_simulator.jwsSigningKey }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -19,6 +20,10 @@ spec:
       labels:
         app: {{ $participantId }}-mojaloop-simulator
     spec:
+      # volumes:
+      #   - name: jws-private-key
+      #     secret:
+      #       secretName: {{ $participantId }}-jws-private-key
       containers:
         - name: mojaloop-simulator
           image: mojaloop/mojaloop-simulator:v9.4.1.7-pisp
@@ -36,9 +41,20 @@ spec:
             - name: DFSP_ID
               value: {{ $participantId }}
             - name: OUTBOUND_ENDPOINT
-              value: {{ $participantId }}-sdk-scheme-adapter:4001
+              value: http://{{ $participantId }}-sdk-scheme-adapter:4001
             - name: THIRDPARTY_OUTBOUND_ENDPOINT
-              value: {{ $participantId }}-thirdparty-scheme-adapter:4005
+              value: http://{{ $participantId }}-thirdparty-scheme-adapter:4005
+            - name: HTTPS_ENABLED
+              value: 'false'
+            - name: MUTUAL_TLS_ENABLED
+              value: 'false'
+            # - name: VALIDATE_INBOUND_JWS
+              # value: 'FALSE'
+            # - name: JWS_SIGN
+              # value: 'FALSE'
+          # volumeMounts:
+          #   - name: jws-private-key
+          #     mountPath: "/jwsSigningKey/"
 
 ---
 apiVersion: v1
@@ -80,3 +96,4 @@ spec:
             backend:
               serviceName: {{ $participantId }}-mojaloop-simulator
               servicePort: 3003
+

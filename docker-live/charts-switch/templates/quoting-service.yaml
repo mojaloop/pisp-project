@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: quotingservice
+  name: quoting-service
   labels:
-    app: quotingservice
+    app: quoting-service
 spec:
   replicas: 1
   strategy:
@@ -12,14 +12,14 @@ spec:
       maxSurge: 1 # exeed the replicas by 1 pod
   selector:
     matchLabels:
-      app: quotingservice
+      app: quoting-service
   template:
     metadata:
       labels:
-        app: quotingservice
+        app: quoting-service
     spec:
       containers:
-      - name: central-ledger
+      - name: quoting-service
         image: mojaloop/quoting-service:v10.1.0
         livenessProbe:
           initialDelaySeconds: 30
@@ -43,26 +43,26 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: quotingservice
+  name: quoting-service
 spec:
   ports:
   - port: 3002
   selector:
-    app: quotingservice
+    app: quoting-service
   clusterIP: None
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: quotingservice
+  name: quoting-service
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$2
     nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
   rules:
     - http:
-        paths: 
+        paths:
           - path: /quoting-service(/|$)(.*)
             backend:
-              serviceName: quotingservice
+              serviceName: quoting-service
               servicePort: 3002

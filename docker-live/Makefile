@@ -23,6 +23,8 @@ uninstall-switch: mysql-drop-database
 
 uninstall-participants:
 	helm del pisp-poc-dfspa
+	helm del pisp-poc-dfspb
+	helm del pisp-poc-pispa
 
 uninstall-all: uninstall-switch clean-install-base clean-add-repos
 
@@ -38,8 +40,8 @@ uninstall-all: uninstall-switch clean-install-base clean-add-repos
 	@touch .add-repos
 
 .install-base:
-	kubectl apply -f ./deployment_setup.yaml
-	helm install kafka public/kafka --values ./kafka_values.yaml
+	kubectl apply -f ./charts-base/deployment_setup.yaml
+	helm install kafka public/kafka --values ./charts-base/kafka_values.yaml
 	helm install nginx ingress-nginx/ingress-nginx --version 2.16.0
 	@touch .install-base
 
@@ -49,7 +51,7 @@ clean-add-repos:
 clean-install-base:
 	@helm del nginx || echo 'helm del nginx failed - continuing anyway'
 	@helm del kafka || echo 'helm del kafka failed - continuing anyway'
-	@kubectl delete -f ./deployment_setup.yaml || echo 'kubectl del kafka failed - continuing anyway'
+	@kubectl delete -f ./charts-base/deployment_setup.yaml || echo 'kubectl del deployment_setup failed - continuing anyway'
 	@rm -rf .install-base
 
 
@@ -62,7 +64,7 @@ clean-install-base:
 # Get the url of the loadbalancer created by nginx for us
 get-elb:
 	$(eval ELB=$(shell kubectl get service/nginx-ingress-nginx-controller -o json | jq -r .status.loadBalancer.ingress[0].hostname))
-	@echo -e "Run:\n\n    export ELB_URL=$(ELB)\n\nto configure the load balancer url"
+	@echo -e "Run:\n\n    export ELB_URL=$(ELB)\n\nto configure the load balancer url in your local environment"
 
 clean-repo:
 	rm -rf $(REPO_DIR)
@@ -87,32 +89,55 @@ mysql-drop-database:
 	kubectl exec -it pod/mysql-cl-0 -- mysql -u root -ppassword -e "drop database central_ledger; create database central_ledger"
 	kubectl exec -it pod/mysql-als-0 -- mysql -u root -ppassword -e "drop database account_lookup; create database account_lookup"
 
-health-check: health-check-central-ledger health-check-quoting-service health-check-ml-api-adapter
+health-check: health-check-switch health-check-participants
 
-health-check-central-ledger:
+health-check-switch:
+	@echo 'Checking health of switch services'
 	curl -s $(ELB_URL)/central-ledger/health | jq
-
-health-check-quoting-service:
+	# curl -s $(ELB_URL)/auth-service/health | jq
 	curl -s $(ELB_URL)/quoting-service/health | jq
-
-health-check-ml-api-adapter:
 	curl -s $(ELB_URL)/ml-api-adapter/health | jq
-
-health-check-als:
 	curl -s $(ELB_URL)/account-lookup-service/health | jq
 	curl -s $(ELB_URL)/account-lookup-service-admin/health | jq
+	curl -s $(ELB_URL)/oracle-simulator/health | jq
 
-health-check-dsfpa:
-	# curl -s $(ELB_URL)/dfspa/mojaloop-simulator/api1/health | jq
-	curl -s $(ELB_URL)/dfspa/sdk-scheme-adapter/inbound | jq
+health-check-participants:
+	@echo 'Checking health of all participants'
+# note: not all health checks contain a response body
+# so they are commented out - comments are left for completeness
+# dfspa
+# No health check on /inbound
+# curl -s $(ELB_URL)/dfspa/sdk-scheme-adapter/inbound | jq
 	curl -s $(ELB_URL)/dfspa/sdk-scheme-adapter/outbound | jq
 	curl -s $(ELB_URL)/dfspa/thirdparty-scheme-adapter/inbound/health | jq
 	curl -s $(ELB_URL)/dfspa/thirdparty-scheme-adapter/outbound/health | jq
+	curl -s $(ELB_URL)/dfspa/mojaloop-simulator/simulator | jq
+# No health check on /report or /test
+# curl -s $(ELB_URL)/dfspa/mojaloop-simulator/report/reports | jq
+# curl -s $(ELB_URL)/dfspa/mojaloop-simulator/test | jq
+
+# dfspb
+# No health check on /inbound
+# curl -s $(ELB_URL)/dfspb/sdk-scheme-adapter/inbound | jq
+	curl -s $(ELB_URL)/dfspb/sdk-scheme-adapter/outbound | jq
+	curl -s $(ELB_URL)/dfspb/thirdparty-scheme-adapter/inbound/health | jq
+	curl -s $(ELB_URL)/dfspb/thirdparty-scheme-adapter/outbound/health | jq
+	curl -s $(ELB_URL)/dfspb/mojaloop-simulator/simulator | jq
+# No health check on /report or /test
+# curl -s $(ELB_URL)/dfspb/mojaloop-simulator/report | jq
+# curl -s $(ELB_URL)/dfspb/mojaloop-simulator/test | jq
+
+#pispa
+	curl -s $(ELB_URL)/pispa/thirdparty-scheme-adapter/inbound/health | jq
+	curl -s $(ELB_URL)/pispa/thirdparty-scheme-adapter/outbound/health | jq
+	curl -s $(ELB_URL)/pispa/mojaloop-simulator/simulator | jq
+#@ No health check on /report or /test
+#@ curl -s $(ELB_URL)/pispa/mojaloop-simulator/report | jq
+#@ curl -s $(ELB_URL)/pispa/mojaloop-simulator/test | jq
 
 
-# TODO: enable these later
-# transfer-api:
-# 	./scripts/_test_transfer_api_v1.0.sh
+transfer-p2p:
+	./_test_transfer.sh
 
 ##
 # Kube Tools

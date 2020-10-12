@@ -6,6 +6,9 @@ participantId: 'dfspa'
 thirdpartyApiSupport: true
 mojaloopApiSupport: true
 
+mojaloop_simulator:
+  jwsSigningKey: ''
+
 sdk_scheme_adapter:
   # Note: copied from `mojaloop/helm`
   env:
@@ -29,14 +32,14 @@ sdk_scheme_adapter:
 
     # applicable only if VALIDATE_INBOUND_JWS is `true`
     # allows disabling of validation on incoming PUT /parties/{idType}/{idValue} requests
-    VALIDATE_INBOUND_PUT_PARTIES_JWS: true
+    VALIDATE_INBOUND_PUT_PARTIES_JWS: false
 
     # applicable only if JWS_SIGN is `true`
     # allows disabling of signing on outgoing PUT /parties/{idType}/{idValue} requests
-    JWS_SIGN_PUT_PARTIES: true
+    JWS_SIGN_PUT_PARTIES: false
 
     # Path to JWS signing key (private key of THIS DFSP)
-    # JWS_SIGNING_KEY_PATH: "/jwsSigningKey.key" # do not configure- will break the chart
+    JWS_SIGNING_KEY_PATH: "/jwsSigningKey.key" # do not configure- will break the chart
     JWS_VERIFICATION_KEYS_DIRECTORY: "/jwsVerificationKeys"
 
     # The number of space characters by which to indent pretty-printed logs. If set to zero, log events
@@ -49,12 +52,12 @@ sdk_scheme_adapter:
     # ideally we would deploy this with proper dns, and be able to
     # give these better values
 
-    ALS_ENDPOINT: "accountlookupservice:4001"
-    QUOTES_ENDPOINT: "quotingservice:3002"
-    TRANSFERS_ENDPOINT: "mlapiadapter:3000"
+    ALS_ENDPOINT: "account-lookup-service:4002"
+    QUOTES_ENDPOINT: "quoting-service:3002"
+    TRANSFERS_ENDPOINT: "ml-api-adapter:3000"
     # TRANSACTION_REQUESTS_ENDPOINT is not yet added in SDK, so using PEER_ENDPOINT
-    TRANSACTION_REQUESTS_ENDPOINT: "transactionrequestservice:4003"
-    PEER_ENDPOINT: "transactionrequestsservice:4003"
+    TRANSACTION_REQUESTS_ENDPOINT: "transaction-requests-service:4003"
+    PEER_ENDPOINT: "transaction-requests-service:4003"
 
     # PEER_ENDPOINT: "mlapiadapter"
     # BULK_TRANSFERS_ENDPOINT="mojaloop-switch-bulk-transfers"

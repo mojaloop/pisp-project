@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mlapiadapter
+  name: ml-api-adapter
   labels:
-    app: mlapiadapter
+    app: ml-api-adapter
 spec:
   replicas: 1
   strategy:
@@ -12,11 +12,11 @@ spec:
       maxSurge: 1 # exeed the replicas by 1 pod
   selector:
     matchLabels:
-      app: mlapiadapter
+      app: ml-api-adapter
   template:
     metadata:
       labels:
-        app: mlapiadapter
+        app: ml-api-adapter
     spec:
       containers:
       - name: ml-api-adapter
@@ -33,9 +33,9 @@ spec:
             port: 3000
         env:
           - name: MLAPI_ENDPOINT_SOURCE_URL
-            value: http://centralledger:3001
+            value: http://central-ledger:3001
           - name: MLAPI_ENDPOINT_HEALTH_URL
-            value: http://centralledger:3001/health
+            value: http://central-ledger:3001/health
           - name: MLAPI_KAFKA__PRODUCER__TRANSFER__PREPARE__config__rdkafkaConf__metadata.broker.list
             value: kafka:9092
           - name: MLAPI_KAFKA__PRODUCER__TRANSFER__FULFIL__config__rdkafkaConf__metadata.broker.list
@@ -48,26 +48,26 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: mlapiadapter
+  name: ml-api-adapter
 spec:
   ports:
   - port: 3000
   selector:
-    app: mlapiadapter
+    app: ml-api-adapter
   clusterIP: None
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: mlapiadapter
+  name: ml-api-adapter
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$2
     nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
   rules:
     - http:
-        paths: 
+        paths:
           - path: /ml-api-adapter(/|$)(.*)
             backend:
-              serviceName: mlapiadapter
+              serviceName: ml-api-adapter
               servicePort: 3000

@@ -286,7 +286,10 @@ services:
 
   ## DFSP A
   dfspa-backend:
-    image: "mojaloop/mojaloop-simulator:v9.4.1.7-pisp"
+    image: "mojaloop/mojaloop-simulator:v9.4.1.8-pisp"
+    # build:
+    #   context: ../../mojaloop-simulator
+    #   dockerfile: ./Dockerfile
     container_name: dfspa-backend
     env_file: ./dfsp_a/dfsp_a_backend.env
     volumes:
@@ -301,7 +304,11 @@ services:
       - "dfspa-thirdparty-scheme-adapter-outbound:172.17.0.1"
 
   dfspa-sdk-scheme-adapter:
-    image: "mojaloop/sdk-scheme-adapter:v10.6.2.1-pisp"
+    image: "mojaloop/sdk-scheme-adapter:v10.6.2.5-pisp"
+    # build: 
+    #     context: ../../sdk-scheme-adapter
+    #     dockerfile: ./Dockerfile
+
     container_name: dsfpa-sdk-scheme-adapter
     env_file: ./dfsp_a/dfsp_a_scheme_adapter.env
     volumes:
@@ -436,7 +443,7 @@ services:
 
   ## DFSP B
   dfspb-backend:
-    image: "mojaloop/mojaloop-simulator:v9.4.1.7-pisp"
+    image: "mojaloop/mojaloop-simulator:v9.4.1.8-pisp"
     container_name: dfspb-backend
     env_file: ./dfsp_b/dfsp_b_backend.env
     volumes:
@@ -451,7 +458,10 @@ services:
       - "dfspb-thirdparty-scheme-adapter-outbound:172.17.0.1"
 
   dfspb-sdk-scheme-adapter:
-    image: "mojaloop/sdk-scheme-adapter:v10.6.2.1-pisp"
+    image: "mojaloop/sdk-scheme-adapter:v10.6.2.5-pisp"
+    # build: 
+    #   context: ../../sdk-scheme-adapter
+    #   dockerfile: ./Dockerfile
     container_name: dfspb-sdk-scheme-adapter
     env_file: ./dfsp_b/dfsp_b_scheme_adapter.env
     volumes:
@@ -587,7 +597,7 @@ services:
 
   ## PISP
   pisp-backend:
-    image: "mojaloop/mojaloop-simulator:v9.4.1.7-pisp"
+    image: "mojaloop/mojaloop-simulator:v9.4.1.8-pisp"
     container_name: pisp-backend
     env_file: ./pisp/pisp_backend.env
     volumes:
@@ -602,7 +612,10 @@ services:
       - "pisp-thirdparty-scheme-adapter-outbound:172.17.0.1"
 
   pisp-sdk-scheme-adapter:
-    image: "mojaloop/sdk-scheme-adapter:v10.6.2.1-pisp"
+    image: "mojaloop/sdk-scheme-adapter:v10.6.2.5-pisp"
+    # build: 
+    #   context: ../../sdk-scheme-adapter
+    #   dockerfile: ./Dockerfile
     container_name: pisp-sdk-scheme-adapter
     env_file: ./pisp/pisp_scheme_adapter.env
     volumes:

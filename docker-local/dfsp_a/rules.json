@@ -32,5 +32,32 @@
         }
       }
     }
+  },
+  {
+    "ruleId": 2,
+    "description": "makes the validation of authorization",
+    "conditions": {
+      "all": [
+        {
+          "fact": "path",
+          "operator": "equal",
+          "value": "/verify-authorization"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "POST"
+        }
+      ]
+    },
+    "event": {
+      "type": "FIXED_CALLBACK",
+      "params": {
+        "statusCode": 200,
+        "body": {
+          "verifyResult": "OK"
+        }
+      }
+    }
   }
 ]

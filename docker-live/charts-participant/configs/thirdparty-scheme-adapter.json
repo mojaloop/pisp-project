@@ -26,10 +26,10 @@
     "COLOR": true
   },
   "SHARED": {
-    "PEER_ENDPOINT": "transactionrequestsservice:4003",
-    "ALS_ENDPOINT": "accountlookupservice:4001",
-    "QUOTES_ENDPOINT": "quotingservice:3002",
-    "TRANSFERS_ENDPOINT": "mlapiadapter:3000",
+    "PEER_ENDPOINT": "transaction-requests-service:4003",
+    "ALS_ENDPOINT": "account-lookup-service:4001",
+    "QUOTES_ENDPOINT": "quoting-service:3002",
+    "TRANSFERS_ENDPOINT": "ml-api-adapter:3000",
     "BULK_TRANSFERS_ENDPOINT": "",
     "DFSP_ID": "{{ $participantId }}",
     "DFSP_BACKEND_URI": "{{ $participantId }}-mojaloop-simulator:3000",

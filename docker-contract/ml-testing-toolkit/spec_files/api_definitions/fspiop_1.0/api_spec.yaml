@@ -3327,6 +3327,7 @@ components:
         - ACCOUNT_ID
         - IBAN
         - ALIAS
+        - OPAQUE
       description: >-
         Below are the allowed values for the enumeration - MSISDN An MSISDN
         (Mobile Station International Subscriber Directory Number, that is, the

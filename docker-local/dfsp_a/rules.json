@@ -41,7 +41,7 @@
         {
           "fact": "path",
           "operator": "equal",
-          "value": "/validate-authorization"
+          "value": "/verify-authorization"
         },
         {
           "fact": "method",
@@ -55,7 +55,7 @@
       "params": {
         "statusCode": 200,
         "body": {
-          "validationResult": "OK"
+          "verifyResult": "OK"
         }
       }
     }

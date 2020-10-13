@@ -16,7 +16,8 @@ autonumber 1 "<b>GRANT-#</b>"
 
 DFSP -> Switch ++: ""POST /consents""\n\
 ""  FSIOP-Source: dfspa""\n\
-""  FSIOP-Destination: auth.dfspa**""\n\
+""  FSIOP-Destination: central-auth""\n\
+""  FSIOP-Destination: pispa""\n\
 ""  {""\n\
     ""  id: "123",""\n\
     ""  requestId: "456",""\n\
@@ -55,7 +56,7 @@ Switch -> PISP ++: ""POST /consents""\n\
     ""}""
 & Switch -> Auth ++: ""POST /consents""\n\
 ""  FSIOP-Source: dfspa""\n\
-""  FSIOP-Destination: auth.dfspa**""\n\
+""  FSIOP-Destination: central-auth""\n\
 "" {""\n\
     ""  id: "123",""\n\
     ""  requestId: "456",""\n\

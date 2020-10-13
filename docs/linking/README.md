@@ -180,6 +180,10 @@ service which will be the record of trust for these resources.
 
 ![Grant consent](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/mojaloop/pisp/master/docs/linking/4-grant-consent.puml)
 
+> Notes:
+> 1. In this example, the DFSP uses the [proposed broadcast](https://github.com/mojaloop/pisp/issues/79) method of sending a `POST /consents` with 2 values for the `FSPIOP-Destination` header.
+> * In this example, the DFSP here uses the `central-auth` service. In the case where a DFSP runs their own auth-service, they would be expected to update their own auth-service separately to this call.
+
 ## 1.6. Credential registration
 
 Once the consent resource has been created, the PISP will attempt to establish
@@ -218,7 +222,6 @@ to the Consent resource.
 
 
 <!-- Note: this diagram is too big for the proxy renderer - so it is maintained locally -->
-
 ![Credential registration: Register](../out/linking/5b-credential-registration/PISP%20Linking%20%20Credential%20registration%20(verification).png)
 
 # 2. Unlinking

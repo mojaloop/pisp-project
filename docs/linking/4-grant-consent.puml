@@ -7,7 +7,9 @@ title PISP Linking: Grant consent
 participant "PISP" as PISP
 
 box "Mojaloop"
-    participant Switch
+    participant "Thirdparty-API-Adapter" as Switch
+    participant "Account Lookup Service" as ALS
+    participant "Auth Service" as Auth
 end box
 
 participant "DFSP" as DFSP
@@ -16,7 +18,8 @@ autonumber 1 "<b>GRANT-#</b>"
 
 DFSP -> Switch ++: ""POST /consents""\n\
 ""  FSIOP-Source: dfspa""\n\
-""  FSIOP-Destination: auth.dfspa**""\n\
+""  FSIOP-Destination: central-auth""\n\
+""  FSIOP-Destination: pispa""\n\
 ""  {""\n\
     ""  id: "123",""\n\
     ""  requestId: "456",""\n\
@@ -55,7 +58,7 @@ Switch -> PISP ++: ""POST /consents""\n\
     ""}""
 & Switch -> Auth ++: ""POST /consents""\n\
 ""  FSIOP-Source: dfspa""\n\
-""  FSIOP-Destination: auth.dfspa**""\n\
+""  FSIOP-Destination: central-auth""\n\
 "" {""\n\
     ""  id: "123",""\n\
     ""  requestId: "456",""\n\
@@ -72,6 +75,20 @@ Switch -> PISP ++: ""POST /consents""\n\
 
 PISP --> Switch: ""202 Accepted""
 & Auth --> Switch: ""202 Accepted""
+
+note left of Auth
+  As the owner of the consent, the Auth Service is
+  responsible for updating the ALS
+end note
+
+Auth -> ALS: ""POST /participants/CONSENTS/123""\n\
+""  FSIOP-Source: central-auth""\n\
+""  FSIOP-Destination: Account Lookup""\n\
+"" {""\n\
+    ""  fspId: "central-auth",""\n\
+  ""}""
+
+ALS --> Auth:
 
 deactivate Switch
 

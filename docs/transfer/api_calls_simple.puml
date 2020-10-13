@@ -22,6 +22,10 @@ D1 -> S: ""POST /thirdpartyRequests/transactions""
 S -> D2: ""POST /thirdpartyRequests/transactions""
 
 D2 -> D2: Lookup this ""consentId"", ""sourceAccountId"" \nand ""pispId"". Verify that they exist, and consent \nis granted with a valid credential
+D2 -> D2: Generate a unique transactionId for this transaction request: ""987""
+
+D2 -> S: ""PUT /thirdpartyRequests/transactions/{id}""
+S -> D1: ""PUT /thirdpartyRequests/transactions/{id}""
 
 D2 -> S: ""POST /quotes""
 S -> D3: ""POST /quotes""

@@ -1208,8 +1208,6 @@ paths:
                     supposed user should be redirected. This URL should be a place where
                     the user can prove their identity (e.g., by logging in).
                   properties:
-                    id:
-                      $ref: '#/paths/~1consentRequests/post/requestBody/content/application~1json/schema/properties/id'
                     initiatorId:
                       type: string
                       description: The id of the PISP who will initiate transactions on a user's behalf.
@@ -1233,12 +1231,12 @@ paths:
                       type: string
                       description: The callback uri that the pisp app redirects to for user to complete their login.
                   required:
-                    - id
                     - initiatorId
                     - scopes
                     - authChannels
                     - callbackUri
                     - authUri
+                  additionalProperties: false
                 - title: ConsentRequestsIDPutResponseWebAuth
                   type: object
                   description: |
@@ -1248,8 +1246,6 @@ paths:
                     the user is expected to prove their identity to the DFSP by passing a OTP
                     or secret to the PISP.
                   properties:
-                    id:
-                      $ref: '#/paths/~1consentRequests/post/requestBody/content/application~1json/schema/properties/id'
                     initiatorId:
                       type: string
                       description: The id of the PISP who will initiate transactions on a user's behalf.
@@ -1271,13 +1267,13 @@ paths:
                       type: string
                       description: The Auth token from the OTP or redirect to pisp app.
                   required:
-                    - id
                     - initiatorId
                     - scopes
                     - authChannels
                     - callbackUri
                     - authUri
                     - authToken
+                  additionalProperties: false
                 - title: ConsentRequestsIDPutResponseOTP
                   type: object
                   description: |
@@ -1285,8 +1281,6 @@ paths:
 
                     Schema used in the request consent phase of the account linking OTP/SMS flow.
                   properties:
-                    id:
-                      $ref: '#/paths/~1consentRequests/post/requestBody/content/application~1json/schema/properties/id'
                     initiatorId:
                       type: string
                       description: The id of the PISP who will initiate transactions on a user's behalf.
@@ -1307,11 +1301,11 @@ paths:
                       type: string
                       description: The callback uri that the user will be redirected to after completing the WEB auth channel.
                   required:
-                    - id
                     - initiatorId
                     - scopes
                     - authChannels
                     - callbackUri
+                  additionalProperties: false
                 - title: ConsentRequestsIDPutResponseOTPAuth
                   type: object
                   description: |
@@ -1321,8 +1315,6 @@ paths:
                     the user is expected to prove their identity to the DFSP by passing a OTP
                     or secret to the PISP.
                   properties:
-                    id:
-                      $ref: '#/paths/~1consentRequests/post/requestBody/content/application~1json/schema/properties/id'
                     initiatorId:
                       type: string
                       description: The id of the PISP who will initiate transactions on a user's behalf.
@@ -1341,12 +1333,12 @@ paths:
                       type: string
                       description: The Auth token from the OTP or redirect to pisp app.
                   required:
-                    - id
                     - initiatorId
                     - scopes
                     - authChannels
                     - callbackUri
                     - authToken
+                  additionalProperties: false
       responses:
         '202':
           $ref: '#/paths/~1consents/post/responses/202'
@@ -1452,63 +1444,11 @@ paths:
                     required:
                       - accountId
                       - actions
-                credential:
-                  nullable: true
-                  title: Credential
-                  type: object
-                  description: |
-                    A credential used to allow a user to prove their identity and
-                    access to an account with a DFSP.
-                  properties:
-                    id:
-                      type: string
-                      description: The id of a Credential.
-                    type:
-                      title: CredentialType
-                      type: string
-                      enum:
-                        - FIDO
-                      description: |
-                        The type of the Credential.
-                        - "FIDO" - A FIDO public/private keypair.
-                    status:
-                      title: CredentialStatusType
-                      type: string
-                      enum:
-                        - PENDING
-                        - ACTIVE
-                      description: |
-                        The status of the Credential's creation
-                        - "PENDING" - The PISP has requested a challenge, or the challenge has
-                                      initialized but not yet answered by the PISP.
-                        - "VERIFIED" - The Credential is valid, and ready to be used by the PISP.
-                    challenge:
-                      title: CredentialChallenge
-                      type: object
-                      description: |
-                        The challenge issued by a DFSP that must be answered by the PISP.
-                      properties:
-                        payload:
-                          type: string
-                          description: Base64 encoded binary of the challenge that must be answered by the PISP.
-                        signature:
-                          type: string
-                          description: Base64 encoded binary string or result of the payload signed by the PISP using the private key.
-                      required:
-                        - payload
-                    payload:
-                      type: string
-                      description: Base64 encoded bytes - The public key of the Public/Private keypair.
-                  required:
-                    - id
-                    - type
-                    - status
               required:
                 - id
                 - scopes
                 - participantId
                 - initiatorId
-                - credential
       parameters:
         - name: Accept
           in: header
@@ -1807,11 +1747,38 @@ paths:
                       type: string
                       description: The id of a Credential.
                     type:
-                      $ref: '#/paths/~1consents/post/requestBody/content/application~1json/schema/properties/credential/properties/type'
+                      title: CredentialType
+                      type: string
+                      enum:
+                        - FIDO
+                      description: |
+                        The type of the Credential.
+                        - "FIDO" - A FIDO public/private keypair.
                     status:
-                      $ref: '#/paths/~1consents/post/requestBody/content/application~1json/schema/properties/credential/properties/status'
+                      title: CredentialStatusType
+                      type: string
+                      enum:
+                        - PENDING
+                        - ACTIVE
+                      description: |
+                        The status of the Credential's creation
+                        - "PENDING" - The PISP has requested a challenge, or the challenge has
+                                      initialized but not yet answered by the PISP.
+                        - "VERIFIED" - The Credential is valid, and ready to be used by the PISP.
                     challenge:
-                      $ref: '#/paths/~1consents/post/requestBody/content/application~1json/schema/properties/credential/properties/challenge'
+                      title: CredentialChallenge
+                      type: object
+                      description: |
+                        The challenge issued by a DFSP that must be answered by the PISP.
+                      properties:
+                        payload:
+                          type: string
+                          description: Base64 encoded binary of the challenge that must be answered by the PISP.
+                        signature:
+                          type: string
+                          description: Base64 encoded binary string or result of the payload signed by the PISP using the private key.
+                      required:
+                        - payload
                     payload:
                       type: string
                       description: Base64 encoded bytes - The public key of the Public/Private keypair.

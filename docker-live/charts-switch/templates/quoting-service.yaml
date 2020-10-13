@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: quoting-service
+  labels:
+    app: quoting-service
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1 # exeed the replicas by 1 pod
+  selector:
+    matchLabels:
+      app: quoting-service
+  template:
+    metadata:
+      labels:
+        app: quoting-service
+    spec:
+      containers:
+      - name: quoting-service
+        image: mojaloop/quoting-service:v10.1.0
+        livenessProbe:
+          initialDelaySeconds: 30
+          httpGet:
+            path: /health
+            port: 3002
+        readinessProbe:
+          initialDelaySeconds: 30
+          httpGet:
+            path: /health
+            port: 3002
+        env:
+          - name: QUOTE_DATABASE__HOST
+            value: mysql
+          - name: QUOTE_SWITCH_ENDPOINT
+            value: http://centralledger:3001
+        # command: [ "sh", "-c", "tail -f /dev/null" ]
+        securityContext:
+          runAsUser: 0
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: quoting-service
+spec:
+  ports:
+  - port: 3002
+  selector:
+    app: quoting-service
+  clusterIP: None
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: quoting-service
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    nginx.ingress.kubernetes.io/use-regex: "true"
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /quoting-service(/|$)(.*)
+            backend:
+              serviceName: quoting-service
+              servicePort: 3002

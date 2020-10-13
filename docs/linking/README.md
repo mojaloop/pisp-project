@@ -178,7 +178,16 @@ This phase consists exclusively of the DFSP requesting that a new consent be
 created. This request must be conveyed both to the PISP itself and the Auth
 service which will be the record of trust for these resources.
 
+The Auth service is then responsible for calling `POST /participants/CONSENTS/{id}`.
+This call will associate the `consentId` with the auth-service's `participantId` and 
+allows us to look up the Auth service given a `consentId` at a later date.
+
 ![Grant consent](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/mojaloop/pisp/master/docs/linking/4-grant-consent.puml)
+
+> Notes:
+> 1. In this example, the DFSP uses the [proposed broadcast](https://github.com/mojaloop/pisp/issues/79) method of sending a `POST /consents` with 2 values for the `FSPIOP-Destination` header.
+> 2. In this example, the DFSP here uses the `central-auth` service. In the case where a DFSP runs their own auth-service, they would be expected to update their own auth-service separately to this call.
+> 3. We don't explicitly record the relationship between a DFSP & Auth service. It's assumed that a DFSP knows the `participantId` of it's Auth service, and can address it correctly using the `FSPIOP-Destination` header in the `POST /consents` request.
 
 ## 1.6. Credential registration
 
@@ -201,6 +210,9 @@ will be returned to the PISP via a `PUT /consents/{ID}` API call.
 
 ![Credential registration: Challenge](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/mojaloop/pisp/master/docs/linking/5a-credential-registration.puml)
 
+> **Notes:**
+> 1. Similar to a `GET /parties` call, the PISP doesn't need to include the `FSPIOP-Destination` header in `POST /consents/{ID}/generateChallenge`. The switch is responsible for finding the responsible Auth service for this consent based on the `consentId`
+
 ### 1.6.2. Finalizing the credential
 
 Once the challenge is provided to the PISP, the PISP will generate a new
@@ -216,7 +228,12 @@ the signature is correct. It then updates the status of the credential to
 `"VERIFIED"`, and notifies both the PISP and the DFSP about these new changes
 to the Consent resource.
 
-![Credential registration: Register](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/mojaloop/pisp/master/docs/linking/5b-credential-registration-2.puml&cache=no)
+
+<!-- Note: this diagram is too big for the proxy renderer - so it is maintained locally -->
+![Credential registration: Register](../out/linking/5b-credential-registration/PISP%20Linking%20%20Credential%20registration%20(verification).png)
+
+> **Notes:**
+> 1. As with step [1.6.1](#161-requesting-a-challenge) above, the PISP doesn't need to include the `FSPIOP-Destination` header in `PUT /consents/{ID}`. The switch is responsible for finding the responsible Auth service for this consent based on the `consentId`
 
 # 2. Unlinking
 

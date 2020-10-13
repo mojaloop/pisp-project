@@ -8,6 +8,10 @@ box "Mojaloop"
 end box
 box "DFSP A"
     participant "DFSP A\n(Payer)" as D2
+    participant "3p-sa-in" as D2_3psa_in
+    participant "3p-sa-out" as D2_3psa_out
+    participant "sdk-sa-in" as D2_sdksa_in
+    participant "sdk-sa-out" as D2_sdksa_out
 end box
 box "DFSP B"
     participant "DFSP B\n(Payee)" as D3

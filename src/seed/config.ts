@@ -1,5 +1,7 @@
+import * as SDKStandardComponents from '@mojaloop/sdk-standard-components'
+
 export interface GlobalConfig {
-  currency: string,
+  currency: SDKStandardComponents.TCurrency,
   // Urls to talk to services
   urls: {
     als: string,
@@ -19,7 +21,7 @@ export enum ParticipantType {
 }
 
 export interface PartyAccount {
-  currency: string,
+  currency: SDKStandardComponents.TCurrency,
   description: string,
   address: string,
 }

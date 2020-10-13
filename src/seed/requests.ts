@@ -1,11 +1,12 @@
 import axios, { AxiosResponse, AxiosRequestConfig } from 'axios'
 import { Party } from './config'
+import * as SDKStandardComponents from '@mojaloop/sdk-standard-components'
 
 
 export type PostHubAccountRequest = {
   body: {
     type: 'HUB_MULTILATERAL_SETTLEMENT' | 'HUB_RECONCILIATION',
-    currency: string
+    currency: SDKStandardComponents.TCurrency
   }
 }
 
@@ -23,7 +24,7 @@ export type PostOraclesRequest = {
       value: string,
       endpointType: string,
     },
-    currency: string,
+    currency: SDKStandardComponents.TCurrency,
     isDefault: true
   }
 }
@@ -31,14 +32,14 @@ export type PostOraclesRequest = {
 export type PostParticipantsRequest = {
   body: {
     name: string,
-    currency: string,
+    currency: SDKStandardComponents.TCurrency,
   }
 }
 
 export type PostParticipantsPositionAndLimitsRequest = {
   participantId: string,
   body: {
-    currency: string,
+    currency: SDKStandardComponents.TCurrency,
     limit: {
       type: string,
       value: number,
@@ -57,7 +58,7 @@ export type PostAccountRequest = {
     reason: string,
     amount: {
       amount: string,
-      currency: string,
+      currency: SDKStandardComponents.TCurrency,
     },
   }
 }
@@ -83,10 +84,9 @@ export type PostALSParticipantRequest = {
   idValue?: string,
   body: {
     fspId: string,
-    currency: string
+    currency: SDKStandardComponents.TCurrency
   }
 }
-
 
 export default class Requests {
   public static async postHubAccount(host: string, request: PostHubAccountRequest): Promise<AxiosResponse<any>> {

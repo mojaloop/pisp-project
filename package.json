@@ -67,6 +67,7 @@
   },
   "homepage": "https://github.com/mojaloop/pisp#readme",
   "dependencies": {
+    "@mojaloop/sdk-standard-components": "^12.0.1",
     "axios": "^0.19.2",
     "chalk": "^4.1.0"
   },

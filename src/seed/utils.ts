@@ -10,9 +10,9 @@ export function wrapWithRunResult (func: () => any): () => Promise<RunResult> {
   return async () => {
     try {
       await func()
-      return Result.makeSuccessResult()
+      return Result.Success()
     } catch (err) {
-      return Result.makeFailureResult([err])
+      return Result.Failure([err])
     }
   }
 }

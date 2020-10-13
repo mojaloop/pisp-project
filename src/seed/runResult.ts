@@ -18,14 +18,14 @@ export interface FailureResult {
 }
 
 export class Result {
-  public static makeSuccessResult(warnings?: Array<string>): SuccessResult {
+  public static Success(warnings?: Array<string>): SuccessResult {
     return {
       type: RunResultType.SUCCESS,
       warnings: warnings || []
     }
   }
 
-  public static makeFailureResult(errors: Array<Error>, warnings?: Array<string>): FailureResult {
+  public static Failure(errors: Array<Error>, warnings?: Array<string>): FailureResult {
     return {
       type: RunResultType.FAILURE,
       warnings: warnings || [],

@@ -46,9 +46,9 @@ export class GenericSteps implements SeedCollection {
     }
 
     if (errors.length > 0) {
-      return Result.makeFailureResult(errors, warnings)
+      return Result.Failure(errors, warnings)
     }
 
-    return Result.makeSuccessResult(warnings)
+    return Result.Success(warnings)
   }
 }

@@ -246,10 +246,7 @@ device, the PISP, and the DFSP.
 To make this work, we simply need to provide a way for a member on the network
 to remove the Consent resourse and notify the other parties about the removal.
 
-
-<!-- Note: this diagram is too big for the proxy renderer - so it is maintained locally -->
-![Credential registration: Register](./out/linking/5b-credential-registration/PISP%20Linking%20%20Credential%20registration%20(verification).png)
-
+![Credential registration: Register](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/mojaloop/pisp/master/docs/linking/unlinking.puml)
 
 # 3. Third-party credential registration
 

@@ -144,6 +144,83 @@
     "version": 1
   },
   {
+    "ruleId": 25,
+    "priority": 1,
+    "description": "get /parties/{OPAQUE}/{ID}",
+    "apiVersion": {
+      "minorVersion": 0,
+      "majorVersion": 1,
+      "type": "fspiop",
+      "asynchronous": true
+    },
+    "conditions": {
+      "all": [
+        {
+          "fact": "pathParams",
+          "operator": "equal",
+          "value": "OPAQUE",
+          "path": "Type"
+        },
+        {
+          "fact": "operationPath",
+          "operator": "equal",
+          "value": "/parties/{Type}/{ID}"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "get"
+        }
+      ]
+    },
+    "event": {
+      "method": "put",
+      "path": "/parties/{Type}/{ID}",
+      "params": {
+        "headers": {
+          "Content-Type": "application/vnd.interoperability.parties+json;version=1.0"
+        },
+        "body": {
+          "party": {
+            "partyIdInfo": {
+              "partyIdType": "MSISDN",
+              "partyIdentifier": "+1-111-111-1111",
+              "fspId": "dfspA"
+            },
+            "merchantClassificationCode": "4321",
+            "name": "Alice K",
+            "personalInfo": {
+              "complexName": {
+                "firstName": "Alice",
+                "lastName": "K"
+              },
+              "dateOfBirth": "1963-06-16"
+            },
+            "accounts": {
+              "account": [
+                {
+                  "address": "dfsa.alice.1234",
+                  "currency": "USD",
+                  "description": "savings"
+                },
+                {
+                  "address": "dfsa.alice.5678",
+                  "currency": "USD",
+                  "description": "checking"
+                }
+              ]
+            }
+          }
+        },
+        "scripts": {}
+      },
+      "delay": 0,
+      "type": "FIXED_CALLBACK"
+    },
+    "type": "callback",
+    "version": 1
+  },
+  {
     "ruleId": 4,
     "priority": 1,
     "description": "post /transactionRequests",
@@ -919,83 +996,6 @@
           "FSPIOP-Source": "DFSPA"
         },
         "body": {}
-      },
-      "delay": 0,
-      "type": "FIXED_CALLBACK"
-    },
-    "type": "callback",
-    "version": 1
-  },
-  {
-    "ruleId": 25,
-    "priority": 1,
-    "description": "get get /parties/OPAQUE/{ID}",
-    "apiVersion": {
-      "minorVersion": 0,
-      "majorVersion": 1,
-      "type": "fspiop",
-      "asynchronous": true
-    },
-    "conditions": {
-      "all": [
-        {
-          "fact": "pathParams",
-          "operator": "equal",
-          "value": "OPAQUE",
-          "path": "Type"
-        },
-        {
-          "fact": "operationPath",
-          "operator": "equal",
-          "value": "/parties/{Type}/{ID}"
-        },
-        {
-          "fact": "method",
-          "operator": "equal",
-          "value": "get"
-        }
-      ]
-    },
-    "event": {
-      "method": "put",
-      "path": "/parties/{Type}/{ID}",
-      "params": {
-        "headers": {
-          "Content-Type": "application/vnd.interoperability.parties+json;version=1.0"
-        },
-        "body": {
-          "party": {
-            "partyIdInfo": {
-              "partyIdType": "MSISDN",
-              "partyIdentifier": "+1-111-111-1111",
-              "fspId": "dfspA"
-            },
-            "merchantClassificationCode": "4321",
-            "name": "Alice K",
-            "personalInfo": {
-              "complexName": {
-                "firstName": "Alice",
-                "lastName": "K"
-              },
-              "dateOfBirth": "1963-06-16"
-            },
-            "accounts": {
-              "account": [
-                {
-                  "address": "dfsa.alice.1234",
-                  "currency": "USD",
-                  "description": "savings"
-                },
-                {
-                  "address": "dfsa.alice.5678",
-                  "currency": "USD",
-                  "description": "checking"
-                }
-              ]
-            }
-          }
-        },
-        "scripts": {}
       },
       "delay": 0,
       "type": "FIXED_CALLBACK"

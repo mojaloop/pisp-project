@@ -1,31 +1,4 @@
 {
-  "/parties/OPAQUE/{ID}": {
-    "get": {
-      "fspid": "{$request.headers.fspiop-source}",
-      "successCallback": {
-        "method": "put",
-        "path": "/parties/OPAQUE/{ID}",
-        "pathPattern": "/parties/OPAQUE/{$request.params.ID}",
-        "headerOverride": {
-          "FSPIOP-Source": "{$request.headers.fspiop-destination}",
-          "FSPIOP-Destination": "{$request.headers.fspiop-source}",
-          "Content-Type": "{$session.negotiatedContentType}",
-          "Date": "{$request.headers.date}"
-        }
-      },
-      "errorCallback": {
-        "method": "put",
-        "path": "/parties/OPAQUE/{ID}",
-        "pathPattern": "/parties/OPAQUE/{$request.params.ID}",
-        "headerOverride": {
-          "FSPIOP-Source": "{$request.headers.fspiop-destination}",
-          "FSPIOP-Destination": "{$request.headers.fspiop-source}",
-          "Content-Type": "{$session.negotiatedContentType}",
-          "Date": "{$request.headers.date}"
-        }
-      }
-    }
-  },
   "/consentRequests": {
     "post": {
       "fspid": "{$request.headers.fspiop-source}",

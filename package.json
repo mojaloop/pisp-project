@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "pretest": "npm run build",
-    "standard": "echo '\\033[1;33m  This project uses eslint instead of standard. Use `npm run lint` instead.'",
+    "standard": "echo '\\033[0;31m  This project uses eslint instead of standard. Use `npm run lint` instead.\\033[0m'",
     "lint": "eslint ./src/**/*.ts *.js",
     "build": "tsc",
     "bundle:openapi": "swagger-cli bundle -o ./src/interface/api.yaml -t yaml ./src/interface/api-template.yaml",
@@ -24,7 +24,9 @@
     "validate:openapi:dfsp": "swagger-cli validate ./src/interface/thirdparty-dfsp-api.yaml",
     "build:openapi:dfsp": "npm run bundle:openapi:dfsp && npm run validate:openapi:dfsp",
     "watch": "tsc -w",
-    "reseed": "echo \"seeding test environment\" && ./docker-local/postman/scripts/_00_seed_all.sh",
+    "reseed": "echo  '\\033[0;31m [WARN]: This command is deprecated and will be removed shortly. Use reseed:docker-local instead.\\033[0m' && npm run reseed:docker-local",
+    "reseed:docker-local": "echo \"seeding docker-local environment\" && ./docker-local/postman/scripts/_00_seed_all.sh",
+    "reseed:docker-live": "echo \"seeding docker-live environment\" && ./src/seed/cli.ts",
     "wait-4-docker": "node ./scripts/_wait4_all.js",
     "test": "npm run test:unit",
     "test:bdd": "jest --testMatch '**/test/step-definitions/**/*.step.ts'",
@@ -65,11 +67,14 @@
   },
   "homepage": "https://github.com/mojaloop/pisp#readme",
   "dependencies": {
-    "axios": "^0.19.2"
+    "@mojaloop/sdk-standard-components": "^12.0.1",
+    "axios": "^0.19.2",
+    "chalk": "^4.1.0"
   },
   "devDependencies": {
     "@mojaloop/api-snippets": "11.0.16",
     "@types/jest": "25.2.2",
+    "@types/uuid": "^8.3.0",
     "@typescript-eslint/eslint-plugin": "1.13.0",
     "@typescript-eslint/parser": "1.13.0",
     "eslint": "6.8.0",
@@ -91,6 +96,7 @@
     "swagger-cli": "^4.0.3",
     "ts-jest": "^26.0.0",
     "ts-node": "8.3.0",
-    "typescript": "3.9.2"
+    "typescript": "3.9.2",
+    "uuid": "^8.3.1"
   }
 }

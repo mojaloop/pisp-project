@@ -5,6 +5,7 @@ This repo contains the documentation, specifications and tests for the Mojaloop-
 ## Overview
 - [Project Documentation](./docs/README.md) - Project Documentation, flows, uml diagrams and so on
 - [Docker-Local](./docker-local/README.md) - Onboarding environment for local development & end to end testing
+- [Docker-Live](./docker-live/README.md) - Kubernetes Environment for live deployment
 - [Docker-Contract](./docker-contract/README.md) - Environment for testing with ml-testing-toolkit
 
 

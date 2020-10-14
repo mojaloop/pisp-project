@@ -138,7 +138,7 @@ describe('PISP side account linking tests', () => {
         }
       ],
       callbackUri: 'pisp-app://callback.com',
-      authUri: 'dfspa.com/authorize?consentRequestId=456'
+      authUri: 'dfspa.com/authorize?consentRequestId=xxxxx'
     }
     // Assert
     expect(consentRequestsCallbackResponse.status).toBe(200)

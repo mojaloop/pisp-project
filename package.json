@@ -28,7 +28,7 @@
     "test": "npm run test:unit",
     "test:bdd": "jest --testMatch '**/test/step-definitions/**/*.step.ts'",
     "test:e2e": "jest --runInBand --testMatch '**/test/e2e/**/*.(test|spec).ts'",
-    "test:contract": "jest --testMatch '**/test/contract/**/*.(test|spec).ts'",
+    "test:contract": "jest --runInBand --testMatch '**/test/contract/**/*.(test|spec).ts'",
     "test:coverage": "jest --coverage --coverageThreshold='{}'",
     "test:coverage-check": "jest --coverage",
     "test:junit": "jest --reporters=default --reporters=jest-junit",

@@ -66,12 +66,12 @@ describe('PISP side account linking tests', () => {
         accounts: {
           account: [
             {
-              address: 'dfsa.alice.1234',
+              address: 'dfspa.alice.1234',
               currency: 'USD',
               description: 'savings'
             },
             {
-              address: 'dfsa.alice.5678',
+              address: 'dfspa.alice.5678',
               currency: 'USD',
               description: 'checking'
             }

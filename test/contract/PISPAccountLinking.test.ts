@@ -46,7 +46,8 @@ describe('PISP side account linking tests', () => {
 
     const partiesCallbackURI =
       `${TestEnv.baseUrls.mlTestingToolkitInbound}/longpolling/callbacks/parties/OPAQUE/dfspa.alice.1234`
-    const partiesCallbackResponse = await axios.get(partiesCallbackURI, config)
+    const response = await axios.get(partiesCallbackURI, config)
+    const partiesCallbackResponse = (response.data.data) ? response.data.data : response.data.body
     const expected = {
       party: {
         partyIdInfo: {
@@ -80,8 +81,8 @@ describe('PISP side account linking tests', () => {
       }
     }
     // Assert
-    expect(partiesCallbackResponse.status).toBe(200)
-    expect(partiesCallbackResponse.data.data).toEqual(expected)
+    expect(response.status).toBe(200)
+    expect(partiesCallbackResponse).toEqual(expected)
   })
 
   it('Test POST /consentRequests & callback response', async () => {
@@ -115,7 +116,8 @@ describe('PISP side account linking tests', () => {
 
     const consentRequestsCallbackURI =
       `${TestEnv.baseUrls.mlTestingToolkitInbound}/longpolling/callbacks/consentRequests/${data.id}`
-    const consentRequestsCallbackResponse = await axios.get(consentRequestsCallbackURI, config)
+    const response = await axios.get(consentRequestsCallbackURI, config)
+    const consentRequestsCallbackResponse = (response.data.data) ? response.data.data : response.data.body
     const expected = {
       initiatorId: 'pispA',
       authChannels: [
@@ -140,9 +142,10 @@ describe('PISP side account linking tests', () => {
       callbackUri: 'pisp-app://callback.com',
       authUri: 'dfspa.com/authorize?consentRequestId=xxxxx'
     }
+
     // Assert
-    expect(consentRequestsCallbackResponse.status).toBe(200)
-    expect(consentRequestsCallbackResponse.data.data).toEqual(expected)
+    expect(response.status).toBe(200)
+    expect(consentRequestsCallbackResponse).toEqual(expected)
   })
 
   it('Test PUT /consentRequests/{ID}', async () => {
@@ -190,7 +193,8 @@ describe('PISP side account linking tests', () => {
 
     const consentsURICallbackURI =
       `${TestEnv.baseUrls.mlTestingToolkitInbound}/longpolling/callbacks/consents/9d553d59-610f-44aa-b7ec-b483af24e98a`
-    const consentsCallbackResponse = await axios.get(consentsURICallbackURI, config)
+    const response = await axios.get(consentsURICallbackURI, config)
+    const consentsCallbackResponse = (response.data.data) ? response.data.data : response.data.body
     const expected = {
       requestId: '4cab6274-8b3e-41b4-83ce-fc0847409155',
       participantId: 'dfspA',
@@ -219,9 +223,10 @@ describe('PISP side account linking tests', () => {
         }
       }
     }
+
     // Assert
-    expect(consentsCallbackResponse.status).toBe(200)
-    expect(consentsCallbackResponse.data.data).toEqual(expected)
+    expect(response.status).toBe(200)
+    expect(consentsCallbackResponse).toEqual(expected)
   })
 
   it('Test PUT /consents/{ID}', async () => {

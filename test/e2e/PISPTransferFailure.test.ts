@@ -31,6 +31,13 @@ describe('PISP initiated transfer failure', (): void => {
     // this error should apply for all mandatory fields like transactionRequestId/payer/payee/etc
     // ideally when hapi openapi throws a missing required error it is reformated into a standard mojaloop error object
     it.todo('receives a missing mandatory element error callback when PISP sends missing payer element from payload. tentative code 6202.')
+
+    it.todo('receives a consent not valid error callback when PISP sends incorrect or not existent consentId. tentative code 6103.')
+
+    // tentative errors for bubbling up downstream errors
+    it.todo('receives a thirdparty request rejection error callback if source account has insufficient funds for transfer. tentative code 6105.')
+    it.todo('receives a thirdparty request rejection error callback if downstream quote fails. tentative code 6105.')
+    it.todo('receives a generic third party error callback if downstream transfer fails. tentative code 6000.')
   })
 
   describe('3. PISP PUT /authorizations/{ID} response', (): void => {
@@ -41,6 +48,12 @@ describe('PISP initiated transfer failure', (): void => {
     // ideally when hapi openapi throws a missing required error it is reformated into a standard mojaloop error object
     it.todo('receives a missing mandatory element error callback from switch when PISP sends missing authenticationInfo element from payload. tentative code 6202.')
 
-    it.todo('receives a  Mismatched thirdparty ID error callback if dfsp errors on checking that /authorization/{UUID} pispId does not match associated /thirdpartyRequest/transaction/{UUID}. tentative code 6208')
+    it.todo('receives a mismatched thirdparty ID error callback if dfsp errors on checking that /authorization/{UUID} pispId does not match associated /thirdpartyRequest/transaction/{UUID}. tentative code 6209')
+
+    // tentative errors for bubbling up downstream errors
+    it.todo('receives a invalid signed challenge error callback if dfsp tries to validate signed challenge with auth service and it is not valid. tentative code 6204.')
+    it.todo('receives a thirdparty request rejection error callback if sourceAccountId is no longer valid. tentative code 6105.')
+    it.todo('receives a thirdparty request rejection error callback if source account has insufficient funds for transfer. tentative code 6105.')
+    it.todo('receives a maximum authorization retires reached error callback if authorization counter has passed the set limit. tentative code 6205.')
   })
 })

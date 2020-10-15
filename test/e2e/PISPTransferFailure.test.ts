@@ -10,27 +10,6 @@ describe('PISP initiated transfer failure', (): void => {
     it.todo('receives a communication error callback. code 1000.')
     it.todo('receives a destination communication error callback. code 1001.')
 
-    // sent by the switch when the switch is unable to fulfil a valid request
-    // believe a PISP should know about these errors
-    it.todo('receives a generic server error callback. code 2000.')
-    it.todo('receives an internal server error callback. code 2001.')
-    // sent if switch's ALS is down?
-    it.todo('receives a service unavailable error callback.  code 2003.')
-    it.todo('receives a server timed out error callback. code 2004.')
-    // unsure how to test.
-    it.todo('receives a server busy error callback. code 2005.')
-
-    // unsure what triggers these error.
-    it.todo('receives a generic client error callback. code 3000.')
-    it.todo('receives an unacceptable version requested error callback. code 3001.')
-
-    // don't believe these can occur from a GET parties scenario?
-    it.todo('receives a generic validation error callback. code 3100.')
-    it.todo('receives a malformed syntax error callback. code 3101.')
-    it.todo('receives a missing mandatory syntax error callback. code 3102.')
-    it.todo('receives a too large payload error callback from switch when PISP sends request with too large of payload. code 3104.')
-    it.todo('receives an invalid signature error callback. code 3105.')
-
     // believe a PISP would need to know about these errors
     it.todo('receives a generic id not found error callback from switch when DFSP is not able to find party related to identifier. code 3200.')
     it.todo('receives a destination fsp not found error callback from switch when DFSP is not found as a participant. code 3201.')

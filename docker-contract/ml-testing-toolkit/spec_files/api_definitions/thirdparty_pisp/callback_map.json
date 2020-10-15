@@ -1,4 +1,58 @@
 {
+  "/consentRequests": {
+    "post": {
+      "fspid": "{$request.headers.fspiop-source}",
+      "successCallback": {
+        "method": "put",
+        "path": "/consentRequests/{ID}",
+        "pathPattern": "/consentRequests/{$request.body.id}",
+        "headerOverride": {
+          "FSPIOP-Source": "{$request.headers.fspiop-destination}",
+          "FSPIOP-Destination": "{$request.headers.fspiop-source}",
+          "Content-Type": "{$session.negotiatedContentType}",
+          "Date": "{$request.headers.date}"
+        }
+      },
+      "errorCallback": {
+        "method": "put",
+        "path": "/consentRequests/{ID}",
+        "pathPattern": "/consentRequests/{$request.body.id}",
+        "headerOverride": {
+          "FSPIOP-Source": "{$request.headers.fspiop-destination}",
+          "FSPIOP-Destination": "{$request.headers.fspiop-source}",
+          "Content-Type": "{$session.negotiatedContentType}",
+          "Date": "{$request.headers.date}"
+        }
+      }
+    }
+  },
+  "/consents/{ID}/generateChallenge": {
+    "post": {
+      "fspid": "{$request.headers.fspiop-source}",
+      "successCallback": {
+        "method": "put",
+        "path": "/consents/{ID}",
+        "pathPattern": "/consents/{$request.params.ID}",
+        "headerOverride": {
+          "FSPIOP-Source": "{$request.headers.fspiop-destination}",
+          "FSPIOP-Destination": "{$request.headers.fspiop-source}",
+          "Content-Type": "{$session.negotiatedContentType}",
+          "Date": "{$request.headers.date}"
+        }
+      },
+      "errorCallback": {
+        "method": "put",
+        "path": "/consents/{ID}",
+        "pathPattern": "/consents/{$request.params.ID}",
+        "headerOverride": {
+          "FSPIOP-Source": "{$request.headers.fspiop-destination}",
+          "FSPIOP-Destination": "{$request.headers.fspiop-source}",
+          "Content-Type": "{$session.negotiatedContentType}",
+          "Date": "{$request.headers.date}"
+        }
+      }
+    }
+  },
   "/thirdpartyRequests/transactions": {
     "post": {
       "successCallback": {
@@ -68,30 +122,6 @@
         "method": "put",
         "path": "/thirdpartyRequests/transactions/{ID}/authorizations/error",
         "pathPattern": "/thirdpartyRequests/transactions/{$request.body.transactionRequestId}/authorizations/error",
-        "headerOverride": {
-          "FSPIOP-Source": "{$config.FSPID}",
-          "FSPIOP-Destination": "{$request.headers.fspiop-source}",
-          "Content-Type": "{$session.negotiatedContentType}",
-          "Date": "{$request.headers.date}"
-        }
-      }
-    },
-    "put": {
-      "successCallback": {
-        "method": "put",
-        "path": "/thirdpartyRequests/transactions/{ID}/authorizations",
-        "pathPattern": "/thirdpartyRequests/transactions/{$request.body.transactionRequestId}",
-        "headerOverride": {
-          "FSPIOP-Source": "{$config.FSPID}",
-          "FSPIOP-Destination": "{$request.headers.fspiop-source}",
-          "Content-Type": "{$session.negotiatedContentType}",
-          "Date": "{$request.headers.date}"
-        }
-      },
-      "errorCallback": {
-        "method": "put",
-        "path": "/thirdpartyRequests/transactions/{ID}/authorizations/error",
-        "pathPattern": "/thirdpartyRequests/transactions/{$request.body.transactionRequestId}/error",
         "headerOverride": {
           "FSPIOP-Source": "{$config.FSPID}",
           "FSPIOP-Destination": "{$request.headers.fspiop-source}",

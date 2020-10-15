@@ -25,6 +25,7 @@ export interface TestEnvType {
     pispThirdpartySchemeAdapterOutbound: string;
     pispContractSchemeAdapter: string;
     mlTestingToolkit: string;
+    mlTestingToolkitInbound: string;
   };
   currency: string;
   users: {
@@ -53,7 +54,8 @@ const TestEnv: TestEnvType = {
     pispThirdpartySchemeAdapterInbound: 'http://localhost:7005',
     pispThirdpartySchemeAdapterOutbound: 'http://localhost:7006',
     pispContractSchemeAdapter: 'http://localhost:8002',
-    mlTestingToolkit: 'http://localhost:15000'
+    mlTestingToolkit: 'http://localhost:15000',
+    mlTestingToolkitInbound: 'http://localhost:5050'
   },
   currency: 'USD',
   users: {

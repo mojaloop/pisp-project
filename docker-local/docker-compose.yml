@@ -6,7 +6,7 @@ networks:
 
 services:
   central-ledger:
-    image: mojaloop/central-ledger:v11.1.4.0-pisp
+    image: mojaloop/central-ledger:v11.1.4.3-pisp
     container_name: central-ledger
     command: sh -c "/opt/central-ledger/wait4/wait4.js central-ledger && node src/api/index.js"
     ports:
@@ -305,7 +305,7 @@ services:
 
   dfspa-sdk-scheme-adapter:
     image: "mojaloop/sdk-scheme-adapter:v10.6.2.5-pisp"
-    # build: 
+    # build:
     #     context: ../../sdk-scheme-adapter
     #     dockerfile: ./Dockerfile
 
@@ -344,7 +344,7 @@ services:
 
   dfspa-thirdparty-scheme-adapter-inbound:
     image: "mojaloop/thirdparty-scheme-adapter:v11.18.0"
-    # build: 
+    # build:
     #   context: ../../thirdparty-scheme-adapter
     #   dockerfile: ./docker/Dockerfile
     container_name: dfspa-thirdparty-scheme-adapter-inbound
@@ -390,7 +390,7 @@ services:
 
   dfspa-thirdparty-scheme-adapter-outbound:
     image: "mojaloop/thirdparty-scheme-adapter:v11.18.0"
-    # build: 
+    # build:
     #   context: ../../thirdparty-scheme-adapter
     #   dockerfile: ./docker/Dockerfile
     container_name: dfspa-thirdparty-scheme-adapter-outbound
@@ -459,7 +459,7 @@ services:
 
   dfspb-sdk-scheme-adapter:
     image: "mojaloop/sdk-scheme-adapter:v10.6.2.5-pisp"
-    # build: 
+    # build:
     #   context: ../../sdk-scheme-adapter
     #   dockerfile: ./Dockerfile
     container_name: dfspb-sdk-scheme-adapter
@@ -497,7 +497,7 @@ services:
 
   dfspb-thirdparty-scheme-adapter-inbound:
     image: "mojaloop/thirdparty-scheme-adapter:v11.18.0"
-    # build: 
+    # build:
     #   context: ../../thirdparty-scheme-adapter
     #   dockerfile: ./docker/Dockerfile
     container_name: dfspb-thirdparty-scheme-adapter-inbound
@@ -543,7 +543,7 @@ services:
 
   dfspb-thirdparty-scheme-adapter-outbound:
     image: "mojaloop/thirdparty-scheme-adapter:v11.18.0"
-    # build: 
+    # build:
     #   context: ../../thirdparty-scheme-adapter
     #   dockerfile: ./docker/Dockerfile
     container_name: dfspb-thirdparty-scheme-adapter-outbound
@@ -613,7 +613,7 @@ services:
 
   pisp-sdk-scheme-adapter:
     image: "mojaloop/sdk-scheme-adapter:v10.6.2.5-pisp"
-    # build: 
+    # build:
     #   context: ../../sdk-scheme-adapter
     #   dockerfile: ./Dockerfile
     container_name: pisp-sdk-scheme-adapter
@@ -651,7 +651,7 @@ services:
 
   pisp-thirdparty-scheme-adapter-inbound:
     image: "mojaloop/thirdparty-scheme-adapter:v11.18.0"
-    # build: 
+    # build:
     #   context: ../../thirdparty-scheme-adapter
     #   dockerfile: ./docker/Dockerfile
     container_name: pisp-thirdparty-scheme-adapter-inbound
@@ -698,7 +698,7 @@ services:
 
   pisp-thirdparty-scheme-adapter-outbound:
     image: "mojaloop/thirdparty-scheme-adapter:v11.18.0"
-    # build: 
+    # build:
     #   context: ../../thirdparty-scheme-adapter
     #   dockerfile: ./docker/Dockerfile
     container_name: pisp-thirdparty-scheme-adapter-outbound

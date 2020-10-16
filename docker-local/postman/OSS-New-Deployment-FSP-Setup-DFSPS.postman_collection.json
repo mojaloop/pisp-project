@@ -1623,6 +1623,41 @@
 							"response": []
 						},
 						{
+							"name": "Add payerfsp callback - TP_CB_URL_TRANSACTION_REQUEST_GET",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "",
+										"type": "text",
+										"value": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"type\": \"TP_CB_URL_TRANSACTION_REQUEST_GET\",\n  \"value\": \"{{THIRDPARTY_SCHEME_ADAPTER_INBOUND}}\"\n}"
+								},
+								"url": {
+									"raw": "{{HOST_CENTRAL_LEDGER}}/participants/{{payerfsp}}/endpoints",
+									"host": [
+										"{{HOST_CENTRAL_LEDGER}}"
+									],
+									"path": [
+										"participants",
+										"{{payerfsp}}",
+										"endpoints"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "Add payerfsp callback - TP_CB_URL_TRANSACTION_REQUEST_POST",
 							"request": {
 								"method": "POST",
@@ -1635,8 +1670,8 @@
 									},
 									{
 										"key": "",
-										"value": "",
-										"type": "text"
+										"type": "text",
+										"value": ""
 									}
 								],
 								"body": {
@@ -3433,6 +3468,41 @@
 							"response": []
 						},
 						{
+							"name": "Add payeefsp callback - TP_CB_URL_TRANSACTION_REQUEST_GET",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "",
+										"type": "text",
+										"value": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"type\": \"TP_CB_URL_TRANSACTION_REQUEST_GET\",\n  \"value\": \"{{THIRDPARTY_SCHEME_ADAPTER_INBOUND}}\"\n}"
+								},
+								"url": {
+									"raw": "{{HOST_CENTRAL_LEDGER}}/participants/{{payeefsp}}/endpoints",
+									"host": [
+										"{{HOST_CENTRAL_LEDGER}}"
+									],
+									"path": [
+										"participants",
+										"{{payeefsp}}",
+										"endpoints"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "Add payeefsp callback - TP_CB_URL_TRANSACTION_REQUEST_POST",
 							"request": {
 								"method": "POST",
@@ -5193,6 +5263,41 @@
 										"parties",
 										"MSISDN",
 										"999999999"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add pispfsp callback - TP_CB_URL_TRANSACTION_REQUEST_GET",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "",
+										"type": "text",
+										"value": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"type\": \"TP_CB_URL_TRANSACTION_REQUEST_GET\",\n  \"value\": \"{{THIRDPARTY_SCHEME_ADAPTER_INBOUND}}\"\n}"
+								},
+								"url": {
+									"raw": "{{HOST_CENTRAL_LEDGER}}/participants/{{payerfsp}}/endpoints",
+									"host": [
+										"{{HOST_CENTRAL_LEDGER}}"
+									],
+									"path": [
+										"participants",
+										"{{payerfsp}}",
+										"endpoints"
 									]
 								}
 							},

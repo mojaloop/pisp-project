@@ -37,7 +37,6 @@ describe('PISP initiated transfer failure', (): void => {
     // tentative errors for bubbling up downstream errors
     it.todo('receives a thirdparty request rejection error callback if source account has insufficient funds for transfer. tentative code 6105.')
     it.todo('receives a thirdparty request rejection error callback if downstream quote fails. tentative code 6105.')
-    it.todo('receives a generic third party error callback if downstream transfer fails. tentative code 6000.')
   })
 
   describe('3. PISP PUT /authorizations/{ID} response', (): void => {
@@ -55,5 +54,6 @@ describe('PISP initiated transfer failure', (): void => {
     it.todo('receives a thirdparty request rejection error callback if sourceAccountId is no longer valid. tentative code 6105.')
     it.todo('receives a thirdparty request rejection error callback if source account has insufficient funds for transfer. tentative code 6105.')
     it.todo('receives a maximum authorization retires reached error callback if authorization counter has passed the set limit. tentative code 6205.')
+    it.todo('receives a generic third party error callback if downstream transfer fails. tentative code 6000.')
   })
 })

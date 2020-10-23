@@ -29,7 +29,9 @@
       "params": {},
       "delay": 0,
       "type": "MOCK_CALLBACK"
-    }
+    },
+    "type": "callback",
+    "version": 1
   },
   {
     "ruleId": 2,
@@ -65,7 +67,9 @@
       },
       "delay": 0,
       "type": "MOCK_CALLBACK"
-    }
+    },
+    "type": "callback",
+    "version": 1
   },
   {
     "ruleId": 3,
@@ -79,6 +83,12 @@
     },
     "conditions": {
       "all": [
+        {
+          "fact": "pathParams",
+          "operator": "notEqual",
+          "value": "OPAQUE",
+          "path": "Type"
+        },
         {
           "fact": "operationPath",
           "operator": "equal",
@@ -129,7 +139,86 @@
       },
       "delay": 0,
       "type": "FIXED_CALLBACK"
-    }
+    },
+    "type": "callback",
+    "version": 1
+  },
+  {
+    "ruleId": 25,
+    "priority": 1,
+    "description": "get /parties/{OPAQUE}/{ID}",
+    "apiVersion": {
+      "minorVersion": 0,
+      "majorVersion": 1,
+      "type": "fspiop",
+      "asynchronous": true
+    },
+    "conditions": {
+      "all": [
+        {
+          "fact": "pathParams",
+          "operator": "equal",
+          "value": "OPAQUE",
+          "path": "Type"
+        },
+        {
+          "fact": "operationPath",
+          "operator": "equal",
+          "value": "/parties/{Type}/{ID}"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "get"
+        }
+      ]
+    },
+    "event": {
+      "method": "put",
+      "path": "/parties/{Type}/{ID}",
+      "params": {
+        "headers": {
+          "Content-Type": "application/vnd.interoperability.parties+json;version=1.0"
+        },
+        "body": {
+          "party": {
+            "partyIdInfo": {
+              "partyIdType": "MSISDN",
+              "partyIdentifier": "+1-111-111-1111",
+              "fspId": "dfspA"
+            },
+            "merchantClassificationCode": "4321",
+            "name": "Alice K",
+            "personalInfo": {
+              "complexName": {
+                "firstName": "Alice",
+                "lastName": "K"
+              },
+              "dateOfBirth": "1963-06-16"
+            },
+            "accounts": {
+              "account": [
+                {
+                  "address": "dfspa.alice.1234",
+                  "currency": "USD",
+                  "description": "savings"
+                },
+                {
+                  "address": "dfspa.alice.5678",
+                  "currency": "USD",
+                  "description": "checking"
+                }
+              ]
+            }
+          }
+        },
+        "scripts": {}
+      },
+      "delay": 0,
+      "type": "FIXED_CALLBACK"
+    },
+    "type": "callback",
+    "version": 1
   },
   {
     "ruleId": 4,
@@ -165,7 +254,9 @@
       },
       "delay": 0,
       "type": "MOCK_CALLBACK"
-    }
+    },
+    "type": "callback",
+    "version": 1
   },
   {
     "ruleId": 5,
@@ -197,7 +288,9 @@
       "params": {},
       "delay": 0,
       "type": "MOCK_CALLBACK"
-    }
+    },
+    "type": "callback",
+    "version": 1
   },
   {
     "ruleId": 6,
@@ -229,7 +322,9 @@
       "params": {},
       "delay": 0,
       "type": "MOCK_CALLBACK"
-    }
+    },
+    "type": "callback",
+    "version": 1
   },
   {
     "ruleId": 7,
@@ -261,7 +356,9 @@
       "params": {},
       "delay": 0,
       "type": "MOCK_CALLBACK"
-    }
+    },
+    "type": "callback",
+    "version": 1
   },
   {
     "ruleId": 8,
@@ -293,7 +390,9 @@
       "params": {},
       "delay": 0,
       "type": "MOCK_CALLBACK"
-    }
+    },
+    "type": "callback",
+    "version": 1
   },
   {
     "ruleId": 9,
@@ -325,7 +424,9 @@
       "params": {},
       "delay": 0,
       "type": "MOCK_CALLBACK"
-    }
+    },
+    "type": "callback",
+    "version": 1
   },
   {
     "ruleId": 10,
@@ -357,7 +458,9 @@
       "params": {},
       "delay": 0,
       "type": "MOCK_CALLBACK"
-    }
+    },
+    "type": "callback",
+    "version": 1
   },
   {
     "ruleId": 11,
@@ -389,7 +492,9 @@
       "params": {},
       "delay": 0,
       "type": "MOCK_CALLBACK"
-    }
+    },
+    "type": "callback",
+    "version": 1
   },
   {
     "ruleId": 12,
@@ -421,7 +526,9 @@
       "params": {},
       "delay": 0,
       "type": "MOCK_CALLBACK"
-    }
+    },
+    "type": "callback",
+    "version": 1
   },
   {
     "ruleId": 13,
@@ -457,7 +564,9 @@
       },
       "delay": 0,
       "type": "MOCK_CALLBACK"
-    }
+    },
+    "type": "callback",
+    "version": 1
   },
   {
     "ruleId": 14,
@@ -489,7 +598,9 @@
       "params": {},
       "delay": 0,
       "type": "MOCK_CALLBACK"
-    }
+    },
+    "type": "callback",
+    "version": 1
   },
   {
     "ruleId": 15,
@@ -525,7 +636,9 @@
       },
       "delay": 0,
       "type": "MOCK_CALLBACK"
-    }
+    },
+    "type": "callback",
+    "version": 1
   },
   {
     "ruleId": 16,
@@ -557,7 +670,9 @@
       "params": {},
       "delay": 0,
       "type": "MOCK_CALLBACK"
-    }
+    },
+    "type": "callback",
+    "version": 1
   },
   {
     "ruleId": 17,
@@ -589,7 +704,9 @@
       "params": {},
       "delay": 0,
       "type": "MOCK_CALLBACK"
-    }
+    },
+    "type": "callback",
+    "version": 1
   },
   {
     "ruleId": 18,
@@ -621,7 +738,9 @@
       "params": {},
       "delay": 0,
       "type": "MOCK_CALLBACK"
-    }
+    },
+    "type": "callback",
+    "version": 1
   },
   {
     "ruleId": 19,
@@ -653,14 +772,16 @@
       "params": {},
       "delay": 0,
       "type": "MOCK_CALLBACK"
-    }
+    },
+    "type": "callback",
+    "version": 1
   },
   {
     "ruleId": 20,
     "priority": 1,
     "description": "post /authorizations",
     "apiVersion": {
-      "minorVersion": 2,
+      "minorVersion": 0,
       "majorVersion": 1,
       "type": "fspiop",
       "asynchronous": true
@@ -698,7 +819,9 @@
       },
       "delay": 0,
       "type": "FIXED_CALLBACK"
-    }
+    },
+    "type": "callback",
+    "version": 1
   },
   {
     "ruleId": 21,
@@ -741,7 +864,9 @@
       },
       "delay": 0,
       "type": "FIXED_CALLBACK"
-    }
+    },
+    "type": "callback",
+    "version": 1
   },
   {
     "ruleId": 22,
@@ -784,7 +909,9 @@
       },
       "delay": 0,
       "type": "FIXED_CALLBACK"
-    }
+    },
+    "type": "callback",
+    "version": 1
   },
   {
     "ruleId": 23,
@@ -830,7 +957,9 @@
       },
       "delay": 0,
       "type": "FIXED_CALLBACK"
-    }
+    },
+    "type": "callback",
+    "version": 1
   },
   {
     "ruleId": 24,
@@ -870,6 +999,138 @@
       },
       "delay": 0,
       "type": "FIXED_CALLBACK"
-    }
+    },
+    "type": "callback",
+    "version": 1
+  },
+  {
+    "ruleId": 26,
+    "priority": 1,
+    "description": "post /consentRequests",
+    "apiVersion": {
+      "minorVersion": 1,
+      "majorVersion": 0,
+      "type": "thirdparty_pisp",
+      "asynchronous": true
+    },
+    "conditions": {
+      "all": [
+        {
+          "fact": "operationPath",
+          "operator": "equal",
+          "value": "/consentRequests"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "post"
+        }
+      ]
+    },
+    "event": {
+      "method": "put",
+      "path": "/consentRequests/{ID}",
+      "params": {
+        "headers": {
+          "Accept": "application/vnd.interoperability.thirdparty+json;version=1.0",
+          "Content-Type": "application/vnd.interoperability.thirdparty+json;version=1.0"
+        },
+        "body": {
+          "initiatorId": "pispA",
+          "authChannels": [
+            "WEB"
+          ],
+          "scopes": [
+            {
+              "accountId": "dfspa.alice.1234",
+              "actions": [
+                "accounts.transfer",
+                "accounts.getBalance"
+              ]
+            },
+            {
+              "accountId": "dfspa.alice.5678",
+              "actions": [
+                "accounts.transfer",
+                "accounts.getBalance"
+              ]
+            }
+          ],
+          "callbackUri": "pisp-app://callback.com",
+          "authUri": "dfspa.com/authorize?consentRequestId=xxxxx"
+        },
+        "scripts": {}
+      },
+      "type": "FIXED_CALLBACK"
+    },
+    "type": "callback",
+    "version": 1
+  },
+  {
+    "ruleId": 27,
+    "priority": 1,
+    "description": "post /consents/{ID}/generateChallenge",
+    "apiVersion": {
+      "minorVersion": 1,
+      "majorVersion": 0,
+      "type": "thirdparty_pisp",
+      "asynchronous": true
+    },
+    "conditions": {
+      "all": [
+        {
+          "fact": "operationPath",
+          "operator": "equal",
+          "value": "/consents/{ID}/generateChallenge"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "post"
+        }
+      ]
+    },
+    "event": {
+      "method": "put",
+      "path": "/consents/{ID}",
+      "params": {
+        "headers": {
+          "Accept": "application/vnd.interoperability.thirdparty+json;version=1.0",
+          "Content-Type": "application/vnd.interoperability.thirdparty+json;version=1.0"
+        },
+        "body": {
+          "requestId": "4cab6274-8b3e-41b4-83ce-fc0847409155",
+          "participantId": "dfspA",
+          "initiatorId": "pispA",
+          "scopes": [
+            {
+              "accountId": "dfspa.alice.1234",
+              "actions": [
+                "accounts.transfer",
+                "accounts.getBalance"
+              ]
+            },
+            {
+              "accountId": "dfspa.alice.5678",
+              "actions": [
+                "accounts.transfer",
+                "accounts.getBalance"
+              ]
+            }
+          ],
+          "credential": {
+            "type": "FIDO",
+            "status": "PENDING",
+            "challenge": {
+              "payload": "base64 encoded challenge"
+            }
+          }
+        },
+        "scripts": {}
+      },
+      "type": "FIXED_CALLBACK"
+    },
+    "type": "callback",
+    "version": 1
   }
 ]

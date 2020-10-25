@@ -69,5 +69,5 @@ describe('/thirdpartyTransaction: partyLookup->initiate->approve', (): void => {
     expect(approveResponse.status).toEqual(200)
     expect(approveResponse.data.currentState).toEqual('transactionStatusReceived')
     expect(approveResponse.data.transactionStatus.transactionRequestState).toEqual('ACCEPTED')
-  })
+  }, 20000)
 })

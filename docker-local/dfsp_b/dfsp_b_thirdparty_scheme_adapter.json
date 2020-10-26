@@ -36,35 +36,13 @@
     "JWS_SIGN": false,
     "JWS_SIGNING_KEY": "./secrets/jwsSigningKey.key",
     "TLS": {
-      "inbound": {
-          "mutualTLS": {
-              "enabled": false
-          },
-          "creds": {
-            "ca": "./secrets/dfsp_b_client.crt",
-            "cert": "./secrets/dfsp_b_client.crt",
-            "key": "./secrets/dfsp_b_client.crt"
-          }
+      "mutualTLS": {
+          "enabled": false
       },
-      "outbound": {
-          "mutualTLS": {
-              "enabled": false
-          },
-          "creds": {
-            "ca": "./secrets/dfsp_b_client.crt",
-            "cert": "./secrets/dfsp_b_client.crt",
-            "key": "./secrets/dfsp_b_client.crt"
-          }
-      },
-      "test": {
-          "mutualTLS": {
-              "enabled": false
-          },
-          "creds": {
-            "ca": "./secrets/dfsp_b_client.crt",
-            "cert": "./secrets/dfsp_b_client.crt",
-            "key": "./secrets/dfsp_b_client.crt"
-          }
+      "creds": {
+        "ca": "./secrets/dfsp_b_client.crt",
+        "cert": "./secrets/dfsp_b_client.crt",
+        "key": "./secrets/dfsp_b_client.crt"
       }
     }
   }

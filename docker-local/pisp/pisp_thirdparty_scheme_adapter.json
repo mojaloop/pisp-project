@@ -1,7 +1,8 @@
 {
   "INBOUND": {
     "PORT": 4005,
-    "HOST": "0.0.0.0"
+    "HOST": "0.0.0.0",
+    "PISP_TRANSACTION_MODE": "true"
   },
   "OUTBOUND": {
     "PORT": 4006,
@@ -30,41 +31,22 @@
     "QUOTES_ENDPOINT": "quoting-service:3002",
     "TRANSFERS_ENDPOINT": "ml-api-adapter:3000",
     "BULK_TRANSFERS_ENDPOINT": "ml-api-adapter:3000",
+    "THIRDPARTY_REQUESTS_ENDPOINT": "pisp-thirdparty-api-adapter:12000",
     "DFSP_ID": "pisp",
     "DFSP_BACKEND_URI": "pisp-backend:11000",
     "DFSP_BACKEND_HTTP_SCHEME": "http",
+    "SDK_REQUEST_TO_PAY_TRANSFER_URI": "pisp-sdk-scheme-adapter:7002/requestToPay",
+    "SDK_PARTIES_INFORMATION_URI": "pisp-sdk-scheme-adapter:7002/parties/{Type}/{ID}/{SubId}",
     "JWS_SIGN": false,
     "JWS_SIGNING_KEY": "./secrets/jwsSigningKey.key",
     "TLS": {
-      "inbound": {
-          "mutualTLS": {
-              "enabled": false
-          },
-          "creds": {
-            "ca": "./secrets/pisp_client.crt",
-            "cert": "./secrets/pisp_client.crt",
-            "key": "./secrets/pisp_client.crt"
-          }
+      "mutualTLS": {
+          "enabled": false
       },
-      "outbound": {
-          "mutualTLS": {
-              "enabled": false
-          },
-          "creds": {
-            "ca": "./secrets/pisp_client.crt",
-            "cert": "./secrets/pisp_client.crt",
-            "key": "./secrets/pisp_client.crt"
-          }
-      },
-      "test": {
-          "mutualTLS": {
-              "enabled": false
-          },
-          "creds": {
-            "ca": "./secrets/pisp_client.crt",
-            "cert": "./secrets/pisp_client.crt",
-            "key": "./secrets/pisp_client.crt"
-          }
+      "creds": {
+        "ca": "./secrets/pisp_client.crt",
+        "cert": "./secrets/pisp_client.crt",
+        "key": "./secrets/pisp_client.crt"
       }
     }
   }

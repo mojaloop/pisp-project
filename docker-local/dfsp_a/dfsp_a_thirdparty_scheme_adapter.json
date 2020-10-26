@@ -33,38 +33,18 @@
     "DFSP_ID": "dfspa",
     "DFSP_BACKEND_URI": "dfspa-backend:9000",
     "DFSP_BACKEND_HTTP_SCHEME": "http",
+    "SDK_REQUEST_TO_PAY_TRANSFER_URI": "dsfpa-sdk-scheme-adapter:5002/requestToPayTransfer",
+    "NOTIFY_ABOUT_TRANSFER_URI": "pisp-thirdparty-scheme-adapter-inbound:7005/thirdpartyRequests/transactions/{ID}",
     "JWS_SIGN": false,
     "JWS_SIGNING_KEY": "./secrets/jwsSigningKey.key",
     "TLS": {
-      "inbound": {
-          "mutualTLS": {
-              "enabled": false
-          },
-          "creds": {
-            "ca": "./secrets/dfsp_a_client.crt",
-            "cert": "./secrets/dfsp_a_client.crt",
-            "key": "./secrets/dfsp_a_client.crt"
-          }
+      "mutualTLS": {
+          "enabled": false
       },
-      "outbound": {
-          "mutualTLS": {
-              "enabled": false
-          },
-          "creds": {
-            "ca": "./secrets/dfsp_a_client.crt",
-            "cert": "./secrets/dfsp_a_client.crt",
-            "key": "./secrets/dfsp_a_client.crt"
-          }
-      },
-      "test": {
-          "mutualTLS": {
-              "enabled": false
-          },
-          "creds": {
-            "ca": "./secrets/dfsp_a_client.crt",
-            "cert": "./secrets/dfsp_a_client.crt",
-            "key": "./secrets/dfsp_a_client.crt"
-          }
+      "creds": {
+        "ca": "./secrets/dfsp_a_client.crt",
+        "cert": "./secrets/dfsp_a_client.crt",
+        "key": "./secrets/dfsp_a_client.crt"
       }
     }
   }

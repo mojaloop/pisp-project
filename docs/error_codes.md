@@ -24,10 +24,6 @@ This document is suggesting that a high level error category 6xxx(can be another
 
 | **Error Code** | **Name** | **Description** | /parties | /thirdPartyRequest | /consentRequests | /authorizations | /consents |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-    | **6200** | Validation error | Generic validation error. | X | X | X | X | X |
-    | **6201** | Malformed syntax | Generic validation error. | X | X | X | X | X |
-    | **6202** | Missing mandatory element | The format of the parameter is not valid. For example, amount set to 5.ABC. The error description field should specify which element is erroneous | X | X | X | X | X |
-    | **6203** | Too many elements | The number of elements of an array exceeds the maximum number allowed. | X |  | X |  | X |
 | **6200** | Invalid signed challenge | PISP server/DFSP receives signed challenge that is invalid. |  |  | X | X |  |
 | **6201** | Maximum authorization retires reached | PISP server has reached maximum number of authorizations. |  |  | X | X |  |
 | **6202** | Missing authentication credential | Payload received with missing authentication credential.  |  |  |  | X |  |  |

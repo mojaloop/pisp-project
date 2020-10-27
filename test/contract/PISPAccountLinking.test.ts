@@ -43,6 +43,46 @@ describe('PISP side account linking tests', () => {
     const result = await axios.get(partiesURI, config)
     // Assert
     expect(result.status).toBe(202)
+
+    const partiesCallbackURI =
+      `${TestEnv.baseUrls.mlTestingToolkitInbound}/longpolling/callbacks/parties/OPAQUE/dfspa.alice.1234`
+    const response = await axios.get(partiesCallbackURI, config)
+    const partiesCallbackResponse = (response.data.data) ? response.data.data : response.data.body
+    const expected = {
+      party: {
+        partyIdInfo: {
+          partyIdType: 'MSISDN',
+          partyIdentifier: '+1-111-111-1111',
+          fspId: 'dfspA'
+        },
+        merchantClassificationCode: '4321',
+        name: 'Alice K',
+        personalInfo: {
+          complexName: {
+            firstName: 'Alice',
+            lastName: 'K'
+          },
+          dateOfBirth: '1963-06-16'
+        },
+        accounts: {
+          account: [
+            {
+              address: 'dfspa.alice.1234',
+              currency: 'USD',
+              description: 'savings'
+            },
+            {
+              address: 'dfspa.alice.5678',
+              currency: 'USD',
+              description: 'checking'
+            }
+          ]
+        }
+      }
+    }
+    // Assert
+    expect(response.status).toBe(200)
+    expect(partiesCallbackResponse).toEqual(expected)
   })
 
   it('Test POST /consentRequests & callback response', async () => {

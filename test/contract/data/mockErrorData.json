@@ -1,0 +1,182 @@
+{
+  "thirdpartyRequestsTransactionError6000": {
+    "transactionRequestId": "7d34f91d-d078-4077-8263-2c047876fcf6",
+    "sourceAccountId": "ERROR6000",
+    "consentId": "8e34f91d-d078-4077-8263-2c047876fcf6",
+    "payee": {
+      "partyIdInfo": {
+        "partyIdType": "MSISDN",
+        "partyIdentifier": "+44 1234 5678",
+        "fspId": "dfspb"
+      }
+    },
+    "payer": {
+      "personalInfo": {
+        "complexName": {
+          "firstName": "Alice",
+          "lastName": "K"
+        }
+      },
+      "partyIdInfo": {
+        "partyIdType": "MSISDN",
+        "partyIdentifier": "+44 8765 4321",
+        "fspId": "dfspa"
+      }
+    },
+    "amountType": "SEND",
+    "amount": {
+      "amount": "100",
+      "currency": "USD"
+    },
+    "transactionType": {
+      "scenario": "TRANSFER",
+      "initiator": "PAYER",
+      "initiatorType": "CONSUMER"
+    },
+    "expiration": "2020-07-15T22:17:28.985-01:00"
+  },
+  "thirdpartyRequestsTransactionError6001": {
+    "transactionRequestId": "7d34f91d-d078-4077-8263-2c047876fcf6",
+    "sourceAccountId": "ERROR6001",
+    "consentId": "8e34f91d-d078-4077-8263-2c047876fcf6",
+    "payee": {
+      "partyIdInfo": {
+        "partyIdType": "MSISDN",
+        "partyIdentifier": "+44 1234 5678",
+        "fspId": "dfspb"
+      }
+    },
+    "payer": {
+      "personalInfo": {
+        "complexName": {
+          "firstName": "Alice",
+          "lastName": "K"
+        }
+      },
+      "partyIdInfo": {
+        "partyIdType": "MSISDN",
+        "partyIdentifier": "+44 8765 4321",
+        "fspId": "dfspa"
+      }
+    },
+    "amountType": "SEND",
+    "amount": {
+      "amount": "100",
+      "currency": "USD"
+    },
+    "transactionType": {
+      "scenario": "TRANSFER",
+      "initiator": "PAYER",
+      "initiatorType": "CONSUMER"
+    },
+    "expiration": "2020-07-15T22:17:28.985-01:00"
+  },
+  "thirdpartyRequestsTransactionError6103": {
+    "transactionRequestId": "7d34f91d-d078-4077-8263-2c047876fcf6",
+    "sourceAccountId": "dfspa.alice",
+    "consentId": "6bfa9378-e94b-43dc-b909-dfc025bc51f2",
+    "payee": {
+      "partyIdInfo": {
+        "partyIdType": "MSISDN",
+        "partyIdentifier": "+44 1234 5678",
+        "fspId": "dfspb"
+      }
+    },
+    "payer": {
+      "personalInfo": {
+        "complexName": {
+          "firstName": "Alice",
+          "lastName": "K"
+        }
+      },
+      "partyIdInfo": {
+        "partyIdType": "MSISDN",
+        "partyIdentifier": "+44 8765 4321",
+        "fspId": "dfspa"
+      }
+    },
+    "amountType": "SEND",
+    "amount": {
+      "amount": "100",
+      "currency": "USD"
+    },
+    "transactionType": {
+      "scenario": "TRANSFER",
+      "initiator": "PAYER",
+      "initiatorType": "CONSUMER"
+    },
+    "expiration": "2020-07-15T22:17:28.985-01:00"
+  },
+  "thirdpartyRequestsTransactionError6105InefficientFunds": {
+    "transactionRequestId": "7d34f91d-d078-4077-8263-2c047876fcf6",
+    "sourceAccountId": "inefficient.funds",
+    "consentId": "6bfa9378-e94b-43dc-b909-dfc025bc51f2",
+    "payee": {
+      "partyIdInfo": {
+        "partyIdType": "MSISDN",
+        "partyIdentifier": "+44 1234 5678",
+        "fspId": "dfspb"
+      }
+    },
+    "payer": {
+      "personalInfo": {
+        "complexName": {
+          "firstName": "Alice",
+          "lastName": "K"
+        }
+      },
+      "partyIdInfo": {
+        "partyIdType": "MSISDN",
+        "partyIdentifier": "+44 8765 4321",
+        "fspId": "dfspa"
+      }
+    },
+    "amountType": "SEND",
+    "amount": {
+      "amount": "100",
+      "currency": "USD"
+    },
+    "transactionType": {
+      "scenario": "TRANSFER",
+      "initiator": "PAYER",
+      "initiatorType": "CONSUMER"
+    },
+    "expiration": "2020-07-15T22:17:28.985-01:00"
+  },
+  "thirdpartyRequestsTransactionError6105QuoteFail": {
+    "transactionRequestId": "7d34f91d-d078-4077-8263-2c047876fcf6",
+    "sourceAccountId": "quote.fail",
+    "consentId": "6bfa9378-e94b-43dc-b909-dfc025bc51f2",
+    "payee": {
+      "partyIdInfo": {
+        "partyIdType": "MSISDN",
+        "partyIdentifier": "+44 1234 5678",
+        "fspId": "dfspb"
+      }
+    },
+    "payer": {
+      "personalInfo": {
+        "complexName": {
+          "firstName": "Alice",
+          "lastName": "K"
+        }
+      },
+      "partyIdInfo": {
+        "partyIdType": "MSISDN",
+        "partyIdentifier": "+44 8765 4321",
+        "fspId": "dfspa"
+      }
+    },
+    "amountType": "SEND",
+    "amount": {
+      "amount": "100",
+      "currency": "USD"
+    },
+    "transactionType": {
+      "scenario": "TRANSFER",
+      "initiator": "PAYER",
+      "initiatorType": "CONSUMER"
+    },
+    "expiration": "2020-07-15T22:17:28.985-01:00"
+  }
+}

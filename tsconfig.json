@@ -1,18 +1,19 @@
 {
   "include": [
-    "src"
+    "src",
+    "**/*.test.ts",
+    "test"
   ],
   "exclude": [
     "node_modules",
     "**/*.spec.ts",
-    "**/*.test.ts",
-    "test",
     "lib",
     "coverage"
   ],
   "compilerOptions": {
     "target": "es2018",
     "module": "commonjs",
+    "resolveJsonModule": true,
     "lib": [
       "esnext"
     ],

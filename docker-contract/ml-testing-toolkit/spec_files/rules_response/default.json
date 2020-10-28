@@ -34,7 +34,9 @@
       },
       "delay": 0,
       "type": "MOCK_RESPONSE"
-    }
+    },
+    "type": "response",
+    "version": 1
   },
   {
     "ruleId": 2,
@@ -99,7 +101,9 @@
       },
       "delay": 0,
       "type": "FIXED_RESPONSE"
-    }
+    },
+    "type": "response",
+    "version": 1
   },
   {
     "ruleId": 3,
@@ -164,7 +168,9 @@
       },
       "delay": 0,
       "type": "FIXED_RESPONSE"
-    }
+    },
+    "type": "response",
+    "version": 1
   },
   {
     "ruleId": 4,
@@ -207,7 +213,9 @@
       },
       "delay": 0,
       "type": "FIXED_RESPONSE"
-    }
+    },
+    "type": "response",
+    "version": 1
   },
   {
     "ruleId": 5,
@@ -372,6 +380,398 @@
         }
       },
       "type": "MOCK_RESPONSE"
+    },
+    "type": "response",
+    "version": 1
+  },
+  {
+    "ruleId": 7,
+    "priority": 1,
+    "description": "put /authorizations/{ID}",
+    "apiVersion": {
+      "minorVersion": 1,
+      "majorVersion": 0,
+      "type": "thirdparty_pisp",
+      "asynchronous": true
+    },
+    "conditions": {
+      "all": [
+        {
+          "fact": "headers",
+          "operator": "equal",
+          "value": "nonexistent-dfsp",
+          "path": "FSPIOP-Destination"
+        },
+        {
+          "fact": "operationPath",
+          "operator": "equal",
+          "value": "/authorizations/{ID}"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "put"
+        }
+      ]
+    },
+    "event": {
+      "method": null,
+      "path": null,
+      "params": {
+        "body": {
+          "errorInformation": {
+            "errorCode": "3201",
+            "errorDescription": "ad magna",
+            "extensionList": {
+              "extension": [
+                {
+                  "key": "dolor esse ut",
+                  "value": "dolor"
+                }
+              ]
+            }
+          }
+        },
+        "statusCode": "400",
+        "scripts": {}
+      },
+      "type": "FIXED_RESPONSE"
+    },
+    "type": "response",
+    "version": 1
+  },
+  {
+    "ruleId": 8,
+    "priority": 1,
+    "description": "put /authorizations/{ID}",
+    "apiVersion": {
+      "minorVersion": 1,
+      "majorVersion": 0,
+      "type": "thirdparty_pisp",
+      "asynchronous": true
+    },
+    "conditions": {
+      "all": [
+        {
+          "fact": "pathParams",
+          "operator": "equal",
+          "value": "f4a0e590-7cee-4e98-a48a-b7a22d23ff12",
+          "path": "ID"
+        },
+        {
+          "fact": "operationPath",
+          "operator": "equal",
+          "value": "/authorizations/{ID}"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "put"
+        }
+      ]
+    },
+    "event": {
+      "method": null,
+      "path": null,
+      "params": {
+        "body": {
+          "errorInformation": {
+            "errorCode": "6205",
+            "errorDescription": "nostrud",
+            "extensionList": {
+              "extension": [
+                {
+                  "key": "amet",
+                  "value": "id ea"
+                }
+              ]
+            }
+          }
+        },
+        "statusCode": "400",
+        "scripts": {}
+      },
+      "type": "FIXED_RESPONSE"
+    },
+    "type": "response",
+    "version": 1
+  },
+  {
+    "ruleId": 9,
+    "priority": 1,
+    "description": "put /authorizations/{ID}",
+    "apiVersion": {
+      "minorVersion": 1,
+      "majorVersion": 0,
+      "type": "thirdparty_pisp",
+      "asynchronous": true
+    },
+    "conditions": {
+      "all": [
+        {
+          "fact": "pathParams",
+          "operator": "equal",
+          "value": "d35943eb-b7a0-49f5-8d61-23cf6806d552",
+          "path": "ID"
+        },
+        {
+          "fact": "operationPath",
+          "operator": "equal",
+          "value": "/authorizations/{ID}"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "put"
+        }
+      ]
+    },
+    "event": {
+      "method": null,
+      "path": null,
+      "params": {
+        "body": {
+          "errorInformation": {
+            "errorCode": "6000",
+            "errorDescription": "quis nostrud esse",
+            "extensionList": {
+              "extension": [
+                {
+                  "key": "i",
+                  "value": "laboris commodo in"
+                }
+              ]
+            }
+          }
+        },
+        "statusCode": "400",
+        "scripts": {}
+      },
+      "type": "FIXED_RESPONSE"
+    },
+    "type": "response",
+    "version": 1
+  },
+  {
+    "ruleId": 10,
+    "priority": 1,
+    "description": "put /authorizations/{ID}",
+    "apiVersion": {
+      "minorVersion": 1,
+      "majorVersion": 0,
+      "type": "thirdparty_pisp",
+      "asynchronous": true
+    },
+    "conditions": {
+      "all": [
+        {
+          "fact": "pathParams",
+          "operator": "equal",
+          "value": "7c4b1be2-dff2-441d-9d94-6aa2c1a5169f",
+          "path": "ID"
+        },
+        {
+          "fact": "operationPath",
+          "operator": "equal",
+          "value": "/authorizations/{ID}"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "put"
+        }
+      ]
+    },
+    "event": {
+      "method": null,
+      "path": null,
+      "params": {
+        "body": {
+          "errorInformation": {
+            "errorCode": "6201",
+            "errorDescription": "ex laboris",
+            "extensionList": {
+              "extension": [
+                {
+                  "key": "mollit ",
+                  "value": "in exercitation Lorem"
+                }
+              ]
+            }
+          }
+        },
+        "statusCode": "400",
+        "scripts": {}
+      },
+      "type": "FIXED_RESPONSE"
+    },
+    "type": "response",
+    "version": 1
+  },
+  {
+    "ruleId": 11,
+    "priority": 1,
+    "description": "put /authorizations/{ID}",
+    "apiVersion": {
+      "minorVersion": 1,
+      "majorVersion": 0,
+      "type": "thirdparty_pisp",
+      "asynchronous": true
+    },
+    "conditions": {
+      "all": [
+        {
+          "fact": "pathParams",
+          "operator": "equal",
+          "value": "3dc003a0-5e49-4271-99ac-598053ed4488",
+          "path": "ID"
+        },
+        {
+          "fact": "operationPath",
+          "operator": "equal",
+          "value": "/authorizations/{ID}"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "put"
+        }
+      ]
+    },
+    "event": {
+      "method": null,
+      "path": null,
+      "params": {
+        "body": {
+          "errorInformation": {
+            "errorCode": "6105",
+            "errorDescription": "amet consectetur cupidatat",
+            "extensionList": {
+              "extension": [
+                {
+                  "key": "eiusmod consequat vo",
+                  "value": "Duis dolor sit aliquip dolor"
+                }
+              ]
+            }
+          }
+        },
+        "statusCode": "400",
+        "scripts": {}
+      },
+      "type": "FIXED_RESPONSE"
+    },
+    "type": "response",
+    "version": 1
+  },
+  {
+    "ruleId": 12,
+    "priority": 1,
+    "description": "put /authorizations/{ID}",
+    "apiVersion": {
+      "minorVersion": 1,
+      "majorVersion": 0,
+      "type": "thirdparty_pisp",
+      "asynchronous": true
+    },
+    "conditions": {
+      "all": [
+        {
+          "fact": "pathParams",
+          "operator": "equal",
+          "value": "58a715c8-7c9c-46d5-8705-ba57093e77a9",
+          "path": "ID"
+        },
+        {
+          "fact": "operationPath",
+          "operator": "equal",
+          "value": "/authorizations/{ID}"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "put"
+        }
+      ]
+    },
+    "event": {
+      "method": null,
+      "path": null,
+      "params": {
+        "body": {
+          "errorInformation": {
+            "errorCode": "6105",
+            "errorDescription": "irure",
+            "extensionList": {
+              "extension": [
+                {
+                  "key": "ex velit reprehenderi",
+                  "value": "est"
+                }
+              ]
+            }
+          }
+        },
+        "statusCode": "400",
+        "scripts": {}
+      },
+      "type": "FIXED_RESPONSE"
+    },
+    "type": "response",
+    "version": 1
+  },
+  {
+    "ruleId": 13,
+    "priority": 1,
+    "description": "put /authorizations/{ID}",
+    "apiVersion": {
+      "minorVersion": 1,
+      "majorVersion": 0,
+      "type": "thirdparty_pisp",
+      "asynchronous": true
+    },
+    "conditions": {
+      "all": [
+        {
+          "fact": "pathParams",
+          "operator": "equal",
+          "value": "e4283875-d152-4681-aae3-691365c60deb",
+          "path": "ID"
+        },
+        {
+          "fact": "operationPath",
+          "operator": "equal",
+          "value": "/authorizations/{ID}"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "put"
+        }
+      ]
+    },
+    "event": {
+      "method": null,
+      "path": null,
+      "params": {
+        "body": {
+          "errorInformation": {
+            "errorCode": "6200",
+            "errorDescription": "et aute ea adipisicing",
+            "extensionList": {
+              "extension": [
+                {
+                  "key": "irure",
+                  "value": "amet reprehenderit veniam"
+                }
+              ]
+            }
+          }
+        },
+        "statusCode": "400",
+        "scripts": {}
+      },
+      "type": "FIXED_RESPONSE"
     },
     "type": "response",
     "version": 1

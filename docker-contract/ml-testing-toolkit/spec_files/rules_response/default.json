@@ -99,12 +99,6 @@
         {
           "fact": "body",
           "operator": "equal",
-          "value": "[\"WEB\"]",
-          "path": "authChannels"
-        },
-        {
-          "fact": "body",
-          "operator": "equal",
           "value": "dfspa.com/authorize?consentRequestId=xxxxx",
           "path": "authUri"
         },
@@ -190,12 +184,6 @@
     "conditions": {
       "all": [
         {
-          "fact": "body",
-          "operator": "equal",
-          "value": "PENDING",
-          "path": "credential.status"
-        },
-        {
           "fact": "operationPath",
           "operator": "equal",
           "value": "/consentRequests/{ID}"
@@ -247,7 +235,6 @@
             "        }",
             "      ],",
             "      \"callbackUri\": \"pisp-app://callback.com\",",
-            "      \"authUri\": \"dfspa.com/authorize?consentRequestId=xxxxx\",",
             "      \"authToken\": \"111222\"",
             "    })",
             "  }",

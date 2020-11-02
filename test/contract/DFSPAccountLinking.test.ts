@@ -39,7 +39,6 @@ const baseRequestConfig = {
   }
 }
 
-
 jest.setTimeout(10 * 1000) // 10 seconds
 
 describe('DFSP side account linking contract tests', () => {
@@ -75,8 +74,8 @@ describe('DFSP side account linking contract tests', () => {
     expect(result.status).toBe(202)
   })
 
-  // TODO: this is brokenish... TTK can't filter based on array contents
-  it.skip('Calls `PUT /consentRequests/{id}` with the OTP auth channel', async () => {
+  // TODO: fix - TTK can't filter based on array contents
+  it.only('Calls `PUT /consentRequests/{id}` with the OTP auth channel', async () => {
     // Arrange
     const consentRequestId = '4cab6274-8b3e-41b4-83ce-fc0847409155'
     const consentRequestsURI = `${TestEnv.baseUrls.mlTestingToolkit}/consentRequests/${consentRequestId}`
@@ -99,8 +98,7 @@ describe('DFSP side account linking contract tests', () => {
           ]
         }
       ],
-      callbackUri: 'pisp-app://callback.com',
-      authUri: 'OTPHEY',
+      callbackUri: 'pisp-app://callback.com'
     }
 
     const result = await axios.put(consentRequestsURI, data, baseRequestConfig)
@@ -143,12 +141,12 @@ describe('DFSP side account linking contract tests', () => {
     // Assert
     expect(result.status).toBe(202)
 
-    // TODO: check longpolling?
+    // TODO: check longpolling
   })
 
   // Auth-Service or DFSP calls `PUT /consents/{id}` and adds empty credential
-  // recevies callback from PISP - signed challenge
-  it.only('Calls `PUT /consents/{id}` and gets the signed challenge from the PISP', async () => {
+  // recevies callback from PISP containing the signed challenge
+  it('Calls `PUT /consents/{id}` and gets the signed challenge from the PISP', async () => {
     // Arrange
     const consentId = '8e34f91d-d078-4077-8263-2c047876fcf6'
     const consentRequestId = '4cab6274-8b3e-41b4-83ce-fc0847409155'
@@ -187,12 +185,58 @@ describe('DFSP side account linking contract tests', () => {
     const result = await axios.put(consentURI, data, baseRequestConfig)
 
     // Assert
-    expect(result.status).toBe(202)
 
-    //TODO: check longpolling for signed challenge from PISP
+    // TODO: according to sequence diagrams, this should be 202 (since the credential is still PENDING)
+    // but we currently don't have the ability to change the http response status based on the
+    // request body
+    expect(result.status).toBe(200)
   })
 
-  // Auth-Service or DFSP calls `PUT /consents/{id}` with finalized
-  // credential
-  it.skip('Calls `PUT /consents/{id}` with the finalized consent.credential')
+  // Auth-Service or DFSP calls `PUT /consents/{id}` with finalized credential
+  it('Calls `PUT /consents/{id}` with the finalized consent.credential', async () => {
+    // Arrange
+    const consentId = '8e34f91d-d078-4077-8263-2c047876fcf6'
+    const consentRequestId = '4cab6274-8b3e-41b4-83ce-fc0847409155'
+    const consentURI = `${TestEnv.baseUrls.mlTestingToolkit}/consents/${consentId}`
+    const data = {
+      requestId: consentRequestId,
+      initiatorId: 'pispA',
+      participantId: 'dfspa',
+      scopes: [
+        {
+          accountId: 'dfspa.alice.1234',
+          actions: [
+            'accounts.transfer',
+            'accounts.getBalance'
+          ]
+        },
+        {
+          accountId: 'dfspa.alice.5678',
+          actions: [
+            'accounts.transfer',
+            'accounts.getBalance'
+          ]
+        }
+      ],
+      // credential in verified status
+      credential: {
+        id: "9876",
+        type: 'FIDO',
+        status: 'VERIFIED',
+        challenge: {
+          payload: 'random base 64 bytes',
+          signature: 'payload signed by PISP - using private key'
+        },
+        payload: 'base64 encoded bytes- using public key'
+      }
+    }
+
+    // Act
+    const result = await axios.put(consentURI, data, baseRequestConfig)
+
+    // Assert
+    expect(result.status).toBe(200)
+
+    // Note: no more updates expected here - auth-service has the final say
+  })
 })

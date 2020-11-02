@@ -74,8 +74,7 @@ describe('DFSP side account linking contract tests', () => {
     expect(result.status).toBe(202)
   })
 
-  // TODO: fix - TTK can't filter based on array contents
-  it.only('Calls `PUT /consentRequests/{id}` with the OTP auth channel', async () => {
+  it('Calls `PUT /consentRequests/{id}` with the OTP auth channel', async () => {
     // Arrange
     const consentRequestId = '4cab6274-8b3e-41b4-83ce-fc0847409155'
     const consentRequestsURI = `${TestEnv.baseUrls.mlTestingToolkit}/consentRequests/${consentRequestId}`
@@ -141,7 +140,45 @@ describe('DFSP side account linking contract tests', () => {
     // Assert
     expect(result.status).toBe(202)
 
-    // TODO: check longpolling
+    // Check longpolling callback
+    const consentsURICallbackURI = `${TestEnv.baseUrls.mlTestingToolkitInbound}/longpolling/callbacks/consents/8e34f91d-d078-4077-8263-2c047876fcf6`
+    const response = await axios.get(consentsURICallbackURI, baseRequestConfig)
+    const consentsCallbackResponse = (response.data.data) ? response.data.data : response.data.body
+    const expected = {
+      requestId: '4cab6274-8b3e-41b4-83ce-fc0847409155',
+      participantId: 'dfspA',
+      initiatorId: 'pispA',
+      scopes: [
+        {
+          accountId: 'dfspa.alice.1234',
+          actions: [
+            'accounts.transfer',
+            'accounts.getBalance'
+          ]
+        },
+        {
+          accountId: 'dfspa.alice.5678',
+          actions: [
+            'accounts.transfer',
+            'accounts.getBalance'
+          ]
+        }
+      ],
+      credential: {
+        id: 'keyhandleId-123',
+        type: 'FIDO',
+        status: 'PENDING',
+        challenge: {
+          payload: 'base64 encoded challenge',
+          signature: "base64 encoded signature",
+        },
+        payload: "base64 encoded public key",
+      }
+    }
+
+    // Assert
+    expect(response.status).toBe(200)
+    expect(consentsCallbackResponse).toEqual(expected)
   })
 
   // Auth-Service or DFSP calls `PUT /consents/{id}` and adds empty credential

@@ -1188,12 +1188,12 @@
           "credential": {
             "id": "keyhandleId-123",
             "type": "FIDO",
-            "status": "VERIFIED",
+            "status": "PENDING",
             "challenge": {
               "payload": "base64 encoded challenge",
-              "signature": "base64 encoded challenge"
+              "signature": "base64 encoded signature"
             },
-            "payload": "base64 encoded signed challenge"
+            "payload": "base64 encoded public key"
           }
         },
         "scripts": {}

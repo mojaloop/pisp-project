@@ -111,7 +111,7 @@ describe('DFSP side account linking contract tests', () => {
   // DFSP calls `POST /consents`, then recieves `PUT /consents` after Auth-Service approves credential
   it.only('Calls `POST /consents`', async () => {
     // Arrange
-    const consentId = '4cab6274-8b3e-41b4-83ce-fc0847409155'
+    const consentId = '8e34f91d-d078-4077-8263-2c047876fcf6'
     const consentRequestId = '4cab6274-8b3e-41b4-83ce-fc0847409155'
     const consentURI = `${TestEnv.baseUrls.mlTestingToolkit}/consents`
     const data = {
@@ -136,7 +136,7 @@ describe('DFSP side account linking contract tests', () => {
         }
       ],
       // Maybe this should be empty?
-      credential: null,
+      // credential: null,
     }
 
     // Act

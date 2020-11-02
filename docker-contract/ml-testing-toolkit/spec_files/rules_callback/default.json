@@ -1162,8 +1162,39 @@
       "path": "/consents/{ID}",
       "params": {
         "headers": {
-          "Date": "{$request.header.Date}",
-          "FSPIOP-Source": "central-auth"
+          "Accept": "application/vnd.interoperability.thirdparty+json;version=1.0",
+          "Content-Type": "application/vnd.interoperability.thirdparty+json;version=1.0"
+        },
+        "body": {
+          "requestId": "4cab6274-8b3e-41b4-83ce-fc0847409155",
+          "participantId": "dfspA",
+          "initiatorId": "pispA",
+          "scopes": [
+            {
+              "accountId": "dfspa.alice.1234",
+              "actions": [
+                "accounts.transfer",
+                "accounts.getBalance"
+              ]
+            },
+            {
+              "accountId": "dfspa.alice.5678",
+              "actions": [
+                "accounts.transfer",
+                "accounts.getBalance"
+              ]
+            }
+          ],
+          "credential": {
+            "id": "keyhandleId-123",
+            "type": "FIDO",
+            "status": "VERIFIED",
+            "challenge": {
+              "payload": "base64 encoded challenge",
+              "signature": "base64 encoded challenge"
+            },
+            "payload": "base64 encoded signed challenge"
+          }
         },
         "scripts": {}
       },

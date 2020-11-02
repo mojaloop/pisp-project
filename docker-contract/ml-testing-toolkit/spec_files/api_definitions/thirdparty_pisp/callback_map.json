@@ -32,7 +32,7 @@
       "successCallback": {
         "method": "put",
         "path": "/consents/{ID}",
-        "pathPattern": "/consents/{$request.params.ID}",
+        "pathPattern": "/consents/{$request.body.id}",
         "headerOverride": {
           "FSPIOP-Source": "{$request.headers.fspiop-destination}",
           "FSPIOP-Destination": "{$request.headers.fspiop-source}",
@@ -43,7 +43,7 @@
       "errorCallback": {
         "method": "put",
         "path": "/consents/{ID}",
-        "pathPattern": "/consents/{$request.params.ID}",
+        "pathPattern": "/consents/{$request.body.id}",
         "headerOverride": {
           "FSPIOP-Source": "{$request.headers.fspiop-destination}",
           "FSPIOP-Destination": "{$request.headers.fspiop-source}",

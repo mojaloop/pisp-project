@@ -176,6 +176,7 @@ describe('PISP side account linking tests', () => {
     }
 
     const result = await axios.put(consentRequestsURI, data, config)
+
     // Assert
     expect(result.status).toBe(202)
   })

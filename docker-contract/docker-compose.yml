@@ -32,9 +32,6 @@ services:
 
   mongo:
     image: mongo
-    # Disable logging as it is far too verbose for debugging locally
-    logging:
-      driver: none
     ports:
       - "27017:27017"
 

@@ -109,7 +109,7 @@ describe('DFSP side account linking contract tests', () => {
   })
 
   // DFSP calls `POST /consents`, then recieves `PUT /consents` after Auth-Service approves credential
-  it.only('Calls `POST /consents`', async () => {
+  it('Calls `POST /consents`', async () => {
     // Arrange
     const consentId = '8e34f91d-d078-4077-8263-2c047876fcf6'
     const consentRequestId = '4cab6274-8b3e-41b4-83ce-fc0847409155'
@@ -135,8 +135,6 @@ describe('DFSP side account linking contract tests', () => {
           ]
         }
       ],
-      // Maybe this should be empty?
-      // credential: null,
     }
 
     // Act
@@ -144,8 +142,57 @@ describe('DFSP side account linking contract tests', () => {
 
     // Assert
     expect(result.status).toBe(202)
+
+    // TODO: check longpolling?
   })
 
-  // Auth-Service OR DFSP
-  it.todo('Calls `PUT /consents/{id}`')
+  // Auth-Service or DFSP calls `PUT /consents/{id}` and adds empty credential
+  // recevies callback from PISP - signed challenge
+  it.only('Calls `PUT /consents/{id}` and gets the signed challenge from the PISP', async () => {
+    // Arrange
+    const consentId = '8e34f91d-d078-4077-8263-2c047876fcf6'
+    const consentRequestId = '4cab6274-8b3e-41b4-83ce-fc0847409155'
+    const consentURI = `${TestEnv.baseUrls.mlTestingToolkit}/consents/${consentId}`
+    const data = {
+      requestId: consentRequestId,
+      initiatorId: 'pispA',
+      participantId: 'dfspa',
+      scopes: [
+        {
+          accountId: 'dfspa.alice.1234',
+          actions: [
+            'accounts.transfer',
+            'accounts.getBalance'
+          ]
+        },
+        {
+          accountId: 'dfspa.alice.5678',
+          actions: [
+            'accounts.transfer',
+            'accounts.getBalance'
+          ]
+        }
+      ],
+      // credential in pending status
+      credential: {
+        type: 'FIDO',
+        status: 'PENDING',
+        challenge: {
+          payload: 'random base 64 bytes'
+        }
+      }
+    }
+
+    // Act
+    const result = await axios.put(consentURI, data, baseRequestConfig)
+
+    // Assert
+    expect(result.status).toBe(202)
+
+    //TODO: check longpolling for signed challenge from PISP
+  })
+
+  // Auth-Service or DFSP calls `PUT /consents/{id}` with finalized
+  // credential
+  it.skip('Calls `PUT /consents/{id}` with the finalized consent.credential')
 })

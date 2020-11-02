@@ -26,6 +26,33 @@
       }
     }
   },
+  "/consents": {
+    "post": {
+      "fspid": "{$request.headers.fspiop-source}",
+      "successCallback": {
+        "method": "put",
+        "path": "/consents/{ID}",
+        "pathPattern": "/consents/{$request.params.ID}",
+        "headerOverride": {
+          "FSPIOP-Source": "{$request.headers.fspiop-destination}",
+          "FSPIOP-Destination": "{$request.headers.fspiop-source}",
+          "Content-Type": "{$session.negotiatedContentType}",
+          "Date": "{$request.headers.date}"
+        }
+      },
+      "errorCallback": {
+        "method": "put",
+        "path": "/consents/{ID}",
+        "pathPattern": "/consents/{$request.params.ID}",
+        "headerOverride": {
+          "FSPIOP-Source": "{$request.headers.fspiop-destination}",
+          "FSPIOP-Destination": "{$request.headers.fspiop-source}",
+          "Content-Type": "{$session.negotiatedContentType}",
+          "Date": "{$request.headers.date}"
+        }
+      }
+    }
+  },
   "/consents/{ID}/generateChallenge": {
     "post": {
       "fspid": "{$request.headers.fspiop-source}",

@@ -73,45 +73,78 @@ describe('DFSP side account linking contract tests', () => {
     const result = await axios.put(consentRequestsURI, data, baseRequestConfig)
     // Assert
     expect(result.status).toBe(202)
-
-    // technically the callback from the PISP should just be the same resource with the `authToken` field
-    // const consentRequestsCallbackURI =
-    //   `${TestEnv.baseUrls.mlTestingToolkitInbound}/longpolling/callbacks/consentRequests/${consentRequestId}`
-    // console.log('consentRequestsCallbackURI', consentRequestsCallbackURI)
-    // const response = await axios.get(consentRequestsCallbackURI, baseRequestConfig)
-    // const consentRequestsCallbackResponse = (response.data.data) ? response.data.data : response.data.body
-    // const expected = {
-    //   initiatorId: 'pispA',
-    //   authChannels: [
-    //     'WEB'
-    //   ],
-    //   scopes: [
-    //     {
-    //       accountId: 'dfspa.alice.1234',
-    //       actions: [
-    //         'accounts.transfer',
-    //         'accounts.getBalance'
-    //       ]
-    //     },
-    //     {
-    //       accountId: 'dfspa.alice.5678',
-    //       actions: [
-    //         'accounts.transfer',
-    //         'accounts.getBalance'
-    //       ]
-    //     }
-    //   ],
-    //   callbackUri: 'pisp-app://callback.com',
-    //   authUri: 'dfspa.com/authorize?consentRequestId=xxxxx'
-    // }
-
-    // // Assert
-    // expect(response.status).toBe(200)
-    // expect(consentRequestsCallbackResponse).toEqual(expected)
   })
 
-  it.todo('Calls `PUT /consentRequests/{id}` with the OTP auth channel')
-  it.todo('Calls `POST /consents`')
+  // TODO: this is brokenish... TTK can't filter based on array contents
+  it.skip('Calls `PUT /consentRequests/{id}` with the OTP auth channel', async () => {
+    // Arrange
+    const consentRequestId = '4cab6274-8b3e-41b4-83ce-fc0847409155'
+    const consentRequestsURI = `${TestEnv.baseUrls.mlTestingToolkit}/consentRequests/${consentRequestId}`
+    const data = {
+      initiatorId: 'pispA',
+      authChannels: ['OTP'],
+      scopes: [
+        {
+          accountId: 'dfspa.alice.1234',
+          actions: [
+            'accounts.transfer',
+            'accounts.getBalance'
+          ]
+        },
+        {
+          accountId: 'dfspa.alice.5678',
+          actions: [
+            'accounts.transfer',
+            'accounts.getBalance'
+          ]
+        }
+      ],
+      callbackUri: 'pisp-app://callback.com',
+      authUri: 'OTPHEY',
+    }
+
+    const result = await axios.put(consentRequestsURI, data, baseRequestConfig)
+    // Assert
+    expect(result.status).toBe(202)
+  })
+
+  // DFSP calls `POST /consents`, then recieves `PUT /consents` after Auth-Service approves credential
+  it.only('Calls `POST /consents`', async () => {
+    // Arrange
+    const consentId = '4cab6274-8b3e-41b4-83ce-fc0847409155'
+    const consentRequestId = '4cab6274-8b3e-41b4-83ce-fc0847409155'
+    const consentURI = `${TestEnv.baseUrls.mlTestingToolkit}/consents`
+    const data = {
+      id: consentId,
+      requestId: consentRequestId,
+      initiatorId: 'pispA',
+      participantId: 'dfspa',
+      scopes: [
+        {
+          accountId: 'dfspa.alice.1234',
+          actions: [
+            'accounts.transfer',
+            'accounts.getBalance'
+          ]
+        },
+        {
+          accountId: 'dfspa.alice.5678',
+          actions: [
+            'accounts.transfer',
+            'accounts.getBalance'
+          ]
+        }
+      ],
+      // Maybe this should be empty?
+      credential: null,
+    }
+
+    // Act
+    const result = await axios.post(consentURI, data, baseRequestConfig)
+
+    // Assert
+    expect(result.status).toBe(202)
+  })
 
   // Auth-Service OR DFSP
   it.todo('Calls `PUT /consents/{id}`')

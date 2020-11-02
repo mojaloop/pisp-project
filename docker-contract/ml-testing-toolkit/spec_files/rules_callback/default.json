@@ -1132,5 +1132,44 @@
     },
     "type": "callback",
     "version": 1
+  },
+  {
+    "ruleId": 28,
+    "priority": 1,
+    "description": "post /consents",
+    "apiVersion": {
+      "minorVersion": 1,
+      "majorVersion": 0,
+      "type": "thirdparty_pisp",
+      "asynchronous": true
+    },
+    "conditions": {
+      "all": [
+        {
+          "fact": "operationPath",
+          "operator": "equal",
+          "value": "/consents"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "post"
+        }
+      ]
+    },
+    "event": {
+      "method": "put",
+      "path": "/consents/{ID}",
+      "params": {
+        "headers": {
+          "Date": "{$request.header.Date}",
+          "FSPIOP-Source": "central-auth"
+        },
+        "scripts": {}
+      },
+      "type": "FIXED_CALLBACK"
+    },
+    "type": "callback",
+    "version": 1
   }
 ]

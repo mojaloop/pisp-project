@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="669px" preserveAspectRatio="none" style="width:1101px;height:669px;" version="1.1" viewBox="0 0 1101 669" width="1101px" zoomAndPan="magnify"><defs><filter height="300%" id="f1x6vhi4crozi8" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><rect fill="#DDDDDD" height="657.2305" style="stroke: #A80036; stroke-width: 1.0;" width="802.5" x="140" y="6"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="61" x="510.75" y="18.5684">Mojaloop</text><rect fill="#DDDDDD" height="657.2305" style="stroke: #A80036; stroke-width: 1.0;" width="74" x="944.5" y="6"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="46" x="958.5" y="18.5684">DFSP A</text><rect fill="#DDDDDD" height="657.2305" style="stroke: #A80036; stroke-width: 1.0;" width="75" x="1020.5" y="6"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="44" x="1036" y="18.5684">DFSP B</text><line style="stroke: #A80036; stroke-width: 1.0;" x1="234" x2="234" y1="77.2871" y2="87.2871"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="234" x2="234" y1="87.2871" y2="128.2422"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="234" x2="234" y1="128.2422" y2="608.2539"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="512" x2="512" y1="77.2871" y2="87.2871"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="512" x2="512" y1="87.2871" y2="128.2422"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="512" x2="512" y1="128.2422" y2="608.2539"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="878.5" x2="878.5" y1="77.2871" y2="87.2871"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="878.5" x2="878.5" y1="87.2871" y2="128.2422"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="878.5" x2="878.5" y1="128.2422" y2="608.2539"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="981.5" x2="981.5" y1="77.2871" y2="87.2871"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="981.5" x2="981.5" y1="87.2871" y2="128.2422"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="981.5" x2="981.5" y1="128.2422" y2="608.2539"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="1057.5" x2="1057.5" y1="77.2871" y2="87.2871"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="1057.5" x2="1057.5" y1="87.2871" y2="128.2422"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="1057.5" x2="1057.5" y1="128.2422" y2="608.2539"/><rect fill="#FEFECE" filter="url(#f1x6vhi4crozi8)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="176" x="144" y="41.7988"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="162" x="151" y="62.334">Central Event Processor</text><rect fill="#FEFECE" filter="url(#f1x6vhi4crozi8)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="176" x="144" y="607.2539"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="162" x="151" y="627.7891">Central Event Processor</text><rect fill="#FEFECE" filter="url(#f1x6vhi4crozi8)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="118" x="451" y="41.7988"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="104" x="458" y="62.334">ML API Adapter</text><rect fill="#FEFECE" filter="url(#f1x6vhi4crozi8)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="118" x="451" y="607.2539"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="104" x="458" y="627.7891">ML API Adapter</text><rect fill="#FEFECE" filter="url(#f1x6vhi4crozi8)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="115" x="819.5" y="41.7988"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="101" x="826.5" y="62.334">Central Ledger</text><rect fill="#FEFECE" filter="url(#f1x6vhi4crozi8)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="115" x="819.5" y="607.2539"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="101" x="826.5" y="627.7891">Central Ledger</text><rect fill="#FEFECE" filter="url(#f1x6vhi4crozi8)" height="46.9766" style="stroke: #A80036; stroke-width: 1.5;" width="62" x="948.5" y="25.3105"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="48" x="955.5" y="45.8457">DFSP A</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="47" x="956" y="62.334">(Payer)</text><rect fill="#FEFECE" filter="url(#f1x6vhi4crozi8)" height="46.9766" style="stroke: #A80036; stroke-width: 1.5;" width="62" x="948.5" y="607.2539"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="48" x="955.5" y="627.7891">DFSP A</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="47" x="956" y="644.2773">(Payer)</text><rect fill="#FEFECE" filter="url(#f1x6vhi4crozi8)" height="46.9766" style="stroke: #A80036; stroke-width: 1.5;" width="63" x="1024.5" y="25.3105"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="46" x="1033" y="45.8457">DFSP B</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="49" x="1031.5" y="62.334">(Payee)</text><rect fill="#FEFECE" filter="url(#f1x6vhi4crozi8)" height="46.9766" style="stroke: #A80036; stroke-width: 1.5;" width="63" x="1024.5" y="607.2539"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="46" x="1033" y="627.7891">DFSP B</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="49" x="1031.5" y="644.2773">(Payee)</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="0" x="423.5" y="111.9219"/><text fill="#000000" font-family="sans-serif" font-size="11" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="336" x="423.5" y="111.9219">User signs the authorization, DFSPA verifies it, and issues a</text><text fill="#000000" font-family="monospace" font-size="11" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="105" x="763.5" y="111.6479">POST /transfers</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="0" x="871.5" y="111.9219"/><rect fill="#FFFFFF" filter="url(#f1x6vhi4crozi8)" height="129" style="stroke: #A80036; stroke-width: 1.0;" width="208" x="877" y="133.2422"/><text fill="#000000" font-family="monospace" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="120" x="881" y="149.3091">POST /transfers</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="160" x="881" y="164.4419">FSPIOP-Source: dfspa</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="200" x="881" y="179.5747">FSPIOP-Destination: dfspb</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="4" x="881" y="195.209">{</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="115" x="897" y="210.5195">transferId: "9876",</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="0" x="897" y="225.8301"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="132" x="897" y="225.8301">transactionId: 5678</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="12" x="897" y="241.1406">...</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="4" x="881" y="256.4512">}</text><polygon fill="#A80036" points="523,285.3262,513,289.3262,523,293.3262,519,289.3262" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="517" x2="980.5" y1="289.3262" y2="289.3262"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="120" x="529" y="284.2603">POST /transfers</text><polygon fill="#A80036" points="969.5,314.6367,979.5,318.6367,969.5,322.6367,973.5,318.6367" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 2.0,2.0;" x1="512" x2="975.5" y1="318.6367" y2="318.6367"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="86" x="519" y="313.8945">202 Accepted</text><polygon fill="#A80036" points="867,343.9473,877,347.9473,867,351.9473,871,347.9473" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="512" x2="873" y1="347.9473" y2="347.9473"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="343" x="519" y="343.2051">Transfer is going ahead... can you check these details?</text><polygon fill="#A80036" points="523,373.2578,513,377.2578,523,381.2578,519,377.2578" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="517" x2="878" y1="377.2578" y2="377.2578"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="279" x="529" y="372.5156">Yep, looks good to me (Prepare Notification)</text><polygon fill="#A80036" points="245,402.5684,235,406.5684,245,410.5684,241,406.5684" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="239" x2="878" y1="406.5684" y2="406.5684"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="317" x="251" y="401.8262">Here's a transfer that looks like it might go ahead.</text><polygon fill="#A80036" points="1046,431.7012,1056,435.7012,1046,439.7012,1050,435.7012" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="512" x2="1052" y1="435.7012" y2="435.7012"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="120" x="519" y="430.6353">POST /transfers</text><line style="stroke: #A80036; stroke-width: 1.0;" x1="234" x2="276" y1="465.0117" y2="465.0117"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="276" x2="276" y1="465.0117" y2="478.0117"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="235" x2="276" y1="478.0117" y2="478.0117"/><polygon fill="#A80036" points="245,474.0117,235,478.0117,245,482.0117,241,478.0117" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="222" x="241" y="460.2695">That transfer has a transactionId of</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="32" x="467" y="459.9458">5678</text><line style="stroke: #A80036; stroke-width: 1.0;" x1="234" x2="276" y1="522.6328" y2="522.6328"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="276" x2="276" y1="522.6328" y2="535.6328"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="235" x2="276" y1="535.6328" y2="535.6328"/><polygon fill="#A80036" points="245,531.6328,235,535.6328,245,539.6328,241,535.6328" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="129" x="241" y="502.5801">It had a transferId of</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="32" x="374" y="502.2563">9876</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="224" x="245" y="517.8906">let's now listen for transfers with id</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="32" x="473" y="517.5669">5678</text><path d="M5,548.6328 L5,588.6328 L459,588.6328 L459,558.6328 L449,548.6328 L5,548.6328 " fill="#FBFB77" filter="url(#f1x6vhi4crozi8)" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M449,548.6328 L449,558.6328 L459,558.6328 L449,548.6328 " fill="#FBFB77" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="393" x="11" y="566.2012">The CEP now knows that it needs to listen for transfers with id</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="32" x="412" y="565.8774">9876</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="258" x="11" y="581.5117">in order to fulfil it's original subscription</text><!--MD5=[99cbf21ad88387ed9e22bebac2db6bd7]
+@startuml
+
+box "Mojaloop"
+    participant "Central Event Processor" as CEP
+    participant "ML API Adapter" as ML
+    participant "Central Ledger" as CL
+end box
+box "DFSP A"
+    participant "DFSP A\n(Payer)" as D2
+end box
+box "DFSP B"
+    participant "DFSP B\n(Payee)" as D3
+end box
+
+
+... **User signs the authorization, DFSPA verifies it, and issues a ""POST /transfers""** ...
+
+rnote over D2 #Light
+**""POST /transfers""**
+""FSPIOP-Source: dfspa""
+""FSPIOP-Destination: dfspb""
+{
+    transferId: "9876",
+    **transactionId: 5678**
+    ...
+}
+end note
+D2 -> ML: ""POST /transfers""
+ML - -> D2: 202 Accepted
+
+' TODO: tidy and clarify these steps
+' it could be the ml-api-adapters event that triggers the CEP
+' we need to look a little more into how the central-ledger's handlers work
+
+ML -> CL: Transfer is going ahead... can you check these details?
+CL -> ML: Yep, looks good to me (Prepare Notification)
+
+CL -> CEP: Here's a transfer that looks like it might go ahead.
+
+ML -> D3: ""POST /transfers""
+
+CEP -> CEP: That transfer has a transactionId of ""5678""
+CEP -> CEP: It had a transferId of ""9876""\n let's now listen for transfers with id ""5678""
+
+note over CEP
+The CEP now knows that it needs to listen for transfers with id  ""9876""
+in order to fulfil it's original subscription
+end note
+
+@enduml
+
+@startuml
+
+box "Mojaloop"
+    participant "Central Event Processor" as CEP
+    participant "ML API Adapter" as ML
+    participant "Central Ledger" as CL
+end box
+box "DFSP A"
+    participant "DFSP A\n(Payer)" as D2
+end box
+box "DFSP B"
+    participant "DFSP B\n(Payee)" as D3
+end box
+
+
+... **User signs the authorization, DFSPA verifies it, and issues a ""POST /transfers""** ...
+
+rnote over D2 #Light
+**""POST /transfers""**
+""FSPIOP-Source: dfspa""
+""FSPIOP-Destination: dfspb""
+{
+    transferId: "9876",
+    **transactionId: 5678**
+    ...
+}
+end note
+D2 -> ML: ""POST /transfers""
+ML - -> D2: 202 Accepted
+
+
+ML -> CL: Transfer is going ahead... can you check these details?
+CL -> ML: Yep, looks good to me (Prepare Notification)
+
+CL -> CEP: Here's a transfer that looks like it might go ahead.
+
+ML -> D3: ""POST /transfers""
+
+CEP -> CEP: That transfer has a transactionId of ""5678""
+CEP -> CEP: It had a transferId of ""9876""\n let's now listen for transfers with id ""5678""
+
+note over CEP
+The CEP now knows that it needs to listen for transfers with id  ""9876""
+in order to fulfil it's original subscription
+end note
+
+@enduml
+
+PlantUML version 1.2020.18(Thu Oct 01 03:40:44 PHT 2020)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: AU
+--></g></svg>

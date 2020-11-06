@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="615px" preserveAspectRatio="none" style="width:999px;height:615px;" version="1.1" viewBox="0 0 999 615" width="999px" zoomAndPan="magnify"><defs><filter height="300%" id="f1blnoaojpuo6t" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><rect fill="#DDDDDD" height="603.5645" style="stroke: #A80036; stroke-width: 1.0;" width="101" x="1" y="6"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="27" x="38" y="18.5684">PISP</text><rect fill="#DDDDDD" height="603.5645" style="stroke: #A80036; stroke-width: 1.0;" width="547.5" x="144" y="6"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="61" x="387.25" y="18.5684">Mojaloop</text><rect fill="#DDDDDD" height="603.5645" style="stroke: #A80036; stroke-width: 1.0;" width="74" x="847.5" y="6"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="46" x="861.5" y="18.5684">DFSP A</text><line style="stroke: #A80036; stroke-width: 1.0;" x1="51" x2="51" y1="77.2871" y2="503.6328"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="51" x2="51" y1="503.6328" y2="544.5879"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="51" x2="51" y1="544.5879" y2="554.5879"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="235" x2="235" y1="77.2871" y2="503.6328"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="235" x2="235" y1="503.6328" y2="544.5879"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="235" x2="235" y1="544.5879" y2="554.5879"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="597.5" x2="597.5" y1="77.2871" y2="503.6328"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="597.5" x2="597.5" y1="503.6328" y2="544.5879"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="597.5" x2="597.5" y1="544.5879" y2="554.5879"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="884.5" x2="884.5" y1="77.2871" y2="503.6328"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="884.5" x2="884.5" y1="503.6328" y2="544.5879"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="884.5" x2="884.5" y1="544.5879" y2="554.5879"/><rect fill="#FEFECE" filter="url(#f1blnoaojpuo6t)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="89" x="5" y="41.7988"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="75" x="12" y="62.334">PISP Server</text><rect fill="#FEFECE" filter="url(#f1blnoaojpuo6t)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="89" x="5" y="553.5879"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="75" x="12" y="574.123">PISP Server</text><rect fill="#FEFECE" filter="url(#f1blnoaojpuo6t)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="171" x="148" y="41.7988"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="157" x="155" y="62.334">Thirdparty API Adapter</text><rect fill="#FEFECE" filter="url(#f1blnoaojpuo6t)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="171" x="148" y="553.5879"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="157" x="155" y="574.123">Thirdparty API Adapter</text><rect fill="#FEFECE" filter="url(#f1blnoaojpuo6t)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="176" x="507.5" y="41.7988"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="162" x="514.5" y="62.334">Central Event Processor</text><rect fill="#FEFECE" filter="url(#f1blnoaojpuo6t)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="176" x="507.5" y="553.5879"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="162" x="514.5" y="574.123">Central Event Processor</text><rect fill="#FEFECE" filter="url(#f1blnoaojpuo6t)" height="46.9766" style="stroke: #A80036; stroke-width: 1.5;" width="62" x="851.5" y="25.3105"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="48" x="858.5" y="45.8457">DFSP A</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="47" x="859" y="62.334">(Payer)</text><rect fill="#FEFECE" filter="url(#f1blnoaojpuo6t)" height="46.9766" style="stroke: #A80036; stroke-width: 1.5;" width="62" x="851.5" y="553.5879"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="48" x="858.5" y="574.123">DFSP A</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="47" x="859" y="590.6113">(Payer)</text><rect fill="#FFFFFF" filter="url(#f1blnoaojpuo6t)" height="129" style="stroke: #A80036; stroke-width: 1.0;" width="211" x="779" y="92.2871"/><text fill="#000000" font-family="monospace" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="160" x="783" y="108.354">POST /authorizations</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="160" x="783" y="123.4868">FSPIOP-Source: pispa</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="200" x="783" y="138.6196">FSPIOP-Destination: dfspa</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="4" x="783" y="154.2539">{</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="187" x="799" y="169.5645">transactionRequestId: "1234",</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="36" x="799" y="184.875">quote</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="12" x="799" y="200.1855">...</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="4" x="783" y="215.4961">}</text><polygon fill="#A80036" points="246.5,244.3711,236.5,248.3711,246.5,252.3711,242.5,248.3711" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="240.5" x2="883.5" y1="248.3711" y2="248.3711"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="160" x="252.5" y="243.3052">POST /authorizations</text><polygon fill="#A80036" points="585.5,273.6816,595.5,277.6816,585.5,281.6816,589.5,277.6816" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="235.5" x2="591.5" y1="277.6816" y2="277.6816"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="338" x="242.5" y="272.9395">Here's an event... not sure if it means anything to you</text><polygon fill="#A80036" points="872.5,302.8145,882.5,306.8145,872.5,310.8145,876.5,306.8145" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 2.0,2.0;" x1="235.5" x2="878.5" y1="306.8145" y2="306.8145"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="96" x="242.5" y="301.7485">202 Accepted</text><polygon fill="#A80036" points="62.5,331.9473,52.5,335.9473,62.5,339.9473,58.5,335.9473" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="56.5" x2="234.5" y1="335.9473" y2="335.9473"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="160" x="68.5" y="330.8813">POST /authorizations</text><polygon fill="#A80036" points="223.5,361.0801,233.5,365.0801,223.5,369.0801,227.5,365.0801" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 2.0,2.0;" x1="51.5" x2="229.5" y1="365.0801" y2="365.0801"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="96" x="58.5" y="360.0142">202 Accepted</text><line style="stroke: #A80036; stroke-width: 1.0;" x1="597.5" x2="639.5" y1="425.0117" y2="425.0117"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="639.5" x2="639.5" y1="425.0117" y2="438.0117"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="598.5" x2="639.5" y1="438.0117" y2="438.0117"/><polygon fill="#A80036" points="608.5,434.0117,598.5,438.0117,608.5,442.0117,604.5,438.0117" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="182" x="604.5" y="389.6484">That event was related to the</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="150" x="604.5" y="404.959">transactionRequestId of</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="32" x="758.5" y="404.6353">1234</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="125" x="604.5" y="420.2695">let's save it for later</text><line style="stroke: #A80036; stroke-width: 1.0;" x1="597.5" x2="639.5" y1="482.6328" y2="482.6328"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="639.5" x2="639.5" y1="482.6328" y2="495.6328"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="598.5" x2="639.5" y1="495.6328" y2="495.6328"/><polygon fill="#A80036" points="608.5,491.6328,598.5,495.6328,608.5,499.6328,604.5,495.6328" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="237" x="604.5" y="462.5801">It had a quote with a transactionId  of</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="32" x="845.5" y="462.2563">5678</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="228" x="604.5" y="477.8906">let's now listen for transactionIds of</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="32" x="836.5" y="477.5669">5678</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="0" x="245.5" y="528.2676"/><text fill="#000000" font-family="sans-serif" font-size="11" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="336" x="245.5" y="528.2676">User signs the authorization, DFSPA verifies it, and issues a</text><text fill="#000000" font-family="monospace" font-size="11" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="105" x="585.5" y="527.9937">POST /transfers</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="0" x="693.5" y="528.2676"/><!--MD5=[b01de5c91c22a122bb5f67532b3bc5cd]
+@startuml
+
+box "PISP"
+    participant "PISP Server" as D1
+end box
+box "Mojaloop"
+    participant "Thirdparty API Adapter" as 3P
+    participant "Central Event Processor" as CEP
+end box
+box "DFSP A"
+    participant "DFSP A\n(Payer)" as D2
+end box
+
+
+' I think this should be the authorizations, since it hits
+' the 3p api adapter already, but it could be on the quote
+' response
+rnote over D2 #Light
+**""POST /authorizations""**
+""FSPIOP-Source: pispa""
+""FSPIOP-Destination: dfspa""
+{
+    transactionRequestId: "1234",
+    quote
+    ...
+}
+end note
+D2 -> 3P: ""POST /authorizations""
+
+' 3P Just publishes all events onto kafka for later consumption
+3P -> CEP: Here's an event... not sure if it means anything to you
+3P - -> D2: ""202 Accepted""
+
+3P -> D1: ""POST /authorizations""
+D1 - -> 3P: ""202 Accepted""
+
+CEP -> CEP: That event was related to the \ntransactionRequestId of ""1234""\nlet's save it for later
+CEP -> CEP: It had a quote with a transactionId  of ""5678""\nlet's now listen for transactionIds of ""5678""
+
+'did Michael say we should also listen for `POST /transfers`?
+
+... **User signs the authorization, DFSPA verifies it, and issues a ""POST /transfers""** ...
+
+@enduml
+
+@startuml
+
+box "PISP"
+    participant "PISP Server" as D1
+end box
+box "Mojaloop"
+    participant "Thirdparty API Adapter" as 3P
+    participant "Central Event Processor" as CEP
+end box
+box "DFSP A"
+    participant "DFSP A\n(Payer)" as D2
+end box
+
+
+rnote over D2 #Light
+**""POST /authorizations""**
+""FSPIOP-Source: pispa""
+""FSPIOP-Destination: dfspa""
+{
+    transactionRequestId: "1234",
+    quote
+    ...
+}
+end note
+D2 -> 3P: ""POST /authorizations""
+
+3P -> CEP: Here's an event... not sure if it means anything to you
+3P - -> D2: ""202 Accepted""
+
+3P -> D1: ""POST /authorizations""
+D1 - -> 3P: ""202 Accepted""
+
+CEP -> CEP: That event was related to the \ntransactionRequestId of ""1234""\nlet's save it for later
+CEP -> CEP: It had a quote with a transactionId  of ""5678""\nlet's now listen for transactionIds of ""5678""
+
+
+... **User signs the authorization, DFSPA verifies it, and issues a ""POST /transfers""** ...
+
+@enduml
+
+PlantUML version 1.2020.18(Thu Oct 01 03:40:44 PHT 2020)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: AU
+--></g></svg>

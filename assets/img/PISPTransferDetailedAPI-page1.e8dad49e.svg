@@ -1,0 +1,1346 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="1342px" preserveAspectRatio="none" style="width:1957px;height:1342px;" version="1.1" viewBox="0 0 1957 1342" width="1957px" zoomAndPan="magnify"><defs><filter height="300%" id="frchmw2lw56bc" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><text fill="#000000" font-family="sans-serif" font-size="18" lengthAdjust="spacingAndGlyphs" textLength="205" x="872.5" y="29.4023">PISPTransferDetailedAPI</text><rect fill="#DDDDDD" height="1295.1875" style="stroke: #A80036; stroke-width: 1.0;" width="101" x="1" y="41.1992"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="27" x="38" y="53.7676">PISP</text><rect fill="#DDDDDD" height="1295.1875" style="stroke: #A80036; stroke-width: 1.0;" width="616" x="104" y="41.1992"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="61" x="381.5" y="53.7676">Mojaloop</text><rect fill="#DDDDDD" height="1295.1875" style="stroke: #A80036; stroke-width: 1.0;" width="805" x="1067" y="41.1992"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="46" x="1446.5" y="53.7676">DFSP A</text><rect fill="#DDDDDD" height="1295.1875" style="stroke: #A80036; stroke-width: 1.0;" width="75" x="1874" y="41.1992"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="44" x="1889.5" y="53.7676">DFSP B</text><line style="stroke: #A80036; stroke-width: 1.0;" x1="51" x2="51" y1="112.4863" y2="272.3281"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="51" x2="51" y1="272.3281" y2="313.2832"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="51" x2="51" y1="313.2832" y2="1229.4551"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="51" x2="51" y1="1229.4551" y2="1270.4102"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="51" x2="51" y1="1270.4102" y2="1281.4102"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="160" x2="160" y1="112.4863" y2="272.3281"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="160" x2="160" y1="272.3281" y2="313.2832"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="160" x2="160" y1="313.2832" y2="1229.4551"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="160" x2="160" y1="1229.4551" y2="1270.4102"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="160" x2="160" y1="1270.4102" y2="1281.4102"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="632" x2="632" y1="112.4863" y2="272.3281"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="632" x2="632" y1="272.3281" y2="313.2832"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="632" x2="632" y1="313.2832" y2="1229.4551"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="632" x2="632" y1="1229.4551" y2="1270.4102"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="632" x2="632" y1="1270.4102" y2="1281.4102"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="694" x2="694" y1="112.4863" y2="272.3281"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="694" x2="694" y1="272.3281" y2="313.2832"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="694" x2="694" y1="313.2832" y2="1229.4551"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="694" x2="694" y1="1229.4551" y2="1270.4102"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="694" x2="694" y1="1270.4102" y2="1281.4102"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="1104" x2="1104" y1="112.4863" y2="272.3281"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="1104" x2="1104" y1="272.3281" y2="313.2832"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="1104" x2="1104" y1="313.2832" y2="1229.4551"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="1104" x2="1104" y1="1229.4551" y2="1270.4102"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="1104" x2="1104" y1="1270.4102" y2="1281.4102"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="1526" x2="1526" y1="112.4863" y2="272.3281"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="1526" x2="1526" y1="272.3281" y2="313.2832"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="1526" x2="1526" y1="313.2832" y2="1229.4551"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="1526" x2="1526" y1="1229.4551" y2="1270.4102"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="1526" x2="1526" y1="1270.4102" y2="1281.4102"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="1621" x2="1621" y1="112.4863" y2="272.3281"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="1621" x2="1621" y1="272.3281" y2="313.2832"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="1621" x2="1621" y1="313.2832" y2="1229.4551"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="1621" x2="1621" y1="1229.4551" y2="1270.4102"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="1621" x2="1621" y1="1270.4102" y2="1281.4102"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="1719" x2="1719" y1="112.4863" y2="272.3281"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="1719" x2="1719" y1="272.3281" y2="313.2832"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="1719" x2="1719" y1="313.2832" y2="1229.4551"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="1719" x2="1719" y1="1229.4551" y2="1270.4102"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="1719" x2="1719" y1="1270.4102" y2="1281.4102"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="1820" x2="1820" y1="112.4863" y2="272.3281"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="1820" x2="1820" y1="272.3281" y2="313.2832"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="1820" x2="1820" y1="313.2832" y2="1229.4551"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="1820" x2="1820" y1="1229.4551" y2="1270.4102"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="1820" x2="1820" y1="1270.4102" y2="1281.4102"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="1911" x2="1911" y1="112.4863" y2="272.3281"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="1911" x2="1911" y1="272.3281" y2="313.2832"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="1911" x2="1911" y1="313.2832" y2="1229.4551"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="1911" x2="1911" y1="1229.4551" y2="1270.4102"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="1911" x2="1911" y1="1270.4102" y2="1281.4102"/><rect fill="#FEFECE" filter="url(#frchmw2lw56bc)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="89" x="5" y="76.998"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="75" x="12" y="97.5332">PISP Server</text><rect fill="#FEFECE" filter="url(#frchmw2lw56bc)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="89" x="5" y="1280.4102"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="75" x="12" y="1300.9453">PISP Server</text><rect fill="#FEFECE" filter="url(#frchmw2lw56bc)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="100" x="108" y="76.998"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="86" x="115" y="97.5332">auth-service</text><rect fill="#FEFECE" filter="url(#frchmw2lw56bc)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="100" x="108" y="1280.4102"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="86" x="115" y="1300.9453">auth-service</text><rect fill="#FEFECE" filter="url(#frchmw2lw56bc)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="58" x="601" y="76.998"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="44" x="608" y="97.5332">Switch</text><rect fill="#FEFECE" filter="url(#frchmw2lw56bc)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="58" x="601" y="1280.4102"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="44" x="608" y="1300.9453">Switch</text><rect fill="#FEFECE" filter="url(#frchmw2lw56bc)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="39" x="673" y="76.998"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="25" x="680" y="97.5332">ALS</text><rect fill="#FEFECE" filter="url(#frchmw2lw56bc)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="39" x="673" y="1280.4102"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="25" x="680" y="1300.9453">ALS</text><rect fill="#FEFECE" filter="url(#frchmw2lw56bc)" height="46.9766" style="stroke: #A80036; stroke-width: 1.5;" width="62" x="1071" y="60.5098"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="48" x="1078" y="81.0449">DFSP A</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="47" x="1078.5" y="97.5332">(Payer)</text><rect fill="#FEFECE" filter="url(#frchmw2lw56bc)" height="46.9766" style="stroke: #A80036; stroke-width: 1.5;" width="62" x="1071" y="1280.4102"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="48" x="1078" y="1300.9453">DFSP A</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="47" x="1078.5" y="1317.4336">(Payer)</text><rect fill="#FEFECE" filter="url(#frchmw2lw56bc)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="76" x="1486" y="76.998"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="62" x="1493" y="97.5332">3p-sa-in</text><rect fill="#FEFECE" filter="url(#frchmw2lw56bc)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="76" x="1486" y="1280.4102"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="62" x="1493" y="1300.9453">3p-sa-in</text><rect fill="#FEFECE" filter="url(#frchmw2lw56bc)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="86" x="1576" y="76.998"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="72" x="1583" y="97.5332">3p-sa-out</text><rect fill="#FEFECE" filter="url(#frchmw2lw56bc)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="86" x="1576" y="1280.4102"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="72" x="1583" y="1300.9453">3p-sa-out</text><rect fill="#FEFECE" filter="url(#frchmw2lw56bc)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="82" x="1676" y="76.998"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="68" x="1683" y="97.5332">sdk-sa-in</text><rect fill="#FEFECE" filter="url(#frchmw2lw56bc)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="82" x="1676" y="1280.4102"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="68" x="1683" y="1300.9453">sdk-sa-in</text><rect fill="#FEFECE" filter="url(#frchmw2lw56bc)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="92" x="1772" y="76.998"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="78" x="1779" y="97.5332">sdk-sa-out</text><rect fill="#FEFECE" filter="url(#frchmw2lw56bc)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="92" x="1772" y="1280.4102"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="78" x="1779" y="1300.9453">sdk-sa-out</text><rect fill="#FEFECE" filter="url(#frchmw2lw56bc)" height="46.9766" style="stroke: #A80036; stroke-width: 1.5;" width="63" x="1878" y="60.5098"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="46" x="1886.5" y="81.0449">DFSP B</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="49" x="1885" y="97.5332">(Payee)</text><rect fill="#FEFECE" filter="url(#frchmw2lw56bc)" height="46.9766" style="stroke: #A80036; stroke-width: 1.5;" width="63" x="1878" y="1280.4102"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="46" x="1886.5" y="1300.9453">DFSP B</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="49" x="1885" y="1317.4336">(Payee)</text><rect fill="#EEEEEE" filter="url(#frchmw2lw56bc)" height="3" style="stroke: #EEEEEE; stroke-width: 1.0;" width="1950" x="0" y="143.1416"/><line style="stroke: #000000; stroke-width: 1.0;" x1="0" x2="1950" y1="143.1416" y2="143.1416"/><line style="stroke: #000000; stroke-width: 1.0;" x1="0" x2="1950" y1="146.1416" y2="146.1416"/><rect fill="#EEEEEE" filter="url(#frchmw2lw56bc)" height="23.3105" style="stroke: #000000; stroke-width: 2.0;" width="148" x="901" y="132.4863"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="130" x="907" y="149.0547">Discovery (Lookup)</text><rect fill="#FFFFFF" filter="url(#frchmw2lw56bc)" height="38" style="stroke: #A80036; stroke-width: 1.0;" width="256" x="56" y="170.7969"/><text fill="#000000" font-family="monospace" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="248" x="60" y="186.8638">GET /parties/MSISDN/+4412345678</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="160" x="60" y="201.9966">FSPIOP-Source: pispa</text><polygon fill="#A80036" points="620,231.1953,630,235.1953,620,239.1953,624,235.1953" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="51.5" x2="626" y1="235.1953" y2="235.1953"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="248" x="58.5" y="230.1294">GET /parties/MSISDN/+4412345678</text><polygon fill="#A80036" points="62.5,260.3281,52.5,264.3281,62.5,268.3281,58.5,264.3281" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 2.0,2.0;" x1="56.5" x2="631" y1="264.3281" y2="264.3281"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="96" x="68.5" y="259.2622">202 Accepted</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="171" x="896" y="296.9629">ALS lookup flow not shown here</text><rect fill="#FFFFFF" filter="url(#frchmw2lw56bc)" height="53" style="stroke: #A80036; stroke-width: 1.0;" width="256" x="504" y="318.2832"/><text fill="#000000" font-family="monospace" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="248" x="508" y="334.3501">GET /parties/MSISDN/+4412345678</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="160" x="508" y="349.4829">FSPIOP-Source: pispa</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="200" x="508" y="364.6157">FSPIOP-Destination: dfspb</text><polygon fill="#A80036" points="1899.5,393.8145,1909.5,397.8145,1899.5,401.8145,1903.5,397.8145" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="632" x2="1905.5" y1="397.8145" y2="397.8145"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="248" x="639" y="392.7485">GET /parties/MSISDN/+4412345678</text><polygon fill="#A80036" points="643,422.9473,633,426.9473,643,430.9473,639,426.9473" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 2.0,2.0;" x1="637" x2="1910.5" y1="426.9473" y2="426.9473"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="96" x="649" y="421.8813">202 Accepted</text><rect fill="#FFFFFF" filter="url(#frchmw2lw56bc)" height="328" style="stroke: #A80036; stroke-width: 1.0;" width="434" x="1472" y="439.9473"/><text fill="#000000" font-family="monospace" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="248" x="1476" y="456.0142">PUT /parties/MSISDN/+4412345678</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="160" x="1476" y="471.147">FSPIOP-Source: dfspb</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="200" x="1476" y="486.2798">FSPIOP-Destination: pispa</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="4" x="1476" y="501.9141">{</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="145" x="1484" y="517.2246">partyIdType: "MSISDN",</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="201" x="1484" y="532.5352">partyIdentifier: "+4412345678",</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="44" x="1484" y="547.8457">party: {</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="81" x="1492" y="563.1563">partyIdInfo: {</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="145" x="1500" y="578.4668">partyIdType: "MSISDN",</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="201" x="1500" y="593.7773">partyIdentifier: "+4412345678",</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="88" x="1500" y="609.0879">fspId: 'dfspb",</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="1492" y="624.3984">},</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="122" x="1492" y="639.709">name: "Bhavesh S.",</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="69" x="1492" y="655.0195">accounts: [</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="4" x="1500" y="670.3301">{</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="394" x="1508" y="685.6406">"address": "dfspb.8f027046-b82a-4fa9-838b-70210fcf8137",</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="108" x="1508" y="700.9512">"currency": "USD"</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="4" x="1500" y="716.2617">}</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="4" x="1492" y="731.5723">]</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="4" x="1484" y="746.8828">}</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="4" x="1476" y="762.1934">}</text><polygon fill="#A80036" points="643,791.0684,633,795.0684,643,799.0684,639,795.0684" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="637" x2="1910.5" y1="795.0684" y2="795.0684"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="248" x="649" y="790.0024">PUT /parties/MSISDN/+4412345678</text><polygon fill="#A80036" points="1899.5,820.2012,1909.5,824.2012,1899.5,828.2012,1903.5,824.2012" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 2.0,2.0;" x1="632" x2="1905.5" y1="824.2012" y2="824.2012"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="48" x="639" y="819.1353">200 OK</text><rect fill="#FFFFFF" filter="url(#frchmw2lw56bc)" height="328" style="stroke: #A80036; stroke-width: 1.0;" width="434" x="415" y="837.2012"/><text fill="#000000" font-family="monospace" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="248" x="419" y="853.2681">PUT /parties/MSISDN/+4412345678</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="160" x="419" y="868.4009">FSPIOP-Source: dfspb</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="200" x="419" y="883.5337">FSPIOP-Destination: pispa</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="4" x="419" y="899.168">{</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="145" x="427" y="914.4785">partyIdType: "MSISDN",</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="201" x="427" y="929.7891">partyIdentifier: "+4412345678",</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="44" x="427" y="945.0996">party: {</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="81" x="435" y="960.4102">partyIdInfo: {</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="145" x="443" y="975.7207">partyIdType: "MSISDN",</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="201" x="443" y="991.0313">partyIdentifier: "+4412345678",</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="88" x="443" y="1006.3418">fspId: 'dfspb",</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="435" y="1021.6523">},</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="122" x="435" y="1036.9629">name: "Bhavesh S.",</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="69" x="435" y="1052.2734">accounts: [</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="4" x="443" y="1067.584">{</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="394" x="451" y="1082.8945">"address": "dfspb.8f027046-b82a-4fa9-838b-70210fcf8137",</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="108" x="451" y="1098.2051">"currency": "USD"</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="4" x="443" y="1113.5156">}</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="4" x="435" y="1128.8262">]</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="4" x="427" y="1144.1367">}</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="4" x="419" y="1159.4473">}</text><polygon fill="#A80036" points="62.5,1188.3223,52.5,1192.3223,62.5,1196.3223,58.5,1192.3223" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="56.5" x2="631" y1="1192.3223" y2="1192.3223"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="248" x="68.5" y="1187.2563">PUT /parties/MSISDN/+4412345678</text><polygon fill="#A80036" points="620,1217.4551,630,1221.4551,620,1225.4551,624,1221.4551" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 2.0,2.0;" x1="51.5" x2="626" y1="1221.4551" y2="1221.4551"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="48" x="58.5" y="1216.3892">200 OK</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="217" x="873" y="1254.0898">PISP confirms payee party with their user</text><line style="stroke: #000000; stroke-width: 1.0; stroke-dasharray: 2.0,2.0;" x1="0" x2="1950" y1="1270.4102" y2="1270.4102"/><!--MD5=[e6602a07423f185030b066b57957b1a0]
+@startuml
+
+title PISPTransferDetailedAPI
+
+!include participants_api.iuml
+
+== Discovery (Lookup) ==
+rnote right of D1 #Light
+**""GET /parties/MSISDN/+4412345678""**
+""FSPIOP-Source: pispa""
+end note
+D1 -> S: ""GET /parties/MSISDN/+4412345678""
+S - -> D1: ""202 Accepted""
+
+... ALS lookup flow not shown here ...
+
+rnote over S #Light
+**""GET /parties/MSISDN/+4412345678""**
+""FSPIOP-Source: pispa""
+""FSPIOP-Destination: dfspb""
+end note
+S -> D3: ""GET /parties/MSISDN/+4412345678""
+D3 - -> S: ""202 Accepted""
+
+rnote left of D3 #Light
+**""PUT /parties/MSISDN/+4412345678""**
+""FSPIOP-Source: dfspb""
+""FSPIOP-Destination: pispa""
+{
+  partyIdType: "MSISDN",
+  partyIdentifier: "+4412345678",
+  party: {
+    partyIdInfo: {
+      partyIdType: "MSISDN",
+      partyIdentifier: "+4412345678",
+      fspId: 'dfspb",
+    },
+    name: "Bhavesh S.",
+    accounts: [
+      {
+        "address": "dfspb.8f027046-b82a-4fa9-838b-70210fcf8137",
+        "currency": "USD"
+      }
+    ]
+  }
+}
+end note
+D3 -> S: ""PUT /parties/MSISDN/+4412345678""
+S - -> D3: ""200 OK""
+
+rnote over S #Light
+**""PUT /parties/MSISDN/+4412345678""**
+""FSPIOP-Source: dfspb""
+""FSPIOP-Destination: pispa""
+{
+  partyIdType: "MSISDN",
+  partyIdentifier: "+4412345678",
+  party: {
+    partyIdInfo: {
+      partyIdType: "MSISDN",
+      partyIdentifier: "+4412345678",
+      fspId: 'dfspb",
+    },
+    name: "Bhavesh S.",
+    accounts: [
+      {
+        "address": "dfspb.8f027046-b82a-4fa9-838b-70210fcf8137",
+        "currency": "USD"
+      }
+    ]
+  }
+}
+end note
+S -> D1: ""PUT /parties/MSISDN/+4412345678""
+D1 - -> S: ""200 OK""
+
+... PISP confirms payee party with their user ...
+
+newpage
+
+== Agreement Phase ==
+rnote right of D1 #Light
+**""POST /thirdpartyRequests/transactions""**
+""FSPIOP-Source: pispa""
+""FSPIOP-Destination: dfspa""
+{
+  "transactionRequestId": "123",
+  //This tells dfspa which account to deduct funds from
+  //it's an opaque identifier that the DFSP knows about
+  **"sourceAccountId": "dfspa.1111-2222",**
+  //This tells dfspa and auth-service which consent allows the pisp to initiate this tx
+  **"consentId": "111"**
+  "payee": {
+    "partyIdInfo": {
+      "partyIdType": "MSISDN",
+      "partyIdentifier": "+4412345678",
+      "fspId": "dfspb"
+    }
+  },
+  "payer": {
+    "personalInfo": {
+      "complexName": {
+        "firstName": "Ayesha",
+        "lastName": "Takia"
+      }
+    },
+    "partyIdInfo": {
+      "partyIdType": "MSISDN",
+      "partyIdentifier": "+44 8765 4321",
+      "fspId": "dfspa"
+    }
+  },
+  "amountType": "SEND",
+  "amount": {
+    "amount": "100",
+    "currency": "USD"
+  },
+  "transactionType": {
+    "scenario": "TRANSFER",
+    "initiator": "PAYER",
+    "initiatorType": "CONSUMER"
+  },
+  "expiration": "2020-06-15T22:17:28.985-01:00"
+}
+end note
+D1 -> S: ""POST /thirdpartyRequests/transactions""
+S - -> D1: ""202 Accepted""
+
+rnote over S #Light
+**""POST /thirdpartyRequests/transactions""**
+""FSPIOP-Source: pispa""
+""FSPIOP-Destination: dfspa""
+{
+  "transactionRequestId": "123",
+  //This tells dfspa which account to deduct funds from
+  //it's an opaque identifier that the DFSP knows about
+  **"sourceAccountId": "dfspa.1111-2222",**
+  //This tells dfspa and auth-service which consent allows the pisp to initiate this tx
+  **"consentId": "111"**
+  "payee": {
+    "partyIdInfo": {
+      "partyIdType": "MSISDN",
+      "partyIdentifier": "+4412345678",
+      "fspId": "dfspb"
+    }
+  },
+  "payer": {
+    "personalInfo": {
+      "complexName": {
+        "firstName": "Ayesha",
+        "lastName": "Takia"
+      }
+    },
+    "partyIdInfo": {
+      "partyIdType": "MSISDN",
+      "partyIdentifier": "+44 8765 4321",
+      "fspId": "dfspa"
+    },
+  },
+  "amountType": "SEND",
+  "amount": {
+    "amount": "100",
+    "currency": "USD"
+  },
+  "transactionType": {
+    "scenario": "TRANSFER",
+    "initiator": "PAYER",
+    "initiatorType": "CONSUMER"
+  },
+  "expiration": "2020-06-15T00:00:00.000"
+}
+end note
+S -> D2: ""POST /thirdpartyRequests/transactions""
+D2 - -> S: ""202 Accepted""
+D2 -> D2: Lookup this ""consentId"", ""sourceAccountId"" \nand ""pispId"". Verify that they exist, and consent \nis granted with a valid credential
+D2 -> D2: Generate a unique transactionId for this transaction request: ""987""
+
+
+rnote left of D2 #Light
+**""PUT /thirdpartyRequests/transactions/123""**
+""FSPIOP-Source: dfspa""
+""FSPIOP-Destination: pispa""
+{
+  "transactionId": "987",
+  "transactionRequestState": "RECEIVED"
+}
+end note
+D2 -> S: ""PUT /thirdpartyRequests/transactions/123""
+S - -> D2: ""200 OK""
+
+rnote over S #Light
+**""PUT /thirdpartyRequests/transactions/123""**
+""FSPIOP-Source: dfspa""
+""FSPIOP-Destination: pispa""
+{
+  "transactionId": "987",
+  "transactionRequestState": "RECEIVED"
+}
+end note
+S -> D1: ""PUT /thirdpartyRequests/transactions/123""
+D1 - -> S: ""200 OK""
+
+
+
+rnote left of D2 #Light
+**""POST /quotes""**
+""FSPIOP-Source: dfspa""
+""FSPIOP-Destination: dfspb""
+{
+  "quoteId": "456", //Set by the payer dfsp
+  "transactionId": "987", //Set by the payer dfsp
+  *"transactionRequestId": "123", //Relates to the original thirdpartyRequest!*
+  "payee": {
+    "partyIdInfo": {
+      "partyIdType": "MSISDN",
+      "partyIdentifier": "+4412345678",
+      "fspId": "dfspb"
+    }
+  },
+  "payer": {
+    "personalInfo": {
+      "complexName": {
+        "firstName": "Ayesha",
+        "lastName": "Takia"
+      }
+    },
+    "partyIdInfo": {
+      "partyIdType": "MSISDN",
+      "partyIdentifier": "+44 8765 4321",
+      "fspId": "dfspa"
+    },
+  },
+  "amountType": "SEND",
+  "amount": {
+    "amount": "100",
+    "currency": "USD"
+  },
+  "transactionType": {
+    "scenario": "TRANSFER",
+    "initiator": "PAYER",
+    "initiatorType": "CONSUMER"
+  },
+  "note": "quote note"
+}
+end note
+D2 -> S: ""POST /quotes""
+S - -> D2: ""202 Accepted""
+
+rnote over S #Light
+**""POST /quotes""**
+""FSPIOP-Source: dfspa""
+""FSPIOP-Destination: dfspb""
+{
+  "quoteId": "456", //Set by the payer dfsp
+  "transactionId": "987", //Set by the payer dfsp
+  *"transactionRequestId": "123", //Relates to the original thirdpartyRequest!*
+  "payee": {
+    "partyIdInfo": {
+      "partyIdType": "MSISDN",
+      "partyIdentifier": "+4412345678",
+      "fspId": "dfspb"
+    }
+  },
+  "payer": {
+    "personalInfo": {
+      "complexName": {
+        "firstName": "Ayesha",
+        "lastName": "Takia"
+      }
+    },
+    "partyIdInfo": {
+      "partyIdType": "MSISDN",
+      "partyIdentifier": "+44 8765 4321",
+      "fspId": "dfspa"
+    },
+  },
+  "amountType": "SEND",
+  "amount": {
+    "amount": "100",
+    "currency": "USD"
+  },
+  "transactionType": {
+    "scenario": "TRANSFER",
+    "initiator": "PAYER",
+    "initiatorType": "CONSUMER"
+  },
+  "note": "quote note"
+}
+end note
+S -> D3: ""POST /quotes""
+D3 - -> S: ""202 Accepted""
+
+rnote left of D2 #Light
+**""PUT /quotes/456""**
+""FSPIOP-Source: dfspb""
+""FSPIOP-Destination: dfspa""
+{
+  "transferAmount": {
+    "amount": "100",
+    "currency": "USD"
+  },
+  "payeeReceiveAmount": {
+    "amount": "99",
+    "currency": "USD"
+  },
+  "payeeFspFee": {
+    "amount": "1",
+    "currency": "USD"
+  },
+  "expiration": "2020-06-15T12:00:00.000",
+  "ilpPacket": "...",
+  "condition": "...",
+}
+end note
+D3 -> S: ""PUT /quotes/456""
+S - -> D3: ""200 OK""
+
+rnote left of D2 #Light
+**""PUT /quotes/456""**
+""FSPIOP-Source: dfspb""
+""FSPIOP-Destination: dfspa""
+{
+  "transferAmount": {
+    "amount": "100",
+    "currency": "USD"
+  },
+  "payeeReceiveAmount": {
+    "amount": "99",
+    "currency": "USD"
+  },
+  "payeeFspFee": {
+    "amount": "1",
+    "currency": "USD"
+  },
+  "expiration": "2020-06-15T12:00:00.000",
+  "ilpPacket": "...",
+  "condition": "...",
+}
+end note
+S -> D2: ""PUT /quotes/456""
+D2 - -> S: ""200 OK""
+
+note left of D2
+  DFSPA has the quote, they can now ask
+  the PISP for authorization
+end note
+
+rnote left of D2 #Light
+**""POST /authorizations""**
+""FSPIOP-Source: dfspa""
+""FSPIOP-Destination: pispa""
+{
+  //transactionRequestId is our 'primary key'
+  //to refer to this authorization
+  **"transactionRequestId": "123",**
+  "authenticationType": "U2F",
+  "retriesLeft": "1",
+  "amount": {
+    "amount": "100",
+    "currency": "USD"
+  },
+  "transactionId": "987",
+  "quote": {
+    //TODO: do we need quoteId here?
+    "transferAmount": {
+      "amount": "100",
+      "currency": "USD"
+    },
+    "payeeReceiveAmount": {
+      "amount": "99",
+      "currency": "USD"
+    },
+    "payeeFspFee": {
+      "amount": "1",
+      "currency": "USD"
+    },
+    "expiration": "2020-06-15T12:00:00.000",
+    "ilpPacket": "...",
+    "condition": "...",
+  }
+}
+end note
+D2 -> S: ""POST /authorizations""
+S - -> D2: ""202 Accepted""
+
+rnote over S #Light
+**""POST /authorizations""**
+""FSPIOP-Source: dfspa""
+""FSPIOP-Destination: pispa""
+{
+  //transactionRequestId is our 'primary key'
+  //to refer to this authorization
+  **"transactionRequestId": "123",**
+  "authenticationType": "U2F",
+  "retriesLeft": "1",
+  "amount": {
+    "amount": "100",
+    "currency": "USD"
+  },
+  "transactionId": "987",
+  "quote": {
+    "transferAmount": {
+      "amount": "100",
+      "currency": "USD"
+    },
+    "payeeReceiveAmount": {
+      "amount": "99",
+      "currency": "USD"
+    },
+    "payeeFspFee": {
+      "amount": "1",
+      "currency": "USD"
+    },
+    "expiration": "2020-06-15T12:00:00.000",
+    "ilpPacket": "...",
+    "condition": "...",
+  }
+}
+end note
+S -> D1: ""POST /authorizations""
+D1 - -> S: ""202 Accepted""
+
+note right of D1
+  PISP checks the quote with the user,
+  and uses FIDO to sign the the QuoteResponse object
+end note
+
+rnote right of D1 #Light
+**""PUT /authorizations/123""**
+""FSPIOP-Source: pispa""
+""FSPIOP-Destination: dfspa""
+{
+  "authenticationInfo": {
+    "authentication": "U2F",
+    "authenticationValue": {
+      "pinValue": "<base64 encoded binary - the signed QuoteResponse>",
+      "counter": "1"
+    }
+  }
+  "responseType": "ENTERED"
+}
+end note
+D1 -> S: ""PUT /authorizations/123""
+
+S - -> D1: ""200 OK""
+
+
+rnote over S #Light
+**""PUT /authorizations/123""**
+""FSPIOP-Source: pispa""
+""FSPIOP-Destination: dfspa""
+{
+  "authenticationInfo": {
+    "authentication": "U2F",
+    "authenticationValue": {
+      "pinValue": "<base64 encoded binary - the signed QuoteResponse>",
+      "counter": "1"
+    }
+  }
+  "responseType": "ENTERED"
+}
+end note
+S -> D2: ""PUT /authorizations/123""
+D2 - -> S: ""200 OK""
+
+
+D2 -> D2: Lookup the ""thirdpartyRequests/transaction""\nrequest, get the ""consentId"" and ""sourceAccountId""
+D2 -> D2: Confirm pispId from ""PUT /authorizations/123""\n matches the ""thirdpartyRequests/transaction""
+
+note over D2
+  Switch has the signed condition
+  For 3rd party FIDO, it now needs to make sure everything checks out
+end note
+
+rnote left of D2 #Light
+**""POST /thirdpartyRequests/transactions/123/authorizations""**
+""FSPIOP-Source: dfspa""
+""FSPIOP-Destination: central-auth""
+{
+  //from ""PUT /quotes/456"" callback
+  "challenge": "<QuoteResponse object>",
+
+  //from ""PUT /authorizations/123"" callback: .authenticationInfo.authenticationValue.pinValue
+  "value": "<base64 encoded binary - the signed quote response object>",
+
+  //from ""thirdpartyRequests/transactions"" body
+  "consentId": "111",
+
+  //from ""thirdpartyRequests/transactions"" body
+  "sourceAccountId": "dfspa.1111-2222"
+}
+end note
+D2 -> S: ""POST /thirdpartyRequests/transactions/123/authorizations""
+S - -> D2: ""202 Accepted""
+
+rnote over S #Light
+**""POST /thirdpartyRequests/transactions/123/authorizations""**
+""FSPIOP-Source: dfspa""
+""FSPIOP-Destination: central-auth""
+{
+  //from ""PUT /quotes/456"" callback
+  "challenge": "<QuoteResponse object>",
+
+  //from ""PUT /authorizations/123"" callback: .authenticationInfo.authenticationValue.pinValue
+  "value": "<base64 encoded binary - the signed quote response object>",
+
+  //from ""thirdpartyRequests/transactions"" body
+  "consentId": "111",
+
+  //from ""thirdpartyRequests/transactions"" body
+  "sourceAccountId": "dfspa.1111-2222",
+
+  "status": "PENDING"
+}
+end note
+S -> AUTHS: ""POST /thirdpartyRequests/transactions/123/authorizations""
+AUTHS - -> S: ""202 Accepted""
+
+AUTHS -> AUTHS: Lookup this consent based on consentId
+AUTHS -> AUTHS: Ensure the sourceAccountId matches what is in Consent
+AUTHS -> AUTHS: Check that the signed bytes match the \npublickey we have stored for the consent
+
+rnote right of AUTHS #Light
+**""PUT /thirdpartyRequests/transactions/123/authorizations""**
+""FSPIOP-Source: central-auth""
+""FSPIOP-Destination: dfspa""
+{
+  //from the ""PUT /quotes/456"" callback
+  "challenge": "<QuoteResponse object>",
+
+  //from the ""PUT /authorizations/123"" callback
+  "value": "<base64 encoded binary - the signed quote response object>",
+
+  //from the ""thirdpartyRequests/transactions"" body
+  "consentId": "111",
+
+  //from the ""thirdpartyRequests/transactions"" body
+  "sourceAccountId": "dfspa.1111-2222"
+  "status": "VERIFIED"
+}
+end note
+AUTHS -> S: ""PUT /thirdpartyRequests/transactions/123/authorizations""
+S - -> AUTHS: ""200 OK""
+
+rnote over S #Light
+**""PUT /thirdpartyRequests/transactions/123/authorizations""**
+""FSPIOP-Source: central-auth""
+""FSPIOP-Destination: dfspa""
+{
+  //from the ""PUT /quotes/456"" callback
+  "challenge": "<QuoteResponse object>",
+
+  //from the ""PUT /authorizations/123"" callback
+  "value": "<base64 encoded binary - the signed quote response object>",
+
+  //from the ""thirdpartyRequests/transactions"" body
+  "consentId": "111",
+
+  //from the ""thirdpartyRequests/transactions"" body
+  "sourceAccountId": "dfspa.1111-2222"
+  "status": "VERIFIED"
+}
+end note
+S -> D2: ""PUT /thirdpartyRequests/transactions/123/authorizations""
+D2 - -> S: ""200 OK""
+
+note over D2
+  DFSPA now knows that the user signed this transaction
+  and can go ahead and initiate the transfer
+end note
+
+newpage
+
+== Transfer Phase ==
+
+rnote over D2 #Light
+**""POST /transfers""**
+""FSPIOP-Source: dfspa""
+""FSPIOP-Destination: dfspb""
+{
+  "transferId": "321",
+  "quoteId": "456",
+  "payerFsp": "dfspa",
+  "payeeFsp": "dfspb",
+  "amount": {
+    "amount": "100",
+    "currency": "USD"
+  },
+  "expiration": "2020-06-15T13:00:00.000",
+  "ilpPacket": "...",
+  "condition": "...",
+}
+end note
+D2 -> S: ""POST /transfers""
+S - -> D2: ""202 Accepted""
+
+rnote over S #Light
+**""POST /transfers""**
+""FSPIOP-Source: dfspa""
+""FSPIOP-Destination: dfspb""
+{
+  "transferId": "321",
+  "quoteId": "456",
+  "payerFsp": "dfspa",
+  "payeeFsp": "dfspb",
+  "amount": {
+    "amount": "100",
+    "currency": "USD"
+  },
+  "expiration": "2020-06-15T13:00:00.000",
+  "ilpPacket": "...",
+  "condition": "...",
+}
+end note
+S -> D3: ""POST /transfers""
+D3 - -> S: ""202 Accepted""
+
+rnote left of D3 #Light
+**""PUT /transfers/321""**
+""FSPIOP-Source: dfspb""
+""FSPIOP-Destination: dfspa""
+{
+  "fulfilment": "...",
+  "completedTimestamp": "2020-06-15T12:01:00.000",
+  "transferState": "COMMITTED"
+}
+end note
+D3 -> S: ""PUT /transfers/321""
+S - -> D3: ""200 OK""
+
+rnote over S #Light
+**""PUT /transfers/321""**
+""FSPIOP-Source: dfspb""
+""FSPIOP-Destination: dfspa""
+{
+  "fulfilment": "...",
+  "completedTimestamp": "2020-06-15T12:01:00.000",
+  "transferState": "COMMITTED"
+}
+end note
+S -> D2: ""PUT /transfers/321""
+D2 - -> S: ""200 OK""
+
+
+rnote over S #Light
+**""PATCH /thirdpartyRequests/transactions/123""**
+""FSPIOP-Source: switch""
+""FSPIOP-Destination: pispa""
+{
+  "transactionId": "987",
+  "transactionRequestState": "ACCEPTED",
+  "transactionState": "COMMITTED"
+}
+end note
+S -> D1: ""PATCH /thirdpartyRequests/transactions/123""
+D1 - -> S: ""200 OK""
+
+
+@enduml
+
+@startuml
+
+title PISPTransferDetailedAPI
+
+box "PISP"
+participant "PISP Server" as D1
+end box
+box "Mojaloop"
+    participant "auth-service" as AUTHS
+    participant Switch as S
+    participant "ALS" as A
+end box
+box "DFSP A"
+    participant "DFSP A\n(Payer)" as D2
+    participant "3p-sa-in" as D2_3psa_in
+    participant "3p-sa-out" as D2_3psa_out
+    participant "sdk-sa-in" as D2_sdksa_in
+    participant "sdk-sa-out" as D2_sdksa_out
+end box
+box "DFSP B"
+    participant "DFSP B\n(Payee)" as D3
+end box
+
+== Discovery (Lookup) ==
+rnote right of D1 #Light
+**""GET /parties/MSISDN/+4412345678""**
+""FSPIOP-Source: pispa""
+end note
+D1 -> S: ""GET /parties/MSISDN/+4412345678""
+S - -> D1: ""202 Accepted""
+
+... ALS lookup flow not shown here ...
+
+rnote over S #Light
+**""GET /parties/MSISDN/+4412345678""**
+""FSPIOP-Source: pispa""
+""FSPIOP-Destination: dfspb""
+end note
+S -> D3: ""GET /parties/MSISDN/+4412345678""
+D3 - -> S: ""202 Accepted""
+
+rnote left of D3 #Light
+**""PUT /parties/MSISDN/+4412345678""**
+""FSPIOP-Source: dfspb""
+""FSPIOP-Destination: pispa""
+{
+  partyIdType: "MSISDN",
+  partyIdentifier: "+4412345678",
+  party: {
+    partyIdInfo: {
+      partyIdType: "MSISDN",
+      partyIdentifier: "+4412345678",
+      fspId: 'dfspb",
+    },
+    name: "Bhavesh S.",
+    accounts: [
+      {
+        "address": "dfspb.8f027046-b82a-4fa9-838b-70210fcf8137",
+        "currency": "USD"
+      }
+    ]
+  }
+}
+end note
+D3 -> S: ""PUT /parties/MSISDN/+4412345678""
+S - -> D3: ""200 OK""
+
+rnote over S #Light
+**""PUT /parties/MSISDN/+4412345678""**
+""FSPIOP-Source: dfspb""
+""FSPIOP-Destination: pispa""
+{
+  partyIdType: "MSISDN",
+  partyIdentifier: "+4412345678",
+  party: {
+    partyIdInfo: {
+      partyIdType: "MSISDN",
+      partyIdentifier: "+4412345678",
+      fspId: 'dfspb",
+    },
+    name: "Bhavesh S.",
+    accounts: [
+      {
+        "address": "dfspb.8f027046-b82a-4fa9-838b-70210fcf8137",
+        "currency": "USD"
+      }
+    ]
+  }
+}
+end note
+S -> D1: ""PUT /parties/MSISDN/+4412345678""
+D1 - -> S: ""200 OK""
+
+... PISP confirms payee party with their user ...
+
+newpage
+
+== Agreement Phase ==
+rnote right of D1 #Light
+**""POST /thirdpartyRequests/transactions""**
+""FSPIOP-Source: pispa""
+""FSPIOP-Destination: dfspa""
+{
+  "transactionRequestId": "123",
+  //This tells dfspa which account to deduct funds from
+  //it's an opaque identifier that the DFSP knows about
+  **"sourceAccountId": "dfspa.1111-2222",**
+  //This tells dfspa and auth-service which consent allows the pisp to initiate this tx
+  **"consentId": "111"**
+  "payee": {
+    "partyIdInfo": {
+      "partyIdType": "MSISDN",
+      "partyIdentifier": "+4412345678",
+      "fspId": "dfspb"
+    }
+  },
+  "payer": {
+    "personalInfo": {
+      "complexName": {
+        "firstName": "Ayesha",
+        "lastName": "Takia"
+      }
+    },
+    "partyIdInfo": {
+      "partyIdType": "MSISDN",
+      "partyIdentifier": "+44 8765 4321",
+      "fspId": "dfspa"
+    }
+  },
+  "amountType": "SEND",
+  "amount": {
+    "amount": "100",
+    "currency": "USD"
+  },
+  "transactionType": {
+    "scenario": "TRANSFER",
+    "initiator": "PAYER",
+    "initiatorType": "CONSUMER"
+  },
+  "expiration": "2020-06-15T22:17:28.985-01:00"
+}
+end note
+D1 -> S: ""POST /thirdpartyRequests/transactions""
+S - -> D1: ""202 Accepted""
+
+rnote over S #Light
+**""POST /thirdpartyRequests/transactions""**
+""FSPIOP-Source: pispa""
+""FSPIOP-Destination: dfspa""
+{
+  "transactionRequestId": "123",
+  //This tells dfspa which account to deduct funds from
+  //it's an opaque identifier that the DFSP knows about
+  **"sourceAccountId": "dfspa.1111-2222",**
+  //This tells dfspa and auth-service which consent allows the pisp to initiate this tx
+  **"consentId": "111"**
+  "payee": {
+    "partyIdInfo": {
+      "partyIdType": "MSISDN",
+      "partyIdentifier": "+4412345678",
+      "fspId": "dfspb"
+    }
+  },
+  "payer": {
+    "personalInfo": {
+      "complexName": {
+        "firstName": "Ayesha",
+        "lastName": "Takia"
+      }
+    },
+    "partyIdInfo": {
+      "partyIdType": "MSISDN",
+      "partyIdentifier": "+44 8765 4321",
+      "fspId": "dfspa"
+    },
+  },
+  "amountType": "SEND",
+  "amount": {
+    "amount": "100",
+    "currency": "USD"
+  },
+  "transactionType": {
+    "scenario": "TRANSFER",
+    "initiator": "PAYER",
+    "initiatorType": "CONSUMER"
+  },
+  "expiration": "2020-06-15T00:00:00.000"
+}
+end note
+S -> D2: ""POST /thirdpartyRequests/transactions""
+D2 - -> S: ""202 Accepted""
+D2 -> D2: Lookup this ""consentId"", ""sourceAccountId"" \nand ""pispId"". Verify that they exist, and consent \nis granted with a valid credential
+D2 -> D2: Generate a unique transactionId for this transaction request: ""987""
+
+
+rnote left of D2 #Light
+**""PUT /thirdpartyRequests/transactions/123""**
+""FSPIOP-Source: dfspa""
+""FSPIOP-Destination: pispa""
+{
+  "transactionId": "987",
+  "transactionRequestState": "RECEIVED"
+}
+end note
+D2 -> S: ""PUT /thirdpartyRequests/transactions/123""
+S - -> D2: ""200 OK""
+
+rnote over S #Light
+**""PUT /thirdpartyRequests/transactions/123""**
+""FSPIOP-Source: dfspa""
+""FSPIOP-Destination: pispa""
+{
+  "transactionId": "987",
+  "transactionRequestState": "RECEIVED"
+}
+end note
+S -> D1: ""PUT /thirdpartyRequests/transactions/123""
+D1 - -> S: ""200 OK""
+
+
+
+rnote left of D2 #Light
+**""POST /quotes""**
+""FSPIOP-Source: dfspa""
+""FSPIOP-Destination: dfspb""
+{
+  "quoteId": "456", //Set by the payer dfsp
+  "transactionId": "987", //Set by the payer dfsp
+  *"transactionRequestId": "123", //Relates to the original thirdpartyRequest!*
+  "payee": {
+    "partyIdInfo": {
+      "partyIdType": "MSISDN",
+      "partyIdentifier": "+4412345678",
+      "fspId": "dfspb"
+    }
+  },
+  "payer": {
+    "personalInfo": {
+      "complexName": {
+        "firstName": "Ayesha",
+        "lastName": "Takia"
+      }
+    },
+    "partyIdInfo": {
+      "partyIdType": "MSISDN",
+      "partyIdentifier": "+44 8765 4321",
+      "fspId": "dfspa"
+    },
+  },
+  "amountType": "SEND",
+  "amount": {
+    "amount": "100",
+    "currency": "USD"
+  },
+  "transactionType": {
+    "scenario": "TRANSFER",
+    "initiator": "PAYER",
+    "initiatorType": "CONSUMER"
+  },
+  "note": "quote note"
+}
+end note
+D2 -> S: ""POST /quotes""
+S - -> D2: ""202 Accepted""
+
+rnote over S #Light
+**""POST /quotes""**
+""FSPIOP-Source: dfspa""
+""FSPIOP-Destination: dfspb""
+{
+  "quoteId": "456", //Set by the payer dfsp
+  "transactionId": "987", //Set by the payer dfsp
+  *"transactionRequestId": "123", //Relates to the original thirdpartyRequest!*
+  "payee": {
+    "partyIdInfo": {
+      "partyIdType": "MSISDN",
+      "partyIdentifier": "+4412345678",
+      "fspId": "dfspb"
+    }
+  },
+  "payer": {
+    "personalInfo": {
+      "complexName": {
+        "firstName": "Ayesha",
+        "lastName": "Takia"
+      }
+    },
+    "partyIdInfo": {
+      "partyIdType": "MSISDN",
+      "partyIdentifier": "+44 8765 4321",
+      "fspId": "dfspa"
+    },
+  },
+  "amountType": "SEND",
+  "amount": {
+    "amount": "100",
+    "currency": "USD"
+  },
+  "transactionType": {
+    "scenario": "TRANSFER",
+    "initiator": "PAYER",
+    "initiatorType": "CONSUMER"
+  },
+  "note": "quote note"
+}
+end note
+S -> D3: ""POST /quotes""
+D3 - -> S: ""202 Accepted""
+
+rnote left of D2 #Light
+**""PUT /quotes/456""**
+""FSPIOP-Source: dfspb""
+""FSPIOP-Destination: dfspa""
+{
+  "transferAmount": {
+    "amount": "100",
+    "currency": "USD"
+  },
+  "payeeReceiveAmount": {
+    "amount": "99",
+    "currency": "USD"
+  },
+  "payeeFspFee": {
+    "amount": "1",
+    "currency": "USD"
+  },
+  "expiration": "2020-06-15T12:00:00.000",
+  "ilpPacket": "...",
+  "condition": "...",
+}
+end note
+D3 -> S: ""PUT /quotes/456""
+S - -> D3: ""200 OK""
+
+rnote left of D2 #Light
+**""PUT /quotes/456""**
+""FSPIOP-Source: dfspb""
+""FSPIOP-Destination: dfspa""
+{
+  "transferAmount": {
+    "amount": "100",
+    "currency": "USD"
+  },
+  "payeeReceiveAmount": {
+    "amount": "99",
+    "currency": "USD"
+  },
+  "payeeFspFee": {
+    "amount": "1",
+    "currency": "USD"
+  },
+  "expiration": "2020-06-15T12:00:00.000",
+  "ilpPacket": "...",
+  "condition": "...",
+}
+end note
+S -> D2: ""PUT /quotes/456""
+D2 - -> S: ""200 OK""
+
+note left of D2
+  DFSPA has the quote, they can now ask
+  the PISP for authorization
+end note
+
+rnote left of D2 #Light
+**""POST /authorizations""**
+""FSPIOP-Source: dfspa""
+""FSPIOP-Destination: pispa""
+{
+  //transactionRequestId is our 'primary key'
+  //to refer to this authorization
+  **"transactionRequestId": "123",**
+  "authenticationType": "U2F",
+  "retriesLeft": "1",
+  "amount": {
+    "amount": "100",
+    "currency": "USD"
+  },
+  "transactionId": "987",
+  "quote": {
+    //TODO: do we need quoteId here?
+    "transferAmount": {
+      "amount": "100",
+      "currency": "USD"
+    },
+    "payeeReceiveAmount": {
+      "amount": "99",
+      "currency": "USD"
+    },
+    "payeeFspFee": {
+      "amount": "1",
+      "currency": "USD"
+    },
+    "expiration": "2020-06-15T12:00:00.000",
+    "ilpPacket": "...",
+    "condition": "...",
+  }
+}
+end note
+D2 -> S: ""POST /authorizations""
+S - -> D2: ""202 Accepted""
+
+rnote over S #Light
+**""POST /authorizations""**
+""FSPIOP-Source: dfspa""
+""FSPIOP-Destination: pispa""
+{
+  //transactionRequestId is our 'primary key'
+  //to refer to this authorization
+  **"transactionRequestId": "123",**
+  "authenticationType": "U2F",
+  "retriesLeft": "1",
+  "amount": {
+    "amount": "100",
+    "currency": "USD"
+  },
+  "transactionId": "987",
+  "quote": {
+    "transferAmount": {
+      "amount": "100",
+      "currency": "USD"
+    },
+    "payeeReceiveAmount": {
+      "amount": "99",
+      "currency": "USD"
+    },
+    "payeeFspFee": {
+      "amount": "1",
+      "currency": "USD"
+    },
+    "expiration": "2020-06-15T12:00:00.000",
+    "ilpPacket": "...",
+    "condition": "...",
+  }
+}
+end note
+S -> D1: ""POST /authorizations""
+D1 - -> S: ""202 Accepted""
+
+note right of D1
+  PISP checks the quote with the user,
+  and uses FIDO to sign the the QuoteResponse object
+end note
+
+rnote right of D1 #Light
+**""PUT /authorizations/123""**
+""FSPIOP-Source: pispa""
+""FSPIOP-Destination: dfspa""
+{
+  "authenticationInfo": {
+    "authentication": "U2F",
+    "authenticationValue": {
+      "pinValue": "<base64 encoded binary - the signed QuoteResponse>",
+      "counter": "1"
+    }
+  }
+  "responseType": "ENTERED"
+}
+end note
+D1 -> S: ""PUT /authorizations/123""
+
+S - -> D1: ""200 OK""
+
+
+rnote over S #Light
+**""PUT /authorizations/123""**
+""FSPIOP-Source: pispa""
+""FSPIOP-Destination: dfspa""
+{
+  "authenticationInfo": {
+    "authentication": "U2F",
+    "authenticationValue": {
+      "pinValue": "<base64 encoded binary - the signed QuoteResponse>",
+      "counter": "1"
+    }
+  }
+  "responseType": "ENTERED"
+}
+end note
+S -> D2: ""PUT /authorizations/123""
+D2 - -> S: ""200 OK""
+
+
+D2 -> D2: Lookup the ""thirdpartyRequests/transaction""\nrequest, get the ""consentId"" and ""sourceAccountId""
+D2 -> D2: Confirm pispId from ""PUT /authorizations/123""\n matches the ""thirdpartyRequests/transaction""
+
+note over D2
+  Switch has the signed condition
+  For 3rd party FIDO, it now needs to make sure everything checks out
+end note
+
+rnote left of D2 #Light
+**""POST /thirdpartyRequests/transactions/123/authorizations""**
+""FSPIOP-Source: dfspa""
+""FSPIOP-Destination: central-auth""
+{
+  //from ""PUT /quotes/456"" callback
+  "challenge": "<QuoteResponse object>",
+
+  //from ""PUT /authorizations/123"" callback: .authenticationInfo.authenticationValue.pinValue
+  "value": "<base64 encoded binary - the signed quote response object>",
+
+  //from ""thirdpartyRequests/transactions"" body
+  "consentId": "111",
+
+  //from ""thirdpartyRequests/transactions"" body
+  "sourceAccountId": "dfspa.1111-2222"
+}
+end note
+D2 -> S: ""POST /thirdpartyRequests/transactions/123/authorizations""
+S - -> D2: ""202 Accepted""
+
+rnote over S #Light
+**""POST /thirdpartyRequests/transactions/123/authorizations""**
+""FSPIOP-Source: dfspa""
+""FSPIOP-Destination: central-auth""
+{
+  //from ""PUT /quotes/456"" callback
+  "challenge": "<QuoteResponse object>",
+
+  //from ""PUT /authorizations/123"" callback: .authenticationInfo.authenticationValue.pinValue
+  "value": "<base64 encoded binary - the signed quote response object>",
+
+  //from ""thirdpartyRequests/transactions"" body
+  "consentId": "111",
+
+  //from ""thirdpartyRequests/transactions"" body
+  "sourceAccountId": "dfspa.1111-2222",
+
+  "status": "PENDING"
+}
+end note
+S -> AUTHS: ""POST /thirdpartyRequests/transactions/123/authorizations""
+AUTHS - -> S: ""202 Accepted""
+
+AUTHS -> AUTHS: Lookup this consent based on consentId
+AUTHS -> AUTHS: Ensure the sourceAccountId matches what is in Consent
+AUTHS -> AUTHS: Check that the signed bytes match the \npublickey we have stored for the consent
+
+rnote right of AUTHS #Light
+**""PUT /thirdpartyRequests/transactions/123/authorizations""**
+""FSPIOP-Source: central-auth""
+""FSPIOP-Destination: dfspa""
+{
+  //from the ""PUT /quotes/456"" callback
+  "challenge": "<QuoteResponse object>",
+
+  //from the ""PUT /authorizations/123"" callback
+  "value": "<base64 encoded binary - the signed quote response object>",
+
+  //from the ""thirdpartyRequests/transactions"" body
+  "consentId": "111",
+
+  //from the ""thirdpartyRequests/transactions"" body
+  "sourceAccountId": "dfspa.1111-2222"
+  "status": "VERIFIED"
+}
+end note
+AUTHS -> S: ""PUT /thirdpartyRequests/transactions/123/authorizations""
+S - -> AUTHS: ""200 OK""
+
+rnote over S #Light
+**""PUT /thirdpartyRequests/transactions/123/authorizations""**
+""FSPIOP-Source: central-auth""
+""FSPIOP-Destination: dfspa""
+{
+  //from the ""PUT /quotes/456"" callback
+  "challenge": "<QuoteResponse object>",
+
+  //from the ""PUT /authorizations/123"" callback
+  "value": "<base64 encoded binary - the signed quote response object>",
+
+  //from the ""thirdpartyRequests/transactions"" body
+  "consentId": "111",
+
+  //from the ""thirdpartyRequests/transactions"" body
+  "sourceAccountId": "dfspa.1111-2222"
+  "status": "VERIFIED"
+}
+end note
+S -> D2: ""PUT /thirdpartyRequests/transactions/123/authorizations""
+D2 - -> S: ""200 OK""
+
+note over D2
+  DFSPA now knows that the user signed this transaction
+  and can go ahead and initiate the transfer
+end note
+
+newpage
+
+== Transfer Phase ==
+
+rnote over D2 #Light
+**""POST /transfers""**
+""FSPIOP-Source: dfspa""
+""FSPIOP-Destination: dfspb""
+{
+  "transferId": "321",
+  "quoteId": "456",
+  "payerFsp": "dfspa",
+  "payeeFsp": "dfspb",
+  "amount": {
+    "amount": "100",
+    "currency": "USD"
+  },
+  "expiration": "2020-06-15T13:00:00.000",
+  "ilpPacket": "...",
+  "condition": "...",
+}
+end note
+D2 -> S: ""POST /transfers""
+S - -> D2: ""202 Accepted""
+
+rnote over S #Light
+**""POST /transfers""**
+""FSPIOP-Source: dfspa""
+""FSPIOP-Destination: dfspb""
+{
+  "transferId": "321",
+  "quoteId": "456",
+  "payerFsp": "dfspa",
+  "payeeFsp": "dfspb",
+  "amount": {
+    "amount": "100",
+    "currency": "USD"
+  },
+  "expiration": "2020-06-15T13:00:00.000",
+  "ilpPacket": "...",
+  "condition": "...",
+}
+end note
+S -> D3: ""POST /transfers""
+D3 - -> S: ""202 Accepted""
+
+rnote left of D3 #Light
+**""PUT /transfers/321""**
+""FSPIOP-Source: dfspb""
+""FSPIOP-Destination: dfspa""
+{
+  "fulfilment": "...",
+  "completedTimestamp": "2020-06-15T12:01:00.000",
+  "transferState": "COMMITTED"
+}
+end note
+D3 -> S: ""PUT /transfers/321""
+S - -> D3: ""200 OK""
+
+rnote over S #Light
+**""PUT /transfers/321""**
+""FSPIOP-Source: dfspb""
+""FSPIOP-Destination: dfspa""
+{
+  "fulfilment": "...",
+  "completedTimestamp": "2020-06-15T12:01:00.000",
+  "transferState": "COMMITTED"
+}
+end note
+S -> D2: ""PUT /transfers/321""
+D2 - -> S: ""200 OK""
+
+
+rnote over S #Light
+**""PATCH /thirdpartyRequests/transactions/123""**
+""FSPIOP-Source: switch""
+""FSPIOP-Destination: pispa""
+{
+  "transactionId": "987",
+  "transactionRequestState": "ACCEPTED",
+  "transactionState": "COMMITTED"
+}
+end note
+S -> D1: ""PATCH /thirdpartyRequests/transactions/123""
+D1 - -> S: ""200 OK""
+
+
+@enduml
+
+PlantUML version 1.2020.18(Thu Oct 01 03:40:44 PHT 2020)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: AU
+--></g></svg>

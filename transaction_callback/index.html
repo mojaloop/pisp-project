@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>PATCH /thirdpartyRequests/transactions/{id} Callback Design</title>
+    <meta name="generator" content="VuePress 1.7.1">
+    
+    <meta name="description" content="Just playing around">
+    
+    <link rel="preload" href="/pisp/assets/css/0.styles.20f1125d.css" as="style"><link rel="preload" href="/pisp/assets/js/app.31213e80.js" as="script"><link rel="preload" href="/pisp/assets/js/5.828fbb0e.js" as="script"><link rel="preload" href="/pisp/assets/js/2.7862e685.js" as="script"><link rel="prefetch" href="/pisp/assets/js/1.40aa0759.js"><link rel="prefetch" href="/pisp/assets/js/10.77f1e1a4.js"><link rel="prefetch" href="/pisp/assets/js/11.9cb184cd.js"><link rel="prefetch" href="/pisp/assets/js/12.a4a59023.js"><link rel="prefetch" href="/pisp/assets/js/13.4a5ca4ca.js"><link rel="prefetch" href="/pisp/assets/js/14.b44084c0.js"><link rel="prefetch" href="/pisp/assets/js/15.92c9c1f6.js"><link rel="prefetch" href="/pisp/assets/js/16.b5cfb2e3.js"><link rel="prefetch" href="/pisp/assets/js/17.85f3f34a.js"><link rel="prefetch" href="/pisp/assets/js/18.43d0b90a.js"><link rel="prefetch" href="/pisp/assets/js/19.643ead68.js"><link rel="prefetch" href="/pisp/assets/js/20.8538b59b.js"><link rel="prefetch" href="/pisp/assets/js/21.07a9cbfc.js"><link rel="prefetch" href="/pisp/assets/js/22.86b740bf.js"><link rel="prefetch" href="/pisp/assets/js/23.fddbe5fa.js"><link rel="prefetch" href="/pisp/assets/js/24.0460e56e.js"><link rel="prefetch" href="/pisp/assets/js/25.f5d651b6.js"><link rel="prefetch" href="/pisp/assets/js/26.b9ca04e2.js"><link rel="prefetch" href="/pisp/assets/js/27.500fb7d8.js"><link rel="prefetch" href="/pisp/assets/js/4.574e2ea2.js"><link rel="prefetch" href="/pisp/assets/js/6.765eed73.js"><link rel="prefetch" href="/pisp/assets/js/7.2526f707.js"><link rel="prefetch" href="/pisp/assets/js/8.763cb4c5.js"><link rel="prefetch" href="/pisp/assets/js/9.90893133.js">
+    <link rel="stylesheet" href="/pisp/assets/css/0.styles.20f1125d.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/pisp/" class="home-link router-link-active"><img src="/pisp/mojaloop_logo_med.png" alt="" class="logo"> <!----></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/pisp/overview/" class="nav-link">
+  Getting Started
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Sequence Diagrams" class="dropdown-title"><span class="title">Sequences</span> <span class="arrow down"></span></button> <button type="button" aria-label="Sequence Diagrams" class="mobile-dropdown-title"><span class="title">Sequences</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pisp/linking/" class="nav-link">
+  Account Linking
+</a></li><li class="dropdown-item"><!----> <a href="/pisp/transfer/" class="nav-link">
+  Transfer
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="API Reference" class="dropdown-title"><span class="title">API Reference</span> <span class="arrow down"></span></button> <button type="button" aria-label="API Reference" class="mobile-dropdown-title"><span class="title">API Reference</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Thirdparty-PISP API
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/pisp/api/thirdparty-pisp.html" class="nav-link">
+  PISP
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Thirdparty-DFSP API
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/pisp/api/thirdparty-dfsp.html" class="nav-link">
+  DFSP
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="https://docs.mojaloop.io/documentation" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Mojaloop Docs
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <a href="https://github.com/mojaloop/pisp" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/pisp/overview/" class="nav-link">
+  Getting Started
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Sequence Diagrams" class="dropdown-title"><span class="title">Sequences</span> <span class="arrow down"></span></button> <button type="button" aria-label="Sequence Diagrams" class="mobile-dropdown-title"><span class="title">Sequences</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pisp/linking/" class="nav-link">
+  Account Linking
+</a></li><li class="dropdown-item"><!----> <a href="/pisp/transfer/" class="nav-link">
+  Transfer
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="API Reference" class="dropdown-title"><span class="title">API Reference</span> <span class="arrow down"></span></button> <button type="button" aria-label="API Reference" class="mobile-dropdown-title"><span class="title">API Reference</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Thirdparty-PISP API
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/pisp/api/thirdparty-pisp.html" class="nav-link">
+  PISP
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Thirdparty-DFSP API
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/pisp/api/thirdparty-dfsp.html" class="nav-link">
+  DFSP
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="https://docs.mojaloop.io/documentation" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Mojaloop Docs
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <a href="https://github.com/mojaloop/pisp" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Getting Started</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/pisp/overview.html" class="sidebar-link">PISP Overview</a></li><li><a href="/pisp/background.html" class="sidebar-link">Background</a></li><li><a href="/pisp/use_cases.html" class="sidebar-link">Use Cases</a></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Guides</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Sequence Diagrams</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Design</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>API Reference</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="patch-thirdpartyrequests-transactions-id-callback-design"><a href="#patch-thirdpartyrequests-transactions-id-callback-design" class="header-anchor">#</a> <code>PATCH /thirdpartyRequests/transactions/{id}</code> Callback Design</h1> <h2 id="_1-subscription"><a href="#_1-subscription" class="header-anchor">#</a> 1. Subscription</h2> <p>The goal of subscription is to allow the Central-Event-Processor (CEP) to listen for <strong>ThirdpartyAuthorizationRequest</strong> Events on the Notifications Topic, and deliver them to the Thirdparty-API-Adapter.</p> <h1 id="_1-1-post-thirdpartyrequests-transactions"><a href="#_1-1-post-thirdpartyrequests-transactions" class="header-anchor">#</a> 1.1 <code>POST /thirdpartyRequests/transactions</code></h1> <p>The PISP issues a <code>POST /thirdpartyRequests/transactions</code> request to dfspA, asking to transfer funds from their users' account to dfspB.</p> <p>The Thirdparty-API-Adapter recieves this request, and emits a <strong>ThirdpartyTransactionRequest Subscription</strong> event</p> <p>The CEP recieves this event, and starts listening for other events related to <code>transferRequestId=1234</code> on the Notifications Topic.</p> <p><img src="http://www.plantuml.com/plantuml/proxy?cache=no&amp;src=https://raw.githubusercontent.com/mojaloop/pisp/master/docs/transaction_callback/1_subscription.puml" alt="subscription"></p> <h2 id="_2-context-gathering"><a href="#_2-context-gathering" class="header-anchor">#</a> 2. Context Gathering</h2> <p>The CEP is listening for events related to a <code>transactionRequestId=1234</code>. In order to listen for the <strong>Transfer Fulfil Notification</strong> Events related to a given <code>transferId</code> that will be the result of a successful 3rd party initiation, it needs to gather more context.</p> <h3 id="_2-1-post-authorizations"><a href="#_2-1-post-authorizations" class="header-anchor">#</a> 2.1 <code>POST /authorizations</code></h3> <blockquote><p>Maybe this should be on the quote you say? See <a href="#outstanding-questions">outstanding-questions</a></p></blockquote> <p>The Thirdparty-API-Adapter recieves a <code>POST /authorizations</code> request, and before forwarding it to the PISP, it emits a <strong>ThirdpartyAuthorizationRequest</strong> Event to the notifications kafka topic.</p> <p>The since the CEP is listening for events related to <code>transactionRequestId=1234</code>, is observes that this event is related.</p> <p>It inspects the event body, and sees the <code>body.transactionId</code> of <code>5678</code>. CEP starts listening for events related to the <code>transactionId=5678</code>.</p> <p><img src="http://www.plantuml.com/plantuml/proxy?cache=no&amp;src=https://raw.githubusercontent.com/mojaloop/pisp/master/docs/transaction_callback/2_context_auth.puml" alt="context_auth"></p> <h3 id="_2-2-post-transfers"><a href="#_2-2-post-transfers" class="header-anchor">#</a> 2.2 <code>POST /transfers</code></h3> <p>DFSPA issues a <code>POST /transfer</code> request to initiate the transfer.</p> <p>The central-ledger processes this call, and emits a <strong>Transfer Prepare Notification</strong> event</p> <p>The CEP observes this event (as it contains either a request body or encoded interledger packet with a <code>transactionId=5678</code>)</p> <p>The <strong>Transfer Prepare Notification</strong> event contains a <code>transferId</code> of <code>9876</code>. CEP starts listening for events related to <code>transferId=9876</code>.</p> <p><img src="http://www.plantuml.com/plantuml/proxy?cache=no&amp;src=https://raw.githubusercontent.com/mojaloop/pisp/master/docs/transaction_callback/3_context_transfer.puml" alt="context_transfer"></p> <h2 id="_3-notification"><a href="#_3-notification" class="header-anchor">#</a> 3. Notification</h2> <p>DFSPB issues a <code>PUT /transfers/{id}</code>.</p> <p>The transfer is processed by the central-ledger, which emits a <strong>Transfer Fulfil Notification</strong> event.</p> <p>The CEP sees this <strong>Transfer Fulfil Notification</strong> event, with a <code>transferId=9876</code>. It sees the related <code>transactionRequest</code> listener, and emits a <strong>ThirdpartyTransactionRequest Fulfil</strong> Event.</p> <p>The Thirdparty-API-Adapter sees this event, and sends a <code>PATCH /thirdpartyRequests/transactions/1234</code> request to the PISP.</p> <p><img src="http://www.plantuml.com/plantuml/proxy?cache=no&amp;src=https://raw.githubusercontent.com/mojaloop/pisp/master/docs/transaction_callback/4_transaction_callback.puml" alt="transaction_callback"></p> <h2 id="outstanding-questions"><a href="#outstanding-questions" class="header-anchor">#</a> Outstanding Questions</h2> <ol><li>Should the CEP be listening for <code>POST /quotes</code> (probably emitted by the quoting-service) or for  <code>POST /authorizations</code> (probably emitted by the 3p-api-adapter?)</li></ol> <ul><li><code>POST /authorizations</code> is more efficent, since it certainly contains a <code>transactionRequestId</code>, whereas a quote <em>may</em> contain a <code>transactionRequestId</code></li> <li><code>POST /quotes</code> is more generic, and could lead us to better design decisions (such as not including the quote response <em>in</em> the <code>POST /authorizations</code> body) in the future
+<ul><li>does the <code>quoting-service</code> publish to kafka at the moment? No.</li></ul></li></ul> <ol start="2"><li>Can we generalize this pattern better and make it more applicable to other use cases?</li></ol> <ul><li>e.g. <code>PISP Consents</code>, <code>FX</code>, <code>Cross-network</code>?
+<ul><li>Probably, we should go through this design process with those use cases and see the commonalities. That can be covered in a separate document.</li></ul></li></ul> <ol start="3"><li>When should does the CEP <em>stop listening</em>?</li></ol> <ul><li>We need to enumerate the error conditions a little better</li></ul> <ol start="4"><li>When do we consider a <em>transaction</em> final? Is it determined by the PayeeFSP? Or perhaps by the Central-Ledger? Or could it be either?</li></ol> <ul><li>I <em>think</em> it's based on the Central-Ledger's <strong>Transfer Fulfil Notification</strong></li></ul> <ol start="5"><li>How tightly or loosely coupled should the different listeners be?</li></ol> <ul><li>Should the listener for <code>transferId=9876</code> <em>know</em> about the listener for <code>transferRequestId=1234</code>?</li> <li>I <em>think</em> so, because we need to keep the old listeners around in order to listen for Error Notifications</li></ul> <ol start="6"><li>Should this all be on the Notifications topic? Or should there be some division of topics?</li></ol> <ul><li>I don't want to burden the ml-api-adapter's notifications topic handler with extra notifications</li> <li>We can make use of existing different group ids...</li></ul> <ol start="7"><li>What database should the CEP use to store these subscriptions?</li></ol> <ul><li>It currently uses Mongo, but that may be unsuitable</li> <li>Multiple listeners referring to 1 shared object may also be tricky, but likely necessary... so we may want some transaction guarantees</li></ul> <h2 id="appendix-a-list-of-kafka-events"><a href="#appendix-a-list-of-kafka-events" class="header-anchor">#</a> Appendix A - List of Kafka Events</h2> <h3 id="a-1-thirdpartytransactionrequest-subscription"><a href="#a-1-thirdpartytransactionrequest-subscription" class="header-anchor">#</a> A.1 ThirdpartyTransactionRequest Subscription</h3> <div class="language-js extra-class"><pre class="language-js"><code><span class="token punctuation">{</span>
+  id<span class="token operator">:</span> <span class="token string">'&lt;message.id&gt;'</span><span class="token punctuation">,</span>
+  <span class="token keyword">from</span><span class="token operator">:</span> <span class="token string">'&lt;message.initiatorId&gt;'</span><span class="token punctuation">,</span>
+  to<span class="token operator">:</span> <span class="token string">'&lt;message.payerFsp&gt;'</span><span class="token punctuation">,</span>
+  type<span class="token operator">:</span> <span class="token string">'application/json'</span><span class="token punctuation">,</span>
+  content<span class="token operator">:</span> <span class="token punctuation">{</span>
+    headers<span class="token operator">:</span> <span class="token string">'&lt;message.headers&gt;'</span><span class="token punctuation">,</span>
+    payload<span class="token operator">:</span> <span class="token punctuation">{</span>
+      transactionRequestId<span class="token operator">:</span> <span class="token string">'&lt;uuid&gt;'</span><span class="token punctuation">,</span>
+      sourceAccountId<span class="token operator">:</span> <span class="token string">'string'</span><span class="token punctuation">,</span>
+      consentId<span class="token operator">:</span> <span class="token string">'string'</span><span class="token punctuation">,</span>
+      <span class="token operator">...</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  metadata<span class="token operator">:</span> <span class="token punctuation">{</span>
+    event<span class="token operator">:</span> <span class="token punctuation">{</span>
+      id<span class="token operator">:</span> <span class="token string">'&lt;uuid&gt;'</span><span class="token punctuation">,</span>
+      type<span class="token operator">:</span> <span class="token string">'transactionRequest'</span><span class="token punctuation">,</span>
+      action<span class="token operator">:</span> <span class="token string">'subscription'</span><span class="token punctuation">,</span>
+      createdAt<span class="token operator">:</span> <span class="token string">'&lt;timestamp&gt;'</span><span class="token punctuation">,</span>
+      state<span class="token operator">:</span> <span class="token punctuation">{</span>
+        status<span class="token operator">:</span> <span class="token string">'success'</span><span class="token punctuation">,</span>
+        code<span class="token operator">:</span> <span class="token number">0</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="a-2-thirdpartyauthorizationrequest"><a href="#a-2-thirdpartyauthorizationrequest" class="header-anchor">#</a> A.2 ThirdpartyAuthorizationRequest</h3> <div class="language-js extra-class"><pre class="language-js"><code><span class="token punctuation">{</span>
+  id<span class="token operator">:</span> <span class="token string">'&lt;message.id&gt;'</span><span class="token punctuation">,</span>
+  <span class="token keyword">from</span><span class="token operator">:</span> <span class="token string">'&lt;message.payerFsp&gt;'</span><span class="token punctuation">,</span>
+  to<span class="token operator">:</span> <span class="token string">'&lt;message.initiatorId&gt;'</span><span class="token punctuation">,</span>
+  type<span class="token operator">:</span> <span class="token string">'application/json'</span><span class="token punctuation">,</span>
+  content<span class="token operator">:</span> <span class="token punctuation">{</span>
+    headers<span class="token operator">:</span> <span class="token string">'&lt;message.headers&gt;'</span><span class="token punctuation">,</span>
+    payload<span class="token operator">:</span> <span class="token punctuation">{</span>
+      transactionRequestId<span class="token operator">:</span> <span class="token string">'&lt;uuid&gt;'</span><span class="token punctuation">,</span>
+      transactionId<span class="token operator">:</span> <span class="token string">'&lt;uuid&gt;'</span><span class="token punctuation">,</span>
+      amount<span class="token operator">:</span> <span class="token punctuation">{</span><span class="token operator">...</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+      quote<span class="token operator">:</span> <span class="token punctuation">{</span><span class="token operator">...</span><span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  metadata<span class="token operator">:</span> <span class="token punctuation">{</span>
+    event<span class="token operator">:</span> <span class="token punctuation">{</span>
+      id<span class="token operator">:</span> <span class="token string">'&lt;uuid&gt;'</span><span class="token punctuation">,</span>
+      type<span class="token operator">:</span> <span class="token string">'authorizationRequest'</span><span class="token punctuation">,</span>
+      action<span class="token operator">:</span> <span class="token string">'subscription'</span><span class="token punctuation">,</span>
+      createdAt<span class="token operator">:</span> <span class="token string">'&lt;timestamp&gt;'</span><span class="token punctuation">,</span>
+      state<span class="token operator">:</span> <span class="token punctuation">{</span>
+        status<span class="token operator">:</span> <span class="token string">'success'</span><span class="token punctuation">,</span>
+        code<span class="token operator">:</span> <span class="token number">0</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="a-3-transfer-prepare-notification"><a href="#a-3-transfer-prepare-notification" class="header-anchor">#</a> A.3 Transfer Prepare Notification</h3> <blockquote><p>Ref <a href="https://github.com/mojaloop/documentation/blob/master/mojaloop-technical-overview/central-ledger/assets/diagrams/sequence/seq-position-1.3.1-prepare.plantuml" target="_blank" rel="noopener noreferrer">1.3.1-prepare<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p></blockquote> <div class="language-js extra-class"><pre class="language-js"><code><span class="token punctuation">{</span>
+  id<span class="token operator">:</span> <span class="token string">'&lt;transferMessage.transferId&gt;'</span><span class="token punctuation">,</span>
+  <span class="token keyword">from</span><span class="token operator">:</span> <span class="token string">'&lt;transferMessage.payerFsp&gt;'</span><span class="token punctuation">,</span>
+  to<span class="token operator">:</span> <span class="token string">'&lt;transferMessage.payeeFsp&gt;'</span><span class="token punctuation">,</span>
+  type<span class="token operator">:</span> <span class="token string">'application/json'</span><span class="token punctuation">,</span>
+  content<span class="token operator">:</span> <span class="token punctuation">{</span>
+    headers<span class="token operator">:</span> <span class="token string">'&lt;transferHeaders&gt;'</span><span class="token punctuation">,</span>
+    payload<span class="token operator">:</span> <span class="token string">'&lt;transferMessage&gt;'</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  metadata<span class="token operator">:</span> <span class="token punctuation">{</span>
+    event<span class="token operator">:</span> <span class="token punctuation">{</span>
+      id<span class="token operator">:</span> <span class="token string">'&lt;uuid&gt;'</span><span class="token punctuation">,</span>
+      responseTo<span class="token operator">:</span> <span class="token string">'&lt;previous.uuid&gt;'</span><span class="token punctuation">,</span>
+      type<span class="token operator">:</span> <span class="token string">'transfer'</span><span class="token punctuation">,</span>
+      action<span class="token operator">:</span> <span class="token string">'prepare'</span><span class="token punctuation">,</span>
+      createdAt<span class="token operator">:</span> <span class="token string">'&lt;timestamp&gt;'</span><span class="token punctuation">,</span>
+      state<span class="token operator">:</span> <span class="token punctuation">{</span>
+        status<span class="token operator">:</span> <span class="token string">'success'</span><span class="token punctuation">,</span>
+        code<span class="token operator">:</span> <span class="token number">0</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="a-4-transfer-fulfil-notification"><a href="#a-4-transfer-fulfil-notification" class="header-anchor">#</a> A.4 Transfer Fulfil Notification</h3> <blockquote><p>Ref: <a href="https://docs.mojaloop.io/documentation/mojaloop-technical-overview/central-ledger/transfers/1.3.2-fulfil-position-handler-consume-v1.1.html" target="_blank" rel="noopener noreferrer">1.3.2-fulfil-position-handler-consume-v1.1<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p></blockquote> <div class="language-js extra-class"><pre class="language-js"><code><span class="token punctuation">{</span>
+  id<span class="token operator">:</span> <span class="token string">'&lt;transferMessage.transferId&gt;'</span><span class="token punctuation">,</span>
+  <span class="token keyword">from</span><span class="token operator">:</span> <span class="token string">'&lt;transferMessage.payerFsp&gt;'</span><span class="token punctuation">,</span>
+  to<span class="token operator">:</span> <span class="token string">'&lt;transferMessage.payeeFsp&gt;'</span><span class="token punctuation">,</span>
+  type<span class="token operator">:</span> <span class="token string">'application/json'</span><span class="token punctuation">,</span>
+  content<span class="token operator">:</span> <span class="token punctuation">{</span>
+    headers<span class="token operator">:</span> <span class="token string">'&lt;transferHeaders&gt;'</span><span class="token punctuation">,</span>
+    payload<span class="token operator">:</span> <span class="token string">'&lt;transferMessage&gt;'</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  metadata<span class="token operator">:</span> <span class="token punctuation">{</span>
+    event<span class="token operator">:</span> <span class="token punctuation">{</span>
+      id<span class="token operator">:</span> <span class="token string">'&lt;uuid&gt;'</span><span class="token punctuation">,</span>
+      responseTo<span class="token operator">:</span> <span class="token string">'&lt;previous.uuid&gt;'</span><span class="token punctuation">,</span>
+      type<span class="token operator">:</span> <span class="token string">'transfer'</span><span class="token punctuation">,</span>
+      action<span class="token operator">:</span> <span class="token string">'commit'</span> <span class="token operator">|</span> <span class="token string">'reserve'</span><span class="token punctuation">,</span>
+      createdAt<span class="token operator">:</span> <span class="token string">'&lt;timestamp&gt;'</span><span class="token punctuation">,</span>
+      state<span class="token operator">:</span> <span class="token punctuation">{</span>
+        status<span class="token operator">:</span> <span class="token string">'success'</span><span class="token punctuation">,</span>
+        code<span class="token operator">:</span> <span class="token number">0</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="a-5-thirdpartytransactionrequest-fulfil"><a href="#a-5-thirdpartytransactionrequest-fulfil" class="header-anchor">#</a> A.5 ThirdpartyTransactionRequest Fulfil</h3> <div class="language-js extra-class"><pre class="language-js"><code><span class="token punctuation">{</span>
+  id<span class="token operator">:</span> <span class="token string">'&lt;message.id&gt;'</span><span class="token punctuation">,</span>
+  <span class="token keyword">from</span><span class="token operator">:</span> <span class="token string">'&lt;???&gt;'</span><span class="token punctuation">,</span>
+  to<span class="token operator">:</span> <span class="token string">'&lt;message.initiatorId&gt;'</span><span class="token punctuation">,</span>
+  type<span class="token operator">:</span> <span class="token string">'application/json'</span><span class="token punctuation">,</span>
+  content<span class="token operator">:</span> <span class="token punctuation">{</span>
+    headers<span class="token operator">:</span> <span class="token string">'&lt;message.headers&gt;'</span><span class="token punctuation">,</span>
+    payload<span class="token operator">:</span> <span class="token punctuation">{</span>
+      transactionRequestId<span class="token operator">:</span> <span class="token string">'&lt;uuid&gt;'</span><span class="token punctuation">,</span>
+      sourceAccountId<span class="token operator">:</span> <span class="token string">'string'</span><span class="token punctuation">,</span>
+      consentId<span class="token operator">:</span> <span class="token string">'string'</span><span class="token punctuation">,</span>
+      <span class="token operator">...</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  metadata<span class="token operator">:</span> <span class="token punctuation">{</span>
+    event<span class="token operator">:</span> <span class="token punctuation">{</span>
+      id<span class="token operator">:</span> <span class="token string">'&lt;uuid&gt;'</span><span class="token punctuation">,</span>
+      type<span class="token operator">:</span> <span class="token string">'transactionRequest'</span><span class="token punctuation">,</span>
+      action<span class="token operator">:</span> <span class="token string">'fulfil'</span><span class="token punctuation">,</span>
+      createdAt<span class="token operator">:</span> <span class="token string">'&lt;timestamp&gt;'</span><span class="token punctuation">,</span>
+      state<span class="token operator">:</span> <span class="token punctuation">{</span>
+        status<span class="token operator">:</span> <span class="token string">'success'</span><span class="token punctuation">,</span>
+        code<span class="token operator">:</span> <span class="token number">0</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="appendix-b-cep-thirdpartytransactionrequest-subscription-listeners-object"><a href="#appendix-b-cep-thirdpartytransactionrequest-subscription-listeners-object" class="header-anchor">#</a> Appendix B - CEP ThirdpartyTransactionRequest Subscription Listeners + Object</h2> <div class="language-js extra-class"><pre class="language-js"><code>Active Listeners<span class="token operator">:</span>
+<span class="token operator">-</span> <span class="token string">'transactionRequestId/1234'</span>
+
+Subscription Object<span class="token operator">:</span>
+<span class="token punctuation">{</span>
+  initiatorId<span class="token operator">:</span> <span class="token string">'pispA'</span><span class="token punctuation">,</span>
+  sourceDFSP<span class="token operator">:</span> <span class="token string">'dfspA'</span><span class="token punctuation">,</span>
+  transactionRequestId<span class="token operator">:</span> <span class="token string">'1234'</span><span class="token punctuation">,</span>
+  transactionId<span class="token operator">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+  transferId<span class="token operator">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+</code></pre></div><div class="language-js extra-class"><pre class="language-js"><code>Active Listeners<span class="token operator">:</span>
+<span class="token operator">-</span> <span class="token string">'transactionRequestId/1234'</span>
+<span class="token operator">-</span> <span class="token string">'transactionId/5678'</span>
+
+Subscription Object<span class="token operator">:</span>
+<span class="token punctuation">{</span>
+  initiatorId<span class="token operator">:</span> <span class="token string">'pispA'</span><span class="token punctuation">,</span>
+  sourceDFSP<span class="token operator">:</span> <span class="token string">'dfspA'</span><span class="token punctuation">,</span>
+  transactionRequestId<span class="token operator">:</span> <span class="token string">'1234'</span><span class="token punctuation">,</span>
+  transactionId<span class="token operator">:</span> <span class="token string">'5678'</span><span class="token punctuation">,</span>
+  transferId<span class="token operator">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+</code></pre></div><div class="language-js extra-class"><pre class="language-js"><code>Active Listeners<span class="token operator">:</span>
+<span class="token operator">-</span> <span class="token string">'transactionRequestId/1234'</span>
+<span class="token operator">-</span> <span class="token string">'transferId/9876'</span>
+
+Subscription Object<span class="token operator">:</span>
+<span class="token punctuation">{</span>
+  initiatorId<span class="token operator">:</span> <span class="token string">'pispA'</span><span class="token punctuation">,</span>
+  sourceDFSP<span class="token operator">:</span> <span class="token string">'dfspA'</span><span class="token punctuation">,</span>
+  transactionRequestId<span class="token operator">:</span> <span class="token string">'1234'</span><span class="token punctuation">,</span>
+  transactionId<span class="token operator">:</span> <span class="token string">'5678'</span><span class="token punctuation">,</span>
+  transferId<span class="token operator">:</span> <span class="token string">'9876'</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="appendix-c-cep-state-transitions"><a href="#appendix-c-cep-state-transitions" class="header-anchor">#</a> Appendix C - CEP State Transitions</h2> <h3 id="simplified"><a href="#simplified" class="header-anchor">#</a> Simplified</h3> <p><img src="http://www.plantuml.com/plantuml/proxy?cache=no&amp;src=https://raw.githubusercontent.com/mojaloop/pisp/feature/273-tx-notif-design-3/docs/transaction_callback/listener_states_simple.puml" alt="listener_states_simple"></p> <h3 id="with-errors"><a href="#with-errors" class="header-anchor">#</a> With Errors</h3> <p><img src="http://www.plantuml.com/plantuml/proxy?cache=no&amp;src=https://raw.githubusercontent.com/mojaloop/pisp/feature/273-tx-notif-design-3/docs/transaction_callback/listener_states_errors.puml" alt="listener_states_errors"></p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/mojaloop/pisp/edit/master/transaction_callback/README.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></div> <!----></footer> <!----> </main></div><div class="global-ui"></div></div>
+    <script src="/pisp/assets/js/app.31213e80.js" defer></script><script src="/pisp/assets/js/5.828fbb0e.js" defer></script><script src="/pisp/assets/js/2.7862e685.js" defer></script>
+  </body>
+</html>

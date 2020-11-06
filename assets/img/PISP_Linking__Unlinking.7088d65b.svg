@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="594px" preserveAspectRatio="none" style="width:996px;height:594px;" version="1.1" viewBox="0 0 996 594" width="996px" zoomAndPan="magnify"><defs><filter height="300%" id="f1tf4765vmwvnt" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><rect fill="#DDDDDD" height="547.6348" style="stroke: #A80036; stroke-width: 1.0;" width="423.5" x="294" y="41.1992"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="61" x="475.25" y="53.7676">Mojaloop</text><text fill="#000000" font-family="sans-serif" font-size="18" lengthAdjust="spacingAndGlyphs" textLength="199" x="396" y="29.4023">PISP Linking: Unlinking</text><line style="stroke: #A80036; stroke-width: 1.0;" x1="28" x2="28" y1="95.998" y2="103.998"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="28" x2="28" y1="103.998" y2="131.998"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="28" x2="28" y1="131.998" y2="171.3086"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="28" x2="28" y1="171.3086" y2="199.3086"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="28" x2="28" y1="199.3086" y2="547.3457"/><rect fill="#FFFFFF" filter="url(#f1tf4765vmwvnt)" height="67.3105" style="stroke: #FFFFFF; stroke-width: 1.0;" width="10" x="23" y="103.998"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="23" x2="23" y1="103.998" y2="171.3086"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="33" x2="33" y1="103.998" y2="171.3086"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="23" x2="33" y1="103.998" y2="103.998"/><rect fill="#FFFFFF" filter="url(#f1tf4765vmwvnt)" height="50.6211" style="stroke: #FFFFFF; stroke-width: 1.0;" width="10" x="23" y="199.3086"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="23" x2="23" y1="199.3086" y2="249.9297"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="33" x2="33" y1="199.3086" y2="249.9297"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="23" x2="33" y1="249.9297" y2="249.9297"/><rect fill="#FFFFFF" filter="url(#f1tf4765vmwvnt)" height="47.3105" style="stroke: #A80036; stroke-width: 1.0;" width="10" x="23" y="500.0352"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="329" x2="329" y1="95.998" y2="103.998"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="329" x2="329" y1="103.998" y2="131.998"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="329" x2="329" y1="131.998" y2="171.3086"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="329" x2="329" y1="171.3086" y2="199.3086"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="329" x2="329" y1="199.3086" y2="547.3457"/><rect fill="#FFFFFF" filter="url(#f1tf4765vmwvnt)" height="87.9316" style="stroke: #A80036; stroke-width: 1.0;" width="10" x="324" y="220.6191"/><rect fill="#FFFFFF" filter="url(#f1tf4765vmwvnt)" height="136.5527" style="stroke: #A80036; stroke-width: 1.0;" width="10" x="324" y="410.793"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="662" x2="662" y1="95.998" y2="103.998"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="662" x2="662" y1="103.998" y2="131.998"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="662" x2="662" y1="131.998" y2="171.3086"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="662" x2="662" y1="171.3086" y2="199.3086"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="662" x2="662" y1="199.3086" y2="547.3457"/><rect fill="#FFFFFF" filter="url(#f1tf4765vmwvnt)" height="160.8633" style="stroke: #A80036; stroke-width: 1.0;" width="10" x="657" y="279.2402"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="960" x2="960" y1="95.998" y2="103.998"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="960" x2="960" y1="103.998" y2="131.998"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="960" x2="960" y1="131.998" y2="171.3086"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="960" x2="960" y1="171.3086" y2="199.3086"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="960" x2="960" y1="199.3086" y2="547.3457"/><rect fill="#FFFFFF" filter="url(#f1tf4765vmwvnt)" height="47.3105" style="stroke: #A80036; stroke-width: 1.0;" width="10" x="955" y="500.0352"/><rect fill="#FEFECE" filter="url(#f1tf4765vmwvnt)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="42" x="5" y="60.5098"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="28" x="12" y="81.0449">PISP</text><rect fill="#FEFECE" filter="url(#f1tf4765vmwvnt)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="58" x="298" y="60.5098"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="44" x="305" y="81.0449">Switch</text><rect fill="#FEFECE" filter="url(#f1tf4765vmwvnt)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="99" x="610.5" y="60.5098"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="85" x="617.5" y="81.0449">Auth Service</text><rect fill="#FEFECE" filter="url(#f1tf4765vmwvnt)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="48" x="934" y="60.5098"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="34" x="941" y="81.0449">DFSP</text><rect fill="#FEFECE" filter="url(#f1tf4765vmwvnt)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="42" x="5" y="547.3457"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="28" x="12" y="567.8809">PISP</text><rect fill="#FEFECE" filter="url(#f1tf4765vmwvnt)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="58" x="298" y="547.3457"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="44" x="305" y="567.8809">Switch</text><rect fill="#FEFECE" filter="url(#f1tf4765vmwvnt)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="99" x="610.5" y="547.3457"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="85" x="617.5" y="567.8809">Auth Service</text><rect fill="#FEFECE" filter="url(#f1tf4765vmwvnt)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="48" x="934" y="547.3457"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="34" x="941" y="567.8809">DFSP</text><path d="M8.5,136.998 L8.5,161.998 L979.5,161.998 L979.5,146.998 L969.5,136.998 L8.5,136.998 " fill="#FBFB77" filter="url(#f1tf4765vmwvnt)" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M969.5,136.998 L969.5,146.998 L979.5,146.998 L969.5,136.998 " fill="#FBFB77" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="599" x="188" y="154.5664">In this scenario the PISP is triggering the unlinking, however it could just as easily be the DFSP.</text><polygon fill="#A80036" points="312,216.6191,322,220.6191,312,224.6191,316,220.6191" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="33" x2="318" y1="220.6191" y2="220.6191"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="68" x="40" y="215.877">UNLINK-1</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="200" x="112" y="215.4644">POST /consents/123/revoke</text><polygon fill="#A80036" points="44,245.9297,34,249.9297,44,253.9297,40,249.9297" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 2.0,2.0;" x1="38" x2="323" y1="249.9297" y2="249.9297"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="68" x="50" y="245.1875">UNLINK-2</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="96" x="122" y="244.7749">202 Accepted</text><polygon fill="#A80036" points="645,275.2402,655,279.2402,645,283.2402,649,279.2402" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="334" x2="651" y1="279.2402" y2="279.2402"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="68" x="341" y="274.498">UNLINK-3</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="200" x="413" y="274.0854">POST /consents/123/revoke</text><polygon fill="#A80036" points="345,304.5508,335,308.5508,345,312.5508,341,308.5508" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 2.0,2.0;" x1="339" x2="656" y1="308.5508" y2="308.5508"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="68" x="351" y="303.8086">UNLINK-4</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="96" x="423" y="303.396">202 Accepted</text><line style="stroke: #A80036; stroke-width: 1.0;" x1="667" x2="709" y1="337.8613" y2="337.8613"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="709" x2="709" y1="337.8613" y2="350.8613"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="668" x2="709" y1="350.8613" y2="350.8613"/><polygon fill="#A80036" points="678,346.8613,668,350.8613,678,354.8613,674,350.8613" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="68" x="674" y="333.1191">UNLINK-5</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="207" x="746" y="333.1191">Delete the record of the consent.</text><polygon fill="#A80036" points="345,406.793,335,410.793,345,414.793,341,410.793" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="339" x2="656" y1="410.793" y2="410.793"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="68" x="351" y="390.7402">UNLINK-6</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="152" x="423" y="375.4297">""PATCH /consents/123</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="96" x="423" y="390.7402">{ status: string,</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="219" x="431" y="406.0508">revokedAt: string (of timestamp)}""</text><polygon fill="#A80036" points="645,436.1035,655,440.1035,645,444.1035,649,440.1035" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 2.0,2.0;" x1="334" x2="651" y1="440.1035" y2="440.1035"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="68" x="341" y="435.3613">UNLINK-7</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="48" x="413" y="434.9487">200 OK</text><polygon fill="#A80036" points="44,496.0352,34,500.0352,44,504.0352,40,500.0352" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="38" x2="323" y1="500.0352" y2="500.0352"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="68" x="50" y="479.9824">UNLINK-8</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="152" x="122" y="464.6719">""PATCH /consents/123</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="96" x="122" y="479.9824">{ status: string,</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="123" x="130" y="495.293">revokedAt: string}""</text><polygon fill="#A80036" points="943,496.0352,953,500.0352,943,504.0352,947,500.0352" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="334" x2="949" y1="500.0352" y2="500.0352"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="68" x="341" y="479.9824">UNLINK-9</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="152" x="413" y="464.6719">""PATCH /consents/123</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="96" x="413" y="479.9824">{ status: string,</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="123" x="421" y="495.293">revokedAt: string}""</text><polygon fill="#A80036" points="312,525.3457,322,529.3457,312,533.3457,316,529.3457" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 2.0,2.0;" x1="33" x2="318" y1="529.3457" y2="529.3457"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="77" x="40" y="524.6035">UNLINK-10</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="48" x="121" y="524.1909">200 OK</text><polygon fill="#A80036" points="345,525.3457,335,529.3457,345,533.3457,341,529.3457" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 2.0,2.0;" x1="339" x2="954" y1="529.3457" y2="529.3457"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="77" x="351" y="524.6035">UNLINK-11</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="48" x="432" y="524.1909">200 OK</text><!--MD5=[9881299232f60bcd0a697a3f6d0c8fe9]
+@startuml
+
+!pragma teoz true
+
+title PISP Linking: Unlinking
+
+participant "PISP" as PISP
+
+box "Mojaloop"
+    participant Switch
+    participant "Auth Service" as Auth
+end box
+
+participant "DFSP" as DFSP
+
+autonumber 1 "<b>UNLINK-#</b>"
+
+activate PISP
+
+...
+
+note over PISP, DFSP
+  In this scenario the PISP is triggering the unlinking, however it could just as easily be the DFSP.
+end note
+
+...
+
+PISP -> Switch ++: ""POST /consents/123/revoke""
+Switch - -> PISP: ""202 Accepted""
+deactivate PISP
+
+' TODO: Do we include the ALS lookup here to figure out which Auth service is
+' responsible for the given Consent?
+
+Switch -> Auth ++:  ""POST /consents/123/revoke""
+Auth - -> Switch: ""202 Accepted""
+deactivate Switch
+
+Auth -> Auth: Delete the record of the consent.
+
+Auth -> Switch ++: ""PATCH /consents/123 \n{ status: string,\n  revokedAt: string (of timestamp)}""
+Switch - -> Auth: ""200 OK""
+deactivate Auth
+
+Switch -> PISP ++: ""PATCH /consents/123 \n{ status: string,\n  revokedAt: string}""
+& Switch -> DFSP ++: ""PATCH /consents/123 \n{ status: string,\n  revokedAt: string}""
+
+PISP - -> Switch: ""200 OK""
+& DFSP - -> Switch: ""200 OK""
+
+@enduml
+
+@startuml
+
+!pragma teoz true
+
+title PISP Linking: Unlinking
+
+participant "PISP" as PISP
+
+box "Mojaloop"
+    participant Switch
+    participant "Auth Service" as Auth
+end box
+
+participant "DFSP" as DFSP
+
+autonumber 1 "<b>UNLINK-#</b>"
+
+activate PISP
+
+...
+
+note over PISP, DFSP
+  In this scenario the PISP is triggering the unlinking, however it could just as easily be the DFSP.
+end note
+
+...
+
+PISP -> Switch ++: ""POST /consents/123/revoke""
+Switch - -> PISP: ""202 Accepted""
+deactivate PISP
+
+
+Switch -> Auth ++:  ""POST /consents/123/revoke""
+Auth - -> Switch: ""202 Accepted""
+deactivate Switch
+
+Auth -> Auth: Delete the record of the consent.
+
+Auth -> Switch ++: ""PATCH /consents/123 \n{ status: string,\n  revokedAt: string (of timestamp)}""
+Switch - -> Auth: ""200 OK""
+deactivate Auth
+
+Switch -> PISP ++: ""PATCH /consents/123 \n{ status: string,\n  revokedAt: string}""
+& Switch -> DFSP ++: ""PATCH /consents/123 \n{ status: string,\n  revokedAt: string}""
+
+PISP - -> Switch: ""200 OK""
+& DFSP - -> Switch: ""200 OK""
+
+@enduml
+
+PlantUML version 1.2020.18(Thu Oct 01 03:40:44 PHT 2020)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: AU
+--></g></svg>

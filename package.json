@@ -35,7 +35,8 @@
     "test:coverage-check": "jest --coverage",
     "test:junit": "jest --reporters=default --reporters=jest-junit",
     "test:unit": "jest --testMatch '**/test/unit/**/*.(test|spec).ts'",
-    "docker:clean:all": "docker rm -f $(docker ps -a -q); docker volume rm (docker volume ls -q)"
+    "docker:clean:all": "docker rm -f $(docker ps -a -q); docker volume rm (docker volume ls -q)",
+    "build:plantuml": "for i in $(git diff --name-only `find . -name '*.puml'`); do puml generate -p $i -o $(echo $i | sed 's/puml/png/g' | sed 's#docs#docs/out#g') -i $(echo $i | sed -e 's;[^/]*$;;'); done"
   },
   "husky": {
     "hooks": {

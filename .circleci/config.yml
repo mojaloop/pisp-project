@@ -21,6 +21,8 @@ defaults_Dependencies: &defaults_Dependencies |
   apk --no-cache add curl
   apk --no-cache add openssh-client
   apk --no-cache add bash
+  # Required for plantuml dependencies
+  apk --no-cache add openjdk11
   apk add --no-cache -t build-dependencies make gcc g++ python libtool autoconf automake
   npm config set unsafe-perm true
   npm install -g node-gyp
@@ -163,6 +165,20 @@ jobs:
       - store_test_results:
           path: ./test/results
 
+  test-docs:
+    executor: default-docker
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - dependency-cache-{{ checksum "package-lock.json" }}
+      - run:
+          name: Check if plantuml has been updated correctly
+          command: |
+            npm run build:plantuml
+            FILE_COUNT=$(git diff --cached --name-only | grep .png | wc -l)
+            if [ ${FILE_COUNT} -ne "0" ]; then echo 'Plantuml files are out of sync. Please run `npm run build:plantuml` and try again.'; exit 1; fi
+
 ##
 # Workflows
 #
@@ -204,3 +220,15 @@ workflows:
               ignore:
                 - /feature*/
                 - /bugfix*/
+      - test-docs:
+          context: org-global
+          requires:
+            - setup
+          filters:
+            tags:
+              only: /.*/
+            branches:
+              ignore:
+                - /feature*/
+                - /bugfix*/
+

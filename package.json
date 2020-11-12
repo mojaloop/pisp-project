@@ -19,6 +19,7 @@
     "bundle:openapi:pisp": "swagger-cli bundle -o ./src/interface/thirdparty-pisp-api.yaml -t yaml ./src/interface/thirdparty-pisp-api-template.yaml",
     "validate:openapi:pisp": "swagger-cli validate ./src/interface/thirdparty-pisp-api.yaml",
     "build:openapi:pisp": "npm run bundle:openapi:pisp && npm run validate:openapi:pisp",
+    "build:plantuml": "./scripts/_build_plantuml.sh",
     "bundle:openapi:dfsp": "swagger-cli bundle -o ./src/interface/thirdparty-dfsp-api.yaml -t yaml ./src/interface/thirdparty-dfsp-api-template.yaml",
     "validate:openapi:dfsp": "swagger-cli validate ./src/interface/thirdparty-dfsp-api.yaml",
     "build:openapi:dfsp": "npm run bundle:openapi:dfsp && npm run validate:openapi:dfsp",
@@ -35,12 +36,11 @@
     "test:coverage-check": "jest --coverage",
     "test:junit": "jest --reporters=default --reporters=jest-junit",
     "test:unit": "jest --testMatch '**/test/unit/**/*.(test|spec).ts'",
-    "docker:clean:all": "docker rm -f $(docker ps -a -q); docker volume rm (docker volume ls -q)",
-    "build:plantuml": "for i in $(git diff --name-only `find . -name '*.puml'`); do puml generate -p $i -o $(echo $i | sed 's/puml/png/g' | sed 's#docs#docs/out#g') -i $(echo $i | sed -e 's;[^/]*$;;'); done"
+    "docker:clean:all": "docker rm -f $(docker ps -a -q); docker volume rm (docker volume ls -q)"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged && npm run test:unit",
+      "pre-commit": "lint-staged && npm run test:unit && npm run build:plantuml",
       "post-commit": "git update-index --again"
     }
   },
@@ -92,6 +92,7 @@
     "jest-junit": "10.0.0",
     "lint-staged": "^10.2.3",
     "newman": "^5.0.1",
+    "node-plantuml": "^0.9.0",
     "source-map-support": "0.5.12",
     "swagger-cli": "^4.0.3",
     "ts-jest": "^26.0.0",

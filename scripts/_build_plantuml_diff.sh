@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+git diff --name-only
+
 for i in $(git diff --name-only `find ./docs -name '*.puml'`); do
   echo "found diagram: $i"
   # make the destination directory if not exists

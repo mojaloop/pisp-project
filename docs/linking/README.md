@@ -230,7 +230,7 @@ to the Consent resource.
 
 
 <!-- Note: this diagram is too big for the proxy renderer - so it is maintained locally -->
-![Credential registration: Register](../out/linking/5b-credential-registration/PISP%20Linking%20%20Credential%20registration%20(verification).png)
+![Credential registration: Register](../out/linking/5b-credential-registration.png)
 
 > **Notes:**
 > 1. As with step [1.6.1](#161-requesting-a-challenge) above, the PISP doesn't need to include the `FSPIOP-Destination` header in `PUT /consents/{ID}`. The switch is responsible for finding the responsible Auth service for this consent based on the `consentId`

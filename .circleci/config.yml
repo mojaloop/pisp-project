@@ -178,9 +178,15 @@ jobs:
       - run:
           name: Check if plantuml has been updated correctly
           command: |
+            set +o pipefail
             npm run build:plantuml:all
             FILE_COUNT=$(git diff --cached --name-only | grep .png | wc -l)
-            if [ ${FILE_COUNT} -ne "0" ]; then echo 'Plantuml files are out of sync. Please run `npm run build:plantuml` and try again.'; exit 1; fi
+            if [ ${FILE_COUNT} -ne "0" ]; then
+              echo 'Plantuml files are out of sync. Please run npm run build:plantuml and try again.';
+              exit 1;
+            else
+              echo 'Plantuml files are up to date';
+            fi
 
 ##
 # Workflows

@@ -6,3 +6,5 @@ for i in $(git diff --staged --name-only `find ./docs -name '*.puml'`); do
   mkdir -p $(dirname $i | sed 's#docs#docs/out#g')
   puml generate -p $i -o $(echo $i | sed 's/puml/png/g' | sed 's#docs#docs/out#g') -i $(echo $i | sed -e 's;[^/]*$;;');
 done
+
+git add ./docs/out

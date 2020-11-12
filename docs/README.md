@@ -16,8 +16,17 @@ Supporting documentation for the PISP implementation.
 
 
 ## Tools
-To update the sequence diagrams in `./docs/out`, ensure you have the [PlantUML vscode plugin](https://marketplace.visualstudio.com/items?itemName=jebbs.plantuml&ssr=false#overview) installed.
 
-1. `CMD + Shift + P`
-2. Select `PlantUML: Export Workspace Diagrams`
-3. Wait for the export to complete, and commit the changes
+### Sequence Diagrams
+
+We use the [node-plantuml](https://github.com/markushedvall/node-plantuml#readme) npm package to auto-export our `.puml` files into images. This happens automatically as a part of a git commit hook, so your plantuml images never get out of sync with the source.
+
+You can run it yourself like so:
+
+```bash
+# regenerate puml images based on `.puml` files that have changed
+npm run build:plantuml:diff
+
+# or, if you wish to regenerate all images, you can run:
+npm run build:plantuml:all
+```

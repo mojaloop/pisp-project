@@ -2,7 +2,7 @@
 
 title PISPTransferSimpleAPI
 
-!include participants_api.iuml
+!include participants.iuml
 
 note over S
 This document aims to demonstrate the high level API Calls between the PISP, Mojaloop Hub and DFSPs.

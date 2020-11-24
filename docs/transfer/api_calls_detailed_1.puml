@@ -2,7 +2,7 @@
 
 title PISPTransferDetailedAPI
 
-!include participants_api.iuml
+!include participants_detailed.iuml
 
 == Discovery (Lookup) ==
 rnote right of D1 #Light
@@ -36,41 +36,11 @@ rnote left of D3 #Light
       fspId: 'dfspb",
     },
     name: "Bhavesh S.",
-    accounts: [
-      {
-        "address": "dfspb.8f027046-b82a-4fa9-838b-70210fcf8137",
-        "currency": "USD"
-      }
-    ]
   }
 }
 end note
 D3 -> S: ""PUT /parties/MSISDN/+4412345678""
 S --> D3: ""200 OK""
-
-rnote over S #Light
-**""PUT /parties/MSISDN/+4412345678""**
-""FSPIOP-Source: dfspb""
-""FSPIOP-Destination: pispa""
-{
-  partyIdType: "MSISDN",
-  partyIdentifier: "+4412345678",
-  party: {
-    partyIdInfo: {
-      partyIdType: "MSISDN",
-      partyIdentifier: "+4412345678",
-      fspId: 'dfspb",
-    },
-    name: "Bhavesh S.",
-    accounts: [
-      {
-        "address": "dfspb.8f027046-b82a-4fa9-838b-70210fcf8137",
-        "currency": "USD"
-      }
-    ]
-  }
-}
-end note
 S -> D1: ""PUT /parties/MSISDN/+4412345678""
 D1 --> S: ""200 OK""
 

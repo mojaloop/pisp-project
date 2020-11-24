@@ -2,8 +2,7 @@
 
 title PISPTransferDetailedAPI
 
-!include participants_api.iuml
-
+!include participants_detailed.iuml
 
 == Transfer Phase ==
 
@@ -61,17 +60,6 @@ rnote left of D3 #Light
 end note
 D3 -> S: ""PUT /transfers/321""
 S --> D3: ""200 OK""
-
-rnote over S #Light
-**""PUT /transfers/321""**
-""FSPIOP-Source: dfspb""
-""FSPIOP-Destination: dfspa""
-{
-  "fulfilment": "...",
-  "completedTimestamp": "2020-06-15T12:01:00.000",
-  "transferState": "COMMITTED"
-}
-end note
 S -> D2: ""PUT /transfers/321""
 D2 --> S: ""200 OK""
 

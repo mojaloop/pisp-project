@@ -1,14 +1,10 @@
-box "Mobile device"
-    actor "Ayesha\n(+44 8765 4321)" as CA
-    participant "PISP App" as App
-end box
 box "PISP"
 participant "PISP Server" as D1
 end box
 box "Mojaloop"
     participant Switch as S
     participant "ALS" as A
-    participant "Auth-Service" as FIDO
+    participant "Auth-Service" as AUTHS
 end box
 box "DFSP A"
     participant "DFSP A\n(Payer)" as D2

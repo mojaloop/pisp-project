@@ -1,0 +1,92 @@
+@startuml
+
+title PISPTransferDetailedAPI
+
+!include participants_api.iuml
+
+
+== Transfer Phase ==
+
+rnote over D2 #Light
+**""POST /transfers""**
+""FSPIOP-Source: dfspa""
+""FSPIOP-Destination: dfspb""
+{
+  "transferId": "321",
+  "quoteId": "456",
+  "payerFsp": "dfspa",
+  "payeeFsp": "dfspb",
+  "amount": {
+    "amount": "100",
+    "currency": "USD"
+  },
+  "expiration": "2020-06-15T13:00:00.000",
+  "ilpPacket": "...",
+  "condition": "...",
+}
+end note
+D2 -> S: ""POST /transfers""
+S --> D2: ""202 Accepted""
+
+rnote over S #Light
+**""POST /transfers""**
+""FSPIOP-Source: dfspa""
+""FSPIOP-Destination: dfspb""
+{
+  "transferId": "321",
+  "quoteId": "456",
+  "payerFsp": "dfspa",
+  "payeeFsp": "dfspb",
+  "amount": {
+    "amount": "100",
+    "currency": "USD"
+  },
+  "expiration": "2020-06-15T13:00:00.000",
+  "ilpPacket": "...",
+  "condition": "...",
+}
+end note
+S -> D3: ""POST /transfers""
+D3 --> S: ""202 Accepted""
+
+rnote left of D3 #Light
+**""PUT /transfers/321""**
+""FSPIOP-Source: dfspb""
+""FSPIOP-Destination: dfspa""
+{
+  "fulfilment": "...",
+  "completedTimestamp": "2020-06-15T12:01:00.000",
+  "transferState": "COMMITTED"
+}
+end note
+D3 -> S: ""PUT /transfers/321""
+S --> D3: ""200 OK""
+
+rnote over S #Light
+**""PUT /transfers/321""**
+""FSPIOP-Source: dfspb""
+""FSPIOP-Destination: dfspa""
+{
+  "fulfilment": "...",
+  "completedTimestamp": "2020-06-15T12:01:00.000",
+  "transferState": "COMMITTED"
+}
+end note
+S -> D2: ""PUT /transfers/321""
+D2 --> S: ""200 OK""
+
+
+rnote over S #Light
+**""PATCH /thirdpartyRequests/transactions/123""**
+""FSPIOP-Source: switch""
+""FSPIOP-Destination: pispa""
+{
+  "transactionId": "987",
+  "transactionRequestState": "ACCEPTED",
+  "transactionState": "COMMITTED"
+}
+end note
+S -> D1: ""PATCH /thirdpartyRequests/transactions/123""
+D1 --> S: ""200 OK""
+
+@enduml

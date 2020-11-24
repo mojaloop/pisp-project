@@ -10,6 +10,8 @@ note over S
 
 end note
 
+
+
 rnote right of D1 #Light
 **""GET /thirdpartyRequests/transactions/123""**
 ""FSPIOP-Source: pispa""
@@ -30,7 +32,7 @@ rnote left of D2 #Light
 ""FSPIOP-Source: dfspa""
 ""FSPIOP-Destination: pispa""
 {
-  "transactionId": "987",
+  "transactionId": "9876",
   "transactionRequestState": "ACCEPTED"
 }
 end note

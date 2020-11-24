@@ -15,7 +15,7 @@ D1 -> S: ""GET /parties/MSISDN/+4412345678""
 S -> D3: ""GET /parties/MSISDN/+4412345678""
 D3 -> S: ""PUT /parties/MSISDN/+4412345678""
 S -> D1: ""PUT /parties/MSISDN/+4412345678""
-... PISP confirms payee party with their user ...
+... The PISP confirms payee party with their user ...
 
 == Agreement Phase ==
 D1 -> S: ""POST /thirdpartyRequests/transactions""
@@ -75,8 +75,8 @@ end note
 
 D2 -> S: ""POST /transfers""
 S -> D3: ""POST /transfers""
-D3 -> S: ""PUT /transfers/321""
-S -> D2: ""PUT /transfers/321""
+D3 -> S: ""PUT /transfers/4321""
+S -> D2: ""PUT /transfers/4321""
 S -> D1: ""PATCH /thirdpartyRequests/transactions/123""
 
 @enduml

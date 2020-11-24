@@ -19,6 +19,8 @@
     "bundle:openapi:pisp": "swagger-cli bundle -o ./src/interface/thirdparty-pisp-api.yaml -t yaml ./src/interface/thirdparty-pisp-api-template.yaml",
     "validate:openapi:pisp": "swagger-cli validate ./src/interface/thirdparty-pisp-api.yaml",
     "build:openapi:pisp": "npm run bundle:openapi:pisp && npm run validate:openapi:pisp",
+    "build:plantuml:diff": "./scripts/_build_plantuml_diff.sh",
+    "build:plantuml:all": "./scripts/_build_plantuml_all.sh",
     "bundle:openapi:dfsp": "swagger-cli bundle -o ./src/interface/thirdparty-dfsp-api.yaml -t yaml ./src/interface/thirdparty-dfsp-api-template.yaml",
     "validate:openapi:dfsp": "swagger-cli validate ./src/interface/thirdparty-dfsp-api.yaml",
     "build:openapi:dfsp": "npm run bundle:openapi:dfsp && npm run validate:openapi:dfsp",
@@ -39,7 +41,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged && npm run test:unit",
+      "pre-commit": "npm run build:plantuml:diff && lint-staged && npm run test:unit",
       "post-commit": "git update-index --again"
     }
   },
@@ -91,6 +93,7 @@
     "jest-junit": "10.0.0",
     "lint-staged": "^10.2.3",
     "newman": "^5.0.1",
+    "node-plantuml": "^0.9.0",
     "source-map-support": "0.5.12",
     "swagger-cli": "^4.0.3",
     "ts-jest": "^26.0.0",

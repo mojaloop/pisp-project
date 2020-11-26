@@ -4,6 +4,7 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 PATH="${PATH}:${DIR}/../node_modules/.bin"
 
 for i in $(find ${DIR}/../docs -name '*.puml'); do
+# for i in $(find ${DIR}/../docs -name '*TransactionModel.puml'); do
   echo "found diagram: $i"
   # make the destination directory if not exists
   mkdir -p $(dirname $i | sed 's#docs#docs/out#g')

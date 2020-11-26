@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
-for i in $(find ./docs -name '*.puml'); do
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+PATH="${PATH}:${DIR}/../node_modules/.bin"
+
+for i in $(find ${DIR}/../docs -name '*.puml'); do
   echo "found diagram: $i"
   # make the destination directory if not exists
   mkdir -p $(dirname $i | sed 's#docs#docs/out#g')

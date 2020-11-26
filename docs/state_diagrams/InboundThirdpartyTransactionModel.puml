@@ -12,7 +12,6 @@ isValid --> transactionSuccess:**TRUE**\ncall ""executeTransfer()""\nwait for ""
 isValid --> authorizationReceived:**FALSE**\ncall ""authorizeTransaction()""\nwait for ""PUT /authorizations/{ID}""
 transactionSuccess --> [*]
 
-note left of isValid : This check could be done by\ncentral auth-service, or DFSP's own
 
 @enduml
 

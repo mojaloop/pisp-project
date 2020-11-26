@@ -18,7 +18,7 @@ Below we propose a number of new state machines to be implemented as a part of t
 Models the PISP side of a PISP transaction, starting with a `GET /parties`, all the way to the `PUT /thirdpartyRequests/transaction/{ID}` callback.
 
 **Model:**  
-![](./out/state_diagrams/OutboundThirdpartyTransactionModel/OutboundThirdpartyTransactionModel.png)
+![](./out/state_diagrams/OutboundThirdpartyTransactionModel/OutboundThirdpartyTransactionModel.svg)
 
 **States:**
 - `start` - when the state machine is created
@@ -39,7 +39,7 @@ Models the PISP side of a PISP transaction, starting with a `GET /parties`, all 
 Models the DFSP side of a PISP transaction, initiated by receiving a `POST /thirdpartyRequests/transaction`
 
 **Model:**  
-![](./out/state_diagrams/InboundThirdpartyTransactionModel/InboundThirdpartyTransactionModel.png)
+![](./out/state_diagrams/InboundThirdpartyTransactionModel/InboundThirdpartyTransactionModel.svg)
 
 **States:**
 - `transactionRequestReceived` - on a `POST /thirdpartyRequests/transaction`

@@ -2,7 +2,22 @@
 
 title PISPTransferDetailedAPI
 
-!include participants_detailed.iuml
+box "PISP"
+participant "PISP Server" as D1
+end box
+box "Mojaloop"
+    participant Switch as S
+    participant "ALS" as A
+    participant "Auth-Service" as AUTHS
+end box
+box "DFSP A"
+    participant "DFSP A\n(Payer)" as D2
+end box
+box "DFSP B"
+    participant "DFSP B\n(Payee)" as D3
+end box
+actor "Bhavesh\n(+44 1234 5678)" as CB
+
 
 == Transfer Phase ==
 

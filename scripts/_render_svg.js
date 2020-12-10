@@ -46,6 +46,12 @@ async function main() {
     if (err.message.indexOf('Response code 403') > -1) {
       console.log('Note: sometimes the public puml renderer fails when the input diagrams are too large. Try running your own renderer server with docker.')
     }
+
+    if (err.message.indexOf('Response code 400') > -1) {
+      console.log('This could be due to bad syntax in the puml diagram. Url is:')
+      console.log(url)
+    }
+
     process.exit(1)
   }
 

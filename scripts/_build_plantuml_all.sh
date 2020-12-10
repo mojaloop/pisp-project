@@ -22,6 +22,7 @@ docker run -d --rm \
   -p ${PUML_PORT}:8080 \
   plantuml/plantuml-server:jetty-v1.2020.21
 
+sleep 2
 
 for i in $(find ${DIR}/../docs -name '*.puml'); do
   echo "rendering .puml -> .svg for diagram diagram: $i"

@@ -1,44 +1,130 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="486px" preserveAspectRatio="none" style="width:748px;height:486px;" version="1.1" viewBox="0 0 748 486" width="748px" zoomAndPan="magnify"><defs><filter height="300%" id="fu2piqjbcjh9w" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="181" x="280" y="23.5352">PISP Linking: Pre-linking</text><rect fill="#DDDDDD" height="441.1895" style="stroke: #A80036; stroke-width: 1.0;" width="99" x="4" y="34.4883"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="93" x="7" y="47.0566">Mobile device</text><rect fill="#DDDDDD" height="441.1895" style="stroke: #A80036; stroke-width: 1.0;" width="54" x="360" y="34.4883"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="27" x="373.5" y="47.0566">PISP</text><rect fill="#DDDDDD" height="441.1895" style="stroke: #A80036; stroke-width: 1.0;" width="70" x="667" y="34.4883"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="61" x="671.5" y="47.0566">Mojaloop</text><rect fill="#FFFFFF" filter="url(#fu2piqjbcjh9w)" height="328.9023" style="stroke: #A80036; stroke-width: 1.0;" width="10" x="48.5" y="99.2871"/><rect fill="#FFFFFF" filter="url(#fu2piqjbcjh9w)" height="88.709" style="stroke: #A80036; stroke-width: 1.0;" width="10" x="382" y="120.5977"/><rect fill="#FFFFFF" filter="url(#fu2piqjbcjh9w)" height="73.9316" style="stroke: #A80036; stroke-width: 1.0;" width="10" x="382" y="345.2578"/><rect fill="#FFFFFF" filter="url(#fu2piqjbcjh9w)" height="248.1934" style="stroke: #A80036; stroke-width: 1.0;" width="10" x="697" y="179.9961"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 5.0,5.0;" x1="53.5" x2="53.5" y1="89.2871" y2="437.1895"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 5.0,5.0;" x1="387" x2="387" y1="89.2871" y2="437.1895"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 5.0,5.0;" x1="702" x2="702" y1="89.2871" y2="437.1895"/><rect fill="#FEFECE" filter="url(#fu2piqjbcjh9w)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="42" x="30.5" y="53.7988"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="28" x="37.5" y="74.334">App</text><rect fill="#FEFECE" filter="url(#fu2piqjbcjh9w)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="42" x="30.5" y="436.1895"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="28" x="37.5" y="456.7246">App</text><rect fill="#FEFECE" filter="url(#fu2piqjbcjh9w)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="42" x="364" y="53.7988"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="28" x="371" y="74.334">PISP</text><rect fill="#FEFECE" filter="url(#fu2piqjbcjh9w)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="42" x="364" y="436.1895"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="28" x="371" y="456.7246">PISP</text><rect fill="#FEFECE" filter="url(#fu2piqjbcjh9w)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="58" x="671" y="53.7988"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="44" x="678" y="74.334">Switch</text><rect fill="#FEFECE" filter="url(#fu2piqjbcjh9w)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="58" x="671" y="436.1895"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="44" x="678" y="456.7246">Switch</text><rect fill="#FFFFFF" filter="url(#fu2piqjbcjh9w)" height="328.9023" style="stroke: #A80036; stroke-width: 1.0;" width="10" x="48.5" y="99.2871"/><rect fill="#FFFFFF" filter="url(#fu2piqjbcjh9w)" height="88.709" style="stroke: #A80036; stroke-width: 1.0;" width="10" x="382" y="120.5977"/><rect fill="#FFFFFF" filter="url(#fu2piqjbcjh9w)" height="73.9316" style="stroke: #A80036; stroke-width: 1.0;" width="10" x="382" y="345.2578"/><rect fill="#FFFFFF" filter="url(#fu2piqjbcjh9w)" height="248.1934" style="stroke: #A80036; stroke-width: 1.0;" width="10" x="697" y="179.9961"/><polygon fill="#A80036" points="370,116.5977,380,120.5977,370,124.5977,374,120.5977" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="58.5" x2="376" y1="120.5977" y2="120.5977"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="42" x="65.5" y="115.8555">PRE-1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="236" x="111.5" y="115.8555">What DFSPs are available to link with?</text><polygon fill="#A80036" points="685,175.9961,695,179.9961,685,183.9961,689,179.9961" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="392" x2="691" y1="179.9961" y2="179.9961"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="42" x="399" y="160.21">PRE-2</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="240" x="445" y="144.6646">GET /services/THIRD_PARTY_DFSP</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="160" x="445" y="159.7974">FSPIOP-Source: pispa</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="208" x="445" y="174.9302">FSPIOP-Destination: switch</text><polygon fill="#A80036" points="398,205.3066,388,209.3066,398,213.3066,394,209.3066" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 2.0,2.0;" x1="392" x2="696" y1="209.3066" y2="209.3066"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="42" x="404" y="204.5645">PRE-3</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="96" x="450" y="204.1519">202 Accepted</text><polygon fill="#A80036" points="403,341.2578,393,345.2578,403,349.2578,399,345.2578" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="397" x2="696" y1="345.2578" y2="345.2578"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="42" x="409" y="287.1953">PRE-4</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="240" x="455" y="233.3735">PUT /services/THIRD_PARTY_DFSP</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="168" x="455" y="248.5063">FSPIOP-Source: switch</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="200" x="455" y="263.6392">FSPIOP-Destination: pispa</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="0" x="459" y="279.2734"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="459" y="278.9497">{</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="0" x="463" y="294.584"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="168" x="479" y="294.2603">"serviceProviders": [</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="0" x="651" y="294.584"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="0" x="463" y="309.8945"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="120" x="495" y="309.5708">"dfspa", "dfspb</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="5" x="615" y="309.8945">"</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="0" x="463" y="325.2051"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="479" y="324.8813">]</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="0" x="491" y="325.2051"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="0" x="459" y="340.5156"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="459" y="340.1919">}</text><polygon fill="#A80036" points="685,370.5684,695,374.5684,685,378.5684,689,374.5684" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 2.0,2.0;" x1="392" x2="691" y1="374.5684" y2="374.5684"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="42" x="399" y="369.8262">PRE-5</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="48" x="445" y="369.4136">200 OK</text><polygon fill="#A80036" points="69.5,415.1895,59.5,419.1895,69.5,423.1895,65.5,419.1895" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 2.0,2.0;" x1="63.5" x2="386" y1="419.1895" y2="419.1895"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="42" x="75.5" y="406.792">PRE-6</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="157" x="121.5" y="399.1367">We have dfspa and dfspb</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="0" x="125.5" y="414.4473"/><!--
-@startuml
-
-title PISP Linking: Pre-linking
-
-box "Mobile device"
-    participant App
-end box
-
-box "PISP"
-    participant PISP
-end box
-
-box "Mojaloop"
-    participant Switch
-end box
-
-autonumber 1 "<b>PRE-#</b>"
-activate App
-App -> PISP ++: What DFSPs are available to link with?
-
-
-PISP -> Switch ++: ""GET /services/THIRD_PARTY_DFSP""\n""FSPIOP-Source: pispa""\n""FSPIOP-Destination: switch""
-Switch - -> PISP: ""202 Accepted""
-deactivate PISP
-
-Switch -> PISP ++: ""PUT /services/THIRD_PARTY_DFSP""\n""FSPIOP-Source: switch""\n""FSPIOP-Destination: pispa""\n ""{""\n  ""  "serviceProviders": ["" \n  ""    "dfspa", "dfspb""" \n  ""  ]"" \n ""}""
-PISP - -> Switch: ""200 OK""
-
-PISP - -> App - -: We have dfspa and dfspb\n
-
-@enduml
-
-PlantUML version 1.2019.06(Sat May 25 01:10:25 PHT 2019)
-(GPL source distribution)
-Java Runtime: Java(TM) SE Runtime Environment
-JVM: Java HotSpot(TM) 64-Bit Server VM
-Java Version: 1.8.0_171-b11
-Operating System: Mac OS X
-OS Version: 10.13.6
-Default Encoding: UTF-8
-Language: en
-Country: AU
---></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" height="485" preserveAspectRatio="none" style="width:758px;height:485px" width="758">
+  <defs>
+    <filter height="300%" id="a" width="300%" x="-1" y="-1">
+      <feGaussianBlur result="blurOut" stdDeviation="2"/>
+      <feColorMatrix in="blurOut" result="blurOut2" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/>
+      <feOffset dx="4" dy="4" in="blurOut2" result="blurOut3"/>
+      <feBlend in="SourceGraphic" in2="blurOut3"/>
+    </filter>
+  </defs>
+  <text font-family="sans-serif" font-size="18" lengthAdjust="spacingAndGlyphs" textLength="215" x="269" y="28.708">
+    PISP Linking: Pre-linking
+  </text>
+  <path fill="#DDD" stroke="#a80036" d="M1 40.953h108v438.852H1z"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="102" x="4" y="53.02">
+    Mobile device
+  </text>
+  <path fill="#DDD" stroke="#a80036" d="M370.5 40.953h56v438.852h-56z"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="33" x="382" y="53.02">
+    PISP
+  </text>
+  <path fill="#DDD" stroke="#a80036" d="M679 40.953h73v438.852h-73z"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="67" x="682" y="53.02">
+    Mojaloop
+  </text>
+  <path fill="#FFF" filter="url(#a)" stroke="#a80036" d="M50 105.383h10v327.125H50zM393.5 126.516h10v88.531h-10zM393.5 350.109h10v73.398h-10zM710.5 185.914h10v246.594h-10z"/>
+  <path stroke="#a80036" stroke-dasharray="5,5" d="M54.5 95.383v346.125M398.5 95.383v346.125M715 95.383v346.125"/>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M32.5 60.086h41v30.297h-41z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="27" x="39.5" y="80.081">
+    App
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M32.5 440.508h41v30.297h-41z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="27" x="39.5" y="460.503">
+    App
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M374.5 60.086h44v30.297h-44z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="30" x="381.5" y="80.081">
+    PISP
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M374.5 440.508h44v30.297h-44z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="30" x="381.5" y="460.503">
+    PISP
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M684 60.086h59v30.297h-59z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="45" x="691" y="80.081">
+    Switch
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M684 440.508h59v30.297h-59z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="45" x="691" y="460.503">
+    Switch
+  </text>
+  <path fill="#FFF" filter="url(#a)" stroke="#a80036" d="M50 105.383h10v327.125H50zM393.5 126.516h10v88.531h-10zM393.5 350.109h10v73.398h-10zM710.5 185.914h10v246.594h-10z"/>
+  <path fill="#A80036" stroke="#a80036" d="M381.5 122.516l10 4-10 4 4-4z"/>
+  <path stroke="#a80036" d="M60 126.516h327.5"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="43" x="67" y="121.45">
+    PRE-1
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="240" x="114" y="121.45">
+    What DFSPs are available to link with?
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M698.5 181.914l10 4-10 4 4-4z"/>
+  <path stroke="#a80036" d="M403.5 185.914h301"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="43" x="410.5" y="165.715">
+    PRE-2
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="240" x="457.5" y="150.583">
+    GET /services/THIRD_PARTY_DFSP
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="160" x="457.5" y="165.715">
+    FSPIOP-Source: pispa
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="208" x="457.5" y="180.848">
+    FSPIOP-Destination: switch
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M409.5 211.047l-10 4 10 4-4-4z"/>
+  <path stroke="#a80036" stroke-dasharray="2,2" d="M403.5 215.047h306"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="43" x="415.5" y="209.981">
+    PRE-3
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="96" x="462.5" y="209.981">
+    202 Accepted
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M414.5 346.11l-10 4 10 4-4-4z"/>
+  <path stroke="#a80036" d="M408.5 350.109h301"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="43" x="420.5" y="292.079">
+    PRE-4
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="240" x="467.5" y="239.114">
+    PUT /services/THIRD_PARTY_DFSP
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="168" x="467.5" y="254.247">
+    FSPIOP-Source: switch
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="200" x="467.5" y="269.379">
+    FSPIOP-Destination: pispa
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="471.5" y="284.512">
+    {
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="168" x="491.5" y="299.645">
+    &quot;serviceProviders&quot;: [
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="120" x="507.5" y="314.778">
+    &quot;dfspa&quot;, &quot;dfspb
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="5" x="627.5" y="314.778">
+    &quot;
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="491.5" y="329.911">
+    ]
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="471.5" y="345.043">
+    }
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M698.5 375.242l10 4-10 4 4-4z"/>
+  <path stroke="#a80036" stroke-dasharray="2,2" d="M403.5 379.242h301"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="43" x="410.5" y="374.176">
+    PRE-5
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="48" x="457.5" y="374.176">
+    200 OK
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M71 419.508l-10 4 10 4-4-4z"/>
+  <path stroke="#a80036" stroke-dasharray="2,2" d="M65 423.508h332.5"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="43" x="77" y="410.875">
+    PRE-6
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="160" x="124" y="403.309">
+    We have dfspa and dfspb
+  </text>
+</svg>

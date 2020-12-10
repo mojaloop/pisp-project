@@ -2,7 +2,25 @@
 
 title PISPGetTransactionRequest
 
-!include participants_api.iuml
+box "PISP"
+participant "PISP Server" as D1
+end box
+box "Mojaloop"
+    participant "auth-service" as AUTHS
+    participant Switch as S
+    participant "ALS" as A
+end box
+box "DFSP A"
+    participant "DFSP A\n(Payer)" as D2
+    participant "3p-sa-in" as D2_3psa_in
+    participant "3p-sa-out" as D2_3psa_out
+    participant "sdk-sa-in" as D2_sdksa_in
+    participant "sdk-sa-out" as D2_sdksa_out
+end box
+box "DFSP B"
+    participant "DFSP B\n(Payee)" as D3
+end box
+
 autonumber 1 "<b>GTR-#</b>"
 
 note over S

@@ -1,52 +1,199 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="911px" preserveAspectRatio="none" style="width:1500px;height:911px;" version="1.1" viewBox="0 0 1500 911" width="1500px" zoomAndPan="magnify"><defs><filter height="300%" id="f10mhp7qrdxzpi" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="250" x="626.5" y="23.5352">PISP Linking: Authentication (OTP)</text><rect fill="#DDDDDD" height="866.0664" style="stroke: #A80036; stroke-width: 1.0;" width="70" x="608" y="34.4883"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="61" x="612.5" y="47.0566">Mojaloop</text><rect fill="#FFFFFF" filter="url(#f10mhp7qrdxzpi)" height="301.9238" style="stroke: #A80036; stroke-width: 1.0;" width="10" x="638" y="429.9004"/><rect fill="#FFFFFF" filter="url(#f10mhp7qrdxzpi)" height="150.5527" style="stroke: #A80036; stroke-width: 1.0;" width="10" x="1255" y="702.5137"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="31" x2="31" y1="89.2871" y2="99.2871"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="31" x2="31" y1="99.2871" y2="127.2871"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="31" x2="31" y1="127.2871" y2="166.5977"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="31" x2="31" y1="166.5977" y2="194.5977"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="31" x2="31" y1="194.5977" y2="862.0664"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="643" x2="643" y1="89.2871" y2="99.2871"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="643" x2="643" y1="99.2871" y2="127.2871"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="643" x2="643" y1="127.2871" y2="166.5977"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="643" x2="643" y1="166.5977" y2="194.5977"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="643" x2="643" y1="194.5977" y2="862.0664"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="1260" x2="1260" y1="89.2871" y2="99.2871"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="1260" x2="1260" y1="99.2871" y2="127.2871"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="1260" x2="1260" y1="127.2871" y2="166.5977"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="1260" x2="1260" y1="166.5977" y2="194.5977"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="1260" x2="1260" y1="194.5977" y2="862.0664"/><rect fill="#FEFECE" filter="url(#f10mhp7qrdxzpi)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="42" x="8" y="53.7988"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="28" x="15" y="74.334">PISP</text><rect fill="#FEFECE" filter="url(#f10mhp7qrdxzpi)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="42" x="8" y="861.0664"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="28" x="15" y="881.6016">PISP</text><rect fill="#FEFECE" filter="url(#f10mhp7qrdxzpi)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="58" x="612" y="53.7988"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="44" x="619" y="74.334">Switch</text><rect fill="#FEFECE" filter="url(#f10mhp7qrdxzpi)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="58" x="612" y="861.0664"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="44" x="619" y="881.6016">Switch</text><rect fill="#FEFECE" filter="url(#f10mhp7qrdxzpi)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="48" x="1234" y="53.7988"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="34" x="1241" y="74.334">DFSP</text><rect fill="#FEFECE" filter="url(#f10mhp7qrdxzpi)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="48" x="1234" y="861.0664"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="34" x="1241" y="881.6016">DFSP</text><rect fill="#FFFFFF" filter="url(#f10mhp7qrdxzpi)" height="301.9238" style="stroke: #A80036; stroke-width: 1.0;" width="10" x="638" y="429.9004"/><rect fill="#FFFFFF" filter="url(#f10mhp7qrdxzpi)" height="150.5527" style="stroke: #A80036; stroke-width: 1.0;" width="10" x="1255" y="702.5137"/><path d="M9,132.2871 L9,157.2871 L1282,157.2871 L1282,142.2871 L1272,132.2871 L9,132.2871 " fill="#FBFB77" filter="url(#f10mhp7qrdxzpi)" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M1272,132.2871 L1272,142.2871 L1282,142.2871 L1272,132.2871 " fill="#FBFB77" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="1010" x="134" y="149.8555">Here the user provides the OTP sent directly to them by the DFSP into the PISP App. It's then used as the secret to prove to the DFSP that the user trusts the PISP.</text><polygon fill="#A80036" points="626,425.9004,636,429.9004,626,433.9004,630,429.9004" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="31" x2="632" y1="429.9004" y2="429.9004"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="56" x="38" y="318.1621">AUTH-1</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="192" x="98" y="210.6646">PUT /consentRequests/456</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="0" x="114" y="226.2988"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="152" x="130" y="225.9751">FSIOP-Source: pispa</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="0" x="114" y="241.6094"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="192" x="130" y="241.2856">FSIOP-Destination: dfspa</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="106" y="256.4185">{</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="0" x="114" y="272.0527"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="192" x="130" y="271.729">authChannels: [ "OTP" ],</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="0" x="114" y="287.3633"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="72" x="130" y="287.0396">scopes: [</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="0" x="114" y="302.6738"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="272" x="146" y="302.3501">{ accountId: "dfsp.username.1234",</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="0" x="114" y="317.9844"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="464" x="162" y="317.6606">actions: [ "accounts.transfer", "accounts.getBalance" ] },</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="0" x="114" y="333.2949"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="272" x="146" y="332.9712">{ accountId: "dfsp.username.5678",</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="0" x="114" y="348.6055"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="464" x="162" y="348.2817">actions: [ "accounts.transfer", "accounts.getBalance" ] },</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="0" x="114" y="363.916"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="16" x="130" y="363.5923">],</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="0" x="114" y="379.2266"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="288" x="130" y="378.9028">callbackUri: "pisp-app://callback...</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="5" x="418" y="379.2266">"</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="0" x="114" y="394.5371"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="416" x="130" y="394.2134">authUri: "dfspa.com/authorize?consentRequestId=456",</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="0" x="114" y="409.8477"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="0" x="130" y="409.5239"/><text fill="#000000" font-family="monospace" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="280" x="130" y="409.5239">authToken: "&lt;OTP&gt;" // This is new !</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="0" x="114" y="425.1582"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="114" y="424.8345">}</text><polygon fill="#A80036" points="42,455.2109,32,459.2109,42,463.2109,38,459.2109" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 2.0,2.0;" x1="36" x2="637" y1="459.2109" y2="459.2109"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="56" x="48" y="454.4688">AUTH-2</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="96" x="108" y="454.0562">202 Accepted</text><polygon fill="#A80036" points="1243,698.5137,1253,702.5137,1243,706.5137,1247,702.5137" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="648" x2="1249" y1="702.5137" y2="702.5137"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="56" x="655" y="590.7754">AUTH-3</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="192" x="715" y="483.2778">PUT /consentRequests/456</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="0" x="731" y="498.9121"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="152" x="747" y="498.5884">FSIOP-Source: pispa</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="0" x="731" y="514.2227"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="192" x="747" y="513.8989">FSIOP-Destination: dfspa</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="723" y="529.0317">{</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="0" x="731" y="544.666"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="192" x="747" y="544.3423">authChannels: [ "OTP" ],</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="0" x="731" y="559.9766"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="72" x="747" y="559.6528">scopes: [</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="0" x="731" y="575.2871"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="272" x="763" y="574.9634">{ accountId: "dfsp.username.1234",</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="0" x="731" y="590.5977"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="464" x="779" y="590.2739">actions: [ "accounts.transfer", "accounts.getBalance" ] },</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="0" x="731" y="605.9082"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="272" x="763" y="605.5845">{ accountId: "dfsp.username.5678",</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="0" x="731" y="621.2188"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="464" x="779" y="620.895">actions: [ "accounts.transfer", "accounts.getBalance" ] },</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="0" x="731" y="636.5293"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="16" x="747" y="636.2056">],</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="0" x="731" y="651.8398"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="288" x="747" y="651.5161">callbackUri: "pisp-app://callback...</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="5" x="1035" y="651.8398">"</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="0" x="731" y="667.1504"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="416" x="747" y="666.8267">authUri: "dfspa.com/authorize?consentRequestId=456",</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="0" x="731" y="682.4609"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="0" x="747" y="682.1372"/><text fill="#000000" font-family="monospace" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="280" x="747" y="682.1372">authToken: "&lt;OTP&gt;" // This is new !</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="0" x="731" y="697.7715"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="731" y="697.4478">}</text><polygon fill="#A80036" points="654,727.8242,644,731.8242,654,735.8242,650,731.8242" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 2.0,2.0;" x1="648" x2="1254" y1="731.8242" y2="731.8242"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="56" x="660" y="727.082">AUTH-4</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="96" x="720" y="726.6694">202 Accepted</text><line style="stroke: #A80036; stroke-width: 1.0;" x1="1265" x2="1307" y1="761.1348" y2="761.1348"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="1307" x2="1307" y1="761.1348" y2="774.1348"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="1266" x2="1307" y1="774.1348" y2="774.1348"/><polygon fill="#A80036" points="1276,770.1348,1266,774.1348,1276,778.1348,1272,774.1348" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="56" x="1272" y="756.3926">AUTH-5</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="156" x="1332" y="756.3926">Verify the OTP is correct.</text><path d="M9,787.1348 L9,842.1348 L1282,842.1348 L1282,797.1348 L1272,787.1348 L9,787.1348 " fill="#FBFB77" filter="url(#f10mhp7qrdxzpi)" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M1272,787.1348 L1272,797.1348 L1282,797.1348 L1272,787.1348 " fill="#FBFB77" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="962" x="158" y="804.7031">At this point, the DFSP believes that the User is their customer and that User trusts the PISP. This means that the DFSP can continue by granting consent.</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="0" x="162" y="820.0137"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="802" x="158" y="835.3242">Note that the DFSP never "responds" to the Consent Request itself. Instead, it will create a Consent resource in the Grant phase.</text><!--
-@startuml
-
-title PISP Linking: Authentication (OTP)
-
-participant "PISP" as PISP
-
-box "Mojaloop"
-    participant Switch
-end box
-
-participant "DFSP" as DFSP
-
-autonumber 1 "<b>AUTH-#</b>"
-
-...
-
-note over PISP, DFSP
-  Here the user provides the OTP sent directly to them by the DFSP into the PISP App. It's then used as the secret to prove to the DFSP that the user trusts the PISP.
-end note
-
-...
-
-PISP -> Switch ++: ""PUT /consentRequests/456""\n    ""  FSIOP-Source: pispa""\n    ""  FSIOP-Destination: dfspa""\n"" {""\n    ""  authChannels: [ "OTP" ],""\n    ""  scopes: [ ""\n    ""    { accountId: "dfsp.username.1234",""\n    ""      actions: [ "accounts.transfer", "accounts.getBalance" ] },""\n    ""    { accountId: "dfsp.username.5678",""\n    ""      actions: [ "accounts.transfer", "accounts.getBalance" ] },""\n    ""  ],""\n    ""  callbackUri: "pisp-app://callback..."""\n    ""  authUri: "dfspa.com/authorize?consentRequestId=456",""\n    ""  **authToken: "<OTP>" // This is new !**""\n    ""}""
-Switch - -> PISP: ""202 Accepted""
-deactivate PISP
-
-Switch -> DFSP ++: ""PUT /consentRequests/456""\n    ""  FSIOP-Source: pispa""\n    ""  FSIOP-Destination: dfspa""\n"" {""\n    ""  authChannels: [ "OTP" ],""\n    ""  scopes: [ ""\n    ""    { accountId: "dfsp.username.1234",""\n    ""      actions: [ "accounts.transfer", "accounts.getBalance" ] },""\n    ""    { accountId: "dfsp.username.5678",""\n    ""      actions: [ "accounts.transfer", "accounts.getBalance" ] },""\n    ""  ],""\n    ""  callbackUri: "pisp-app://callback..."""\n    ""  authUri: "dfspa.com/authorize?consentRequestId=456",""\n    ""  **authToken: "<OTP>" // This is new !**""\n    ""}""
-DFSP - -> Switch: ""202 Accepted""
-deactivate Switch
-
-DFSP -> DFSP: Verify the OTP is correct.
-
-note over PISP, DFSP
-  At this point, the DFSP believes that the User is their customer and that User trusts the PISP. This means that the DFSP can continue by granting consent.
-
-  Note that the DFSP never "responds" to the Consent Request itself. Instead, it will create a Consent resource in the Grant phase.
-end note
-
-@enduml
-
-PlantUML version 1.2019.06(Sat May 25 01:10:25 PHT 2019)
-(GPL source distribution)
-Java Runtime: Java(TM) SE Runtime Environment
-JVM: Java HotSpot(TM) 64-Bit Server VM
-Java Version: 1.8.0_171-b11
-Operating System: Mac OS X
-OS Version: 10.13.6
-Default Encoding: UTF-8
-Language: en
-Country: AU
---></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" height="906" preserveAspectRatio="none" style="width:1487px;height:906px" width="1487">
+  <defs>
+    <filter height="300%" id="a" width="300%" x="-1" y="-1">
+      <feGaussianBlur result="blurOut" stdDeviation="2"/>
+      <feColorMatrix in="blurOut" result="blurOut2" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/>
+      <feOffset dx="4" dy="4" in="blurOut2" result="blurOut3"/>
+      <feBlend in="SourceGraphic" in2="blurOut3"/>
+    </filter>
+  </defs>
+  <text font-family="sans-serif" font-size="18" lengthAdjust="spacingAndGlyphs" textLength="305" x="593.5" y="28.708">
+    PISP Linking: Authentication (OTP)
+  </text>
+  <path fill="#DDD" stroke="#a80036" d="M602.5 40.953h73v859.641h-73z"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="67" x="605.5" y="53.02">
+    Mojaloop
+  </text>
+  <path fill="#FFF" filter="url(#a)" stroke="#a80036" d="M634 433.508h10v299.258h-10zM1249 703.633h10v149.664h-10z"/>
+  <path stroke="#a80036" d="M29 95.383v10"/>
+  <path stroke="#a80036" stroke-dasharray="1,4" d="M29 105.383v28"/>
+  <path stroke="#a80036" d="M29 133.383v39.133"/>
+  <path stroke="#a80036" stroke-dasharray="1,4" d="M29 172.516v28"/>
+  <path stroke="#a80036" d="M29 200.516v661.781M638.5 95.383v10"/>
+  <path stroke="#a80036" stroke-dasharray="1,4" d="M638.5 105.383v28"/>
+  <path stroke="#a80036" d="M638.5 133.383v39.133"/>
+  <path stroke="#a80036" stroke-dasharray="1,4" d="M638.5 172.516v28"/>
+  <path stroke="#a80036" d="M638.5 200.516v661.781M1253.5 95.383v10"/>
+  <path stroke="#a80036" stroke-dasharray="1,4" d="M1253.5 105.383v28"/>
+  <path stroke="#a80036" d="M1253.5 133.383v39.133"/>
+  <path stroke="#a80036" stroke-dasharray="1,4" d="M1253.5 172.516v28"/>
+  <path stroke="#a80036" d="M1253.5 200.516v661.781"/>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M5 60.086h44v30.297H5z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="30" x="12" y="80.081">
+    PISP
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M5 861.297h44v30.297H5z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="30" x="12" y="881.292">
+    PISP
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M607.5 60.086h59v30.297h-59z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="45" x="614.5" y="80.081">
+    Switch
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M607.5 861.297h59v30.297h-59z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="45" x="614.5" y="881.292">
+    Switch
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M1226.5 60.086h51v30.297h-51z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="37" x="1233.5" y="80.081">
+    DFSP
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M1226.5 861.297h51v30.297h-51z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="37" x="1233.5" y="881.292">
+    DFSP
+  </text>
+  <path fill="#FFF" filter="url(#a)" stroke="#a80036" d="M634 433.508h10v299.258h-10zM1249 703.633h10v149.664h-10z"/>
+  <path d="M5 138.383v25h1271v-15l-10-10H5" fill="#FBFB77" filter="url(#a)" stroke="#a80036"/>
+  <path d="M1266 138.383v10h10l-10-10" fill="#FBFB77" stroke="#a80036"/>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="1041" x="113.75" y="155.45">
+    Here the user provides the OTP sent directly to them by the DFSP into the PISP App. It&apos;s then used as the secret to prove to the DFSP that the user trusts the PISP.
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M622 429.508l10 4-10 4 4-4z"/>
+  <path stroke="#a80036" d="M29 433.508h599"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="53" x="36" y="322.512">
+    AUTH-1
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="192" x="93" y="216.583">
+    PUT /consentRequests/456
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="152" x="125" y="231.715">
+    FSIOP-Source: pispa
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="192" x="125" y="246.848">
+    FSIOP-Destination: dfspa
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="101" y="261.981">
+    {
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="192" x="125" y="277.114">
+    authChannels: [ &quot;OTP&quot; ],
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="72" x="125" y="292.247">
+    scopes: [
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="272" x="141" y="307.379">
+    { accountId: &quot;dfsp.username.1234&quot;,
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="464" x="157" y="322.512">
+    actions: [ &quot;accounts.transfer&quot;, &quot;accounts.getBalance&quot; ] },
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="272" x="141" y="337.645">
+    { accountId: &quot;dfsp.username.5678&quot;,
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="464" x="157" y="352.778">
+    actions: [ &quot;accounts.transfer&quot;, &quot;accounts.getBalance&quot; ] },
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="16" x="125" y="367.911">
+    ],
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="288" x="125" y="383.043">
+    callbackUri: &quot;pisp-app://callback...
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="5" x="413" y="383.043">
+    &quot;
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="416" x="125" y="398.176">
+    authUri: &quot;dfspa.com/authorize?consentRequestId=456&quot;,
+  </text>
+  <text font-family="monospace" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="280" x="125" y="413.309">
+    authToken: &quot;&lt;OTP&gt;&quot; // This is new !
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="109" y="428.442">
+    }
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M40 458.64l-10 4 10 4-4-4z"/>
+  <path stroke="#a80036" stroke-dasharray="2,2" d="M34 462.641h599"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="53" x="46" y="457.575">
+    AUTH-2
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="96" x="103" y="457.575">
+    202 Accepted
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M1237 699.633l10 4-10 4 4-4z"/>
+  <path stroke="#a80036" d="M644 703.633h599"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="53" x="651" y="592.637">
+    AUTH-3
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="192" x="708" y="486.707">
+    PUT /consentRequests/456
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="152" x="740" y="501.84">
+    FSIOP-Source: pispa
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="192" x="740" y="516.973">
+    FSIOP-Destination: dfspa
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="716" y="532.106">
+    {
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="192" x="740" y="547.239">
+    authChannels: [ &quot;OTP&quot; ],
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="72" x="740" y="562.372">
+    scopes: [
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="272" x="756" y="577.504">
+    { accountId: &quot;dfsp.username.1234&quot;,
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="464" x="772" y="592.637">
+    actions: [ &quot;accounts.transfer&quot;, &quot;accounts.getBalance&quot; ] },
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="272" x="756" y="607.77">
+    { accountId: &quot;dfsp.username.5678&quot;,
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="464" x="772" y="622.903">
+    actions: [ &quot;accounts.transfer&quot;, &quot;accounts.getBalance&quot; ] },
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="16" x="740" y="638.036">
+    ],
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="288" x="740" y="653.168">
+    callbackUri: &quot;pisp-app://callback...
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="5" x="1028" y="653.168">
+    &quot;
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="416" x="740" y="668.301">
+    authUri: &quot;dfspa.com/authorize?consentRequestId=456&quot;,
+  </text>
+  <text font-family="monospace" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="280" x="740" y="683.434">
+    authToken: &quot;&lt;OTP&gt;&quot; // This is new !
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="724" y="698.567">
+    }
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M650 728.766l-10 4 10 4-4-4z"/>
+  <path stroke="#a80036" stroke-dasharray="2,2" d="M644 732.766h604"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="53" x="656" y="727.7">
+    AUTH-4
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="96" x="713" y="727.7">
+    202 Accepted
+  </text>
+  <path stroke="#a80036" d="M1259 761.898h42M1301 761.898v13M1260 774.898h41"/>
+  <path fill="#A80036" stroke="#a80036" d="M1270 770.898l-10 4 10 4-4-4z"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="53" x="1266" y="756.832">
+    AUTH-5
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="157" x="1323" y="756.832">
+    Verify the OTP is correct.
+  </text>
+  <path d="M5 787.898v55h1271v-45l-10-10H5" fill="#FBFB77" filter="url(#a)" stroke="#a80036"/>
+  <path d="M1266 787.898v10h10l-10-10" fill="#FBFB77" stroke="#a80036"/>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="986" x="141.25" y="804.965">
+    At this point, the DFSP believes that the User is their customer and that User trusts the PISP. This means that the DFSP can continue by granting consent.
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="820" x="141.25" y="835.231">
+    Note that the DFSP never &quot;responds&quot; to the Consent Request itself. Instead, it will create a Consent resource in the Grant phase.
+  </text>
+</svg>

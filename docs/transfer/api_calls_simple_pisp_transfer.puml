@@ -2,7 +2,25 @@
 
 title PISPTransferSimpleAPI
 
-!include participants_api.iuml
+box "PISP"
+participant "PISP Server" as D1
+end box
+box "Mojaloop"
+    participant "auth-service" as AUTHS
+    participant Switch as S
+    participant "ALS" as A
+end box
+box "DFSP A"
+    participant "DFSP A\n(Payer)" as D2
+    participant "3p-sa-in" as D2_3psa_in
+    participant "3p-sa-out" as D2_3psa_out
+    participant "sdk-sa-in" as D2_sdksa_in
+    participant "sdk-sa-out" as D2_sdksa_out
+end box
+box "DFSP B"
+    participant "DFSP B\n(Payee)" as D3
+end box
+
 
 note over S
 This document aims to demonstrate the high level API Calls between the PISP, Mojaloop Hub and DFSPs.
@@ -91,8 +109,8 @@ D2 -> S: POST /transfers
 S -> D3: POST /transfers
 D3 -> S: PUT /transfers/321
 S -> D2_sdksa_in: PUT /transfers/321
-D2_sdksa_in -> D2_sdksa_out: notify via redis-cache 
-D2_sdksa_out -> D2_sdksa_out: OutboundRequestToPayTransferModel workflow ends 
+D2_sdksa_in -> D2_sdksa_out: notify via redis-cache
+D2_sdksa_out -> D2_sdksa_out: OutboundRequestToPayTransferModel workflow ends
 D2_sdksa_out -> D2_3psa_in: sync response POST /requestToPayTransfer
 
 note over D2_3psa_in

@@ -1,62 +1,188 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="593px" preserveAspectRatio="none" style="width:991px;height:593px;" version="1.1" viewBox="0 0 991 593" width="991px" zoomAndPan="magnify"><defs><filter height="300%" id="f1tf4765vmwvnt" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><rect fill="#DDDDDD" height="547.6348" style="stroke: #A80036; stroke-width: 1.0;" width="423.5" x="292" y="34.4883"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="61" x="473.25" y="47.0566">Mojaloop</text><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="168" x="409.5" y="23.5352">PISP Linking: Unlinking</text><line style="stroke: #A80036; stroke-width: 1.0;" x1="26" x2="26" y1="89.2871" y2="97.2871"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="26" x2="26" y1="97.2871" y2="125.2871"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="26" x2="26" y1="125.2871" y2="164.5977"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="26" x2="26" y1="164.5977" y2="192.5977"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="26" x2="26" y1="192.5977" y2="540.6348"/><rect fill="#FFFFFF" filter="url(#f1tf4765vmwvnt)" height="67.3105" style="stroke: #FFFFFF; stroke-width: 1.0;" width="10" x="21" y="97.2871"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="21" x2="21" y1="97.2871" y2="164.5977"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="31" x2="31" y1="97.2871" y2="164.5977"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="21" x2="31" y1="97.2871" y2="97.2871"/><rect fill="#FFFFFF" filter="url(#f1tf4765vmwvnt)" height="50.6211" style="stroke: #FFFFFF; stroke-width: 1.0;" width="10" x="21" y="192.5977"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="21" x2="21" y1="192.5977" y2="243.2188"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="31" x2="31" y1="192.5977" y2="243.2188"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="21" x2="31" y1="243.2188" y2="243.2188"/><rect fill="#FFFFFF" filter="url(#f1tf4765vmwvnt)" height="47.3105" style="stroke: #A80036; stroke-width: 1.0;" width="10" x="21" y="493.3242"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="327" x2="327" y1="89.2871" y2="97.2871"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="327" x2="327" y1="97.2871" y2="125.2871"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="327" x2="327" y1="125.2871" y2="164.5977"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="327" x2="327" y1="164.5977" y2="192.5977"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="327" x2="327" y1="192.5977" y2="540.6348"/><rect fill="#FFFFFF" filter="url(#f1tf4765vmwvnt)" height="87.9316" style="stroke: #A80036; stroke-width: 1.0;" width="10" x="322" y="213.9082"/><rect fill="#FFFFFF" filter="url(#f1tf4765vmwvnt)" height="136.5527" style="stroke: #A80036; stroke-width: 1.0;" width="10" x="322" y="404.082"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="660" x2="660" y1="89.2871" y2="97.2871"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="660" x2="660" y1="97.2871" y2="125.2871"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="660" x2="660" y1="125.2871" y2="164.5977"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="660" x2="660" y1="164.5977" y2="192.5977"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="660" x2="660" y1="192.5977" y2="540.6348"/><rect fill="#FFFFFF" filter="url(#f1tf4765vmwvnt)" height="160.8633" style="stroke: #A80036; stroke-width: 1.0;" width="10" x="655" y="272.5293"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="958" x2="958" y1="89.2871" y2="97.2871"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="958" x2="958" y1="97.2871" y2="125.2871"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="958" x2="958" y1="125.2871" y2="164.5977"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="958" x2="958" y1="164.5977" y2="192.5977"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="958" x2="958" y1="192.5977" y2="540.6348"/><rect fill="#FFFFFF" filter="url(#f1tf4765vmwvnt)" height="47.3105" style="stroke: #A80036; stroke-width: 1.0;" width="10" x="953" y="493.3242"/><rect fill="#FEFECE" filter="url(#f1tf4765vmwvnt)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="42" x="3" y="53.7988"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="28" x="10" y="74.334">PISP</text><rect fill="#FEFECE" filter="url(#f1tf4765vmwvnt)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="58" x="296" y="53.7988"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="44" x="303" y="74.334">Switch</text><rect fill="#FEFECE" filter="url(#f1tf4765vmwvnt)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="99" x="608.5" y="53.7988"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="85" x="615.5" y="74.334">Auth Service</text><rect fill="#FEFECE" filter="url(#f1tf4765vmwvnt)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="48" x="932" y="53.7988"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="34" x="939" y="74.334">DFSP</text><rect fill="#FEFECE" filter="url(#f1tf4765vmwvnt)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="42" x="3" y="540.6348"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="28" x="10" y="561.1699">PISP</text><rect fill="#FEFECE" filter="url(#f1tf4765vmwvnt)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="58" x="296" y="540.6348"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="44" x="303" y="561.1699">Switch</text><rect fill="#FEFECE" filter="url(#f1tf4765vmwvnt)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="99" x="608.5" y="540.6348"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="85" x="615.5" y="561.1699">Auth Service</text><rect fill="#FEFECE" filter="url(#f1tf4765vmwvnt)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="48" x="932" y="540.6348"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="34" x="939" y="561.1699">DFSP</text><path d="M6.5,130.2871 L6.5,155.2871 L977.5,155.2871 L977.5,140.2871 L967.5,130.2871 L6.5,130.2871 " fill="#FBFB77" filter="url(#f1tf4765vmwvnt)" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M967.5,130.2871 L967.5,140.2871 L977.5,140.2871 L967.5,130.2871 " fill="#FBFB77" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="599" x="186" y="147.8555">In this scenario the PISP is triggering the unlinking, however it could just as easily be the DFSP.</text><polygon fill="#A80036" points="310,209.9082,320,213.9082,310,217.9082,314,213.9082" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="31" x2="316" y1="213.9082" y2="213.9082"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="68" x="38" y="209.166">UNLINK-1</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="200" x="110" y="208.7534">POST /consents/123/revoke</text><polygon fill="#A80036" points="42,239.2188,32,243.2188,42,247.2188,38,243.2188" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 2.0,2.0;" x1="36" x2="321" y1="243.2188" y2="243.2188"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="68" x="48" y="238.4766">UNLINK-2</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="96" x="120" y="238.064">202 Accepted</text><polygon fill="#A80036" points="643,268.5293,653,272.5293,643,276.5293,647,272.5293" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="332" x2="649" y1="272.5293" y2="272.5293"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="68" x="339" y="267.7871">UNLINK-3</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="200" x="411" y="267.3745">POST /consents/123/revoke</text><polygon fill="#A80036" points="343,297.8398,333,301.8398,343,305.8398,339,301.8398" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 2.0,2.0;" x1="337" x2="654" y1="301.8398" y2="301.8398"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="68" x="349" y="297.0977">UNLINK-4</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="96" x="421" y="296.6851">202 Accepted</text><line style="stroke: #A80036; stroke-width: 1.0;" x1="665" x2="707" y1="331.1504" y2="331.1504"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="707" x2="707" y1="331.1504" y2="344.1504"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="666" x2="707" y1="344.1504" y2="344.1504"/><polygon fill="#A80036" points="676,340.1504,666,344.1504,676,348.1504,672,344.1504" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="68" x="672" y="326.4082">UNLINK-5</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="207" x="744" y="326.4082">Delete the record of the consent.</text><polygon fill="#A80036" points="343,400.082,333,404.082,343,408.082,339,404.082" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="337" x2="654" y1="404.082" y2="404.082"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="68" x="349" y="384.0293">UNLINK-6</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="152" x="421" y="368.7188">""PATCH /consents/123</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="96" x="421" y="384.0293">{ status: string,</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="219" x="429" y="399.3398">revokedAt: string (of timestamp)}""</text><polygon fill="#A80036" points="643,429.3926,653,433.3926,643,437.3926,647,433.3926" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 2.0,2.0;" x1="332" x2="649" y1="433.3926" y2="433.3926"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="68" x="339" y="428.6504">UNLINK-7</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="48" x="411" y="428.2378">200 OK</text><polygon fill="#A80036" points="42,489.3242,32,493.3242,42,497.3242,38,493.3242" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="36" x2="321" y1="493.3242" y2="493.3242"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="68" x="48" y="473.2715">UNLINK-8</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="152" x="120" y="457.9609">""PATCH /consents/123</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="96" x="120" y="473.2715">{ status: string,</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="123" x="128" y="488.582">revokedAt: string}""</text><polygon fill="#A80036" points="941,489.3242,951,493.3242,941,497.3242,945,493.3242" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="332" x2="947" y1="493.3242" y2="493.3242"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="68" x="339" y="473.2715">UNLINK-9</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="152" x="411" y="457.9609">""PATCH /consents/123</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="96" x="411" y="473.2715">{ status: string,</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="123" x="419" y="488.582">revokedAt: string}""</text><polygon fill="#A80036" points="310,518.6348,320,522.6348,310,526.6348,314,522.6348" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 2.0,2.0;" x1="31" x2="316" y1="522.6348" y2="522.6348"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="77" x="38" y="517.8926">UNLINK-10</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="48" x="119" y="517.48">200 OK</text><polygon fill="#A80036" points="343,518.6348,333,522.6348,343,526.6348,339,522.6348" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 2.0,2.0;" x1="337" x2="952" y1="522.6348" y2="522.6348"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="77" x="349" y="517.8926">UNLINK-11</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="48" x="430" y="517.48">200 OK</text><!--
-@startuml
-
-!pragma teoz true
-
-title PISP Linking: Unlinking
-
-participant "PISP" as PISP
-
-box "Mojaloop"
-    participant Switch
-    participant "Auth Service" as Auth
-end box
-
-participant "DFSP" as DFSP
-
-autonumber 1 "<b>UNLINK-#</b>"
-
-activate PISP
-
-...
-
-note over PISP, DFSP
-  In this scenario the PISP is triggering the unlinking, however it could just as easily be the DFSP.
-end note
-
-...
-
-PISP -> Switch ++: ""POST /consents/123/revoke""
-Switch - -> PISP: ""202 Accepted""
-deactivate PISP
-
-
-Switch -> Auth ++:  ""POST /consents/123/revoke""
-Auth - -> Switch: ""202 Accepted""
-deactivate Switch
-
-Auth -> Auth: Delete the record of the consent.
-
-Auth -> Switch ++: ""PATCH /consents/123 \n{ status: string,\n  revokedAt: string (of timestamp)}""
-Switch - -> Auth: ""200 OK""
-deactivate Auth
-
-Switch -> PISP ++: ""PATCH /consents/123 \n{ status: string,\n  revokedAt: string}""
-& Switch -> DFSP ++: ""PATCH /consents/123 \n{ status: string,\n  revokedAt: string}""
-
-PISP - -> Switch: ""200 OK""
-& DFSP - -> Switch: ""200 OK""
-
-@enduml
-
-PlantUML version 1.2019.06(Sat May 25 01:10:25 PHT 2019)
-(GPL source distribution)
-Java Runtime: Java(TM) SE Runtime Environment
-JVM: Java HotSpot(TM) 64-Bit Server VM
-Java Version: 1.8.0_171-b11
-Operating System: Mac OS X
-OS Version: 10.13.6
-Default Encoding: UTF-8
-Language: en
-Country: AU
---></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" height="591" preserveAspectRatio="none" style="width:1011px;height:591px" width="1011">
+  <defs>
+    <filter height="300%" id="a" width="300%" x="-1" y="-1">
+      <feGaussianBlur result="blurOut" stdDeviation="2"/>
+      <feColorMatrix in="blurOut" result="blurOut2" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/>
+      <feOffset dx="4" dy="4" in="blurOut2" result="blurOut3"/>
+      <feBlend in="SourceGraphic" in2="blurOut3"/>
+    </filter>
+  </defs>
+  <path fill="#DDD" stroke="#a80036" d="M294.5 40.953H727v544.586H294.5z"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="67" x="477.25" y="53.02">
+    Mojaloop
+  </text>
+  <text font-family="sans-serif" font-size="18" lengthAdjust="spacingAndGlyphs" textLength="203" x="401.75" y="28.708">
+    PISP Linking: Unlinking
+  </text>
+  <path stroke="#a80036" d="M29 95.383v8"/>
+  <path stroke="#a80036" stroke-dasharray="1,4" d="M29 103.383v28"/>
+  <path stroke="#a80036" d="M29 131.383v39.133"/>
+  <path stroke="#a80036" stroke-dasharray="1,4" d="M29 170.516v28"/>
+  <path stroke="#a80036" d="M29 198.516v345.726"/>
+  <path fill="#FFF" filter="url(#a)" stroke="#fff" d="M24 103.383h10v67.133H24z"/>
+  <path stroke="#a80036" d="M24 103.383v67.133M34 103.383v67.133M24 103.383h10"/>
+  <path fill="#FFF" filter="url(#a)" stroke="#fff" d="M24 198.516h10v50.266H24z"/>
+  <path stroke="#a80036" d="M24 198.516v50.265M34 198.516v50.265M24 248.781h10"/>
+  <path fill="#FFF" filter="url(#a)" stroke="#a80036" d="M24 497.109h10v47.133H24z"/>
+  <path stroke="#a80036" d="M330 95.383v8"/>
+  <path stroke="#a80036" stroke-dasharray="1,4" d="M330 103.383v28"/>
+  <path stroke="#a80036" d="M330 131.383v39.133"/>
+  <path stroke="#a80036" stroke-dasharray="1,4" d="M330 170.516v28"/>
+  <path stroke="#a80036" d="M330 198.516v345.726"/>
+  <path fill="#FFF" filter="url(#a)" stroke="#a80036" d="M325 219.648h10v87.398h-10zM325 408.578h10v135.664h-10z"/>
+  <path stroke="#a80036" d="M671 95.383v8"/>
+  <path stroke="#a80036" stroke-dasharray="1,4" d="M671 103.383v28"/>
+  <path stroke="#a80036" d="M671 131.383v39.133"/>
+  <path stroke="#a80036" stroke-dasharray="1,4" d="M671 170.516v28"/>
+  <path stroke="#a80036" d="M671 198.516v345.726"/>
+  <path fill="#FFF" filter="url(#a)" stroke="#a80036" d="M666 277.914h10v159.797h-10z"/>
+  <path stroke="#a80036" d="M974 95.383v8"/>
+  <path stroke="#a80036" stroke-dasharray="1,4" d="M974 103.383v28"/>
+  <path stroke="#a80036" d="M974 131.383v39.133"/>
+  <path stroke="#a80036" stroke-dasharray="1,4" d="M974 170.516v28"/>
+  <path stroke="#a80036" d="M974 198.516v345.726"/>
+  <path fill="#FFF" filter="url(#a)" stroke="#a80036" d="M969 497.109h10v47.133h-10z"/>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M5 60.086h44v30.297H5z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="30" x="12" y="80.081">
+    PISP
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M298.5 60.086h59v30.297h-59z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="45" x="305.5" y="80.081">
+    Switch
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M619 60.086h100v30.297H619z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="86" x="626" y="80.081">
+    Auth Service
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M946.5 60.086h51v30.297h-51z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="37" x="953.5" y="80.081">
+    DFSP
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M5 544.242h44v30.297H5z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="30" x="12" y="564.237">
+    PISP
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M298.5 544.242h59v30.297h-59z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="45" x="305.5" y="564.237">
+    Switch
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M619 544.242h100v30.297H619z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="86" x="626" y="564.237">
+    Auth Service
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M946.5 544.242h51v30.297h-51z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="37" x="953.5" y="564.237">
+    DFSP
+  </text>
+  <path d="M8.25 136.383v25h986v-15l-10-10h-976" fill="#FBFB77" filter="url(#a)" stroke="#a80036"/>
+  <path d="M984.25 136.383v10h10l-10-10" fill="#FBFB77" stroke="#a80036"/>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="601" x="194.5" y="153.45">
+    In this scenario the PISP is triggering the unlinking, however it could just as easily be the DFSP.
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M313 215.648l10 4-10 4 4-4z"/>
+  <path stroke="#a80036" d="M34 219.648h285"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="68" x="41" y="214.583">
+    UNLINK-1
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="200" x="113" y="214.583">
+    POST /consents/123/revoke
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M45 244.781l-10 4 10 4-4-4z"/>
+  <path stroke="#a80036" stroke-dasharray="2,2" d="M39 248.781h285"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="68" x="51" y="243.715">
+    UNLINK-2
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="96" x="123" y="243.715">
+    202 Accepted
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M654 273.914l10 4-10 4 4-4z"/>
+  <path stroke="#a80036" d="M335 277.914h325"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="68" x="342" y="272.848">
+    UNLINK-3
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="200" x="414" y="272.848">
+    POST /consents/123/revoke
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M346 303.047l-10 4 10 4-4-4z"/>
+  <path stroke="#a80036" stroke-dasharray="2,2" d="M340 307.047h325"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="68" x="352" y="301.981">
+    UNLINK-4
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="96" x="424" y="301.981">
+    202 Accepted
+  </text>
+  <path stroke="#a80036" d="M676 336.18h42M718 336.18v13M677 349.18h41"/>
+  <path fill="#A80036" stroke="#a80036" d="M687 345.18l-10 4 10 4-4-4z"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="68" x="683" y="331.114">
+    UNLINK-5
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="212" x="755" y="331.114">
+    Delete the record of the consent.
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M346 404.578l-10 4 10 4-4-4z"/>
+  <path stroke="#a80036" d="M340 408.578h325"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="68" x="352" y="388.379">
+    UNLINK-6
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="147" x="424" y="373.247">
+    &quot;&quot;PATCH /consents/123
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="100" x="424" y="388.379">
+    { status: string,
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="227" x="432" y="403.512">
+    revokedAt: string (of timestamp)}&quot;&quot;
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M654 433.71l10 4-10 4 4-4z"/>
+  <path stroke="#a80036" stroke-dasharray="2,2" d="M335 437.711h325"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="68" x="342" y="432.645">
+    UNLINK-7
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="48" x="414" y="432.645">
+    200 OK
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M45 493.11l-10 4 10 4-4-4z"/>
+  <path stroke="#a80036" d="M39 497.109h285"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="68" x="51" y="476.911">
+    UNLINK-8
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="147" x="123" y="461.778">
+    &quot;&quot;PATCH /consents/123
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="100" x="123" y="476.911">
+    { status: string,
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="127" x="131" y="492.043">
+    revokedAt: string}&quot;&quot;
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M957 493.11l10 4-10 4 4-4z"/>
+  <path stroke="#a80036" d="M335 497.109h628"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="68" x="342" y="476.911">
+    UNLINK-9
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="147" x="414" y="461.778">
+    &quot;&quot;PATCH /consents/123
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="100" x="414" y="476.911">
+    { status: string,
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="127" x="422" y="492.043">
+    revokedAt: string}&quot;&quot;
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M313 522.242l10 4-10 4 4-4z"/>
+  <path stroke="#a80036" stroke-dasharray="2,2" d="M34 526.242h285"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="77" x="41" y="521.176">
+    UNLINK-10
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="48" x="122" y="521.176">
+    200 OK
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M346 522.242l-10 4 10 4-4-4z"/>
+  <path stroke="#a80036" stroke-dasharray="2,2" d="M340 526.242h628"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="77" x="352" y="521.176">
+    UNLINK-11
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="48" x="433" y="521.176">
+    200 OK
+  </text>
+</svg>

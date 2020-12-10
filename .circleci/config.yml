@@ -174,8 +174,8 @@ jobs:
           command: |
             echo ${NVM_DIR}
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            nvm install v10.15.3
-            nvm alias default v10.15.3
+            nvm install v12.16.1
+            nvm alias default v12.16.1
             node --version
             npm ci
       - run:

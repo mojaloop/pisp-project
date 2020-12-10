@@ -1,113 +1,466 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="1918px" preserveAspectRatio="none" style="width:2002px;height:1918px;" version="1.1" viewBox="0 0 2002 1918" width="2002px" zoomAndPan="magnify"><defs><filter height="300%" id="f915dgskb365r" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="165" x="914.25" y="23.5352">PISPTransferSimpleAPI</text><rect fill="#DDDDDD" height="1873.4785" style="stroke: #A80036; stroke-width: 1.0;" width="221" x="4" y="34.4883"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="93" x="68" y="47.0566">Mobile device</text><rect fill="#DDDDDD" height="1873.4785" style="stroke: #A80036; stroke-width: 1.0;" width="101" x="227" y="34.4883"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="27" x="264" y="47.0566">PISP</text><rect fill="#DDDDDD" height="1873.4785" style="stroke: #A80036; stroke-width: 1.0;" width="240" x="602.5" y="34.4883"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="61" x="692" y="47.0566">Mojaloop</text><rect fill="#DDDDDD" height="1873.4785" style="stroke: #A80036; stroke-width: 1.0;" width="74" x="952.5" y="34.4883"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="46" x="966.5" y="47.0566">DFSP A</text><rect fill="#DDDDDD" height="1873.4785" style="stroke: #A80036; stroke-width: 1.0;" width="75" x="1374" y="34.4883"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="44" x="1389.5" y="47.0566">DFSP B</text><line style="stroke: #A80036; stroke-width: 1.0;" x1="70" x2="70" y1="153.7754" y2="275.5293"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="70" x2="70" y1="275.5293" y2="316.4844"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="70" x2="70" y1="316.4844" y2="403.8828"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="70" x2="70" y1="403.8828" y2="444.8379"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="70" x2="70" y1="444.8379" y2="1804.9902"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="182" x2="182" y1="153.7754" y2="275.5293"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="182" x2="182" y1="275.5293" y2="316.4844"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="182" x2="182" y1="316.4844" y2="403.8828"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="182" x2="182" y1="403.8828" y2="444.8379"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="182" x2="182" y1="444.8379" y2="1804.9902"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="277" x2="277" y1="153.7754" y2="275.5293"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="277" x2="277" y1="275.5293" y2="316.4844"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="277" x2="277" y1="316.4844" y2="403.8828"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="277" x2="277" y1="403.8828" y2="444.8379"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="277" x2="277" y1="444.8379" y2="1804.9902"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="637.5" x2="637.5" y1="153.7754" y2="275.5293"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="637.5" x2="637.5" y1="275.5293" y2="316.4844"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="637.5" x2="637.5" y1="316.4844" y2="403.8828"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="637.5" x2="637.5" y1="403.8828" y2="444.8379"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="637.5" x2="637.5" y1="444.8379" y2="1804.9902"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="699.5" x2="699.5" y1="153.7754" y2="275.5293"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="699.5" x2="699.5" y1="275.5293" y2="316.4844"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="699.5" x2="699.5" y1="316.4844" y2="403.8828"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="699.5" x2="699.5" y1="403.8828" y2="444.8379"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="699.5" x2="699.5" y1="444.8379" y2="1804.9902"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="784.5" x2="784.5" y1="153.7754" y2="275.5293"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="784.5" x2="784.5" y1="275.5293" y2="316.4844"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="784.5" x2="784.5" y1="316.4844" y2="403.8828"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="784.5" x2="784.5" y1="403.8828" y2="444.8379"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="784.5" x2="784.5" y1="444.8379" y2="1804.9902"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="989.5" x2="989.5" y1="153.7754" y2="275.5293"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="989.5" x2="989.5" y1="275.5293" y2="316.4844"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="989.5" x2="989.5" y1="316.4844" y2="403.8828"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="989.5" x2="989.5" y1="403.8828" y2="444.8379"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="989.5" x2="989.5" y1="444.8379" y2="1804.9902"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="1411" x2="1411" y1="153.7754" y2="275.5293"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="1411" x2="1411" y1="275.5293" y2="316.4844"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="1411" x2="1411" y1="316.4844" y2="403.8828"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="1411" x2="1411" y1="403.8828" y2="444.8379"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="1411" x2="1411" y1="444.8379" y2="1804.9902"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="1517" x2="1517" y1="153.7754" y2="275.5293"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="1517" x2="1517" y1="275.5293" y2="316.4844"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="1517" x2="1517" y1="316.4844" y2="403.8828"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="1517" x2="1517" y1="403.8828" y2="444.8379"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="1517" x2="1517" y1="444.8379" y2="1804.9902"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="1622" x2="1622" y1="153.7754" y2="275.5293"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="1622" x2="1622" y1="275.5293" y2="316.4844"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="1622" x2="1622" y1="316.4844" y2="403.8828"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 1.0,4.0;" x1="1622" x2="1622" y1="403.8828" y2="444.8379"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="1622" x2="1622" y1="444.8379" y2="1804.9902"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="49" x="43" y="134.334">Ayesha</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="119" x="8" y="150.8223">(+44 8765 4321)</text><ellipse cx="70.5" cy="63.7988" fill="#FEFECE" filter="url(#f915dgskb365r)" rx="8" ry="8" style="stroke: #A80036; stroke-width: 2.0;"/><path d="M70.5,71.7988 L70.5,98.7988 M57.5,79.7988 L83.5,79.7988 M70.5,98.7988 L57.5,113.7988 M70.5,98.7988 L83.5,113.7988 " fill="none" filter="url(#f915dgskb365r)" style="stroke: #A80036; stroke-width: 2.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="49" x="43" y="1817.5254">Ayesha</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="119" x="8" y="1834.0137">(+44 8765 4321)</text><ellipse cx="70.5" cy="1846.9668" fill="#FEFECE" filter="url(#f915dgskb365r)" rx="8" ry="8" style="stroke: #A80036; stroke-width: 2.0;"/><path d="M70.5,1854.9668 L70.5,1881.9668 M57.5,1862.9668 L83.5,1862.9668 M70.5,1881.9668 L57.5,1896.9668 M70.5,1881.9668 L83.5,1896.9668 " fill="none" filter="url(#f915dgskb365r)" style="stroke: #A80036; stroke-width: 2.0;"/><rect fill="#FEFECE" filter="url(#f915dgskb365r)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="74" x="143" y="118.2871"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="60" x="150" y="138.8223">PISP App</text><rect fill="#FEFECE" filter="url(#f915dgskb365r)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="74" x="143" y="1803.9902"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="60" x="150" y="1824.5254">PISP App</text><rect fill="#FEFECE" filter="url(#f915dgskb365r)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="89" x="231" y="118.2871"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="75" x="238" y="138.8223">PISP Server</text><rect fill="#FEFECE" filter="url(#f915dgskb365r)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="89" x="231" y="1803.9902"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="75" x="238" y="1824.5254">PISP Server</text><rect fill="#FEFECE" filter="url(#f915dgskb365r)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="58" x="606.5" y="118.2871"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="44" x="613.5" y="138.8223">Switch</text><rect fill="#FEFECE" filter="url(#f915dgskb365r)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="58" x="606.5" y="1803.9902"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="44" x="613.5" y="1824.5254">Switch</text><rect fill="#FEFECE" filter="url(#f915dgskb365r)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="39" x="678.5" y="118.2871"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="25" x="685.5" y="138.8223">ALS</text><rect fill="#FEFECE" filter="url(#f915dgskb365r)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="39" x="678.5" y="1803.9902"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="25" x="685.5" y="1824.5254">ALS</text><rect fill="#FEFECE" filter="url(#f915dgskb365r)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="103" x="731.5" y="118.2871"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="89" x="738.5" y="138.8223">Auth-Service</text><rect fill="#FEFECE" filter="url(#f915dgskb365r)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="103" x="731.5" y="1803.9902"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="89" x="738.5" y="1824.5254">Auth-Service</text><rect fill="#FEFECE" filter="url(#f915dgskb365r)" height="46.9766" style="stroke: #A80036; stroke-width: 1.5;" width="62" x="956.5" y="101.7988"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="48" x="963.5" y="122.334">DFSP A</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="47" x="964" y="138.8223">(Payer)</text><rect fill="#FEFECE" filter="url(#f915dgskb365r)" height="46.9766" style="stroke: #A80036; stroke-width: 1.5;" width="62" x="956.5" y="1803.9902"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="48" x="963.5" y="1824.5254">DFSP A</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="47" x="964" y="1841.0137">(Payer)</text><rect fill="#FEFECE" filter="url(#f915dgskb365r)" height="46.9766" style="stroke: #A80036; stroke-width: 1.5;" width="63" x="1378" y="101.7988"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="46" x="1386.5" y="122.334">DFSP B</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="49" x="1385" y="138.8223">(Payee)</text><rect fill="#FEFECE" filter="url(#f915dgskb365r)" height="46.9766" style="stroke: #A80036; stroke-width: 1.5;" width="63" x="1378" y="1803.9902"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="46" x="1386.5" y="1824.5254">DFSP B</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="49" x="1385" y="1841.0137">(Payee)</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="56" x="1486.5" y="134.334">Bhavesh</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="119" x="1455" y="150.8223">(+44 1234 5678)</text><ellipse cx="1517.5" cy="63.7988" fill="#FEFECE" filter="url(#f915dgskb365r)" rx="8" ry="8" style="stroke: #A80036; stroke-width: 2.0;"/><path d="M1517.5,71.7988 L1517.5,98.7988 M1504.5,79.7988 L1530.5,79.7988 M1517.5,98.7988 L1504.5,113.7988 M1517.5,98.7988 L1530.5,113.7988 " fill="none" filter="url(#f915dgskb365r)" style="stroke: #A80036; stroke-width: 2.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="56" x="1486.5" y="1817.5254">Bhavesh</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="119" x="1455" y="1834.0137">(+44 1234 5678)</text><ellipse cx="1517.5" cy="1846.9668" fill="#FEFECE" filter="url(#f915dgskb365r)" rx="8" ry="8" style="stroke: #A80036; stroke-width: 2.0;"/><path d="M1517.5,1854.9668 L1517.5,1881.9668 M1504.5,1862.9668 L1530.5,1862.9668 M1517.5,1881.9668 L1504.5,1896.9668 M1517.5,1881.9668 L1530.5,1896.9668 " fill="none" filter="url(#f915dgskb365r)" style="stroke: #A80036; stroke-width: 2.0;"/><rect fill="#FEFECE" filter="url(#f915dgskb365r)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="61" x="1590" y="118.2871"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="47" x="1597" y="138.8223">AUTHS</text><rect fill="#FEFECE" filter="url(#f915dgskb365r)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="61" x="1590" y="1803.9902"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="47" x="1597" y="1824.5254">AUTHS</text><path d="M298,168.7754 L298,193.7754 L973,193.7754 L973,178.7754 L963,168.7754 L298,168.7754 " fill="#FBFB77" filter="url(#f915dgskb365r)" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M963,168.7754 L963,178.7754 L973,178.7754 L963,168.7754 " fill="#FBFB77" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="654" x="304" y="186.3438">This document aims to demonstrate the high level API Calls between the PISP, Mojaloop Hub and DFSPs.</text><rect fill="#EEEEEE" filter="url(#f915dgskb365r)" height="3" style="stroke: #EEEEEE; stroke-width: 1.0;" width="1987.5" x="3" y="223.7412"/><line style="stroke: #000000; stroke-width: 1.0;" x1="3" x2="1990.5" y1="223.7412" y2="223.7412"/><line style="stroke: #000000; stroke-width: 1.0;" x1="3" x2="1990.5" y1="226.7412" y2="226.7412"/><rect fill="#EEEEEE" filter="url(#f915dgskb365r)" height="23.3105" style="stroke: #000000; stroke-width: 2.0;" width="148" x="922.75" y="213.0859"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="130" x="928.75" y="229.6543">Discovery (Lookup)</text><polygon fill="#A80036" points="625.5,263.5293,635.5,267.5293,625.5,271.5293,629.5,267.5293" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="277.5" x2="631.5" y1="267.5293" y2="267.5293"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="248" x="284.5" y="262.4634">GET /parties/MSISDN/+4412345678</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="239" x="727" y="300.1641">Get participants/parties flow not shown here</text><polygon fill="#A80036" points="1399.5,333.6172,1409.5,337.6172,1399.5,341.6172,1403.5,337.6172" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="637.5" x2="1405.5" y1="337.6172" y2="337.6172"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="248" x="644.5" y="332.5513">GET /parties/MSISDN/+4412345678</text><polygon fill="#A80036" points="648.5,362.75,638.5,366.75,648.5,370.75,644.5,366.75" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="642.5" x2="1410.5" y1="366.75" y2="366.75"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="248" x="654.5" y="361.6841">PUT /parties/MSISDN/+4412345678</text><polygon fill="#A80036" points="288.5,391.8828,278.5,395.8828,288.5,399.8828,284.5,395.8828" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="282.5" x2="636.5" y1="395.8828" y2="395.8828"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="248" x="294.5" y="390.8169">PUT /parties/MSISDN/+4412345678</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="240" x="726.5" y="428.5176">The PISP confirms payee party with their user</text><rect fill="#EEEEEE" filter="url(#f915dgskb365r)" height="3" style="stroke: #EEEEEE; stroke-width: 1.0;" width="1987.5" x="3" y="465.4932"/><line style="stroke: #000000; stroke-width: 1.0;" x1="3" x2="1990.5" y1="465.4932" y2="465.4932"/><line style="stroke: #000000; stroke-width: 1.0;" x1="3" x2="1990.5" y1="468.4932" y2="468.4932"/><rect fill="#EEEEEE" filter="url(#f915dgskb365r)" height="23.3105" style="stroke: #000000; stroke-width: 2.0;" width="138" x="927.75" y="454.8379"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="120" x="933.75" y="471.4063">Agreement Phase</text><polygon fill="#A80036" points="625.5,505.2813,635.5,509.2813,625.5,513.2813,629.5,509.2813" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="277.5" x2="631.5" y1="509.2813" y2="509.2813"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="296" x="284.5" y="504.2153">POST /thirdpartyRequests/transactions</text><polygon fill="#A80036" points="977.5,534.4141,987.5,538.4141,977.5,542.4141,981.5,538.4141" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="637.5" x2="983.5" y1="538.4141" y2="538.4141"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="296" x="644.5" y="533.3481">POST /thirdpartyRequests/transactions</text><line style="stroke: #A80036; stroke-width: 1.0;" x1="989.5" x2="1031.5" y1="598.3457" y2="598.3457"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="1031.5" x2="1031.5" y1="598.3457" y2="611.3457"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="990.5" x2="1031.5" y1="611.3457" y2="611.3457"/><polygon fill="#A80036" points="1000.5,607.3457,990.5,611.3457,1000.5,615.3457,996.5,611.3457" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="75" x="996.5" y="562.9824">Lookup this</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="72" x="1075.5" y="562.6587">consentId</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="4" x="1147.5" y="562.9824">,</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="120" x="1155.5" y="562.6587">sourceAccountId</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="0" x="1279.5" y="562.9824"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="23" x="996.5" y="578.293">and</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="48" x="1023.5" y="577.9692">pispId</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="224" x="1071.5" y="578.293">. Verify that they exist, and consent</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="205" x="996.5" y="593.6035">is granted with a valid credential</text><line style="stroke: #A80036; stroke-width: 1.0;" x1="989.5" x2="1031.5" y1="640.6563" y2="640.6563"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="1031.5" x2="1031.5" y1="640.6563" y2="653.6563"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="990.5" x2="1031.5" y1="653.6563" y2="653.6563"/><polygon fill="#A80036" points="1000.5,649.6563,990.5,653.6563,1000.5,657.6563,996.5,653.6563" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="380" x="996.5" y="635.9141">Generate a unique transactionId for this transaction request:</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="24" x="1380.5" y="635.5903">987</text><polygon fill="#A80036" points="648.5,678.7891,638.5,682.7891,648.5,686.7891,644.5,682.7891" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="642.5" x2="988.5" y1="682.7891" y2="682.7891"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="328" x="654.5" y="677.7231">PUT /thirdpartyRequests/transactions/{id}</text><polygon fill="#A80036" points="288.5,707.9219,278.5,711.9219,288.5,715.9219,284.5,711.9219" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="282.5" x2="636.5" y1="711.9219" y2="711.9219"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="328" x="294.5" y="706.856">PUT /thirdpartyRequests/transactions/{id}</text><polygon fill="#A80036" points="648.5,737.0547,638.5,741.0547,648.5,745.0547,644.5,741.0547" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="642.5" x2="988.5" y1="741.0547" y2="741.0547"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="96" x="654.5" y="735.9888">POST /quotes</text><polygon fill="#A80036" points="1399.5,766.1875,1409.5,770.1875,1399.5,774.1875,1403.5,770.1875" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="637.5" x2="1405.5" y1="770.1875" y2="770.1875"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="96" x="644.5" y="765.1216">POST /quotes</text><polygon fill="#A80036" points="648.5,795.3203,638.5,799.3203,648.5,803.3203,644.5,799.3203" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="642.5" x2="1410.5" y1="799.3203" y2="799.3203"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="120" x="654.5" y="794.2544">PUT /quotes/456</text><polygon fill="#A80036" points="977.5,824.4531,987.5,828.4531,977.5,832.4531,981.5,828.4531" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="637.5" x2="983.5" y1="828.4531" y2="828.4531"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="120" x="644.5" y="823.3872">PUT /quotes/456</text><path d="M712,841.4531 L712,881.4531 L980,881.4531 L980,851.4531 L970,841.4531 L712,841.4531 " fill="#FBFB77" filter="url(#f915dgskb365r)" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M970,841.4531 L970,851.4531 L980,851.4531 L970,841.4531 " fill="#FBFB77" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="247" x="718" y="859.0215">DFSPA has the quote, they can now ask</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="159" x="718" y="874.332">the PISP for authorization</text><polygon fill="#A80036" points="648.5,908.207,638.5,912.207,648.5,916.207,644.5,912.207" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="642.5" x2="988.5" y1="912.207" y2="912.207"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="160" x="654.5" y="907.1411">POST /authorizations</text><polygon fill="#A80036" points="288.5,937.3398,278.5,941.3398,288.5,945.3398,284.5,941.3398" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="282.5" x2="636.5" y1="941.3398" y2="941.3398"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="160" x="294.5" y="936.2739">POST /authorizations</text><path d="M282,954.3398 L282,994.3398 L635,994.3398 L635,964.3398 L625,954.3398 L282,954.3398 " fill="#FBFB77" filter="url(#f915dgskb365r)" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M625,954.3398 L625,964.3398 L635,964.3398 L625,954.3398 " fill="#FBFB77" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="227" x="288" y="971.9082">PISP checks the quote with the user,</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="332" x="288" y="987.2188">and uses FIDO to sign the the QuoteResponse object</text><polygon fill="#A80036" points="625.5,1021.0938,635.5,1025.0938,625.5,1029.0938,629.5,1025.0938" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="277.5" x2="631.5" y1="1025.0938" y2="1025.0938"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="184" x="284.5" y="1020.0278">PUT /authorizations/123</text><polygon fill="#A80036" points="977.5,1050.2266,987.5,1054.2266,977.5,1058.2266,981.5,1054.2266" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="637.5" x2="983.5" y1="1054.2266" y2="1054.2266"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="184" x="644.5" y="1049.1606">PUT /authorizations/123</text><line style="stroke: #A80036; stroke-width: 1.0;" x1="989.5" x2="1031.5" y1="1098.8477" y2="1098.8477"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="1031.5" x2="1031.5" y1="1098.8477" y2="1111.8477"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="990.5" x2="1031.5" y1="1111.8477" y2="1111.8477"/><polygon fill="#A80036" points="1000.5,1107.8477,990.5,1111.8477,1000.5,1115.8477,996.5,1111.8477" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="71" x="996.5" y="1078.7949">Lookup the</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="240" x="1071.5" y="1078.4712">thirdpartyRequests/transaction</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="99" x="996.5" y="1094.1055">request, get the</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="72" x="1099.5" y="1093.7817">consentId</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="23" x="1175.5" y="1094.1055">and</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="120" x="1202.5" y="1093.7817">sourceAccountId</text><line style="stroke: #A80036; stroke-width: 1.0;" x1="989.5" x2="1031.5" y1="1156.4688" y2="1156.4688"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="1031.5" x2="1031.5" y1="1156.4688" y2="1169.4688"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="990.5" x2="1031.5" y1="1169.4688" y2="1169.4688"/><polygon fill="#A80036" points="1000.5,1165.4688,990.5,1169.4688,1000.5,1173.4688,996.5,1169.4688" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="128" x="996.5" y="1136.416">Confirm pispId from</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="184" x="1128.5" y="1136.0923">PUT /authorizations/123</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="77" x="1000.5" y="1151.7266">matches the</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="240" x="1081.5" y="1151.4028">thirdpartyRequests/transaction</text><path d="M760,1182.4688 L760,1222.4688 L1214,1222.4688 L1214,1192.4688 L1204,1182.4688 L760,1182.4688 " fill="#FBFB77" filter="url(#f915dgskb365r)" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M1204,1182.4688 L1204,1192.4688 L1214,1192.4688 L1204,1182.4688 " fill="#FBFB77" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="201" x="766" y="1200.0371">Switch has the signed condition</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="433" x="766" y="1215.3477">For 3rd party FIDO, it now needs to make sure everything checks out</text><polygon fill="#A80036" points="648.5,1264.3555,638.5,1268.3555,648.5,1272.3555,644.5,1268.3555" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="642.5" x2="988.5" y1="1268.3555" y2="1268.3555"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="296" x="654.5" y="1248.1567">POST /thirdpartyRequests/transactions</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="152" x="694.5" y="1263.2896">/123/authorizations</text><polygon fill="#A80036" points="1610.5,1308.6211,1620.5,1312.6211,1610.5,1316.6211,1614.5,1312.6211" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="637.5" x2="1616.5" y1="1312.6211" y2="1312.6211"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="296" x="644.5" y="1292.4224">POST /thirdpartyRequests/transactions</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="152" x="684.5" y="1307.5552">/123/authorizations</text><line style="stroke: #A80036; stroke-width: 1.0;" x1="1622.5" x2="1664.5" y1="1341.9316" y2="1341.9316"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="1664.5" x2="1664.5" y1="1341.9316" y2="1354.9316"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="1623.5" x2="1664.5" y1="1354.9316" y2="1354.9316"/><polygon fill="#A80036" points="1633.5,1350.9316,1623.5,1354.9316,1633.5,1358.9316,1629.5,1354.9316" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="256" x="1629.5" y="1337.1895">Lookup this consent based on consentId</text><line style="stroke: #A80036; stroke-width: 1.0;" x1="1622.5" x2="1664.5" y1="1384.2422" y2="1384.2422"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="1664.5" x2="1664.5" y1="1384.2422" y2="1397.2422"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="1623.5" x2="1664.5" y1="1397.2422" y2="1397.2422"/><polygon fill="#A80036" points="1633.5,1393.2422,1623.5,1397.2422,1633.5,1401.2422,1629.5,1397.2422" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="354" x="1629.5" y="1379.5">Ensure the sourceAccountId matches what is in Consent</text><line style="stroke: #A80036; stroke-width: 1.0;" x1="1622.5" x2="1664.5" y1="1441.8633" y2="1441.8633"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="1664.5" x2="1664.5" y1="1441.8633" y2="1454.8633"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="1623.5" x2="1664.5" y1="1454.8633" y2="1454.8633"/><polygon fill="#A80036" points="1633.5,1450.8633,1623.5,1454.8633,1633.5,1458.8633,1629.5,1454.8633" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="243" x="1629.5" y="1421.8105">Check that the signed bytes match the</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="259" x="1629.5" y="1437.1211">publickey we have stored for the consent</text><polygon fill="#A80036" points="648.5,1495.1289,638.5,1499.1289,648.5,1503.1289,644.5,1499.1289" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="642.5" x2="1621.5" y1="1499.1289" y2="1499.1289"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="288" x="654.5" y="1478.9302">PUT /thirdpartyRequests/transactions</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="152" x="686.5" y="1494.063">/123/authorizations</text><polygon fill="#A80036" points="977.5,1539.3945,987.5,1543.3945,977.5,1547.3945,981.5,1543.3945" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="637.5" x2="983.5" y1="1543.3945" y2="1543.3945"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="288" x="644.5" y="1523.1958">PUT /thirdpartyRequests/transactions</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="152" x="676.5" y="1538.3286">/123/authorizations</text><path d="M803,1556.3945 L803,1596.3945 L1172,1596.3945 L1172,1566.3945 L1162,1556.3945 L803,1556.3945 " fill="#FBFB77" filter="url(#f915dgskb365r)" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M1162,1556.3945 L1162,1566.3945 L1172,1566.3945 L1162,1556.3945 " fill="#FBFB77" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="348" x="809" y="1573.9629">DFSPA now knows that the user signed this transaction</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="262" x="809" y="1589.2734">and can go ahead and initiate the transfer</text><rect fill="#EEEEEE" filter="url(#f915dgskb365r)" height="3" style="stroke: #EEEEEE; stroke-width: 1.0;" width="1987.5" x="3" y="1626.6709"/><line style="stroke: #000000; stroke-width: 1.0;" x1="3" x2="1990.5" y1="1626.6709" y2="1626.6709"/><line style="stroke: #000000; stroke-width: 1.0;" x1="3" x2="1990.5" y1="1629.6709" y2="1629.6709"/><rect fill="#EEEEEE" filter="url(#f915dgskb365r)" height="23.3105" style="stroke: #000000; stroke-width: 2.0;" width="120" x="936.75" y="1616.0156"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="102" x="942.75" y="1632.584">Transfer Phase</text><polygon fill="#A80036" points="648.5,1666.459,638.5,1670.459,648.5,1674.459,644.5,1670.459" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="642.5" x2="988.5" y1="1670.459" y2="1670.459"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="120" x="654.5" y="1665.3931">POST /transfers</text><polygon fill="#A80036" points="1399.5,1695.5918,1409.5,1699.5918,1399.5,1703.5918,1403.5,1699.5918" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="637.5" x2="1405.5" y1="1699.5918" y2="1699.5918"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="120" x="644.5" y="1694.5259">POST /transfers</text><polygon fill="#A80036" points="648.5,1724.7246,638.5,1728.7246,648.5,1732.7246,644.5,1728.7246" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="642.5" x2="1410.5" y1="1728.7246" y2="1728.7246"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="152" x="654.5" y="1723.6587">PUT /transfers/4321</text><polygon fill="#A80036" points="977.5,1753.8574,987.5,1757.8574,977.5,1761.8574,981.5,1757.8574" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="637.5" x2="983.5" y1="1757.8574" y2="1757.8574"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="152" x="644.5" y="1752.7915">PUT /transfers/4321</text><polygon fill="#A80036" points="288.5,1782.9902,278.5,1786.9902,288.5,1790.9902,284.5,1786.9902" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="282.5" x2="636.5" y1="1786.9902" y2="1786.9902"/><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="336" x="294.5" y="1781.9243">PATCH /thirdpartyRequests/transactions/123</text><!--
-@startuml
-
-title PISPTransferSimpleAPI
-
-box "Mobile device"
-    actor "Ayesha\n(+44 8765 4321)" as CA
-    participant "PISP App" as App
-end box
-box "PISP"
-participant "PISP Server" as D1
-end box
-box "Mojaloop"
-    participant Switch as S
-    participant "ALS" as A
-    participant "Auth-Service" as FIDO
-end box
-box "DFSP A"
-    participant "DFSP A\n(Payer)" as D2
-end box
-box "DFSP B"
-    participant "DFSP B\n(Payee)" as D3
-end box
-actor "Bhavesh\n(+44 1234 5678)" as CB
-
-note over S
-This document aims to demonstrate the high level API Calls between the PISP, Mojaloop Hub and DFSPs.
-end note
-
-
-== Discovery (Lookup) ==
-D1 -> S: ""GET /parties/MSISDN/+4412345678""
-... Get participants/parties flow not shown here ...
-S -> D3: ""GET /parties/MSISDN/+4412345678""
-D3 -> S: ""PUT /parties/MSISDN/+4412345678""
-S -> D1: ""PUT /parties/MSISDN/+4412345678""
-... The PISP confirms payee party with their user ...
-
-== Agreement Phase ==
-D1 -> S: ""POST /thirdpartyRequests/transactions""
-S -> D2: ""POST /thirdpartyRequests/transactions""
-
-D2 -> D2: Lookup this ""consentId"", ""sourceAccountId"" \nand ""pispId"". Verify that they exist, and consent \nis granted with a valid credential
-D2 -> D2: Generate a unique transactionId for this transaction request: ""987""
-
-D2 -> S: ""PUT /thirdpartyRequests/transactions/{id}""
-S -> D1: ""PUT /thirdpartyRequests/transactions/{id}""
-
-D2 -> S: ""POST /quotes""
-S -> D3: ""POST /quotes""
-D3 -> S: ""PUT /quotes/456""
-S -> D2: ""PUT /quotes/456""
-
-note left of D2
-  DFSPA has the quote, they can now ask
-  the PISP for authorization
-end note
-
-D2 -> S: ""POST /authorizations""
-S -> D1: ""POST /authorizations""
-
-note right of D1
-  PISP checks the quote with the user,
-  and uses FIDO to sign the the QuoteResponse object
-end note
-
-D1 -> S: ""PUT /authorizations/123""
-S -> D2: ""PUT /authorizations/123""
-
-D2 -> D2: Lookup the ""thirdpartyRequests/transaction""\nrequest, get the ""consentId"" and ""sourceAccountId""
-D2 -> D2: Confirm pispId from ""PUT /authorizations/123""\n matches the ""thirdpartyRequests/transaction""
-
-note over D2
-  Switch has the signed condition
-  For 3rd party FIDO, it now needs to make sure everything checks out
-end note
-
-D2 -> S: ""POST /thirdpartyRequests/transactions""\n""     /123/authorizations""
-S -> AUTHS: ""POST /thirdpartyRequests/transactions""\n""     /123/authorizations""
-
-AUTHS -> AUTHS: Lookup this consent based on consentId
-AUTHS -> AUTHS: Ensure the sourceAccountId matches what is in Consent
-AUTHS -> AUTHS: Check that the signed bytes match the \npublickey we have stored for the consent
-
-AUTHS -> S: ""PUT /thirdpartyRequests/transactions""\n""    /123/authorizations""
-S -> D2: ""PUT /thirdpartyRequests/transactions""\n""    /123/authorizations""
-
-note over D2
-  DFSPA now knows that the user signed this transaction
-  and can go ahead and initiate the transfer
-end note
-
-== Transfer Phase ==
-
-D2 -> S: ""POST /transfers""
-S -> D3: ""POST /transfers""
-D3 -> S: ""PUT /transfers/4321""
-S -> D2: ""PUT /transfers/4321""
-S -> D1: ""PATCH /thirdpartyRequests/transactions/123""
-
-@enduml
-
-PlantUML version 1.2019.06(Sat May 25 01:10:25 PHT 2019)
-(GPL source distribution)
-Java Runtime: Java(TM) SE Runtime Environment
-JVM: Java HotSpot(TM) 64-Bit Server VM
-Java Version: 1.8.0_171-b11
-Operating System: Mac OS X
-OS Version: 10.13.6
-Default Encoding: UTF-8
-Language: en
-Country: AU
---></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" height="1914" preserveAspectRatio="none" style="width:2012px;height:1914px" width="2012">
+  <defs>
+    <filter height="300%" id="a" width="300%" x="-1" y="-1">
+      <feGaussianBlur result="blurOut" stdDeviation="2"/>
+      <feColorMatrix in="blurOut" result="blurOut2" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/>
+      <feOffset dx="4" dy="4" in="blurOut2" result="blurOut3"/>
+      <feBlend in="SourceGraphic" in2="blurOut3"/>
+    </filter>
+  </defs>
+  <text font-family="sans-serif" font-size="18" lengthAdjust="spacingAndGlyphs" textLength="202" x="901.75" y="28.708">
+    PISPTransferSimpleAPI
+  </text>
+  <path fill="#DDD" stroke="#a80036" d="M1 40.953h223v1867.969H1z"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="102" x="61.5" y="53.02">
+    Mobile device
+  </text>
+  <path fill="#DDD" stroke="#a80036" d="M226 40.953h104v1867.969H226z"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="33" x="261.5" y="53.02">
+    PISP
+  </text>
+  <path fill="#DDD" stroke="#a80036" d="M602.5 40.953h239v1867.969h-239z"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="67" x="688.5" y="53.02">
+    Mojaloop
+  </text>
+  <path fill="#DDD" stroke="#a80036" d="M952 40.953h76v1867.969h-76z"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="54" x="963" y="53.02">
+    DFSP A
+  </text>
+  <path fill="#DDD" stroke="#a80036" d="M1380 40.953h78v1867.969h-78z"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="54" x="1392" y="53.02">
+    DFSP B
+  </text>
+  <path stroke="#a80036" d="M68 159.68v121.398"/>
+  <path stroke="#a80036" stroke-dasharray="1,4" d="M68 281.078v40.805"/>
+  <path stroke="#a80036" d="M68 321.883v87.398"/>
+  <path stroke="#a80036" stroke-dasharray="1,4" d="M68 409.281v40.805"/>
+  <path stroke="#a80036" d="M68 450.086v1356.242M180 159.68v121.398"/>
+  <path stroke="#a80036" stroke-dasharray="1,4" d="M180 281.078v40.805"/>
+  <path stroke="#a80036" d="M180 321.883v87.398"/>
+  <path stroke="#a80036" stroke-dasharray="1,4" d="M180 409.281v40.805"/>
+  <path stroke="#a80036" d="M180 450.086v1356.242M278 159.68v121.398"/>
+  <path stroke="#a80036" stroke-dasharray="1,4" d="M278 281.078v40.805"/>
+  <path stroke="#a80036" d="M278 321.883v87.398"/>
+  <path stroke="#a80036" stroke-dasharray="1,4" d="M278 409.281v40.805"/>
+  <path stroke="#a80036" d="M278 450.086v1356.242M637.5 159.68v121.398"/>
+  <path stroke="#a80036" stroke-dasharray="1,4" d="M637.5 281.078v40.805"/>
+  <path stroke="#a80036" d="M637.5 321.883v87.398"/>
+  <path stroke="#a80036" stroke-dasharray="1,4" d="M637.5 409.281v40.805"/>
+  <path stroke="#a80036" d="M637.5 450.086v1356.242M700.5 159.68v121.398"/>
+  <path stroke="#a80036" stroke-dasharray="1,4" d="M700.5 281.078v40.805"/>
+  <path stroke="#a80036" d="M700.5 321.883v87.398"/>
+  <path stroke="#a80036" stroke-dasharray="1,4" d="M700.5 409.281v40.805"/>
+  <path stroke="#a80036" d="M700.5 450.086v1356.242M784.5 159.68v121.398"/>
+  <path stroke="#a80036" stroke-dasharray="1,4" d="M784.5 281.078v40.805"/>
+  <path stroke="#a80036" d="M784.5 321.883v87.398"/>
+  <path stroke="#a80036" stroke-dasharray="1,4" d="M784.5 409.281v40.805"/>
+  <path stroke="#a80036" d="M784.5 450.086v1356.242M990 159.68v121.398"/>
+  <path stroke="#a80036" stroke-dasharray="1,4" d="M990 281.078v40.805"/>
+  <path stroke="#a80036" d="M990 321.883v87.398"/>
+  <path stroke="#a80036" stroke-dasharray="1,4" d="M990 409.281v40.805"/>
+  <path stroke="#a80036" d="M990 450.086v1356.242M1419 159.68v121.398"/>
+  <path stroke="#a80036" stroke-dasharray="1,4" d="M1419 281.078v40.805"/>
+  <path stroke="#a80036" d="M1419 321.883v87.398"/>
+  <path stroke="#a80036" stroke-dasharray="1,4" d="M1419 409.281v40.805"/>
+  <path stroke="#a80036" d="M1419 450.086v1356.242M1527 159.68v121.398"/>
+  <path stroke="#a80036" stroke-dasharray="1,4" d="M1527 281.078v40.805"/>
+  <path stroke="#a80036" d="M1527 321.883v87.398"/>
+  <path stroke="#a80036" stroke-dasharray="1,4" d="M1527 409.281v40.805"/>
+  <path stroke="#a80036" d="M1527 450.086v1356.242M1632 159.68v121.398"/>
+  <path stroke="#a80036" stroke-dasharray="1,4" d="M1632 281.078v40.805"/>
+  <path stroke="#a80036" d="M1632 321.883v87.398"/>
+  <path stroke="#a80036" stroke-dasharray="1,4" d="M1632 409.281v40.805"/>
+  <path stroke="#a80036" d="M1632 450.086v1356.242"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="50" x="40" y="140.081">
+    Ayesha
+  </text>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="120" x="5" y="156.378">
+    (+44 8765 4321)
+  </text>
+  <circle cx="68" cy="70.086" fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="2" r="8"/>
+  <path d="M68 78.086v27m-13-19h26m-13 19l-13 15m13-15l13 15" fill="none" filter="url(#a)" stroke="#a80036" stroke-width="2"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="50" x="40" y="1818.323">
+    Ayesha
+  </text>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="120" x="5" y="1834.62">
+    (+44 8765 4321)
+  </text>
+  <circle cx="68" cy="1847.922" fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="2" r="8"/>
+  <path d="M68 1855.922v27m-13-19h26m-13 19l-13 15m13-15l13 15" fill="none" filter="url(#a)" stroke="#a80036" stroke-width="2"/>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M141 124.383h75v30.297h-75z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="61" x="148" y="144.378">
+    PISP App
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M141 1805.328h75v30.297h-75z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="61" x="148" y="1825.323">
+    PISP App
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M230 124.383h92v30.297h-92z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="78" x="237" y="144.378">
+    PISP Server
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M230 1805.328h92v30.297h-92z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="78" x="237" y="1825.323">
+    PISP Server
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M606.5 124.383h59v30.297h-59z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="45" x="613.5" y="144.378">
+    Switch
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M606.5 1805.328h59v30.297h-59z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="45" x="613.5" y="1825.323">
+    Switch
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M679.5 124.383h39v30.297h-39z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="25" x="686.5" y="144.378">
+    ALS
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M679.5 1805.328h39v30.297h-39z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="25" x="686.5" y="1825.323">
+    ALS
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M732.5 124.383h101v30.297h-101z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="87" x="739.5" y="144.378">
+    Auth-Service
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M732.5 1805.328h101v30.297h-101z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="87" x="739.5" y="1825.323">
+    Auth-Service
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M956 108.086h64v46.594h-64z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="50" x="963" y="128.081">
+    DFSP A
+  </text>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="48" x="964" y="144.378">
+    (Payer)
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M956 1805.328h64v46.594h-64z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="50" x="963" y="1825.323">
+    DFSP A
+  </text>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="48" x="964" y="1841.62">
+    (Payer)
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M1384 108.086h66v46.594h-66z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="51" x="1391.5" y="128.081">
+    DFSP B
+  </text>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="52" x="1391" y="144.378">
+    (Payee)
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M1384 1805.328h66v46.594h-66z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="51" x="1391.5" y="1825.323">
+    DFSP B
+  </text>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="52" x="1391" y="1841.62">
+    (Payee)
+  </text>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="60" x="1494" y="140.081">
+    Bhavesh
+  </text>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="120" x="1464" y="156.378">
+    (+44 1234 5678)
+  </text>
+  <circle cx="1527" cy="70.086" fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="2" r="8"/>
+  <path d="M1527 78.086v27m-13-19h26m-13 19l-13 15m13-15l13 15" fill="none" filter="url(#a)" stroke="#a80036" stroke-width="2"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="60" x="1494" y="1818.323">
+    Bhavesh
+  </text>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="120" x="1464" y="1834.62">
+    (+44 1234 5678)
+  </text>
+  <circle cx="1527" cy="1847.922" fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="2" r="8"/>
+  <path d="M1527 1855.922v27m-13-19h26m-13 19l-13 15m13-15l13 15" fill="none" filter="url(#a)" stroke="#a80036" stroke-width="2"/>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M1600 124.383h61v30.297h-61z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="47" x="1607" y="144.378">
+    AUTHS
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M1600 1805.328h61v30.297h-61z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="47" x="1607" y="1825.323">
+    AUTHS
+  </text>
+  <path d="M292 174.68v25h688v-15l-10-10H292" fill="#FBFB77" filter="url(#a)" stroke="#a80036"/>
+  <path d="M970 174.68v10h10l-10-10" fill="#FBFB77" stroke="#a80036"/>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="667" x="298" y="191.747">
+    This document aims to demonstrate the high level API Calls between the PISP, Mojaloop Hub and DFSPs.
+  </text>
+  <path fill="#EEE" filter="url(#a)" stroke="#eee" d="M0 229.379h2005.5v3H0z"/>
+  <path stroke="#000" d="M0 229.379h2005.5M0 232.379h2005.5"/>
+  <path fill="#EEE" filter="url(#a)" stroke="#000" stroke-width="2" d="M922.25 218.813h161v23.133h-161z"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="142" x="928.25" y="234.879">
+    Discovery (Lookup)
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M626 269.078l10 4-10 4 4-4z"/>
+  <path stroke="#a80036" d="M278 273.078h354"/>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="248" x="285" y="268.012">
+    GET /parties/MSISDN/+4412345678
+  </text>
+  <text font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="255" x="722.75" y="305.289">
+    Get participants/parties flow not shown here
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M1407 339.016l10 4-10 4 4-4z"/>
+  <path stroke="#a80036" d="M638 343.016h775"/>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="248" x="645" y="337.95">
+    GET /parties/MSISDN/+4412345678
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M649 368.148l-10 4 10 4-4-4z"/>
+  <path stroke="#a80036" d="M643 372.148h775"/>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="248" x="655" y="367.082">
+    PUT /parties/MSISDN/+4412345678
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M289 397.281l-10 4 10 4-4-4z"/>
+  <path stroke="#a80036" d="M283 401.281h354"/>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="248" x="295" y="396.215">
+    PUT /parties/MSISDN/+4412345678
+  </text>
+  <text font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="262" x="719.25" y="433.492">
+    The PISP confirms payee party with their user
+  </text>
+  <path fill="#EEE" filter="url(#a)" stroke="#eee" d="M0 470.652h2005.5v3H0z"/>
+  <path stroke="#000" d="M0 470.652h2005.5M0 473.652h2005.5"/>
+  <path fill="#EEE" filter="url(#a)" stroke="#000" stroke-width="2" d="M927.25 460.086h151v23.133h-151z"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="132" x="933.25" y="476.153">
+    Agreement Phase
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M626 510.352l10 4-10 4 4-4z"/>
+  <path stroke="#a80036" d="M278 514.352h354"/>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="296" x="285" y="509.286">
+    POST /thirdpartyRequests/transactions
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M978 539.484l10 4-10 4 4-4z"/>
+  <path stroke="#a80036" d="M638 543.484h346"/>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="296" x="645" y="538.418">
+    POST /thirdpartyRequests/transactions
+  </text>
+  <path stroke="#a80036" d="M990 602.883h42M1032 602.883v13M991 615.883h41"/>
+  <path fill="#A80036" stroke="#a80036" d="M1001 611.883l-10 4 10 4-4-4z"/>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="73" x="997" y="567.551">
+    Lookup this
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="72" x="1074" y="567.551">
+    consentId
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="4" x="1146" y="567.551">
+    ,
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="120" x="1154" y="567.551">
+    sourceAccountId
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="24" x="997" y="582.684">
+    and
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="48" x="1025" y="582.684">
+    pispId
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="227" x="1073" y="582.684">
+    . Verify that they exist, and consent
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="205" x="997" y="597.817">
+    is granted with a valid credential
+  </text>
+  <path stroke="#a80036" d="M990 645.016h42M1032 645.016v13M991 658.016h41"/>
+  <path fill="#A80036" stroke="#a80036" d="M1001 654.016l-10 4 10 4-4-4z"/>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="387" x="997" y="639.95">
+    Generate a unique transactionId for this transaction request:
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="24" x="1388" y="639.95">
+    987
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M649 683.148l-10 4 10 4-4-4z"/>
+  <path stroke="#a80036" d="M643 687.148h346"/>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="328" x="655" y="682.082">
+    PUT /thirdpartyRequests/transactions/{id}
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M289 712.281l-10 4 10 4-4-4z"/>
+  <path stroke="#a80036" d="M283 716.281h354"/>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="328" x="295" y="711.215">
+    PUT /thirdpartyRequests/transactions/{id}
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M649 741.414l-10 4 10 4-4-4z"/>
+  <path stroke="#a80036" d="M643 745.414h346"/>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="96" x="655" y="740.348">
+    POST /quotes
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M1407 770.547l10 4-10 4 4-4z"/>
+  <path stroke="#a80036" d="M638 774.547h775"/>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="96" x="645" y="769.481">
+    POST /quotes
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M649 799.68l-10 4 10 4-4-4z"/>
+  <path stroke="#a80036" d="M643 803.68h775"/>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="120" x="655" y="798.614">
+    PUT /quotes/456
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M978 828.813l10 4-10 4 4-4z"/>
+  <path stroke="#a80036" d="M638 832.813h346"/>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="120" x="645" y="827.747">
+    PUT /quotes/456
+  </text>
+  <path d="M706 845.813v40h275v-30l-10-10H706" fill="#FBFB77" filter="url(#a)" stroke="#a80036"/>
+  <path d="M971 845.813v10h10l-10-10" fill="#FBFB77" stroke="#a80036"/>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="254" x="712" y="862.879">
+    DFSPA has the quote, they can now ask
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="162" x="712" y="878.012">
+    the PISP for authorization
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M649 912.21l-10 4 10 4-4-4z"/>
+  <path stroke="#a80036" d="M643 916.211h346"/>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="160" x="655" y="911.145">
+    POST /authorizations
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M289 941.344l-10 4 10 4-4-4z"/>
+  <path stroke="#a80036" d="M283 945.344h354"/>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="160" x="295" y="940.278">
+    POST /authorizations
+  </text>
+  <path d="M283 958.344v40h358v-30l-10-10H283" fill="#FBFB77" filter="url(#a)" stroke="#a80036"/>
+  <path d="M631 958.344v10h10l-10-10" fill="#FBFB77" stroke="#a80036"/>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="232" x="289" y="975.411">
+    PISP checks the quote with the user,
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="337" x="289" y="990.543">
+    and uses FIDO to sign the the QuoteResponse object
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M626 1024.742l10 4-10 4 4-4z"/>
+  <path stroke="#a80036" d="M278 1028.742h354"/>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="184" x="285" y="1023.676">
+    PUT /authorizations/123
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M978 1053.875l10 4-10 4 4-4z"/>
+  <path stroke="#a80036" d="M638 1057.875h346"/>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="184" x="645" y="1052.809">
+    PUT /authorizations/123
+  </text>
+  <path stroke="#a80036" d="M990 1102.141h42M1032 1102.141v13M991 1115.141h41"/>
+  <path fill="#A80036" stroke="#a80036" d="M1001 1111.14l-10 4 10 4-4-4z"/>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="71" x="997" y="1081.942">
+    Lookup the
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="240" x="1072" y="1081.942">
+    thirdpartyRequests/transaction
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="103" x="997" y="1097.075">
+    request, get the
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="72" x="1104" y="1097.075">
+    consentId
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="24" x="1180" y="1097.075">
+    and
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="120" x="1208" y="1097.075">
+    sourceAccountId
+  </text>
+  <path stroke="#a80036" d="M990 1159.406h42M1032 1159.406v13M991 1172.406h41"/>
+  <path fill="#A80036" stroke="#a80036" d="M1001 1168.406l-10 4 10 4-4-4z"/>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="125" x="997" y="1139.207">
+    Confirm pispId from
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="184" x="1126" y="1139.207">
+    PUT /authorizations/123
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="81" x="1001" y="1154.34">
+    matches the
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="240" x="1086" y="1154.34">
+    thirdpartyRequests/transaction
+  </text>
+  <path d="M759 1185.406v40h458v-30l-10-10H759" fill="#FBFB77" filter="url(#a)" stroke="#a80036"/>
+  <path d="M1207 1185.406v10h10l-10-10" fill="#FBFB77" stroke="#a80036"/>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="201" x="765" y="1202.473">
+    Switch has the signed condition
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="437" x="765" y="1217.606">
+    For 3rd party FIDO, it now needs to make sure everything checks out
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M649 1266.938l-10 4 10 4-4-4z"/>
+  <path stroke="#a80036" d="M643 1270.938h346"/>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="296" x="655" y="1250.739">
+    POST /thirdpartyRequests/transactions
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="152" x="695" y="1265.872">
+    /123/authorizations
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M1620.5 1311.203l10 4-10 4 4-4z"/>
+  <path stroke="#a80036" d="M638 1315.203h988.5"/>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="296" x="645" y="1295.004">
+    POST /thirdpartyRequests/transactions
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="152" x="685" y="1310.137">
+    /123/authorizations
+  </text>
+  <path stroke="#a80036" d="M1632.5 1344.336h42M1674.5 1344.336v13M1633.5 1357.336h41"/>
+  <path fill="#A80036" stroke="#a80036" d="M1643.5 1353.336l-10 4 10 4-4-4z"/>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="257" x="1639.5" y="1339.27">
+    Lookup this consent based on consentId
+  </text>
+  <path stroke="#a80036" d="M1632.5 1386.469h42M1674.5 1386.469v13M1633.5 1399.469h41"/>
+  <path fill="#A80036" stroke="#a80036" d="M1643.5 1395.469l-10 4 10 4-4-4z"/>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="359" x="1639.5" y="1381.403">
+    Ensure the sourceAccountId matches what is in Consent
+  </text>
+  <path stroke="#a80036" d="M1632.5 1443.734h42M1674.5 1443.734v13M1633.5 1456.734h41"/>
+  <path fill="#A80036" stroke="#a80036" d="M1643.5 1452.734l-10 4 10 4-4-4z"/>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="249" x="1639.5" y="1423.536">
+    Check that the signed bytes match the
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="261" x="1639.5" y="1438.668">
+    publickey we have stored for the consent
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M649 1497l-10 4 10 4-4-4z"/>
+  <path stroke="#a80036" d="M643 1501h988.5"/>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="288" x="655" y="1480.801">
+    PUT /thirdpartyRequests/transactions
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="152" x="687" y="1495.934">
+    /123/authorizations
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M978 1541.266l10 4-10 4 4-4z"/>
+  <path stroke="#a80036" d="M638 1545.266h346"/>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="288" x="645" y="1525.067">
+    PUT /thirdpartyRequests/transactions
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="152" x="677" y="1540.2">
+    /123/authorizations
+  </text>
+  <path d="M802 1558.266v40h372v-30l-10-10H802" fill="#FBFB77" filter="url(#a)" stroke="#a80036"/>
+  <path d="M1164 1558.266v10h10l-10-10" fill="#FBFB77" stroke="#a80036"/>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="351" x="808" y="1575.332">
+    DFSPA now knows that the user signed this transaction
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="269" x="808" y="1590.465">
+    and can go ahead and initiate the transfer
+  </text>
+  <path fill="#EEE" filter="url(#a)" stroke="#eee" d="M0 1628.098h2005.5v3H0z"/>
+  <path stroke="#000" d="M0 1628.098h2005.5M0 1631.098h2005.5"/>
+  <path fill="#EEE" filter="url(#a)" stroke="#000" stroke-width="2" d="M937.75 1617.531h130v23.133h-130z"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="111" x="943.75" y="1633.598">
+    Transfer Phase
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M649 1667.797l-10 4 10 4-4-4z"/>
+  <path stroke="#a80036" d="M643 1671.797h346"/>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="120" x="655" y="1666.731">
+    POST /transfers
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M1407 1696.93l10 4-10 4 4-4z"/>
+  <path stroke="#a80036" d="M638 1700.93h775"/>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="120" x="645" y="1695.864">
+    POST /transfers
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M649 1726.063l-10 4 10 4-4-4z"/>
+  <path stroke="#a80036" d="M643 1730.063h775"/>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="152" x="655" y="1724.997">
+    PUT /transfers/4321
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M978 1755.195l10 4-10 4 4-4z"/>
+  <path stroke="#a80036" d="M638 1759.195h346"/>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="152" x="645" y="1754.129">
+    PUT /transfers/4321
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M289 1784.328l-10 4 10 4-4-4z"/>
+  <path stroke="#a80036" d="M283 1788.328h354"/>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="336" x="295" y="1783.262">
+    PATCH /thirdpartyRequests/transactions/123
+  </text>
+</svg>

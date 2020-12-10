@@ -1,75 +1,251 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="799px" preserveAspectRatio="none" style="width:1665px;height:799px;" version="1.1" viewBox="0 0 1665 799" width="1665px" zoomAndPan="magnify"><defs><filter height="300%" id="fcsnbykzwo0ng" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="198" x="730.25" y="23.5352">PISPGetTransactionRequest</text><rect fill="#DDDDDD" height="753.7832" style="stroke: #A80036; stroke-width: 1.0;" width="101" x="4" y="34.4883"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="27" x="41" y="47.0566">PISP</text><rect fill="#DDDDDD" height="753.7832" style="stroke: #A80036; stroke-width: 1.0;" width="428.5" x="107" y="34.4883"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="61" x="290.75" y="47.0566">Mojaloop</text><rect fill="#DDDDDD" height="753.7832" style="stroke: #A80036; stroke-width: 1.0;" width="774" x="803.5" y="34.4883"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="46" x="1167.5" y="47.0566">DFSP A</text><rect fill="#DDDDDD" height="753.7832" style="stroke: #A80036; stroke-width: 1.0;" width="75" x="1579.5" y="34.4883"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="44" x="1595" y="47.0566">DFSP B</text><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 5.0,5.0;" x1="54" x2="54" y1="105.7754" y2="733.2949"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 5.0,5.0;" x1="163" x2="163" y1="105.7754" y2="733.2949"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 5.0,5.0;" x1="447.5" x2="447.5" y1="105.7754" y2="733.2949"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 5.0,5.0;" x1="509.5" x2="509.5" y1="105.7754" y2="733.2949"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 5.0,5.0;" x1="840.5" x2="840.5" y1="105.7754" y2="733.2949"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 5.0,5.0;" x1="1231.5" x2="1231.5" y1="105.7754" y2="733.2949"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 5.0,5.0;" x1="1326.5" x2="1326.5" y1="105.7754" y2="733.2949"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 5.0,5.0;" x1="1424.5" x2="1424.5" y1="105.7754" y2="733.2949"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 5.0,5.0;" x1="1525.5" x2="1525.5" y1="105.7754" y2="733.2949"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 5.0,5.0;" x1="1616.5" x2="1616.5" y1="105.7754" y2="733.2949"/><rect fill="#FEFECE" filter="url(#fcsnbykzwo0ng)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="89" x="8" y="70.2871"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="75" x="15" y="90.8223">PISP Server</text><rect fill="#FEFECE" filter="url(#fcsnbykzwo0ng)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="89" x="8" y="732.2949"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="75" x="15" y="752.8301">PISP Server</text><rect fill="#FEFECE" filter="url(#fcsnbykzwo0ng)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="100" x="111" y="70.2871"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="86" x="118" y="90.8223">auth-service</text><rect fill="#FEFECE" filter="url(#fcsnbykzwo0ng)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="100" x="111" y="732.2949"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="86" x="118" y="752.8301">auth-service</text><rect fill="#FEFECE" filter="url(#fcsnbykzwo0ng)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="58" x="416.5" y="70.2871"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="44" x="423.5" y="90.8223">Switch</text><rect fill="#FEFECE" filter="url(#fcsnbykzwo0ng)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="58" x="416.5" y="732.2949"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="44" x="423.5" y="752.8301">Switch</text><rect fill="#FEFECE" filter="url(#fcsnbykzwo0ng)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="39" x="488.5" y="70.2871"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="25" x="495.5" y="90.8223">ALS</text><rect fill="#FEFECE" filter="url(#fcsnbykzwo0ng)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="39" x="488.5" y="732.2949"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="25" x="495.5" y="752.8301">ALS</text><rect fill="#FEFECE" filter="url(#fcsnbykzwo0ng)" height="46.9766" style="stroke: #A80036; stroke-width: 1.5;" width="62" x="807.5" y="53.7988"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="48" x="814.5" y="74.334">DFSP A</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="47" x="815" y="90.8223">(Payer)</text><rect fill="#FEFECE" filter="url(#fcsnbykzwo0ng)" height="46.9766" style="stroke: #A80036; stroke-width: 1.5;" width="62" x="807.5" y="732.2949"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="48" x="814.5" y="752.8301">DFSP A</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="47" x="815" y="769.3184">(Payer)</text><rect fill="#FEFECE" filter="url(#fcsnbykzwo0ng)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="76" x="1191.5" y="70.2871"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="62" x="1198.5" y="90.8223">3p-sa-in</text><rect fill="#FEFECE" filter="url(#fcsnbykzwo0ng)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="76" x="1191.5" y="732.2949"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="62" x="1198.5" y="752.8301">3p-sa-in</text><rect fill="#FEFECE" filter="url(#fcsnbykzwo0ng)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="86" x="1281.5" y="70.2871"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="72" x="1288.5" y="90.8223">3p-sa-out</text><rect fill="#FEFECE" filter="url(#fcsnbykzwo0ng)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="86" x="1281.5" y="732.2949"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="72" x="1288.5" y="752.8301">3p-sa-out</text><rect fill="#FEFECE" filter="url(#fcsnbykzwo0ng)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="82" x="1381.5" y="70.2871"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="68" x="1388.5" y="90.8223">sdk-sa-in</text><rect fill="#FEFECE" filter="url(#fcsnbykzwo0ng)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="82" x="1381.5" y="732.2949"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="68" x="1388.5" y="752.8301">sdk-sa-in</text><rect fill="#FEFECE" filter="url(#fcsnbykzwo0ng)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="92" x="1477.5" y="70.2871"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="78" x="1484.5" y="90.8223">sdk-sa-out</text><rect fill="#FEFECE" filter="url(#fcsnbykzwo0ng)" height="30.4883" style="stroke: #A80036; stroke-width: 1.5;" width="92" x="1477.5" y="732.2949"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="78" x="1484.5" y="752.8301">sdk-sa-out</text><rect fill="#FEFECE" filter="url(#fcsnbykzwo0ng)" height="46.9766" style="stroke: #A80036; stroke-width: 1.5;" width="63" x="1583.5" y="53.7988"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="46" x="1592" y="74.334">DFSP B</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="49" x="1590.5" y="90.8223">(Payee)</text><rect fill="#FEFECE" filter="url(#fcsnbykzwo0ng)" height="46.9766" style="stroke: #A80036; stroke-width: 1.5;" width="63" x="1583.5" y="732.2949"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="46" x="1592" y="752.8301">DFSP B</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="49" x="1590.5" y="769.3184">(Payee)</text><path d="M203,120.7754 L203,160.7754 L688,160.7754 L688,130.7754 L678,120.7754 L203,120.7754 " fill="#FBFB77" filter="url(#fcsnbykzwo0ng)" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M678,120.7754 L678,130.7754 L688,130.7754 L678,120.7754 " fill="#FBFB77" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="436" x="209" y="138.3438">Assuming a previously created thirdparty transaction request with id:</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="24" x="649" y="138.02">123</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="0" x="213" y="153.6543"/><rect fill="#FFFFFF" filter="url(#fcsnbykzwo0ng)" height="53" style="stroke: #A80036; stroke-width: 1.0;" width="328" x="59" y="175.3965"/><text fill="#000000" font-family="monospace" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="320" x="63" y="191.4634">GET /thirdpartyRequests/transactions/123</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="160" x="63" y="206.5962">FSPIOP-Source: pispa</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="200" x="63" y="221.729">FSPIOP-Destination: dfspa</text><polygon fill="#A80036" points="435.5,251.1055,445.5,255.1055,435.5,259.1055,439.5,255.1055" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="54.5" x2="441.5" y1="255.1055" y2="255.1055"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="45" x="61.5" y="250.3633">GTR-1</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="320" x="110.5" y="249.9507">GET /thirdpartyRequests/transactions/123</text><polygon fill="#A80036" points="65.5,280.416,55.5,284.416,65.5,288.416,61.5,284.416" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 2.0,2.0;" x1="59.5" x2="446.5" y1="284.416" y2="284.416"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="45" x="71.5" y="279.6738">GTR-2</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="96" x="120.5" y="279.2612">202 Accepted</text><polygon fill="#A80036" points="828.5,309.7266,838.5,313.7266,828.5,317.7266,832.5,313.7266" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="447.5" x2="834.5" y1="313.7266" y2="313.7266"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="45" x="454.5" y="308.9844">GTR-3</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="320" x="503.5" y="308.5718">GET /thirdpartyRequests/transactions/123</text><polygon fill="#A80036" points="458.5,339.0371,448.5,343.0371,458.5,347.0371,454.5,343.0371" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 2.0,2.0;" x1="452.5" x2="839.5" y1="343.0371" y2="343.0371"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="45" x="464.5" y="338.2949">GTR-4</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="96" x="513.5" y="337.8823">202 Accepted</text><line style="stroke: #A80036; stroke-width: 1.0;" x1="840.5" x2="882.5" y1="387.6582" y2="387.6582"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="882.5" x2="882.5" y1="387.6582" y2="400.6582"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="841.5" x2="882.5" y1="400.6582" y2="400.6582"/><polygon fill="#A80036" points="851.5,396.6582,841.5,400.6582,851.5,404.6582,847.5,400.6582" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="45" x="847.5" y="375.2607">GTR-5</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="189" x="896.5" y="367.6055">DFSP looks up already created</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="188" x="896.5" y="382.916">thirdparty transaction request</text><line style="stroke: #A80036; stroke-width: 1.0;" x1="840.5" x2="882.5" y1="460.4121" y2="460.4121"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="882.5" x2="882.5" y1="460.4121" y2="473.4121"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="841.5" x2="882.5" y1="473.4121" y2="473.4121"/><polygon fill="#A80036" points="851.5,469.4121,841.5,473.4121,851.5,477.4121,847.5,473.4121" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="45" x="847.5" y="440.4482">GTR-6</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="272" x="896.5" y="425.2266">DFSP ensures that the FSPIOP-Source (pisp)</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="229" x="896.5" y="440.5371">is the same as the original sender of</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="328" x="896.5" y="455.3462">POST /thirdpartyRequests/transactions/123</text><rect fill="#FFFFFF" filter="url(#fcsnbykzwo0ng)" height="114" style="stroke: #A80036; stroke-width: 1.0;" width="328" x="507" y="486.4121"/><text fill="#000000" font-family="monospace" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="320" x="511" y="502.479">PUT /thirdpartyRequests/transactions/123</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="160" x="511" y="517.6118">FSPIOP-Source: dfspa</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="200" x="511" y="532.7446">FSPIOP-Destination: pispa</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="4" x="511" y="548.3789">{</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="147" x="519" y="563.6895">"transactionId": "9876",</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="246" x="519" y="579">"transactionRequestState": "ACCEPTED"</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="4" x="511" y="594.3105">}</text><polygon fill="#A80036" points="458.5,623.3633,448.5,627.3633,458.5,631.3633,454.5,627.3633" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="452.5" x2="839.5" y1="627.3633" y2="627.3633"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="45" x="464.5" y="622.6211">GTR-7</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="320" x="513.5" y="622.2085">PUT /thirdpartyRequests/transactions/123</text><polygon fill="#A80036" points="828.5,652.6738,838.5,656.6738,828.5,660.6738,832.5,656.6738" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 2.0,2.0;" x1="447.5" x2="834.5" y1="656.6738" y2="656.6738"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="45" x="454.5" y="651.9316">GTR-8</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="48" x="503.5" y="651.519">200 OK</text><polygon fill="#A80036" points="65.5,681.9844,55.5,685.9844,65.5,689.9844,61.5,685.9844" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="59.5" x2="446.5" y1="685.9844" y2="685.9844"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="45" x="71.5" y="681.2422">GTR-9</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="320" x="120.5" y="680.8296">PUT /thirdpartyRequests/transactions/123</text><polygon fill="#A80036" points="435.5,711.2949,445.5,715.2949,435.5,719.2949,439.5,715.2949" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 2.0,2.0;" x1="54.5" x2="441.5" y1="715.2949" y2="715.2949"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="54" x="61.5" y="710.5527">GTR-10</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="48" x="119.5" y="710.1401">200 OK</text><!--
-@startuml
-
-title PISPGetTransactionRequest
-
-box "PISP"
-participant "PISP Server" as D1
-end box
-box "Mojaloop"
-    participant "auth-service" as AUTHS
-    participant Switch as S
-    participant "ALS" as A
-end box
-box "DFSP A"
-    participant "DFSP A\n(Payer)" as D2
-    participant "3p-sa-in" as D2_3psa_in
-    participant "3p-sa-out" as D2_3psa_out
-    participant "sdk-sa-in" as D2_sdksa_in
-    participant "sdk-sa-out" as D2_sdksa_out
-end box
-box "DFSP B"
-    participant "DFSP B\n(Payee)" as D3
-end box
-autonumber 1 "<b>GTR-#</b>"
-
-note over S
-  Assuming a previously created thirdparty transaction request with id: ""123""
-
-end note
-
-
-
-rnote right of D1 #Light
-**""GET /thirdpartyRequests/transactions/123""**
-""FSPIOP-Source: pispa""
-""FSPIOP-Destination: dfspa""
-end note
-
-D1 -> S: ""GET /thirdpartyRequests/transactions/123""
-S - -> D1: ""202 Accepted""
-
-S -> D2: ""GET /thirdpartyRequests/transactions/123""
-D2 - -> S: ""202 Accepted""
-
-D2 -> D2: DFSP looks up already created \nthirdparty transaction request
-D2 -> D2: DFSP ensures that the FSPIOP-Source (pisp)\nis the same as the original sender of \n""POST /thirdpartyRequests/transactions/123""
-
-rnote left of D2 #Light
-**""PUT /thirdpartyRequests/transactions/123""**
-""FSPIOP-Source: dfspa""
-""FSPIOP-Destination: pispa""
-{
-  "transactionId": "9876",
-  "transactionRequestState": "ACCEPTED"
-}
-end note
-D2 -> S: ""PUT /thirdpartyRequests/transactions/123""
-S - -> D2: ""200 OK""
-
-S -> D1: ""PUT /thirdpartyRequests/transactions/123""
-D1 - -> S: ""200 OK""
-
-@enduml
-
-PlantUML version 1.2019.06(Sat May 25 01:10:25 PHT 2019)
-(GPL source distribution)
-Java Runtime: Java(TM) SE Runtime Environment
-JVM: Java HotSpot(TM) 64-Bit Server VM
-Java Version: 1.8.0_171-b11
-Operating System: Mac OS X
-OS Version: 10.13.6
-Default Encoding: UTF-8
-Language: en
-Country: AU
---></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" height="796" preserveAspectRatio="none" style="width:1639px;height:796px" width="1639">
+  <defs>
+    <filter height="300%" id="a" width="300%" x="-1" y="-1">
+      <feGaussianBlur result="blurOut" stdDeviation="2"/>
+      <feColorMatrix in="blurOut" result="blurOut2" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/>
+      <feOffset dx="4" dy="4" in="blurOut2" result="blurOut3"/>
+      <feBlend in="SourceGraphic" in2="blurOut3"/>
+    </filter>
+  </defs>
+  <text font-family="sans-serif" font-size="18" lengthAdjust="spacingAndGlyphs" textLength="245" x="694.5" y="28.708">
+    PISPGetTransactionRequest
+  </text>
+  <path fill="#DDD" stroke="#a80036" d="M1 40.953h104v749.641H1z"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="33" x="36.5" y="53.02">
+    PISP
+  </text>
+  <path fill="#DDD" stroke="#a80036" d="M107 40.953h425.5v749.641H107z"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="67" x="286.25" y="53.02">
+    Mojaloop
+  </text>
+  <path fill="#DDD" stroke="#a80036" d="M797 40.953h756v749.641H797z"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="54" x="1148" y="53.02">
+    DFSP A
+  </text>
+  <path fill="#DDD" stroke="#a80036" d="M1555 40.953h78v749.641h-78z"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="54" x="1567" y="53.02">
+    DFSP B
+  </text>
+  <path stroke="#a80036" stroke-dasharray="5,5" d="M53 111.68V736M162 111.68V736M443.5 111.68V736M506.5 111.68V736M835 111.68V736M1224 111.68V736M1313 111.68V736M1406 111.68V736M1503 111.68V736M1594 111.68V736"/>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M5 76.383h92v30.297H5z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="78" x="12" y="96.378">
+    PISP Server
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M5 735h92v30.297H5z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="78" x="12" y="754.995">
+    PISP Server
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M111 76.383h99v30.297h-99z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="85" x="118" y="96.378">
+    auth-service
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M111 735h99v30.297h-99z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="85" x="118" y="754.995">
+    auth-service
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M412.5 76.383h59v30.297h-59z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="45" x="419.5" y="96.378">
+    Switch
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M412.5 735h59v30.297h-59z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="45" x="419.5" y="754.995">
+    Switch
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M485.5 76.383h39v30.297h-39z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="25" x="492.5" y="96.378">
+    ALS
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M485.5 735h39v30.297h-39z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="25" x="492.5" y="754.995">
+    ALS
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M801 60.086h64v46.594h-64z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="50" x="808" y="80.081">
+    DFSP A
+  </text>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="48" x="809" y="96.378">
+    (Payer)
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M801 735h64v46.594h-64z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="50" x="808" y="754.995">
+    DFSP A
+  </text>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="48" x="809" y="771.292">
+    (Payer)
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M1187 76.383h70v30.297h-70z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="56" x="1194" y="96.378">
+    3p-sa-in
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M1187 735h70v30.297h-70z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="56" x="1194" y="754.995">
+    3p-sa-in
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M1271 76.383h81v30.297h-81z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="67" x="1278" y="96.378">
+    3p-sa-out
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M1271 735h81v30.297h-81z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="67" x="1278" y="754.995">
+    3p-sa-out
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M1366 76.383h77v30.297h-77z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="63" x="1373" y="96.378">
+    sdk-sa-in
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M1366 735h77v30.297h-77z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="63" x="1373" y="754.995">
+    sdk-sa-in
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M1457 76.383h88v30.297h-88z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="74" x="1464" y="96.378">
+    sdk-sa-out
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M1457 735h88v30.297h-88z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="74" x="1464" y="754.995">
+    sdk-sa-out
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M1559 60.086h66v46.594h-66z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="51" x="1566.5" y="80.081">
+    DFSP B
+  </text>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="52" x="1566" y="96.378">
+    (Payee)
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M1559 735h66v46.594h-66z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="51" x="1566.5" y="754.995">
+    DFSP B
+  </text>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="52" x="1566" y="771.292">
+    (Payee)
+  </text>
+  <path d="M198 126.68v40h488v-30l-10-10H198" fill="#FBFB77" filter="url(#a)" stroke="#a80036"/>
+  <path d="M676 126.68v10h10l-10-10" fill="#FBFB77" stroke="#a80036"/>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="439" x="204" y="143.747">
+    Assuming a previously created thirdparty transaction request with id:
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="24" x="647" y="143.747">
+    123
+  </text>
+  <path fill="#FFF" filter="url(#a)" stroke="#a80036" d="M58 180.945h328v53H58z"/>
+  <text font-family="monospace" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="320" x="62" y="197.012">
+    GET /thirdpartyRequests/transactions/123
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="160" x="62" y="212.145">
+    FSPIOP-Source: pispa
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="200" x="62" y="227.278">
+    FSPIOP-Destination: dfspa
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M432 256.477l10 4-10 4 4-4z"/>
+  <path stroke="#a80036" d="M53 260.477h385"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="43" x="60" y="255.411">
+    GTR-1
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="320" x="107" y="255.411">
+    GET /thirdpartyRequests/transactions/123
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M64 285.61l-10 4 10 4-4-4z"/>
+  <path stroke="#a80036" stroke-dasharray="2,2" d="M58 289.609h385"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="43" x="70" y="284.543">
+    GTR-2
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="96" x="117" y="284.543">
+    202 Accepted
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M823 314.742l10 4-10 4 4-4z"/>
+  <path stroke="#a80036" d="M444 318.742h385"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="43" x="451" y="313.676">
+    GTR-3
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="320" x="498" y="313.676">
+    GET /thirdpartyRequests/transactions/123
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M455 343.875l-10 4 10 4-4-4z"/>
+  <path stroke="#a80036" stroke-dasharray="2,2" d="M449 347.875h385"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="43" x="461" y="342.809">
+    GTR-4
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="96" x="508" y="342.809">
+    202 Accepted
+  </text>
+  <path stroke="#a80036" d="M835 392.141h42M877 392.141v13M836 405.141h41"/>
+  <path fill="#A80036" stroke="#a80036" d="M846 401.14l-10 4 10 4-4-4z"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="43" x="842" y="379.508">
+    GTR-5
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="195" x="889" y="371.942">
+    DFSP looks up already created
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="191" x="889" y="387.075">
+    thirdparty transaction request
+  </text>
+  <path stroke="#a80036" d="M835 464.539h42M877 464.539v13M836 477.539h41"/>
+  <path fill="#A80036" stroke="#a80036" d="M846 473.54l-10 4 10 4-4-4z"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="43" x="842" y="444.34">
+    GTR-6
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="283" x="889" y="429.207">
+    DFSP ensures that the FSPIOP-Source (pisp)
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="233" x="889" y="444.34">
+    is the same as the original sender of
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="328" x="889" y="459.473">
+    POST /thirdpartyRequests/transactions/123
+  </text>
+  <path fill="#FFF" filter="url(#a)" stroke="#a80036" d="M502 490.539h328v113H502z"/>
+  <text font-family="monospace" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="320" x="506" y="506.606">
+    PUT /thirdpartyRequests/transactions/123
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="160" x="506" y="521.739">
+    FSPIOP-Source: dfspa
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="200" x="506" y="536.872">
+    FSPIOP-Destination: pispa
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="506" y="552.004">
+    {
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="147" x="514" y="567.137">
+    &quot;transactionId&quot;: &quot;9876&quot;,
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="255" x="514" y="582.27">
+    &quot;transactionRequestState&quot;: &quot;ACCEPTED&quot;
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="506" y="597.403">
+    }
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M455 626.602l-10 4 10 4-4-4z"/>
+  <path stroke="#a80036" d="M449 630.602h385"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="43" x="461" y="625.536">
+    GTR-7
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="320" x="508" y="625.536">
+    PUT /thirdpartyRequests/transactions/123
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M823 655.734l10 4-10 4 4-4z"/>
+  <path stroke="#a80036" stroke-dasharray="2,2" d="M444 659.734h385"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="43" x="451" y="654.668">
+    GTR-8
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="48" x="498" y="654.668">
+    200 OK
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M64 684.867l-10 4 10 4-4-4z"/>
+  <path stroke="#a80036" d="M58 688.867h385"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="43" x="70" y="683.801">
+    GTR-9
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="320" x="117" y="683.801">
+    PUT /thirdpartyRequests/transactions/123
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M432 714l10 4-10 4 4-4z"/>
+  <path stroke="#a80036" stroke-dasharray="2,2" d="M53 718h385"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="52" x="60" y="712.934">
+    GTR-10
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="48" x="116" y="712.934">
+    200 OK
+  </text>
+</svg>

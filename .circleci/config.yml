@@ -166,19 +166,23 @@ jobs:
           path: ./test/results
 
   test-docs:
-    executor: default-docker
+    executor: default-machine
     steps:
       - checkout
       - run:
-          name: Install general dependencies
-          command: *defaults_Dependencies
-      - restore_cache:
-          keys:
-            - dependency-cache-{{ checksum "package-lock.json" }}
+          name: Set up NVM
+          command: |
+            echo ${NVM_DIR}
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            nvm install v10.15.3
+            nvm alias default v10.15.3
+            node --version
+            npm ci
       - run:
           name: Check if plantuml has been updated correctly
           command: |
             set +o pipefail
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             npm run build:plantuml:all
             FILE_COUNT=$(git diff --cached --name-only | grep .svg | wc -l)
             if [ ${FILE_COUNT} -ne "0" ]; then

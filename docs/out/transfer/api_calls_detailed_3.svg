@@ -1,0 +1,310 @@
+<svg xmlns="http://www.w3.org/2000/svg" height="1400" preserveAspectRatio="none" style="width:918px;height:1400px" width="918">
+  <defs>
+    <filter height="300%" id="a" width="300%" x="-1" y="-1">
+      <feGaussianBlur result="blurOut" stdDeviation="2"/>
+      <feColorMatrix in="blurOut" result="blurOut2" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/>
+      <feOffset dx="4" dy="4" in="blurOut2" result="blurOut3"/>
+      <feBlend in="SourceGraphic" in2="blurOut3"/>
+    </filter>
+  </defs>
+  <text font-family="sans-serif" font-size="18" lengthAdjust="spacingAndGlyphs" textLength="216" x="347.75" y="28.708">
+    PISPTransferDetailedAPI
+  </text>
+  <path fill="#DDD" stroke="#a80036" d="M1 40.953h104v1354.023H1z"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="33" x="36.5" y="53.02">
+    PISP
+  </text>
+  <path fill="#DDD" stroke="#a80036" d="M377.5 40.953h239v1354.023h-239z"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="67" x="463.5" y="53.02">
+    Mojaloop
+  </text>
+  <path fill="#DDD" stroke="#a80036" d="M618.5 40.953h76v1354.023h-76z"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="54" x="629.5" y="53.02">
+    DFSP A
+  </text>
+  <path fill="#DDD" stroke="#a80036" d="M696.5 40.953h78v1354.023h-78z"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="54" x="708.5" y="53.02">
+    DFSP B
+  </text>
+  <path stroke="#a80036" stroke-dasharray="5,5" d="M53 139.547v1152.836M412.5 139.547v1152.836M475.5 139.547v1152.836M559.5 139.547v1152.836M656.5 139.547v1152.836M735.5 139.547v1152.836M843.5 139.547v1152.836"/>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M5 104.25h92v30.297H5z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="78" x="12" y="124.245">
+    PISP Server
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M5 1291.383h92v30.297H5z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="78" x="12" y="1311.378">
+    PISP Server
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M381.5 104.25h59v30.297h-59z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="45" x="388.5" y="124.245">
+    Switch
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M381.5 1291.383h59v30.297h-59z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="45" x="388.5" y="1311.378">
+    Switch
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M454.5 104.25h39v30.297h-39z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="25" x="461.5" y="124.245">
+    ALS
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M454.5 1291.383h39v30.297h-39z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="25" x="461.5" y="1311.378">
+    ALS
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M507.5 104.25h101v30.297h-101z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="87" x="514.5" y="124.245">
+    Auth-Service
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M507.5 1291.383h101v30.297h-101z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="87" x="514.5" y="1311.378">
+    Auth-Service
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M622.5 87.953h64v46.594h-64z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="50" x="629.5" y="107.948">
+    DFSP A
+  </text>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="48" x="630.5" y="124.245">
+    (Payer)
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M622.5 1291.383h64v46.594h-64z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="50" x="629.5" y="1311.378">
+    DFSP A
+  </text>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="48" x="630.5" y="1327.675">
+    (Payer)
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M700.5 87.953h66v46.594h-66z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="51" x="708" y="107.948">
+    DFSP B
+  </text>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="52" x="707.5" y="124.245">
+    (Payee)
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M700.5 1291.383h66v46.594h-66z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="51" x="708" y="1311.378">
+    DFSP B
+  </text>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="52" x="707.5" y="1327.675">
+    (Payee)
+  </text>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="60" x="810.5" y="119.948">
+    Bhavesh
+  </text>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="120" x="780.5" y="136.245">
+    (+44 1234 5678)
+  </text>
+  <circle cx="843.5" cy="49.953" fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="2" r="8"/>
+  <path d="M843.5 57.953v27m-13-19h26m-13 19l-13 15m13-15l13 15" fill="none" filter="url(#a)" stroke="#a80036" stroke-width="2"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="60" x="810.5" y="1304.378">
+    Bhavesh
+  </text>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="120" x="780.5" y="1320.675">
+    (+44 1234 5678)
+  </text>
+  <circle cx="843.5" cy="1333.977" fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="2" r="8"/>
+  <path d="M843.5 1341.977v27m-13-19h26m-13 19l-13 15m13-15l13 15" fill="none" filter="url(#a)" stroke="#a80036" stroke-width="2"/>
+  <path fill="#EEE" filter="url(#a)" stroke="#eee" d="M0 170.113h911.5v3H0z"/>
+  <path stroke="#000" d="M0 170.113h911.5M0 173.113h911.5"/>
+  <path fill="#EEE" filter="url(#a)" stroke="#000" stroke-width="2" d="M390.75 159.547h130v23.133h-130z"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="111" x="396.75" y="175.614">
+    Transfer Phase
+  </text>
+  <path fill="#FFF" filter="url(#a)" stroke="#a80036" d="M518 197.68h276v250H518z"/>
+  <text font-family="monospace" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="120" x="522" y="213.747">
+    POST /transfers
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="160" x="522" y="228.879">
+    FSPIOP-Source: dfspa
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="200" x="522" y="244.012">
+    FSPIOP-Destination: dfspb
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="522" y="259.145">
+    {
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="117" x="530" y="274.278">
+    &quot;transferId&quot;: &quot;321&quot;,
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="104" x="530" y="289.411">
+    &quot;quoteId&quot;: &quot;456&quot;,
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="125" x="530" y="304.543">
+    &quot;payerFsp&quot;: &quot;dfspa&quot;,
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="128" x="530" y="319.676">
+    &quot;payeeFsp&quot;: &quot;dfspb&quot;,
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="76" x="530" y="334.809">
+    &quot;amount&quot;: {
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="106" x="538" y="349.942">
+    &quot;amount&quot;: &quot;100&quot;,
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="112" x="538" y="365.075">
+    &quot;currency&quot;: &quot;USD&quot;
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="12" x="530" y="380.207">
+    },
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="260" x="530" y="395.34">
+    &quot;expiration&quot;: &quot;2020-06-15T13:00:00.000&quot;,
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="101" x="530" y="410.473">
+    &quot;ilpPacket&quot;: &quot;...&quot;,
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="102" x="530" y="425.606">
+    &quot;condition&quot;: &quot;...&quot;,
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="522" y="440.739">
+    }
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M424 469.938l-10 4 10 4-4-4z"/>
+  <path stroke="#a80036" d="M418 473.938h237.5"/>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="120" x="430" y="468.872">
+    POST /transfers
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M644.5 499.07l10 4-10 4 4-4z"/>
+  <path stroke="#a80036" stroke-dasharray="2,2" d="M413 503.07h237.5"/>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="96" x="420" y="498.004">
+    202 Accepted
+  </text>
+  <path fill="#FFF" filter="url(#a)" stroke="#a80036" d="M275 516.07h276v250H275z"/>
+  <text font-family="monospace" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="120" x="279" y="532.137">
+    POST /transfers
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="160" x="279" y="547.27">
+    FSPIOP-Source: dfspa
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="200" x="279" y="562.403">
+    FSPIOP-Destination: dfspb
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="279" y="577.536">
+    {
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="117" x="287" y="592.668">
+    &quot;transferId&quot;: &quot;321&quot;,
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="104" x="287" y="607.801">
+    &quot;quoteId&quot;: &quot;456&quot;,
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="125" x="287" y="622.934">
+    &quot;payerFsp&quot;: &quot;dfspa&quot;,
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="128" x="287" y="638.067">
+    &quot;payeeFsp&quot;: &quot;dfspb&quot;,
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="76" x="287" y="653.2">
+    &quot;amount&quot;: {
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="106" x="295" y="668.332">
+    &quot;amount&quot;: &quot;100&quot;,
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="112" x="295" y="683.465">
+    &quot;currency&quot;: &quot;USD&quot;
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="12" x="287" y="698.598">
+    },
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="260" x="287" y="713.731">
+    &quot;expiration&quot;: &quot;2020-06-15T13:00:00.000&quot;,
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="101" x="287" y="728.864">
+    &quot;ilpPacket&quot;: &quot;...&quot;,
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="102" x="287" y="743.997">
+    &quot;condition&quot;: &quot;...&quot;,
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="279" y="759.129">
+    }
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M723.5 788.328l10 4-10 4 4-4z"/>
+  <path stroke="#a80036" d="M413 792.328h316.5"/>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="120" x="420" y="787.262">
+    POST /transfers
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M424 817.46l-10 4 10 4-4-4z"/>
+  <path stroke="#a80036" stroke-dasharray="2,2" d="M418 821.461h316.5"/>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="96" x="430" y="816.395">
+    202 Accepted
+  </text>
+  <path fill="#FFF" filter="url(#a)" stroke="#a80036" d="M377 834.461h353v129H377z"/>
+  <text font-family="monospace" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="144" x="381" y="850.528">
+    PUT /transfers/321
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="160" x="381" y="865.661">
+    FSPIOP-Source: dfspb
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="200" x="381" y="880.793">
+    FSPIOP-Destination: dfspa
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="381" y="895.926">
+    {
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="103" x="389" y="911.059">
+    &quot;fulfilment&quot;: &quot;...&quot;,
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="337" x="389" y="926.192">
+    &quot;completedTimestamp&quot;: &quot;2020-06-15T12:01:00.000&quot;,
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="189" x="389" y="941.325">
+    &quot;transferState&quot;: &quot;COMMITTED&quot;
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="381" y="956.457">
+    }
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M424 985.656l-10 4 10 4-4-4z"/>
+  <path stroke="#a80036" d="M418 989.656h316.5"/>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="144" x="430" y="984.59">
+    PUT /transfers/321
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M723.5 1014.79l10 4-10 4 4-4z"/>
+  <path stroke="#a80036" stroke-dasharray="2,2" d="M413 1018.789h316.5"/>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="48" x="420" y="1013.723">
+    200 OK
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M644.5 1043.922l10 4-10 4 4-4z"/>
+  <path stroke="#a80036" d="M413 1047.922h237.5"/>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="144" x="420" y="1042.856">
+    PUT /transfers/321
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M424 1073.055l-10 4 10 4-4-4z"/>
+  <path stroke="#a80036" stroke-dasharray="2,2" d="M418 1077.055h237.5"/>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="48" x="430" y="1071.989">
+    200 OK
+  </text>
+  <path fill="#FFF" filter="url(#a)" stroke="#a80036" d="M241 1090.055h344v129H241z"/>
+  <text font-family="monospace" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="336" x="245" y="1106.122">
+    PATCH /thirdpartyRequests/transactions/123
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="168" x="245" y="1121.254">
+    FSPIOP-Source: switch
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="200" x="245" y="1136.387">
+    FSPIOP-Destination: pispa
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="245" y="1151.52">
+    {
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="139" x="253" y="1166.653">
+    &quot;transactionId&quot;: &quot;987&quot;,
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="259" x="253" y="1181.786">
+    &quot;transactionRequestState&quot;: &quot;ACCEPTED&quot;,
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="211" x="253" y="1196.918">
+    &quot;transactionState&quot;: &quot;COMMITTED&quot;
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="245" y="1212.051">
+    }
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M64 1241.25l-10 4 10 4-4-4z"/>
+  <path stroke="#a80036" d="M58 1245.25h354"/>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="336" x="70" y="1240.184">
+    PATCH /thirdpartyRequests/transactions/123
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M401 1270.383l10 4-10 4 4-4z"/>
+  <path stroke="#a80036" stroke-dasharray="2,2" d="M53 1274.383h354"/>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="48" x="60" y="1269.317">
+    200 OK
+  </text>
+</svg>

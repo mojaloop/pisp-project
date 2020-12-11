@@ -2,7 +2,21 @@
 
 title PISPTransferDetailedAPI
 
-!include participants_api.iuml
+box "PISP"
+participant "PISP Server" as D1
+end box
+box "Mojaloop"
+    participant Switch as S
+    participant "ALS" as A
+    participant "Auth-Service" as AUTHS
+end box
+box "DFSP A"
+    participant "DFSP A\n(Payer)" as D2
+end box
+box "DFSP B"
+    participant "DFSP B\n(Payee)" as D3
+end box
+actor "Bhavesh\n(+44 1234 5678)" as CB
 
 
 == Transfer Phase ==
@@ -61,17 +75,6 @@ rnote left of D3 #Light
 end note
 D3 -> S: ""PUT /transfers/321""
 S --> D3: ""200 OK""
-
-rnote over S #Light
-**""PUT /transfers/321""**
-""FSPIOP-Source: dfspb""
-""FSPIOP-Destination: dfspa""
-{
-  "fulfilment": "...",
-  "completedTimestamp": "2020-06-15T12:01:00.000",
-  "transferState": "COMMITTED"
-}
-end note
 S -> D2: ""PUT /transfers/321""
 D2 --> S: ""200 OK""
 

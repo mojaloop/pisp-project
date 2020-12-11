@@ -50,7 +50,7 @@ Services are composed in the testing layout as:
     - dfspb-redis: redisDB
   > configuration folder: [dfsp_b](./dfsp_b)
 
-![components](./components_layout.png)
+![components](./components_layout.svg)
 
 ## Prerequisites
 - `docker` - `v18.06.0` or higher

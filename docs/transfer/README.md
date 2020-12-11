@@ -4,20 +4,20 @@
 
 Edit the transfer flow `.puml` files here: [PISP Transfer Api Calls Detailed](./api_calls_detailed.puml)
 
-![PISPTransferSimpleAPI](../out/transfer/api_calls_simple.png)
+![PISPTransferSimpleAPI](../out/transfer/api_calls_simple.svg)
 > Puml source: [`./transfer/api_calls_simple.puml`](./transfer/api_calls_simple.puml)
 
 For a more detailed breakdown of the api calls, Refer to the detailed API flows:
- - [Discovery](../out/transfer/api_calls_detailed_1.png)
- - [Agreement](../out/transfer/api_calls_detailed_2.png)
- - [Transfer](../out/transfer/api_calls_detailed_3.png)
+ - [Discovery](../out/transfer/api_calls_detailed_1.svg)
+ - [Agreement](../out/transfer/api_calls_detailed_2.svg)
+ - [Transfer](../out/transfer/api_calls_detailed_3.svg)
 
 
 ### Request TransactionRequest Status
 
 A PISP can issue a `GET /thirdpartyRequests/{id}/transactions` to find the status of a transaction request.
 
-![PISPTransferSimpleAPI](../out/transfer/get_transaction_request.png)
+![PISPTransferSimpleAPI](../out/transfer/get_transaction_request.svg)
 
 1. PISP issues a `GET /thirdpartyRequests/transactions/{id}`
 1. Switch validates request and responds with `202 Accepted`

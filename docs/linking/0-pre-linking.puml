@@ -18,20 +18,19 @@ autonumber 1 "<b>PRE-#</b>"
 activate App
 App -> PISP ++: What DFSPs are available to link with?
 
-note over PISP, Switch
-  TODO: What is the right URL path for this?
-end note
 
-PISP -> Switch ++: ""GET /participants""\n""FSPIOP-Source: pispa""\n""FSPIOP-Destination: switch""
+PISP -> Switch ++: ""GET /services/THIRD_PARTY_DFSP""\n""FSPIOP-Source: pispa""\n""FSPIOP-Destination: switch""
 Switch --> PISP: ""202 Accepted""
 deactivate PISP
 
-Switch -> PISP ++: ""PUT /participants""\n""FSPIOP-Source: switch""\n""FSPIOP-Destination: pispa""\n\
- ""[""\n\
-  ""  { DFSP A }, { DFSP B }, ..."" \n\
- ""]""
+Switch -> PISP ++: ""PUT /services/THIRD_PARTY_DFSP""\n""FSPIOP-Source: switch""\n""FSPIOP-Destination: pispa""\n\
+ ""{""\n\
+  ""  "serviceProviders": ["" \n\
+  ""    "dfspa", "dfspb""" \n\
+  ""  ]"" \n\
+ ""}""
 PISP --> Switch: ""200 OK""
 
-PISP --> App --: We have DFSP A, B, and C.\n(and metadata on each)
+PISP --> App --: We have dfspa and dfspb\n
 
 @enduml

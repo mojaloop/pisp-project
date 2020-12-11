@@ -26,15 +26,14 @@ PISP -> Switch ++: ""POST /consentRequests""\n\
   ""  FSIOP-Source: pispa""\n\
   ""  FSIOP-Destination: dfspa""\n\
 ""{""\n\
-  ""  id: "456",""\n\
-  ""  initiatorId: "pispa",""\n\
-  ""  authChannels: [ "Web", "OTP" ],""\n\
+  ""  consentRequestId: "456",""\n\
   ""  scopes: [ ""\n\
   ""    { **accountId: "dfsp.username.1234", // Required for OTP!**""\n\
   ""      actions: [ "accounts.transfer", "accounts.getBalance" ] },""\n\
   ""    { accountId: "dfsp.username.5678",""\n\
   ""      actions: [ "accounts.transfer", "accounts.getBalance" ] },""\n\
   ""  ],""\n\
+  ""  authChannels: [ "Web", "OTP" ],""\n\
   ""  callbackUri: "pisp-app://callback..."""\n\
   ""}""
 Switch --> PISP: ""202 Accepted""
@@ -44,15 +43,14 @@ Switch -> DFSP ++:  ""POST /consentRequests""\n\
   ""  FSIOP-Source: pispa""\n\
   ""  FSIOP-Destination: dfspa""\n\
 ""{""\n\
-  ""  id: "456",""\n\
-  ""  initiatorId: "pispa",""\n\
-  ""  authChannels: [ "Web", "OTP" ],""\n\
+  ""  consentRequestId: "456",""\n\
   ""  scopes: [ ""\n\
-  ""    { accountId: "dfsp.username.1234",""\n\
+  ""    { **accountId: "dfsp.username.1234", // Required for OTP!**""\n\
   ""      actions: [ "accounts.transfer", "accounts.getBalance" ] },""\n\
   ""    { accountId: "dfsp.username.5678",""\n\
   ""      actions: [ "accounts.transfer", "accounts.getBalance" ] },""\n\
   ""  ],""\n\
+  ""  authChannels: [ "Web", "OTP" ],""\n\
   ""  callbackUri: "pisp-app://callback..."""\n\
   ""}""
 DFSP --> Switch: ""202 Accepted""
@@ -62,7 +60,6 @@ DFSP -> Switch ++: ""PUT /consentRequests/456""\n\
   ""  FSIOP-Source: dfspa""\n\
   ""  FSIOP-Destination: pispa""\n\
 "" {""\n\
-  ""  initiatorId: "pispa",""\n\
   ""  **authChannels: [ "OTP" ], // This is updated with the channel in use**""\n\
   ""  scopes: [ ""\n\
   ""    { accountId: "dfsp.username.1234",""\n\
@@ -71,7 +68,7 @@ DFSP -> Switch ++: ""PUT /consentRequests/456""\n\
   ""      actions: [ "accounts.transfer", "accounts.getBalance" ] },""\n\
   ""  ],""\n\
   ""  callbackUri: "pisp-app://callback..."""\n\
-  ""  **authUri: null // This is new, but left blank**""\n\
+  ""  **//note: no authUri for OTP flow**""\n\
   ""}""
 Switch --> DFSP: ""202 Accepted""
 
@@ -85,7 +82,6 @@ Switch -> PISP ++: ""PUT /consentRequests/456""\n\
   ""  FSIOP-Source: dfspa""\n\
   ""  FSIOP-Destination: pispa""\n\
 ""{""\n\
-  ""  initiatorId: "pispa",""\n\
   ""  **authChannels: [ "OTP" ], // This is updated with the channel in use**""\n\
   ""  scopes: [ ""\n\
   ""    { accountId: "dfsp.username.1234",""\n\
@@ -94,7 +90,7 @@ Switch -> PISP ++: ""PUT /consentRequests/456""\n\
   ""      actions: [ "accounts.transfer", "accounts.getBalance" ] },""\n\
   ""  ],""\n\
   ""  callbackUri: "pisp-app://callback..."""\n\
-  ""  **authUri: null // This is new, but left blank**""\n\
+  ""  **//note: no authUri for OTP flow**""\n\
   ""}""
 PISP --> Switch: ""202 Accepted""
 deactivate Switch

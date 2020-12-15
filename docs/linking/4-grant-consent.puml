@@ -70,21 +70,19 @@ Switch -> PISP ++: ""POST /consents""\n\
 PISP --> Switch: ""202 Accepted""
 & Auth --> Switch: ""202 Accepted""
 
-' TODO: move this to the DFSP somwehere
-' also, we should be registering the party or something
-' note left of Auth
-'   As the owner of the consent, the Auth Service is
-'   responsible for updating the ALS
-' end note
+note left of Auth
+  As the issuer of the Consent, the DFSP is now responsible
+  for registering the Consent with the ALS.
+end note
 
-' Auth -> ALS: ""POST /participants/CONSENTS/123""\n\
-' ""  FSIOP-Source: central-auth""\n\
-' ""  FSIOP-Destination: Account Lookup""\n\
-' "" {""\n\
-'     ""  fspId: "central-auth",""\n\
-'   ""}""
+DFSP -> Switch: ""POST /participants/CONSENTS/123""\n\
+""  FSIOP-Source: dfsp""\n\
+""  FSIOP-Destination: Account Lookup""\n\
+"" {""\n\
+    ""  fspId: "central-auth",""\n\
+  ""}""
 
-' ALS --> Auth:
+ALS --> Auth:
 
 deactivate Switch
 

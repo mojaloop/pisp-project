@@ -23,6 +23,7 @@ DFSP -> Switch ++: ""POST /consents""\n\
 ""  {""\n\
     ""  consentId: "123",""\n\
     ""  consentRequestId: "456",""\n\
+    ""  keyByScope: false,""\n\
     ""  scopes: [ ""\n\
     ""    { **accountId: "dfsp.username.1234", // If web, these may change!**""\n\
     ""      actions: [ "accounts.transfer", "accounts.getBalance" ] },""\n\
@@ -70,6 +71,8 @@ Switch -> PISP ++: ""POST /consents""\n\
 PISP --> Switch: ""202 Accepted""
 & Auth --> Switch: ""202 Accepted""
 
+' TODO: move this to the DFSP somwehere
+' also, we should be registering the party or something
 note left of Auth
   As the issuer of the Consent, the DFSP is now responsible
   for registering the Consent with the ALS.

@@ -76,7 +76,7 @@ services:
       - "simulator.local:172.17.0.1"
 
   ml-api-adapter:
-    image: mojaloop/ml-api-adapter:v11.0.3.0-pisp
+    image: mojaloop/ml-api-adapter:v11.1.2
     container_name: ml-api-adapter
     command: sh -c "/opt/ml-api-adapter/wait4/wait4.js ml-api-adapter && node src/api/index.js"
     ports:
@@ -310,7 +310,7 @@ services:
 
   dfspa-sdk-scheme-adapter:
     image: "mojaloop/sdk-scheme-adapter:v10.6.2.7-pisp"
-    # build: 
+    # build:
     #   context: ../../sdk-scheme-adapter
     #   dockerfile: ./Dockerfile
 
@@ -351,7 +351,7 @@ services:
 
   dfspa-thirdparty-scheme-adapter-inbound:
     image: "mojaloop/thirdparty-scheme-adapter:v11.21.0"
-    # build: 
+    # build:
     #   context: ../../thirdparty-scheme-adapter
     #   dockerfile: ./docker/Dockerfile
     container_name: dfspa-thirdparty-scheme-adapter-inbound
@@ -401,7 +401,7 @@ services:
 
   dfspa-thirdparty-scheme-adapter-outbound:
     image: "mojaloop/thirdparty-scheme-adapter:v11.21.0"
-    # build: 
+    # build:
     #   context: ../../thirdparty-scheme-adapter
     #   dockerfile: ./docker/Dockerfile
     container_name: dfspa-thirdparty-scheme-adapter-outbound
@@ -472,7 +472,7 @@ services:
 
   dfspb-sdk-scheme-adapter:
     image: "mojaloop/sdk-scheme-adapter:v10.6.2.7-pisp"
-    # build: 
+    # build:
     #   context: ../../sdk-scheme-adapter
     #   dockerfile: ./Dockerfile
     container_name: dfspb-sdk-scheme-adapter
@@ -512,7 +512,7 @@ services:
 
   dfspb-thirdparty-scheme-adapter-inbound:
     image: "mojaloop/thirdparty-scheme-adapter:v11.21.0"
-    # build: 
+    # build:
     #   context: ../../thirdparty-scheme-adapter
     #   dockerfile: ./docker/Dockerfile
     container_name: dfspb-thirdparty-scheme-adapter-inbound
@@ -560,7 +560,7 @@ services:
 
   dfspb-thirdparty-scheme-adapter-outbound:
     image: "mojaloop/thirdparty-scheme-adapter:v11.21.0"
-    # build: 
+    # build:
     #   context: ../../thirdparty-scheme-adapter
     #   dockerfile: ./docker/Dockerfile
     container_name: dfspb-thirdparty-scheme-adapter-outbound
@@ -632,7 +632,7 @@ services:
 
   pisp-sdk-scheme-adapter:
     image: "mojaloop/sdk-scheme-adapter:v10.6.2.7-pisp"
-    # build: 
+    # build:
     #   context: ../../sdk-scheme-adapter
     #   dockerfile: ./Dockerfile
     container_name: pisp-sdk-scheme-adapter
@@ -673,7 +673,7 @@ services:
 
   pisp-thirdparty-scheme-adapter-inbound:
     image: "mojaloop/thirdparty-scheme-adapter:v11.21.0"
-    # build: 
+    # build:
     #   context: ../../thirdparty-scheme-adapter
     #   dockerfile: ./docker/Dockerfile
     container_name: pisp-thirdparty-scheme-adapter-inbound

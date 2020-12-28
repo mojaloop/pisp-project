@@ -6,7 +6,7 @@ networks:
 
 services:
   central-ledger:
-    image: mojaloop/central-ledger:v11.1.4.3-pisp
+    image: mojaloop/central-ledger:v11.3.3.0-pisp
     container_name: central-ledger
     command: sh -c "/opt/central-ledger/wait4/wait4.js central-ledger && node src/api/index.js"
     ports:
@@ -167,7 +167,7 @@ services:
       - "transaction-request-service:172.17.0.1"
 
   transaction-requests-service:
-    image: mojaloop/transaction-requests-service:v10.6.1.1-pisp
+    image: mojaloop/transaction-requests-service:v11.1.3.0-pisp
 
     container_name: transaction-requests-service
     ports:
@@ -237,7 +237,7 @@ services:
        - ./docker/wait4:/opt/central-settlement/wait4
 
   account-lookup-service:
-    image: mojaloop/account-lookup-service:v10.3.0.2-pisp
+    image: mojaloop/account-lookup-service:v11.1.2.0-pisp
     container_name: account-lookup-service
     command: sh -c "/opt/account-lookup-service/wait4/wait4.js account-lookup-service && npm run migrate && node src/index.js server"
     ports:

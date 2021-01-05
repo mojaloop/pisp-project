@@ -23,12 +23,13 @@ DFSP -> Switch ++: ""POST /consents""\n\
 ""  {""\n\
     ""  consentId: "123",""\n\
     ""  consentRequestId: "456",""\n\
-    ""  keyByScope: false,""\n\
+    ""  keyByScope: false,""\n\ //if this is true, then there should be a unique key for each scope
     ""  scopes: [ ""\n\
     ""    { **accountId: "dfsp.username.1234", // If web, these may change!**""\n\
     ""      actions: [ "accounts.transfer", "accounts.getBalance" ] },""\n\
     ""    { accountId: "dfsp.username.5678",""\n\
     ""      actions: [ "accounts.transfer", "accounts.getBalance" ] },""\n\
+    ' TODO: -  do we need to include the partyIdInfo here as well?
     ""  ],""\n\
     ""}""
 Switch --> DFSP: ""202 Accepted""

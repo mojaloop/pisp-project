@@ -190,10 +190,10 @@ allows us to look up the Auth service given a `consentId` at a later date.
 ![Grant Consent](../out/linking/4-grant-consent.svg)
 
 
-> Notes:
+<!-- > Notes:
 > 1. In this example, the DFSP uses the [proposed broadcast](https://github.com/mojaloop/pisp/issues/79) method of sending a `POST /consents` with 2 values for the `FSPIOP-Destination` header.
 > 2. In this example, the DFSP here uses the `central-auth` service. In the case where a DFSP runs their own auth-service, they would be expected to update their own auth-service separately to this call.
-> 3. We don't explicitly record the relationship between a DFSP & Auth service. It's assumed that a DFSP knows the `participantId` of it's Auth service, and can address it correctly using the `FSPIOP-Destination` header in the `POST /consents` request.
+> 3. We don't explicitly record the relationship between a DFSP & Auth service. It's assumed that a DFSP knows the `participantId` of it's Auth service, and can address it correctly using the `FSPIOP-Destination` header in the `POST /consents` request. -->
 
 ## 1.6. Credential registration
 
@@ -211,7 +211,7 @@ and finalizing the signature.
 
 ### 1.6.1. Deriving the challenge
 
-<!-- TODO: update with details about how a PISP can derive the challenge -->
+[TODO: update with details about how a PISP can derive the challenge]
 
 <!-- In this sub-phase, the PISP requests a challenge from the Auth service, which
 will be returned to the PISP via a `PUT /consents/{ID}` API call.

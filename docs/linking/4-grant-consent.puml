@@ -24,7 +24,6 @@ DFSP -> Switch ++: ""POST /consents""\n\
     ""  consentRequestId: "456",""\n\
     ""  keyByScope: false,// If true, then there should be a unique credential for each scope""\n\
     ""  scopes: [ ""\n\
-    ' TODO: Q1: I think we should also include the partyIdInfo here? I don't see why not...
     ""    { accountId: "dfsp.username.1234",""\n\
     ""      actions: [ "accounts.transfer", "accounts.getBalance" ] },""\n\
     ""    { accountId: "dfsp.username.5678",""\n\
@@ -51,7 +50,6 @@ Switch -> PISP ++: ""POST /consents""\n\
     ""  consentRequestId: "456",""\n\
     ""  keyByScope: false,// If true, then there should be a unique credential for each scope""\n\
     ""  scopes: [ ""\n\
-        ' TODO: Q1: I think we should also include the partyIdInfo here? I don't see why not...
     ""    { accountId: "dfsp.username.1234",""\n\
     ""      actions: [ "accounts.transfer", "accounts.getBalance" ] },""\n\
     ""    { accountId: "dfsp.username.5678",""\n\

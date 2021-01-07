@@ -152,8 +152,8 @@
   <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="225" x="78" y="410.473">
     &quot;partyIdType&quot;: &quot;THIRD_PARTY_LINK&quot;,
   </text>
-  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="141" x="78" y="425.606">
-    &quot;partyIdentifier&quot;: &quot;???&quot;,
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="207" x="78" y="425.606">
+    &quot;partyIdentifier&quot;: &quot;qwerty-56789&quot;,
   </text>
   <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="93" x="78" y="440.739">
     &quot;fspId&quot;: &quot;dfspa&quot;
@@ -351,8 +351,8 @@
   <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="225" x="511" y="1459.911">
     &quot;partyIdType&quot;: &quot;THIRD_PARTY_LINK&quot;,
   </text>
-  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="141" x="511" y="1475.043">
-    &quot;partyIdentifier&quot;: &quot;???&quot;,
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="207" x="511" y="1475.043">
+    &quot;partyIdentifier&quot;: &quot;qwerty-56789&quot;,
   </text>
   <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="93" x="511" y="1490.176">
     &quot;fspId&quot;: &quot;dfspa&quot;

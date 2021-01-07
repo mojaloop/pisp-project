@@ -62,7 +62,7 @@ The end-goal of this phase is for the PISP Server to have a final list of DFSPs
 available and any relevant metadata about those DFPSs that are necessary to
 begin the linking process.
 
-![Pre-linking](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/mojaloop/pisp/master/docs/linking/0-pre-linking.puml)
+![Pre-linking](../out/linking/0-pre-linking.svg)
 
 ## 1.2. Discovery
 
@@ -81,7 +81,7 @@ that they actually would like to link a different account than those chosen at
 the very beginning. This is perfectly acceptable and should be expected from
 time to time.
 
-![Discovery](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/mojaloop/pisp/master/docs/linking/1-discovery.puml)
+![Discovery](../out/linking/1-discovery.svg)
 
 ## 1.3. Request consent
 
@@ -114,7 +114,8 @@ In the web authentication channel, the result is the PISP being instructed on
 a specific URL where this supposed user should be redirected. This URL should be
 a place where the user can prove their identity (e.g., by logging in).
 
-![Request consent](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/mojaloop/pisp/master/docs/linking/2-request-consent-web.puml)
+![Request consent](../out/linking/2-request-consent-web.svg)
+
 
 ### 1.3.2. OTP / SMS
 
@@ -122,7 +123,9 @@ In the OTP authentication channel, the result is the PISP being instructed on
 a specific URL where this supposed user should be redirected. This URL should be
 a place where the user can prove their identity (e.g., by logging in).
 
-![Request consent](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/mojaloop/pisp/master/docs/linking/2-request-consent-otp.puml)
+
+![Request consent](../out/linking/2-request-consent-otp.svg)
+
 
 ## 1.4. Authentication
 
@@ -155,7 +158,8 @@ which accounts to link with. The result of this will be seen later on when
 during the Grant consent phase, where the DFSP will provide the correct values
 to the PISP in the `scopes` field.
 
-![Authentication (Web)](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/mojaloop/pisp/master/docs/linking/3-authentication-web.puml)
+![Authentication (Web)](../out/linking/3-authentication-web.svg)
+
 
 ### 1.4.2. OTP
 
@@ -163,7 +167,8 @@ When using the OTP authentication channel, the DFSP will send the User some sort
 of one-time password over a pre-established channel (most likely SMS). The PISP
 should prompt the user for this secret and then provide that back to the DFSP.
 
-![Authentication (OTP)](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/mojaloop/pisp/master/docs/linking/3-authentication-otp.puml)
+![Authentication (OTP)](../out/linking/3-authentication-otp.svg)
+
 
 ## 1.5. Grant consent
 
@@ -182,7 +187,8 @@ The Auth service is then responsible for calling `POST /participants/CONSENTS/{i
 This call will associate the `consentId` with the auth-service's `participantId` and 
 allows us to look up the Auth service given a `consentId` at a later date.
 
-![Grant consent](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/mojaloop/pisp/master/docs/linking/4-grant-consent.puml)
+![Grant Consent](../out/linking/4-grant-consent.svg)
+
 
 > Notes:
 > 1. In this example, the DFSP uses the [proposed broadcast](https://github.com/mojaloop/pisp/issues/79) method of sending a `POST /consents` with 2 values for the `FSPIOP-Destination` header.
@@ -203,15 +209,17 @@ case, the private key) in order to be considered valid.
 This credential registration is composed of two phases: requesting a challenge
 and finalizing the signature.
 
-### 1.6.1. Requesting a challenge
+### 1.6.1. Deriving the challenge
 
-In this sub-phase, the PISP requests a challenge from the Auth service, which
+<!-- TODO: update with details about how a PISP can derive the challenge -->
+
+<!-- In this sub-phase, the PISP requests a challenge from the Auth service, which
 will be returned to the PISP via a `PUT /consents/{ID}` API call.
 
 ![Credential registration: Challenge](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/mojaloop/pisp/master/docs/linking/5a-credential-registration.puml)
 
 > **Notes:**
-> 1. Similar to a `GET /parties` call, the PISP doesn't need to include the `FSPIOP-Destination` header in `POST /consents/{ID}/generateChallenge`. The switch is responsible for finding the responsible Auth service for this consent based on the `consentId`
+> 1. Similar to a `GET /parties` call, the PISP doesn't need to include the `FSPIOP-Destination` header in `POST /consents/{ID}/generateChallenge`. The switch is responsible for finding the responsible Auth service for this consent based on the `consentId` -->
 
 ### 1.6.2. Finalizing the credential
 
@@ -230,7 +238,7 @@ to the Consent resource.
 
 
 <!-- Note: this diagram is too big for the proxy renderer - so it is maintained locally -->
-![Credential registration: Register](../out/linking/5b-credential-registration.png)
+![Credential registration: Register](../out/linking/5b-credential-registration.svgs)
 
 > **Notes:**
 > 1. As with step [1.6.1](#161-requesting-a-challenge) above, the PISP doesn't need to include the `FSPIOP-Destination` header in `PUT /consents/{ID}`. The switch is responsible for finding the responsible Auth service for this consent based on the `consentId`

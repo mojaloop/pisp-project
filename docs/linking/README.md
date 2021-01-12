@@ -62,7 +62,7 @@ The end-goal of this phase is for the PISP Server to have a final list of DFSPs
 available and any relevant metadata about those DFPSs that are necessary to
 begin the linking process.
 
-![Pre-linking](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/mojaloop/pisp/master/docs/linking/0-pre-linking.puml)
+![Pre-linking](../out/linking/0-pre-linking.svg)
 
 ## 1.2. Discovery
 
@@ -185,9 +185,9 @@ allows us to look up the Auth service given a `consentId` at a later date.
 ![Grant consent](../out/linking/4-grant-consent.svg)
 
 > Notes:
-<!-- > 1. In this example, the DFSP uses the [proposed broadcast](https://github.com/mojaloop/pisp/issues/79) method of sending a `POST /consents` with 2 values for the `FSPIOP-Destination` header. -->
+<!-- > 1. In this example, the DFSP uses the [proposed broadcast](https://github.com/mojaloop/pisp/issues/79) method of sending a `POST /consents` with 2 values for the `FSPIOP-Destination` header.
 > 2. In this example, the DFSP here uses the `central-auth` service. In the case where a DFSP runs their own auth-service, they would be expected to update their own auth-service separately to this call.
-> 3. We don't explicitly record the relationship between a DFSP & Auth service. It's assumed that a DFSP knows the `participantId` of it's Auth service, and can address it correctly using the `FSPIOP-Destination` header in the `POST /consents` request.
+> 3. We don't explicitly record the relationship between a DFSP & Auth service. It's assumed that a DFSP knows the `participantId` of it's Auth service, and can address it correctly using the `FSPIOP-Destination` header in the `POST /consents` request. -->
 
 ## 1.6. Credential registration
 
@@ -246,8 +246,7 @@ the signature is correct. It then updates the status of the credential to
 to the Consent resource.
 
 
-<!-- Note: this diagram is too big for the proxy renderer - so it is maintained locally -->
-![Credential registration: Register](../out/linking/5b-credential-registration.svg)
+![Credential registration: Register](../out/linking/5-credential-registration.svg)
 
 <!-- > **Notes:**
 > 1. As with step [1.6.1](#161-requesting-a-challenge) above, the PISP doesn't need to include the `FSPIOP-Destination` header in `PUT /consents/{ID}`. The switch is responsible for finding the responsible Auth service for this consent based on the `consentId` -->

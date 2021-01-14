@@ -56,6 +56,12 @@ Switch -> DFSP ++:  ""POST /consentRequests""\n\
 DFSP --> Switch: ""202 Accepted""
 deactivate Switch
 
+DFSP -> DFSP : ""POST /sendOTP""\n\
+  ""{""\n\
+  ""  consentRequestId: "456",""\n\
+  ""  accountId: "dfsp.username.5678" ""\n\
+  ""}""
+
 DFSP -> Switch ++: ""PUT /consentRequests/456""\n\
   ""  FSIOP-Source: dfspa""\n\
   ""  FSIOP-Destination: pispa""\n\

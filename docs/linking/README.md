@@ -10,7 +10,9 @@
     - [1.3.2. OTP / SMS](#132-otp--sms)
   - [1.4. Authentication](#14-authentication)
     - [1.4.1. Web](#141-web)
+      - [DFSPAuthorizeSimulator](#dfspauthorizesimulator)
     - [1.4.2. OTP](#142-otp)
+      - [DFSPAuthorizeSimulator](#dfspauthorizesimulator-1)
   - [1.5. Grant consent](#15-grant-consent)
   - [1.6. Credential registration](#16-credential-registration)
     - [1.6.1. Requesting a challenge](#161-requesting-a-challenge)
@@ -100,7 +102,7 @@ information:
   the ability to view a balance of a specific account and send funds from an
   account).
 
-Some information depends on the authentication channel used (either web or OTP).
+Some information depends on the authentication channel used (either Web or OTP).
 Specically, if the web authentication channel is used, the following extra
 information is required:
 
@@ -154,6 +156,18 @@ to the PISP in the `scopes` field.
 
 ![Authentication (Web)](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/mojaloop/pisp/master/docs/linking/3-authentication-web.puml)
 
+#### DFSPAuthorizeSimulator
+DFSPAuthorizeSimulator is api service for demo purposes. For the `Web flow` it is the backend  for single page application (SPA) which demonstrates the process of User's authorizations and granting the consents at DFSP web service.
+
+It is implemented as extension for TestingToolkit service which allows to define testing scenarios as TTK rules driven by `username` parameter.
+
+- SIM-1 PISP application redirects user to `authUri`, passing `consentRequestId` as query parameter.
+- SIM-4 WebBrowser renders DFSP login form
+- SIM-5 User submits the `username` and `password` at DFSP login page
+- SIM-9 WebBrowser renders grant consent page
+- SIM-10 User grants consent
+- SIM-13 in response from /authorize call is generated `secret`  
+- SIM-14 `secret` is appended to callbackUri as query parameter
 ### 1.4.2. OTP
 
 When using the OTP authentication channel, the DFSP will send the User some sort
@@ -162,6 +176,10 @@ should prompt the user for this secret and then provide that back to the DFSP.
 
 ![Authentication (OTP)](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/mojaloop/pisp/master/docs/linking/3-authentication-otp.puml)
 
+#### DFSPAuthorizeSimulator
+FSPAuthorizeSimulator is api service for demo purposes. For the `OTP flow` it exposes `/sendOTP` API endpoint which allows to simulate sending SMS token to the User's device.
+
+It is implemented as extension for TestingToolkit service which allows to define testing scenarios as TTK rules driven by `username` parameter.
 ## 1.5. Grant consent
 
 Now that mutual trust has been established between all three parties, the DFSP

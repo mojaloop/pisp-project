@@ -10,6 +10,11 @@ end box
 
 participant DFSP
 
+participant DFSPAuthorizeSimulator
+participant WebBrowser
+
+actor User
+
 autonumber 1 "<b>REQ-#</b>"
 
 activate PISP
@@ -95,4 +100,32 @@ note over PISP, DFSP
   At this point, the PISP knows that the Web authChannel is in use and the PISP App should redirect the user to the provided ""authUri"".
 end note
 
+autonumber 1 "<b>SIM-#</b>"
+
+PISP -> WebBrowser: ""window.location <- authUri ==> ** GET dfspa.com/authorize?consentRequestId=456**&callbackUri=pisp-app://callback...""
+deactivate PISP
+activate WebBrowser
+activate User
+WebBrowser -> DFSPAuthorizeSimulator: GET **/authorize?consentRequestId=456&callbackUri=pisp-app://callback...**
+DFSPAuthorizeSimulator -> WebBrowser: 200 OK: send **/authorize** single page application (SPA)
+WebBrowser -> WebBrowser: RENDER: **login form**
+User -> WebBrowser: SUBMIT **username & password**
+WebBrowser -> DFSPAuthorizeSimulator: ""POST /login""\n\
+  ""{""\n\
+  ""  username,""\n\
+  ""  password,""\n\
+  ""}""
+DFSPAuthorizeSimulator -> DFSPAuthorizeSimulator: verify User's credentials \ntake action on **TTK defined rule for username**"
+DFSPAuthorizeSimulator -> WebBrowser: 201 OK: user authorized
+WebBrowser -> WebBrowser: RENDER **ask the User to grant consent** for **consentRequestId=456**\n
+User -> WebBrowser: SUBMIT: **consent granted**
+WebBrowser -> DFSPAuthorizeSimulator: ""POST /authorize""\n\
+  ""{""\n\
+  ""  consentRequestId=456"",\n\
+  ""  username,""\n\
+  ""}""
+DFSPAuthorizeSimulator -> DFSPAuthorizeSimulator: generate a **secret="some-secret"**\ntake action on **TTK defined rule for username**
+DFSPAuthorizeSimulator -> WebBrowser: 201 OK: response: { **secret:"some-secret"**" }
+WebBrowser -> User: redirects to callbackUri="pisp-app://callback...?**secret=some-secret**"
+deactivate User
 @enduml

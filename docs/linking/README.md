@@ -3,22 +3,22 @@
 <!-- TOC -->
 
 - [1. Linking](#1-linking)
-    - [1.1. Pre-linking](#11-pre-linking)
-    - [1.2. Discovery](#12-discovery)
-    - [1.3. Request consent](#13-request-consent)
-        - [1.3.1. Web](#131-web)
-        - [1.3.2. OTP / SMS](#132-otp--sms)
-    - [1.4. Authentication](#14-authentication)
-        - [1.4.1. Web](#141-web)
-        - [1.4.2. OTP](#142-otp)
-    - [1.5. Grant consent](#15-grant-consent)
-    - [1.6. Credential registration](#16-credential-registration)
-        - [1.6.1. Requesting a challenge](#161-requesting-a-challenge)
-        - [1.6.2. Finalizing the credential](#162-finalizing-the-credential)
+  - [1.1. Pre-linking](#11-pre-linking)
+  - [1.2. Discovery](#12-discovery)
+  - [1.3. Request consent](#13-request-consent)
+    - [1.3.1. Web](#131-web)
+    - [1.3.2. OTP / SMS](#132-otp--sms)
+  - [1.4. Authentication](#14-authentication)
+    - [1.4.1. Web](#141-web)
+    - [1.4.2. OTP](#142-otp)
+  - [1.5. Grant consent](#15-grant-consent)
+  - [1.6. Credential registration](#16-credential-registration)
+    - [1.6.1. Requesting a challenge](#161-requesting-a-challenge)
+    - [1.6.2. Finalizing the credential](#162-finalizing-the-credential)
 - [2. Unlinking](#2-unlinking)
 - [3. Third-party credential registration](#3-third-party-credential-registration)
-    - [3.1. Authentication](#31-authentication)
-    - [3.2. Credential registration](#32-credential-registration)
+  - [3.1. Authentication](#31-authentication)
+  - [3.2. Credential registration](#32-credential-registration)
 
 <!-- /TOC -->
 
@@ -118,10 +118,7 @@ a place where the user can prove their identity (e.g., by logging in).
 
 ### 1.3.2. OTP / SMS
 
-In the OTP authentication channel, the result is the PISP being instructed on
-a specific URL where this supposed user should be redirected. This URL should be
-a place where the user can prove their identity (e.g., by logging in).
-
+In the OTP authentication channel, the result is the PISP should ask user to enter OTP token received on his registered device (phone). **/sendOTP** is an example endpoint used by DFSP to send OTP token to user's device.
 ![Request consent](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/mojaloop/pisp/master/docs/linking/2-request-consent-otp.puml)
 
 ## 1.4. Authentication

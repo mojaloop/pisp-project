@@ -10,10 +10,9 @@ end box
 
 participant DFSP
 
-participant DFSPAuthorizeSimulator
-participant WebBrowser
-
 actor User
+participant WebBrowser
+participant DFSPAuthorizeSimulator
 
 autonumber 1 "<b>REQ-#</b>"
 

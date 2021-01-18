@@ -177,7 +177,7 @@ should prompt the user for this secret and then provide that back to the DFSP.
 ![Authentication (OTP)](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/mojaloop/pisp/master/docs/linking/3-authentication-otp.puml)
 
 #### DFSPAuthorizeSimulator
-FSPAuthorizeSimulator is api service for demo purposes. For the `OTP flow` it exposes `/sendOTP` API endpoint which allows to simulate sending SMS token to the User's device.
+DFSPAuthorizeSimulator is api service for demo purposes. For the `OTP flow` it exposes `/sendOTP` API endpoint which allows to simulate sending SMS token to the User's device.
 
 It is implemented as extension for TestingToolkit service which allows to define testing scenarios as TTK rules driven by `username` parameter.
 ## 1.5. Grant consent

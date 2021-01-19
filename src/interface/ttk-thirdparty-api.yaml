@@ -18,8 +18,8 @@ paths:
       description: |
         A request from a PISP to a DFSP to start the process of delegating consent
       parameters:
-        - $ref: '#/paths/~1otp/post/parameters/0'
-        - $ref: '#/paths/~1otp/post/parameters/1'
+        - $ref: '#/paths/~1login/post/parameters/0'
+        - $ref: '#/paths/~1login/post/parameters/1'
         - $ref: '#/paths/~1consents~1%7BID%7D/parameters/1'
         - $ref: '#/paths/~1consents~1%7BID%7D/parameters/2'
         - $ref: '#/paths/~1consents~1%7BID%7D/parameters/3'
@@ -87,23 +87,23 @@ paths:
               callbackUri: 'pisp-app://callback.com'
       responses:
         '202':
-          $ref: '#/paths/~1otp/post/responses/202'
+          $ref: '#/paths/~1sendOTP/post/responses/202'
         '400':
-          $ref: '#/paths/~1otp/post/responses/400'
+          $ref: '#/paths/~1login/post/responses/400'
         '401':
-          $ref: '#/paths/~1otp/post/responses/401'
+          $ref: '#/paths/~1login/post/responses/401'
         '403':
-          $ref: '#/paths/~1otp/post/responses/403'
+          $ref: '#/paths/~1login/post/responses/403'
         '404':
-          $ref: '#/paths/~1otp/post/responses/404'
+          $ref: '#/paths/~1login/post/responses/404'
         '405':
-          $ref: '#/paths/~1otp/post/responses/405'
+          $ref: '#/paths/~1login/post/responses/405'
         '406':
-          $ref: '#/paths/~1otp/post/responses/406'
+          $ref: '#/paths/~1login/post/responses/406'
         '501':
-          $ref: '#/paths/~1otp/post/responses/501'
+          $ref: '#/paths/~1login/post/responses/501'
         '503':
-          $ref: '#/paths/~1otp/post/responses/503'
+          $ref: '#/paths/~1login/post/responses/503'
   '/consentRequests/{ID}':
     put:
       tags:
@@ -117,8 +117,8 @@ paths:
         which the DFSP is to then verify.
       parameters:
         - $ref: '#/paths/~1consents~1%7BID%7D/parameters/0'
-        - $ref: '#/paths/~1otp/post/parameters/0'
-        - $ref: '#/paths/~1otp/post/parameters/1'
+        - $ref: '#/paths/~1login/post/parameters/0'
+        - $ref: '#/paths/~1login/post/parameters/1'
         - $ref: '#/paths/~1consents~1%7BID%7D/parameters/1'
         - $ref: '#/paths/~1consents~1%7BID%7D/parameters/2'
         - $ref: '#/paths/~1consents~1%7BID%7D/parameters/3'
@@ -311,23 +311,23 @@ paths:
                   authToken: otp or secret
       responses:
         '202':
-          $ref: '#/paths/~1otp/post/responses/202'
+          $ref: '#/paths/~1sendOTP/post/responses/202'
         '400':
-          $ref: '#/paths/~1otp/post/responses/400'
+          $ref: '#/paths/~1login/post/responses/400'
         '401':
-          $ref: '#/paths/~1otp/post/responses/401'
+          $ref: '#/paths/~1login/post/responses/401'
         '403':
-          $ref: '#/paths/~1otp/post/responses/403'
+          $ref: '#/paths/~1login/post/responses/403'
         '404':
-          $ref: '#/paths/~1otp/post/responses/404'
+          $ref: '#/paths/~1login/post/responses/404'
         '405':
-          $ref: '#/paths/~1otp/post/responses/405'
+          $ref: '#/paths/~1login/post/responses/405'
         '406':
-          $ref: '#/paths/~1otp/post/responses/406'
+          $ref: '#/paths/~1login/post/responses/406'
         '501':
-          $ref: '#/paths/~1otp/post/responses/501'
+          $ref: '#/paths/~1login/post/responses/501'
         '503':
-          $ref: '#/paths/~1otp/post/responses/503'
+          $ref: '#/paths/~1login/post/responses/503'
   /consents:
     post:
       description: |
@@ -338,8 +338,8 @@ paths:
       tags:
         - consents
       parameters:
-        - $ref: '#/paths/~1otp/post/parameters/0'
-        - $ref: '#/paths/~1otp/post/parameters/1'
+        - $ref: '#/paths/~1login/post/parameters/0'
+        - $ref: '#/paths/~1login/post/parameters/1'
         - $ref: '#/paths/~1consents~1%7BID%7D/parameters/1'
         - $ref: '#/paths/~1consents~1%7BID%7D/parameters/2'
         - $ref: '#/paths/~1consents~1%7BID%7D/parameters/3'
@@ -446,23 +446,23 @@ paths:
                     - accounts.getBalance
       responses:
         '202':
-          $ref: '#/paths/~1otp/post/responses/202'
+          $ref: '#/paths/~1sendOTP/post/responses/202'
         '400':
-          $ref: '#/paths/~1otp/post/responses/400'
+          $ref: '#/paths/~1login/post/responses/400'
         '401':
-          $ref: '#/paths/~1otp/post/responses/401'
+          $ref: '#/paths/~1login/post/responses/401'
         '403':
-          $ref: '#/paths/~1otp/post/responses/403'
+          $ref: '#/paths/~1login/post/responses/403'
         '404':
-          $ref: '#/paths/~1otp/post/responses/404'
+          $ref: '#/paths/~1login/post/responses/404'
         '405':
-          $ref: '#/paths/~1otp/post/responses/405'
+          $ref: '#/paths/~1login/post/responses/405'
         '406':
-          $ref: '#/paths/~1otp/post/responses/406'
+          $ref: '#/paths/~1login/post/responses/406'
         '501':
-          $ref: '#/paths/~1otp/post/responses/501'
+          $ref: '#/paths/~1login/post/responses/501'
         '503':
-          $ref: '#/paths/~1otp/post/responses/503'
+          $ref: '#/paths/~1login/post/responses/503'
   '/consents/{ID}/generateChallenge':
     post:
       description: |
@@ -476,8 +476,8 @@ paths:
       operationId: GenerateChallengeRequest
       parameters:
         - $ref: '#/paths/~1consents~1%7BID%7D/parameters/0'
-        - $ref: '#/paths/~1otp/post/parameters/0'
-        - $ref: '#/paths/~1otp/post/parameters/1'
+        - $ref: '#/paths/~1login/post/parameters/0'
+        - $ref: '#/paths/~1login/post/parameters/1'
         - $ref: '#/paths/~1consents~1%7BID%7D/parameters/1'
         - $ref: '#/paths/~1consents~1%7BID%7D/parameters/2'
         - $ref: '#/paths/~1consents~1%7BID%7D/parameters/3'
@@ -513,23 +513,23 @@ paths:
               type: FIDO
       responses:
         '202':
-          $ref: '#/paths/~1otp/post/responses/202'
+          $ref: '#/paths/~1sendOTP/post/responses/202'
         '400':
-          $ref: '#/paths/~1otp/post/responses/400'
+          $ref: '#/paths/~1login/post/responses/400'
         '401':
-          $ref: '#/paths/~1otp/post/responses/401'
+          $ref: '#/paths/~1login/post/responses/401'
         '403':
-          $ref: '#/paths/~1otp/post/responses/403'
+          $ref: '#/paths/~1login/post/responses/403'
         '404':
-          $ref: '#/paths/~1otp/post/responses/404'
+          $ref: '#/paths/~1login/post/responses/404'
         '405':
-          $ref: '#/paths/~1otp/post/responses/405'
+          $ref: '#/paths/~1login/post/responses/405'
         '406':
-          $ref: '#/paths/~1otp/post/responses/406'
+          $ref: '#/paths/~1login/post/responses/406'
         '501':
-          $ref: '#/paths/~1otp/post/responses/501'
+          $ref: '#/paths/~1login/post/responses/501'
         '503':
-          $ref: '#/paths/~1otp/post/responses/503'
+          $ref: '#/paths/~1login/post/responses/503'
   '/consents/{ID}':
     parameters:
       - name: ID
@@ -915,23 +915,23 @@ paths:
         '200':
           $ref: '#/paths/~1login/post/responses/200'
         '202':
-          $ref: '#/paths/~1otp/post/responses/202'
+          $ref: '#/paths/~1sendOTP/post/responses/202'
         '400':
-          $ref: '#/paths/~1otp/post/responses/400'
+          $ref: '#/paths/~1login/post/responses/400'
         '401':
-          $ref: '#/paths/~1otp/post/responses/401'
+          $ref: '#/paths/~1login/post/responses/401'
         '403':
-          $ref: '#/paths/~1otp/post/responses/403'
+          $ref: '#/paths/~1login/post/responses/403'
         '404':
-          $ref: '#/paths/~1otp/post/responses/404'
+          $ref: '#/paths/~1login/post/responses/404'
         '405':
-          $ref: '#/paths/~1otp/post/responses/405'
+          $ref: '#/paths/~1login/post/responses/405'
         '406':
-          $ref: '#/paths/~1otp/post/responses/406'
+          $ref: '#/paths/~1login/post/responses/406'
         '501':
-          $ref: '#/paths/~1otp/post/responses/501'
+          $ref: '#/paths/~1login/post/responses/501'
         '503':
-          $ref: '#/paths/~1otp/post/responses/503'
+          $ref: '#/paths/~1login/post/responses/503'
     patch:
       description: |
         The HTTP request `PATCH /consents/{ID}` is used to notify the PISP and DFSP of revoked consent.
@@ -970,23 +970,23 @@ paths:
         '200':
           $ref: '#/paths/~1login/post/responses/200'
         '202':
-          $ref: '#/paths/~1otp/post/responses/202'
+          $ref: '#/paths/~1sendOTP/post/responses/202'
         '400':
-          $ref: '#/paths/~1otp/post/responses/400'
+          $ref: '#/paths/~1login/post/responses/400'
         '401':
-          $ref: '#/paths/~1otp/post/responses/401'
+          $ref: '#/paths/~1login/post/responses/401'
         '403':
-          $ref: '#/paths/~1otp/post/responses/403'
+          $ref: '#/paths/~1login/post/responses/403'
         '404':
-          $ref: '#/paths/~1otp/post/responses/404'
+          $ref: '#/paths/~1login/post/responses/404'
         '405':
-          $ref: '#/paths/~1otp/post/responses/405'
+          $ref: '#/paths/~1login/post/responses/405'
         '406':
-          $ref: '#/paths/~1otp/post/responses/406'
+          $ref: '#/paths/~1login/post/responses/406'
         '501':
-          $ref: '#/paths/~1otp/post/responses/501'
+          $ref: '#/paths/~1login/post/responses/501'
         '503':
-          $ref: '#/paths/~1otp/post/responses/503'
+          $ref: '#/paths/~1login/post/responses/503'
   '/thirdpartyRequests/transactions/{ID}':
     parameters:
       - $ref: '#/paths/~1consents~1%7BID%7D/parameters/0'
@@ -1010,21 +1010,21 @@ paths:
         '200':
           $ref: '#/paths/~1login/post/responses/200'
         '400':
-          $ref: '#/paths/~1otp/post/responses/400'
+          $ref: '#/paths/~1login/post/responses/400'
         '401':
-          $ref: '#/paths/~1otp/post/responses/401'
+          $ref: '#/paths/~1login/post/responses/401'
         '403':
-          $ref: '#/paths/~1otp/post/responses/403'
+          $ref: '#/paths/~1login/post/responses/403'
         '404':
-          $ref: '#/paths/~1otp/post/responses/404'
+          $ref: '#/paths/~1login/post/responses/404'
         '405':
-          $ref: '#/paths/~1otp/post/responses/405'
+          $ref: '#/paths/~1login/post/responses/405'
         '406':
-          $ref: '#/paths/~1otp/post/responses/406'
+          $ref: '#/paths/~1login/post/responses/406'
         '501':
-          $ref: '#/paths/~1otp/post/responses/501'
+          $ref: '#/paths/~1login/post/responses/501'
         '503':
-          $ref: '#/paths/~1otp/post/responses/503'
+          $ref: '#/paths/~1login/post/responses/503'
     patch:
       operationId: NotifyThirdpartyTransactionRequests
       summary: NotifyThirdpartyTransactionRequests
@@ -1036,7 +1036,7 @@ paths:
       tags:
         - thirdpartyRequests
       parameters:
-        - $ref: '#/paths/~1otp/post/parameters/1'
+        - $ref: '#/paths/~1login/post/parameters/1'
       requestBody:
         required: true
         content:
@@ -1065,21 +1065,21 @@ paths:
         '200':
           $ref: '#/paths/~1login/post/responses/200'
         '400':
-          $ref: '#/paths/~1otp/post/responses/400'
+          $ref: '#/paths/~1login/post/responses/400'
         '401':
-          $ref: '#/paths/~1otp/post/responses/401'
+          $ref: '#/paths/~1login/post/responses/401'
         '403':
-          $ref: '#/paths/~1otp/post/responses/403'
+          $ref: '#/paths/~1login/post/responses/403'
         '404':
-          $ref: '#/paths/~1otp/post/responses/404'
+          $ref: '#/paths/~1login/post/responses/404'
         '405':
-          $ref: '#/paths/~1otp/post/responses/405'
+          $ref: '#/paths/~1login/post/responses/405'
         '406':
-          $ref: '#/paths/~1otp/post/responses/406'
+          $ref: '#/paths/~1login/post/responses/406'
         '501':
-          $ref: '#/paths/~1otp/post/responses/501'
+          $ref: '#/paths/~1login/post/responses/501'
         '503':
-          $ref: '#/paths/~1otp/post/responses/503'
+          $ref: '#/paths/~1login/post/responses/503'
   '/thirdpartyRequests/transactions/{ID}/error':
     put:
       tags:
@@ -1092,7 +1092,7 @@ paths:
         The `{ID}` in the URI should contain the `transactionRequestId` that was used for the creation of the transaction request.     
       parameters:
         - $ref: '#/paths/~1consents~1%7BID%7D/parameters/0'
-        - $ref: '#/paths/~1otp/post/parameters/1'
+        - $ref: '#/paths/~1login/post/parameters/1'
         - $ref: '#/paths/~1consents~1%7BID%7D/parameters/1'
         - $ref: '#/paths/~1consents~1%7BID%7D/parameters/2'
         - $ref: '#/paths/~1consents~1%7BID%7D/parameters/3'
@@ -1113,21 +1113,21 @@ paths:
         '200':
           $ref: '#/paths/~1login/post/responses/200'
         '400':
-          $ref: '#/paths/~1otp/post/responses/400'
+          $ref: '#/paths/~1login/post/responses/400'
         '401':
-          $ref: '#/paths/~1otp/post/responses/401'
+          $ref: '#/paths/~1login/post/responses/401'
         '403':
-          $ref: '#/paths/~1otp/post/responses/403'
+          $ref: '#/paths/~1login/post/responses/403'
         '404':
-          $ref: '#/paths/~1otp/post/responses/404'
+          $ref: '#/paths/~1login/post/responses/404'
         '405':
-          $ref: '#/paths/~1otp/post/responses/405'
+          $ref: '#/paths/~1login/post/responses/405'
         '406':
-          $ref: '#/paths/~1otp/post/responses/406'
+          $ref: '#/paths/~1login/post/responses/406'
         '501':
-          $ref: '#/paths/~1otp/post/responses/501'
+          $ref: '#/paths/~1login/post/responses/501'
         '503':
-          $ref: '#/paths/~1otp/post/responses/503'
+          $ref: '#/paths/~1login/post/responses/503'
   /thirdpartyRequests/transactions:
     post:
       tags:
@@ -1140,8 +1140,8 @@ paths:
 
         PISP -> Switch(Thirdparty API Adapter)
       parameters:
-        - $ref: '#/paths/~1otp/post/parameters/0'
-        - $ref: '#/paths/~1otp/post/parameters/1'
+        - $ref: '#/paths/~1login/post/parameters/0'
+        - $ref: '#/paths/~1login/post/parameters/1'
         - $ref: '#/paths/~1consents~1%7BID%7D/parameters/1'
         - $ref: '#/paths/~1consents~1%7BID%7D/parameters/2'
         - $ref: '#/paths/~1consents~1%7BID%7D/parameters/3'
@@ -1491,23 +1491,23 @@ paths:
               expiration: '2020-07-15T22:17:28.985-01:00'
       responses:
         '202':
-          $ref: '#/paths/~1otp/post/responses/202'
+          $ref: '#/paths/~1sendOTP/post/responses/202'
         '400':
-          $ref: '#/paths/~1otp/post/responses/400'
+          $ref: '#/paths/~1login/post/responses/400'
         '401':
-          $ref: '#/paths/~1otp/post/responses/401'
+          $ref: '#/paths/~1login/post/responses/401'
         '403':
-          $ref: '#/paths/~1otp/post/responses/403'
+          $ref: '#/paths/~1login/post/responses/403'
         '404':
-          $ref: '#/paths/~1otp/post/responses/404'
+          $ref: '#/paths/~1login/post/responses/404'
         '405':
-          $ref: '#/paths/~1otp/post/responses/405'
+          $ref: '#/paths/~1login/post/responses/405'
         '406':
-          $ref: '#/paths/~1otp/post/responses/406'
+          $ref: '#/paths/~1login/post/responses/406'
         '501':
-          $ref: '#/paths/~1otp/post/responses/501'
+          $ref: '#/paths/~1login/post/responses/501'
         '503':
-          $ref: '#/paths/~1otp/post/responses/503'
+          $ref: '#/paths/~1login/post/responses/503'
   '/thirdpartyRequests/transactions/{ID}/authorizations':
     post:
       tags:
@@ -1518,8 +1518,8 @@ paths:
         The HTTP request `POST /thirdpartyRequests/transactions/{id}/authorizations` is used by the DFSP to verify a third party authorization.
       parameters:
         - $ref: '#/paths/~1consents~1%7BID%7D/parameters/0'
-        - $ref: '#/paths/~1otp/post/parameters/0'
-        - $ref: '#/paths/~1otp/post/parameters/1'
+        - $ref: '#/paths/~1login/post/parameters/0'
+        - $ref: '#/paths/~1login/post/parameters/1'
         - $ref: '#/paths/~1consents~1%7BID%7D/parameters/1'
         - $ref: '#/paths/~1consents~1%7BID%7D/parameters/2'
         - $ref: '#/paths/~1consents~1%7BID%7D/parameters/3'
@@ -1574,23 +1574,23 @@ paths:
               status: PENDING
       responses:
         '202':
-          $ref: '#/paths/~1otp/post/responses/202'
+          $ref: '#/paths/~1sendOTP/post/responses/202'
         '400':
-          $ref: '#/paths/~1otp/post/responses/400'
+          $ref: '#/paths/~1login/post/responses/400'
         '401':
-          $ref: '#/paths/~1otp/post/responses/401'
+          $ref: '#/paths/~1login/post/responses/401'
         '403':
-          $ref: '#/paths/~1otp/post/responses/403'
+          $ref: '#/paths/~1login/post/responses/403'
         '404':
-          $ref: '#/paths/~1otp/post/responses/404'
+          $ref: '#/paths/~1login/post/responses/404'
         '405':
-          $ref: '#/paths/~1otp/post/responses/405'
+          $ref: '#/paths/~1login/post/responses/405'
         '406':
-          $ref: '#/paths/~1otp/post/responses/406'
+          $ref: '#/paths/~1login/post/responses/406'
         '501':
-          $ref: '#/paths/~1otp/post/responses/501'
+          $ref: '#/paths/~1login/post/responses/501'
         '503':
-          $ref: '#/paths/~1otp/post/responses/503'
+          $ref: '#/paths/~1login/post/responses/503'
     put:
       tags:
         - thirdpartyRequests
@@ -1602,7 +1602,7 @@ paths:
         For an unsuccessful authorization result, the `PUT /thirdpartyRequests/transactions/{id}/authorizations/error` will be called by the auth-service, instead of this endpoint.
       parameters:
         - $ref: '#/paths/~1consents~1%7BID%7D/parameters/0'
-        - $ref: '#/paths/~1otp/post/parameters/1'
+        - $ref: '#/paths/~1login/post/parameters/1'
         - $ref: '#/paths/~1consents~1%7BID%7D/parameters/1'
         - $ref: '#/paths/~1consents~1%7BID%7D/parameters/2'
         - $ref: '#/paths/~1consents~1%7BID%7D/parameters/3'
@@ -1666,21 +1666,21 @@ paths:
         '200':
           $ref: '#/paths/~1login/post/responses/200'
         '400':
-          $ref: '#/paths/~1otp/post/responses/400'
+          $ref: '#/paths/~1login/post/responses/400'
         '401':
-          $ref: '#/paths/~1otp/post/responses/401'
+          $ref: '#/paths/~1login/post/responses/401'
         '403':
-          $ref: '#/paths/~1otp/post/responses/403'
+          $ref: '#/paths/~1login/post/responses/403'
         '404':
-          $ref: '#/paths/~1otp/post/responses/404'
+          $ref: '#/paths/~1login/post/responses/404'
         '405':
-          $ref: '#/paths/~1otp/post/responses/405'
+          $ref: '#/paths/~1login/post/responses/405'
         '406':
-          $ref: '#/paths/~1otp/post/responses/406'
+          $ref: '#/paths/~1login/post/responses/406'
         '501':
-          $ref: '#/paths/~1otp/post/responses/501'
+          $ref: '#/paths/~1login/post/responses/501'
         '503':
-          $ref: '#/paths/~1otp/post/responses/503'
+          $ref: '#/paths/~1login/post/responses/503'
   /authorizations:
     post:
       tags:
@@ -1689,8 +1689,8 @@ paths:
       summary: Outbound Authorizations endpoint
       description: DFSP Requests Authorization of Transaction from the End User
       parameters:
-        - $ref: '#/paths/~1otp/post/parameters/0'
-        - $ref: '#/paths/~1otp/post/parameters/1'
+        - $ref: '#/paths/~1login/post/parameters/0'
+        - $ref: '#/paths/~1login/post/parameters/1'
         - $ref: '#/paths/~1consents~1%7BID%7D/parameters/1'
         - $ref: '#/paths/~1consents~1%7BID%7D/parameters/2'
         - $ref: '#/paths/~1consents~1%7BID%7D/parameters/3'
@@ -1740,23 +1740,23 @@ paths:
                       value: This is a more detailed error description
       responses:
         '202':
-          $ref: '#/paths/~1otp/post/responses/202'
+          $ref: '#/paths/~1sendOTP/post/responses/202'
         '400':
-          $ref: '#/paths/~1otp/post/responses/400'
+          $ref: '#/paths/~1login/post/responses/400'
         '401':
-          $ref: '#/paths/~1otp/post/responses/401'
+          $ref: '#/paths/~1login/post/responses/401'
         '403':
-          $ref: '#/paths/~1otp/post/responses/403'
+          $ref: '#/paths/~1login/post/responses/403'
         '404':
-          $ref: '#/paths/~1otp/post/responses/404'
+          $ref: '#/paths/~1login/post/responses/404'
         '405':
-          $ref: '#/paths/~1otp/post/responses/405'
+          $ref: '#/paths/~1login/post/responses/405'
         '406':
-          $ref: '#/paths/~1otp/post/responses/406'
+          $ref: '#/paths/~1login/post/responses/406'
         '501':
-          $ref: '#/paths/~1otp/post/responses/501'
+          $ref: '#/paths/~1login/post/responses/501'
         '503':
-          $ref: '#/paths/~1otp/post/responses/503'
+          $ref: '#/paths/~1login/post/responses/503'
   '/authorizations/{ID}':
     parameters:
       - $ref: '#/paths/~1consents~1%7BID%7D/parameters/0'
@@ -1777,23 +1777,23 @@ paths:
       description: The HTTP request GET /authorizations/ is used to request the Payer to enter the applicable credentials in the Payee FSP system.
       responses:
         '202':
-          $ref: '#/paths/~1otp/post/responses/202'
+          $ref: '#/paths/~1sendOTP/post/responses/202'
         '400':
-          $ref: '#/paths/~1otp/post/responses/400'
+          $ref: '#/paths/~1login/post/responses/400'
         '401':
-          $ref: '#/paths/~1otp/post/responses/401'
+          $ref: '#/paths/~1login/post/responses/401'
         '403':
-          $ref: '#/paths/~1otp/post/responses/403'
+          $ref: '#/paths/~1login/post/responses/403'
         '404':
-          $ref: '#/paths/~1otp/post/responses/404'
+          $ref: '#/paths/~1login/post/responses/404'
         '405':
-          $ref: '#/paths/~1otp/post/responses/405'
+          $ref: '#/paths/~1login/post/responses/405'
         '406':
-          $ref: '#/paths/~1otp/post/responses/406'
+          $ref: '#/paths/~1login/post/responses/406'
         '501':
-          $ref: '#/paths/~1otp/post/responses/501'
+          $ref: '#/paths/~1login/post/responses/501'
         '503':
-          $ref: '#/paths/~1otp/post/responses/503'
+          $ref: '#/paths/~1login/post/responses/503'
     put:
       tags:
         - authorizations
@@ -1804,7 +1804,7 @@ paths:
         result of a previously-requested authorization. The ID in the URI should
         contain the one that was used in the POST /authorizations/ requestBody.transactionRequestId @ OUTBOUND
       parameters:
-        - $ref: '#/paths/~1otp/post/parameters/1'
+        - $ref: '#/paths/~1login/post/parameters/1'
       requestBody:
         description: Authorization request details
         required: true
@@ -1823,21 +1823,21 @@ paths:
         '200':
           $ref: '#/paths/~1login/post/responses/200'
         '400':
-          $ref: '#/paths/~1otp/post/responses/400'
+          $ref: '#/paths/~1login/post/responses/400'
         '401':
-          $ref: '#/paths/~1otp/post/responses/401'
+          $ref: '#/paths/~1login/post/responses/401'
         '403':
-          $ref: '#/paths/~1otp/post/responses/403'
+          $ref: '#/paths/~1login/post/responses/403'
         '404':
-          $ref: '#/paths/~1otp/post/responses/404'
+          $ref: '#/paths/~1login/post/responses/404'
         '405':
-          $ref: '#/paths/~1otp/post/responses/405'
+          $ref: '#/paths/~1login/post/responses/405'
         '406':
-          $ref: '#/paths/~1otp/post/responses/406'
+          $ref: '#/paths/~1login/post/responses/406'
         '501':
-          $ref: '#/paths/~1otp/post/responses/501'
+          $ref: '#/paths/~1login/post/responses/501'
         '503':
-          $ref: '#/paths/~1otp/post/responses/503'
+          $ref: '#/paths/~1login/post/responses/503'
   '/authorizations/{ID}/error':
     put:
       summary: AuthorizationsByIDAndError
@@ -1847,7 +1847,7 @@ paths:
         - authorizations
       parameters:
         - $ref: '#/paths/~1consents~1%7BID%7D/parameters/0'
-        - $ref: '#/paths/~1otp/post/parameters/1'
+        - $ref: '#/paths/~1login/post/parameters/1'
         - $ref: '#/paths/~1consents~1%7BID%7D/parameters/1'
         - $ref: '#/paths/~1consents~1%7BID%7D/parameters/2'
         - $ref: '#/paths/~1consents~1%7BID%7D/parameters/3'
@@ -1903,21 +1903,21 @@ paths:
         '200':
           $ref: '#/paths/~1login/post/responses/200'
         '400':
-          $ref: '#/paths/~1otp/post/responses/400'
+          $ref: '#/paths/~1login/post/responses/400'
         '401':
-          $ref: '#/paths/~1otp/post/responses/401'
+          $ref: '#/paths/~1login/post/responses/401'
         '403':
-          $ref: '#/paths/~1otp/post/responses/403'
+          $ref: '#/paths/~1login/post/responses/403'
         '404':
-          $ref: '#/paths/~1otp/post/responses/404'
+          $ref: '#/paths/~1login/post/responses/404'
         '405':
-          $ref: '#/paths/~1otp/post/responses/405'
+          $ref: '#/paths/~1login/post/responses/405'
         '406':
-          $ref: '#/paths/~1otp/post/responses/406'
+          $ref: '#/paths/~1login/post/responses/406'
         '501':
-          $ref: '#/paths/~1otp/post/responses/501'
+          $ref: '#/paths/~1login/post/responses/501'
         '503':
-          $ref: '#/paths/~1otp/post/responses/503'
+          $ref: '#/paths/~1login/post/responses/503'
   /login:
     post:
       tags:
@@ -1925,87 +1925,6 @@ paths:
       description: The HTTP request `POST /login` is used to login to DFSP application by providing credentials.
       summary: DFSP user login
       operationId: DFSPLogin
-      parameters:
-        - $ref: '#/paths/~1otp/post/parameters/0'
-        - $ref: '#/paths/~1otp/post/parameters/1'
-        - $ref: '#/paths/~1consents~1%7BID%7D/parameters/1'
-        - $ref: '#/paths/~1consents~1%7BID%7D/parameters/3'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/DFSPLoginRequest'
-            example:
-              userName: dfspa.user.name
-              password: dfspa.user.password
-              consentRequestId: 3b346cec-47b3-4def-b870-edb255aaf6c3
-      responses:
-        '200':
-          description: OK
-        '400':
-          $ref: '#/paths/~1otp/post/responses/400'
-        '401':
-          $ref: '#/paths/~1otp/post/responses/401'
-        '403':
-          $ref: '#/paths/~1otp/post/responses/403'
-        '404':
-          $ref: '#/paths/~1otp/post/responses/404'
-        '405':
-          $ref: '#/paths/~1otp/post/responses/405'
-        '406':
-          $ref: '#/paths/~1otp/post/responses/406'
-        '501':
-          $ref: '#/paths/~1otp/post/responses/501'
-        '503':
-          $ref: '#/paths/~1otp/post/responses/503'
-  /authorize:
-    post:
-      tags:
-        - DFSPSim
-      description: The HTTP request `POST /authorize` is used to grant consent by a DFSP user.
-      summary: DFSP user authorization
-      operationId: DFSPAuthorize
-      parameters:
-        - $ref: '#/paths/~1otp/post/parameters/0'
-        - $ref: '#/paths/~1otp/post/parameters/1'
-        - $ref: '#/paths/~1consents~1%7BID%7D/parameters/1'
-        - $ref: '#/paths/~1consents~1%7BID%7D/parameters/3'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/DFSPAuthorizeRequest'
-            example:
-              userName: dfspa.user.name
-              consentRequestId: 3b346cec-47b3-4def-b870-edb255aaf6c3
-      responses:
-        '200':
-          $ref: '#/paths/~1login/post/responses/200'
-        '400':
-          $ref: '#/paths/~1otp/post/responses/400'
-        '401':
-          $ref: '#/paths/~1otp/post/responses/401'
-        '403':
-          $ref: '#/paths/~1otp/post/responses/403'
-        '404':
-          $ref: '#/paths/~1otp/post/responses/404'
-        '405':
-          $ref: '#/paths/~1otp/post/responses/405'
-        '406':
-          $ref: '#/paths/~1otp/post/responses/406'
-        '501':
-          $ref: '#/paths/~1otp/post/responses/501'
-        '503':
-          $ref: '#/paths/~1otp/post/responses/503'
-  /otp:
-    post:
-      tags:
-        - DFSPSim
-      description: The HTTP request `POST /otp` is used to send OTP to a DFSP user (most likely through SMS).
-      summary: DFSP Send OTP
-      operationId: SendOTP
       parameters:
         - name: Accept
           in: header
@@ -2031,14 +1950,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SendOTPRequest'
+              $ref: '#/components/schemas/DFSPLoginRequest'
             example:
               userName: dfspa.user.name
+              password: dfspa.user.password
               consentRequestId: 3b346cec-47b3-4def-b870-edb255aaf6c3
-              message: '9876'
       responses:
-        '202':
-          description: Accepted
+        '200':
+          description: OK
         '400':
           description: Bad Request
           content:
@@ -2070,78 +1989,159 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/paths/~1otp/post/responses/400/content/application~1json/schema'
+                $ref: '#/paths/~1login/post/responses/400/content/application~1json/schema'
           headers:
             Content-Length:
-              $ref: '#/paths/~1otp/post/responses/400/headers/Content-Length'
+              $ref: '#/paths/~1login/post/responses/400/headers/Content-Length'
             Content-Type:
-              $ref: '#/paths/~1otp/post/responses/400/headers/Content-Type'
+              $ref: '#/paths/~1login/post/responses/400/headers/Content-Type'
         '403':
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '#/paths/~1otp/post/responses/400/content/application~1json/schema'
+                $ref: '#/paths/~1login/post/responses/400/content/application~1json/schema'
           headers:
             Content-Length:
-              $ref: '#/paths/~1otp/post/responses/400/headers/Content-Length'
+              $ref: '#/paths/~1login/post/responses/400/headers/Content-Length'
             Content-Type:
-              $ref: '#/paths/~1otp/post/responses/400/headers/Content-Type'
+              $ref: '#/paths/~1login/post/responses/400/headers/Content-Type'
         '404':
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: '#/paths/~1otp/post/responses/400/content/application~1json/schema'
+                $ref: '#/paths/~1login/post/responses/400/content/application~1json/schema'
           headers:
             Content-Length:
-              $ref: '#/paths/~1otp/post/responses/400/headers/Content-Length'
+              $ref: '#/paths/~1login/post/responses/400/headers/Content-Length'
             Content-Type:
-              $ref: '#/paths/~1otp/post/responses/400/headers/Content-Type'
+              $ref: '#/paths/~1login/post/responses/400/headers/Content-Type'
         '405':
           description: Method Not Allowed
           content:
             application/json:
               schema:
-                $ref: '#/paths/~1otp/post/responses/400/content/application~1json/schema'
+                $ref: '#/paths/~1login/post/responses/400/content/application~1json/schema'
           headers:
             Content-Length:
-              $ref: '#/paths/~1otp/post/responses/400/headers/Content-Length'
+              $ref: '#/paths/~1login/post/responses/400/headers/Content-Length'
             Content-Type:
-              $ref: '#/paths/~1otp/post/responses/400/headers/Content-Type'
+              $ref: '#/paths/~1login/post/responses/400/headers/Content-Type'
         '406':
           description: Not Acceptable
           content:
             application/json:
               schema:
-                $ref: '#/paths/~1otp/post/responses/400/content/application~1json/schema'
+                $ref: '#/paths/~1login/post/responses/400/content/application~1json/schema'
           headers:
             Content-Length:
-              $ref: '#/paths/~1otp/post/responses/400/headers/Content-Length'
+              $ref: '#/paths/~1login/post/responses/400/headers/Content-Length'
             Content-Type:
-              $ref: '#/paths/~1otp/post/responses/400/headers/Content-Type'
+              $ref: '#/paths/~1login/post/responses/400/headers/Content-Type'
         '501':
           description: Not Implemented
           content:
             application/json:
               schema:
-                $ref: '#/paths/~1otp/post/responses/400/content/application~1json/schema'
+                $ref: '#/paths/~1login/post/responses/400/content/application~1json/schema'
           headers:
             Content-Length:
-              $ref: '#/paths/~1otp/post/responses/400/headers/Content-Length'
+              $ref: '#/paths/~1login/post/responses/400/headers/Content-Length'
             Content-Type:
-              $ref: '#/paths/~1otp/post/responses/400/headers/Content-Type'
+              $ref: '#/paths/~1login/post/responses/400/headers/Content-Type'
         '503':
           description: Service Unavailable
           content:
             application/json:
               schema:
-                $ref: '#/paths/~1otp/post/responses/400/content/application~1json/schema'
+                $ref: '#/paths/~1login/post/responses/400/content/application~1json/schema'
           headers:
             Content-Length:
-              $ref: '#/paths/~1otp/post/responses/400/headers/Content-Length'
+              $ref: '#/paths/~1login/post/responses/400/headers/Content-Length'
             Content-Type:
-              $ref: '#/paths/~1otp/post/responses/400/headers/Content-Type'
+              $ref: '#/paths/~1login/post/responses/400/headers/Content-Type'
+  /authorize:
+    post:
+      tags:
+        - DFSPSim
+      description: The HTTP request `POST /authorize` is used to grant consent by a DFSP user.
+      summary: DFSP user authorization
+      operationId: DFSPAuthorize
+      parameters:
+        - $ref: '#/paths/~1login/post/parameters/0'
+        - $ref: '#/paths/~1login/post/parameters/1'
+        - $ref: '#/paths/~1consents~1%7BID%7D/parameters/1'
+        - $ref: '#/paths/~1consents~1%7BID%7D/parameters/3'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DFSPAuthorizeRequest'
+            example:
+              userName: dfspa.user.name
+              consentRequestId: 3b346cec-47b3-4def-b870-edb255aaf6c3
+      responses:
+        '200':
+          $ref: '#/paths/~1login/post/responses/200'
+        '400':
+          $ref: '#/paths/~1login/post/responses/400'
+        '401':
+          $ref: '#/paths/~1login/post/responses/401'
+        '403':
+          $ref: '#/paths/~1login/post/responses/403'
+        '404':
+          $ref: '#/paths/~1login/post/responses/404'
+        '405':
+          $ref: '#/paths/~1login/post/responses/405'
+        '406':
+          $ref: '#/paths/~1login/post/responses/406'
+        '501':
+          $ref: '#/paths/~1login/post/responses/501'
+        '503':
+          $ref: '#/paths/~1login/post/responses/503'
+  /sendOTP:
+    post:
+      tags:
+        - DFSPSim
+      description: The HTTP request `POST /sendOTP` is used to send OTP to a DFSP user (most likely through SMS).
+      summary: DFSP Send OTP
+      operationId: SendOTP
+      parameters:
+        - $ref: '#/paths/~1login/post/parameters/0'
+        - $ref: '#/paths/~1login/post/parameters/1'
+        - $ref: '#/paths/~1consents~1%7BID%7D/parameters/1'
+        - $ref: '#/paths/~1consents~1%7BID%7D/parameters/3'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendOTPRequest'
+            example:
+              userName: dfspa.user.name
+              consentRequestId: 3b346cec-47b3-4def-b870-edb255aaf6c3
+              message: '9876'
+      responses:
+        '202':
+          description: Accepted
+        '400':
+          $ref: '#/paths/~1login/post/responses/400'
+        '401':
+          $ref: '#/paths/~1login/post/responses/401'
+        '403':
+          $ref: '#/paths/~1login/post/responses/403'
+        '404':
+          $ref: '#/paths/~1login/post/responses/404'
+        '405':
+          $ref: '#/paths/~1login/post/responses/405'
+        '406':
+          $ref: '#/paths/~1login/post/responses/406'
+        '501':
+          $ref: '#/paths/~1login/post/responses/501'
+        '503':
+          $ref: '#/paths/~1login/post/responses/503'
   /verifyOTPorSecret:
     post:
       tags:
@@ -2150,8 +2150,8 @@ paths:
       summary: /verifyOTPorSecret
       operationId: VerifyOTPorSecret
       parameters:
-        - $ref: '#/paths/~1otp/post/parameters/0'
-        - $ref: '#/paths/~1otp/post/parameters/1'
+        - $ref: '#/paths/~1login/post/parameters/0'
+        - $ref: '#/paths/~1login/post/parameters/1'
         - $ref: '#/paths/~1consents~1%7BID%7D/parameters/1'
         - $ref: '#/paths/~1consents~1%7BID%7D/parameters/3'
       requestBody:
@@ -2174,26 +2174,26 @@ paths:
         '200':
           $ref: '#/paths/~1login/post/responses/200'
         '400':
-          $ref: '#/paths/~1otp/post/responses/400'
+          $ref: '#/paths/~1login/post/responses/400'
         '401':
-          $ref: '#/paths/~1otp/post/responses/401'
+          $ref: '#/paths/~1login/post/responses/401'
         '403':
-          $ref: '#/paths/~1otp/post/responses/403'
+          $ref: '#/paths/~1login/post/responses/403'
         '404':
-          $ref: '#/paths/~1otp/post/responses/404'
+          $ref: '#/paths/~1login/post/responses/404'
         '405':
-          $ref: '#/paths/~1otp/post/responses/405'
+          $ref: '#/paths/~1login/post/responses/405'
         '406':
-          $ref: '#/paths/~1otp/post/responses/406'
+          $ref: '#/paths/~1login/post/responses/406'
         '501':
-          $ref: '#/paths/~1otp/post/responses/501'
+          $ref: '#/paths/~1login/post/responses/501'
         '503':
-          $ref: '#/paths/~1otp/post/responses/503'
-  '/otp-secret/{ID}':
+          $ref: '#/paths/~1login/post/responses/503'
+  '/OTPorSecret/{ID}':
     get:
       tags:
         - DFSPSim
-      description: 'The HTTP request `GET /otp-secret/{ID}` is used to get OTP or Secret from DFSP.'
+      description: 'The HTTP request `GET /OTPorSecret/{ID}` is used to get OTP or Secret from DFSP.'
       summary: Get OTP or Secret for specified consentRequestId
       operationId: GetOTPorSecret
       parameters:
@@ -2215,21 +2215,21 @@ paths:
                   value:
                     value: xx auth secret xx
         '400':
-          $ref: '#/paths/~1otp/post/responses/400'
+          $ref: '#/paths/~1login/post/responses/400'
         '401':
-          $ref: '#/paths/~1otp/post/responses/401'
+          $ref: '#/paths/~1login/post/responses/401'
         '403':
-          $ref: '#/paths/~1otp/post/responses/403'
+          $ref: '#/paths/~1login/post/responses/403'
         '404':
-          $ref: '#/paths/~1otp/post/responses/404'
+          $ref: '#/paths/~1login/post/responses/404'
         '405':
-          $ref: '#/paths/~1otp/post/responses/405'
+          $ref: '#/paths/~1login/post/responses/405'
         '406':
-          $ref: '#/paths/~1otp/post/responses/406'
+          $ref: '#/paths/~1login/post/responses/406'
         '501':
-          $ref: '#/paths/~1otp/post/responses/501'
+          $ref: '#/paths/~1login/post/responses/501'
         '503':
-          $ref: '#/paths/~1otp/post/responses/503'
+          $ref: '#/paths/~1login/post/responses/503'
   /store/consentRequests:
     post:
       tags:
@@ -2268,21 +2268,21 @@ paths:
         '200':
           $ref: '#/paths/~1login/post/responses/200'
         '400':
-          $ref: '#/paths/~1otp/post/responses/400'
+          $ref: '#/paths/~1login/post/responses/400'
         '401':
-          $ref: '#/paths/~1otp/post/responses/401'
+          $ref: '#/paths/~1login/post/responses/401'
         '403':
-          $ref: '#/paths/~1otp/post/responses/403'
+          $ref: '#/paths/~1login/post/responses/403'
         '404':
-          $ref: '#/paths/~1otp/post/responses/404'
+          $ref: '#/paths/~1login/post/responses/404'
         '405':
-          $ref: '#/paths/~1otp/post/responses/405'
+          $ref: '#/paths/~1login/post/responses/405'
         '406':
-          $ref: '#/paths/~1otp/post/responses/406'
+          $ref: '#/paths/~1login/post/responses/406'
         '501':
-          $ref: '#/paths/~1otp/post/responses/501'
+          $ref: '#/paths/~1login/post/responses/501'
         '503':
-          $ref: '#/paths/~1otp/post/responses/503'
+          $ref: '#/paths/~1login/post/responses/503'
   '/store/consentRequests/{ID}':
     get:
       tags:
@@ -2319,21 +2319,21 @@ paths:
                       - accounts.getBalance
                 callbackUri: 'pisp-app://callback.com'
         '400':
-          $ref: '#/paths/~1otp/post/responses/400'
+          $ref: '#/paths/~1login/post/responses/400'
         '401':
-          $ref: '#/paths/~1otp/post/responses/401'
+          $ref: '#/paths/~1login/post/responses/401'
         '403':
-          $ref: '#/paths/~1otp/post/responses/403'
+          $ref: '#/paths/~1login/post/responses/403'
         '404':
-          $ref: '#/paths/~1otp/post/responses/404'
+          $ref: '#/paths/~1login/post/responses/404'
         '405':
-          $ref: '#/paths/~1otp/post/responses/405'
+          $ref: '#/paths/~1login/post/responses/405'
         '406':
-          $ref: '#/paths/~1otp/post/responses/406'
+          $ref: '#/paths/~1login/post/responses/406'
         '501':
-          $ref: '#/paths/~1otp/post/responses/501'
+          $ref: '#/paths/~1login/post/responses/501'
         '503':
-          $ref: '#/paths/~1otp/post/responses/503'
+          $ref: '#/paths/~1login/post/responses/503'
 components:
   schemas:
     Counter:
@@ -2789,7 +2789,7 @@ components:
     SendOTPRequest:
       title: SendOTPRequest
       type: object
-      description: POST /otp request
+      description: POST /sendOTP request
       properties:
         userName:
           $ref: '#/components/schemas/UserName'
@@ -2828,7 +2828,7 @@ components:
     GetOTPorSecretResponse:
       title: GetOTPorSecretResponse
       type: object
-      description: 'Get /otp-secret/{consentRequestId} response'
+      description: 'Get /OTPorSecret/{ID} response'
       properties:
         value:
           oneOf:

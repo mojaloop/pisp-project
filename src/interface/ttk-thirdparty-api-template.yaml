@@ -1053,11 +1053,11 @@ paths:
           $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/501'
         503:
           $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/503'
-  /otp:
+  /sendOTP:
     post:
       tags:
         - DFSPSim
-      description: The HTTP request `POST /otp` is used to send OTP to a DFSP user (most likely through SMS).
+      description: The HTTP request `POST /sendOTP` is used to send OTP to a DFSP user (most likely through SMS).
       summary: DFSP Send OTP
       operationId: SendOTP
       parameters:
@@ -1143,11 +1143,11 @@ paths:
           $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/501'
         503:
           $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/503'
-  /otp-secret/{ID}:
+  /OTPorSecret/{ID}:
     get:
       tags:
         - DFSPSim
-      description: The HTTP request `GET /otp-secret/{ID}` is used to get OTP or Secret from DFSP.
+      description: The HTTP request `GET /OTPorSecret/{ID}` is used to get OTP or Secret from DFSP.
       summary: Get OTP or Secret for specified consentRequestId 
       operationId: GetOTPorSecret
       parameters:
@@ -1421,7 +1421,7 @@ components:
     SendOTPRequest:
       title: SendOTPRequest
       type: object
-      description: 'POST /otp request'
+      description: 'POST /sendOTP request'
       properties:
         userName:
           $ref: '#/components/schemas/UserName'
@@ -1451,7 +1451,7 @@ components:
     GetOTPorSecretResponse:
       title: GetOTPorSecretResponse
       type: object
-      description: 'Get /otp-secret/{consentRequestId} response'
+      description: 'Get /OTPorSecret/{ID} response'
       properties:
         value:
           oneOf:

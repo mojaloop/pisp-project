@@ -1,0 +1,50 @@
+@startuml
+title Adapters Tandem: clashing endpoints
+
+box "Mojaloop"
+  participant Switch as S
+end box
+
+box "SDK-scheme-adapter" 
+  participant "SDK-Incoming" as Sin
+  participant "SDK-Outgoing" as Sout
+end box
+
+box "Thirdparty-scheme-adapter"
+  participant "Thridparty-Incoming" as Tin
+  participant "Thirdparty-Outgoing" as Tout
+end box
+
+participant PISP as P
+
+note over Sin
+PUT /parties/MSISDN/...
+  callback registered
+  in the Mojaloop switch
+end note
+
+note over Tin
+PUT /parties/MSISDN/...
+  two callbacks for the same endpoint
+  can't be registered in Mojaloop Switch
+end note
+
+activate P
+P -> Tout: start the Transfer flow which involes using of\nGET /parties/MSISDN/12345678
+activate Tout
+Tout -> S: GET /parties/MSISDN/12345678
+activate S
+S --> Tout: 200 OK
+Tout --> Tin: register to PUB/SUB channel\nto receive data from PUT /parties
+activate Tin
+Tin -> Tin: waiting on PUT /parties/MSISDN/... callback
+Tout -> Tout: keeping open connection with PISP\nand waiting on data to be send down as response
+S -> S: resolving party information
+S -> Sin: PUT /parties/MSISDN/12345678
+deactivate S
+activate Sin
+Sin -> Sin: unexpected PUT /parties/MSISDN/12345678 - what to do with it?
+Tin -> Tin: still waiting on PUT /parties - it will never be delivered to Thirdparty-Incoming\n so it can't be PUB to Thirdparty-Outgoing
+deactivate Sin
+P -> P: still open connection and listening
+@enduml

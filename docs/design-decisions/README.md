@@ -97,3 +97,37 @@ This means that we don't need to unpack the `authorization` object, nor do we ne
 This does, however, require some thinking about the error cases when verifying the signed challenge. Here is what we have proposed:
 - internal (Mojaloop-hosted) fido: failure case for FIDO -> forward error to DFSP in `PUT /authorizations/{id}/error`
 - external fido: forward whole `PUT /authorizations/{id}` request to the DFSP to take care
+
+
+### SDK & Thirdparty adapters cooperation
+
+Separation of PISP (Thirdparty) related API services from DFSP affects a new problem when two scheme adapters come to the stage. The endpoint callbacks are clashing when the same callback is used in both scheme adapters.
+
+For example, in Transfer flow, we have a Discovery phase where `GET & PUT /parties` endpoints are used to retrieve additional information about transfer parties: DFSP Payer & Payee.  Unfortunately, when the SDK-scheme-adapter is deployed, all callbacks from Switch are delivered to the `PUT /parties` - the callback already registered by the SDK-scheme-adapter, and Thirdparty-scheme-adapter will not be able to register its callback for `PUT /parties`. 
+
+![clashing-endpoints](../out/design-decisions/tandem_clashing_endpoints.svg)
+
+To keep separation of concerns, we don't want to infect SDK-scheme-adapter with Thirdparty-scheme-adapter related logic and keep both scheme-adapters dedicated to their purpose.
+
+Two solutions:
+- A. Let be SDK-scheme-adapter a proxy for asynchronous  GET & PUT /parties endpoints. Then there is an SDK-scheme-adapter responsibility to distinguish and adequately handle incoming `PUT /parties` messages and forward them to Thirdparty-scheme-adapter. 
+  Problems: 
+  - A need to have different logic that governs corresponding asynchronous calls in both adapters for the same endpoint.
+  - A need to have additional configuration for Thirdparty Incoming callbacks endpoints
+![async-proxy](../out/design-decisions/tandem_async_proxy.svg)
+
+- B. Let expose synchronous GET /parties endpoint by the SDK-scheme-adapter so that Thirdparty-scheme-adapter can use it in a simplified way. 
+![sync-client-server](../out/design-decisions/tandem_sync_client_server.svg)
+  
+
+#### The solution B is good candidate to become the pattern of exposing the asynchronous GET/POST -> PUT sequence of calls/callbacks into one synchronous call interface on Outgoing sdk-scheme-adapter. 
+
+
+Problems:
+
+  - 1. Delivering Incoming (from the Switch) response to a proper instance of sdk-scheme-adapter service where the synchronous connection is waiting for data to be sent down to the listening client
+  - 2. Timeout/Expiry handling:
+    - 2.1. How long should we allow the client to listen and keep the open connection on the Outgoing side of the adapter, and how will we handle the expiration: 
+    - 2.2. Should we merely close the connection with the 408 request timeout status code?
+    - 2.3. Is there a need for additional cleanup?
+    - 2.4. What should we do if the Incoming response will come after expiry? 

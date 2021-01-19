@@ -47,7 +47,7 @@ paths:
                 scopes:
                   type: array
                   items:
-                    $ref: '#/paths/~1consents/post/requestBody/content/application~1json/schema/properties/scopes/items'
+                    $ref: '#/paths/~1store~1consentRequests~1%7BID%7D/post/requestBody/content/application~1json/schema'
                 authChannels:
                   type: array
                   items:
@@ -150,7 +150,7 @@ paths:
                     scopes:
                       type: array
                       items:
-                        $ref: '#/paths/~1consents/post/requestBody/content/application~1json/schema/properties/scopes/items'
+                        $ref: '#/paths/~1store~1consentRequests~1%7BID%7D/post/requestBody/content/application~1json/schema'
                     authChannels:
                       type: array
                       items:
@@ -188,7 +188,7 @@ paths:
                     scopes:
                       type: array
                       items:
-                        $ref: '#/paths/~1consents/post/requestBody/content/application~1json/schema/properties/scopes/items'
+                        $ref: '#/paths/~1store~1consentRequests~1%7BID%7D/post/requestBody/content/application~1json/schema'
                     authChannels:
                       type: array
                       items:
@@ -223,7 +223,7 @@ paths:
                     scopes:
                       type: array
                       items:
-                        $ref: '#/paths/~1consents/post/requestBody/content/application~1json/schema/properties/scopes/items'
+                        $ref: '#/paths/~1store~1consentRequests~1%7BID%7D/post/requestBody/content/application~1json/schema'
                     authChannels:
                       type: array
                       items:
@@ -257,7 +257,7 @@ paths:
                     scopes:
                       type: array
                       items:
-                        $ref: '#/paths/~1consents/post/requestBody/content/application~1json/schema/properties/scopes/items'
+                        $ref: '#/paths/~1store~1consentRequests~1%7BID%7D/post/requestBody/content/application~1json/schema'
                     authChannels:
                       type: array
                       items:
@@ -399,32 +399,7 @@ paths:
                 scopes:
                   type: array
                   items:
-                    title: Scope
-                    type: object
-                    description: Scope + Account Identifier mapping for a Consent.
-                    example: |
-                      {
-                        accountId: "dfsp.username.5678",
-                        actions: [ "accounts.transfer", "accounts.getBalance" ]
-                      }
-                    properties:
-                      accountId:
-                        $ref: '#/paths/~1thirdpartyRequests~1transactions/post/requestBody/content/application~1json/schema/properties/sourceAccountId/allOf/0'
-                      actions:
-                        type: array
-                        items:
-                          title: ConsentScopeType
-                          type: string
-                          enum:
-                            - accounts.getBalance
-                            - accounts.transfer
-                          description: |
-                            The scopes requested for a ConsentRequest.
-                            - "accounts.getBalance" - Get the balance of a given account.
-                            - "accounts.transfer" - Initiate a transfer from an account.
-                    required:
-                      - accountId
-                      - actions
+                    $ref: '#/paths/~1store~1consentRequests~1%7BID%7D/post/requestBody/content/application~1json/schema'
               required:
                 - id
                 - scopes
@@ -667,7 +642,7 @@ paths:
                     scopes:
                       type: array
                       items:
-                        $ref: '#/paths/~1consents/post/requestBody/content/application~1json/schema/properties/scopes/items'
+                        $ref: '#/paths/~1store~1consentRequests~1%7BID%7D/post/requestBody/content/application~1json/schema'
                     credential:
                       title: SignedCredential
                       type: object
@@ -744,7 +719,7 @@ paths:
                     scopes:
                       type: array
                       items:
-                        $ref: '#/paths/~1consents/post/requestBody/content/application~1json/schema/properties/scopes/items'
+                        $ref: '#/paths/~1store~1consentRequests~1%7BID%7D/post/requestBody/content/application~1json/schema'
                     credential:
                       title: UnsignedCredential
                       type: object
@@ -809,7 +784,7 @@ paths:
                     scopes:
                       type: array
                       items:
-                        $ref: '#/paths/~1consents/post/requestBody/content/application~1json/schema/properties/scopes/items'
+                        $ref: '#/paths/~1store~1consentRequests~1%7BID%7D/post/requestBody/content/application~1json/schema'
                     credential:
                       title: VerifiedCredential
                       type: object
@@ -1168,15 +1143,7 @@ paths:
                     Common ID between the FSPs for the transaction request object. The ID should be reused for resends of the same transaction request. A new ID should be generated for each new transaction request.
                 sourceAccountId:
                   allOf:
-                    - title: AccountAddress
-                      type: string
-                      description: |
-                        A long-lived unique account identifier provided by the DFSP. This MUST NOT
-                        be Bank Account Number or anything that may expose a User's private bank
-                        account information.
-                      pattern: '^([0-9A-Za-z_~\-\.]+[0-9A-Za-z_~\-])$'
-                      minLength: 1
-                      maxLength: 1023
+                    - $ref: '#/paths/~1store~1consentRequests~1%7BID%7D/post/requestBody/content/application~1json/schema/properties/accountId'
                   description: 'DFSP specific account identifiers, e.g. `dfspa.alice.1234`'
                 consentId:
                   allOf:
@@ -1553,7 +1520,7 @@ paths:
                     Common ID between the PISP and FSP for the Consent object This tells DFSP and auth-service which constent allows the PISP to initiate transaction.
                 sourceAccountId:
                   allOf:
-                    - $ref: '#/paths/~1thirdpartyRequests~1transactions/post/requestBody/content/application~1json/schema/properties/sourceAccountId/allOf/0'
+                    - $ref: '#/paths/~1store~1consentRequests~1%7BID%7D/post/requestBody/content/application~1json/schema/properties/accountId'
                   description: 'DFSP specific account identifiers, e.g. `dfspa.alice.1234`'
                 status:
                   type: string
@@ -1643,7 +1610,7 @@ paths:
                     Common ID between the PISP and FSP for the Consent object This tells DFSP and auth-service which consent allows the PISP to initiate transaction.
                 sourceAccountId:
                   allOf:
-                    - $ref: '#/paths/~1thirdpartyRequests~1transactions/post/requestBody/content/application~1json/schema/properties/sourceAccountId/allOf/0'
+                    - $ref: '#/paths/~1store~1consentRequests~1%7BID%7D/post/requestBody/content/application~1json/schema/properties/accountId'
                   description: 'DFSP specific account identifiers, e.g. `dfspa.alice.1234`'
                 status:
                   type: string
@@ -2230,43 +2197,35 @@ paths:
           $ref: '#/paths/~1login/post/responses/501'
         '503':
           $ref: '#/paths/~1login/post/responses/503'
-  /store/consentRequests:
-    post:
+  '/store/consentRequests/{ID}':
+    parameters:
+      - $ref: '#/paths/~1consents~1%7BID%7D/parameters/0'
+      - $ref: '#/paths/~1consents~1%7BID%7D/parameters/1'
+      - $ref: '#/paths/~1consents~1%7BID%7D/parameters/3'
+    get:
       tags:
         - DFSPSim
-      operationId: StoreConsentRequest
-      summary: StoreConsentRequest
+      operationId: GetConsentRequest
+      summary: GetConsentRequest
       description: |
-        The HTTP request `POST /store/consentRequests` is used by DFSP to store consentRequests.
-      parameters:
-        - $ref: '#/paths/~1consents~1%7BID%7D/parameters/1'
-        - $ref: '#/paths/~1consents~1%7BID%7D/parameters/3'
-      requestBody:
-        description: The consentRequest to store
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/paths/~1consentRequests/post/requestBody/content/application~1json/schema'
-            example:
-              id: '456'
-              initiatorId: pispA
-              authChannels:
-                - WEB
-                - OTP
-              scopes:
-                - accountId: dfspa.username.1234
-                  actions:
-                    - accounts.transfer
-                    - accounts.getBalance
-                - accountId: dfspa.username.5678
-                  actions:
-                    - accounts.transfer
-                    - accounts.getBalance
-              callbackUri: 'pisp-app://callback.com'
+        The HTTP request `GET /store/consentRequests/{ID}` is used by DFSP to load a specified consentRequest.
       responses:
         '200':
-          $ref: '#/paths/~1login/post/responses/200'
+          description: Response containing consentRequest details
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1store~1consentRequests~1%7BID%7D/post/requestBody/content/application~1json/schema'
+              example:
+                scopes:
+                  - accountId: dfspa.username.1234
+                    actions:
+                      - accounts.transfer
+                      - accounts.getBalance
+                  - accountId: dfspa.username.5678
+                    actions:
+                      - accounts.transfer
+                      - accounts.getBalance
         '400':
           $ref: '#/paths/~1login/post/responses/400'
         '401':
@@ -2283,41 +2242,66 @@ paths:
           $ref: '#/paths/~1login/post/responses/501'
         '503':
           $ref: '#/paths/~1login/post/responses/503'
-  '/store/consentRequests/{ID}':
-    get:
+    post:
       tags:
         - DFSPSim
-      operationId: GetConsentRequest
-      summary: GetConsentRequest
+      operationId: StoreConsentRequest
+      summary: StoreConsentRequest
       description: |
-        The HTTP request `GET /store/consentRequests/{ID}` is used by DFSP to load a specified consentRequest.
-      parameters:
-        - $ref: '#/paths/~1consents~1%7BID%7D/parameters/0'
-        - $ref: '#/paths/~1consents~1%7BID%7D/parameters/1'
-        - $ref: '#/paths/~1consents~1%7BID%7D/parameters/3'
+        The HTTP request `POST /store/consentRequests/{ID}` is used by a DFSP to store consentRequests.
+      requestBody:
+        description: The consentRequest to store
+        required: true
+        content:
+          application/json:
+            schema:
+              title: Scope
+              type: object
+              description: Scope + Account Identifier mapping for a Consent.
+              example: |
+                {
+                  accountId: "dfsp.username.5678",
+                  actions: [ "accounts.transfer", "accounts.getBalance" ]
+                }
+              properties:
+                accountId:
+                  title: AccountAddress
+                  type: string
+                  description: |
+                    A long-lived unique account identifier provided by the DFSP. This MUST NOT
+                    be Bank Account Number or anything that may expose a User's private bank
+                    account information.
+                  pattern: '^([0-9A-Za-z_~\-\.]+[0-9A-Za-z_~\-])$'
+                  minLength: 1
+                  maxLength: 1023
+                actions:
+                  type: array
+                  items:
+                    title: ConsentScopeType
+                    type: string
+                    enum:
+                      - accounts.getBalance
+                      - accounts.transfer
+                    description: |
+                      The scopes requested for a ConsentRequest.
+                      - "accounts.getBalance" - Get the balance of a given account.
+                      - "accounts.transfer" - Initiate a transfer from an account.
+              required:
+                - accountId
+                - actions
+            example:
+              scopes:
+                - accountId: dfspa.username.1234
+                  actions:
+                    - accounts.transfer
+                    - accounts.getBalance
+                - accountId: dfspa.username.5678
+                  actions:
+                    - accounts.transfer
+                    - accounts.getBalance
       responses:
         '200':
-          description: Response containing consentRequest details
-          content:
-            application/json:
-              schema:
-                $ref: '#/paths/~1consentRequests/post/requestBody/content/application~1json/schema'
-              example:
-                id: '456'
-                initiatorId: pispA
-                authChannels:
-                  - WEB
-                  - OTP
-                scopes:
-                  - accountId: dfspa.username.1234
-                    actions:
-                      - accounts.transfer
-                      - accounts.getBalance
-                  - accountId: dfspa.username.5678
-                    actions:
-                      - accounts.transfer
-                      - accounts.getBalance
-                callbackUri: 'pisp-app://callback.com'
+          $ref: '#/paths/~1login/post/responses/200'
         '400':
           $ref: '#/paths/~1login/post/responses/400'
         '401':

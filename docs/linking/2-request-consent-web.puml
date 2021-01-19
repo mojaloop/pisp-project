@@ -59,7 +59,7 @@ Switch -> DFSP ++:  ""POST /consentRequests""\n\
   ""}""
 autonumber 1 "<b>SIM-#</b>"
 
-DFSP -> DFSPAuthorizeSimulator: ""POST /store/consentRequests""
+DFSP -> DFSPAuthorizeSimulator: ""POST /store/consentRequests/456""
 DFSPAuthorizeSimulator -> DFSPAuthorizeSimulator: store consentRequest details
 DFSPAuthorizeSimulator -> DFSP: 201 Created
 autonumber 4 "<b>REQ-#</b>"

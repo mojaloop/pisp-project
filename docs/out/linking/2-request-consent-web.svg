@@ -220,8 +220,8 @@
   <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="40" x="1317" y="725.301">
     SIM-1
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="216" x="1361" y="725.301">
-    POST /store/consentRequests
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="248" x="1361" y="725.301">
+    POST /store/consentRequests/456
   </text>
   <path stroke="#a80036" d="M2515.5 759.5h42M2557.5 759.5v13M2516.5 772.5h41"/>
   <path fill="#A80036" stroke="#a80036" d="M2526.5 768.5l-10 4 10 4-4-4z"/>

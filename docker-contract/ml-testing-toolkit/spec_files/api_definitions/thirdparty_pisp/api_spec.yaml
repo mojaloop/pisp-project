@@ -2231,6 +2231,110 @@ paths:
           $ref: '#/paths/~1otp/post/responses/501'
         '503':
           $ref: '#/paths/~1otp/post/responses/503'
+  /store/consentRequests:
+    post:
+      tags:
+        - DFSPSim
+      operationId: StoreConsentRequest
+      summary: StoreConsentRequest
+      description: |
+        The HTTP request `POST /store/consentRequests` is used by DFSP to store consentRequests.
+      parameters:
+        - $ref: '#/paths/~1consents~1%7BID%7D/parameters/1'
+        - $ref: '#/paths/~1consents~1%7BID%7D/parameters/3'
+      requestBody:
+        description: The consentRequest to store
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/paths/~1consentRequests/post/requestBody/content/application~1json/schema'
+            example:
+              id: '456'
+              initiatorId: pispA
+              authChannels:
+                - WEB
+                - OTP
+              scopes:
+                - accountId: dfspa.username.1234
+                  actions:
+                    - accounts.transfer
+                    - accounts.getBalance
+                - accountId: dfspa.username.5678
+                  actions:
+                    - accounts.transfer
+                    - accounts.getBalance
+              callbackUri: 'pisp-app://callback.com'
+      responses:
+        '200':
+          $ref: '#/paths/~1login/post/responses/200'
+        '400':
+          $ref: '#/paths/~1otp/post/responses/400'
+        '401':
+          $ref: '#/paths/~1otp/post/responses/401'
+        '403':
+          $ref: '#/paths/~1otp/post/responses/403'
+        '404':
+          $ref: '#/paths/~1otp/post/responses/404'
+        '405':
+          $ref: '#/paths/~1otp/post/responses/405'
+        '406':
+          $ref: '#/paths/~1otp/post/responses/406'
+        '501':
+          $ref: '#/paths/~1otp/post/responses/501'
+        '503':
+          $ref: '#/paths/~1otp/post/responses/503'
+  '/store/consentRequests/{ID}':
+    get:
+      tags:
+        - DFSPSim
+      operationId: GetConsentRequest
+      summary: GetConsentRequest
+      description: |
+        The HTTP request `GET /store/consentRequests/{ID}` is used by DFSP to load a specified consentRequest.
+      parameters:
+        - $ref: '#/paths/~1consents~1%7BID%7D/parameters/0'
+        - $ref: '#/paths/~1consents~1%7BID%7D/parameters/1'
+        - $ref: '#/paths/~1consents~1%7BID%7D/parameters/3'
+      responses:
+        '200':
+          description: Response containing consentRequest details
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1consentRequests/post/requestBody/content/application~1json/schema'
+              example:
+                id: '456'
+                initiatorId: pispA
+                authChannels:
+                  - WEB
+                  - OTP
+                scopes:
+                  - accountId: dfspa.username.1234
+                    actions:
+                      - accounts.transfer
+                      - accounts.getBalance
+                  - accountId: dfspa.username.5678
+                    actions:
+                      - accounts.transfer
+                      - accounts.getBalance
+                callbackUri: 'pisp-app://callback.com'
+        '400':
+          $ref: '#/paths/~1otp/post/responses/400'
+        '401':
+          $ref: '#/paths/~1otp/post/responses/401'
+        '403':
+          $ref: '#/paths/~1otp/post/responses/403'
+        '404':
+          $ref: '#/paths/~1otp/post/responses/404'
+        '405':
+          $ref: '#/paths/~1otp/post/responses/405'
+        '406':
+          $ref: '#/paths/~1otp/post/responses/406'
+        '501':
+          $ref: '#/paths/~1otp/post/responses/501'
+        '503':
+          $ref: '#/paths/~1otp/post/responses/503'
 components:
   schemas:
     Counter:

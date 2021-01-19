@@ -121,13 +121,4 @@ Two solutions:
   
 
 #### The solution B is good candidate to become the pattern of exposing the asynchronous GET/POST -> PUT sequence of calls/callbacks into one synchronous call interface on Outgoing sdk-scheme-adapter. 
-
-
-Problems:
-
-  - 1. Delivering Incoming (from the Switch) response to a proper instance of sdk-scheme-adapter service where the synchronous connection is waiting for data to be sent down to the listening client
-  - 2. Timeout/Expiry handling:
-    - 2.1. How long should we allow the client to listen and keep the open connection on the Outgoing side of the adapter, and how will we handle the expiration: 
-    - 2.2. Should we merely close the connection with the 408 request timeout status code?
-    - 2.3. Is there a need for additional cleanup?
-    - 2.4. What should we do if the Incoming response will come after expiry? 
+![generic-pattern](../out/design-decisions/tandem_generic_pattern.svg)

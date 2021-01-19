@@ -161,13 +161,14 @@ DFSPAuthorizeSimulator is api service for demo purposes. For the `Web flow` it i
 
 It is implemented as extension for TestingToolkit service which allows to define testing scenarios as TTK rules driven by `username` parameter.
 
-- SIM-1 PISP application redirects user to `authUri`, passing `consentRequestId` as query parameter.
-- SIM-4 WebBrowser renders DFSP login form
-- SIM-5 User submits the `username` and `password` at DFSP login page
-- SIM-9 WebBrowser renders grant consent page
-- SIM-10 User grants consent
-- SIM-13 in response from /authorize call is generated `secret`  
-- SIM-14 `secret` is appended to callbackUri as query parameter
+- SIM-4 PISP application redirects user to `authUri`, passing `consentRequestId` as query parameter.
+- SIM-7 WebBrowser renders DFSP login form
+- SIM-8 User submits the `username` and `password` at DFSP login page
+- SIM-12 WebBrowser retrieves the consentRequest details - including the list of accounts
+- SIM-15 WebBrowser renders grant consent page
+- SIM-16 User grants consent
+- SIM-19 in response from /authorize call is generated `secret`  
+- SIM-20 `secret` is appended to callbackUri as query parameter
 ### 1.4.2. OTP
 
 When using the OTP authentication channel, the DFSP will send the User some sort

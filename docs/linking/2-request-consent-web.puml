@@ -59,7 +59,7 @@ Switch -> DFSP ++:  ""POST /consentRequests""\n\
   ""}""
 autonumber 1 "<b>SIM-#</b>"
 
-DFSP -> DFSPAuthorizeSimulator: ""POST /consentRequests""
+DFSP -> DFSPAuthorizeSimulator: ""POST /store/consentRequests""
 DFSPAuthorizeSimulator -> DFSPAuthorizeSimulator: store consentRequest details
 DFSPAuthorizeSimulator -> DFSP: 201 Created
 autonumber 4 "<b>REQ-#</b>"
@@ -123,7 +123,7 @@ WebBrowser -> DFSPAuthorizeSimulator: ""POST /login""\n\
   ""}""
 DFSPAuthorizeSimulator -> DFSPAuthorizeSimulator: verify User's credentials \ntake action on **TTK defined rule for username**"
 DFSPAuthorizeSimulator -> WebBrowser: 201 OK: user authorized
-WebBrowser -> DFSPAuthorizeSimulator: GET /consentRequests/456
+WebBrowser -> DFSPAuthorizeSimulator: GET /store/consentRequests/456
 DFSPAuthorizeSimulator -> DFSPAuthorizeSimulator: find consentRequest details for id=456
 DFSPAuthorizeSimulator -> WebBrowser: 200 OK: consent requests details in response payload
 WebBrowser -> WebBrowser: RENDER **ask the User to grant consent** for **consentRequestId=456**\n

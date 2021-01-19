@@ -15,7 +15,8 @@ end box
 
 participant PISP as P
 
-activate Tout, P
+activate Tout
+activate P
 P -> Tout: start workflow
 Tout -> Sout: sync GET <urlResource>
 activate Sout

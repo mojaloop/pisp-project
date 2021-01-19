@@ -111,9 +111,10 @@ To keep separation of concerns, we don't want to infect SDK-scheme-adapter with 
 
 Two solutions:
 - A. Let be SDK-scheme-adapter a proxy for asynchronous  GET & PUT /parties endpoints. Then there is an SDK-scheme-adapter responsibility to distinguish and adequately handle incoming `PUT /parties` messages and forward them to Thirdparty-scheme-adapter. 
-  Problems: 
+  
+Problems: 
   - A need to have different logic that governs corresponding asynchronous calls in both adapters for the same endpoint.
-  - A need to have additional configuration for Thirdparty Incoming callbacks endpoints
+  - A need to have additional configuration for Thirdparty-Incoming callbacks endpoints
 ![async-proxy](../out/design-decisions/tandem_async_proxy.svg)
 
 - B. Let expose synchronous GET /parties endpoint by the SDK-scheme-adapter so that Thirdparty-scheme-adapter can use it in a simplified way. 

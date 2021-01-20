@@ -1,6 +1,6 @@
 # Scheme Adapters: SDK & Thirdparty
 
-## layout of sdk-scheme-adapter and thridparty-scheme-adapter
+## layout of sdk-scheme-adapter and Thirdparty-scheme-adapter
 
 ![adapters-layout](./adapters-layout.png)
 

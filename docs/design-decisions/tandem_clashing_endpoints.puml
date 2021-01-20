@@ -11,7 +11,7 @@ box "SDK-scheme-adapter"
 end box
 
 box "Thirdparty-scheme-adapter"
-  participant "Thridparty-Incoming" as Tin
+  participant "Thirdparty-Incoming" as Tin
   participant "Thirdparty-Outgoing" as Tout
 end box
 

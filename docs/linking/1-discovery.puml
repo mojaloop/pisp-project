@@ -27,7 +27,7 @@ end note
 
 ...
 
-PISP -> Switch ++: ""GET /parties/ALIAS/username1234""\n\
+PISP -> Switch ++: ""GET /something/account_login_username_thingo""\n\
   ""  FSIOP-Source: pispa""\n\
   ""  FSIOP-Destination: dfspa""
 Switch --> PISP: ""202 Accepted""
@@ -43,8 +43,8 @@ DFSP -> Switch ++: ""PUT /parties/ALIAS/username1234""\n\
   ""  FSIOP-Source: dfspa""\n\
   ""  FSIOP-Destination: pispa""\n\
   ""{ [""\n\
-  ""  { id: "dfspa.username.1234", currency: "ZAR" },""\n\
-  ""  { id: "dfspa.username.5678", currency: "USD" }""\n\
+  ""  { accountNickname: "Tx account", id: "dfspa.username.1234", currency: "ZAR" },""\n\
+  ""  { accountNickname: "spending account", id: "dfspa.username.5678", currency: "USD" }""\n\
   ""] }""
 Switch --> DFSP: ""200 OK""
 deactivate DFSP

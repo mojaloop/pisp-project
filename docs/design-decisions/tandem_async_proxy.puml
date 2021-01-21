@@ -1,0 +1,48 @@
+@startuml
+
+box "Mojaloop"
+  participant Switch as S
+end box
+
+box "SDK-scheme-adapter" 
+  participant "SDK-Incoming" as Sin
+  participant "SDK-Outgoing" as Sout
+end box
+box "Thirdparty-scheme-adapter"
+  participant "Thirdparty-Incoming" as Tin
+  participant "Thirdparty-Outgoing" as Tout
+end box
+
+participant PISP as P
+
+P -> Tout: start the Transfer flow which involes using of\nGET /parties/MSISDN/12345678
+activate P
+activate Tout
+
+Tout -> Sout: GET /parties/MSISDN/12345678
+activate Sout
+Sout --> Tout: 200 OK
+Sout -> Sout: discover that this call is comming\nfrom Thirdparty-scheme-adapter
+Tout -> Tout: register to PUB/SUB channel\nand wait for response
+
+Sout -> S: GET /parties/MSISDN/12345678
+activate S
+deactivate Tout
+S --> Sout: 200 OK
+deactivate Sout
+
+S -> S: finding party information
+
+S -> Sin: PUT /parties/MSISDN/12345678
+deactivate S
+activate Sin
+Sin -> Sin: discover that this call should be propagated\nto the proper Thirdparty-scheme-adapter' callback
+Sin -> Tin: PUT /parties/MSISDN/12345678
+activate Tin
+deactivate Sin
+Tin -> Tout: send PUT payload via PUB/SUB channel
+deactivate Tin
+activate Tout
+Tout -> Tout: consume PUT payload received via PUB/SUB channel to PISP and continue the Transfer flow
+Tout -> P: send result of Transfer flow
+@enduml

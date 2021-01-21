@@ -1,5 +1,8 @@
 {
   "plantuml.diagramsRoot": "docs",
   "plantuml.exportFormat": "png",
-  "plantuml.exportOutDir": "docs/out"
+  "plantuml.exportOutDir": "docs/out",
+  "cSpell.words": [
+    "Thirdparty"
+  ]
 }

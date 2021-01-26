@@ -25,7 +25,7 @@
       "generateTimeout": 30000
     },
     "ERROR_HANDLING": {
-      "includeCauseExtension": true,
+      "includeCauseExtension": false,
       "truncateExtensions": true
     },
     "SWITCH_ENDPOINT": "http://central-ledger:3001",

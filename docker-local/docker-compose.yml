@@ -247,7 +247,7 @@ services:
       - "4001:4001"
       - "4002:4002"
     environment:
-      - LOG_LEVEL=debug
+      - LOG_LEVEL=info
       - ALS_DISPLAY_ROUTES=false
     networks:
       - mojaloop-net

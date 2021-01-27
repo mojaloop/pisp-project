@@ -13,8 +13,9 @@
         - [1.4.2. OTP](#142-otp)
     - [1.5. Grant consent](#15-grant-consent)
     - [1.6. Credential registration](#16-credential-registration)
-        - [1.6.1. Requesting a challenge](#161-requesting-a-challenge)
-        - [1.6.2. Finalizing the credential](#162-finalizing-the-credential)
+        - [1.6.1. Deriving the challenge](#161-requesting-a-challenge)
+        - [1.6.2. Registering the credential](#162-registering-the-credential)
+        - [1.6.2. Finalizing the Consent](#163-finalizing-the-consent)
 - [2. Unlinking](#2-unlinking)
 - [3. Third-party credential registration](#3-third-party-credential-registration)
     - [3.1. Authentication](#31-authentication)
@@ -236,6 +237,33 @@ information about the credential on the Consent resource:
 2. A `credentialType` field set to `FIDO`
 3. a `status` field set to `PENDING`
 
+> **Note:** Generic `Credential` objects  
+> While we are focussed on FIDO first, we don't want to exclude PISPs who want 
+> to offer services to users over other channels, eg. USSD or SMS, for this
+> reason, the API also supports a `GENERIC` Credential type, i.e.:
+>```
+> CredentialTypeGeneric {
+>   credentialType: 'GENERIC'
+>   status: 'PENDING',
+>   payload: {
+>     publicKey: base64(...),
+>     signature: base64(...),
+>   }
+> }
+>```
+
+The DFSP receives the `PUT /consents/{id}` call from the PISP, and optionally 
+validates the Credential object included in the request body. The DFSP then 
+asks the Auth-Service to create the `Consent` object, and validate the Credential.
+
+If the DFSP recieves a `PUT /consents/{id}` callback from the Auth-Service, with a
+`credential.status` of `VERIFIED`, it knows that the credential is valid according
+to the Auth Service.
+
+Otherwise, if it recieves a `PUT /consents/{id}/error` callback, it knows that something
+went wrong with registering the Consent and associated credential, and can inform
+the PISP accordingly.
+
 
 The Auth service is then responsible for calling `POST /participants/CONSENTS/{id}`.
 This call will associate the `consentId` with the auth-service's `participantId` and 
@@ -244,33 +272,20 @@ allows us to look up the Auth service given a `consentId` at a later date.
 ![Credential registration: Register](../out/linking/5a-credential-registration.svg)
 
 
-### 1.6.3. Finalizing the credential
+### 1.6.3. Finalizing the Consent
 
-Once the PISP has derived the challenge, the PISP will generate a new
-credential on the device, digitally sign the challenge, and provide the some new
-information about the credential on the Consent resource:
+Once the DFSP is satisfied that the credential is valid, it calls 
+`POST /participants/THIRD_PARTY_LINK/{id}` for each account in the 
+`Consent.scopes` list. This entry is a representation of the account
+link between the PISP and DFSP, which the PISP can use to specify 
+the _source of funds_ for the transaction request.
 
-1. The credential itself (the public component)
-2. A signature of the challenge (to be verified against this public component)
-3. The ID of the credential understood by the device itself
-
-[
-   todo:
-   - signing metadata so that the signed challenge can be understood by the DFSP
-   - ensure that we have covered cases where there is a cred per scope or something...
-
-]
-
-This information is provided back to the Auth service, which then verifies that
-the signature is correct. It then updates the status of the credential to
-`"VERIFIED"`, and notifies both the PISP and the DFSP about these new changes
-to the Consent resource.
+Finally, the DFSP calls `PUT /consent/{id}` with the finalized Consent
+object it received from the Auth Service.
 
 
 ![Credential registration: Finalize](../out/linking/5b-finalize_consent.svg)
 
-<!-- > **Notes:**
-> 1. As with step [1.6.1](#161-requesting-a-challenge) above, the PISP doesn't need to include the `FSPIOP-Destination` header in `PUT /consents/{ID}`. The switch is responsible for finding the responsible Auth service for this consent based on the `consentId` -->
 
 # 2. Unlinking
 

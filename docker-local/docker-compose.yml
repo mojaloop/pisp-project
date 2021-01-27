@@ -34,9 +34,6 @@ services:
       - "simulator:172.17.0.1"
       - "host.docker.internal:172.17.0.1"
       - "simulator.local:172.17.0.1"
-      - "dfspa-sdk-scheme-adapter:172.17.0.1"
-      - "dfspb-sdk-scheme-adapter:172.17.0.1"
-      - "pisp-sdk-scheme-adapter:172.17.0.1"
 
   objstore:
     image: mongo:latest
@@ -822,7 +819,6 @@ services:
     restart: always
     ports:
       - "6379:6379"
-
 
   als-consent-oracle:
     container_name: als-consent-oracle

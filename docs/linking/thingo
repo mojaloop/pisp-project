@@ -13,11 +13,6 @@ CredentialTypeFIDO {
   credentialType: 'FIDO',
   status: 'PENDING',
   payload: PublicKeyCredential
-  <!-- payload: {
-    credentialId: string,
-    //metadata contains signature
-    metadata: AuthenticationAttestationResponse
-  } -->
 }
 
 CredentialTypeGeneric {

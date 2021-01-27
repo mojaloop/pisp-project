@@ -1,0 +1,138 @@
+@startuml
+
+!pragma teoz true
+
+title PISP Linking: Credential registration (verification)
+
+participant "PISP" as PISP
+
+box "Mojaloop"
+    participant "Thirdparty-API-Adapter" as Switch
+    participant "Account Lookup Service" as ALS
+    participant "Auth Service" as Auth
+end box
+
+participant "DFSP" as DFSP
+
+autonumber 10 "<b>CRED-#</b>"
+
+...
+
+
+rnote over DFSP
+  DFSP is now satisfied that the Consent registered by the PISP is valid,
+  and now proceeds to register with the ALS:
+    - `THIRD_PARTY_LINK` (optional - for routing of funds to a Third Party Link)
+    - `Consent` - to allow for `GET /consent/{ID}` calls etc. Will point to the fspId of the Auth Service responsible for the Consent
+  ALS
+end note
+
+loop for each scope in ""Consents.scopes""
+
+DFSP -> ALS: ""POST /participants/THIRD_PARTY_LINK/dfsp.username.5678"" \n\
+""  FSIOP-Source: dfspa""\n\
+""  {""\n\
+""    fspId: "dfspa",""\n\
+""  }""
+ALS --> DFSP: ""202 Accepted""
+
+rnote over ALS #DimGray
+  ALS registers a new entry in the THIRD_PARTY_LINK oracle
+end note
+
+ALS -> DFSP: ""PUT /participants/THIRD_PARTY_LINK/dfsp.username.5678"" \n\
+""  FSIOP-Source: account-lookup-service""\n\
+""  FSIOP-Destination: dfspa""\n\
+""  {""\n\
+""    fspId: "dfspa",""\n\
+""  }""
+DFSP --> ALS: ""200 OK""
+end
+
+
+' //TODO: Auth Service registers with the ALS
+Auth -> ALS: ""POST /participants/CONSENTS/123"" \n\
+""  FSIOP-Source: dfspa""\n\
+""  {""\n\
+""    fspId: "central-auth",""\n\
+""  }""
+ALS --> Auth: ""202 Accepted""
+
+rnote over ALS #DimGray
+  ALS registers a new entry in the Consents oracle
+end note
+
+ALS -> DFSP: ""PUT /participants/CONSENTS/123"" \n\
+""  FSIOP-Source: account-lookup-service""\n\
+""  FSIOP-Destination: dfspa""\n\
+""  {""\n\
+""    fspId: "central-auth",""\n\
+""  }""
+DFSP --> ALS: ""200 OK""
+
+
+
+rnote over DFSP
+  Now that the Credentials are verified and registered with the Auth Service,
+  the DFSP can update the PISP with the final status
+end note
+
+DFSP -> Switch: ""PUT /consents/123""\n\
+""  FSIOP-Source: dfspa""\n\
+""  FSPIOP-Destination: pispa""\n\
+""  {""\n\
+    ""  scopes: [""\n\
+    ""    {""\n\
+    ""      accountId: "dfsp.username.1234",""\n\
+    ""      actions: [ "accounts.transfer", "accounts.getBalance" ],""\n\
+    ""    },""\n\
+    ""    {""\n\
+    ""      accountId: "dfsp.username.5678",""\n\
+    ""      actions: [ "accounts.transfer", "accounts.getBalance" ],""\n\
+    ""    },""\n\
+    ""  ],""\n\
+    ""  credential: {""\n\
+    ""    credentialId: "9876", //keyHandleId in FIDO speak ""\n\
+    ""    credentialType: "FIDO",""\n\
+    ""    **status: "VERIFIED", //this is new!** ""\n\
+    ""    signature: base64(...),""\n\
+    ""    payload: base64(...),""\n\
+    ' Q3. Need to define this metadata better
+    ""    metadata: ... //TODO - metadata that the DFSP can use to verify this signature""\n\
+    ""  }""\n\
+""  }""
+DFSP --> Switch: ""200 OK""
+
+Switch -> PISP ++: ""PUT /consents/123""\n\
+""  FSIOP-Source: dfspa""\n\
+""  FSPIOP-Destination: pispa""\n\
+""  {""\n\
+    ""  scopes: [""\n\
+    ""    {""\n\
+    ""      accountId: "dfsp.username.1234",""\n\
+    ""      actions: [ "accounts.transfer", "accounts.getBalance" ],""\n\
+    ""    },""\n\
+    ""    {""\n\
+    ""      accountId: "dfsp.username.5678",""\n\
+    ""      actions: [ "accounts.transfer", "accounts.getBalance" ],""\n\
+    ""    },""\n\
+    ""  ],""\n\
+    ""  credential: {""\n\
+    ""    credentialId: "9876", //keyHandleId in FIDO speak ""\n\
+    ""    credentialType: "FIDO",""\n\
+    ""    **status: "VERIFIED", //this is new!** ""\n\
+    ""    signature: base64(...),""\n\
+    ""    payload: base64(...),""\n\
+    ' Q3. Need to define this metadata better
+    ""    metadata: ... //TODO - metadata that the DFSP can use to verify this signature""\n\
+    ""  }""\n\
+""  }""
+PISP --> Switch: ""200 OK""
+
+
+note over PISP, DFSP
+  Now we have a new identifier that the PISP can use to initiate transactions, a registered credential, and that credential is stored in the auth-service
+end note
+
+
+@enduml

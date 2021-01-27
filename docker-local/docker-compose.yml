@@ -826,9 +826,7 @@ services:
 
   als-consent-oracle:
     container_name: als-consent-oracle
-    #image: "mojaloop/als-consent-oracle:v0.0.2"
-    build:
-      context: https://github.com/kleyow/als-consent-oracle.git#refactor/get-handler
+    image: "mojaloop/als-consent-oracle:v0.0.3"
     command: sh -c "/opt/als-consent-oracle/wait4/wait4.js als-consent-oracle && npm run migrate && npm run start"
     ports:
       - "16000:3000"

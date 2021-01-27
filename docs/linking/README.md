@@ -3,23 +3,25 @@
 <!-- TOC -->
 
 - [1. Linking](#1-linking)
-    - [1.1. Pre-linking](#11-pre-linking)
-    - [1.2. Discovery](#12-discovery)
-    - [1.3. Request consent](#13-request-consent)
-        - [1.3.1. Web](#131-web)
-        - [1.3.2. OTP / SMS](#132-otp--sms)
-    - [1.4. Authentication](#14-authentication)
-        - [1.4.1. Web](#141-web)
-        - [1.4.2. OTP](#142-otp)
-    - [1.5. Grant consent](#15-grant-consent)
-    - [1.6. Credential registration](#16-credential-registration)
+  - [1.1. Pre-linking](#11-pre-linking)
+  - [1.2. Discovery](#12-discovery)
+  - [1.3. Request consent](#13-request-consent)
+    - [1.3.1. Web](#131-web)
+    - [1.3.2. OTP / SMS](#132-otp--sms)
+  - [1.4. Authentication](#14-authentication)
+    - [1.4.1. Web](#141-web)
+      - [DFSPAuthorizeSimulator](#dfspauthorizesimulator)
+    - [1.4.2. OTP](#142-otp)
+      - [DFSPAuthorizeSimulator](#dfspauthorizesimulator-1)
+  - [1.5. Grant consent](#15-grant-consent)
+  - [1.6. Credential registration](#16-credential-registration)
         - [1.6.1. Deriving the challenge](#161-requesting-a-challenge)
         - [1.6.2. Registering the credential](#162-registering-the-credential)
         - [1.6.2. Finalizing the Consent](#163-finalizing-the-consent)
 - [2. Unlinking](#2-unlinking)
 - [3. Third-party credential registration](#3-third-party-credential-registration)
-    - [3.1. Authentication](#31-authentication)
-    - [3.2. Credential registration](#32-credential-registration)
+  - [3.1. Authentication](#31-authentication)
+  - [3.2. Credential registration](#32-credential-registration)
 
 <!-- /TOC -->
 
@@ -106,7 +108,7 @@ information:
   the ability to view a balance of a specific account and send funds from an
   account).
 
-Some information depends on the authentication channel used (either web or OTP).
+Some information depends on the authentication channel used (either Web or OTP).
 Specically, if the web authentication channel is used, the following extra
 information is required:
 
@@ -124,11 +126,16 @@ a place where the user can prove their identity (e.g., by logging in).
 
 ### 1.3.2. OTP / SMS
 
+<<<<<<< HEAD
 In the OTP authentication channel, the result is the PISP being instructed on
 a specific URL where this supposed user should be redirected. This URL should be
 a place where the user can prove their identity (e.g., by logging in).
 
 ![Request consent](../out/linking/2-request-consent-otp.svg)
+=======
+In the OTP authentication channel, the result is the PISP should ask user to enter OTP token received on his registered device (phone). **/sendOTP** is an example endpoint used by DFSP to send OTP token to user's device.
+![Request consent](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/mojaloop/pisp/master/docs/linking/2-request-consent-otp.puml)
+>>>>>>> d0b93bf726403683dc98b4f6b162c555d8aa85ee
 
 ## 1.4. Authentication
 
@@ -163,6 +170,19 @@ to the PISP in the `scopes` field.
 
 ![Authentication (Web)](../out/linking/3-authentication-web.svg)
 
+#### DFSPAuthorizeSimulator
+DFSPAuthorizeSimulator is api service for demo purposes. For the `Web flow` it is the backend  for single page application (SPA) which demonstrates the process of User's authorizations and granting the consents at DFSP web service.
+
+It is implemented as extension for TestingToolkit service which allows to define testing scenarios as TTK rules driven by `username` parameter.
+
+- SIM-4 PISP application redirects user to `authUri`, passing `consentRequestId` as query parameter.
+- SIM-7 WebBrowser renders DFSP login form
+- SIM-8 User submits the `username` and `password` at DFSP login page
+- SIM-12 WebBrowser retrieves the consentRequest details - including the list of accounts
+- SIM-15 WebBrowser renders grant consent page
+- SIM-16 User grants consent
+- SIM-19 in response from /authorize call is generated `secret`  
+- SIM-20 `secret` is appended to callbackUri as query parameter
 ### 1.4.2. OTP
 
 When using the OTP authentication channel, the DFSP will send the User some sort
@@ -171,6 +191,10 @@ should prompt the user for this secret and then provide that back to the DFSP.
 
 ![Authentication (OTP)](../out/linking/3-authentication-otp.svg)
 
+#### DFSPAuthorizeSimulator
+DFSPAuthorizeSimulator is api service for demo purposes. For the `OTP flow` it exposes `/sendOTP` API endpoint which allows to simulate sending SMS token to the User's device.
+
+It is implemented as extension for TestingToolkit service which allows to define testing scenarios as TTK rules driven by `username` parameter.
 ## 1.5. Grant consent
 
 Now that mutual trust has been established between all three parties, the DFSP

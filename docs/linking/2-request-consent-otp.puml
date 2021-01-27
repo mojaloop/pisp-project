@@ -9,6 +9,7 @@ box "Mojaloop"
 end box
 
 participant DFSP
+participant DFSPAuthorizeSimulator
 
 autonumber 1 "<b>REQ-#</b>"
 
@@ -56,6 +57,15 @@ Switch -> DFSP ++:  ""POST /consentRequests""\n\
 DFSP --> Switch: ""202 Accepted""
 deactivate Switch
 
+DFSP -> DFSPAuthorizeSimulator : ""POST /sendOTP""\n\
+  ""{""\n\
+  ""  consentRequestId: "456",""\n\
+  ""  username:"username.1234", ""\n\
+  ""  message: "0987" ""\n\
+  ""}""
+
+DFSPAuthorizeSimulator -> DFSPAuthorizeSimulator: take action on **TTK defined rule for username**
+DFSPAuthorizeSimulator -> DFSP: 201 OK
 DFSP -> Switch ++: ""PUT /consentRequests/456""\n\
   ""  FSIOP-Source: dfspa""\n\
   ""  FSIOP-Destination: pispa""\n\
@@ -78,7 +88,7 @@ end note
 
 deactivate DFSP
 
-Switch -> PISP ++: ""PUT /consentRequests/456""\n\
+Switch -> PISP: ""PUT /consentRequests/456""\n\
   ""  FSIOP-Source: dfspa""\n\
   ""  FSIOP-Destination: pispa""\n\
 ""{""\n\

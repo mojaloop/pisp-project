@@ -970,6 +970,313 @@ paths:
           $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/501'
         503:
           $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/503'
+  /login:
+    post:
+      tags:
+        - DFSPSim
+      description: The HTTP request `POST /login` is used to login to DFSP application by providing credentials.
+      summary: DFSP user login
+      operationId: DFSPLogin
+      parameters:
+        #Headers
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/Accept.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/Content-Length.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/Content-Type.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/X-Forwarded-For.yaml'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DFSPLoginRequest'
+            example:
+              userName: 'dfspa.user.name'
+              password: 'dfspa.user.password'
+              consentRequestId: '3b346cec-47b3-4def-b870-edb255aaf6c3'
+      responses:
+        200:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/200'
+        400:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/400'
+        401:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/401'
+        403:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/403'
+        404:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/404'
+        405:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/405'
+        406:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/406'
+        501:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/501'
+        503:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/503'
+  /authorize:
+    post:
+      tags:
+        - DFSPSim
+      description: The HTTP request `POST /authorize` is used to grant consent by a DFSP user.
+      summary: DFSP user authorization
+      operationId: DFSPAuthorize
+      parameters:
+        #Headers
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/Accept.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/Content-Length.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/Content-Type.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/X-Forwarded-For.yaml'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DFSPAuthorizeRequest'
+            example:
+              userName: 'dfspa.user.name'
+              consentRequestId: '3b346cec-47b3-4def-b870-edb255aaf6c3'
+      responses:
+        200:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/200'
+        400:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/400'
+        401:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/401'
+        403:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/403'
+        404:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/404'
+        405:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/405'
+        406:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/406'
+        501:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/501'
+        503:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/503'
+  /sendOTP:
+    post:
+      tags:
+        - DFSPSim
+      description: The HTTP request `POST /sendOTP` is used to send OTP to a DFSP user (most likely through SMS).
+      summary: DFSP Send OTP
+      operationId: SendOTP
+      parameters:
+        #Headers
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/Accept.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/Content-Length.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/Content-Type.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/X-Forwarded-For.yaml'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendOTPRequest'
+            example:
+              userName: 'dfspa.user.name'
+              consentRequestId: '3b346cec-47b3-4def-b870-edb255aaf6c3'
+              message: '9876'
+      responses:
+        202:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/202'
+        400:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/400'
+        401:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/401'
+        403:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/403'
+        404:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/404'
+        405:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/405'
+        406:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/406'
+        501:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/501'
+        503:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/503'
+  /verifyOTPorSecret:
+    post:
+      tags:
+        - DFSPSim
+      description: The HTTP request `POST /verifyOTPorSecret` is used to verify OTP or Secret received from PISP.
+      summary: /verifyOTPorSecret
+      operationId: VerifyOTPorSecret
+      parameters:
+        #Headers
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/Accept.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/Content-Length.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/Content-Type.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/X-Forwarded-For.yaml'
+      requestBody:
+        description: Perform verification of OTP or Secret
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerifyOTPorSecretRequest'
+            examples:
+              sample1:
+                value:
+                  consentRequestId: '3b346cec-47b3-4def-b870-edb255aaf6c3'
+                  value: '1234'
+              sample2:
+                value:
+                  consentRequestId: '3b346cec-47b3-4def-b870-edb255aaf6c4'
+                  value: 'xx auth secret xx'
+      responses:
+        200:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/200'
+        400:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/400'
+        401:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/401'
+        403:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/403'
+        404:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/404'
+        405:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/405'
+        406:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/406'
+        501:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/501'
+        503:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/503'
+  /OTPorSecret/{ID}:
+    get:
+      tags:
+        - DFSPSim
+      description: The HTTP request `GET /OTPorSecret/{ID}` is used to get OTP or Secret from DFSP.
+      summary: Get OTP or Secret for specified consentRequestId 
+      operationId: GetOTPorSecret
+      parameters:
+        #Path
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/ID.yaml'
+        #Headers
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/Content-Type.yaml'
+        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/X-Forwarded-For.yaml'
+      responses:
+        200:
+          description: Response containing details of the OTP or Secret
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetOTPorSecretResponse'
+              examples:
+                sample1:
+                  value:
+                    value: '1234'
+                sample2:
+                  value:
+                    value: 'xx auth secret xx'
+        400:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/400'
+        401:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/401'
+        403:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/403'
+        404:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/404'
+        405:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/405'
+        406:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/406'
+        501:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/501'
+        503:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/503'
+  /store/consentRequests/{ID}:
+    parameters:
+      #Path
+      - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/ID.yaml'
+      #Headers
+      - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/Content-Type.yaml'
+      - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/X-Forwarded-For.yaml'
+    get:
+      tags:
+        - DFSPSim
+      operationId: GetConsentRequest
+      summary: GetConsentRequest
+      description: |
+        The HTTP request `GET /store/consentRequests/{ID}` is used by DFSP to load a specified consentRequest.
+      responses:
+        200:
+          description: Response containing consentRequest details
+          content:
+            application/json:
+              schema:
+                $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/schemas/Scope.yaml'
+              example:
+                scopes:
+                  - accountId: dfspa.username.1234
+                    actions:
+                      - accounts.transfer
+                      - accounts.getBalance
+                  - accountId: dfspa.username.5678
+                    actions:
+                      - accounts.transfer
+                      - accounts.getBalance
+        400:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/400'
+        401:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/401'
+        403:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/403'
+        404:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/404'
+        405:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/405'
+        406:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/406'
+        501:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/501'
+        503:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/503'
+    post:
+      tags:
+        - DFSPSim
+      operationId: StoreConsentRequest
+      summary: StoreConsentRequest
+      description: |
+        The HTTP request `POST /store/consentRequests/{ID}` is used by a DFSP to store consentRequests.
+      requestBody:
+        description: The consentRequest to store
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/schemas/Scope.yaml'
+            example:
+              scopes:
+                - accountId: dfspa.username.1234
+                  actions:
+                    - accounts.transfer
+                    - accounts.getBalance
+                - accountId: dfspa.username.5678
+                  actions:
+                    - accounts.transfer
+                    - accounts.getBalance
+      responses:
+        200:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/200'
+        400:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/400'
+        401:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/401'
+        403:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/403'
+        404:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/404'
+        405:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/405'
+        406:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/406'
+        501:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/501'
+        503:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/503'
+
 components:
   # TODO: Move to `mojaloop/api-snippets.
   schemas:
@@ -1018,6 +1325,25 @@ components:
       required:
         - authentication
         - authenticationValue
+    SecretValue:
+      title: SecretValue
+      type: string
+      minLength: 1
+      maxLength: 128
+    UserName:
+      title: UserName
+      type: string
+      minLength: 1
+      maxLength: 25
+    Password:
+      title: Password
+      type: string
+      minLength: 1
+      maxLength: 25
+    Message:
+      title: Message
+      type: string
+      description: OTP value or error message
     InboundAuthorizationsIDPutResponse:
       description: information about result of required (via POST) /authorization
       title: AuthorizationsIDPutResponse
@@ -1053,3 +1379,72 @@ components:
         - transactionId
         - transactionRequestId
         - quote
+    DFSPLoginRequest:
+      title: DFSPLoginRequest
+      type: object
+      description: 'POST /login request'
+      properties:
+        userName:
+          $ref: '#/components/schemas/UserName'
+        password:
+          $ref: '#/components/schemas/Password'
+        consentRequestId:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/schemas/CorrelationId.yaml'
+      required:
+        - userName
+        - password
+        - consentRequestId
+    DFSPAuthorizeRequest:
+      title: DFSPAuthorizeRequest
+      type: object
+      description: 'POST /authorize request'
+      properties:
+        userName:
+          $ref: '#/components/schemas/UserName'
+        consentRequestId:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/schemas/CorrelationId.yaml'
+      required:
+        - userName
+        - consentRequestId
+    SendOTPRequest:
+      title: SendOTPRequest
+      type: object
+      description: 'POST /sendOTP request'
+      properties:
+        userName:
+          $ref: '#/components/schemas/UserName'
+        consentRequestId:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/schemas/CorrelationId.yaml'
+        message:
+          $ref: '#/components/schemas/Message'
+      required:
+        - userName
+        - consentRequestId
+        - message
+    VerifyOTPorSecretRequest:
+      title: VerifyOTPorSecretRequest
+      type: object
+      description: 'POST /verifyOTPorSecret request'
+      properties:
+        consentRequestId:
+          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/schemas/CorrelationId.yaml'
+        value:
+          oneOf:
+            - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/schemas/OtpValue.yaml'
+            - $ref: '#/components/schemas/SecretValue'
+          description: Contains the OTP or Secret value.
+      required:
+        - consentRequestId
+        - value
+    GetOTPorSecretResponse:
+      title: GetOTPorSecretResponse
+      type: object
+      description: 'Get /OTPorSecret/{ID} response'
+      properties:
+        value:
+          oneOf:
+            - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/schemas/OtpValue.yaml'
+            - $ref: '#/components/schemas/SecretValue'
+          description: Contains the OTP or Secret value.
+      required:
+        - value

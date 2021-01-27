@@ -6,7 +6,7 @@ networks:
 
 services:
   central-ledger:
-    image: mojaloop/central-ledger:v11.1.4.3-pisp
+    image: mojaloop/central-ledger:v11.3.3.0-pisp
     container_name: central-ledger
     command: sh -c "/opt/central-ledger/wait4/wait4.js central-ledger && node src/api/index.js"
     ports:
@@ -76,7 +76,7 @@ services:
       - "simulator.local:172.17.0.1"
 
   ml-api-adapter:
-    image: mojaloop/ml-api-adapter:v11.0.3.0-pisp
+    image: mojaloop/ml-api-adapter:v11.1.2
     container_name: ml-api-adapter
     command: sh -c "/opt/ml-api-adapter/wait4/wait4.js ml-api-adapter && node src/api/index.js"
     ports:
@@ -167,7 +167,7 @@ services:
       - "transaction-request-service:172.17.0.1"
 
   transaction-requests-service:
-    image: mojaloop/transaction-requests-service:v10.6.1.1-pisp
+    image: mojaloop/transaction-requests-service:v11.1.3.0-pisp
 
     container_name: transaction-requests-service
     ports:
@@ -237,7 +237,7 @@ services:
        - ./docker/wait4:/opt/central-settlement/wait4
 
   account-lookup-service:
-    image: mojaloop/account-lookup-service:v10.3.0.2-pisp
+    image: mojaloop/account-lookup-service:v11.1.2.0-pisp
     container_name: account-lookup-service
     command: sh -c "/opt/account-lookup-service/wait4/wait4.js account-lookup-service && npm run migrate && node src/index.js server"
     ports:
@@ -291,7 +291,7 @@ services:
 
   ## DFSP A
   dfspa-backend:
-    image: "mojaloop/mojaloop-simulator:v9.4.1.8-pisp"
+    image: "mojaloop/mojaloop-simulator:v11.3.0.0-pisp"
     # build:
     #   context: ../../mojaloop-simulator
     #   dockerfile: ./Dockerfile
@@ -309,8 +309,8 @@ services:
       - "dfspa-thirdparty-scheme-adapter-outbound:172.17.0.1"
 
   dfspa-sdk-scheme-adapter:
-    image: "mojaloop/sdk-scheme-adapter:v10.6.2.7-pisp"
-    # build: 
+    image: "mojaloop/sdk-scheme-adapter:v11.10.1.1-pisp"
+    # build:
     #   context: ../../sdk-scheme-adapter
     #   dockerfile: ./Dockerfile
 
@@ -351,7 +351,7 @@ services:
 
   dfspa-thirdparty-scheme-adapter-inbound:
     image: "mojaloop/thirdparty-scheme-adapter:v11.21.0"
-    # build: 
+    # build:
     #   context: ../../thirdparty-scheme-adapter
     #   dockerfile: ./docker/Dockerfile
     container_name: dfspa-thirdparty-scheme-adapter-inbound
@@ -401,7 +401,7 @@ services:
 
   dfspa-thirdparty-scheme-adapter-outbound:
     image: "mojaloop/thirdparty-scheme-adapter:v11.21.0"
-    # build: 
+    # build:
     #   context: ../../thirdparty-scheme-adapter
     #   dockerfile: ./docker/Dockerfile
     container_name: dfspa-thirdparty-scheme-adapter-outbound
@@ -456,7 +456,7 @@ services:
 
   ## DFSP B
   dfspb-backend:
-    image: "mojaloop/mojaloop-simulator:v9.4.1.8-pisp"
+    image: "mojaloop/mojaloop-simulator:v11.3.0.0-pisp"
     container_name: dfspb-backend
     env_file: ./dfsp_b/dfsp_b_backend.env
     volumes:
@@ -471,8 +471,8 @@ services:
       - "dfspb-thirdparty-scheme-adapter-outbound:172.17.0.1"
 
   dfspb-sdk-scheme-adapter:
-    image: "mojaloop/sdk-scheme-adapter:v10.6.2.7-pisp"
-    # build: 
+    image: "mojaloop/sdk-scheme-adapter:v11.10.1.1-pisp"
+    # build:
     #   context: ../../sdk-scheme-adapter
     #   dockerfile: ./Dockerfile
     container_name: dfspb-sdk-scheme-adapter
@@ -512,7 +512,7 @@ services:
 
   dfspb-thirdparty-scheme-adapter-inbound:
     image: "mojaloop/thirdparty-scheme-adapter:v11.21.0"
-    # build: 
+    # build:
     #   context: ../../thirdparty-scheme-adapter
     #   dockerfile: ./docker/Dockerfile
     container_name: dfspb-thirdparty-scheme-adapter-inbound
@@ -560,7 +560,7 @@ services:
 
   dfspb-thirdparty-scheme-adapter-outbound:
     image: "mojaloop/thirdparty-scheme-adapter:v11.21.0"
-    # build: 
+    # build:
     #   context: ../../thirdparty-scheme-adapter
     #   dockerfile: ./docker/Dockerfile
     container_name: dfspb-thirdparty-scheme-adapter-outbound
@@ -616,7 +616,7 @@ services:
 
   ## PISP
   pisp-backend:
-    image: "mojaloop/mojaloop-simulator:v9.4.1.8-pisp"
+    image: "mojaloop/mojaloop-simulator:v11.3.0.0-pisp"
     container_name: pisp-backend
     env_file: ./pisp/pisp_backend.env
     volumes:
@@ -631,8 +631,8 @@ services:
       - "pisp-thirdparty-scheme-adapter-outbound:172.17.0.1"
 
   pisp-sdk-scheme-adapter:
-    image: "mojaloop/sdk-scheme-adapter:v10.6.2.7-pisp"
-    # build: 
+    image: "mojaloop/sdk-scheme-adapter:v11.10.1.1-pisp"
+    # build:
     #   context: ../../sdk-scheme-adapter
     #   dockerfile: ./Dockerfile
     container_name: pisp-sdk-scheme-adapter
@@ -673,7 +673,7 @@ services:
 
   pisp-thirdparty-scheme-adapter-inbound:
     image: "mojaloop/thirdparty-scheme-adapter:v11.21.0"
-    # build: 
+    # build:
     #   context: ../../thirdparty-scheme-adapter
     #   dockerfile: ./docker/Dockerfile
     container_name: pisp-thirdparty-scheme-adapter-inbound

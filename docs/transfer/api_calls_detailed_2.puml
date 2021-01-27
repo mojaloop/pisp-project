@@ -98,7 +98,11 @@ rnote left of D2 #Light
     },
     "partyIdInfo": {
       "partyIdType": "THIRD_PARTY_LINK",
+<<<<<<< HEAD
       "partyIdentifier": "qwerty-56789",
+=======
+      "partyIdentifier": "???",
+>>>>>>> d0b93bf726403683dc98b4f6b162c555d8aa85ee
       "fspId": "dfspa"
     },
     },

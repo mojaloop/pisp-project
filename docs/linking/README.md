@@ -74,6 +74,11 @@ The result of this phase is a list of potential accounts available for linking.
 The user will then choose one or more of these source accounts and the PISP will
 provide these to the DFSP when requesting consent.
 
+The DFSP MAY send back an `accountNickname` to the PISP in the list of accounts. This list
+will be displayed to the user in the PISP application for them to select which accounts
+they wish to link. A DFSP could obfuscate some of the nickname depending on their requirements
+for displaying account information without authorizing the user.
+
 **NOTE:** When using the Web authentication channel, it's possible that the
 choices made (i.e., the accounts to link with) will be overridden by the user in
 a web view. In other words, the user may decide during the Authentication phase
@@ -175,19 +180,10 @@ for how the User can prove that it consents to each individual transfer in the
 future.
 
 This phase consists exclusively of the DFSP requesting that a new consent be
-created. This request must be conveyed both to the PISP itself and the Auth
-service which will be the record of trust for these resources.
-
-The Auth service is then responsible for calling `POST /participants/CONSENTS/{id}`.
-This call will associate the `consentId` with the auth-service's `participantId` and 
-allows us to look up the Auth service given a `consentId` at a later date.
+created. This request must be conveyed both to the PISP itself.
 
 ![Grant consent](../out/linking/4-grant-consent.svg)
 
-> Notes:
-<!-- > 1. In this example, the DFSP uses the [proposed broadcast](https://github.com/mojaloop/pisp/issues/79) method of sending a `POST /consents` with 2 values for the `FSPIOP-Destination` header.
-> 2. In this example, the DFSP here uses the `central-auth` service. In the case where a DFSP runs their own auth-service, they would be expected to update their own auth-service separately to this call.
-> 3. We don't explicitly record the relationship between a DFSP & Auth service. It's assumed that a DFSP knows the `participantId` of it's Auth service, and can address it correctly using the `FSPIOP-Destination` header in the `POST /consents` request. -->
 
 ## 1.6. Credential registration
 
@@ -200,30 +196,55 @@ service inside the consent resource. When future transfers are proposed, we will
 require that those transfers be digitally signed by the FIDO credential (in this
 case, the private key) in order to be considered valid.
 
-This credential registration is composed of two phases: requesting a challenge
-and finalizing the signature.
+This credential registration is composed of three phases: (1) deriving the 
+challenge, (2) registering the credential, and (3) finalizing the consent.
 
 ### 1.6.1. Deriving the challenge
 
-[ 
-   todo: define these rules
-      - challenge is derived 
-      - dfsp can choose whether or not there is 1 credential for entire consent, or if it is a credential-scope-arrangement
-
-]
+The PISP must derive the challenge to be used as an input to the FIDO Key 
+Registration step. This challenge must not be guessable ahead of time by 
+the PISP.
 
 
-Based on the scope 
+1. _let `consentId` be the value of the `body.consentId` in the `POST /consents` request_  
+2. _let `scopes` be the value of `body.scopes` in the `POST /consents` request_
 
-<!-- In this sub-phase, the PISP requests a challenge from the Auth service, which
-will be returned to the PISP via a `PUT /consents/{ID}` API call.
+3. The PISP must build the JSON object `rawChallenge`
+```
+{
+   "consentId": <body.consentId>,
+   "scopes": <body.scopes>
+}
+```
 
-![Credential registration: Challenge](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/mojaloop/pisp/master/docs/linking/5a-credential-registration.puml)
+4. Next, the PISP must convert this json object to a string representation using a [RFC-8785 Canonical JSON format](https://tools.ietf.org/html/rfc8785)
 
-> **Notes:**
-> 1. Similar to a `GET /parties` call, the PISP doesn't need to include the `FSPIOP-Destination` header in `POST /consents/{ID}/generateChallenge`. The switch is responsible for finding the responsible Auth service for this consent based on the `consentId` -->
+5. Finally, the PISP must calculate a SHA-256 hash of the canonicalized JSON string.
+i.e. `SHA256(CJSON(rawChallenge))`
 
-### 1.6.2. Finalizing the credential
+The output of this algorithm, `challenge` will be used as the challenge for the [FIDO registration flow](https://webauthn.guide/#registration)
+
+
+### 1.6.2 Registering the credential
+
+
+Once the PISP has derived the challenge, the PISP will generate a new
+credential on the device, digitally signing the challenge, and provide the some new
+information about the credential on the Consent resource:
+
+1. The `PublicKeyCredential` object - which contains the key's Id, and an [AuthenticatorAttestationResponse](https://w3c.github.io/webauthn/#iface-authenticatorattestationresponse) which contains the public key
+2. A `credentialType` field set to `FIDO`
+3. a `status` field set to `PENDING`
+
+
+The Auth service is then responsible for calling `POST /participants/CONSENTS/{id}`.
+This call will associate the `consentId` with the auth-service's `participantId` and 
+allows us to look up the Auth service given a `consentId` at a later date.
+
+![Credential registration: Register](../out/linking/5a-credential-registration.svg)
+
+
+### 1.6.3. Finalizing the credential
 
 Once the PISP has derived the challenge, the PISP will generate a new
 credential on the device, digitally sign the challenge, and provide the some new
@@ -246,7 +267,7 @@ the signature is correct. It then updates the status of the credential to
 to the Consent resource.
 
 
-![Credential registration: Register](../out/linking/5-credential-registration.svg)
+![Credential registration: Finalize](../out/linking/5b-finalize_consent.svg)
 
 <!-- > **Notes:**
 > 1. As with step [1.6.1](#161-requesting-a-challenge) above, the PISP doesn't need to include the `FSPIOP-Destination` header in `PUT /consents/{ID}`. The switch is responsible for finding the responsible Auth service for this consent based on the `consentId` -->

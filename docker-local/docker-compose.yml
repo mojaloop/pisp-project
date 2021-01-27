@@ -237,7 +237,7 @@ services:
        - ./docker/wait4:/opt/central-settlement/wait4
 
   account-lookup-service:
-    image: mojaloop/account-lookup-service:v11.1.2.0-pisp
+    image: mojaloop/account-lookup-service:v11.1.2.2-pisp
     container_name: account-lookup-service
     command: sh -c "/opt/account-lookup-service/wait4/wait4.js account-lookup-service && npm run migrate && node src/index.js server"
     ports:
@@ -267,6 +267,7 @@ services:
       - "simulator.local:172.17.0.1"
       - "transaction-request-service:172.17.0.1"
       - "central-ledger:172.17.0.1"
+      - "als-consent-oracle:172.17.0.1"
 
   mysql-als:
     image: mysql/mysql-server
@@ -309,11 +310,10 @@ services:
       - "dfspa-thirdparty-scheme-adapter-outbound:172.17.0.1"
 
   dfspa-sdk-scheme-adapter:
-    image: "mojaloop/sdk-scheme-adapter:v11.10.1.1-pisp"
+    image: "mojaloop/sdk-scheme-adapter:v11.10.1.3-pisp"
     # build:
     #   context: ../../sdk-scheme-adapter
     #   dockerfile: ./Dockerfile
-
     container_name: dsfpa-sdk-scheme-adapter
     env_file: ./dfsp_a/dfsp_a_scheme_adapter.env
     volumes:
@@ -471,7 +471,7 @@ services:
       - "dfspb-thirdparty-scheme-adapter-outbound:172.17.0.1"
 
   dfspb-sdk-scheme-adapter:
-    image: "mojaloop/sdk-scheme-adapter:v11.10.1.1-pisp"
+    image: "mojaloop/sdk-scheme-adapter:v11.10.1.3-pisp"
     # build:
     #   context: ../../sdk-scheme-adapter
     #   dockerfile: ./Dockerfile
@@ -631,7 +631,7 @@ services:
       - "pisp-thirdparty-scheme-adapter-outbound:172.17.0.1"
 
   pisp-sdk-scheme-adapter:
-    image: "mojaloop/sdk-scheme-adapter:v11.10.1.1-pisp"
+    image: "mojaloop/sdk-scheme-adapter:v11.10.1.3-pisp"
     # build:
     #   context: ../../sdk-scheme-adapter
     #   dockerfile: ./Dockerfile
@@ -819,3 +819,47 @@ services:
     restart: always
     ports:
       - "6379:6379"
+
+  als-consent-oracle:
+    container_name: als-consent-oracle
+    image: "mojaloop/als-consent-oracle:v0.0.3"
+    command: sh -c "/opt/als-consent-oracle/wait4/wait4.js als-consent-oracle && npm run migrate && npm run start"
+    ports:
+      - "16000:3000"
+    networks:
+      - mojaloop-net
+    depends_on:
+      - als-consent-oracle-mysql
+    volumes:
+       - ./docker/wait4:/opt/als-consent-oracle/wait4
+       - ./docker/als-consent-oracle/development.json:/opt/als-consent-oracle/config/development.json
+       - ./docker/als-consent-oracle/development_db.json:/opt/als-consent-oracle/config/development_db.json
+    environment:
+      - NODE_ENV=development
+    healthcheck:
+      test: wget -q http://172.17.0.1:16000/health -O /dev/null || exit 1
+      timeout: 20s
+      retries: 30
+      interval: 15s
+
+  als-consent-oracle-mysql:
+    image: mysql/mysql-server
+    container_name: als-consent-oracle-mysql
+    ports:
+      - "16006:3306"
+    environment:
+      - NODE_ENV=development
+      - MYSQL_USER=${DBUSER:-als-consent-oracle}
+      - MYSQL_PASSWORD=${DBPASS:-password}
+      - MYSQL_DATABASE=${DBUSER:-als-consent-oracle}
+      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+    volumes:
+      - ./docker/sql-consent-oracle-init/:/docker-entrypoint-initdb.d/
+    networks:
+      - mojaloop-net
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "als-consent-oracle-mysql"]
+      timeout: 20s
+      retries: 10
+      start_period: 40s
+      interval: 30s

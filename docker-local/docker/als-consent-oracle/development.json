@@ -1,0 +1,9 @@
+{
+  "PORT": 3000,
+  "HOST": "0.0.0.0",
+  "INSPECT": {
+    "DEPTH": 4,
+    "SHOW_HIDDEN": false,
+    "COLOR": true
+  }
+}

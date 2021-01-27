@@ -60,6 +60,8 @@ function getWaiters (wait4, config) {
   const methods = {
     mongo: methodMongoDB,
     mysql: methodMySQL,
+    // creating a alternative wait method since consent oracle uses a different separated config
+    mysqlAlt: methodMySQLAlt,
     ncat: methodNCat
   }
   console.log(`wait4 Dependencies to wait for:\n${util.inspect(wait4, false, 5, true)}`)
@@ -157,6 +159,29 @@ async function methodMySQL (waitJob, RC) {
       user: RC.DATABASE.USER,
       password: RC.DATABASE.PASSWORD,
       database: RC.DATABASE.SCHEMA
+    }
+  })
+  await knex.select(1)
+
+  return waitJob
+}
+
+/**
+ * @function methodMySQLAlt
+ * @description Waits for the MySQL service to be up and running
+ * @param {*} waitJob
+ * @param {*} RC
+ */
+async function methodMySQLAlt (waitJob, RC) {
+  // make connection to MySQL using `knex`
+  const knex = require('knex')({
+    client: 'mysql',
+    connection: {
+      host: RC.connection.host.replace(/\/$/, ''),
+      port: RC.connection.port,
+      user: RC.connection.user,
+      password: RC.connection.password,
+      database: RC.connection.schema
     }
   })
   await knex.select(1)

@@ -72,6 +72,7 @@ npm install
 127.0.0.1 dfspa-backend dfspa-thirdparty-scheme-adapter-inbound dfspa-thirdparty-scheme-adapter-outbound dfspa-sdk-scheme-adapter
 127.0.0.1 dfspb-backend dfspb-thirdparty-scheme-adapter-inbound dfspb-thirdparty-scheme-adapter-outbound dfspb-sdk-scheme-adapter
 127.0.0.1 pisp-backend pisp-thirdparty-scheme-adapter-inbound pisp-thirdparty-scheme-adapter-outbound pisp-sdk-scheme-adapter
+127.0.0.1 als-consent-oracle
 ```
 
 ## Start services using `docker-compose`

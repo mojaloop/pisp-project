@@ -126,6 +126,22 @@ module.exports = {
           method: 'ncat'
         }
       ]
+    },
+
+    {
+      name: 'als-consent-oracle',
+      wait4: [
+        {
+          description: 'MySQL Database',
+          uri: 'als-consent-oracle-mysql:3306',
+          method: 'mysqlAlt',
+          rc: {
+            namespace: 'CO',
+            configPath: '../config/development_db.json'
+          },
+          retries: 60
+        }
+      ]
     }
   ]
 }

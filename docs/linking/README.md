@@ -126,16 +126,11 @@ a place where the user can prove their identity (e.g., by logging in).
 
 ### 1.3.2. OTP / SMS
 
-<<<<<<< HEAD
 In the OTP authentication channel, the result is the PISP being instructed on
 a specific URL where this supposed user should be redirected. This URL should be
 a place where the user can prove their identity (e.g., by logging in).
 
 ![Request consent](../out/linking/2-request-consent-otp.svg)
-=======
-In the OTP authentication channel, the result is the PISP should ask user to enter OTP token received on his registered device (phone). **/sendOTP** is an example endpoint used by DFSP to send OTP token to user's device.
-![Request consent](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/mojaloop/pisp/master/docs/linking/2-request-consent-otp.puml)
->>>>>>> d0b93bf726403683dc98b4f6b162c555d8aa85ee
 
 ## 1.4. Authentication
 

@@ -42,20 +42,20 @@ deactivate Switch
 DFSP -> Switch ++: ""PUT /accounts/username1234""\n\
   ""  FSIOP-Source: dfspa""\n\
   ""  FSIOP-Destination: pispa""\n\
-  ""{ [""\n\
+  ""[""\n\
   ""  { accountNickname: "XXXXXXnt", id: "dfspa.username.1234", currency: "ZAR" },""\n\
   ""  { accountNickname: "SpeXXXXXXXXnt", id: "dfspa.username.5678", currency: "USD" }""\n\
-  ""] }""
+  ""]""
 Switch --> DFSP: ""200 OK""
 deactivate DFSP
 
 Switch -> PISP ++: ""PUT /accounts/username1234""\n\
   ""  FSIOP-Source: dfspa""\n\
   ""  FSIOP-Destination: pispa""\n\
-  ""{ [""\n\
+  ""[""\n\
   ""  { accountNickname: "XXXXXXnt", id: "dfspa.username.1234", currency: "ZAR" },""\n\
   ""  { accountNickname: "SpeXXXXXXXXnt", id: "dfspa.username.5678", currency: "USD" }""\n\
-  ""] }""
+  ""]""
 PISP --> Switch: ""200 OK""
 deactivate Switch
 deactivate PISP

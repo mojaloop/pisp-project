@@ -1,0 +1,343 @@
+{
+	"info": {
+		"_postman_id": "bffa3638-478e-45d9-8321-05b95abb453a",
+		"name": "thirdparty-simulator",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept-encoding": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userName\": \"dfspa.user.name\",\n    \"password\": \"dfspa.user.password\",\n    \"consentRequestId\": \"3b346cec-47b3-4def-b870-edb255aaf6c3\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://ml-testing-toolkit.local:15000/login",
+					"protocol": "http",
+					"host": [
+						"ml-testing-toolkit",
+						"local"
+					],
+					"port": "15000",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/authorize",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept-encoding": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userName\": \"dfspa.user.name\",    \n    \"consentRequestId\": \"3b346cec-47b3-4def-b870-edb255aaf6c3\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://ml-testing-toolkit.local:15000/authorize",
+					"protocol": "http",
+					"host": [
+						"ml-testing-toolkit",
+						"local"
+					],
+					"port": "15000",
+					"path": [
+						"authorize"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/sendOTP",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept-encoding": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userName\": \"dfspa.user.name\",\n    \"consentRequestId\": \"3b346cec-47b3-4def-b870-edb255aaf6c3\",\n    \"message\": \"9876\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://ml-testing-toolkit.local:15000/sendOTP",
+					"protocol": "http",
+					"host": [
+						"ml-testing-toolkit",
+						"local"
+					],
+					"port": "15000",
+					"path": [
+						"sendOTP"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/otp/{ID}",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept-encoding": true
+				}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://ml-testing-toolkit.local:15000/OTPorSecret/3b346cec-47b3-4def-b870-edb255aaf6c3",
+					"protocol": "http",
+					"host": [
+						"ml-testing-toolkit",
+						"local"
+					],
+					"port": "15000",
+					"path": [
+						"OTPorSecret",
+						"3b346cec-47b3-4def-b870-edb255aaf6c3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/verifyOTPorSecret",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept-encoding": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{    \n    \"consentRequestId\": \"3b346cec-47b3-4def-b870-edb255aaf6c3\",\n    \"value\": \"9876\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://ml-testing-toolkit.local:15000/verifyOTPorSecret",
+					"protocol": "http",
+					"host": [
+						"ml-testing-toolkit",
+						"local"
+					],
+					"port": "15000",
+					"path": [
+						"verifyOTPorSecret"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/store/consentRequests/{ID}",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept-encoding": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"scopes\": [\n        {\n            \"accountId\": \"dfspa.username.1234\",\n            \"actions\": [\n                \"accounts.transfer\",\n                \"accounts.getBalance\"\n            ]\n        },\n        {\n            \"accountId\": \"dfspa.username.5678\",\n            \"actions\": [\n                \"accounts.transfer\",\n                \"accounts.getBalance\"\n            ]\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://ml-testing-toolkit.local:15000/store/consentRequests/3b346cec-47b3-4def-b870-edb255aaf6c3",
+					"protocol": "http",
+					"host": [
+						"ml-testing-toolkit",
+						"local"
+					],
+					"port": "15000",
+					"path": [
+						"store",
+						"consentRequests",
+						"3b346cec-47b3-4def-b870-edb255aaf6c3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/store/consentRequests/{ID}",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept-encoding": true
+				}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://ml-testing-toolkit.local:15000/store/consentRequests/3b346cec-47b3-4def-b870-edb255aaf6c3",
+					"protocol": "http",
+					"host": [
+						"ml-testing-toolkit",
+						"local"
+					],
+					"port": "15000",
+					"path": [
+						"store",
+						"consentRequests",
+						"3b346cec-47b3-4def-b870-edb255aaf6c3"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

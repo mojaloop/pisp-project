@@ -126,9 +126,10 @@ a place where the user can prove their identity (e.g., by logging in).
 
 ### 1.3.2. OTP / SMS
 
-In the OTP authentication channel, the result is the PISP being instructed on
-a specific URL where this supposed user should be redirected. This URL should be
-a place where the user can prove their identity (e.g., by logging in).
+In the OTP authentication channel, the DFSP sends an 'out of bound' OTP message
+to their user (e.g. over SMS or Email). The PISP prompts the user for this OTP
+message, and includes it in the `authToken` field in the `PUT /consentRequests/{id}`
+callback.
 
 ![Request consent](../out/linking/2-request-consent-otp.svg)
 

@@ -65,6 +65,9 @@ The end-goal of this phase is for the PISP Server to have a final list of DFSPs
 available and any relevant metadata about those DFPSs that are necessary to
 begin the linking process.
 
+The PISP can display this list of DFSPs to their user, and the user can select 
+which DFSP they hold an account with for linking.
+
 ![Pre-linking](../out/linking/0-pre-linking.svg)
 
 ## 1.2. Discovery

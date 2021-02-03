@@ -3328,6 +3328,7 @@ components:
         - IBAN
         - ALIAS
         - OPAQUE
+        - CONSENT
       description: >-
         Below are the allowed values for the enumeration - MSISDN An MSISDN
         (Mobile Station International Subscriber Directory Number, that is, the

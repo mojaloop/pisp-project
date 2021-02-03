@@ -148,6 +148,13 @@ jobs:
             cd ./docker-contract/
             docker-compose pull
             docker-compose up -d
+
+            # wait for services to be up and running
+            npm run wait-4-docker
+
+            # seed the environment
+            npm run reseed:docker-contract
+
             sleep 45s
       - run:
           name: Run the contract tests

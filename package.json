@@ -30,6 +30,7 @@
     "reseed:docker-local": "echo \"seeding docker-local environment\" && ./docker-local/postman/scripts/_00_seed_all.sh",
     "reseed:docker-live": "echo \"seeding docker-live environment\" && ./src/seed/cli.ts",
     "wait-4-docker": "node ./scripts/_wait4_all.js",
+    "wait-4-docker-contract": "node ./scripts/_wait4_docker_contract.js",
     "test": "npm run test:unit",
     "test:bdd": "jest --testMatch '**/test/step-definitions/**/*.step.ts'",
     "test:e2e": "jest --runInBand --testMatch '**/test/e2e/**/*.(test|spec).ts'",

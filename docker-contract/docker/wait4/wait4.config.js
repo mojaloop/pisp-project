@@ -40,19 +40,6 @@ module.exports = {
       ]
     },
     {
-      name: 'central-settlement',
-      wait4: [
-        {
-          uri: 'kafka:29092',
-          method: 'ncat'
-        },
-        {
-          uri: 'mysql:3306',
-          method: 'mysql'
-        }
-      ]
-    },
-    {
       name: 'account-lookup-service',
       wait4: [
         {
@@ -77,57 +64,6 @@ module.exports = {
         }
       ]
     },
-    {
-      name: 'ml-api-adapter',
-      wait4: [
-        {
-          uri: 'kafka:29092',
-          method: 'ncat',
-          // Seems to take longer on circleci to start up
-          retries: 60
-        }
-      ]
-    },
-    {
-      name: 'thirdparty-api-adapter',
-      wait4: [
-        {
-          uri: 'kafka:29092',
-          method: 'ncat'
-        }
-      ]
-    },
-    {
-      name: 'pisp-thirdparty-scheme-adapter',
-      wait4: [
-        {
-          description: 'PISP Redis Cache',
-          uri: 'pisp-redis:6379',
-          method: 'ncat'
-        }
-      ]
-    },
-    {
-      name: 'dfspa-thirdparty-scheme-adapter',
-      wait4: [
-        {
-          description: 'DFSP A Redis Cache',
-          uri: 'dfspa-redis:6379',
-          method: 'ncat'
-        }
-      ]
-    },
-    {
-      name: 'dfspb-thirdparty-scheme-adapter',
-      wait4: [
-        {
-          description: 'DFSP B Redis Cache',
-          uri: 'dfspb-redis:6379',
-          method: 'ncat'
-        }
-      ]
-    },
-
     {
       name: 'als-consent-oracle',
       wait4: [

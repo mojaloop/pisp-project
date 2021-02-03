@@ -107,7 +107,7 @@ jobs:
             docker-compose up -d
 
             # wait for services to be up and running
-            npm run wait-4-docker-contract
+            npm run wait-4-docker
 
             # seed the environment
             npm run reseed
@@ -155,7 +155,7 @@ jobs:
             docker-compose up -d
 
             # wait for services to be up and running
-            npm run wait-4-docker
+            npm run wait-4-docker-contract
 
             # seed the environment
             npm run reseed:docker-contract

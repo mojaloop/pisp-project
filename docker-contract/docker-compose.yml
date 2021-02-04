@@ -17,11 +17,18 @@ services:
     environment:
       - AUTH_ENABLED=FALSE
     command: npm start
+    depends_on:
+      - mongo
     networks:
       - mojaloop-pisp-net
     extra_hosts:
       - "pisp-sim-scheme-adapter:172.17.0.1"
       - "ml-testing-toolkit:172.17.0.1"
+
+  mongo:
+    image: mongo
+    ports:
+      - "27018:27017"
 
   ml-testing-toolkit-ui:
     image: mojaloop/ml-testing-toolkit-ui:v11.8.3
@@ -35,14 +42,9 @@ services:
     networks:
       - mojaloop-pisp-net
 
-  mongo:
-    image: mongo
-    ports:
-      - "27017:27017"
-
   ## PISP Simulator
   pisp-sim-backend:
-    image: "mojaloop/mojaloop-simulator:v9.4.1.7-pisp"
+    image: "mojaloop/mojaloop-simulator:v11.3.0.0-pisp"
     container_name: pisp-sim-backend
     env_file: ./pisp-sim/pisp_backend.env
     ports:
@@ -52,6 +54,8 @@ services:
     extra_hosts:
       - "pisp-sim-scheme-adapter:172.17.0.1"
 
+  # Latest v11.10.1.3-pisp seems to break tests.
+  # TODO: Investigate changes, update image and fix tests.
   pisp-sim-scheme-adapter:
     image: "mojaloop/sdk-scheme-adapter:v10.6.2.3-pisp"
     container_name: pisp-sim-scheme-adapter
@@ -77,3 +81,189 @@ services:
     networks:
       - mojaloop-pisp-net
     restart: always
+
+  central-ledger:
+    image: mojaloop/central-ledger:v11.3.3.0-pisp
+    container_name: central-ledger-contract
+    command: sh -c "/opt/central-ledger/wait4/wait4.js central-ledger && node src/api/index.js"
+    ports:
+      - "3001:3001"
+    volumes:
+       - ./docker/central-ledger/default.json:/opt/central-ledger/config/default.json
+       - ./docker/wait4:/opt/central-ledger/wait4
+    environment:
+      - LOG_LEVEL=info
+      - CLEDG_SIDECAR__DISABLED=true
+      - CLEDG_MONGODB__DISABLED=false
+    networks:
+      - mojaloop-pisp-net
+    depends_on:
+      - mysql
+      - kafka
+      - objstore
+    healthcheck:
+      test: wget -q http://172.17.0.1:3001/health -O /dev/null || exit 1
+      timeout: 20s
+      retries: 30
+      interval: 15s
+    extra_hosts:
+      - "moja-simulator.local:172.17.0.1"
+      - "simulator:172.17.0.1"
+      - "host.docker.internal:172.17.0.1"
+      - "simulator.local:172.17.0.1"
+
+  mysql:
+    image: mysql/mysql-server
+    container_name: mysql-contract
+    ports:
+      - "3307:3306"
+    volumes:
+      # Note: this fixes the permissions issue, but docker-compose up will fail on first attempt
+      - ./docker/sql-init/:/docker-entrypoint-initdb.d/
+    environment:
+      - MYSQL_USER=${DBUSER:-central_ledger}
+      - MYSQL_PASSWORD=${DBPASS:-password}
+      - MYSQL_DATABASE=${DBUSER:-central_ledger}
+      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+    networks:
+      - mojaloop-pisp-net
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "mysql"]
+      timeout: 20s
+      retries: 10
+      start_period: 40s
+      interval: 30s
+
+  objstore:
+    image: mongo:latest
+    container_name: objstore-contract
+    # Disable logging, this container is not that important and rather verbose
+    logging:
+      driver: none
+    ports:
+      - "27017:27017"
+    networks:
+      - mojaloop-pisp-net
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongo localhost:27017/test --quiet
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
+
+  kafka:
+    image: johnnypark/kafka-zookeeper:2.3.0
+    container_name: kafka-contract
+    volumes:
+      - ./docker/kafka/:/opt/kafka_2.12-2.3.0/config/
+    ports:
+      - "2181:2181"
+      - "9092:9092"
+    environment:
+      - ZOO_LOG4J_PROP=WARN
+    networks:
+      - mojaloop-pisp-net
+    healthcheck:
+      test: ["CMD" ,"/opt/kafka_2.12-2.3.0/bin/kafka-broker-api-versions.sh","--bootstrap-server","172.17.0.1:9092"]
+      timeout: 20s
+      retries: 10
+      start_period: 40s
+      interval: 30s
+
+  account-lookup-service:
+    image: mojaloop/account-lookup-service:v11.1.2.2-pisp
+    container_name: account-lookup-service-contract
+    command: sh -c "/opt/account-lookup-service/wait4/wait4.js account-lookup-service && npm run migrate && node src/index.js server"
+    ports:
+      - "4001:4001"
+      - "4002:4002"
+    environment:
+      - LOG_LEVEL=info
+      - ALS_DISPLAY_ROUTES=false
+    networks:
+      - mojaloop-pisp-net
+    depends_on:
+      - mysql-als
+      - central-ledger
+    volumes:
+      - ./docker/account-lookup-service/default.json:/opt/account-lookup-service/config/default.json
+      - ./docker/wait4:/opt/account-lookup-service/wait4
+    healthcheck:
+      test: wget -q http://172.17.0.1:4001/health -O /dev/null || exit 1
+      timeout: 20s
+      retries: 10
+      start_period: 40s
+      interval: 30s
+    extra_hosts:
+      - "moja-simulator.local:172.17.0.1"
+      - "simulator:172.17.0.1"
+      - "host.docker.internal:172.17.0.1"
+      - "simulator.local:172.17.0.1"
+      - "transaction-request-service:172.17.0.1"
+      - "central-ledger:172.17.0.1"
+      - "als-consent-oracle:172.17.0.1"
+
+  mysql-als:
+    image: mysql/mysql-server
+    container_name: mysql-als-contract
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./docker/sql-als-init/:/docker-entrypoint-initdb.d/
+    environment:
+      - MYSQL_USER=${DBUSER:-account_lookup}
+      - MYSQL_PASSWORD=${DBPASS:-password}
+      - MYSQL_DATABASE=${DBUSER:-account_lookup}
+      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+    networks:
+      - mojaloop-pisp-net
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "mysql-als"]
+      timeout: 20s
+      retries: 10
+      start_period: 40s
+      interval: 30s
+
+  als-consent-oracle:
+    container_name: als-consent-oracle-contract
+    image: "mojaloop/als-consent-oracle:v0.0.3"
+    command: sh -c "/opt/als-consent-oracle/wait4/wait4.js als-consent-oracle && npm run migrate && npm run start"
+    ports:
+      - "16000:3000"
+    networks:
+      - mojaloop-pisp-net
+    depends_on:
+      - als-consent-oracle-mysql
+    volumes:
+       - ./docker/wait4:/opt/als-consent-oracle/wait4
+       - ./docker/als-consent-oracle/development.json:/opt/als-consent-oracle/config/development.json
+       - ./docker/als-consent-oracle/development_db.json:/opt/als-consent-oracle/config/development_db.json
+    environment:
+      - NODE_ENV=development
+    healthcheck:
+      test: wget -q http://172.17.0.1:16000/health -O /dev/null || exit 1
+      timeout: 20s
+      retries: 30
+      interval: 15s
+
+  als-consent-oracle-mysql:
+    image: mysql/mysql-server
+    container_name: als-consent-oracle-mysql-contract
+    ports:
+      - "16006:3306"
+    environment:
+      - NODE_ENV=development
+      - MYSQL_USER=${DBUSER:-als-consent-oracle}
+      - MYSQL_PASSWORD=${DBPASS:-password}
+      - MYSQL_DATABASE=${DBUSER:-als-consent-oracle}
+      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+    volumes:
+      - ./docker/sql-consent-oracle-init/:/docker-entrypoint-initdb.d/
+    networks:
+      - mojaloop-pisp-net
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "als-consent-oracle-mysql"]
+      timeout: 20s
+      retries: 10
+      start_period: 40s
+      interval: 30s

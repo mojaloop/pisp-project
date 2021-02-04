@@ -134,6 +134,11 @@ jobs:
       - restore_cache:
           keys:
             - dependency-cache-{{ checksum "package-lock.json" }}
+      # TODO: set up /etc/hosts!
+      - run:
+          name: Add /etc/hosts entries
+          command: |
+            sudo ./scripts/_setup_hosts_file.sh
       - run:
           name: Set up nvm
           command: |
@@ -148,6 +153,13 @@ jobs:
             cd ./docker-contract/
             docker-compose pull
             docker-compose up -d
+
+            # wait for services to be up and running
+            npm run wait-4-docker-contract
+
+            # seed the environment
+            npm run reseed:docker-contract
+
             sleep 45s
       - run:
           name: Run the contract tests

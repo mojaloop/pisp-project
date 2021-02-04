@@ -49,8 +49,10 @@ services:
     extra_hosts:
       - "pisp-sim-scheme-adapter:172.17.0.1"
 
+  # Latest v11.10.1.3-pisp seems to break tests.
+  # TODO: Investigate changes, update image and fix tests.
   pisp-sim-scheme-adapter:
-    image: "mojaloop/sdk-scheme-adapter:v11.10.1.3-pisp"
+    image: "mojaloop/sdk-scheme-adapter:v10.6.2.3-pisp"
     container_name: pisp-sim-scheme-adapter
     env_file: ./pisp-sim/pisp_scheme_adapter.env
     volumes:

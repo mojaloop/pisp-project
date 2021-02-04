@@ -15,11 +15,18 @@ services:
       - "15000:5000"
       - "5050:5050"
     command: npm start
+    depends_on:
+      - mongo
     networks:
       - mojaloop-pisp-net
     extra_hosts:
       - "pisp-sim-scheme-adapter:172.17.0.1"
       - "ml-testing-toolkit:172.17.0.1"
+
+  mongo:
+    image: mongo
+    ports:
+      - "27018:27017"
 
   ml-testing-toolkit-ui:
     image: mojaloop/ml-testing-toolkit-ui:v11.8.3

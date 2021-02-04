@@ -9,7 +9,7 @@
     "userSettings": 1
   },
   "DB": {
-    "URI": "mongodb://mongo:27017/dfsps"
+    "URI": "mongodb://mongo:27018/dfsps"
   },
   "OAUTH": {
     "AUTH_ENABLED": false,

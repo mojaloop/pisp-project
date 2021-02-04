@@ -1,0 +1,107 @@
+@startuml
+
+!pragma teoz true
+
+title PISP Linking: Credential registration (verification)
+
+participant "PISP" as PISP
+
+box "Mojaloop"
+    participant "Thirdparty-API-Adapter" as Switch
+    participant "Account Lookup Service" as ALS
+    participant "Auth Service" as Auth
+end box
+
+participant "DFSP" as DFSP
+
+autonumber 16 "<b>CRED-#</b>"
+
+...
+
+
+rnote over DFSP
+  DFSP is now satisfied that the Consent registered by the PISP is valid,
+  and now proceeds to register with the ALS:
+    - `THIRD_PARTY_LINK` (optional - for routing of funds to a Third Party Link)
+  ALS
+end note
+
+loop for each scope in ""Consents.scopes""
+
+DFSP -> ALS: ""POST /participants/THIRD_PARTY_LINK/dfsp.username.5678"" \n\
+""  FSIOP-Source: dfspa""\n\
+""  {""\n\
+""    fspId: "dfspa",""\n\
+""  }""
+ALS --> DFSP: ""202 Accepted""
+
+rnote over ALS #LightGray
+  ALS registers a new entry in the THIRD_PARTY_LINK oracle
+end note
+
+ALS -> DFSP: ""PUT /participants/THIRD_PARTY_LINK/dfsp.username.5678"" \n\
+""  FSIOP-Source: account-lookup-service""\n\
+""  FSIOP-Destination: dfspa""\n\
+""  {""\n\
+""    fspId: "dfspa",""\n\
+""  }""
+DFSP --> ALS: ""200 OK""
+end
+
+
+rnote over DFSP
+  Now that the Credentials are verified and registered with the Auth Service,
+  the DFSP can update the PISP with the final status
+end note
+
+DFSP -> Switch: ""PUT /consents/123""\n\
+""  FSIOP-Source: dfspa""\n\
+""  FSPIOP-Destination: pispa""\n\
+""  {""\n\
+    ""  scopes: [""\n\
+    ""    {""\n\
+    ""      accountId: "dfsp.username.1234",""\n\
+    ""      actions: [ "accounts.transfer", "accounts.getBalance" ],""\n\
+    ""    },""\n\
+    ""    {""\n\
+    ""      accountId: "dfsp.username.5678",""\n\
+    ""      actions: [ "accounts.transfer", "accounts.getBalance" ],""\n\
+    ""    },""\n\
+    ""  ],""\n\
+    ""  credential: {""\n\
+    ""    credentialType: "FIDO",""\n\
+    ""    **status: "VERIFIED", //this is new!**""\n\
+    ""    payload: PublicKeyCredential ""\n\
+    ""  }""\n\
+""  }""
+DFSP --> Switch: ""200 OK""
+
+Switch -> PISP ++: ""PUT /consents/123""\n\
+""  FSIOP-Source: dfspa""\n\
+""  FSPIOP-Destination: pispa""\n\
+""  {""\n\
+    ""  scopes: [""\n\
+    ""    {""\n\
+    ""      accountId: "dfsp.username.1234",""\n\
+    ""      actions: [ "accounts.transfer", "accounts.getBalance" ],""\n\
+    ""    },""\n\
+    ""    {""\n\
+    ""      accountId: "dfsp.username.5678",""\n\
+    ""      actions: [ "accounts.transfer", "accounts.getBalance" ],""\n\
+    ""    },""\n\
+    ""  ],""\n\
+    ""  credential: {""\n\
+    ""    credentialType: "FIDO",""\n\
+    ""    **status: "VERIFIED", //this is new!**""\n\
+    ""    payload: PublicKeyCredential ""\n\
+    ""  }""\n\
+""  }""
+PISP --> Switch: ""200 OK""
+
+
+note over PISP, DFSP
+  Now we have a new identifier that the PISP can use to initiate transactions, a registered credential, and that credential is stored in the auth-service
+end note
+
+
+@enduml

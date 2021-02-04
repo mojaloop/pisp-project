@@ -1235,5 +1235,389 @@
     },
     "type": "response",
     "version": 1
+  },
+  {
+    "ruleId": 21,
+    "priority": 1,
+    "description": "post /login",
+    "apiVersion": {
+      "minorVersion": 1,
+      "majorVersion": 0,
+      "type": "thirdparty_simulator",
+      "asynchronous": false
+    },
+    "conditions": {
+      "all": [
+        {
+          "fact": "operationPath",
+          "operator": "equal",
+          "value": "/login"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "post"
+        }
+      ]
+    },
+    "event": {
+      "method": null,
+      "path": null,
+      "params": {
+        "body": {},
+        "statusCode": "200",
+        "scripts": {}
+      },
+      "delay": 0,
+      "type": "FIXED_RESPONSE"
+    },
+    "type": "response",
+    "version": 1
+  },
+  {
+    "ruleId": 22,
+    "priority": 1,
+    "description": "post /authorize",
+    "apiVersion": {
+      "minorVersion": 1,
+      "majorVersion": 0,
+      "type": "thirdparty_simulator",
+      "asynchronous": false
+    },
+    "conditions": {
+      "all": [
+        {
+          "fact": "operationPath",
+          "operator": "equal",
+          "value": "/authorize"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "post"
+        }
+      ]
+    },
+    "event": {
+      "method": null,
+      "path": null,
+      "params": {
+        "body": {
+          "secret": "{$environment.secretOrOTPAuth}"
+        },
+        "statusCode": "200",
+        "scripts": {
+          "exec": [
+            "const body = JSON.parse(pm.request.body)",
+            "const consReqId = body.consentRequestId",
+            "pm.environment.set(consReqId, 'some-secret-' + consReqId)",
+            "pm.environment.set('secretOrOTPAuth', 'some-secret-' + consReqId)"
+          ]
+        }
+      },
+      "delay": 0,
+      "type": "FIXED_RESPONSE"
+    },
+    "type": "response",
+    "version": 1
+  },
+  {
+    "ruleId": 23,
+    "priority": 1,
+    "description": "post /sendOTP",
+    "apiVersion": {
+      "minorVersion": 1,
+      "majorVersion": 0,
+      "type": "thirdparty_simulator",
+      "asynchronous": false
+    },
+    "conditions": {
+      "all": [
+        {
+          "fact": "operationPath",
+          "operator": "equal",
+          "value": "/sendOTP"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "post"
+        }
+      ]
+    },
+    "event": {
+      "method": null,
+      "path": null,
+      "params": {
+        "body": {
+          "otp": "{$environment.secretOrOTPPost}"
+        },
+        "statusCode": "200",
+        "scripts": {
+          "exec": [
+            "const body = JSON.parse(pm.request.body)",
+            "const consReqId = body.consentRequestId",
+            "pm.environment.set(consReqId, body.message)",
+            "pm.environment.set('secretOrOTPPost', body.message)"
+          ]
+        }
+      },
+      "delay": 0,
+      "type": "FIXED_RESPONSE"
+    },
+    "type": "response",
+    "version": 1
+  },
+  {
+    "ruleId": 24,
+    "priority": 2,
+    "description": "post /verifyOTPorSecret -FAIL",
+    "apiVersion": {
+      "minorVersion": 1,
+      "majorVersion": 0,
+      "type": "thirdparty_simulator",
+      "asynchronous": false
+    },
+    "conditions": {
+      "all": [
+        {
+          "fact": "body",
+          "operator": "equal",
+          "value": "000000",
+          "path": "value"
+        },
+        {
+          "fact": "body",
+          "operator": "equal",
+          "value": "000001",
+          "path": "value"
+        },
+        {
+          "fact": "operationPath",
+          "operator": "equal",
+          "value": "/verifyOTPorSecret"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "post"
+        }
+      ]
+    },
+    "event": {
+      "method": null,
+      "path": null,
+      "params": {
+        "body": {
+          "statusCode": "401",
+          "status": "FAIL",
+          "secretOrOTP": "{$request.body.value}"
+        },
+        "statusCode": "401",
+        "scripts": {
+          "exec": []
+        }
+      },
+      "delay": 0,
+      "type": "FIXED_RESPONSE"
+    },
+    "type": "response",
+    "version": 1
+  },
+  {
+    "ruleId": 25,
+    "priority": 1,
+    "description": "post /verifyOTPorSecret",
+    "apiVersion": {
+      "minorVersion": 1,
+      "majorVersion": 0,
+      "type": "thirdparty_simulator",
+      "asynchronous": false
+    },
+    "conditions": {
+      "all": [
+        {
+          "fact": "operationPath",
+          "operator": "equal",
+          "value": "/verifyOTPorSecret"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "post"
+        }
+      ]
+    },
+    "event": {
+      "method": null,
+      "path": null,
+      "params": {
+        "body": {
+          "statusCode": "{$environment.statusCode}",
+          "status": "{$environment.verifyOTPorSecretStatus}"
+        },
+        "statusCode": "200",
+        "scripts": {
+          "exec": [
+            "const body = JSON.parse(pm.request.body)",
+            "const secretOrOTPVerify = pm.environment.get(body.consentRequestId)",
+            "if (body.value == secretOrOTPVerify) {",
+            "  pm.environment.set('verifyOTPorSecretStatus', 'SUCCESS')",
+            "  pm.environment.set('statusCode', 200)",
+            "} else {",
+            " pm.environment.set('verifyOTPorSecretStatus', 'FAIL')",
+            " pm.environment.set('statusCode', 401)",
+            "}"
+          ]
+        }
+      },
+      "delay": 0,
+      "type": "FIXED_RESPONSE"
+    },
+    "type": "response",
+    "version": 1
+  },
+  {
+    "ruleId": 26,
+    "priority": 1,
+    "description": "get /OTPorSecret/{ID}",
+    "apiVersion": {
+      "minorVersion": 1,
+      "majorVersion": 0,
+      "type": "thirdparty_simulator",
+      "asynchronous": false
+    },
+    "conditions": {
+      "all": [
+        {
+          "fact": "operationPath",
+          "operator": "equal",
+          "value": "/OTPorSecret/{ID}"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "get"
+        }
+      ]
+    },
+    "event": {
+      "method": null,
+      "path": null,
+      "params": {
+        "body": {
+          "value": "{$environment.secretOrOTPGet}"
+        },
+        "statusCode": "200",
+        "scripts": {
+          "exec": [
+            "const consReqId = pm.request.url.path[1]",
+            "const secretOrOTPGet = pm.environment.get(consReqId)",
+            "pm.environment.set('secretOrOTPGet', secretOrOTPGet)"
+          ]
+        }
+      },
+      "delay": 0,
+      "type": "FIXED_RESPONSE"
+    },
+    "type": "response",
+    "version": 1
+  },
+  {
+    "ruleId": 27,
+    "priority": 1,
+    "description": "post  /store/consentRequests/{ID}",
+    "apiVersion": {
+      "minorVersion": 1,
+      "majorVersion": 0,
+      "type": "thirdparty_simulator",
+      "asynchronous": false
+    },
+    "conditions": {
+      "all": [
+        {
+          "fact": "operationPath",
+          "operator": "equal",
+          "value": "/store/consentRequests/{ID}"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "post"
+        }
+      ]
+    },
+    "event": {
+      "method": null,
+      "path": null,
+      "params": {
+        "body": {
+          "value": "{$environment.consReqStorePost}"
+        },
+        "statusCode": "200",
+        "scripts": {
+          "exec": [
+            "const body = JSON.parse(pm.request.body)",
+            "const consReqId = (pm.request.url.path[2] + '-store')",
+            "const searchRegExp = /\\\"/gi",
+            "const replaceWith = '\\''",
+            "const reqAsStr = JSON.stringify(body)",
+            "const reqAsObj = reqAsStr.replace(searchRegExp, replaceWith)",
+            "pm.environment.set(consReqId, reqAsObj)",
+            "pm.environment.set('consReqStorePost', reqAsObj)"
+          ]
+        }
+      },
+      "delay": 0,
+      "type": "FIXED_RESPONSE"
+    },
+    "type": "response",
+    "version": 1
+  },
+  {
+    "ruleId": 28,
+    "priority": 1,
+    "description": "get /store/consentRequests/{ID}",
+    "apiVersion": {
+      "minorVersion": 1,
+      "majorVersion": 0,
+      "type": "thirdparty_simulator",
+      "asynchronous": false
+    },
+    "conditions": {
+      "all": [
+        {
+          "fact": "operationPath",
+          "operator": "equal",
+          "value": "/store/consentRequests/{ID}"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "get"
+        }
+      ]
+    },
+    "event": {
+      "method": null,
+      "path": null,
+      "params": {
+        "body": {
+          "value": "{$environment.consReqStoreGet}"
+        },
+        "statusCode": "200",
+        "scripts": {
+          "exec": [
+            "const consReqId = (pm.request.url.path[2] + '-store')",
+            "const consReqStoreGet = pm.environment.get(consReqId)",
+            "pm.environment.set('consReqStoreGet', consReqStoreGet)"
+          ]
+        }
+      },
+      "delay": 0,
+      "type": "FIXED_RESPONSE"
+    },
+    "type": "response",
+    "version": 1
   }
 ]

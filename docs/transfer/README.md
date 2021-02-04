@@ -1,6 +1,6 @@
-## Transfer API
+# Transfer API
 
-### Happy Path
+## 1. Transfers
 
 Edit the transfer flow `.puml` files here: [PISP Transfer Api Calls Detailed](./api_calls_detailed.puml)
 
@@ -13,7 +13,30 @@ For a more detailed breakdown of the api calls, Refer to the detailed API flows:
  - [Transfer](../out/transfer/api_calls_detailed_3.svg)
 
 
-### Request TransactionRequest Status
+Transfers is broken down into the separate sections:
+1. **Discovery**
+    In this phase, a PISP looks up the Payee Party who they wish to recieve the funds
+
+2. **Agreement**
+    In this phase, the PISP confirms the Payee Party, and looks up the terms of the transaction. If the User accepts the terms of the transaction, they sign the transaction with the credential established in the Linking API flow
+
+3. **Transfer**
+    In this phase, the Payer DFSP initiates the transaction, and informs the PISP of the transaction result.
+
+### 1.1 Discovery
+
+The PISP's user performs a 
+
+![todo]()
+
+
+### 1.2 Agreement
+
+### 1.3 Transfer
+
+
+
+## 2. Request TransactionRequest Status
 
 A PISP can issue a `GET /thirdpartyRequests/{id}/transactions` to find the status of a transaction request.
 
@@ -44,7 +67,7 @@ A PISP can issue a `GET /thirdpartyRequests/{id}/transactions` to find the statu
 1. Switch looks up the endpoint for `pispa` for forwards to PISP
 1. PISP validates the request and responds with `200 OK`
 
-### Error Conditions
+## 3. Error Conditions
 
 
 The PayerDFSP is responsible for communicating failures to the PISP

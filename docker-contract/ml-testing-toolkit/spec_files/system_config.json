@@ -49,6 +49,11 @@
       "asynchronous": true
     },
     {
+      "type": "thirdparty_simulator",
+      "version": "0.1",
+      "folderPath": "thirdparty_simulator"
+    },
+    {
       "type": "settlements",
       "version": "1.0",
       "folderPath": "settlements_1.0"

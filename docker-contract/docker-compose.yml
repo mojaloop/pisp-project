@@ -14,6 +14,8 @@ services:
     ports:
       - "15000:5000"
       - "5050:5050"
+    environment:
+      - AUTH_ENABLED=FALSE
     command: npm start
     depends_on:
       - mongo
@@ -33,6 +35,9 @@ services:
     container_name: dl_ml-testing-toolkit-ui
     ports:
       - "6060:6060"
+    environment:
+      - API_BASE_URL=http://ml-testing-toolkit:5050
+      - AUTH_ENABLED=FALSE
     command: nginx -g "daemon off;"
     networks:
       - mojaloop-pisp-net

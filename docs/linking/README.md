@@ -6,17 +6,18 @@
   - [1.1. Pre-linking](#11-pre-linking)
   - [1.2. Discovery](#12-discovery)
   - [1.3. Request consent](#13-request-consent)
-    - [1.3.1. Web](#131-web)
-    - [1.3.2. OTP / SMS](#132-otp--sms)
+      - [1.3.1. Web](#131-web)
+      - [1.3.2. OTP / SMS](#132-otp--sms)
   - [1.4. Authentication](#14-authentication)
-    - [1.4.1. Web](#141-web)
-      - [DFSPAuthorizeSimulator](#dfspauthorizesimulator)
-    - [1.4.2. OTP](#142-otp)
-      - [DFSPAuthorizeSimulator](#dfspauthorizesimulator-1)
+      - [1.4.1. Web](#141-web)
+          - [DFSPAuthorizeSimulator](#dfspauthorizesimulator)
+      - [1.4.2. OTP](#142-otp)
+          - [DFSPAuthorizeSimulator](#dfspauthorizesimulator-1)
   - [1.5. Grant consent](#15-grant-consent)
   - [1.6. Credential registration](#16-credential-registration)
-    - [1.6.1. Requesting a challenge](#161-requesting-a-challenge)
-    - [1.6.2. Finalizing the credential](#162-finalizing-the-credential)
+      - [1.6.1. Deriving the challenge](#161-requesting-a-challenge)
+      - [1.6.2. Registering the credential](#162-registering-the-credential)
+      - [1.6.2. Finalizing the Consent](#163-finalizing-the-consent)
 - [2. Unlinking](#2-unlinking)
 - [3. Third-party credential registration](#3-third-party-credential-registration)
   - [3.1. Authentication](#31-authentication)
@@ -64,17 +65,25 @@ The end-goal of this phase is for the PISP Server to have a final list of DFSPs
 available and any relevant metadata about those DFPSs that are necessary to
 begin the linking process.
 
-![Pre-linking](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/mojaloop/pisp/master/docs/linking/0-pre-linking.puml)
+The PISP can display this list of DFSPs to their user, and the user can select 
+which DFSP they hold an account with for linking.
+
+![Pre-linking](../out/linking/0-pre-linking.svg)
 
 ## 1.2. Discovery
 
-In this phase, we ask the user for the identifier they use with the DFSP they
-intend to link with. This could be a username, MSISDN (phone number), or email
-address.
+In this phase, we ask the user to select the type and value of identifier they use 
+with the DFSP they intend to link with. This could be a username, MSISDN (phone number), 
+or email address.
 
 The result of this phase is a list of potential accounts available for linking.
 The user will then choose one or more of these source accounts and the PISP will
 provide these to the DFSP when requesting consent.
+
+The DFSP MAY send back an `accountNickname` to the PISP in the list of accounts. This list
+will be displayed to the user in the PISP application for them to select which accounts
+they wish to link. A DFSP could obfuscate some of the nickname depending on their requirements
+for displaying account information without authorizing the user.
 
 **NOTE:** When using the Web authentication channel, it's possible that the
 choices made (i.e., the accounts to link with) will be overridden by the user in
@@ -83,7 +92,7 @@ that they actually would like to link a different account than those chosen at
 the very beginning. This is perfectly acceptable and should be expected from
 time to time.
 
-![Discovery](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/mojaloop/pisp/master/docs/linking/1-discovery.puml)
+![Discovery](../out/linking/1-discovery.svg)
 
 ## 1.3. Request consent
 
@@ -116,12 +125,16 @@ In the web authentication channel, the result is the PISP being instructed on
 a specific URL where this supposed user should be redirected. This URL should be
 a place where the user can prove their identity (e.g., by logging in).
 
-![Request consent](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/mojaloop/pisp/master/docs/linking/2-request-consent-web.puml)
+![Request consent](../out/linking/2-request-consent-web.svg)
 
 ### 1.3.2. OTP / SMS
 
-In the OTP authentication channel, the result is the PISP should ask user to enter OTP token received on his registered device (phone). **/sendOTP** is an example endpoint used by DFSP to send OTP token to user's device.
-![Request consent](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/mojaloop/pisp/master/docs/linking/2-request-consent-otp.puml)
+In the OTP authentication channel, the DFSP sends an 'out of bound' OTP message
+to their user (e.g. over SMS or Email). The PISP prompts the user for this OTP
+message, and includes it in the `authToken` field in the `PUT /consentRequests/{id}`
+callback.
+
+![Request consent](../out/linking/2-request-consent-otp.svg)
 
 ## 1.4. Authentication
 
@@ -154,7 +167,7 @@ which accounts to link with. The result of this will be seen later on when
 during the Grant consent phase, where the DFSP will provide the correct values
 to the PISP in the `scopes` field.
 
-![Authentication (Web)](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/mojaloop/pisp/master/docs/linking/3-authentication-web.puml)
+![Authentication (Web)](../out/linking/3-authentication-web.svg)
 
 #### DFSPAuthorizeSimulator
 DFSPAuthorizeSimulator is api service for demo purposes. For the `Web flow` it is the backend  for single page application (SPA) which demonstrates the process of User's authorizations and granting the consents at DFSP web service.
@@ -175,7 +188,7 @@ When using the OTP authentication channel, the DFSP will send the User some sort
 of one-time password over a pre-established channel (most likely SMS). The PISP
 should prompt the user for this secret and then provide that back to the DFSP.
 
-![Authentication (OTP)](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/mojaloop/pisp/master/docs/linking/3-authentication-otp.puml)
+![Authentication (OTP)](../out/linking/3-authentication-otp.svg)
 
 #### DFSPAuthorizeSimulator
 DFSPAuthorizeSimulator is api service for demo purposes. For the `OTP flow` it exposes `/sendOTP` API endpoint which allows to simulate sending SMS token to the User's device.
@@ -191,19 +204,10 @@ for how the User can prove that it consents to each individual transfer in the
 future.
 
 This phase consists exclusively of the DFSP requesting that a new consent be
-created. This request must be conveyed both to the PISP itself and the Auth
-service which will be the record of trust for these resources.
+created. This request must be conveyed both to the PISP itself.
 
-The Auth service is then responsible for calling `POST /participants/CONSENTS/{id}`.
-This call will associate the `consentId` with the auth-service's `participantId` and 
-allows us to look up the Auth service given a `consentId` at a later date.
+![Grant consent](../out/linking/4-grant-consent.svg)
 
-![Grant consent](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/mojaloop/pisp/master/docs/linking/4-grant-consent.puml)
-
-> Notes:
-> 1. In this example, the DFSP uses the [proposed broadcast](https://github.com/mojaloop/pisp/issues/79) method of sending a `POST /consents` with 2 values for the `FSPIOP-Destination` header.
-> 2. In this example, the DFSP here uses the `central-auth` service. In the case where a DFSP runs their own auth-service, they would be expected to update their own auth-service separately to this call.
-> 3. We don't explicitly record the relationship between a DFSP & Auth service. It's assumed that a DFSP knows the `participantId` of it's Auth service, and can address it correctly using the `FSPIOP-Destination` header in the `POST /consents` request.
 
 ## 1.6. Credential registration
 
@@ -216,40 +220,95 @@ service inside the consent resource. When future transfers are proposed, we will
 require that those transfers be digitally signed by the FIDO credential (in this
 case, the private key) in order to be considered valid.
 
-This credential registration is composed of two phases: requesting a challenge
-and finalizing the signature.
+This credential registration is composed of three phases: (1) deriving the 
+challenge, (2) registering the credential, and (3) finalizing the consent.
 
-### 1.6.1. Requesting a challenge
+### 1.6.1. Deriving the challenge
 
-In this sub-phase, the PISP requests a challenge from the Auth service, which
-will be returned to the PISP via a `PUT /consents/{ID}` API call.
+The PISP must derive the challenge to be used as an input to the FIDO Key 
+Registration step. This challenge must not be guessable ahead of time by 
+the PISP.
 
-![Credential registration: Challenge](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/mojaloop/pisp/master/docs/linking/5a-credential-registration.puml)
 
-> **Notes:**
-> 1. Similar to a `GET /parties` call, the PISP doesn't need to include the `FSPIOP-Destination` header in `POST /consents/{ID}/generateChallenge`. The switch is responsible for finding the responsible Auth service for this consent based on the `consentId`
+1. _let `consentId` be the value of the `body.consentId` in the `POST /consents` request_  
+2. _let `scopes` be the value of `body.scopes` in the `POST /consents` request_
 
-### 1.6.2. Finalizing the credential
+3. The PISP must build the JSON object `rawChallenge`
+```
+{
+   "consentId": <body.consentId>,
+   "scopes": <body.scopes>
+}
+```
 
-Once the challenge is provided to the PISP, the PISP will generate a new
-credential on the device, digitally sign the challenge, and provide the some new
+4. Next, the PISP must convert this json object to a string representation using a [RFC-8785 Canonical JSON format](https://tools.ietf.org/html/rfc8785)
+
+5. Finally, the PISP must calculate a SHA-256 hash of the canonicalized JSON string.
+i.e. `SHA256(CJSON(rawChallenge))`
+
+The output of this algorithm, `challenge` will be used as the challenge for the [FIDO registration flow](https://webauthn.guide/#registration)
+
+
+### 1.6.2 Registering the credential
+
+
+Once the PISP has derived the challenge, the PISP will generate a new
+credential on the device, digitally signing the challenge, and provide the some new
 information about the credential on the Consent resource:
 
-1. The credential itself (the public component)
-2. A signature of the challenge (to be verified against this public component)
-3. The ID of the credential understood by the device itself
+1. The `PublicKeyCredential` object - which contains the key's Id, and an [AuthenticatorAttestationResponse](https://w3c.github.io/webauthn/#iface-authenticatorattestationresponse) which contains the public key
+2. A `credentialType` field set to `FIDO`
+3. a `status` field set to `PENDING`
 
-This information is provided back to the Auth service, which then verifies that
-the signature is correct. It then updates the status of the credential to
-`"VERIFIED"`, and notifies both the PISP and the DFSP about these new changes
-to the Consent resource.
+> **Note:** Generic `Credential` objects  
+> While we are focussed on FIDO first, we don't want to exclude PISPs who want 
+> to offer services to users over other channels, eg. USSD or SMS, for this
+> reason, the API also supports a `GENERIC` Credential type, i.e.:
+>```
+> CredentialTypeGeneric {
+>   credentialType: 'GENERIC'
+>   status: 'PENDING',
+>   payload: {
+>     publicKey: base64(...),
+>     signature: base64(...),
+>   }
+> }
+>```
+
+The DFSP receives the `PUT /consents/{id}` call from the PISP, and optionally 
+validates the Credential object included in the request body. The DFSP then 
+asks the Auth-Service to create the `Consent` object, and validate the Credential.
+
+If the DFSP recieves a `PUT /consents/{id}` callback from the Auth-Service, with a
+`credential.status` of `VERIFIED`, it knows that the credential is valid according
+to the Auth Service.
+
+Otherwise, if it recieves a `PUT /consents/{id}/error` callback, it knows that something
+went wrong with registering the Consent and associated credential, and can inform
+the PISP accordingly.
 
 
-<!-- Note: this diagram is too big for the proxy renderer - so it is maintained locally -->
-![Credential registration: Register](../out/linking/5b-credential-registration.png)
+The Auth service is then responsible for calling `POST /participants/CONSENTS/{id}`.
+This call will associate the `consentId` with the auth-service's `participantId` and 
+allows us to look up the Auth service given a `consentId` at a later date.
 
-> **Notes:**
-> 1. As with step [1.6.1](#161-requesting-a-challenge) above, the PISP doesn't need to include the `FSPIOP-Destination` header in `PUT /consents/{ID}`. The switch is responsible for finding the responsible Auth service for this consent based on the `consentId`
+![Credential registration: Register](../out/linking/5a-credential-registration.svg)
+
+
+### 1.6.3. Finalizing the Consent
+
+Once the DFSP is satisfied that the credential is valid, it calls 
+`POST /participants/THIRD_PARTY_LINK/{id}` for each account in the 
+`Consent.scopes` list. This entry is a representation of the account
+link between the PISP and DFSP, which the PISP can use to specify 
+the _source of funds_ for the transaction request.
+
+Finally, the DFSP calls `PUT /consent/{id}` with the finalized Consent
+object it received from the Auth Service.
+
+
+![Credential registration: Finalize](../out/linking/5b-finalize_consent.svg)
+
 
 # 2. Unlinking
 
@@ -262,7 +321,7 @@ device, the PISP, and the DFSP.
 To make this work, we simply need to provide a way for a member on the network
 to remove the Consent resourse and notify the other parties about the removal.
 
-![Credential registration: Register](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/mojaloop/pisp/master/docs/linking/unlinking.puml)
+![Unlinking](../out/linking/unlinking.svg)
 
 # 3. Third-party credential registration
 
@@ -281,7 +340,7 @@ The authentication phase becomes very minimal. Since the credential will be
 collected by the DFSP itself (for use later by the PISP), there's no need to
 send back any sort of secret and no need to pass a secret back to the DFSP.
 
-![Credential registration: Register](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/mojaloop/pisp/master/docs/linking/3-authentication-third-party-fido.puml)
+![Authentication](../out/linking/3-authentication-third-party-fido.svg)
 
 ## 3.2. Credential registration
 

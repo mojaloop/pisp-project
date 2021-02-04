@@ -35,7 +35,7 @@ rnote right of D1 #Light
   },
   "payer": {
     "partyIdType": "THIRD_PARTY_LINK",
-    "partyIdentifier": "???",
+    "partyIdentifier": "qwerty-56789",
     "fspId": "dfspa"
   },
   "amountType": "SEND",
@@ -98,7 +98,7 @@ rnote left of D2 #Light
     },
     "partyIdInfo": {
       "partyIdType": "THIRD_PARTY_LINK",
-      "partyIdentifier": "???",
+      "partyIdentifier": "qwerty-56789",
       "fspId": "dfspa"
     },
     },

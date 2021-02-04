@@ -1,0 +1,319 @@
+<svg xmlns="http://www.w3.org/2000/svg" height="1367" preserveAspectRatio="none" style="width:1609px;height:1367px" width="1609">
+  <defs>
+    <filter height="300%" id="a" width="300%" x="-1" y="-1">
+      <feGaussianBlur result="blurOut" stdDeviation="2"/>
+      <feColorMatrix in="blurOut" result="blurOut2" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/>
+      <feOffset dx="4" dy="4" in="blurOut2" result="blurOut3"/>
+      <feBlend in="SourceGraphic" in2="blurOut3"/>
+    </filter>
+  </defs>
+  <path fill="#DDD" stroke="#a80036" d="M547 40.953h488V1361.18H547z"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="67" x="757.5" y="53.02">
+    Mojaloop
+  </text>
+  <text font-family="sans-serif" font-size="18" lengthAdjust="spacingAndGlyphs" textLength="439" x="583.25" y="28.708">
+    PISP Linking: Credential registration (verification)
+  </text>
+  <path fill="#FFF" filter="url(#a)" stroke="#000" stroke-width="2" d="M615.5 213.914H1368v307.992H615.5z"/>
+  <path stroke="#a80036" d="M29 95.383v8"/>
+  <path stroke="#a80036" stroke-dasharray="1,4" d="M29 103.383v28"/>
+  <path stroke="#a80036" d="M29 131.383v1188.5"/>
+  <path fill="#FFF" filter="url(#a)" stroke="#a80036" d="M24 1233.617h10v86.266H24z"/>
+  <path stroke="#a80036" d="M637 95.383v8"/>
+  <path stroke="#a80036" stroke-dasharray="1,4" d="M637 103.383v28"/>
+  <path stroke="#a80036" d="M637 131.383v1188.5M825 95.383v8"/>
+  <path stroke="#a80036" stroke-dasharray="1,4" d="M825 103.383v28"/>
+  <path stroke="#a80036" d="M825 131.383v1188.5M979 95.383v8"/>
+  <path stroke="#a80036" stroke-dasharray="1,4" d="M979 103.383v28"/>
+  <path stroke="#a80036" d="M979 131.383v1188.5M1352 95.383v8"/>
+  <path stroke="#a80036" stroke-dasharray="1,4" d="M1352 103.383v28"/>
+  <path stroke="#a80036" d="M1352 131.383v1188.5"/>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M5 60.086h44v30.297H5z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="30" x="12" y="80.081">
+    PISP
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M551 60.086h168v30.297H551z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="154" x="558" y="80.081">
+    Thirdparty-API-Adapter
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M733 60.086h180v30.297H733z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="166" x="740" y="80.081">
+    Account Lookup Service
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M927 60.086h100v30.297H927z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="86" x="934" y="80.081">
+    Auth Service
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M1324.5 60.086h51v30.297h-51z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="37" x="1331.5" y="80.081">
+    DFSP
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M5 1319.883h44v30.297H5z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="30" x="12" y="1339.878">
+    PISP
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M551 1319.883h168v30.297H551z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="154" x="558" y="1339.878">
+    Thirdparty-API-Adapter
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M733 1319.883h180v30.297H733z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="166" x="740" y="1339.878">
+    Account Lookup Service
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M927 1319.883h100v30.297H927z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="86" x="934" y="1339.878">
+    Auth Service
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M1324.5 1319.883h51v30.297h-51z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="37" x="1331.5" y="1339.878">
+    DFSP
+  </text>
+  <path fill="#FBFB77" filter="url(#a)" stroke="#a80036" d="M1108.5 136.383h487v68h-487z"/>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="442" x="1112.5" y="152.45">
+    DFSP is now satisfied that the Consent registered by the PISP is valid,
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="273" x="1112.5" y="167.583">
+    and now proceeds to register with the ALS:
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="471" x="1120.5" y="182.715">
+    - `THIRD_PARTY_LINK` (optional - for routing of funds to a Third Party Link)
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="25" x="1112.5" y="197.848">
+    ALS
+  </text>
+  <path d="M615.5 213.914h77v7l-10 10h-67v-17" fill="#EEE" stroke="#000"/>
+  <path fill="none" stroke="#000" stroke-width="2" d="M615.5 213.914H1368v307.992H615.5z"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="32" x="630.5" y="226.981">
+    loop
+  </text>
+  <text font-family="sans-serif" font-size="11" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="116" x="707.5" y="226.125">
+    [for each scope in
+  </text>
+  <text font-family="monospace" font-size="11" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="105" x="827.5" y="226.125">
+    Consents.scopes
+  </text>
+  <text font-family="sans-serif" font-size="11" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="5" x="932.5" y="226.125">
+    ]
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M836 313.71l-10 4 10 4-4-4z"/>
+  <path stroke="#a80036" d="M830 317.711h521"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="63" x="842" y="282.379">
+    CRED-16
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="432" x="909" y="252.114">
+    POST /participants/THIRD_PARTY_LINK/dfsp.username.5678
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="152" x="925" y="267.247">
+    FSIOP-Source: dfspa
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="925" y="282.379">
+    {
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="120" x="941" y="297.512">
+    fspId: &quot;dfspa&quot;,
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="925" y="312.645">
+    }
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M1340 342.844l10 4-10 4 4-4z"/>
+  <path stroke="#a80036" stroke-dasharray="2,2" d="M825 346.844h521"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="63" x="832" y="341.778">
+    CRED-17
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="96" x="899" y="341.778">
+    202 Accepted
+  </text>
+  <path fill="#D3D3D3" filter="url(#a)" stroke="#a80036" d="M636.5 359.844h377v23h-377z"/>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="369" x="640.5" y="375.911">
+    ALS registers a new entry in the THIRD_PARTY_LINK oracle
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M1340 480.773l10 4-10 4 4-4z"/>
+  <path stroke="#a80036" d="M825 484.773h521"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="63" x="832" y="441.875">
+    CRED-18
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="424" x="899" y="404.043">
+    PUT /participants/THIRD_PARTY_LINK/dfsp.username.5678
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="288" x="915" y="419.176">
+    FSIOP-Source: account-lookup-service
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="192" x="915" y="434.309">
+    FSIOP-Destination: dfspa
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="915" y="449.442">
+    {
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="120" x="931" y="464.575">
+    fspId: &quot;dfspa&quot;,
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="915" y="479.707">
+    }
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M836 509.906l-10 4 10 4-4-4z"/>
+  <path stroke="#a80036" stroke-dasharray="2,2" d="M830 513.906h521"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="63" x="842" y="508.84">
+    CRED-19
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="48" x="909" y="508.84">
+    200 OK
+  </text>
+  <path fill="#FBFB77" filter="url(#a)" stroke="#a80036" d="M1111.5 535.906h481v38h-481z"/>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="473" x="1115.5" y="551.973">
+    Now that the Credentials are verified and registered with the Auth Service,
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="320" x="1115.5" y="567.106">
+    the DFSP can update the PISP with the final status
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M648 883.828l-10 4 10 4-4-4z"/>
+  <path stroke="#a80036" d="M642 887.828h709"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="63" x="654" y="739">
+    CRED-20
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="136" x="721" y="595.239">
+    PUT /consents/123
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="152" x="737" y="610.372">
+    FSIOP-Source: dfspa
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="200" x="737" y="625.504">
+    FSPIOP-Destination: pispa
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="737" y="640.637">
+    {
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="72" x="753" y="655.77">
+    scopes: [
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="769" y="670.903">
+    {
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="256" x="785" y="686.036">
+    accountId: &quot;dfsp.username.1234&quot;,
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="448" x="785" y="701.168">
+    actions: [ &quot;accounts.transfer&quot;, &quot;accounts.getBalance&quot; ],
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="16" x="769" y="716.301">
+    },
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="769" y="731.434">
+    {
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="256" x="785" y="746.567">
+    accountId: &quot;dfsp.username.5678&quot;,
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="448" x="785" y="761.7">
+    actions: [ &quot;accounts.transfer&quot;, &quot;accounts.getBalance&quot; ],
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="16" x="769" y="776.832">
+    },
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="16" x="753" y="791.965">
+    ],
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="104" x="753" y="807.098">
+    credential: {
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="184" x="769" y="822.231">
+    credentialType: &quot;FIDO&quot;,
+  </text>
+  <text font-family="monospace" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="272" x="769" y="837.364">
+    status: &quot;VERIFIED&quot;, //this is new!
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="224" x="769" y="852.497">
+    payload: PublicKeyCredential
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="753" y="867.629">
+    }
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="737" y="882.762">
+    }
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M648 912.96l-10 4 10 4-4-4z"/>
+  <path stroke="#a80036" stroke-dasharray="2,2" d="M642 916.961h709"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="63" x="654" y="911.895">
+    CRED-21
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="48" x="721" y="911.895">
+    200 OK
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M45 1229.617l-10 4 10 4-4-4z"/>
+  <path stroke="#a80036" d="M39 1233.617h597"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="63" x="51" y="1084.79">
+    CRED-22
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="136" x="118" y="941.028">
+    PUT /consents/123
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="152" x="134" y="956.161">
+    FSIOP-Source: dfspa
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="200" x="134" y="971.293">
+    FSPIOP-Destination: pispa
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="134" y="986.426">
+    {
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="72" x="150" y="1001.559">
+    scopes: [
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="166" y="1016.692">
+    {
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="256" x="182" y="1031.825">
+    accountId: &quot;dfsp.username.1234&quot;,
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="448" x="182" y="1046.957">
+    actions: [ &quot;accounts.transfer&quot;, &quot;accounts.getBalance&quot; ],
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="16" x="166" y="1062.09">
+    },
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="166" y="1077.223">
+    {
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="256" x="182" y="1092.356">
+    accountId: &quot;dfsp.username.5678&quot;,
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="448" x="182" y="1107.489">
+    actions: [ &quot;accounts.transfer&quot;, &quot;accounts.getBalance&quot; ],
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="16" x="166" y="1122.622">
+    },
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="16" x="150" y="1137.754">
+    ],
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="104" x="150" y="1152.887">
+    credential: {
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="184" x="166" y="1168.02">
+    credentialType: &quot;FIDO&quot;,
+  </text>
+  <text font-family="monospace" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="272" x="166" y="1183.153">
+    status: &quot;VERIFIED&quot;, //this is new!
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="224" x="166" y="1198.286">
+    payload: PublicKeyCredential
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="150" y="1213.418">
+    }
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="134" y="1228.551">
+    }
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M625 1258.75l10 4-10 4 4-4z"/>
+  <path stroke="#a80036" stroke-dasharray="2,2" d="M34 1262.75h597"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="63" x="41" y="1257.684">
+    CRED-23
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="48" x="108" y="1257.684">
+    200 OK
+  </text>
+  <path d="M8.25 1275.75v25h1364v-15l-10-10H8.25" fill="#FBFB77" filter="url(#a)" stroke="#a80036"/>
+  <path d="M1362.25 1275.75v10h10l-10-10" fill="#FBFB77" stroke="#a80036"/>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="934" x="217" y="1292.817">
+    Now we have a new identifier that the PISP can use to initiate transactions, a registered credential, and that credential is stored in the auth-service
+  </text>
+</svg>

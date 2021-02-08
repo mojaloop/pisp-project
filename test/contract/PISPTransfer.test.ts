@@ -4,14 +4,15 @@ import axios from 'axios'
 /**
  * @name PISPTransfer
  * @description PISP transfer Tests
+ * Outdated tests that were use to test POC of PISP initiated transfers.
  */
 
-describe('PISP initiated transfer', () => {
+describe.skip('PISP initiated transfer', () => {
   let transactionRequestId: string | undefined
 
   // Note: these steps are wrapped in `describe` blocks to ensure they are run sequentially with Jest
   describe('1. PISP GET /parties & /transactionRequests', () => {
-    it('initites the transaction request', async () => {
+    it('initiates the transaction request', async () => {
       // Arrange
       const scenariosURI = `${TestEnv.baseUrls.pispContractSchemeAdapter}/requestToPay`
       const options = {

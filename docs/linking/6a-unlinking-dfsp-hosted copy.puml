@@ -12,7 +12,7 @@ end box
 
 participant "DFSP" as DFSP
 
-autonumber 1 "<b>UNLINK-#</b>"
+autonumber 1 "<b>UNLINK-A-#</b>"
 
 activate PISP
 

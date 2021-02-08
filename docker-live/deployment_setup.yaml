@@ -1,6 +1,6 @@
 # mysql: central-ledger
 ---
-# MySQL 
+# MySQL
 # apiVersion: v1
 # kind: PersistentVolume
 # metadata:
@@ -139,6 +139,70 @@ spec:
       - name: mysql-als-persistent-storage
         persistentVolumeClaim:
           claimName: mysql-als-pv-claim
+---
+# als-consent-oracle-mysql
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: als-consent-oracle-mysql-pv-claim
+spec:
+  storageClassName: awsgp2
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: als-consent-oracle-mysql
+spec:
+  ports:
+  - port: 3306
+  selector:
+    app: als-consent-oracle-mysql
+  clusterIP: None
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: als-consent-oracle-mysql
+spec:
+  selector:
+    matchLabels:
+      app: als-consent-oracle-mysql
+  serviceName: als-consent-oracle-mysql-service
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: als-consent-oracle-mysql
+    spec:
+      containers:
+      - image: mysql:5.6
+        name: als-consent-oracle-mysql
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: password
+        - name: MYSQL_USER
+          value: als-consent-oracle
+        - name: MYSQL_PASSWORD
+          value: password
+        - name: MYSQL_DATABASE
+          value: als-consent-oracle
+        - name: NODE_ENV
+          value: development
+        ports:
+        - containerPort: 3306
+          name: mysql
+        volumeMounts:
+        - name: als-consent-oracle-mysql-persistent-storage
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: als-consent-oracle-mysql-persistent-storage
+        persistentVolumeClaim:
+          claimName: als-consent-oracle-mysql-pv-claim
 ---
 # Kafka util:
 apiVersion: v1

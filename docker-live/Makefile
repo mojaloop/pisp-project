@@ -100,6 +100,7 @@ health-check-switch:
 	curl -s $(ELB_URL)/account-lookup-service/health | jq
 	curl -s $(ELB_URL)/account-lookup-service-admin/health | jq
 	curl -s $(ELB_URL)/oracle-simulator/health | jq
+	curl -s $(ELB_URL)/als-consent-oracle/health | jq
 
 health-check-participants:
 	@echo 'Checking health of all participants'

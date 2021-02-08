@@ -321,6 +321,12 @@ device, the PISP, and the DFSP.
 To make this work, we simply need to provide a way for a member on the network
 to remove the Consent resourse and notify the other parties about the removal.
 
+
+There are 2 scenarios we need to cater for with a `DELETE /consents/{id}` request:
+1. A DFSP-hosted Auth Service, where no details about the Consent are stored in the Hub, and
+2. A Hub-hosted Auth Service, where the Hub hosted auth service is considered the Authoratative source on the `Consent` object
+
+
 ![Unlinking](../out/linking/unlinking.svg)
 
 # 3. Third-party credential registration

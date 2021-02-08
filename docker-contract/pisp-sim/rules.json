@@ -1,7 +1,7 @@
 [
   {
     "ruleId": 1,
-    "description": "Returns an Payee rejected transcaction error (ML error 5105) from the simulator when transfer value is 5105 in any currency",
+    "description": "Returns an Payee rejected transaction error (ML error 5105) from the simulator when transfer value is 5105 in any currency",
     "conditions": {
       "all": [
         {

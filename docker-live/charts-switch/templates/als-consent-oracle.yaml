@@ -31,10 +31,26 @@ spec:
           httpGet:
             path: /health
             port: 3000
+        volumeMounts:
+          - name: als-consent-oracle-config-volume
+            mountPath: /opt/als-consent-oracle/config
         env:
           - name: NODE_ENV
             value: development
-
+    volumes:
+        - name: als-consent-oracle-config-volume
+          configMap:
+            name: als-consent-oracle-config
+            items:
+            - key: development_db.json
+              path: development_db.json
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: als-consent-oracle-config
+data:
+  development_db.json: {{ (.Files.Get "configs/consent-oracle-production_db.json") | quote }}
 ---
 apiVersion: v1
 kind: Service

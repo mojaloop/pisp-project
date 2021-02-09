@@ -35,7 +35,7 @@ uninstall-all: uninstall-switch clean-install-base clean-add-repos
 # running the same command multiple times
 ##
 .add-repos:
-	helm repo add public http://storage.googleapis.com/kubernetes-charts-incubator
+	helm repo add public https://charts.helm.sh/incubator
 	helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 	@touch .add-repos
 
@@ -88,6 +88,7 @@ mysql-login:
 mysql-drop-database:
 	kubectl exec -it pod/mysql-cl-0 -- mysql -u root -ppassword -e "drop database central_ledger; create database central_ledger"
 	kubectl exec -it pod/mysql-als-0 -- mysql -u root -ppassword -e "drop database account_lookup; create database account_lookup"
+	kubectl exec -it pod/als-consent-oracle-mysql-0 -- mysql -u root -ppassword -e "drop database als-consent-oracle; create database als-consent-oracle"
 
 health-check: health-check-switch health-check-participants
 
@@ -100,6 +101,7 @@ health-check-switch:
 	curl -s $(ELB_URL)/account-lookup-service/health | jq
 	curl -s $(ELB_URL)/account-lookup-service-admin/health | jq
 	curl -s $(ELB_URL)/oracle-simulator/health | jq
+	curl -s $(ELB_URL)/als-consent-oracle/health | jq
 
 health-check-participants:
 	@echo 'Checking health of all participants'

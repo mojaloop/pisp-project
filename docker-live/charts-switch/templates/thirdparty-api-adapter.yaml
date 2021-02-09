@@ -32,12 +32,6 @@ spec:
             httpGet:
               path: /health
               port: 3008
-          # todo - we need to specify a proper file here :(
-          # env:
-            # - name: THIRD_PARTY_ENDPOINT_SERVICE_URL
-              # value: http://centralledger:3001
-            # - name: THIRD_PARTY_KAFKA__CONSUMER__0__rdkafkaConf__metadata.broker.list
-              # value: kafka:9092
           volumeMounts:
             - name: thirdparty-api-adapter-config-volume
               mountPath: /opt/thirdparty-api-adapter/config

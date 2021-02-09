@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: account-lookup-service
-        image: mojaloop/account-lookup-service:v10.3.0.2-pisp
+        image: mojaloop/account-lookup-service:v11.1.2.2-pisp
         livenessProbe:
           initialDelaySeconds: 30
           httpGet:

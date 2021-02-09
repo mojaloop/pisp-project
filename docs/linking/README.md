@@ -321,7 +321,33 @@ device, the PISP, and the DFSP.
 To make this work, we simply need to provide a way for a member on the network
 to remove the Consent resourse and notify the other parties about the removal.
 
-![Unlinking](../out/linking/unlinking.svg)
+
+There are 2 scenarios we need to cater for with a `DELETE /consents/{id}` request:
+1. A DFSP-hosted Auth Service, where no details about the Consent are stored in the Hub, and
+2. A Hub-hosted Auth Service, where the Hub hosted auth service is considered the Authoritative source on the `Consent` object
+
+
+## 2.1 Unlinking without a Hub Hosted Auth Service
+In this case, the switch passes on the `DELETE /consents/123` request to the DFSP in the `FSPIOP-Destination` header.
+
+![Unlinking-DFSP-Hosted](../out/linking/6a-unlinking-dfsp-hosted.svg)
+
+In the case where Unlinking is requested from the DFSP's side, the DFSP can
+simply call `PATCH /consents/123` to inform the PISP of an update to the 
+`Consent` object.
+
+## 2.2 Unlinking with a Hub Hosted Auth Service
+
+In this instance, the PISP still addresses it's `DELETE /consents/123` call to the
+DFSP, since it knows nothing 
+
+Internally, the switch will lookup the Authoritative source of the `Consent` object,
+using the ALS Call, `GET /participants/CONSENT/{id}`. If it is determined that there
+is a Hub-hosted Auth Service which 'owns' this `Consent`, the HTTP call `DELETE /consents/{id}`
+will be redirected to the Auth Service.
+
+![Unlinking-Hub-Hosted](../out/linking/6b-unlinking-hub-hosted.svg)
+
 
 # 3. Third-party credential registration
 

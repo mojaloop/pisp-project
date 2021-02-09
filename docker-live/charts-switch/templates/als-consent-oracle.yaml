@@ -19,25 +19,27 @@ spec:
         app: als-consent-oracle
     spec:
       containers:
-      - name: als-consent-oracle
-        image: mojaloop/als-consent-oracle:v0.0.3
-        livenessProbe:
-          initialDelaySeconds: 30
-          httpGet:
-            path: /health
-            port: 3000
-        readinessProbe:
-          initialDelaySeconds: 30
-          httpGet:
-            path: /health
-            port: 3000
-        volumeMounts:
-          - name: als-consent-oracle-config-volume
-            mountPath: /opt/als-consent-oracle/config
-        env:
-          - name: NODE_ENV
-            value: development
-    volumes:
+        - name: als-consent-oracle
+          image: mojaloop/als-consent-oracle:v0.0.3
+          # command: [ "tail", "-f", "/dev/null" ]
+          livenessProbe:
+            initialDelaySeconds: 30
+            httpGet:
+              path: /health
+              port: 3000
+          readinessProbe:
+            initialDelaySeconds: 30
+            httpGet:
+              path: /health
+              port: 3000
+          volumeMounts:
+            - name: als-consent-oracle-config-volume
+              mountPath: /opt/als-consent-oracle/config/development_db.json
+              subPath: development_db.json
+          env:
+            - name: NODE_ENV
+              value: development
+      volumes:
         - name: als-consent-oracle-config-volume
           configMap:
             name: als-consent-oracle-config

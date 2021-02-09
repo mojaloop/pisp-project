@@ -140,11 +140,11 @@ spec:
         persistentVolumeClaim:
           claimName: mysql-als-pv-claim
 ---
-# als-consent-oracle-mysql
+# mysql-oracle-consent
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: als-consent-oracle-mysql-pv-claim
+  name: mysql-oracle-consent-pv-claim
 spec:
   storageClassName: awsgp2
   accessModes:
@@ -156,53 +156,53 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: als-consent-oracle-mysql
+  name: mysql-oracle-consent
 spec:
   ports:
   - port: 3306
   selector:
-    app: als-consent-oracle-mysql
+    app: mysql-oracle-consent
   clusterIP: None
 ---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: als-consent-oracle-mysql
+  name: mysql-oracle-consent
 spec:
   selector:
     matchLabels:
-      app: als-consent-oracle-mysql
-  serviceName: als-consent-oracle-mysql-service
+      app: mysql-oracle-consent
+  serviceName: mysql-oracle-consent-service
   replicas: 1
   template:
     metadata:
       labels:
-        app: als-consent-oracle-mysql
+        app: mysql-oracle-consent
     spec:
       containers:
       - image: mysql:5.6
-        name: als-consent-oracle-mysql
+        name: mysql-oracle-consent
         env:
         - name: MYSQL_ROOT_PASSWORD
           value: password
         - name: MYSQL_USER
-          value: als-consent-oracle
+          value: oracle_consent
         - name: MYSQL_PASSWORD
           value: password
         - name: MYSQL_DATABASE
-          value: als-consent-oracle
+          value: oracle_consent
         - name: NODE_ENV
           value: development
         ports:
         - containerPort: 3306
           name: mysql
         volumeMounts:
-        - name: als-consent-oracle-mysql-persistent-storage
+        - name: mysql-oracle-consent-persistent-storage
           mountPath: /var/lib/mysql
       volumes:
-      - name: als-consent-oracle-mysql-persistent-storage
+      - name: mysql-oracle-consent-persistent-storage
         persistentVolumeClaim:
-          claimName: als-consent-oracle-mysql-pv-claim
+          claimName: mysql-oracle-consent-pv-claim
 ---
 # Kafka util:
 apiVersion: v1

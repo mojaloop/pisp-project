@@ -20,6 +20,8 @@ curl -s -X POST ${ELB_URL}/account-lookup-service-admin/oracles \
       "isDefault": true
     }'
 
+exit 0
+
 # A super simple rough test of the Consents oracle
 curl -s -X POST ${ELB_URL}/account-lookup-service/CONSENTS/ \
   --header 'Content-Type: application/json' \

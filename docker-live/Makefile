@@ -35,7 +35,7 @@ uninstall-all: uninstall-switch clean-install-base clean-add-repos
 # running the same command multiple times
 ##
 .add-repos:
-	helm repo add public http://storage.googleapis.com/kubernetes-charts-incubator
+	helm repo add public https://charts.helm.sh/incubator
 	helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 	@touch .add-repos
 

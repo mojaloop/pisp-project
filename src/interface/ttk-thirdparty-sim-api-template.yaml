@@ -2,8 +2,7 @@ openapi: 3.0.2
 info:
   title: Mojaloop Thirdparty & DFSP Simulator API
   version: '1.0'
-  description:
-    A Mojaloop API that will simulate the out of bound user authentication (OTP or WEB) 
+  description: A Mojaloop API that will simulate the out of bound user authentication (OTP or WEB)
     between a DFSP/PISP and their user
   license:
     name: TBD
@@ -24,16 +23,22 @@ paths:
         - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/Content-Length.yaml'
         - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/Content-Type.yaml'
         - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/X-Forwarded-For.yaml'
+        - name: userName
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/UserName'
+        - name: password
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/Password'
       requestBody:
-        required: true
+        required: false
         content:
-          application/json:
+          application/x-www-form-urlencoded:
             schema:
               $ref: '#/components/schemas/DFSPLoginRequest'
-            example:
-              userName: 'dfspa.user.name'
-              password: 'dfspa.user.password'
-              consentRequestId: '3b346cec-47b3-4def-b870-edb255aaf6c3'
       responses:
         200:
           $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/responses/index.yaml#/200'
@@ -66,15 +71,24 @@ paths:
         - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/Content-Length.yaml'
         - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/Content-Type.yaml'
         - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/X-Forwarded-For.yaml'
+        - name: userId
+          in: query
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+        - name: consentRequestId
+          in: query
+          required: true
+          schema:
+            $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/schemas/CorrelationId.yaml'
       requestBody:
-        required: true
+        required: false
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/DFSPAuthorizeRequest'
-            example:
-              userName: 'dfspa.user.name'
-              consentRequestId: '3b346cec-47b3-4def-b870-edb255aaf6c3'
       responses:
         200:
           description: Response containing secret
@@ -195,13 +209,12 @@ paths:
       tags:
         - DFSPSim
       description: The HTTP request `GET /OTPorSecret/{ID}` is used to get OTP or Secret from DFSP.
-      summary: Get OTP or Secret for specified consentRequestId 
+      summary: Get OTP or Secret for specified consentRequestId
       operationId: GetOTPorSecret
       parameters:
         #Path
         - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/ID.yaml'
         #Headers
-        - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/Content-Type.yaml'
         - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/X-Forwarded-For.yaml'
       responses:
         200:
@@ -238,7 +251,6 @@ paths:
       #Path
       - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/ID.yaml'
       #Headers
-      - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/Content-Type.yaml'
       - $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/parameters/X-Forwarded-For.yaml'
     get:
       tags:
@@ -326,12 +338,18 @@ paths:
 
 components:
   # TODO: Move to `mojaloop/api-snippets.
-  schemas:    
+  schemas:
     SecretValue:
       title: SecretValue
       type: string
       minLength: 11
       maxLength: 128
+    UserId:
+      type: array
+      items:
+        $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/schemas/AccountAddress.yaml'
+      minItems: 1
+      description: A long-lived unique account identifier provided by the DFSP
     UserName:
       title: UserName
       type: string
@@ -355,24 +373,15 @@ components:
           $ref: '#/components/schemas/UserName'
         password:
           $ref: '#/components/schemas/Password'
-        consentRequestId:
-          $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/schemas/CorrelationId.yaml'
-      required:
-        - userName
-        - password
-        - consentRequestId
     DFSPAuthorizeRequest:
       title: DFSPAuthorizeRequest
       type: object
       description: 'POST /authorize request'
       properties:
-        userName:
-          $ref: '#/components/schemas/UserName'
+        userId:
+          $ref: '#/components/schemas/UserId'
         consentRequestId:
           $ref: '../../node_modules/@mojaloop/api-snippets/v1.0/openapi3/schemas/CorrelationId.yaml'
-      required:
-        - userName
-        - consentRequestId
     DFSPAuthorizeResponse:
       title: DFSPAuthorizeResponse
       type: object

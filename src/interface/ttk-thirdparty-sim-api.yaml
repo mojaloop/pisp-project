@@ -34,18 +34,31 @@ paths:
             The `Content-Length` header field indicates the anticipated size of the
             payload body. Only sent if there is a body.
             **Note:** The API supports a maximum size of 5242880 bytes (5 Megabytes).
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          required: true
+          description: |
+            The `Content-Type` header indicates the specific version of the API used
+            to send the payload body.
         - $ref: '#/paths/~1store~1consentRequests~1%7BID%7D/parameters/1'
-        - $ref: '#/paths/~1store~1consentRequests~1%7BID%7D/parameters/2'
+        - name: userName
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/UserName'
+        - name: password
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/Password'
       requestBody:
-        required: true
+        required: false
         content:
-          application/json:
+          application/x-www-form-urlencoded:
             schema:
               $ref: '#/components/schemas/DFSPLoginRequest'
-            example:
-              userName: dfspa.user.name
-              password: dfspa.user.password
-              consentRequestId: 3b346cec-47b3-4def-b870-edb255aaf6c3
       responses:
         '200':
           description: OK
@@ -222,17 +235,26 @@ paths:
       parameters:
         - $ref: '#/paths/~1login/post/parameters/0'
         - $ref: '#/paths/~1login/post/parameters/1'
+        - $ref: '#/paths/~1login/post/parameters/2'
         - $ref: '#/paths/~1store~1consentRequests~1%7BID%7D/parameters/1'
-        - $ref: '#/paths/~1store~1consentRequests~1%7BID%7D/parameters/2'
+        - name: userId
+          in: query
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+        - name: consentRequestId
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/SendOTPRequest/properties/consentRequestId'
       requestBody:
-        required: true
+        required: false
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/DFSPAuthorizeRequest'
-            example:
-              userName: dfspa.user.name
-              consentRequestId: 3b346cec-47b3-4def-b870-edb255aaf6c3
       responses:
         '200':
           description: Response containing secret
@@ -268,8 +290,8 @@ paths:
       parameters:
         - $ref: '#/paths/~1login/post/parameters/0'
         - $ref: '#/paths/~1login/post/parameters/1'
+        - $ref: '#/paths/~1login/post/parameters/2'
         - $ref: '#/paths/~1store~1consentRequests~1%7BID%7D/parameters/1'
-        - $ref: '#/paths/~1store~1consentRequests~1%7BID%7D/parameters/2'
       requestBody:
         required: true
         content:
@@ -309,8 +331,8 @@ paths:
       parameters:
         - $ref: '#/paths/~1login/post/parameters/0'
         - $ref: '#/paths/~1login/post/parameters/1'
+        - $ref: '#/paths/~1login/post/parameters/2'
         - $ref: '#/paths/~1store~1consentRequests~1%7BID%7D/parameters/1'
-        - $ref: '#/paths/~1store~1consentRequests~1%7BID%7D/parameters/2'
       requestBody:
         description: Perform verification of OTP or Secret
         required: true
@@ -356,7 +378,6 @@ paths:
       parameters:
         - $ref: '#/paths/~1store~1consentRequests~1%7BID%7D/parameters/0'
         - $ref: '#/paths/~1store~1consentRequests~1%7BID%7D/parameters/1'
-        - $ref: '#/paths/~1store~1consentRequests~1%7BID%7D/parameters/2'
       responses:
         '200':
           description: Response containing details of the OTP or Secret
@@ -395,14 +416,6 @@ paths:
         schema:
           type: string
         description: The identifier value.
-      - name: Content-Type
-        in: header
-        schema:
-          type: string
-        required: true
-        description: |
-          The `Content-Type` header indicates the specific version of the API used
-          to send the payload body.
       - name: X-Forwarded-For
         in: header
         schema:
@@ -507,6 +520,20 @@ components:
       type: string
       minLength: 11
       maxLength: 128
+    UserId:
+      type: array
+      items:
+        title: AccountAddress
+        type: string
+        description: |
+          A long-lived unique account identifier provided by the DFSP. This MUST NOT
+          be Bank Account Number or anything that may expose a User's private bank
+          account information.
+        pattern: '^([0-9A-Za-z_~\-\.]+[0-9A-Za-z_~\-])$'
+        minLength: 1
+        maxLength: 1023
+      minItems: 1
+      description: A long-lived unique account identifier provided by the DFSP
     UserName:
       title: UserName
       type: string
@@ -530,24 +557,15 @@ components:
           $ref: '#/components/schemas/UserName'
         password:
           $ref: '#/components/schemas/Password'
-        consentRequestId:
-          $ref: '#/components/schemas/SendOTPRequest/properties/consentRequestId'
-      required:
-        - userName
-        - password
-        - consentRequestId
     DFSPAuthorizeRequest:
       title: DFSPAuthorizeRequest
       type: object
       description: POST /authorize request
       properties:
-        userName:
-          $ref: '#/components/schemas/UserName'
+        userId:
+          $ref: '#/components/schemas/UserId'
         consentRequestId:
           $ref: '#/components/schemas/SendOTPRequest/properties/consentRequestId'
-      required:
-        - userName
-        - consentRequestId
     DFSPAuthorizeResponse:
       title: DFSPAuthorizeResponse
       type: object
@@ -632,15 +650,7 @@ components:
               }
             properties:
               accountId:
-                title: AccountAddress
-                type: string
-                description: |
-                  A long-lived unique account identifier provided by the DFSP. This MUST NOT
-                  be Bank Account Number or anything that may expose a User's private bank
-                  account information.
-                pattern: '^([0-9A-Za-z_~\-\.]+[0-9A-Za-z_~\-])$'
-                minLength: 1
-                maxLength: 1023
+                $ref: '#/components/schemas/UserId/items'
               actions:
                 type: array
                 items:

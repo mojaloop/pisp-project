@@ -6,7 +6,7 @@ networks:
 
 services:
   ml-testing-toolkit:
-    image: mojaloop/ml-testing-toolkit:v11.7.8
+    image: mojaloop/ml-testing-toolkit:v11.7.7
     container_name: dl_ml-testing-toolkit
     volumes:
       - "./ml-testing-toolkit/spec_files:/opt/mojaloop-testing-toolkit/spec_files"
@@ -22,8 +22,9 @@ services:
     networks:
       - mojaloop-pisp-net
     extra_hosts:
+      - "pisp-sim-scheme-adapter:172.17.0.1"
+      - "ml-testing-toolkit:172.17.0.1"
       - "ml-testing-toolkit-ui:172.17.0.1"
-      - "ml-testing-toolkit-ui.local:172.17.0.1"
 
   mongo:
     image: mongo
@@ -46,7 +47,6 @@ services:
       - mojaloop-pisp-net
     extra_hosts:
       - "ml-testing-toolkit:172.17.0.1"
-      - "ml-testing-toolkit.local:172.17.0.1"
 
   ## PISP Simulator
   pisp-sim-backend:

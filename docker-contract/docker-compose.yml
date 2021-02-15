@@ -6,7 +6,7 @@ networks:
 
 services:
   ml-testing-toolkit:
-    image: mojaloop/ml-testing-toolkit:v11.7.7
+    image: mojaloop/ml-testing-toolkit:v11.8.1
     container_name: dl_ml-testing-toolkit
     volumes:
       - "./ml-testing-toolkit/spec_files:/opt/mojaloop-testing-toolkit/spec_files"
@@ -32,7 +32,7 @@ services:
       - "27018:27017"
 
   ml-testing-toolkit-ui:
-    image: mojaloop/ml-testing-toolkit-ui:v11.8.4
+    image: mojaloop/ml-testing-toolkit-ui:v11.8.4.2-pisp
     container_name: dl_ml-testing-toolkit-ui
     ports:
       - "6060:6060"

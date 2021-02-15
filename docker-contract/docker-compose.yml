@@ -6,7 +6,7 @@ networks:
 
 services:
   ml-testing-toolkit:
-    image: mojaloop/ml-testing-toolkit:v11.7.7
+    image: mojaloop/ml-testing-toolkit:v11.8.1
     container_name: dl_ml-testing-toolkit
     volumes:
       - "./ml-testing-toolkit/spec_files:/opt/mojaloop-testing-toolkit/spec_files"
@@ -24,6 +24,7 @@ services:
     extra_hosts:
       - "pisp-sim-scheme-adapter:172.17.0.1"
       - "ml-testing-toolkit:172.17.0.1"
+      - "ml-testing-toolkit-ui:172.17.0.1"
 
   mongo:
     image: mongo
@@ -31,16 +32,21 @@ services:
       - "27018:27017"
 
   ml-testing-toolkit-ui:
-    image: mojaloop/ml-testing-toolkit-ui:v11.8.3
+    image: mojaloop/ml-testing-toolkit-ui:v11.8.4.2-pisp
     container_name: dl_ml-testing-toolkit-ui
     ports:
       - "6060:6060"
     environment:
       - API_BASE_URL=http://ml-testing-toolkit:5050
       - AUTH_ENABLED=FALSE
-    command: nginx -g "daemon off;"
+      - TP_SIM_URL=http://ml-testing-toolkit:15000
+    command:
+      - sh
+      - /usr/share/nginx/start.sh
     networks:
       - mojaloop-pisp-net
+    extra_hosts:
+      - "ml-testing-toolkit:172.17.0.1"
 
   ## PISP Simulator
   pisp-sim-backend:

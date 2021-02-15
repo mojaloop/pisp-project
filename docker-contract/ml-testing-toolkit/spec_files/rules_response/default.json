@@ -1276,6 +1276,50 @@
   },
   {
     "ruleId": 22,
+    "priority": 2,
+    "description": "post /login -Fail",
+    "apiVersion": {
+      "minorVersion": 1,
+      "majorVersion": 0,
+      "type": "thirdparty_simulator",
+      "asynchronous": false
+    },
+    "conditions": {
+      "all": [
+        {
+          "fact": "queryParams",
+          "operator": "equal",
+          "value": "fail-test",
+          "path": "userName"
+        },
+        {
+          "fact": "operationPath",
+          "operator": "equal",
+          "value": "/login"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "post"
+        }
+      ]
+    },
+    "event": {
+      "method": null,
+      "path": null,
+      "params": {
+        "body": {},
+        "statusCode": "401",
+        "scripts": {}
+      },
+      "delay": 0,
+      "type": "FIXED_RESPONSE"
+    },
+    "type": "response",
+    "version": 1
+  },
+  {
+    "ruleId": 23,
     "priority": 1,
     "description": "post /authorize",
     "apiVersion": {
@@ -1308,8 +1352,11 @@
         "statusCode": "200",
         "scripts": {
           "exec": [
-            "const body = JSON.parse(pm.request.body)",
-            "const consReqId = body.consentRequestId",
+            "//const body = JSON.parse(pm.request.body)",
+            "//const consReqId = body.consentRequestId",
+            "let query = {}",
+            "pm.request.url.query.all().forEach((param) => { query[param.key] = param.value})",
+            "const consReqId = query.consentRequestId",
             "pm.environment.set(consReqId, 'some-secret-' + consReqId)",
             "pm.environment.set('secretOrOTPAuth', 'some-secret-' + consReqId)"
           ]
@@ -1322,7 +1369,7 @@
     "version": 1
   },
   {
-    "ruleId": 23,
+    "ruleId": 24,
     "priority": 1,
     "description": "post /sendOTP",
     "apiVersion": {
@@ -1369,9 +1416,9 @@
     "version": 1
   },
   {
-    "ruleId": 24,
+    "ruleId": 25,
     "priority": 2,
-    "description": "post /verifyOTPorSecret -FAIL",
+    "description": "post /verifyOTPorSecret -Fail",
     "apiVersion": {
       "minorVersion": 1,
       "majorVersion": 0,
@@ -1425,7 +1472,7 @@
     "version": 1
   },
   {
-    "ruleId": 25,
+    "ruleId": 26,
     "priority": 1,
     "description": "post /verifyOTPorSecret",
     "apiVersion": {
@@ -1478,7 +1525,7 @@
     "version": 1
   },
   {
-    "ruleId": 26,
+    "ruleId": 27,
     "priority": 1,
     "description": "get /OTPorSecret/{ID}",
     "apiVersion": {
@@ -1524,7 +1571,7 @@
     "version": 1
   },
   {
-    "ruleId": 27,
+    "ruleId": 28,
     "priority": 1,
     "description": "post  /store/consentRequests/{ID}",
     "apiVersion": {
@@ -1575,7 +1622,7 @@
     "version": 1
   },
   {
-    "ruleId": 28,
+    "ruleId": 29,
     "priority": 1,
     "description": "get /store/consentRequests/{ID}",
     "apiVersion": {

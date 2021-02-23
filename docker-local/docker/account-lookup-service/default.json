@@ -50,5 +50,6 @@
         "FSPIOP_SOURCE_TO_SIGN": "switch",
         "JWS_SIGNING_KEY_PATH": "secrets/jwsSigningKey.key"
       }
-    }
+    },
+    "FEATURE_ENABLE_EXTENDED_PARTY_ID_TYPE": true
   }

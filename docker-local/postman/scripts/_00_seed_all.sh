@@ -18,3 +18,4 @@ set -u
 ./_09_seed_dfsp_simulator_msisdn.sh
 ./_10_seed_pisp_msisdn.sh
 ./_11_seed_dfsp_backend_parties.sh
+./_12_seed_settlement_models.sh

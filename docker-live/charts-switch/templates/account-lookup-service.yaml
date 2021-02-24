@@ -37,7 +37,7 @@ spec:
           - name: ALS_DATABASE__HOST
             value: mysql-als
           - name: ALS_FEATURE_ENABLE_EXTENDED_PARTY_ID_TYPE
-            value: "true"
+            value: 'true'
 ---
 apiVersion: v1
 kind: Service

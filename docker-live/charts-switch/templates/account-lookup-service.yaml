@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: account-lookup-service
-        image: mojaloop/account-lookup-service:v11.1.2.2-pisp
+        image: mojaloop/account-lookup-service:v11.3.0
         livenessProbe:
           initialDelaySeconds: 30
           httpGet:
@@ -36,6 +36,8 @@ spec:
             value: http://central-ledger:3001
           - name: ALS_DATABASE__HOST
             value: mysql-als
+          - name: ALS_FEATURE_ENABLE_EXTENDED_PARTY_ID_TYPE
+            value: "true"
 ---
 apiVersion: v1
 kind: Service

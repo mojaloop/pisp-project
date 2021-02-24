@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: central-ledger
-        image: mojaloop/central-ledger:v11.1.4.0-pisp
+        image: mojaloop/central-ledger:v13.2.0
         livenessProbe:
           initialDelaySeconds: 30
           httpGet:

@@ -822,7 +822,7 @@ services:
 
   als-consent-oracle:
     container_name: als-consent-oracle
-    image: "mojaloop/als-consent-oracle:v0.0.3"
+    image: "mojaloop/als-consent-oracle:v0.0.6"
     command: sh -c "/opt/als-consent-oracle/wait4/wait4.js als-consent-oracle && npm run migrate && npm run start"
     ports:
       - "16000:3000"
@@ -832,10 +832,7 @@ services:
       - als-consent-oracle-mysql
     volumes:
        - ./docker/wait4:/opt/als-consent-oracle/wait4
-       - ./docker/als-consent-oracle/development.json:/opt/als-consent-oracle/config/development.json
-       - ./docker/als-consent-oracle/development_db.json:/opt/als-consent-oracle/config/development_db.json
-    environment:
-      - NODE_ENV=development
+       - ./docker/als-consent-oracle/default.json:/opt/als-consent-oracle/config/default.json
     healthcheck:
       test: wget -q http://172.17.0.1:16000/health -O /dev/null || exit 1
       timeout: 20s

@@ -50,6 +50,7 @@ function getService (config) {
   }
   return config.services.find(s => s.name === serviceName)
 }
+
 /**
  * @function getWaiters
  * @description - generates the list of promises of doing the wait job

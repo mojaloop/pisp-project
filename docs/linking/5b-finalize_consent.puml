@@ -54,24 +54,13 @@ rnote over DFSP
   the DFSP can update the PISP with the final status
 end note
 
-DFSP -> Switch: ""PUT /consents/123""\n\
+DFSP -> Switch: ""PATCH /consents/123""\n\
 ""  FSIOP-Source: dfspa""\n\
 ""  FSPIOP-Destination: pispa""\n\
+""  Content-Type: application/merge-patch+json""\n\
 ""  {""\n\
-    ""  scopes: [""\n\
-    ""    {""\n\
-    ""      accountId: "dfsp.username.1234",""\n\
-    ""      actions: [ "accounts.transfer", "accounts.getBalance" ],""\n\
-    ""    },""\n\
-    ""    {""\n\
-    ""      accountId: "dfsp.username.5678",""\n\
-    ""      actions: [ "accounts.transfer", "accounts.getBalance" ],""\n\
-    ""    },""\n\
-    ""  ],""\n\
     ""  credential: {""\n\
-    ""    credentialType: "FIDO",""\n\
     ""    **status: "VERIFIED", //this is new!**""\n\
-    ""    payload: PublicKeyCredential ""\n\
     ""  }""\n\
 ""  }""
 DFSP --> Switch: ""200 OK""
@@ -79,21 +68,10 @@ DFSP --> Switch: ""200 OK""
 Switch -> PISP ++: ""PUT /consents/123""\n\
 ""  FSIOP-Source: dfspa""\n\
 ""  FSPIOP-Destination: pispa""\n\
+""  Content-Type: application/merge-patch+json""\n\
 ""  {""\n\
-    ""  scopes: [""\n\
-    ""    {""\n\
-    ""      accountId: "dfsp.username.1234",""\n\
-    ""      actions: [ "accounts.transfer", "accounts.getBalance" ],""\n\
-    ""    },""\n\
-    ""    {""\n\
-    ""      accountId: "dfsp.username.5678",""\n\
-    ""      actions: [ "accounts.transfer", "accounts.getBalance" ],""\n\
-    ""    },""\n\
-    ""  ],""\n\
     ""  credential: {""\n\
-    ""    credentialType: "FIDO",""\n\
     ""    **status: "VERIFIED", //this is new!**""\n\
-    ""    payload: PublicKeyCredential ""\n\
     ""  }""\n\
 ""  }""
 PISP --> Switch: ""200 OK""

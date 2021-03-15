@@ -30,6 +30,7 @@
     "QUOTES_ENDPOINT": "quoting-service:3002",
     "TRANSFERS_ENDPOINT": "ml-api-adapter:3000",
     "BULK_TRANSFERS_ENDPOINT": "ml-api-adapter:3000",
+    "THIRDPARTY_REQUESTS_ENDPOINT": "pisp-thirdparty-api-adapter:12000",
     "DFSP_ID": "dfspa",
     "DFSP_BACKEND_URI": "dfspa-backend:9000",
     "DFSP_BACKEND_HTTP_SCHEME": "http",

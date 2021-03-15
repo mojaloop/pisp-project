@@ -1,14 +1,7 @@
 import TestEnv from './TestEnv'
 import axios from 'axios'
 
-describe('GET /accounts/{ID}', (): void => {
-  const requestConfig = {
-    headers: {
-      'FSPIOP-Source': 'pisp',
-      'FSPIOP-Destination': 'dfspa',
-      Date: new Date().toUTCString()
-    }
-  }
+describe('GET /accounts/{fspId}/{userId}', (): void => {
   const expectedResp = {
     accounts: [
       {
@@ -26,8 +19,8 @@ describe('GET /accounts/{ID}', (): void => {
   }
 
   it('PISP requests DFSP to return user accounts for linking', async (): Promise<void> => {
-    const scenariosURI = `${TestEnv.baseUrls.pispThirdpartySchemeAdapterOutbound}/accounts/username1234`
-    const response = await axios.get(scenariosURI, requestConfig)
+    const scenariosURI = `${TestEnv.baseUrls.pispThirdpartySchemeAdapterOutbound}/accounts/dfspa/username1234`
+    const response = await axios.get(scenariosURI)
 
     // Assert
     expect(response.status).toBe(200)
@@ -35,7 +28,7 @@ describe('GET /accounts/{ID}', (): void => {
   })
 
   it('PISP requests DFSP: Expect ID not found', async (): Promise<void> => {
-    const scenariosURI = `${TestEnv.baseUrls.pispThirdpartySchemeAdapterOutbound}/accounts/test`
+    const scenariosURI = `${TestEnv.baseUrls.pispThirdpartySchemeAdapterOutbound}/accounts/dfspa/test`
     const idNotFoundResp = {
       accounts: [],
       errorInformation: {
@@ -45,7 +38,7 @@ describe('GET /accounts/{ID}', (): void => {
       currentState: 'COMPLETED'
     }
 
-    await axios.get(scenariosURI, requestConfig)
+    await axios.get(scenariosURI)
       .catch(error => {
         // Assert
         expect(error.response.status).toBe(500)

@@ -24,17 +24,6 @@
 
 ##  1. <a name='Transfers'></a>1. Transfers
 
-Edit the transfer flow `.puml` files here: [PISP Transfer Api Calls Detailed](./api_calls_detailed.puml)
-
-![PISPTransferSimpleAPI](../out/transfer/api_calls_simple.svg)
-> Puml source: [`./transfer/api_calls_simple.puml`](./transfer/api_calls_simple.puml)
-
-For a more detailed breakdown of the api calls, Refer to the detailed API flows:
- - [Discovery](../out/transfer/api_calls_detailed_1.svg)
- - [Agreement](../out/transfer/api_calls_detailed_2.svg)
- - [Transfer](../out/transfer/api_calls_detailed_3.svg)
-
-
 Transfers is broken down into the separate sections:
 1. **Discovery**
     In this phase, a PISP looks up the Payee Party who they wish to recieve the funds

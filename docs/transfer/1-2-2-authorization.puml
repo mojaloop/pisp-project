@@ -1,6 +1,6 @@
 @startuml
 
-title Transfer: 1.2 Agreement
+title Transfer: 1.2.2 Authorization
 
 
 box "PISP"
@@ -95,13 +95,16 @@ note left of D2
   the PISP for authorization
 end note
 
+D2 -> D2: Generate a UUID for the authorization Request:\n""33333333-0000-0000-0000-000000000000""
+D2 -> D2: Derive the challenge based \non ""PUT /quotes/{ID}""
+
 rnote left of D2 #Light
 **""POST /thirdpartyRequests/authorizations""**
 ""FSPIOP-Source: dfspa""
 ""FSPIOP-Destination: pispa""
 {
   "authorizationRequestId": "33333333-0000-0000-0000-000000000000",
-  "challenge": "base64String...", // encoded challenge by the DFSP
+  "challenge": ""<base64 encoded binary - the encoded challenge>"",
   "quote": {
     "transferAmount": {"amount": "100", "currency": "USD"},
     "payeeReceiveAmount": {"amount": "99", "currency": "USD"},

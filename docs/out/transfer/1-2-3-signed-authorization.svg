@@ -1,0 +1,153 @@
+<svg xmlns="http://www.w3.org/2000/svg" height="720" preserveAspectRatio="none" style="width:1176px;height:720px" width="1176">
+  <defs>
+    <filter height="300%" id="a" width="300%" x="-1" y="-1">
+      <feGaussianBlur result="blurOut" stdDeviation="2"/>
+      <feColorMatrix in="blurOut" result="blurOut2" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/>
+      <feOffset dx="4" dy="4" in="blurOut2" result="blurOut3"/>
+      <feBlend in="SourceGraphic" in2="blurOut3"/>
+    </filter>
+  </defs>
+  <text font-family="sans-serif" font-size="18" lengthAdjust="spacingAndGlyphs" textLength="321" x="424" y="28.708">
+    Transfer: 1.2.3 Signed Authorization
+  </text>
+  <path fill="#DDD" stroke="#a80036" d="M1 40.953h104v673.641H1z"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="33" x="36.5" y="53.02">
+    PISP
+  </text>
+  <path fill="#DDD" stroke="#a80036" d="M641.5 40.953h73v673.641h-73z"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="67" x="644.5" y="53.02">
+    Mojaloop
+  </text>
+  <path fill="#DDD" stroke="#a80036" d="M969 40.953h76v673.641h-76z"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="54" x="980" y="53.02">
+    DFSP A
+  </text>
+  <path stroke="#a80036" stroke-dasharray="5,5" d="M53 111.68V660M677.5 111.68V660M1007 111.68V660"/>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M5 76.383h92v30.297H5z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="78" x="12" y="96.378">
+    PISP Server
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M5 659h92v30.297H5z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="78" x="12" y="678.995">
+    PISP Server
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M646.5 76.383h59v30.297h-59z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="45" x="653.5" y="96.378">
+    Switch
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M646.5 659h59v30.297h-59z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="45" x="653.5" y="678.995">
+    Switch
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M973 60.086h64v46.594h-64z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="50" x="980" y="80.081">
+    DFSP A
+  </text>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="48" x="981" y="96.378">
+    (Payer)
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M973 659h64v46.594h-64z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="50" x="980" y="678.995">
+    DFSP A
+  </text>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="48" x="981" y="695.292">
+    (Payer)
+  </text>
+  <path fill="#EEE" filter="url(#a)" stroke="#eee" d="M0 142.246h1169v3H0z"/>
+  <path stroke="#000" d="M0 142.246h1169M0 145.246h1169"/>
+  <path fill="#EEE" filter="url(#a)" stroke="#000" stroke-width="2" d="M509 131.68h151v23.133H509z"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="132" x="515" y="147.747">
+    Agreement Phase
+  </text>
+  <path d="M58 169.813v55h253v-45l-10-10H58" fill="#FBFB77" filter="url(#a)" stroke="#a80036"/>
+  <path d="M301 169.813v10h10l-10-10" fill="#FBFB77" stroke="#a80036"/>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="232" x="64" y="186.879">
+    PISP checks the quote with the user,
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="213" x="64" y="202.012">
+    and uses the FIDO API to sign the
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="21" x="64" y="217.145">
+    the
+  </text>
+  <text font-family="monospace" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="72" x="89" y="217.145">
+    challenge
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="36" x="165" y="217.145">
+    string
+  </text>
+  <path fill="#FFF" filter="url(#a)" stroke="#a80036" d="M58 239.211h608v204H58z"/>
+  <text font-family="monospace" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="600" x="62" y="255.278">
+    PUT /thirdpartyRequests/authorizations/33333333-0000-0000-0000-000000000000
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="160" x="62" y="270.411">
+    FSPIOP-Source: pispa
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="200" x="62" y="285.543">
+    FSPIOP-Destination: dfspa
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="62" y="300.676">
+    {
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="141" x="70" y="315.809">
+    &quot;authenticationInfo&quot;: {
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="149" x="78" y="330.942">
+    &quot;authentication&quot;: &quot;U2F&quot;,
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="154" x="78" y="346.075">
+    &quot;authenticationValue&quot;: {
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="403" x="86" y="361.207">
+    &quot;pinValue&quot;: &quot;&lt;base64 encoded binary - the signed challenge&gt;&quot;,
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="85" x="86" y="376.34">
+    &quot;counter&quot;: &quot;1&quot;
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="78" y="391.473">
+    }
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="70" y="406.606">
+    }
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="176" x="70" y="421.739">
+    &quot;responseType&quot;: &quot;ENTERED&quot;
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="62" y="436.872">
+    }
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M666 466.07l10 4-10 4 4-4z"/>
+  <path stroke="#a80036" d="M53 470.07h619"/>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="600" x="60" y="465.004">
+    PUT /thirdpartyRequests/authorizations/33333333-0000-0000-0000-000000000000
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M64 495.203l-10 4 10 4-4-4z"/>
+  <path stroke="#a80036" stroke-dasharray="2,2" d="M58 499.203h619"/>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="48" x="70" y="494.137">
+    200 OK
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M995 539.469l10 4-10 4 4-4z"/>
+  <path stroke="#a80036" d="M678 543.469h323"/>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="304" x="685" y="523.27">
+    PUT /thirdpartyRequests/authorizations
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="296" x="685" y="538.403">
+    /33333333-0000-0000-0000-000000000000
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M689 568.602l-10 4 10 4-4-4z"/>
+  <path stroke="#a80036" stroke-dasharray="2,2" d="M683 572.602h323"/>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="48" x="695" y="567.536">
+    200 OK
+  </text>
+  <path d="M850 585.602v55h310v-45l-10-10H850" fill="#FBFB77" filter="url(#a)" stroke="#a80036"/>
+  <path d="M1150 585.602v10h10l-10-10" fill="#FBFB77" stroke="#a80036"/>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="201" x="856" y="602.668">
+    DFSP has the signed challenge.
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="289" x="856" y="617.801">
+    It now needs to ask the Auth-Service to verify
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="136" x="856" y="632.934">
+    the signed challenge.
+  </text>
+</svg>

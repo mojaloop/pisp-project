@@ -6,8 +6,8 @@
 	* [1.2 Agreement](#Agreement)
 		* [1.2.1 `POST /thirdpartyRequests/transactions`](#POSTthirdpartyRequeststransactions)
 		* [1.2.2 Thirdparty Authorization Request](#ThirdpartyAuthorizationRequest)
-		* [1.2.2 Signed Authorization](#SignedAuthorization)
-		* [1.2.3 Validate Authorization](#ValidateAuthorization)
+		* [1.2.3 Signed Authorization](#SignedAuthorization)
+		* [1.2.4 Validate Authorization](#ValidateAuthorization)
 	* [1.3 Transfer](#Transfer)
 * [2. Request TransactionRequest Status](#RequestTransactionRequestStatus)
 * [3. Error Conditions](#ErrorConditions)
@@ -90,7 +90,7 @@ could be derived.
 ![1-2-2-authorization](../out/transfer/1-2-2-authorization.svg)
 
 
-#### <a name='SignedAuthorization'></a>1.2.2 Signed Authorization
+#### <a name='SignedAuthorization'></a>1.2.3 Signed Authorization
 
 Upon receiving the `POST /thirdpartyRequests/authorizations` request from the DFSP, the PISP confirms the details of the 
 transaction with the user, and uses the [FIDO Authentication](https://webauthn.guide/#authentication) flow to sign the `challenge`
@@ -102,9 +102,9 @@ After retrieving the signed challenge from the user's device, the PISP sends a `
 ![1-2-3-signed-authorization](../out/transfer/1-2-3-signed-authorization.svg)
 
 
-#### <a name='ValidateAuthorization'></a>1.2.3 Validate Authorization
+#### <a name='ValidateAuthorization'></a>1.2.4 Validate Authorization
 
-> If the DFSP uses a self-hosted authorization service, this step can be skipped.
+> __Note:__ If the DFSP uses a self-hosted authorization service, this step can be skipped.
 
 The DFSP now needs to check that challenge has been signed correctly, and by the private key that corresponds to the 
 public key that is attached to the `Consent` object.
@@ -112,8 +112,8 @@ public key that is attached to the `Consent` object.
 The DFSP uses the API call `POST /thirdpartyRequests/verifications`, the body of which is comprised of:
 
 - `verificationRequestId` - A UUID created by the DFSP to identify this verification request.
-- `challenge` - The same challenge that was sent to the PISP in step `1.2.2`.
-- `value` - The body op the `PUT /thirdpartyRequests/authorizations` from the PISP.
+- `challenge` - The same challenge that was sent to the PISP in [1.2.2 ThirdpartyAuthorizationRequest](#ThirdpartyAuthorizationRequest)
+- `value` - The body of the `PUT /thirdpartyRequests/authorizations` from the PISP.
 - `consentId` - The `consentId` of the Consent resource that contains the credential public key with which to verify this transaction.
 The DFSP must lookup the `consentId` based on the `payee` details of the `ThirdpartyTransactionRequest`.
 
@@ -183,9 +183,9 @@ The PayerDFSP is responsible for communicating failures to the PISP
 
 ### <a name='DerivingtheChallenge'></a>4.1 Deriving the Challenge
 
-1. _let `quote` be the value of the response body from the `PUT /quotes/{ID}` call
-2. _let the function `CJSON()` be the implementation of a Canonical JSON to string 
-3. _let the function `SHA256()` be the implementation of a SHA-256 one way hash function
+1. _let `quote` be the value of the response body from the `PUT /quotes/{ID}` call_
+2. _let the function `CJSON()` be the implementation of a Canonical JSON to string_
+3. _let the function `SHA256()` be the implementation of a SHA-256 one way hash function_
 Format, as specified in [RFC-8785 - Canonical JSON format](https://tools.ietf.org/html/rfc8785)
 4. The DFSP must generate the value `jsonString` from the output of `CJSON(quote)`
 5. The `challenge` is the value of `SHA256(jsonString)`

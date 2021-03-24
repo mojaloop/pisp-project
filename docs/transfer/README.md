@@ -1,18 +1,18 @@
 # Transfer API
 
 <!-- vscode-markdown-toc -->
-* 1. [1. Transfers](#Transfers)
-	* 1.1. [1.1 Discovery](#Discovery)
-	* 1.2. [1.2 Agreement](#Agreement)
-		* 1.2.1. [1.2.1 `POST /thirdpartyRequests/transactions`](#POSTthirdpartyRequeststransactions)
-		* 1.2.2. [1.2.2 Thirdparty Authorization Request](#ThirdpartyAuthorizationRequest)
-		* 1.2.3. [1.2.2 Signed Authorization](#SignedAuthorization)
-		* 1.2.4. [1.2.3 Validate Authorization](#ValidateAuthorization)
-	* 1.3. [1.3 Transfer](#Transfer)
-* 2. [2. Request TransactionRequest Status](#RequestTransactionRequestStatus)
-* 3. [3. Error Conditions](#ErrorConditions)
-* 4. [4. Appendix](#Appendix)
-* 5. [4.1 Deriving the Challenge](#DerivingtheChallenge)
+* [1. Transfers](#Transfers)
+	* [1.1 Discovery](#Discovery)
+	* [1.2 Agreement](#Agreement)
+		* [1.2.1 `POST /thirdpartyRequests/transactions`](#POSTthirdpartyRequeststransactions)
+		* [1.2.2 Thirdparty Authorization Request](#ThirdpartyAuthorizationRequest)
+		* [1.2.2 Signed Authorization](#SignedAuthorization)
+		* [1.2.3 Validate Authorization](#ValidateAuthorization)
+	* [1.3 Transfer](#Transfer)
+* [2. Request TransactionRequest Status](#RequestTransactionRequestStatus)
+* [3. Error Conditions](#ErrorConditions)
+* [4. Appendix](#Appendix)
+* [4.1 Deriving the Challenge](#DerivingtheChallenge)
 
 <!-- vscode-markdown-toc-config
 	numbering=true

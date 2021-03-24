@@ -112,7 +112,7 @@ public key that is attached to the `Consent` object.
 The DFSP uses the API call `POST /thirdpartyRequests/verifications`, the body of which is comprised of:
 
 - `verificationRequestId` - A UUID created by the DFSP to identify this verification request.
-- `challenge` - The same challenge that was sent to the PISP in [1.2.2 ThirdpartyAuthorizationRequest](#ThirdpartyAuthorizationRequest)
+- `challenge` - The same challenge that was sent to the PISP in [1.2.2 Thirdparty Authorization Request](#ThirdpartyAuthorizationRequest)
 - `value` - The body of the `PUT /thirdpartyRequests/authorizations` from the PISP.
 - `consentId` - The `consentId` of the Consent resource that contains the credential public key with which to verify this transaction.
 The DFSP must lookup the `consentId` based on the `payee` details of the `ThirdpartyTransactionRequest`.
@@ -184,8 +184,7 @@ The PayerDFSP is responsible for communicating failures to the PISP
 ### <a name='DerivingtheChallenge'></a>4.1 Deriving the Challenge
 
 1. _let `quote` be the value of the response body from the `PUT /quotes/{ID}` call_
-2. _let the function `CJSON()` be the implementation of a Canonical JSON to string_
-3. _let the function `SHA256()` be the implementation of a SHA-256 one way hash function_
-Format, as specified in [RFC-8785 - Canonical JSON format](https://tools.ietf.org/html/rfc8785)
+2. _let the function `CJSON()` be the implementation of a Canonical JSON to string, as specified in [RFC-8785 - Canonical JSON format](https://tools.ietf.org/html/rfc8785)_
+3. _let the function `SHA256()` be the implementation of a SHA-256 one way hash function, as specified in [RFC-6234](https://tools.ietf.org/html/rfc6234)
 4. The DFSP must generate the value `jsonString` from the output of `CJSON(quote)`
 5. The `challenge` is the value of `SHA256(jsonString)`

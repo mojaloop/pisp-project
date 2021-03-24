@@ -12,7 +12,7 @@
 * [2. Request TransactionRequest Status](#RequestTransactionRequestStatus)
 * [3. Error Conditions](#ErrorConditions)
 * [4. Appendix](#Appendix)
-* [4.1 Deriving the Challenge](#DerivingtheChallenge)
+    * [4.1 Deriving the Challenge](#DerivingtheChallenge)
 
 <!-- vscode-markdown-toc-config
 	numbering=true

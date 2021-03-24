@@ -67,7 +67,7 @@ Should this validation succeed, the DFSP will generate a unique `transactionId` 
 
 This call informs the PISP that the Thirdparty Transaction Request was accepted, and informs them of the final `transactionId` to watch for at a later date.
 
-If the above validation fail, the DFSP should send a `PUT /thirdpartyRequests/transactions/{ID}/error` call to the PISP, with an error message communicating the failure to the PISP. See [Error Codes](./error_codes.md) for more information.
+If the above validation fail, the DFSP should send a `PUT /thirdpartyRequests/transactions/{ID}/error` call to the PISP, with an error message communicating the failure to the PISP. See [Error Codes](../error_codes.md) for more information.
 
 #### <a name='ThirdpartyAuthorizationRequest'></a>1.2.2 Thirdparty Authorization Request
 
@@ -80,7 +80,7 @@ They use the API call `POST /thirdpartyRequests/authorizations`. The request bod
 could be a random string, we recommend that it be derived from something _meaningful_ to the actors involved in the transaction, 
 that can't be predicted ahead of time by the PISP. See [Section 4.1](#DerivingtheChallenge) for an example of how the challenge
 could be derived.
-> Note: this requirement could be enforced in scheme rules
+    > Note: this requirement could be enforced in scheme rules
 - `quote` - the response body from the `PUT /quotes/{ID}` callback
 - `transactionType` the `transactionType` field from the original `POST /thirdpartyRequests/transactions` request
 

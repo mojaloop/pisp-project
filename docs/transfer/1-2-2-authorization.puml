@@ -104,6 +104,7 @@ rnote left of D2 #Light
 ""FSPIOP-Destination: pispa""
 {
   "authorizationRequestId": "33333333-0000-0000-0000-000000000000",
+  "transactionRequestId": "00000000-0000-0000-0000-000000000000",
   "challenge": ""<base64 encoded binary - the encoded challenge>"",
   "quote": {
     "transferAmount": {"amount": "100", "currency": "USD"},

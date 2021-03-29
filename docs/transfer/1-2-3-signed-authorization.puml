@@ -14,7 +14,8 @@ box "DFSP A"
 end box
 == Agreement Phase ==
 note right of D1
-  PISP checks the quote with the user,
+  PISP looks up the ""transactionRequestId"" and
+  checks the quote with the user,
   and uses the FIDO API to sign the 
   the **""challenge""** string
 end note

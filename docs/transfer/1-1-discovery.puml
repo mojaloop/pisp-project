@@ -1,6 +1,6 @@
 @startuml
 
-title PISPTransferDetailedAPI
+title Transfer: 1.1 Discovery
 
 box "PISP"
 participant "PISP Server" as D1

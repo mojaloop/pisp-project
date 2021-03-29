@@ -21,7 +21,7 @@ actor "Bhavesh\n(+44 1234 5678)" as CB
 
 ... DFSP A initiates a normal Mojaloop P2P Transfer ...
 
-D2 -> D2: Generate a new ""transferId"", and associate it with the ""transactionRequestId""
+D2 -> D2: Generate a new ""transferId"", and associate \n it with the ""transactionRequestId""
 
 rnote over D2 #Light
 **""POST /transfers""**

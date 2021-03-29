@@ -21,6 +21,8 @@ actor "Bhavesh\n(+44 1234 5678)" as CB
 
 ... DFSP A initiates a normal Mojaloop P2P Transfer ...
 
+D2 -> D2: Generate a new ""transferId"", and associate it with the ""transactionRequestId""
+
 rnote over D2 #Light
 **""POST /transfers""**
 ""FSPIOP-Source: dfspa""
@@ -80,7 +82,7 @@ S -> D2: ""PUT /transfers/321""
 D2 --> S: ""200 OK""
 
 
-D2 -> D2: Look up ThirdpartyTransactionRequestId from the transferId
+D2 -> D2: Look up ""transactionRequestId"" from the ""transferId""
 
 rnote over D2 #Light
 **""PATCH /thirdpartyRequests/transactions/00000000-0000-0000-0000-000000000000""**

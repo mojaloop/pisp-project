@@ -12,6 +12,8 @@ box "DFSP A"
 end box
 
 
+D2 -> D2: Generate a new ""verificationRequestId", and associate it with the ""thirdpartyTransactionRequestId"
+
 rnote left of D2 #Light
 **""POST /thirdpartyRequests/verifications""**
 ""FSPIOP-Source: dfspa""

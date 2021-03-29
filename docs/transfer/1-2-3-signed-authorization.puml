@@ -39,6 +39,9 @@ S --> D1: ""200 OK""
 S -> D2: ""PUT /thirdpartyRequests/authorizations""\n""/33333333-0000-0000-0000-000000000000""
 D2 --> S: ""200 OK""
 
+D2 -> D2: Look up the ""transactionRequestId"" for this ""authorizationId""
+D2 -> D2: Look up the ""consentId"" for this ""transactionRequestId""
+
 note over D2
   DFSP has the signed challenge.
   It now needs to ask the Auth-Service to verify

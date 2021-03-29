@@ -50,7 +50,8 @@ D1 -> S: ""POST /thirdpartyRequests/transactions""
 S --> D1: ""202 Accepted""
 S -> D2: ""POST /thirdpartyRequests/transactions""
 D2 --> S: ""202 Accepted""
-D2 -> D2: Lookup this ""payer"", verify that they exist, and consent \nis granted with a valid credential
+D2 -> D2: Lookup the consent for this ""payer"", verify that they exist, and consent \nis granted with a valid credential
+D2 -> D2: Store a referece to the `consentId` with the `transactionRequestId`
 D2 -> D2: Generate a unique transactionId for this transaction request:\n**""11111111-0000-0000-0000-000000000000""**
 
 

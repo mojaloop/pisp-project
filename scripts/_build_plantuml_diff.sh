@@ -22,6 +22,9 @@ docker run -d --rm \
   -p ${PUML_PORT}:8080 \
   plantuml/plantuml-server:jetty-v1.2020.21
 
+# Wait for docker to be up
+sleep 2
+
 for i in $(git diff --staged --name-only `find ${DIR}/../docs -name '*.puml'`); do
   echo "found diagram: $i"
   # make the destination directory if not exists

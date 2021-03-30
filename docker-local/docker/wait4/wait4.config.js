@@ -134,10 +134,10 @@ module.exports = {
         {
           description: 'MySQL Database',
           uri: 'als-consent-oracle-mysql:3306',
-          method: 'mysqlAlt',
+          method: 'mysql',
           rc: {
             namespace: 'CO',
-            configPath: '../config/development_db.json'
+            configPath: '../config/default.json'
           },
           retries: 60
         }

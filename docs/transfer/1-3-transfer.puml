@@ -1,14 +1,12 @@
 @startuml
 
-title PISPTransferDetailedAPI
+title Transfer: 1.3 Final transfer
 
 box "PISP"
 participant "PISP Server" as D1
 end box
 box "Mojaloop"
     participant Switch as S
-    participant "ALS" as A
-    participant "Auth-Service" as AUTHS
 end box
 box "DFSP A"
     participant "DFSP A\n(Payer)" as D2
@@ -20,6 +18,10 @@ actor "Bhavesh\n(+44 1234 5678)" as CB
 
 
 == Transfer Phase ==
+
+... DFSP A initiates a normal Mojaloop P2P Transfer ...
+
+D2 -> D2: Generate a new ""transferId"", and associate \n it with the ""transactionRequestId""
 
 rnote over D2 #Light
 **""POST /transfers""**
@@ -75,21 +77,32 @@ rnote left of D3 #Light
 end note
 D3 -> S: ""PUT /transfers/321""
 S --> D3: ""200 OK""
+D3 -> CB: You have received funds from Ayeesha!
 S -> D2: ""PUT /transfers/321""
 D2 --> S: ""200 OK""
 
 
-rnote over S #Light
-**""PATCH /thirdpartyRequests/transactions/123""**
-""FSPIOP-Source: switch""
+D2 -> D2: Look up ""transactionRequestId"" from the ""transferId""
+
+rnote over D2 #Light
+**""PATCH /thirdpartyRequests/transactions/00000000-0000-0000-0000-000000000000""**
+""FSPIOP-Source: dfspa""
 ""FSPIOP-Destination: pispa""
 {
-  "transactionId": "987",
+  "transactionId": "11111111-0000-0000-0000-000000000000",
   "transactionRequestState": "ACCEPTED",
   "transactionState": "COMMITTED"
 }
 end note
-S -> D1: ""PATCH /thirdpartyRequests/transactions/123""
+D2 -> S: ""PATCH /thirdpartyRequests/transactions""\n""   /00000000-0000-0000-0000-000000000000""
+S --> D2: ""200 OK""
+
+S -> D1: ""PATCH /thirdpartyRequests/transactions""\n""   /00000000-0000-0000-0000-000000000000""
 D1 --> S: ""200 OK""
+
+note over D1 
+  PISP can now inform the user the 
+  funds have been sent
+end note
 
 @enduml

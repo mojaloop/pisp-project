@@ -7,8 +7,8 @@
       <feBlend in="SourceGraphic" in2="blurOut3"/>
     </filter>
   </defs>
-  <text font-family="sans-serif" font-size="18" lengthAdjust="spacingAndGlyphs" textLength="216" x="303.75" y="28.708">
-    PISPTransferDetailedAPI
+  <text font-family="sans-serif" font-size="18" lengthAdjust="spacingAndGlyphs" textLength="208" x="307.75" y="28.708">
+    Transfer: 1.1 Discovery
   </text>
   <path fill="#DDD" stroke="#a80036" d="M1 40.953h104v935.648H1z"/>
   <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="33" x="36.5" y="53.02">

@@ -7,6 +7,7 @@
     "PORT": 4006,
     "HOST": "0.0.0.0"
   },
+  "REQUEST_PROCESSING_TIMEOUT_SECONDS": 30,
   "WSO2_AUTH": {
     "staticToken": "0706c62f-c022-3c42-8d14-8b5df128876d",
     "tokenEndpoint": "",
@@ -30,6 +31,7 @@
     "QUOTES_ENDPOINT": "quoting-service:3002",
     "TRANSFERS_ENDPOINT": "ml-api-adapter:3000",
     "BULK_TRANSFERS_ENDPOINT": "ml-api-adapter:3000",
+    "THIRDPARTY_REQUESTS_ENDPOINT": "pisp-thirdparty-api-adapter:12000",
     "DFSP_ID": "dfspb",
     "DFSP_BACKEND_URI": "dfspb-backend:10000",
     "DFSP_BACKEND_HTTP_SCHEME": "http",

@@ -7,6 +7,7 @@
     "PORT": 4006,
     "HOST": "0.0.0.0"
   },
+  "REQUEST_PROCESSING_TIMEOUT_SECONDS": 30,
   "WSO2_AUTH": {
     "staticToken": "0706c62f-c022-3c42-8d14-8b5df128876d",
     "tokenEndpoint": "",
@@ -30,11 +31,12 @@
     "QUOTES_ENDPOINT": "quoting-service:3002",
     "TRANSFERS_ENDPOINT": "ml-api-adapter:3000",
     "BULK_TRANSFERS_ENDPOINT": "ml-api-adapter:3000",
+    "THIRDPARTY_REQUESTS_ENDPOINT": "pisp-thirdparty-api-adapter:12000",
     "DFSP_ID": "dfspa",
     "DFSP_BACKEND_URI": "dfspa-backend:9000",
     "DFSP_BACKEND_HTTP_SCHEME": "http",
     "SDK_REQUEST_TO_PAY_TRANSFER_URI": "dsfpa-sdk-scheme-adapter:5002/requestToPayTransfer",
-    "NOTIFY_ABOUT_TRANSFER_URI": "pisp-thirdparty-scheme-adapter-inbound:7005/thirdpartyRequests/transactions/{ID}",
+    "SDK_NOTIFY_ABOUT_TRANSFER_URI": "pisp-thirdparty-scheme-adapter-inbound:7005/thirdpartyRequests/transactions/{ID}",
     "JWS_SIGN": false,
     "JWS_SIGNING_KEY": "./secrets/jwsSigningKey.key",
     "TLS": {

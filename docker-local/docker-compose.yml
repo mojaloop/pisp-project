@@ -6,7 +6,7 @@ networks:
 
 services:
   central-ledger:
-    image: mojaloop/central-ledger:v13.2.0
+    image: mojaloop/central-ledger:v13.2.6
     container_name: central-ledger
     command: sh -c "/opt/central-ledger/wait4/wait4.js central-ledger && node src/api/index.js"
     ports:
@@ -292,7 +292,7 @@ services:
 
   ## DFSP A
   dfspa-backend:
-    image: "mojaloop/mojaloop-simulator:v11.3.0.0-pisp"
+    image: "mojaloop/mojaloop-simulator:v11.3.0.3-pisp"
     # build:
     #   context: ../../mojaloop-simulator
     #   dockerfile: ./Dockerfile
@@ -350,10 +350,10 @@ services:
       - "dfspa-backend:172.17.0.1"
 
   dfspa-thirdparty-scheme-adapter-inbound:
-    image: "mojaloop/thirdparty-scheme-adapter:v11.21.0"
-    # build:
-    #   context: ../../thirdparty-scheme-adapter
-    #   dockerfile: ./docker/Dockerfile
+    # image: "mojaloop/thirdparty-scheme-adapter:v11.21.0"
+    build:
+      context: https://github.com/kleyow/thirdparty-scheme-adapter.git#feat/pisp-outbound-handler
+      dockerfile: ./docker/Dockerfile
     container_name: dfspa-thirdparty-scheme-adapter-inbound
     environment:
       - NODE_ENV=e2e
@@ -398,12 +398,13 @@ services:
       - "dfspa-backend:172.17.0.1"
       - "dsfpa-sdk-scheme-adapter:172.17.0.1"
       - "pisp-thirdparty-scheme-adapter-inbound:172.17.0.1"
+      - "pisp-thirdparty-api-adapter:172.17.0.1"
 
   dfspa-thirdparty-scheme-adapter-outbound:
-    image: "mojaloop/thirdparty-scheme-adapter:v11.21.0"
-    # build:
-    #   context: ../../thirdparty-scheme-adapter
-    #   dockerfile: ./docker/Dockerfile
+    # image: "mojaloop/thirdparty-scheme-adapter:v11.21.0"
+    build:
+      context: https://github.com/kleyow/thirdparty-scheme-adapter.git#feat/pisp-outbound-handler
+      dockerfile: ./docker/Dockerfile
     container_name: dfspa-thirdparty-scheme-adapter-outbound
     environment:
       - NODE_ENV=e2e
@@ -456,7 +457,7 @@ services:
 
   ## DFSP B
   dfspb-backend:
-    image: "mojaloop/mojaloop-simulator:v11.3.0.0-pisp"
+    image: "mojaloop/mojaloop-simulator:v11.3.0.3-pisp"
     container_name: dfspb-backend
     env_file: ./dfsp_b/dfsp_b_backend.env
     volumes:
@@ -511,10 +512,10 @@ services:
       - "dfspb-backend:172.17.0.1"
 
   dfspb-thirdparty-scheme-adapter-inbound:
-    image: "mojaloop/thirdparty-scheme-adapter:v11.21.0"
-    # build:
-    #   context: ../../thirdparty-scheme-adapter
-    #   dockerfile: ./docker/Dockerfile
+    # image: "mojaloop/thirdparty-scheme-adapter:v11.21.0"
+    build:
+      context: https://github.com/kleyow/thirdparty-scheme-adapter.git#feat/pisp-outbound-handler
+      dockerfile: ./docker/Dockerfile
     container_name: dfspb-thirdparty-scheme-adapter-inbound
     environment:
       - NODE_ENV=e2e
@@ -557,12 +558,13 @@ services:
       - "simulator.local:172.17.0.1"
       - "transaction-request-service:172.17.0.1"
       - "dfspb-backend:172.17.0.1"
+      - "pisp-thirdparty-api-adapter:172.17.0.1"
 
   dfspb-thirdparty-scheme-adapter-outbound:
-    image: "mojaloop/thirdparty-scheme-adapter:v11.21.0"
-    # build:
-    #   context: ../../thirdparty-scheme-adapter
-    #   dockerfile: ./docker/Dockerfile
+    # image: "mojaloop/thirdparty-scheme-adapter:v11.21.0"
+    build:
+      context: https://github.com/kleyow/thirdparty-scheme-adapter.git#feat/pisp-outbound-handler
+      dockerfile: ./docker/Dockerfile
     container_name: dfspb-thirdparty-scheme-adapter-outbound
     environment:
       - NODE_ENV=e2e
@@ -616,7 +618,7 @@ services:
 
   ## PISP
   pisp-backend:
-    image: "mojaloop/mojaloop-simulator:v11.3.0.0-pisp"
+    image: "mojaloop/mojaloop-simulator:v11.3.0.3-pisp"
     container_name: pisp-backend
     env_file: ./pisp/pisp_backend.env
     volumes:
@@ -672,10 +674,10 @@ services:
       - "pisp-backend:172.17.0.1"
 
   pisp-thirdparty-scheme-adapter-inbound:
-    image: "mojaloop/thirdparty-scheme-adapter:v11.21.0"
-    # build:
-    #   context: ../../thirdparty-scheme-adapter
-    #   dockerfile: ./docker/Dockerfile
+    # image: "mojaloop/thirdparty-scheme-adapter:v11.21.0"
+    build:
+      context: https://github.com/kleyow/thirdparty-scheme-adapter.git#feat/pisp-outbound-handler
+      dockerfile: ./docker/Dockerfile
     container_name: pisp-thirdparty-scheme-adapter-inbound
     environment:
       - NODE_ENV=e2e
@@ -721,10 +723,10 @@ services:
       - "pisp-backend:172.17.0.1"
 
   pisp-thirdparty-scheme-adapter-outbound:
-    image: "mojaloop/thirdparty-scheme-adapter:v11.21.0"
-    # build:
-    #   context: ../../thirdparty-scheme-adapter
-    #   dockerfile: ./docker/Dockerfile
+    # image: "mojaloop/thirdparty-scheme-adapter:v11.21.0"
+    build:
+      context: https://github.com/kleyow/thirdparty-scheme-adapter.git#feat/pisp-outbound-handler
+      dockerfile: ./docker/Dockerfile
     container_name: pisp-thirdparty-scheme-adapter-outbound
     environment:
       - NODE_ENV=e2e
@@ -772,7 +774,7 @@ services:
       - "pisp-thirdparty-api-adapter:172.17.0.1"
 
   pisp-thirdparty-api-adapter:
-    image: "mojaloop/thirdparty-api-adapter:v11.10.0"
+    image: "mojaloop/thirdparty-api-adapter:v11.15.0"
     container_name: pisp-thirdparty-api-adapter
     command: sh -c "/opt/thirdparty-api-adapter/wait4/wait4.js thirdparty-api-adapter && npm run start"
     ports:

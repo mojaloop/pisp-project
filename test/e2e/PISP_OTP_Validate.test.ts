@@ -50,29 +50,15 @@ describe('/consentRequests/{ID}/validate: start->errored', (): void => {
       toParticipantId: 'dfspa'
     }
     const validateURI = `${TestEnv.baseUrls.pispThirdpartySchemeAdapterOutbound}/consentRequests/${consentRequestsId}/validate`
-    const validateResponse = await axios.patch(validateURI, validateRequest)
-    expect(validateResponse.status).toEqual(200)
-    expect(validateResponse.data.consent.consentRequestId).toEqual(consentRequestsId)
-    // these scope values are mocked for now in mojaloop-simulator
-    expect(validateResponse.data.consent.errorInformation).toEqual({
-      scopes: [
-        {
-          accountId: 'dfsp.blue.account.one',
-          actions: [
-            'accounts.getBalance',
-            'accounts.transfer'
-          ]
-        },
-        {
-          accountId: 'dfsp.blue.account.two',
-          actions: [
-            'accounts.getBalance',
-            'accounts.transfer'
-          ]
-        }
-      ]
+    try {
+      await axios.patch(validateURI, validateRequest)
+    } catch (error) {
+      expect(error.response.status).toEqual(500)
+      expect(error.response.data.errorInformation).toEqual({
+        errorCode: '2001',
+        errorDescription: 'Internal server error'
+      })
+      expect(error.response.data.currentState).toEqual('errored')
     }
-    )
-    expect(validateResponse.data.currentState).toEqual('errored')
   })
 })

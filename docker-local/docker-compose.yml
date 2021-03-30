@@ -774,7 +774,10 @@ services:
       - "pisp-thirdparty-api-adapter:172.17.0.1"
 
   pisp-thirdparty-api-adapter:
-    image: "mojaloop/thirdparty-api-adapter:v11.15.0"
+    # image: "mojaloop/thirdparty-api-adapter:v11.15.0"
+    build:
+      context: https://github.com/kleyow/thirdparty-api-adapter.git#feat/put-consent-requests-id-error
+      # dockerfile: ./docker/Dockerfile
     container_name: pisp-thirdparty-api-adapter
     command: sh -c "/opt/thirdparty-api-adapter/wait4/wait4.js thirdparty-api-adapter && npm run start"
     ports:

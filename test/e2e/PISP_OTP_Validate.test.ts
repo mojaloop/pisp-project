@@ -55,8 +55,8 @@ describe('/consentRequests/{ID}/validate: start->errored', (): void => {
     } catch (error) {
       expect(error.response.status).toEqual(500)
       expect(error.response.data.errorInformation).toEqual({
-        errorCode: '2001',
-        errorDescription: 'Internal server error'
+        errorCode: '7205',
+        errorDescription: 'OTP failed validation'
       })
       expect(error.response.data.currentState).toEqual('errored')
     }

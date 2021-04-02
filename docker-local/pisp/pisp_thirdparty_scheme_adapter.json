@@ -36,8 +36,10 @@
     "DFSP_ID": "pisp",
     "DFSP_BACKEND_URI": "pisp-backend:11000",
     "DFSP_BACKEND_HTTP_SCHEME": "http",
-    "SDK_REQUEST_TO_PAY_TRANSFER_URI": "pisp-sdk-scheme-adapter:7002/requestToPay",
-    "SDK_PARTIES_INFORMATION_URI": "pisp-sdk-scheme-adapter:7002/parties/{Type}/{ID}/{SubId}",
+    "SDK_OUTGOING_URI": "pisp-sdk-scheme-adapter:7002",
+    "SDK_OUTGOING_HTTP_SCHEME": "http",
+    "SDK_PARTIES_INFORMATION_URI": "parties/{Type}/{ID}/{SubId}",
+    "SDK_REQUEST_TO_PAY_TRANSFER_URI": "requestToPay",
     "JWS_SIGN": false,
     "JWS_SIGNING_KEY": "./secrets/jwsSigningKey.key",
     "TLS": {

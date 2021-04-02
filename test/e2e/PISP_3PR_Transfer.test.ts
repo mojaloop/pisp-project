@@ -6,8 +6,8 @@ import expected from './expected'
 
 // pisp transfer from Alice -> Bob
 
-// test is failing due to url being resulting in
-// "uri": "http://localhost:7002/pisp-sdk-scheme-adapter:7002/parties/MSISDN/987654321"
+// test is failing at the party lookup step.
+// todo: investigate and fix this test
 describe.skip('/thirdpartyTransaction: partyLookup->initiate->approve', (): void => {
   const transactionRequestId = 'c51ec534-ee48-4575-b6a9-ead2955b8060'
   it('transactionRequestState should be ACCEPTED', async (): Promise<void> => {

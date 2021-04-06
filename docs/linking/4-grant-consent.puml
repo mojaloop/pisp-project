@@ -16,6 +16,10 @@ participant "DFSP" as DFSP
 
 autonumber 1 "<b>GRANT-#</b>"
 
+== Success case ==
+
+DFSP -> DFSP: Get scopes that were stored\nin "Request consent" step.
+
 DFSP -> Switch ++: ""POST /consents""\n\
 ""  FSIOP-Source: dfspa""\n\
 ""  FSIOP-Destination: pispa""\n\
@@ -47,5 +51,36 @@ Switch -> PISP ++: ""POST /consents""\n\
     ""}""
 
 PISP --> Switch: ""202 Accepted""
+deactivate Switch
+deactivate PISP
+
+== Failure case ==
+
+DFSP -> DFSP: Unable to fetch stored scopes
+
+DFSP -> Switch ++: ""PUT /consentRequests/456/error""\n\
+  ""  FSIOP-Source: dfspa""\n\
+  ""  FSIOP-Destination: pispa""\n\
+  ""{""\n\
+  ""  errorInformation : { ""\n\
+  ""    errorCode: "7207", ""\n\
+  ""    errorDescription: "FSP failed retrieve scopes for consent request" ""\n\
+  ""  } ""\n\
+  ""}""
+Switch --> DFSP: ""200 OK""
+deactivate DFSP
+
+Switch -> PISP ++: ""PUT /consentRequests/456/error""\n\
+  ""  FSIOP-Source: dfspa""\n\
+  ""  FSIOP-Destination: pispa""\n\
+  ""{""\n\
+  ""  errorInformation : { ""\n\
+  ""    errorCode: "7207", ""\n\
+  ""    errorDescription: "FSP failed retrieve scopes for consent request" ""\n\
+  ""  } ""\n\
+  ""}""
+PISP --> Switch: ""200 OK""
+deactivate Switch
+deactivate PISP
 
 @enduml

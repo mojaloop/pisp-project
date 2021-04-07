@@ -22,6 +22,7 @@
 - [3. Third-party credential registration](#3-third-party-credential-registration)
   - [3.1. Authentication](#31-authentication)
   - [3.2. Credential registration](#32-credential-registration)
+- [4. Linking Error Scenarios](#4-linking-error-scenarios)
 
 <!-- /TOC -->
 
@@ -65,15 +66,15 @@ The end-goal of this phase is for the PISP Server to have a final list of DFSPs
 available and any relevant metadata about those DFPSs that are necessary to
 begin the linking process.
 
-The PISP can display this list of DFSPs to their user, and the user can select 
+The PISP can display this list of DFSPs to their user, and the user can select
 which DFSP they hold an account with for linking.
 
 ![Pre-linking](../out/linking/0-pre-linking.svg)
 
 ## 1.2. Discovery
 
-In this phase, we ask the user to select the type and value of identifier they use 
-with the DFSP they intend to link with. This could be a username, MSISDN (phone number), 
+In this phase, we ask the user to select the type and value of identifier they use
+with the DFSP they intend to link with. This could be a username, MSISDN (phone number),
 or email address.
 
 The result of this phase is a list of potential accounts available for linking.
@@ -180,7 +181,7 @@ It is implemented as extension for TestingToolkit service which allows to define
 - SIM-12 WebBrowser retrieves the consentRequest details - including the list of accounts
 - SIM-15 WebBrowser renders grant consent page
 - SIM-16 User grants consent
-- SIM-19 in response from /authorize call is generated `secret`  
+- SIM-19 in response from /authorize call is generated `secret`
 - SIM-20 `secret` is appended to callbackUri as query parameter
 ### 1.4.2. OTP
 
@@ -220,17 +221,17 @@ service inside the consent resource. When future transfers are proposed, we will
 require that those transfers be digitally signed by the FIDO credential (in this
 case, the private key) in order to be considered valid.
 
-This credential registration is composed of three phases: (1) deriving the 
+This credential registration is composed of three phases: (1) deriving the
 challenge, (2) registering the credential, and (3) finalizing the consent.
 
 ### 1.6.1. Deriving the challenge
 
-The PISP must derive the challenge to be used as an input to the FIDO Key 
-Registration step. This challenge must not be guessable ahead of time by 
+The PISP must derive the challenge to be used as an input to the FIDO Key
+Registration step. This challenge must not be guessable ahead of time by
 the PISP.
 
 
-1. _let `consentId` be the value of the `body.consentId` in the `POST /consents` request_  
+1. _let `consentId` be the value of the `body.consentId` in the `POST /consents` request_
 2. _let `scopes` be the value of `body.scopes` in the `POST /consents` request_
 
 3. The PISP must build the JSON object `rawChallenge`
@@ -260,8 +261,8 @@ information about the credential on the Consent resource:
 2. A `credentialType` field set to `FIDO`
 3. a `status` field set to `PENDING`
 
-> **Note:** Generic `Credential` objects  
-> While we are focussed on FIDO first, we don't want to exclude PISPs who want 
+> **Note:** Generic `Credential` objects
+> While we are focussed on FIDO first, we don't want to exclude PISPs who want
 > to offer services to users over other channels, eg. USSD or SMS, for this
 > reason, the API also supports a `GENERIC` Credential type, i.e.:
 >```
@@ -275,8 +276,8 @@ information about the credential on the Consent resource:
 > }
 >```
 
-The DFSP receives the `PUT /consents/{id}` call from the PISP, and optionally 
-validates the Credential object included in the request body. The DFSP then 
+The DFSP receives the `PUT /consents/{id}` call from the PISP, and optionally
+validates the Credential object included in the request body. The DFSP then
 asks the Auth-Service to create the `Consent` object, and validate the Credential.
 
 If the DFSP recieves a `PUT /consents/{id}` callback from the Auth-Service, with a
@@ -289,7 +290,7 @@ the PISP accordingly.
 
 
 The Auth service is then responsible for calling `POST /participants/CONSENTS/{id}`.
-This call will associate the `consentId` with the auth-service's `participantId` and 
+This call will associate the `consentId` with the auth-service's `participantId` and
 allows us to look up the Auth service given a `consentId` at a later date.
 
 ![Credential registration: Register](../out/linking/5a-credential-registration.svg)
@@ -297,10 +298,10 @@ allows us to look up the Auth service given a `consentId` at a later date.
 
 ### 1.6.3. Finalizing the Consent
 
-Once the DFSP is satisfied that the credential is valid, it calls 
-`POST /participants/THIRD_PARTY_LINK/{id}` for each account in the 
+Once the DFSP is satisfied that the credential is valid, it calls
+`POST /participants/THIRD_PARTY_LINK/{id}` for each account in the
 `Consent.scopes` list. This entry is a representation of the account
-link between the PISP and DFSP, which the PISP can use to specify 
+link between the PISP and DFSP, which the PISP can use to specify
 the _source of funds_ for the transaction request.
 
 Finally, the DFSP calls `PUT /consent/{id}` with the finalized Consent
@@ -333,13 +334,13 @@ In this case, the switch passes on the `DELETE /consents/123` request to the DFS
 ![Unlinking-DFSP-Hosted](../out/linking/6a-unlinking-dfsp-hosted.svg)
 
 In the case where Unlinking is requested from the DFSP's side, the DFSP can
-simply call `PATCH /consents/123` to inform the PISP of an update to the 
+simply call `PATCH /consents/123` to inform the PISP of an update to the
 `Consent` object.
 
 ## 2.2 Unlinking with a Hub Hosted Auth Service
 
 In this instance, the PISP still addresses it's `DELETE /consents/123` call to the
-DFSP, since it knows nothing 
+DFSP, since it knows nothing
 
 Internally, the switch will lookup the Authoritative source of the `Consent` object,
 using the ALS Call, `GET /participants/CONSENT/{id}`. If it is determined that there
@@ -371,3 +372,9 @@ send back any sort of secret and no need to pass a secret back to the DFSP.
 ## 3.2. Credential registration
 
 TODO!
+
+# 4. Linking Error Scenarios
+
+![Authentication Invalid OTP](../out/linking/error_scenarios/3-authentication-otp-invalid.svg)
+
+![Grant consent scope error](../out/linking/error_scenarios/4-grant-consent-scope-error.svg)

@@ -36,6 +36,8 @@ Switch -> DFSP ++: ""PATCH /consentRequests/456""\n\
 DFSP --> Switch: ""202 Accepted""
 deactivate Switch
 
+DFSP -> DFSP: Verify the OTP is correct.
+
 DFSP -> DFSP: Unable to fetch stored scopes
 
 DFSP -> Switch ++: ""PUT /consentRequests/456/error""\n\

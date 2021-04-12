@@ -163,19 +163,83 @@ A PISP can issue a `GET /thirdpartyRequests/{id}/transactions` to find the statu
 
 ## <a name='ErrorConditions'></a>3. Error Conditions
 
-
-The PayerDFSP is responsible for communicating failures to the PISP
-
-1. Thirdparty Transaction Request fails
-
-2. Downstream Quote Failure
-
-3. Authorization Failure
-
-4. Transfer Failure
+Error Conditions for Third-party initiated transfers fall into the following categories:
+1. Bad Payee Lookup
+2. DFSP rejects the transfer
+3. Downstream processing by the DFSP fails (e.g. `POST /quotes` or `POST /transfers` of the FSPIOP-API)
+4. Invalid signing of the challenge, or other related verification errors
+5. User rejects the terms of the transfer
+6. Timeout of the Thirdparty Transaction Request
 
 
-[ todo: in mojaloop/mojaloop#346 ]
+After the PISP initiates the Thirdparty Transaction Request with `POST /thirdpartyRequests/transactions`, the DFSP must send either a `POST /thirdpartyRequests/transcations/{ID}/error` or `PATCH /thirdpartyRequests/transactions/{ID}` callback to inform the PISP of a final status to the Thirdparty Transaction Request.
+
+- `PATCH /thirdpartyRequests/transactions/{ID}` is to inform the PISP of the successfull status of the Thirdparty Transaction Request
+- `PUT /thirdpartyRequests/transcations/{ID}/error` is used to inform the PISP of a failed Thirdparty Transaction Request
+- If a PISP doesn't recieve either of the above callbacks within the `expiration` DateTime specified in the `POST /thirdpartyRequests/transactions`, it can assume the Thirdparty Transaction Request failed, and inform their user accordingly
+
+
+### 3.1 Bad Payee Lookup
+
+When the PISP performs a Payee lookup (`GET /parties/{Type}/{Id}`), they may recieve back a response `PUT /parties/{Type}/{Id}/error`. 
+
+See [6.3.4 Parties Error Callbacks](https://docs.mojaloop.io/mojaloop-specification/documents/API%20Definition%20v1.0.html#634-error-callbacks) of the FSPIOP API Definition for details on how to interpret use this error callback.
+
+In this case, the PISP may wish to display an error message to their user informing them to try a different identifier, or try again at a later stage.
+### 3.2 Bad `thirdpartyRequest/transactions` Request
+
+When the DFSP receives the `POST /thirdpartyRequests/transactions` request from the PISP, any number of processing or validation errors could occur, such as:
+1. The `payer.partyIdType` or `payer.partyIdentifier` is not valid, or not linked with a valid **Consent** that the DFSP knows about
+2. The user's acount identified by `payer.partyIdentifier` doesn't have enough funds to complete the transaction
+3. The currency specified by `amount.currency` is not a currency that the user's account transacts in
+4. Any other checks or verifications of the transaction request on the DFSP's side fail
+
+In this case, the DFSP must inform the PISP of the failure by sending a `PUT /thirdpartyRequests/transactions/{ID}/error` callback to the PISP.
+
+![3-2-1-bad-tx-request](../out/transfer/3-2-1-bad-tx-request.svg)
+
+The PISP can then inform their user of the failure, and can ask them to restart the Thirdparty Transaction request if desired.
+
+
+### 3.3 Downstream FSPIOP-API Failure
+
+The DFSP may not want to (or may not be able to) expose details about downstream failures in the FSPIOP API to PISPs.
+
+For example, before issuing a `POST /thirdpartyRequests/authorizations` to the PISP, if the `POST /quotes` call with the Payee FSP fails, the DFSP sends a `PUT /thirdpartyRequests/transactions/{ID}/error` callback to the PISP.
+
+![3-3-1-bad-quote-request](../out/transfer/3-3-1-bad-quote-request.svg)
+
+Another example is where the `POST /transfers` request fails:
+
+![3-3-2-bad-transfer-request](../out/transfer/3-3-2-bad-transfer-request.svg)
+
+
+## 3.4 Invalid Signed Challenge
+
+After receiving a `POST /thirdpartyRequests/authorizations` call from the DFSP, the PISP asks the user to sign the `challenge` using the credential that was registered during the account linking flow. 
+
+The signed challenge is returned to the DFSP with the call `PUT /thirdpartyRequest/authorizations/{ID}`. 
+
+The DFSP either:
+1. Performs validation of the signed challenge itself, or in the case of using the hub-hosted Auth-Service, 
+2. Uses the `thirdpartyRequests/verifications` resource to check the validity of the signed challenge against the publicKey registered for the Consent.
+
+Should the signed challenge be invalid, the DFSP sends a `PUT /thirdpartyRequests/transactions/{ID}/error` callback to the PISP.
+
+
+Case 1: DFSP self-verifies the signed challenge
+
+![3-4-1-bad-signed-challenge-self-hosted](../out/transfer/3-4-1-bad-signed-challenge-self-hosted.svg)
+
+
+Case 2: DFSP uses the hub-hosted Auth-Service to check the validity of the signed challenge against the registered credential.
+
+![3-4-2-bad-signed-challenge-auth-service](../out/transfer/3-4-2-bad-signed-challenge-auth-service.svg)
+
+## 3.5 User Rejects the terms of the Thirdparty Transaction Request
+
+
+
 
 
 ## <a name='Appendix'></a>4. Appendix

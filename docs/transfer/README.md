@@ -163,15 +163,6 @@ A PISP can issue a `GET /thirdpartyRequests/{id}/transactions` to find the statu
 
 ## <a name='ErrorConditions'></a>3. Error Conditions
 
-Error Conditions for Third-party initiated transfers fall into the following categories:
-1. Bad Payee Lookup
-2. DFSP rejects the transfer
-3. Downstream processing by the DFSP fails (e.g. `POST /quotes` or `POST /transfers` of the FSPIOP-API)
-4. Invalid signing of the challenge, or other related verification errors
-5. User rejects the terms of the transfer
-6. Timeout of the Thirdparty Transaction Request
-
-
 After the PISP initiates the Thirdparty Transaction Request with `POST /thirdpartyRequests/transactions`, the DFSP must send either a `POST /thirdpartyRequests/transcations/{ID}/error` or `PATCH /thirdpartyRequests/transactions/{ID}` callback to inform the PISP of a final status to the Thirdparty Transaction Request.
 
 - `PATCH /thirdpartyRequests/transactions/{ID}` is used to inform the PISP of the final status of the Thirdparty Transaction Request. This could be either a Thirdparty Transaction Request that was rejected by the user, or a Thirdparty Transaction Request that was approved and resulted in a successful transfer of funds.

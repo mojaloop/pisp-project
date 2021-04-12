@@ -174,8 +174,8 @@ Error Conditions for Third-party initiated transfers fall into the following cat
 
 After the PISP initiates the Thirdparty Transaction Request with `POST /thirdpartyRequests/transactions`, the DFSP must send either a `POST /thirdpartyRequests/transcations/{ID}/error` or `PATCH /thirdpartyRequests/transactions/{ID}` callback to inform the PISP of a final status to the Thirdparty Transaction Request.
 
-- `PATCH /thirdpartyRequests/transactions/{ID}` is to inform the PISP of the successfull status of the Thirdparty Transaction Request
-- `PUT /thirdpartyRequests/transcations/{ID}/error` is used to inform the PISP of a failed Thirdparty Transaction Request
+- `PATCH /thirdpartyRequests/transactions/{ID}` is used to inform the PISP of the final status of the Thirdparty Transaction Request. This could be either a Thirdparty Transaction Request that was rejected by the user, or a Thirdparty Transaction Request that was approved and resulted in a successful transfer of funds.
+- `PUT /thirdpartyRequests/transcations/{ID}/error` is used to inform the PISP of a failed Thirdparty Transaction Request.
 - If a PISP doesn't recieve either of the above callbacks within the `expiration` DateTime specified in the `POST /thirdpartyRequests/transactions`, it can assume the Thirdparty Transaction Request failed, and inform their user accordingly
 
 
@@ -238,9 +238,20 @@ Case 2: DFSP uses the hub-hosted Auth-Service to check the validity of the signe
 
 ## 3.5 User Rejects the terms of the Thirdparty Transaction Request
 
+In the case where the user rejects the terms of the Thirdparty Transaction Request, a PISP should send a `PUT /thirdpartyRequests/authorizations/{ID}` request with a `responseType` of `REJECTED`.
+
+> ***Note**: this is not considered an Error, so the DFSP should not send an `.../error` callback to the PISP*
+
+The DFSP shall respond with the callback `PATCH /thirdpartyRequests/transactions/{ID}`.
+
+![3-5-user-rejects-tpr](../out/transfer/3-5-user-rejects-tpr.svg)
+
+## 3.5 Thirdparty Transaction Request Timeout
+
+If a PISP doesn't recieve either of the above callbacks within the `expiration` DateTime specified in the `POST /thirdpartyRequests/transactions`, it can assume the Thirdparty Transaction Request failed, and inform their user accordingly.
 
 
-
+![3-6-tpr-timeout](../out/transfer/3-6-tpr-timeout.svg)
 
 ## <a name='Appendix'></a>4. Appendix
 

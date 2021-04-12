@@ -163,10 +163,10 @@ A PISP can issue a `GET /thirdpartyRequests/{id}/transactions` to find the statu
 
 ## <a name='ErrorConditions'></a>3. Error Conditions
 
-After the PISP initiates the Thirdparty Transaction Request with `POST /thirdpartyRequests/transactions`, the DFSP must send either a `POST /thirdpartyRequests/transcations/{ID}/error` or `PATCH /thirdpartyRequests/transactions/{ID}` callback to inform the PISP of a final status to the Thirdparty Transaction Request.
+After the PISP initiates the Thirdparty Transaction Request with `POST /thirdpartyRequests/transactions`, the DFSP must send either a `PUT /thirdpartyRequests/transactions/{ID}/error` or `PATCH /thirdpartyRequests/transactions/{ID}` callback to inform the PISP of a final status to the Thirdparty Transaction Request.
 
 - `PATCH /thirdpartyRequests/transactions/{ID}` is used to inform the PISP of the final status of the Thirdparty Transaction Request. This could be either a Thirdparty Transaction Request that was rejected by the user, or a Thirdparty Transaction Request that was approved and resulted in a successful transfer of funds.
-- `PUT /thirdpartyRequests/transcations/{ID}/error` is used to inform the PISP of a failed Thirdparty Transaction Request.
+- `PUT /thirdpartyRequests/transactions/{ID}/error` is used to inform the PISP of a failed Thirdparty Transaction Request.
 - If a PISP doesn't recieve either of the above callbacks within the `expiration` DateTime specified in the `POST /thirdpartyRequests/transactions`, it can assume the Thirdparty Transaction Request failed, and inform their user accordingly
 
 

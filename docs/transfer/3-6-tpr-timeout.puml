@@ -1,6 +1,6 @@
 @startuml
 
-title Transfer: 3.5 User Rejects Thirdparty Transaction Request
+title Transfer: 3.Thirdparty Transaction Request Times Out
 
 box "PISP"
 participant "PISP Server" as D1

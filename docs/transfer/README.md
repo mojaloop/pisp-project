@@ -212,18 +212,18 @@ After receiving a `POST /thirdpartyRequests/authorizations` call from the DFSP, 
 The signed challenge is returned to the DFSP with the call `PUT /thirdpartyRequest/authorizations/{ID}`. 
 
 The DFSP either:
-1. Performs validation of the signed challenge itself, or in the case of using the hub-hosted Auth-Service, 
-2. Uses the `thirdpartyRequests/verifications` resource to check the validity of the signed challenge against the publicKey registered for the Consent.
+1. Performs validation of the signed challenge itself
+2. Queries the Auth-Service with  the `thirdpartyRequests/verifications` resource to check the validity of the signed challenge against the publicKey registered for the Consent.
 
 Should the signed challenge be invalid, the DFSP sends a `PUT /thirdpartyRequests/transactions/{ID}/error` callback to the PISP.
 
 
-Case 1: DFSP self-verifies the signed challenge
+### Case 1: DFSP self-verifies the signed challenge
 
 ![3-4-1-bad-signed-challenge-self-hosted](../out/transfer/3-4-1-bad-signed-challenge-self-hosted.svg)
 
 
-Case 2: DFSP uses the hub-hosted Auth-Service to check the validity of the signed challenge against the registered credential.
+### Case 2: DFSP uses the hub-hosted Auth-Service to check the validity of the signed challenge against the registered credential.
 
 ![3-4-2-bad-signed-challenge-auth-service](../out/transfer/3-4-2-bad-signed-challenge-auth-service.svg)
 

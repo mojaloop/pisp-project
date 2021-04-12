@@ -7,8 +7,8 @@
       <feBlend in="SourceGraphic" in2="blurOut3"/>
     </filter>
   </defs>
-  <text font-family="sans-serif" font-size="18" lengthAdjust="spacingAndGlyphs" textLength="517" x="177.5" y="28.708">
-    Transfer: 3.5 User Rejects Thirdparty Transaction Request
+  <text font-family="sans-serif" font-size="18" lengthAdjust="spacingAndGlyphs" textLength="480" x="196" y="28.708">
+    Transfer: 3.Thirdparty Transaction Request Times Out
   </text>
   <path fill="#DDD" stroke="#a80036" d="M124 40.953h104v855.906H124z"/>
   <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="33" x="159.5" y="53.02">

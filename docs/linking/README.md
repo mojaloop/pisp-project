@@ -369,11 +369,46 @@ send back any sort of secret and no need to pass a secret back to the DFSP.
 
 ![Authentication](../out/linking/3-authentication-third-party-fido.svg)
 
-## 3.2. Credential registration
+<!-- ## 3.2. Credential registration
 
-TODO!
+TODO! -->
 
 # 4. Linking Error Scenarios
+
+
+Broadly speaking, the following error scenarios 
+
+1. `GET /accounts/{ID}`
+      1. DFSP cannot find any accounts linked for the username provided, or some other issue looking up accounts.
+1. `POST /consentRequests`
+      1. The list of scopes provided by the PISP in `POST /consentRequests` is unsuitable to the DFSP
+      1. The pisp provided a bad `callbackUri` that the DFSP doesn't trust
+1. `PUT /consentRequests/{ID}`
+      1. The `authUri` provided by the DFSP is invalid or one the PISP doesn't trust
+      1. (Web flow) - the user declined to give permission for the PISP to use it's accounts
+
+1. `PATCH /consentRequests/{ID}`
+      1. DFSP received an invalid `authToken`
+      1. Any other failure to create the `Consent` (e.g. account deleted, some other checks on DFSP side fail)
+
+
+1. `POST /consents`
+      1. PISP cannot find `consentRequestId` for given `Consent`
+
+
+1. `PUT /consents/{ID}`
+      1. Invalid or mutated scopes by PISP (Grant consent scope error)
+      1. Invalid credential
+      1. Auth-Service failed to register the `consentId` with the Consents oracle
+      1. Any other downstream error communicating with the Auth-Service
+      1. DFSP failed to register the accounts with ThirdPartyLink Oracle (out of scope)
+
+1. `DELETE /consents/{ID}`
+      1. Failed to find the consent with the given ID
+      1. Participant doesn't have permission to delete this consent (e.g. it is referring to a different PISP)
+
+
+<!-- TODO: rebname/refactor the below to fit into our list -->
 
 ![Authentication Invalid OTP](../out/linking/error_scenarios/3-authentication-otp-invalid.svg)
 

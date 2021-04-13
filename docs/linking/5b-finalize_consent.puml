@@ -65,7 +65,7 @@ DFSP -> Switch: ""PATCH /consents/123""\n\
 ""  }""
 DFSP --> Switch: ""200 OK""
 
-Switch -> PISP ++: ""PUT /consents/123""\n\
+Switch -> PISP ++: ""PATCH /consents/123""\n\
 ""  FSIOP-Source: dfspa""\n\
 ""  FSPIOP-Destination: pispa""\n\
 ""  Content-Type: application/merge-patch+json""\n\

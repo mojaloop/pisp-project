@@ -183,7 +183,8 @@ When the DFSP receives the `POST /thirdpartyRequests/transactions` request from 
 1. The `payer.partyIdType` or `payer.partyIdentifier` is not valid, or not linked with a valid **Consent** that the DFSP knows about
 2. The user's acount identified by `payer.partyIdentifier` doesn't have enough funds to complete the transaction
 3. The currency specified by `amount.currency` is not a currency that the user's account transacts in
-4. Any other checks or verifications of the transaction request on the DFSP's side fail
+4. `payee.partyIdInfo.fspId` is not set - it's an optional property, but payee fspId will be required to properly address quote request
+5. Any other checks or verifications of the transaction request on the DFSP's side fail
 
 In this case, the DFSP must inform the PISP of the failure by sending a `PUT /thirdpartyRequests/transactions/{ID}/error` callback to the PISP.
 

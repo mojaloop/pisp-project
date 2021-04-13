@@ -61,7 +61,7 @@ rnote left of D2 #Light
 ""FSPIOP-Destination: pispa""
 {
   "errorInformation": {
-    "errorCode": "6105",
+    "errorCode": "7105",
     "errorDescription": "Thirdparty request rejection",
     "extensionList": []
   }

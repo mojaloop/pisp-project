@@ -332,7 +332,7 @@
     &quot;errorInformation&quot;: {
   </text>
   <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="128" x="486" y="1415.801">
-    &quot;errorCode&quot;: &quot;6XXX&quot;,
+    &quot;errorCode&quot;: &quot;71XX&quot;,
   </text>
   <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="311" x="486" y="1430.934">
     &quot;errorDescription&quot;: &quot;Downstream request failed.&quot;,

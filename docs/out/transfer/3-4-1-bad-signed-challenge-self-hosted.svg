@@ -227,7 +227,7 @@
     &quot;errorInformation&quot;: {
   </text>
   <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="128" x="710" y="911.606">
-    &quot;errorCode&quot;: &quot;6200&quot;,
+    &quot;errorCode&quot;: &quot;71XX&quot;,
   </text>
   <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="286" x="710" y="926.739">
     &quot;errorDescription&quot;: &quot;Invalid signed challenge&quot;,

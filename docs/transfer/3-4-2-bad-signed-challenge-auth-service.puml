@@ -89,7 +89,7 @@ rnote right of AUTHS #Light
 ""FSPIOP-Destination: dfspa""
 {
   "errorInformation": {
-    "errorCode": "6200",
+    "errorCode": "71XX",
     "errorDescription": "Invalid signed challenge",
     "extensionList": []
   }
@@ -112,7 +112,7 @@ rnote left of D2 #Light
 ""FSPIOP-Destination: pispa""
 {
   "errorInformation": {
-    "errorCode": "6200",
+    "errorCode": "71XX",
     "errorDescription": "Invalid signed challenge",
     "extensionList": []
   }

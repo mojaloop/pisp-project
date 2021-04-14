@@ -95,5 +95,112 @@
         ]
       }
     }
+  },
+  {
+    "ruleId": 4,
+    "description": "validate consentRequests- WEB",
+    "conditions": {
+      "all": [
+        {
+          "fact": "path",
+          "operator": "equal",
+          "value": "/validateConsentRequests"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "POST"
+        },
+        {
+          "fact": "body",
+          "operator": "equal",
+          "value": "b51ec534-ee48-4575-b6a9-ead2955b8069",
+          "path": ".id"
+        }
+      ]
+    },
+    "event": {
+      "type": "FIXED_CALLBACK",
+      "params": {
+        "statusCode": 200,
+        "body": {
+          "isValid": true,
+          "authChannels": [
+            "WEB"
+          ],
+          "authUri": "dfspa.com/authorize?consentRequestId=xxx-xxxx"
+        }
+      }
+    }
+  },
+  {
+    "ruleId": 5,
+    "description": "validate consentRequests -OTP",
+    "conditions": {
+      "all": [
+        {
+          "fact": "path",
+          "operator": "equal",
+          "value": "/validateConsentRequests"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "POST"
+        },
+        {
+          "fact": "body",
+          "operator": "equal",
+          "value": "c51ec534-ee48-4575-b6a9-ead2955b8069",
+          "path": ".id"
+        }
+      ]
+    },
+    "event": {
+      "type": "FIXED_CALLBACK",
+      "params": {
+        "statusCode": 200,
+        "body": {
+          "isValid": true,
+          "authChannels": [
+            "OTP"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "ruleId": 6,
+    "description": "validate consentRequests -Error",
+    "conditions": {
+      "all": [
+        {
+          "fact": "path",
+          "operator": "equal",
+          "value": "/validateConsentRequests"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "POST"
+        },
+        {
+          "fact": "body",
+          "operator": "equal",
+          "value": "d51ec534-ee48-4575-b6a9-ead2955b8069",
+          "path": ".id"
+        }
+      ]
+    },
+    "event": {
+      "type": "FIXED_CALLBACK",
+      "params": {
+        "statusCode": 200,
+        "body": {
+          "isValid": false,
+          "authChannels": []
+        }
+      }
+    }
   }
 ]

@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" height="1559" preserveAspectRatio="none" style="width:2132px;height:1559px" width="2132">
+<svg xmlns="http://www.w3.org/2000/svg" height="2667" preserveAspectRatio="none" style="width:2210px;height:2667px" width="2210">
   <defs>
     <filter height="300%" id="a" width="300%" x="-1" y="-1">
       <feGaussianBlur result="blurOut" stdDeviation="2"/>
@@ -7,368 +7,606 @@
       <feBlend in="SourceGraphic" in2="blurOut3"/>
     </filter>
   </defs>
-  <text font-family="sans-serif" font-size="18" lengthAdjust="spacingAndGlyphs" textLength="323" x="904.5" y="28.708">
+  <text font-family="sans-serif" font-size="18" lengthAdjust="spacingAndGlyphs" textLength="323" x="940" y="28.708">
     PISP Linking: Request consent (OTP)
   </text>
-  <path fill="#DDD" stroke="#a80036" d="M766.5 40.953h73v1512.422h-73z"/>
+  <path fill="#DDD" stroke="#a80036" d="M766.5 40.953h73v2620.992h-73z"/>
   <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="67" x="769.5" y="53.02">
     Mojaloop
   </text>
   <path fill="#FFF" filter="url(#a)" stroke="#fff" d="M24 105.383h10v67.133H24z"/>
   <path stroke="#a80036" d="M24 105.383v67.133M34 105.383v67.133M24 105.383h10"/>
-  <path fill="#FFF" filter="url(#a)" stroke="#fff" d="M24 200.516h10v262.125H24z"/>
-  <path stroke="#a80036" d="M24 200.516v262.125M34 200.516v262.125M24 462.641h10"/>
-  <path fill="#FFF" filter="url(#a)" stroke="#a80036" d="M798 433.508h10v299.258h-10zM798 1134.688h10v323.258h-10zM1436 703.633h10v460.188h-10z"/>
+  <path fill="#FFF" filter="url(#a)" stroke="#fff" d="M24 200.516h10v305.258H24z"/>
+  <path stroke="#a80036" d="M24 200.516v305.257M34 200.516v305.257M24 505.773h10"/>
+  <path fill="#FFF" filter="url(#a)" stroke="#a80036" d="M798 476.641h10v299.258h-10zM798 1219.953h10v323.258h-10zM798 1866.469h10v299.258h-10zM798 2397.188h10v217.461h-10zM1468 746.766h10v502.32h-10zM1468 2136.594h10v289.727h-10z"/>
   <path stroke="#a80036" d="M29 95.383v10"/>
   <path stroke="#a80036" stroke-dasharray="1,4" d="M29 105.383v28"/>
   <path stroke="#a80036" d="M29 133.383v39.133"/>
   <path stroke="#a80036" stroke-dasharray="1,4" d="M29 172.516v28"/>
-  <path stroke="#a80036" d="M29 200.516v1314.562M802.5 95.383v10"/>
+  <path stroke="#a80036" d="M29 200.516v2423.132M802.5 95.383v10"/>
   <path stroke="#a80036" stroke-dasharray="1,4" d="M802.5 105.383v28"/>
   <path stroke="#a80036" d="M802.5 133.383v39.133"/>
   <path stroke="#a80036" stroke-dasharray="1,4" d="M802.5 172.516v28"/>
-  <path stroke="#a80036" d="M802.5 200.516v1314.562M1440.5 95.383v10"/>
-  <path stroke="#a80036" stroke-dasharray="1,4" d="M1440.5 105.383v28"/>
-  <path stroke="#a80036" d="M1440.5 133.383v39.133"/>
-  <path stroke="#a80036" stroke-dasharray="1,4" d="M1440.5 172.516v28"/>
-  <path stroke="#a80036" d="M1440.5 200.516v1314.562M1749.5 95.383v10"/>
-  <path stroke="#a80036" stroke-dasharray="1,4" d="M1749.5 105.383v28"/>
-  <path stroke="#a80036" d="M1749.5 133.383v39.133"/>
-  <path stroke="#a80036" stroke-dasharray="1,4" d="M1749.5 172.516v28"/>
-  <path stroke="#a80036" d="M1749.5 200.516v1314.562"/>
+  <path stroke="#a80036" d="M802.5 200.516v2423.132M1472.5 95.383v10"/>
+  <path stroke="#a80036" stroke-dasharray="1,4" d="M1472.5 105.383v28"/>
+  <path stroke="#a80036" d="M1472.5 133.383v39.133"/>
+  <path stroke="#a80036" stroke-dasharray="1,4" d="M1472.5 172.516v28"/>
+  <path stroke="#a80036" d="M1472.5 200.516v2423.132M1824.5 95.383v10"/>
+  <path stroke="#a80036" stroke-dasharray="1,4" d="M1824.5 105.383v28"/>
+  <path stroke="#a80036" d="M1824.5 133.383v39.133"/>
+  <path stroke="#a80036" stroke-dasharray="1,4" d="M1824.5 172.516v28"/>
+  <path stroke="#a80036" d="M1824.5 200.516v2423.132"/>
   <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M5 60.086h44v30.297H5z"/>
   <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="30" x="12" y="80.081">
     PISP
   </text>
-  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M5 1514.078h44v30.297H5z"/>
-  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="30" x="12" y="1534.073">
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M5 2622.648h44v30.297H5z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="30" x="12" y="2642.644">
     PISP
   </text>
   <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M771.5 60.086h59v30.297h-59z"/>
   <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="45" x="778.5" y="80.081">
     Switch
   </text>
-  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M771.5 1514.078h59v30.297h-59z"/>
-  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="45" x="778.5" y="1534.073">
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M771.5 2622.648h59v30.297h-59z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="45" x="778.5" y="2642.644">
     Switch
   </text>
-  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M1413.5 60.086h51v30.297h-51z"/>
-  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="37" x="1420.5" y="80.081">
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M1445.5 60.086h51v30.297h-51z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="37" x="1452.5" y="80.081">
     DFSP
   </text>
-  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M1413.5 1514.078h51v30.297h-51z"/>
-  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="37" x="1420.5" y="1534.073">
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M1445.5 2622.648h51v30.297h-51z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="37" x="1452.5" y="2642.644">
     DFSP
   </text>
-  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M1657.5 60.086h181v30.297h-181z"/>
-  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="167" x="1664.5" y="80.081">
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M1732.5 60.086h181v30.297h-181z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="167" x="1739.5" y="80.081">
     DFSPAuthorizeSimulator
   </text>
-  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M1657.5 1514.078h181v30.297h-181z"/>
-  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="167" x="1664.5" y="1534.073">
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M1732.5 2622.648h181v30.297h-181z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="167" x="1739.5" y="2642.644">
     DFSPAuthorizeSimulator
   </text>
   <path fill="#FFF" filter="url(#a)" stroke="#fff" d="M24 105.383h10v67.133H24z"/>
   <path stroke="#a80036" d="M24 105.383v67.133M34 105.383v67.133M24 105.383h10"/>
-  <path fill="#FFF" filter="url(#a)" stroke="#fff" d="M24 200.516h10v262.125H24z"/>
-  <path stroke="#a80036" d="M24 200.516v262.125M34 200.516v262.125M24 462.641h10"/>
-  <path fill="#FFF" filter="url(#a)" stroke="#a80036" d="M798 433.508h10v299.258h-10zM798 1134.688h10v323.258h-10zM1436 703.633h10v460.188h-10z"/>
-  <path d="M5 138.383v25h1458v-15l-10-10H5" fill="#FBFB77" filter="url(#a)" stroke="#a80036"/>
-  <path d="M1453 138.383v10h10l-10-10" fill="#FBFB77" stroke="#a80036"/>
-  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="783" x="336.25" y="155.45">
+  <path fill="#FFF" filter="url(#a)" stroke="#fff" d="M24 200.516h10v305.258H24z"/>
+  <path stroke="#a80036" d="M24 200.516v305.257M34 200.516v305.257M24 505.773h10"/>
+  <path fill="#FFF" filter="url(#a)" stroke="#a80036" d="M798 476.641h10v299.258h-10zM798 1219.953h10v323.258h-10zM798 1866.469h10v299.258h-10zM798 2397.188h10v217.461h-10zM1468 746.766h10v502.32h-10zM1468 2136.594h10v289.727h-10z"/>
+  <path d="M5 138.383v25h1490v-15l-10-10H5" fill="#FBFB77" filter="url(#a)" stroke="#a80036"/>
+  <path d="M1485 138.383v10h10l-10-10" fill="#FBFB77" stroke="#a80036"/>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="783" x="352.25" y="155.45">
     The user initiated some sort of account linking by choosing the appropriate DFSP from a screen inside the PISP application.
   </text>
-  <path fill="#A80036" stroke="#a80036" d="M786 429.508l10 4-10 4 4-4z"/>
-  <path stroke="#a80036" d="M34 433.508h758"/>
-  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="44" x="41" y="322.512">
+  <path fill="#EEE" filter="url(#a)" stroke="#eee" d="M0 221.082h2203v3H0z"/>
+  <path stroke="#000" d="M0 221.082h2203M0 224.082h2203"/>
+  <path fill="#EEE" filter="url(#a)" stroke="#000" stroke-width="2" d="M1043 210.516h117v23.133h-117z"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="98" x="1049" y="226.583">
+    Success case
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M786 472.64l10 4-10 4 4-4z"/>
+  <path stroke="#a80036" d="M34 476.641h758"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="44" x="41" y="365.645">
     REQ-1
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="168" x="89" y="216.583">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="168" x="89" y="259.715">
     POST /consentRequests
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="152" x="113" y="231.715">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="152" x="113" y="274.848">
     FSIOP-Source: pispa
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="192" x="113" y="246.848">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="192" x="113" y="289.981">
     FSIOP-Destination: dfspa
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="89" y="261.981">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="89" y="305.114">
     {
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="192" x="113" y="277.114">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="192" x="113" y="320.247">
     consentRequestId: &quot;456&quot;,
   </text>
-  <text font-family="monospace" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="672" x="113" y="292.247">
+  <text font-family="monospace" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="672" x="113" y="335.379">
     userId: &quot;username1234&quot;, //so the dfsp can associate this request with GET /accounts/
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="72" x="113" y="307.379">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="72" x="113" y="350.512">
     scopes: [
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="129" y="322.512">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="129" y="365.645">
     {
   </text>
-  <text font-family="monospace" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="424" x="145" y="322.512">
+  <text font-family="monospace" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="424" x="145" y="365.645">
     accountId: &quot;dfsp.username.1234&quot;, // Required for OTP!
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="464" x="145" y="337.645">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="464" x="145" y="380.778">
     actions: [ &quot;accounts.transfer&quot;, &quot;accounts.getBalance&quot; ] },
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="272" x="129" y="352.778">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="272" x="129" y="395.911">
     { accountId: &quot;dfsp.username.5678&quot;,
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="464" x="145" y="367.911">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="464" x="145" y="411.043">
     actions: [ &quot;accounts.transfer&quot;, &quot;accounts.getBalance&quot; ] },
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="16" x="113" y="383.043">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="16" x="113" y="426.176">
     ],
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="248" x="113" y="398.176">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="248" x="113" y="441.309">
     authChannels: [ &quot;Web&quot;, &quot;OTP&quot; ],
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="288" x="113" y="413.309">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="288" x="113" y="456.442">
     callbackUri: &quot;pisp-app://callback...
   </text>
-  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="5" x="401" y="413.309">
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="5" x="401" y="456.442">
     &quot;
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="97" y="428.442">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="97" y="471.575">
     }
   </text>
-  <path fill="#A80036" stroke="#a80036" d="M40 458.64l-10 4 10 4-4-4z"/>
-  <path stroke="#a80036" stroke-dasharray="2,2" d="M34 462.641h763"/>
-  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="44" x="46" y="457.575">
+  <path fill="#A80036" stroke="#a80036" d="M40 501.773l-10 4 10 4-4-4z"/>
+  <path stroke="#a80036" stroke-dasharray="2,2" d="M34 505.773h763"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="44" x="46" y="500.707">
     REQ-2
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="96" x="94" y="457.575">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="96" x="94" y="500.707">
     202 Accepted
   </text>
-  <path fill="#A80036" stroke="#a80036" d="M1424 699.633l10 4-10 4 4-4z"/>
-  <path stroke="#a80036" d="M808 703.633h622"/>
-  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="44" x="815" y="592.637">
+  <path fill="#A80036" stroke="#a80036" d="M1456 742.766l10 4-10 4 4-4z"/>
+  <path stroke="#a80036" d="M808 746.766h654"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="44" x="815" y="635.77">
     REQ-3
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="168" x="863" y="486.707">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="168" x="863" y="529.84">
     POST /consentRequests
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="152" x="887" y="501.84">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="152" x="887" y="544.973">
     FSIOP-Source: pispa
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="192" x="887" y="516.973">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="192" x="887" y="560.106">
     FSIOP-Destination: dfspa
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="863" y="532.106">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="863" y="575.239">
     {
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="192" x="887" y="547.239">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="192" x="887" y="590.372">
     consentRequestId: &quot;456&quot;,
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="184" x="887" y="562.372">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="184" x="887" y="605.504">
     userId: &quot;username1234&quot;,
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="72" x="887" y="577.504">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="72" x="887" y="620.637">
     scopes: [
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="272" x="903" y="592.637">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="272" x="903" y="635.77">
     { accountId: &quot;dfsp.username.1234&quot;,
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="464" x="919" y="607.77">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="464" x="919" y="650.903">
     actions: [ &quot;accounts.transfer&quot;, &quot;accounts.getBalance&quot; ] },
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="272" x="903" y="622.903">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="272" x="903" y="666.036">
     { accountId: &quot;dfsp.username.5678&quot;,
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="464" x="919" y="638.036">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="464" x="919" y="681.168">
     actions: [ &quot;accounts.transfer&quot;, &quot;accounts.getBalance&quot; ] },
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="16" x="887" y="653.168">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="16" x="887" y="696.301">
     ],
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="248" x="887" y="668.301">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="248" x="887" y="711.434">
     authChannels: [ &quot;Web&quot;, &quot;OTP&quot; ],
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="288" x="887" y="683.434">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="288" x="887" y="726.567">
     callbackUri: &quot;pisp-app://callback...
   </text>
-  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="5" x="1175" y="683.434">
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="5" x="1175" y="726.567">
     &quot;
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="871" y="698.567">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="871" y="741.7">
     }
   </text>
-  <path fill="#A80036" stroke="#a80036" d="M814 728.766l-10 4 10 4-4-4z"/>
-  <path stroke="#a80036" stroke-dasharray="2,2" d="M808 732.766h627"/>
-  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="44" x="820" y="727.7">
+  <path fill="#A80036" stroke="#a80036" d="M814 771.898l-10 4 10 4-4-4z"/>
+  <path stroke="#a80036" stroke-dasharray="2,2" d="M808 775.898h659"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="44" x="820" y="770.832">
     REQ-4
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="96" x="868" y="727.7">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="96" x="868" y="770.832">
     202 Accepted
   </text>
-  <path fill="#A80036" stroke="#a80036" d="M1738 833.563l10 4-10 4 4-4z"/>
-  <path stroke="#a80036" d="M1446 837.563h298"/>
-  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="44" x="1453" y="794.665">
-    REQ-5
+  <path stroke="#a80036" d="M1478 805.031h42M1520 805.031v13M1479 818.031h41"/>
+  <path fill="#A80036" stroke="#a80036" d="M1489 814.031l-10 4 10 4-4-4z"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="53" x="1485" y="799.965">
+    DFSP-1
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="104" x="1501" y="756.832">
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="271" x="1542" y="799.965">
+    Verify the consentRequests is valid or not?
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M1813 918.828l10 4-10 4 4-4z"/>
+  <path stroke="#a80036" d="M1478 922.828h341"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="40" x="1485" y="879.93">
+    SIM-1
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="104" x="1529" y="842.098">
     POST /sendOTP
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="1509" y="771.965">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="1537" y="857.231">
     {
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="192" x="1525" y="787.098">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="192" x="1553" y="872.364">
     consentRequestId: &quot;456&quot;,
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="200" x="1525" y="802.231">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="200" x="1553" y="887.497">
     username:&quot;username.1234&quot;,
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="120" x="1525" y="817.364">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="120" x="1553" y="902.629">
     message: &quot;0987&quot;
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="1509" y="832.497">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="1537" y="917.762">
     }
   </text>
-  <path stroke="#a80036" d="M1750 866.695h42M1792 866.695v13M1751 879.695h41"/>
-  <path fill="#A80036" stroke="#a80036" d="M1761 875.695l-10 4 10 4-4-4z"/>
-  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="44" x="1757" y="861.629">
-    REQ-6
+  <path stroke="#a80036" d="M1825 951.961h42M1867 951.961v13M1826 964.961h41"/>
+  <path fill="#A80036" stroke="#a80036" d="M1836 960.96l-10 4 10 4-4-4z"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="40" x="1832" y="946.895">
+    SIM-2
   </text>
-  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="91" x="1805" y="861.629">
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="91" x="1876" y="946.895">
     take action on
   </text>
-  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="225" x="1900" y="861.629">
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="225" x="1971" y="946.895">
     TTK defined rule for username
   </text>
-  <path fill="#A80036" stroke="#a80036" d="M1457 904.828l-10 4 10 4-4-4z"/>
-  <path stroke="#a80036" d="M1451 908.828h298"/>
-  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="44" x="1463" y="903.762">
-    REQ-7
+  <path fill="#A80036" stroke="#a80036" d="M1489 990.094l-10 4 10 4-4-4z"/>
+  <path stroke="#a80036" d="M1483 994.094h341"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="40" x="1495" y="989.028">
+    SIM-3
   </text>
-  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="46" x="1511" y="903.762">
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="46" x="1539" y="989.028">
     201 OK
   </text>
-  <path fill="#A80036" stroke="#a80036" d="M819 1130.688l-10 4 10 4-4-4z"/>
-  <path stroke="#a80036" d="M813 1134.688h622"/>
-  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="44" x="825" y="1031.258">
-    REQ-8
+  <path fill="#A80036" stroke="#a80036" d="M819 1215.953l-10 4 10 4-4-4z"/>
+  <path stroke="#a80036" d="M813 1219.953h654"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="44" x="825" y="1116.524">
+    REQ-5
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="192" x="873" y="932.895">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="192" x="873" y="1018.161">
     PUT /consentRequests/456
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="152" x="897" y="948.028">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="152" x="897" y="1033.293">
     FSIOP-Source: dfspa
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="192" x="897" y="963.161">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="192" x="897" y="1048.426">
     FSIOP-Destination: pispa
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="881" y="978.293">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="881" y="1063.559">
     {
   </text>
-  <text font-family="monospace" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="536" x="897" y="993.426">
+  <text font-family="monospace" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="536" x="897" y="1078.692">
     authChannels: [ &quot;OTP&quot; ], // This is updated with the channel in use
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="72" x="897" y="1008.559">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="72" x="897" y="1093.825">
     scopes: [
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="272" x="913" y="1023.692">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="272" x="913" y="1108.957">
     { accountId: &quot;dfsp.username.1234&quot;,
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="464" x="929" y="1038.825">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="464" x="929" y="1124.09">
     actions: [ &quot;accounts.transfer&quot;, &quot;accounts.getBalance&quot; ] },
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="272" x="913" y="1053.957">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="272" x="913" y="1139.223">
     { accountId: &quot;dfsp.username.5678&quot;,
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="464" x="929" y="1069.09">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="464" x="929" y="1154.356">
     actions: [ &quot;accounts.transfer&quot;, &quot;accounts.getBalance&quot; ] },
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="16" x="897" y="1084.223">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="16" x="897" y="1169.489">
     ],
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="288" x="897" y="1099.356">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="288" x="897" y="1184.622">
     callbackUri: &quot;pisp-app://callback...
   </text>
-  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="5" x="1185" y="1099.356">
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="5" x="1185" y="1184.622">
     &quot;
   </text>
-  <text font-family="monospace" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="248" x="897" y="1114.489">
+  <text font-family="monospace" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="248" x="897" y="1199.754">
     //note: no authUri for OTP flow
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="881" y="1129.622">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="881" y="1214.887">
     }
   </text>
-  <path fill="#A80036" stroke="#a80036" d="M1429 1159.82l10 4-10 4 4-4z"/>
-  <path stroke="#a80036" stroke-dasharray="2,2" d="M808 1163.82h627"/>
-  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="44" x="815" y="1158.754">
-    REQ-9
+  <path fill="#A80036" stroke="#a80036" d="M1461 1245.086l10 4-10 4 4-4z"/>
+  <path stroke="#a80036" stroke-dasharray="2,2" d="M808 1249.086h659"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="44" x="815" y="1244.02">
+    REQ-6
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="96" x="863" y="1158.754">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="96" x="863" y="1244.02">
     202 Accepted
   </text>
-  <path d="M5 1176.82v25h1458v-15l-10-10H5" fill="#FBFB77" filter="url(#a)" stroke="#a80036"/>
-  <path d="M1453 1176.82v10h10l-10-10" fill="#FBFB77" stroke="#a80036"/>
-  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="414" x="520.75" y="1193.887">
+  <path d="M5 1262.086v25h1490v-15l-10-10H5" fill="#FBFB77" filter="url(#a)" stroke="#a80036"/>
+  <path d="M1485 1262.086v10h10l-10-10" fill="#FBFB77" stroke="#a80036"/>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="414" x="536.75" y="1279.153">
     Here, the DFSP sends an OTP directly to the user (e.g., via SMS).
   </text>
-  <path fill="#A80036" stroke="#a80036" d="M40 1424.813l-10 4 10 4-4-4z"/>
-  <path stroke="#a80036" d="M34 1428.813h763"/>
-  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="53" x="46" y="1325.383">
-    REQ-10
+  <path fill="#A80036" stroke="#a80036" d="M40 1510.078l-10 4 10 4-4-4z"/>
+  <path stroke="#a80036" d="M34 1514.078h763"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="44" x="46" y="1410.649">
+    REQ-7
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="192" x="103" y="1227.02">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="192" x="94" y="1312.286">
     PUT /consentRequests/456
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="152" x="127" y="1242.153">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="152" x="118" y="1327.418">
     FSIOP-Source: dfspa
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="192" x="127" y="1257.286">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="192" x="118" y="1342.551">
     FSIOP-Destination: pispa
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="103" y="1272.418">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="94" y="1357.684">
     {
   </text>
-  <text font-family="monospace" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="536" x="127" y="1287.551">
+  <text font-family="monospace" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="536" x="118" y="1372.817">
     authChannels: [ &quot;OTP&quot; ], // This is updated with the channel in use
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="72" x="127" y="1302.684">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="72" x="118" y="1387.95">
     scopes: [
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="272" x="143" y="1317.817">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="272" x="134" y="1403.082">
     { accountId: &quot;dfsp.username.1234&quot;,
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="464" x="159" y="1332.95">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="464" x="150" y="1418.215">
     actions: [ &quot;accounts.transfer&quot;, &quot;accounts.getBalance&quot; ] },
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="272" x="143" y="1348.082">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="272" x="134" y="1433.348">
     { accountId: &quot;dfsp.username.5678&quot;,
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="464" x="159" y="1363.215">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="464" x="150" y="1448.481">
     actions: [ &quot;accounts.transfer&quot;, &quot;accounts.getBalance&quot; ] },
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="16" x="127" y="1378.348">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="16" x="118" y="1463.614">
     ],
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="288" x="127" y="1393.481">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="288" x="118" y="1478.747">
     callbackUri: &quot;pisp-app://callback...
   </text>
-  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="5" x="415" y="1393.481">
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="5" x="406" y="1478.747">
     &quot;
   </text>
-  <text font-family="monospace" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="248" x="127" y="1408.614">
+  <text font-family="monospace" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="248" x="118" y="1493.879">
     //note: no authUri for OTP flow
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="111" y="1423.747">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="102" y="1509.012">
     }
   </text>
-  <path fill="#A80036" stroke="#a80036" d="M791 1453.945l10 4-10 4 4-4z"/>
-  <path stroke="#a80036" stroke-dasharray="2,2" d="M29 1457.945h768"/>
-  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="53" x="36" y="1452.879">
-    REQ-11
+  <path fill="#A80036" stroke="#a80036" d="M791 1539.21l10 4-10 4 4-4z"/>
+  <path stroke="#a80036" stroke-dasharray="2,2" d="M29 1543.211h768"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="44" x="36" y="1538.145">
+    REQ-8
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="96" x="93" y="1452.879">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="96" x="84" y="1538.145">
     202 Accepted
   </text>
-  <path d="M5 1470.945v25h1458v-15l-10-10H5" fill="#FBFB77" filter="url(#a)" stroke="#a80036"/>
-  <path d="M1453 1470.945v10h10l-10-10" fill="#FBFB77" stroke="#a80036"/>
-  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="800" x="327.75" y="1488.012">
+  <path d="M5 1556.21v25h1490v-15l-10-10H5" fill="#FBFB77" filter="url(#a)" stroke="#a80036"/>
+  <path d="M1485 1556.21v10h10l-10-10" fill="#FBFB77" stroke="#a80036"/>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="800" x="343.75" y="1573.278">
     At this point, the PISP knows that the OTP authChannel is in use and the PISP App should prompt the user to provide the OTP.
+  </text>
+  <path fill="#EEE" filter="url(#a)" stroke="#eee" d="M0 1610.91h2203v3H0z"/>
+  <path stroke="#000" d="M0 1610.91h2203M0 1613.91h2203"/>
+  <path fill="#EEE" filter="url(#a)" stroke="#000" stroke-width="2" d="M1047.5 1600.344h108v23.133h-108z"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="89" x="1053.5" y="1616.411">
+    Failure case
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M786 1862.469l10 4-10 4 4-4z"/>
+  <path stroke="#a80036" d="M29 1866.469h763"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="44" x="36" y="1755.473">
+    REQ-9
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="168" x="84" y="1649.543">
+    POST /consentRequests
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="152" x="108" y="1664.676">
+    FSIOP-Source: pispa
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="192" x="108" y="1679.809">
+    FSIOP-Destination: dfspa
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="84" y="1694.942">
+    {
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="192" x="108" y="1710.075">
+    consentRequestId: &quot;456&quot;,
+  </text>
+  <text font-family="monospace" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="672" x="108" y="1725.207">
+    userId: &quot;username1234&quot;, //so the dfsp can associate this request with GET /accounts/
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="72" x="108" y="1740.34">
+    scopes: [
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="124" y="1755.473">
+    {
+  </text>
+  <text font-family="monospace" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="424" x="140" y="1755.473">
+    accountId: &quot;dfsp.username.1234&quot;, // Required for OTP!
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="464" x="140" y="1770.606">
+    actions: [ &quot;accounts.transfer&quot;, &quot;accounts.getBalance&quot; ] },
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="272" x="124" y="1785.739">
+    { accountId: &quot;dfsp.username.5678&quot;,
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="464" x="140" y="1800.872">
+    actions: [ &quot;accounts.transfer&quot;, &quot;accounts.getBalance&quot; ] },
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="16" x="108" y="1816.004">
+    ],
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="248" x="108" y="1831.137">
+    authChannels: [ &quot;Web&quot;, &quot;OTP&quot; ],
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="288" x="108" y="1846.27">
+    callbackUri: &quot;pisp-app://callback...
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="5" x="396" y="1846.27">
+    &quot;
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="92" y="1861.403">
+    }
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M40 1891.602l-10 4 10 4-4-4z"/>
+  <path stroke="#a80036" stroke-dasharray="2,2" d="M34 1895.602h763"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="53" x="46" y="1890.536">
+    REQ-10
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="96" x="103" y="1890.536">
+    202 Accepted
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M1456 2132.594l10 4-10 4 4-4z"/>
+  <path stroke="#a80036" d="M808 2136.594h654"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="53" x="815" y="2025.598">
+    REQ-11
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="168" x="872" y="1919.668">
+    POST /consentRequests
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="152" x="896" y="1934.801">
+    FSIOP-Source: pispa
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="192" x="896" y="1949.934">
+    FSIOP-Destination: dfspa
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="872" y="1965.067">
+    {
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="192" x="896" y="1980.2">
+    consentRequestId: &quot;456&quot;,
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="184" x="896" y="1995.332">
+    userId: &quot;username1234&quot;,
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="72" x="896" y="2010.465">
+    scopes: [
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="272" x="912" y="2025.598">
+    { accountId: &quot;dfsp.username.1234&quot;,
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="464" x="928" y="2040.731">
+    actions: [ &quot;accounts.transfer&quot;, &quot;accounts.getBalance&quot; ] },
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="272" x="912" y="2055.864">
+    { accountId: &quot;dfsp.username.5678&quot;,
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="464" x="928" y="2070.997">
+    actions: [ &quot;accounts.transfer&quot;, &quot;accounts.getBalance&quot; ] },
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="16" x="896" y="2086.129">
+    ],
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="248" x="896" y="2101.262">
+    authChannels: [ &quot;Web&quot;, &quot;OTP&quot; ],
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="288" x="896" y="2116.395">
+    callbackUri: &quot;pisp-app://callback...
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="5" x="1184" y="2116.395">
+    &quot;
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="880" y="2131.528">
+    }
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M814 2161.727l-10 4 10 4-4-4z"/>
+  <path stroke="#a80036" stroke-dasharray="2,2" d="M808 2165.727h659"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="53" x="820" y="2160.661">
+    REQ-12
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="96" x="877" y="2160.661">
+    202 Accepted
+  </text>
+  <path stroke="#a80036" d="M1478 2194.859h42M1520 2194.859v13M1479 2207.859h41"/>
+  <path fill="#A80036" stroke="#a80036" d="M1489 2203.86l-10 4 10 4-4-4z"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="53" x="1485" y="2189.794">
+    DFSP-1
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="271" x="1542" y="2189.794">
+    Verify the consentRequests is valid or not?
+  </text>
+  <path d="M5 2220.86v25h1490v-15l-10-10H5" fill="#FBFB77" filter="url(#a)" stroke="#a80036"/>
+  <path d="M1485 2220.86v10h10l-10-10" fill="#FBFB77" stroke="#a80036"/>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="595" x="446.25" y="2237.926">
+    We respond with an error that the consentRequests is invalid so the PISP can inform the user.
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M819 2393.188l-10 4 10 4-4-4z"/>
+  <path stroke="#a80036" d="M813 2397.188h654"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="44" x="825" y="2331.59">
+    REQ-5
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="240" x="873" y="2271.059">
+    PUT /consentRequests/456/error
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="152" x="897" y="2286.192">
+    FSIOP-Source: dfspa
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="192" x="897" y="2301.325">
+    FSIOP-Destination: pispa
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="881" y="2316.457">
+    {
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="160" x="897" y="2331.59">
+    errorInformation : {
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="144" x="913" y="2346.723">
+    errorCode: &quot;7204&quot;,
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="544" x="913" y="2361.856">
+    errorDescription: &quot;FSP does not support any requested scope actions&quot;
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="897" y="2376.989">
+    }
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="881" y="2392.122">
+    }
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M1461 2422.32l10 4-10 4 4-4z"/>
+  <path stroke="#a80036" stroke-dasharray="2,2" d="M808 2426.32h659"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="44" x="815" y="2421.254">
+    REQ-6
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="48" x="863" y="2421.254">
+    200 OK
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M45 2572.516l-10 4 10 4-4-4z"/>
+  <path stroke="#a80036" d="M39 2576.516h758"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="44" x="51" y="2510.919">
+    REQ-7
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="240" x="99" y="2450.387">
+    PUT /consentRequests/456/error
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="152" x="123" y="2465.52">
+    FSIOP-Source: dfspa
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="192" x="123" y="2480.653">
+    FSIOP-Destination: pispa
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="107" y="2495.786">
+    {
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="160" x="123" y="2510.919">
+    errorInformation : {
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="144" x="139" y="2526.051">
+    errorCode: &quot;7204&quot;,
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="544" x="139" y="2541.184">
+    errorDescription: &quot;FSP does not support any requested scope actions&quot;
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="123" y="2556.317">
+    }
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="107" y="2571.45">
+    }
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M786 2601.648l10 4-10 4 4-4z"/>
+  <path stroke="#a80036" stroke-dasharray="2,2" d="M34 2605.648h758"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="44" x="41" y="2600.582">
+    REQ-8
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="48" x="89" y="2600.582">
+    200 OK
   </text>
 </svg>

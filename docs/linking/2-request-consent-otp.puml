@@ -121,6 +121,8 @@ end note
 
 == Failure case ==
 
+autonumber 1 "<b>REQ-#</b>"
+
 PISP -> Switch ++: ""POST /consentRequests""\n\
   ""  FSIOP-Source: pispa""\n\
   ""  FSIOP-Destination: dfspa""\n\

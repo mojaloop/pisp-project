@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" height="1001" preserveAspectRatio="none" style="width:1520px;height:1001px" width="1520">
+<svg xmlns="http://www.w3.org/2000/svg" height="1017" preserveAspectRatio="none" style="width:1520px;height:1017px" width="1520">
   <defs>
     <filter height="300%" id="a" width="300%" x="-1" y="-1">
       <feGaussianBlur result="blurOut" stdDeviation="2"/>
@@ -10,15 +10,15 @@
   <text font-family="sans-serif" font-size="18" lengthAdjust="spacingAndGlyphs" textLength="517" x="501.5" y="28.708">
     Transfer: 3.5 User Rejects Thirdparty Transaction Request
   </text>
-  <path fill="#DDD" stroke="#a80036" d="M73 40.953h104v954.914H73z"/>
+  <path fill="#DDD" stroke="#a80036" d="M73 40.953h104V1011H73z"/>
   <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="33" x="108.5" y="53.02">
     PISP
   </text>
-  <path fill="#DDD" stroke="#a80036" d="M713.5 40.953h73v954.914h-73z"/>
+  <path fill="#DDD" stroke="#a80036" d="M713.5 40.953h73V1011h-73z"/>
   <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="67" x="716.5" y="53.02">
     Mojaloop
   </text>
-  <path fill="#DDD" stroke="#a80036" d="M1057 40.953h76v954.914h-76z"/>
+  <path fill="#DDD" stroke="#a80036" d="M1057 40.953h76V1011h-76z"/>
   <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="54" x="1068" y="53.02">
     DFSP A
   </text>
@@ -26,29 +26,29 @@
   <path stroke="#a80036" stroke-dasharray="1,4" d="M125 121.68v40.804"/>
   <path stroke="#a80036" d="M125 162.484h0"/>
   <path stroke="#a80036" stroke-dasharray="1,4" d="M125 162.484v40.805"/>
-  <path stroke="#a80036" d="M125 203.289v737.984M749.5 111.68v10"/>
+  <path stroke="#a80036" d="M125 203.289v753.117M749.5 111.68v10"/>
   <path stroke="#a80036" stroke-dasharray="1,4" d="M749.5 121.68v40.804"/>
   <path stroke="#a80036" d="M749.5 162.484h0"/>
   <path stroke="#a80036" stroke-dasharray="1,4" d="M749.5 162.484v40.805"/>
-  <path stroke="#a80036" d="M749.5 203.289v737.984M1095 111.68v10"/>
+  <path stroke="#a80036" d="M749.5 203.289v753.117M1095 111.68v10"/>
   <path stroke="#a80036" stroke-dasharray="1,4" d="M1095 121.68v40.804"/>
   <path stroke="#a80036" d="M1095 162.484h0"/>
   <path stroke="#a80036" stroke-dasharray="1,4" d="M1095 162.484v40.805"/>
-  <path stroke="#a80036" d="M1095 203.289v737.984"/>
+  <path stroke="#a80036" d="M1095 203.289v753.117"/>
   <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M77 76.383h92v30.297H77z"/>
   <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="78" x="84" y="96.378">
     PISP Server
   </text>
-  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M77 940.273h92v30.297H77z"/>
-  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="78" x="84" y="960.269">
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M77 955.406h92v30.297H77z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="78" x="84" y="975.401">
     PISP Server
   </text>
   <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M718.5 76.383h59v30.297h-59z"/>
   <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="45" x="725.5" y="96.378">
     Switch
   </text>
-  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M718.5 940.273h59v30.297h-59z"/>
-  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="45" x="725.5" y="960.269">
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M718.5 955.406h59v30.297h-59z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="45" x="725.5" y="975.401">
     Switch
   </text>
   <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M1061 60.086h64v46.594h-64z"/>
@@ -58,11 +58,11 @@
   <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="48" x="1069" y="96.378">
     (Payer)
   </text>
-  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M1061 940.273h64v46.594h-64z"/>
-  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="50" x="1068" y="960.269">
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M1061 955.406h64V1002h-64z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="50" x="1068" y="975.401">
     DFSP A
   </text>
-  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="48" x="1069" y="976.565">
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="48" x="1069" y="991.698">
     (Payer)
   </text>
   <text font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="309" x="326" y="145.89">
@@ -154,7 +154,7 @@
   <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="395" x="1102" y="595.348">
     See that the user rejected the Thirdparty Transaction Request
   </text>
-  <path fill="#FFF" filter="url(#a)" stroke="#a80036" d="M791 626.414h608v98H791z"/>
+  <path fill="#FFF" filter="url(#a)" stroke="#a80036" d="M791 626.414h608v113H791z"/>
   <text font-family="monospace" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="600" x="795" y="642.481">
     PATCH /thirdpartyRequests/transactions/00000000-0000-0000-0000-000000000000
   </text>
@@ -170,41 +170,44 @@
   <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="252" x="803" y="703.012">
     &quot;transactionRequestState&quot;: &quot;REJECTED&quot;,
   </text>
-  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="795" y="718.145">
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="391" x="803" y="718.145">
+    &quot;transactionId&quot;: &quot;11111111-0000-0000-0000-000000000000&quot;,
+  </text>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="795" y="733.278">
     }
   </text>
-  <path fill="#A80036" stroke="#a80036" d="M761 762.477l-10 4 10 4-4-4z"/>
-  <path stroke="#a80036" d="M755 766.477h339"/>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="304" x="767" y="746.278">
+  <path fill="#A80036" stroke="#a80036" d="M761 777.61l-10 4 10 4-4-4z"/>
+  <path stroke="#a80036" d="M755 781.609h339"/>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="304" x="767" y="761.411">
     PATCH /thirdpartyRequests/transactions
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="296" x="791" y="761.411">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="296" x="791" y="776.543">
     /00000000-0000-0000-0000-000000000000
   </text>
-  <path fill="#A80036" stroke="#a80036" d="M1083 791.61l10 4-10 4 4-4z"/>
-  <path stroke="#a80036" stroke-dasharray="2,2" d="M750 795.609h339"/>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="48" x="757" y="790.543">
+  <path fill="#A80036" stroke="#a80036" d="M1083 806.742l10 4-10 4 4-4z"/>
+  <path stroke="#a80036" stroke-dasharray="2,2" d="M750 810.742h339"/>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="48" x="757" y="805.676">
     200 OK
   </text>
-  <path fill="#A80036" stroke="#a80036" d="M136 835.875l-10 4 10 4-4-4z"/>
-  <path stroke="#a80036" d="M130 839.875h619"/>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="304" x="142" y="819.676">
+  <path fill="#A80036" stroke="#a80036" d="M136 851.008l-10 4 10 4-4-4z"/>
+  <path stroke="#a80036" d="M130 855.008h619"/>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="304" x="142" y="834.809">
     PATCH /thirdpartyRequests/transactions
   </text>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="296" x="166" y="834.809">
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="296" x="166" y="849.942">
     /00000000-0000-0000-0000-000000000000
   </text>
-  <path fill="#A80036" stroke="#a80036" d="M738 865.008l10 4-10 4 4-4z"/>
-  <path stroke="#a80036" stroke-dasharray="2,2" d="M125 869.008h619"/>
-  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="48" x="132" y="863.942">
+  <path fill="#A80036" stroke="#a80036" d="M738 880.14l10 4-10 4 4-4z"/>
+  <path stroke="#a80036" stroke-dasharray="2,2" d="M125 884.141h619"/>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="48" x="132" y="879.075">
     200 OK
   </text>
-  <path d="M5 882.008v40h236v-30l-10-10H5" fill="#FBFB77" filter="url(#a)" stroke="#a80036"/>
-  <path d="M231 882.008v10h10l-10-10" fill="#FBFB77" stroke="#a80036"/>
-  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="211" x="11" y="899.075">
+  <path d="M5 897.14v40h236v-30l-10-10H5" fill="#FBFB77" filter="url(#a)" stroke="#a80036"/>
+  <path d="M231 897.14v10h10l-10-10" fill="#FBFB77" stroke="#a80036"/>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="211" x="11" y="914.207">
     PISP can now inform the user the
   </text>
-  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="138" x="11" y="914.207">
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="138" x="11" y="929.34">
     funds have been sent
   </text>
 </svg>

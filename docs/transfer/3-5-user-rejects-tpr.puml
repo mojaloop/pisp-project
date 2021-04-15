@@ -48,6 +48,7 @@ rnote over D2 #Light
 ""FSPIOP-Destination: pispa""
 {
   "transactionRequestState": "REJECTED",
+  "transactionId": "11111111-0000-0000-0000-000000000000",
 }
 end note
 D2 -> S: ""PATCH /thirdpartyRequests/transactions""\n""   /00000000-0000-0000-0000-000000000000""

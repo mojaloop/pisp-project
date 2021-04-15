@@ -65,7 +65,7 @@ describe('/consentRequests: test', (): void => {
       toParticipantId: 'dfspa'
     }
     const expectedResponse = {
-      consentRequests: { ...consentRequestsPut, authUri: 'dfspa.com/authorize?consentRequestId=xxx-xxxx' },
+      consentRequests: { ...consentRequestsPut, authUri: 'dfspa.com/authorize?consentRequestId=b51ec534-ee48-4575-b6a9-ead2955b8069' },
       currentState: 'RequestIsValid'
     }
     const consentRequestsResponse = await axios.post(consentRequestsURI, consentRequest)

@@ -35,7 +35,10 @@ DFSP -> Switch ++: ""PUT /accounts/username1234/error""\n\
   ""  FSIOP-Source: dfspa""\n\
   ""  FSIOP-Destination: pispa""\n\
   ""{""\n\
-  ""  errorInformation : { errorCode: "7202", errorDescription: "No accounts found for generic ID" } ""\n\
+  ""  errorInformation : { ""\n\
+  ""    errorCode: "7202", ""\n\
+  ""    errorDescription: "No accounts found for generic ID" ""\n\
+  ""  } ""\n\
   ""}""
 Switch --> DFSP: ""200 OK""
 deactivate DFSP
@@ -44,7 +47,10 @@ Switch -> PISP ++: ""PUT /accounts/username1234/error""\n\
   ""  FSIOP-Source: dfspa""\n\
   ""  FSIOP-Destination: pispa""\n\
   ""{""\n\
-  ""  errorInformation : { errorCode: "7202", errorDescription: "No accounts found for generic ID" } ""\n\
+  ""  errorInformation : { ""\n\
+  ""    errorCode: "7202", ""\n\
+  ""    errorDescription: "No accounts found for generic ID" ""\n\
+  ""  } ""\n\
   ""}""
 PISP --> Switch: ""200 OK""
 deactivate Switch

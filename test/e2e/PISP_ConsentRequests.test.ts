@@ -99,7 +99,7 @@ describe('/consentRequests: test', (): void => {
     // mojaloop-simulator returns Error reponse for id 'd51ec534-ee48-4575-b6a9-ead2955b8069'
     const consentRequest = {
       ...consentRequestsPost,
-      id: 'd51ec534-ee48-4575-b6a9-ead2955b8069',
+      id: 'e51ec534-ee48-4575-b6a9-ead2955b8069',
       toParticipantId: 'dfspa'
     }
     const expectedResponse = {

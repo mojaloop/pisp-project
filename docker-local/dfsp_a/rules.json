@@ -125,10 +125,12 @@
         "statusCode": 200,
         "body": {
           "isValid": true,
-          "authChannels": [
-            "WEB"
-          ],
-          "authUri": "dfspa.com/authorize?consentRequestId=xxx-xxxx"
+          "data": {
+            "authChannels": [
+              "WEB"
+            ],
+            "authUri": "dfspa.com/authorize?consentRequestId=b51ec534-ee48-4575-b6a9-ead2955b8069"
+          }
         }
       }
     }
@@ -162,16 +164,18 @@
         "statusCode": 200,
         "body": {
           "isValid": true,
-          "authChannels": [
-            "OTP"
-          ]
+          "data": {
+            "authChannels": [
+              "OTP"
+            ]
+          }
         }
       }
     }
   },
   {
     "ruleId": 6,
-    "description": "validate consentRequests -Error",
+    "description": "validate consentRequests -Error:7203",
     "conditions": {
       "all": [
         {
@@ -198,7 +202,163 @@
         "statusCode": 200,
         "body": {
           "isValid": false,
-          "authChannels": []
+          "data": {},
+          "errorInformation": {
+            "errorCode": "7203",
+            "errorDescription": "FSP does not support any requested authentication channels"
+          }
+        }
+      }
+    }
+  },
+  {
+    "ruleId": 7,
+    "description": "validate consentRequests -Error:7204",
+    "conditions": {
+      "all": [
+        {
+          "fact": "path",
+          "operator": "equal",
+          "value": "/validateConsentRequests"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "POST"
+        },
+        {
+          "fact": "body",
+          "operator": "equal",
+          "value": "e51ec534-ee48-4575-b6a9-ead2955b8069",
+          "path": ".id"
+        }
+      ]
+    },
+    "event": {
+      "type": "FIXED_CALLBACK",
+      "params": {
+        "statusCode": 200,
+        "body": {
+          "isValid": false,
+          "data": {},
+          "errorInformation": {
+            "errorCode": "7204",
+            "errorDescription": "FSP does not support any requested scope actions"
+          }
+        }
+      }
+    }
+  },
+  {
+    "ruleId": 8,
+    "description": "validate consentRequests -Error:7209",
+    "conditions": {
+      "all": [
+        {
+          "fact": "path",
+          "operator": "equal",
+          "value": "/validateConsentRequests"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "POST"
+        },
+        {
+          "fact": "body",
+          "operator": "equal",
+          "value": "f51ec534-ee48-4575-b6a9-ead2955b8069",
+          "path": ".id"
+        }
+      ]
+    },
+    "event": {
+      "type": "FIXED_CALLBACK",
+      "params": {
+        "statusCode": 200,
+        "body": {
+          "isValid": false,
+          "data": {},
+          "errorInformation": {
+            "errorCode": "7209",
+            "errorDescription": "FSP does not find scopes suitable"
+          }
+        }
+      }
+    }
+  },
+  {
+    "ruleId": 9,
+    "description": "validate consentRequests -Error:7210",
+    "conditions": {
+      "all": [
+        {
+          "fact": "path",
+          "operator": "equal",
+          "value": "/validateConsentRequests"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "POST"
+        },
+        {
+          "fact": "body",
+          "operator": "equal",
+          "value": "f61ec534-ee48-4575-b6a9-ead2955b8069",
+          "path": ".id"
+        }
+      ]
+    },
+    "event": {
+      "type": "FIXED_CALLBACK",
+      "params": {
+        "statusCode": 200,
+        "body": {
+          "isValid": false,
+          "data": {},
+          "errorInformation": {
+            "errorCode": "7210",
+            "errorDescription": "FSP does not trust PISP callback URI"
+          }
+        }
+      }
+    }
+  },
+  {
+    "ruleId": 10,
+    "description": "validate consentRequests -Error:7211",
+    "conditions": {
+      "all": [
+        {
+          "fact": "path",
+          "operator": "equal",
+          "value": "/validateConsentRequests"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "POST"
+        },
+        {
+          "fact": "body",
+          "operator": "equal",
+          "value": "f71ec534-ee48-4575-b6a9-ead2955b8069",
+          "path": ".id"
+        }
+      ]
+    },
+    "event": {
+      "type": "FIXED_CALLBACK",
+      "params": {
+        "statusCode": 200,
+        "body": {
+          "isValid": false,
+          "data": {},
+          "errorInformation": {
+            "errorCode": "7211",
+            "errorDescription": "FSP does not allow consent requests for specified username"
+          }
         }
       }
     }

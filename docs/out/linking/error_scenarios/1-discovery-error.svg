@@ -1,0 +1,187 @@
+<svg xmlns="http://www.w3.org/2000/svg" height="699" preserveAspectRatio="none" style="width:1908px;height:699px" width="1908">
+  <defs>
+    <filter height="300%" id="a" width="300%" x="-1" y="-1">
+      <feGaussianBlur result="blurOut" stdDeviation="2"/>
+      <feColorMatrix in="blurOut" result="blurOut2" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/>
+      <feOffset dx="4" dy="4" in="blurOut2" result="blurOut3"/>
+      <feBlend in="SourceGraphic" in2="blurOut3"/>
+    </filter>
+  </defs>
+  <text font-family="sans-serif" font-size="18" lengthAdjust="spacingAndGlyphs" textLength="304" x="799.75" y="28.708">
+    PISP Linking: Discovery error case
+  </text>
+  <path fill="#DDD" stroke="#a80036" d="M1 40.953h108v652.781H1z"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="102" x="4" y="53.02">
+    Mobile device
+  </text>
+  <path fill="#DDD" stroke="#a80036" d="M111 40.953h56v652.781h-56z"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="33" x="122.5" y="53.02">
+    PISP
+  </text>
+  <path fill="#DDD" stroke="#a80036" d="M968.5 40.953h73v652.781h-73z"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="67" x="971.5" y="53.02">
+    Mojaloop
+  </text>
+  <path fill="#FFF" filter="url(#a)" stroke="#a80036" d="M134 105.383h10v80.531h-10zM134 513.172h10v29.133h-10zM1000 156.781h10v117.664h-10zM1000 379.242h10v163.063h-10zM1866 245.313h10v163.063h-10z"/>
+  <path stroke="#a80036" d="M54.5 95.383v454.922"/>
+  <path stroke="#a80036" stroke-dasharray="1,4" d="M54.5 550.305v28"/>
+  <path stroke="#a80036" d="M54.5 578.305v39.133"/>
+  <path stroke="#a80036" stroke-dasharray="1,4" d="M54.5 617.438v28"/>
+  <path stroke="#a80036" d="M54.5 645.438v10M139 95.383v454.922"/>
+  <path stroke="#a80036" stroke-dasharray="1,4" d="M139 550.305v28"/>
+  <path stroke="#a80036" d="M139 578.305v39.133"/>
+  <path stroke="#a80036" stroke-dasharray="1,4" d="M139 617.438v28"/>
+  <path stroke="#a80036" d="M139 645.438v10M1004.5 95.383v454.922"/>
+  <path stroke="#a80036" stroke-dasharray="1,4" d="M1004.5 550.305v28"/>
+  <path stroke="#a80036" d="M1004.5 578.305v39.133"/>
+  <path stroke="#a80036" stroke-dasharray="1,4" d="M1004.5 617.438v28"/>
+  <path stroke="#a80036" d="M1004.5 645.438v10M1870.5 95.383v454.922"/>
+  <path stroke="#a80036" stroke-dasharray="1,4" d="M1870.5 550.305v28"/>
+  <path stroke="#a80036" d="M1870.5 578.305v39.133"/>
+  <path stroke="#a80036" stroke-dasharray="1,4" d="M1870.5 617.438v28"/>
+  <path stroke="#a80036" d="M1870.5 645.438v10"/>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M32.5 60.086h41v30.297h-41z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="27" x="39.5" y="80.081">
+    App
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M32.5 654.438h41v30.297h-41z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="27" x="39.5" y="674.433">
+    App
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M115 60.086h44v30.297h-44z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="30" x="122" y="80.081">
+    PISP
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M115 654.438h44v30.297h-44z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="30" x="122" y="674.433">
+    PISP
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M973.5 60.086h59v30.297h-59z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="45" x="980.5" y="80.081">
+    Switch
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M973.5 654.438h59v30.297h-59z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="45" x="980.5" y="674.433">
+    Switch
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M1843.5 60.086h51v30.297h-51z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="37" x="1850.5" y="80.081">
+    DFSP
+  </text>
+  <path fill="#FEFECE" filter="url(#a)" stroke="#a80036" stroke-width="1.5" d="M1843.5 654.438h51v30.297h-51z"/>
+  <text font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="37" x="1850.5" y="674.433">
+    DFSP
+  </text>
+  <path fill="#FFF" filter="url(#a)" stroke="#a80036" d="M134 105.383h10v80.531h-10zM134 513.172h10v29.133h-10zM1000 156.781h10v117.664h-10zM1000 379.242h10v163.063h-10zM1866 245.313h10v163.063h-10z"/>
+  <path fill="#A80036" stroke="#a80036" d="M988 152.781l10 4-10 4 4-4z"/>
+  <path stroke="#a80036" d="M144 156.781h850"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="48" x="151" y="136.583">
+    DISC-1
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="208" x="203" y="121.45">
+    GET /accounts/username1234
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="152" x="227" y="136.583">
+    FSIOP-Source: pispa
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="192" x="227" y="151.715">
+    FSIOP-Destination: dfspa
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M150 181.914l-10 4 10 4-4-4z"/>
+  <path stroke="#a80036" stroke-dasharray="2,2" d="M144 185.914h855"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="48" x="156" y="180.848">
+    DISC-2
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="96" x="208" y="180.848">
+    202 Accepted
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M1854 241.313l10 4-10 4 4-4z"/>
+  <path stroke="#a80036" d="M1010 245.313h850"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="48" x="1017" y="225.114">
+    DISC-3
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="208" x="1069" y="209.981">
+    GET /accounts/username1234
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="152" x="1093" y="225.114">
+    FSIOP-Source: pispa
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="192" x="1093" y="240.247">
+    FSIOP-Destination: dfspa
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M1016 270.445l-10 4 10 4-4-4z"/>
+  <path stroke="#a80036" stroke-dasharray="2,2" d="M1010 274.445h855"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="48" x="1022" y="269.379">
+    DISC-4
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="96" x="1074" y="269.379">
+    202 Accepted
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M1021 375.242l-10 4 10 4-4-4z"/>
+  <path stroke="#a80036" d="M1015 379.242h850"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="48" x="1027" y="336.344">
+    DISC-5
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="256" x="1079" y="298.512">
+    PUT /accounts/username1234/error
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="152" x="1103" y="313.645">
+    FSIOP-Source: dfspa
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="192" x="1103" y="328.778">
+    FSIOP-Destination: pispa
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="1087" y="343.911">
+    {
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="752" x="1103" y="359.043">
+    errorInformation : { errorCode: &quot;7202&quot;, errorDescription: &quot;No accounts found for generic ID&quot; }
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="1087" y="374.176">
+    }
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M1859 404.375l10 4-10 4 4-4z"/>
+  <path stroke="#a80036" stroke-dasharray="2,2" d="M1010 408.375h855"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="48" x="1017" y="403.309">
+    DISC-6
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="48" x="1069" y="403.309">
+    200 OK
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M155 509.172l-10 4 10 4-4-4z"/>
+  <path stroke="#a80036" d="M149 513.172h850"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="48" x="161" y="470.274">
+    DISC-7
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="256" x="213" y="432.442">
+    PUT /accounts/username1234/error
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="152" x="237" y="447.575">
+    FSIOP-Source: dfspa
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="192" x="237" y="462.707">
+    FSIOP-Destination: pispa
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="221" y="477.84">
+    {
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="752" x="237" y="492.973">
+    errorInformation : { errorCode: &quot;7202&quot;, errorDescription: &quot;No accounts found for generic ID&quot; }
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="221" y="508.106">
+    }
+  </text>
+  <path fill="#A80036" stroke="#a80036" d="M993 538.305l10 4-10 4 4-4z"/>
+  <path stroke="#a80036" stroke-dasharray="2,2" d="M139 542.305h860"/>
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="48" x="146" y="537.239">
+    DISC-8
+  </text>
+  <text font-family="monospace" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="48" x="198" y="537.239">
+    200 OK
+  </text>
+  <path d="M32 583.305v25h1861v-15l-10-10H32" fill="#FBFB77" filter="url(#a)" stroke="#a80036"/>
+  <path d="M1883 583.305v10h10l-10-10" fill="#FBFB77" stroke="#a80036"/>
+  <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="548" x="682" y="600.372">
+    The PISP can now show error message and user can try again with another username.
+  </text>
+</svg>

@@ -59,6 +59,11 @@ Switch -> DFSP ++:  ""POST /consentRequests""\n\
 DFSP --> Switch: ""202 Accepted""
 deactivate Switch
 
+autonumber 1 "<b>DFSP-#</b>"
+
+DFSP -> DFSP: Verify the consentRequests is valid or not?
+autonumber 1 "<b>SIM-#</b>"
+
 DFSP -> DFSPAuthorizeSimulator : ""POST /sendOTP""\n\
   ""{""\n\
   ""  consentRequestId: "456",""\n\
@@ -68,6 +73,7 @@ DFSP -> DFSPAuthorizeSimulator : ""POST /sendOTP""\n\
 
 DFSPAuthorizeSimulator -> DFSPAuthorizeSimulator: take action on **TTK defined rule for username**
 DFSPAuthorizeSimulator -> DFSP: 201 OK
+autonumber 5 "<b>REQ-#</b>"
 DFSP -> Switch ++: ""PUT /consentRequests/456""\n\
   ""  FSIOP-Source: dfspa""\n\
   ""  FSIOP-Destination: pispa""\n\

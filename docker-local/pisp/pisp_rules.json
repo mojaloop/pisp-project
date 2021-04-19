@@ -23,41 +23,5 @@
         "body": ""
       }
     }
-  },
-  {
-    "ruleId": 2,
-    "description": "Returns list of user Accounts",
-    "conditions": {
-      "all": [
-        {
-          "fact": "path",
-          "operator": "equal",
-          "value": "/accounts/username1234"
-        },
-        {
-          "fact": "method",
-          "operator": "equal",
-          "value": "GET"
-        }
-      ]
-    },
-    "event": {
-      "type": "FIXED_CALLBACK",
-      "params": {
-        "statusCode": 200,
-        "body": [
-          {
-            "accountNickname": "dfspa.user.nickname1",
-            "id": "dfspa.username.1234",
-            "currency": "ZAR"
-          },
-          {
-            "accountNickname": "dfspa.user.nickname2",
-            "id": "dfspa.username.5678",
-            "currency": "USD"
-          }
-        ]
-      }
-    }
   }
 ]

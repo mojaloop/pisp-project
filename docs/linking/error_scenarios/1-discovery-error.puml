@@ -59,7 +59,7 @@ deactivate PISP
 ...
 
 note over App, DFSP
-  The PISP can now show error message and user can try again with another username.
+  The PISP can now show error message and user can try again with another username or different DFSP.
 end note
 
 ...

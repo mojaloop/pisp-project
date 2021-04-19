@@ -385,12 +385,12 @@ TODO!
 ## 4.2. Bad consentRequests
 When the DFSP receives the POST /consentRequests request from the PISP, any number of processing or validation errors could occur, such as:
 
-1. FSP does not support any requested authentication channels
-2. FSP does not support any requested scope actions
-3. FSP does not find scopes suitable
-4. FSP does not trust PISP callback URI
-5. FSP does not allow consent requests for specified username
-6. Any other checks or validation of the consentRequests on the DFSP's side fail
+1. FSP does not support any requested authentication channels (Error code: `7203`)
+2. FSP does not support any requested scope actions (Error code: `7204`)
+3. FSP does not find scopes suitable (Error code: `7209`)
+4. FSP does not trust PISP callback URI (Error code: `7210`)
+5. FSP does not allow consent requests for specified username (Error code: `7211`)
+6. Any other checks or validation of the consentRequests on the DFSP's side fail (Error code: `7208`)
 
 In this case, the DFSP must inform the PISP of the failure by sending a PUT /consentRequests/{ID}/error callback to the PISP.
 

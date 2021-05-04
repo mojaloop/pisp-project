@@ -61,7 +61,7 @@ deactivate Switch
 
 autonumber 1 "<b>DFSP-#</b>"
 
-DFSP -> DFSP: Verify the consentRequests is valid or not?
+DFSP -> DFSP: Verify the consentRequest is valid or not?
 autonumber 1 "<b>SIM-#</b>"
 
 DFSP -> DFSPAuthorizeSimulator : ""POST /sendOTP""\n\

@@ -1,7 +1,7 @@
 import TestEnv from './TestEnv'
 import axios from 'axios'
 
-describe('GET /accounts/{fspId}/{userId}', (): void => {
+describe('GET /linking/accounts/{fspId}/{userId}', (): void => {
   const expectedResp = {
     accounts: [
       {
@@ -19,7 +19,7 @@ describe('GET /accounts/{fspId}/{userId}', (): void => {
   }
 
   it('PISP requests DFSP to return user accounts for linking', async (): Promise<void> => {
-    const scenariosURI = `${TestEnv.baseUrls.pispThirdpartySchemeAdapterOutbound}/accounts/dfspa/username1234`
+    const scenariosURI = `${TestEnv.baseUrls.pispThirdpartySchemeAdapterOutbound}/linking/accounts/dfspa/username1234`
     const response = await axios.get(scenariosURI)
 
     // Assert
@@ -28,7 +28,7 @@ describe('GET /accounts/{fspId}/{userId}', (): void => {
   })
 
   it('PISP requests DFSP: Expect ID not found', async (): Promise<void> => {
-    const scenariosURI = `${TestEnv.baseUrls.pispThirdpartySchemeAdapterOutbound}/accounts/dfspa/test`
+    const scenariosURI = `${TestEnv.baseUrls.pispThirdpartySchemeAdapterOutbound}/linking/accounts/dfspa/test`
     const idNotFoundResp = {
       accounts: [],
       errorInformation: {

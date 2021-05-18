@@ -81,18 +81,20 @@
       "type": "FIXED_CALLBACK",
       "params": {
         "statusCode": 200,
-        "body": [
-          {
-            "accountNickname": "dfspa.user.nickname1",
-            "id": "dfspa.username.1234",
-            "currency": "ZAR"
-          },
-          {
-            "accountNickname": "dfspa.user.nickname2",
-            "id": "dfspa.username.5678",
-            "currency": "USD"
-          }
-        ]
+        "body": {
+          "accounts": [
+            {
+              "accountNickname": "dfspa.user.nickname1",
+              "id": "dfspa.username.1234",
+              "currency": "ZAR"
+            },
+            {
+              "accountNickname": "dfspa.user.nickname2",
+              "id": "dfspa.username.5678",
+              "currency": "USD"
+            }
+          ]
+        }
       }
     }
   },

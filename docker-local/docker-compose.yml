@@ -864,3 +864,46 @@ services:
       retries: 10
       start_period: 40s
       interval: 30s
+
+  participant-list-service:
+    image: mojaloop/ml-testing-toolkit:v11.8.1
+    container_name: participant-list-service
+    volumes:
+      - "./participant-list-service/spec_files:/opt/mojaloop-testing-toolkit/spec_files"
+      - "./participant-list-service/secrets:/opt/mojaloop-testing-toolkit/secrets"
+    ports:
+      - "25000:5000"
+      - "25050:5050"
+    environment:
+      - AUTH_ENABLED=FALSE
+    command: npm start
+    depends_on:
+      - mongo
+    networks:
+      - mojaloop-net
+    extra_hosts:
+      - "pisp-sim-scheme-adapter:172.17.0.1"
+      - "ml-testing-toolkit:172.17.0.1"
+      - "ml-testing-toolkit-ui:172.17.0.1"
+
+  mongo:
+    image: mongo
+    ports:
+      - "27018:27017"
+
+  ml-testing-toolkit-ui:
+    image: mojaloop/ml-testing-toolkit-ui:v11.8.4.2-pisp
+    container_name: participant-list-service-testing-ui
+    ports:
+      - "26060:6060"
+    environment:
+      - API_BASE_URL=http://participant-list-service:25050
+      - AUTH_ENABLED=FALSE
+      - TP_SIM_URL=http://participant-list-service:25000
+    command:
+      - sh
+      - /usr/share/nginx/start.sh
+    networks:
+      - mojaloop-net
+    extra_hosts:
+      - "ml-testing-toolkit:172.17.0.1"

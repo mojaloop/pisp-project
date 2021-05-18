@@ -1,0 +1,58 @@
+[
+  {
+    "ruleId": 1,
+    "priority": 1,
+    "description": "get /services/{ServiceType}",
+    "apiVersion": {
+      "minorVersion": 1,
+      "majorVersion": 0,
+      "type": "thirdparty_pisp",
+      "asynchronous": true
+    },
+    "conditions": {
+      "all": [
+        {
+          "fact": "operationPath",
+          "operator": "equal",
+          "value": "/services/{ServiceType}"
+        },
+        {
+          "fact": "pathParams",
+          "operator": "equal",
+          "value": "THIRD_PARTY_DFSP",
+          "path": "ServiceType"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "get"
+        }
+      ]
+    },
+    "event": {
+      "method": "put",
+      "path": "/services/{ServiceType}",
+      "params": {
+        "headers": {
+          "Content-Type": "application/vnd.interoperability.parties+json;version=1.0",
+          "Date": "Wed, 27 May 2020 11:13:34 GMT",
+          "X-Forwarded-For": "sed eiusmod sunt",
+          "FSPIOP-Source": "switch",
+          "FSPIOP-Destination": "pispA",
+          "FSPIOP-Encryption": "magna Excepteur dolore nisi fugiat",
+          "FSPIOP-Signature": "nisi",
+          "FSPIOP-URI": "veniam reprehenderit anim ut",
+          "FSPIOP-HTTP-Method": "PUT",
+          "Content-Length": ""
+        },
+        "body": {
+          "providers": ["dfspA", "dfspB"]
+        }
+      },
+      "delay": 0,
+      "type": "FIXED_CALLBACK"
+    },
+    "type": "callback",
+    "version": 1
+  }
+]

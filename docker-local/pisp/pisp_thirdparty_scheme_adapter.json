@@ -33,6 +33,7 @@
     "TRANSFERS_ENDPOINT": "ml-api-adapter:3000",
     "BULK_TRANSFERS_ENDPOINT": "ml-api-adapter:3000",
     "THIRDPARTY_REQUESTS_ENDPOINT": "pisp-thirdparty-api-adapter:12000",
+    "SERVICES_ENDPOINT": "pisp-thirdparty-api-adapter:12000",
     "DFSP_ID": "pisp",
     "DFSP_BACKEND_URI": "pisp-backend:11000",
     "DFSP_BACKEND_HTTP_SCHEME": "http",

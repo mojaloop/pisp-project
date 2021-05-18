@@ -1,0 +1,3108 @@
+openapi: 3.0.2
+info:
+  title: Mojaloop PISP/Switch API
+  version: '1.0'
+  description: >-
+    A Mojaloop API for thirdparty interactions between `PISPs` (Payment
+    Initiation Service Providers) and a Mojaloop Switch.
+  license:
+    name: TBD
+    url: TBD
+servers:
+  - url: /
+paths:
+  '/thirdpartyRequests/transactions/{ID}':
+    patch:
+      tags:
+        - thirdpartyRequests
+      operationId: NotifyThirdpartyTransactionRequests
+      summary: NotifyThirdpartyTransactionRequests
+      description: >
+        The HTTP request `PATCH /thirdpartyRequests/transactions/{ID}` is used
+        to
+
+        notify a thirdparty of the outcome of a transaction request.
+
+
+        Switch(Thirdparty API Adapter) -> PISP
+      parameters:
+        - $ref: '#/components/parameters/ID'
+        - $ref: '#/components/parameters/Content-Length'
+        - $ref: '#/components/parameters/Content-Type'
+        - $ref: '#/components/parameters/Date'
+        - $ref: '#/components/parameters/FSPIOP-Source'
+        - $ref: '#/components/parameters/FSPIOP-Destination'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: >-
+                #/components/schemas/ThirdpartyRequestsTransactionsIDPatchResponse
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+    put:
+      tags:
+        - thirdpartyRequests
+        - sampled
+      operationId: UpdateThirdPartyTransactionRequests
+      summary: UpdateThirdPartyTransactionRequests
+      description: >
+        The HTTP request `PUT /thirdpartyRequests/transactions/{ID}` is used to
+        inform the client about
+
+        status of a previously requested thirdparty transaction.
+
+
+        Switch(Thirdparty API Adapter) -> PISP
+      parameters:
+        - $ref: '#/components/parameters/ID'
+        - $ref: '#/components/parameters/Content-Length'
+        - $ref: '#/components/parameters/Content-Type'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ThirdpartyRequestsTransactionsIDPutResponse'
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /thirdpartyRequests/transactions:
+    post:
+      tags:
+        - thirdpartyRequests
+      operationId: CreateThirdpartyTransactionRequests
+      summary: CreateThirdpartyTransactionRequests
+      description: >
+        The HTTP request `POST /thirdpartyRequests/transactions` is used to
+        request the creation of a third party transaction.
+
+        Called by a PISP to initiate a third party transaction flow.
+
+
+        PISP -> Switch(Thirdparty API Adapter)
+      parameters:
+        - $ref: '#/components/parameters/Accept'
+        - $ref: '#/components/parameters/Content-Length'
+        - $ref: '#/components/parameters/Content-Type'
+        - $ref: '#/components/parameters/Date'
+        - $ref: '#/components/parameters/X-Forwarded-For'
+        - $ref: '#/components/parameters/FSPIOP-Source'
+        - $ref: '#/components/parameters/FSPIOP-Destination'
+        - $ref: '#/components/parameters/FSPIOP-Encryption'
+        - $ref: '#/components/parameters/FSPIOP-Signature'
+        - $ref: '#/components/parameters/FSPIOP-URI'
+        - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
+      requestBody:
+        description: Transaction request to be created.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ThirdpartyRequestsTransactionsPostRequest'
+            example:
+              transactionRequestId: 8d34f91d-d078-4077-8263-2c047876fcf6
+              sourceAccountId: dfspa.alice.1234
+              consentId: '111'
+              payee:
+                partyIdInfo:
+                  partyIdType: MSISDN
+                  partyIdentifier: +44 1234 5678
+                  fspId: dfspb
+              payer:
+                personalInfo:
+                  complexName:
+                    firstName: Alice
+                    lastName: K
+                partyIdInfo:
+                  partyIdType: MSISDN
+                  partyIdentifier: +44 8765 4321
+                  fspId: dfspa
+              amountType: SEND
+              amount:
+                amount: '100'
+                currency: USD
+              transactionType:
+                scenario: TRANSFER
+                initiator: PAYER
+                initiatorType: CONSUMER
+              expiration: '2020-07-15T22:17:28.985-01:00'
+      responses:
+        '202':
+          $ref: '#/components/responses/202'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /authorizations:
+    post:
+      tags:
+        - authorizations
+      operationId: OutboundAuthorizationsPost
+      summary: Outbound Authorizations endpoint
+      description: DFSP Requests Authorization of Transaction from the End User
+      parameters:
+        - $ref: '#/components/parameters/Accept'
+        - $ref: '#/components/parameters/Content-Length'
+        - $ref: '#/components/parameters/Content-Type'
+        - $ref: '#/components/parameters/Date'
+        - $ref: '#/components/parameters/X-Forwarded-For'
+        - $ref: '#/components/parameters/FSPIOP-Source'
+        - $ref: '#/components/parameters/FSPIOP-Destination'
+        - $ref: '#/components/parameters/FSPIOP-Encryption'
+        - $ref: '#/components/parameters/FSPIOP-Signature'
+        - $ref: '#/components/parameters/FSPIOP-URI'
+        - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
+      requestBody:
+        description: Authorization request details
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OutboundAuthorizationsPostRequest'
+            example:
+              authenticationType: U2F
+              retriesLeft: '1'
+              amount:
+                currency: USD
+                amount: '124.45'
+              transactionId: 2f169631-ef99-4cb1-96dc-91e8fc08f539
+              transactionRequestId: 02e28448-3c05-4059-b5f7-d518d0a2d8ea
+              quote:
+                transferAmount:
+                  currency: USD
+                  amount: '124.45'
+                payeeReceiveAmount:
+                  currency: USD
+                  amount: '123.45'
+                payeeFspFee:
+                  currency: USD
+                  amount: '1.00'
+                payeeFspCommission:
+                  currency: USD
+                  amount: '0'
+                expiration: '2020-08-24T08:38:08.699-04:00'
+                geoCode:
+                  latitude: '+45.4215'
+                  longitude: '+75.6972'
+                ilpPacket: AYIBgQAAAAAAAASwNGxldmVsb25lLmRmc3AxLm1lci45T2RTOF81MDdqUUZ
+                condition: f5sqb7tBTWPd5Y8BDFdMm9BJR_MNI4isf8p8n4D5pHA
+                extensionList:
+                  extension:
+                    - key: errorDescription
+                      value: This is a more detailed error description
+      responses:
+        '202':
+          $ref: '#/components/responses/202'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  '/authorizations/{ID}':
+    parameters:
+      - $ref: '#/components/parameters/ID'
+      - $ref: '#/components/parameters/Content-Type'
+      - $ref: '#/components/parameters/Date'
+      - $ref: '#/components/parameters/X-Forwarded-For'
+      - $ref: '#/components/parameters/FSPIOP-Source'
+      - $ref: '#/components/parameters/FSPIOP-Destination'
+      - $ref: '#/components/parameters/FSPIOP-Encryption'
+      - $ref: '#/components/parameters/FSPIOP-Signature'
+      - $ref: '#/components/parameters/FSPIOP-URI'
+      - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
+    get:
+      tags:
+        - authorizations
+      operationId: GetAuthorizationsById
+      summary: GetAuthorizationsById
+      description: >-
+        The HTTP request GET /authorizations/ is used to request the Payer to
+        enter the applicable credentials in the Payee FSP system.
+      responses:
+        '202':
+          $ref: '#/components/responses/202'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+    put:
+      tags:
+        - authorizations
+      operationId: InboundAuthorizationsIDPutResponse
+      summary: Inbound Authorizations endpoint
+      description: >
+        The callback PUT /authorizations/ is used to inform the client of the
+
+        result of a previously-requested authorization. The ID in the URI should
+
+        contain the one that was used in the POST /authorizations/
+        requestBody.transactionRequestId @ OUTBOUND
+      parameters:
+        - $ref: '#/components/parameters/Content-Length'
+      requestBody:
+        description: Authorization request details
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthorizationsIDPutResponse'
+            example:
+              authenticationInfo:
+                authentication: U2F
+                authenticationValue:
+                  pinValue: '233133331'
+                  counter: '1'
+              responseType: ENTERED
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  '/authorizations/{ID}/error':
+    put:
+      summary: AuthorizationsByIDAndError
+      operationId: AuthorizationsByIDAndError
+      description: >-
+        If the server is unable to find the transaction request, or another
+        processing error occurs, the error callback PUT /authorizations//error
+        is used. The  in the URI should contain the  that was used in the GET
+        /authorizations/.
+      tags:
+        - authorizations
+      parameters:
+        - $ref: '#/components/parameters/ID'
+        - $ref: '#/components/parameters/Content-Length'
+        - $ref: '#/components/parameters/Content-Type'
+        - $ref: '#/components/parameters/Date'
+        - $ref: '#/components/parameters/X-Forwarded-For'
+        - $ref: '#/components/parameters/FSPIOP-Source'
+        - $ref: '#/components/parameters/FSPIOP-Destination'
+        - $ref: '#/components/parameters/FSPIOP-Encryption'
+        - $ref: '#/components/parameters/FSPIOP-Signature'
+        - $ref: '#/components/parameters/FSPIOP-URI'
+        - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
+      requestBody:
+        description: Error information returned.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ErrorInformationObject'
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /consentRequests:
+    post:
+      tags:
+        - consentRequests
+      operationId: CreateConsentRequest
+      summary: CreateConsentRequest
+      description: >
+        A request from a PISP to a DFSP to start the process of delegating
+        consentRequest.
+
+
+        PISP -> Switch
+      parameters:
+        - $ref: '#/components/parameters/Accept'
+        - $ref: '#/components/parameters/Content-Length'
+        - $ref: '#/components/parameters/Content-Type'
+        - $ref: '#/components/parameters/Date'
+        - $ref: '#/components/parameters/X-Forwarded-For'
+        - $ref: '#/components/parameters/FSPIOP-Source'
+        - $ref: '#/components/parameters/FSPIOP-Destination'
+        - $ref: '#/components/parameters/FSPIOP-Encryption'
+        - $ref: '#/components/parameters/FSPIOP-Signature'
+        - $ref: '#/components/parameters/FSPIOP-URI'
+        - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
+      requestBody:
+        description: The consentRequest to create
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConsentRequestsPostRequest'
+            example:
+              id: '456'
+              initiatorId: pispA
+              authChannels:
+                - WEB
+                - OTP
+              scopes:
+                - accountId: dfspa.username.1234
+                  actions:
+                    - accounts.transfer
+                    - accounts.getBalance
+                - accountId: dfspa.username.5678
+                  actions:
+                    - accounts.transfer
+                    - accounts.getBalance
+              callbackUri: 'pisp-app://callback.com'
+      responses:
+        '202':
+          $ref: '#/components/responses/202'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  '/consentRequests/{ID}':
+    put:
+      tags:
+        - consentRequests
+      operationId: UpdateConsentRequest
+      summary: UpdateConsentRequest
+      description: >
+        PISP receives consentRequest back with DFSP auth channels and/or auth
+        uri in response to consentRequest.
+
+
+        Switch -> PISP
+
+
+        PISP updates the consentRequest to include authorization token from
+        their user.
+
+
+        PISP -> Switch
+      parameters:
+        - $ref: '#/components/parameters/ID'
+        - $ref: '#/components/parameters/Content-Length'
+        - $ref: '#/components/parameters/Content-Type'
+        - $ref: '#/components/parameters/Date'
+        - $ref: '#/components/parameters/X-Forwarded-For'
+        - $ref: '#/components/parameters/FSPIOP-Source'
+        - $ref: '#/components/parameters/FSPIOP-Destination'
+        - $ref: '#/components/parameters/FSPIOP-Encryption'
+        - $ref: '#/components/parameters/FSPIOP-Signature'
+        - $ref: '#/components/parameters/FSPIOP-URI'
+        - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
+      requestBody:
+        description: The updated consentRequest body
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: '#/components/schemas/ConsentRequestsIDPutResponseWeb'
+                - $ref: '#/components/schemas/ConsentRequestsIDPutResponseWebAuth'
+                - $ref: '#/components/schemas/ConsentRequestsIDPutResponseOTP'
+                - $ref: '#/components/schemas/ConsentRequestsIDPutResponseOTPAuth'
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+    patch:
+      tags:
+        - consentRequests
+      operationId: PatchConsentRequest
+      summary: PatchConsentRequest
+      description: >
+        PISP sends user's OTP token to a DFSP to verify user trusts
+        aforementioned PISP
+      parameters:
+        - $ref: '#/components/parameters/ID'
+        - $ref: '#/components/parameters/Content-Length'
+        - $ref: '#/components/parameters/Content-Type'
+        - $ref: '#/components/parameters/Date'
+        - $ref: '#/components/parameters/X-Forwarded-For'
+        - $ref: '#/components/parameters/FSPIOP-Source'
+        - $ref: '#/components/parameters/FSPIOP-Destination'
+        - $ref: '#/components/parameters/FSPIOP-Encryption'
+        - $ref: '#/components/parameters/FSPIOP-Signature'
+        - $ref: '#/components/parameters/FSPIOP-URI'
+        - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConsentRequestsIDPatchRequest'
+      responses:
+        '202':
+          $ref: '#/components/responses/202'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  '/consentRequests/{ID}/error':
+    put:
+      tags:
+        - consentRequests
+      operationId: NotifyErrorConsentRequests
+      summary: NotifyErrorConsentRequests
+      description: >
+        DFSP responds to the PISP if something went wrong with validating an OTP
+        or secret.
+      parameters:
+        - $ref: '#/components/parameters/ID'
+        - $ref: '#/components/parameters/Content-Length'
+        - $ref: '#/components/parameters/Content-Type'
+        - $ref: '#/components/parameters/Date'
+        - $ref: '#/components/parameters/X-Forwarded-For'
+        - $ref: '#/components/parameters/FSPIOP-Source'
+        - $ref: '#/components/parameters/FSPIOP-Destination'
+        - $ref: '#/components/parameters/FSPIOP-Encryption'
+        - $ref: '#/components/parameters/FSPIOP-Signature'
+        - $ref: '#/components/parameters/FSPIOP-URI'
+        - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
+      requestBody:
+        description: Error information returned.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ErrorInformationObject'
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  /consents:
+    post:
+      description: >
+        Create a consent object. Called by DFSP after the successful creation
+        and validation of a consentRequest.
+
+        Switch -> PISP
+      summary: CreateConsent
+      operationId: CreateConsent
+      tags:
+        - consent
+      requestBody:
+        description: The updated consentRequest body.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConsentsPostRequest'
+      parameters:
+        - $ref: '#/components/parameters/Accept'
+        - $ref: '#/components/parameters/Content-Length'
+        - $ref: '#/components/parameters/Content-Type'
+        - $ref: '#/components/parameters/Date'
+        - $ref: '#/components/parameters/X-Forwarded-For'
+        - $ref: '#/components/parameters/FSPIOP-Source'
+        - $ref: '#/components/parameters/FSPIOP-Destination'
+        - $ref: '#/components/parameters/FSPIOP-Encryption'
+        - $ref: '#/components/parameters/FSPIOP-Signature'
+        - $ref: '#/components/parameters/FSPIOP-URI'
+        - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
+      responses:
+        '202':
+          $ref: '#/components/responses/202'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  '/consents/{ID}':
+    put:
+      description: >
+        The HTTP request `PUT /consents/{ID}` is used to update a specified
+        consent object.
+
+        The `{ID}` in the URI should contain the `{ID}` that was used in the
+        `POST /consents`.
+
+        - Called by a `auth-service` to add the credential details.
+
+
+        - Called by a `PISP` to add a signature of the challenge.
+
+
+        PISP -> Switch
+
+        Switch -> PISP
+      summary: UpdateConsent
+      tags:
+        - consent
+      operationId: UpdateConsent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: '#/components/schemas/ConsentsIDPutResponseSigned'
+                - $ref: '#/components/schemas/ConsentsIDPutResponseUnsigned'
+                - $ref: '#/components/schemas/ConsentsIDPutResponseVerified'
+      parameters:
+        - $ref: '#/components/parameters/ID'
+        - $ref: '#/components/parameters/Content-Type'
+        - $ref: '#/components/parameters/Date'
+        - $ref: '#/components/parameters/X-Forwarded-For'
+        - $ref: '#/components/parameters/FSPIOP-Source'
+        - $ref: '#/components/parameters/FSPIOP-Destination'
+        - $ref: '#/components/parameters/FSPIOP-Encryption'
+        - $ref: '#/components/parameters/FSPIOP-Signature'
+        - $ref: '#/components/parameters/FSPIOP-URI'
+        - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+    patch:
+      description: >
+        The HTTP request `PATCH /consents/{ID}` is used to notify the PISP and
+        DFSP of revoked consent.
+
+
+        Switch -> PISP
+      summary: NotifyConsent
+      tags:
+        - consent
+      operationId: NotifyConsent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConsentsIDPatchResponse'
+      parameters:
+        - $ref: '#/components/parameters/ID'
+        - $ref: '#/components/parameters/Content-Type'
+        - $ref: '#/components/parameters/Date'
+        - $ref: '#/components/parameters/X-Forwarded-For'
+        - $ref: '#/components/parameters/FSPIOP-Source'
+        - $ref: '#/components/parameters/FSPIOP-Destination'
+        - $ref: '#/components/parameters/FSPIOP-Encryption'
+        - $ref: '#/components/parameters/FSPIOP-Signature'
+        - $ref: '#/components/parameters/FSPIOP-URI'
+        - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  '/consents/{ID}/generateChallenge':
+    post:
+      tags:
+        - consent
+      operationId: GenerateChallengeRequest
+      summary: GenerateChallengeRequest
+      description: |
+        PISP requests a challenge from the auth service.
+
+        PISP -> Switch
+      parameters:
+        - $ref: '#/components/parameters/ID'
+        - $ref: '#/components/parameters/Accept'
+        - $ref: '#/components/parameters/Content-Length'
+        - $ref: '#/components/parameters/Content-Type'
+        - $ref: '#/components/parameters/Date'
+        - $ref: '#/components/parameters/X-Forwarded-For'
+        - $ref: '#/components/parameters/FSPIOP-Source'
+        - $ref: '#/components/parameters/FSPIOP-Destination'
+        - $ref: '#/components/parameters/FSPIOP-Encryption'
+        - $ref: '#/components/parameters/FSPIOP-Signature'
+        - $ref: '#/components/parameters/FSPIOP-URI'
+        - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
+      requestBody:
+        description: GenerateChallengeRequest Body
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConsentsIDGenerateChallengePostRequest'
+            example:
+              type: FIDO
+      responses:
+        '202':
+          $ref: '#/components/responses/202'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  '/consents/{ID}/revoke':
+    post:
+      description: >
+        The HTTP request `POST /consents/{ID}/revoke` is used to revoke a
+        previously created consent.
+
+        - Called by a PISP when a user wants to unlink their account(s).
+
+        - Called by a DFSP when a dfsp wants to unlink user's account(s).
+
+
+        PISP -> Switch
+      tags:
+        - consent
+      parameters:
+        - $ref: '#/components/parameters/ID'
+        - $ref: '#/components/parameters/Content-Length'
+        - $ref: '#/components/parameters/Content-Type'
+        - $ref: '#/components/parameters/Date'
+        - $ref: '#/components/parameters/X-Forwarded-For'
+        - $ref: '#/components/parameters/FSPIOP-Source'
+        - $ref: '#/components/parameters/FSPIOP-Destination'
+        - $ref: '#/components/parameters/FSPIOP-Encryption'
+        - $ref: '#/components/parameters/FSPIOP-Signature'
+        - $ref: '#/components/parameters/FSPIOP-URI'
+        - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
+      operationId: RevokeConsent
+      responses:
+        '202':
+          $ref: '#/components/responses/202'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  '/accounts/{ID}':
+    parameters:
+      - $ref: '#/components/parameters/ID'
+      - $ref: '#/components/parameters/Date'
+      - $ref: '#/components/parameters/X-Forwarded-For'
+      - $ref: '#/components/parameters/FSPIOP-Source'
+      - $ref: '#/components/parameters/FSPIOP-Destination'
+      - $ref: '#/components/parameters/FSPIOP-Encryption'
+      - $ref: '#/components/parameters/FSPIOP-Signature'
+      - $ref: '#/components/parameters/FSPIOP-URI'
+      - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
+    get:
+      tags:
+        - accounts
+      operationId: GetAccountsByUserId
+      summary: GetAccountsByUserId
+      description: >
+        The HTTP request `GET /accounts/{ID}` is used to retrieve the list of
+        potential accounts available for linking.
+
+
+        - Called by a `PISP` to initiate a thirdparty linking flow
+      responses:
+        '202':
+          $ref: '#/components/responses/202'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+    put:
+      tags:
+        - accounts
+      operationId: UpdateAccountsByUserId
+      summary: UpdateAccountsByUserId
+      description: >
+        The HTTP request `PUT /accounts/{ID}` is used to return the list of
+        potential accounts available for linking
+
+
+        Switch(Thirdparty API Adapter) -> PISP
+      parameters:
+        - $ref: '#/components/parameters/Content-Length'
+        - $ref: '#/components/parameters/Content-Type'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountsIDPutResponse'
+            example:
+              - accountNickname: dfspa.user.nickname1
+                id: dfspa.username.1234
+                currency: ZAR
+              - accountNickname: dfspa.user.nickname2
+                id: dfspa.username.5678
+                currency: USD
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  '/accounts/{ID}/error':
+    put:
+      tags:
+        - accounts
+      operationId: UpdateAccountsByUserIdError
+      summary: UpdateAccountsByUserIdError
+      parameters:
+        - $ref: '#/components/parameters/ID'
+        - $ref: '#/components/parameters/Content-Length'
+        - $ref: '#/components/parameters/Content-Type'
+        - $ref: '#/components/parameters/Date'
+        - $ref: '#/components/parameters/X-Forwarded-For'
+        - $ref: '#/components/parameters/FSPIOP-Source'
+        - $ref: '#/components/parameters/FSPIOP-Destination'
+        - $ref: '#/components/parameters/FSPIOP-Encryption'
+        - $ref: '#/components/parameters/FSPIOP-Signature'
+        - $ref: '#/components/parameters/FSPIOP-URI'
+        - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
+      requestBody:
+        description: Details of the error returned.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ErrorInformationObject'
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  '/services/{ServiceType}':
+    parameters:
+      - $ref: '#/components/parameters/ServiceType'
+      - $ref: '#/components/parameters/Date'
+      - $ref: '#/components/parameters/X-Forwarded-For'
+      - $ref: '#/components/parameters/FSPIOP-Source'
+      - $ref: '#/components/parameters/FSPIOP-Destination'
+      - $ref: '#/components/parameters/FSPIOP-Encryption'
+      - $ref: '#/components/parameters/FSPIOP-Signature'
+      - $ref: '#/components/parameters/FSPIOP-URI'
+      - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
+    get:
+      operationId: GetServicesByServiceType
+      summary: GetServicesByServiceType
+      description: >
+        The HTTP request `GET /services/{ServiceType}` is used to retrieve the
+        list of participants
+
+        that support a specified service.
+      parameters:
+        - $ref: '#/components/parameters/Accept'
+      tags:
+        - services
+        - sampled
+      responses:
+        '202':
+          $ref: '#/components/responses/202'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+    put:
+      description: >
+        The HTTP request `PUT /services/{ServiceType}` is used to return list of
+        participants
+
+        that support a specified service.
+      operationId: PutServicesByServiceType
+      summary: PutServicesByServiceType
+      tags:
+        - services
+        - sampled
+      parameters:
+        - $ref: '#/components/parameters/Content-Length'
+        - $ref: '#/components/parameters/Content-Type'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServicesServiceTypePutResponse'
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+  '/services/{ServiceType}/error':
+    parameters:
+      - $ref: '#/components/parameters/ServiceType'
+      - $ref: '#/components/parameters/Content-Length'
+      - $ref: '#/components/parameters/Content-Type'
+      - $ref: '#/components/parameters/Date'
+      - $ref: '#/components/parameters/X-Forwarded-For'
+      - $ref: '#/components/parameters/FSPIOP-Source'
+      - $ref: '#/components/parameters/FSPIOP-Destination'
+      - $ref: '#/components/parameters/FSPIOP-Encryption'
+      - $ref: '#/components/parameters/FSPIOP-Signature'
+      - $ref: '#/components/parameters/FSPIOP-URI'
+      - $ref: '#/components/parameters/FSPIOP-HTTP-Method'
+    put:
+      description: >
+        The HTTP request `PUT /services/{ServiceType}/error` is used to return
+        error information
+      operationId: PutServicesByServiceTypeAndError
+      summary: PutServicesByServiceTypeAndError
+      tags:
+        - services
+        - sampled
+      requestBody:
+        description: Details of the error returned.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ErrorInformationObject'
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
+components:
+  schemas:
+    OutboundAuthorizationsPostRequest:
+      title: authorizationsRequest
+      description: POST /authorizations Request object
+      type: object
+      properties:
+        authenticationType:
+          $ref: '#/components/schemas/AuthorizationChannelType'
+        retriesLeft:
+          $ref: '#/components/schemas/Integer'
+        amount:
+          $ref: '#/components/schemas/Money'
+        transactionId:
+          $ref: '#/components/schemas/CorrelationId'
+        transactionRequestId:
+          $ref: '#/components/schemas/CorrelationId'
+        quote:
+          $ref: '#/components/schemas/QuotesIDPutResponse'
+      required:
+        - authenticationType
+        - retriesLeft
+        - amount
+        - transactionId
+        - transactionRequestId
+        - quote
+    CorrelationId:
+      title: CorrelationId
+      type: string
+      pattern: >-
+        ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+      description: >-
+        Identifier that correlates all messages of the same sequence. The API
+        data type UUID (Universally Unique Identifier) is a JSON String in
+        canonical format, conforming to [RFC
+        4122](https://tools.ietf.org/html/rfc4122), that is restricted by a
+        regular expression for interoperability reasons. A UUID is always 36
+        characters long, 32 hexadecimal symbols and 4 dashes (‘-‘).
+      example: b51ec534-ee48-4575-b6a9-ead2955b8069
+    TransactionRequestState:
+      title: TransactionRequestState
+      type: string
+      enum:
+        - RECEIVED
+        - PENDING
+        - ACCEPTED
+        - REJECTED
+      description: |-
+        Below are the allowed values for the enumeration.
+        - RECEIVED - Payer FSP has received the transaction from the Payee FSP.
+        - PENDING - Payer FSP has sent the transaction request to the Payer.
+        - ACCEPTED - Payer has approved the transaction.
+        - REJECTED - Payer has rejected the transaction.
+      example: RECEIVED
+    ThirdpartyRequestsTransactionsIDPutResponse:
+      title: ThirdpartyRequestsTransactionsIDPutResponse
+      type: object
+      description: >-
+        The object sent in the PUT /thirdPartyRequests/transactions/{ID}
+        request.
+      properties:
+        transactionId:
+          $ref: '#/components/schemas/CorrelationId'
+        transactionRequestState:
+          $ref: '#/components/schemas/TransactionRequestState'
+      required:
+        - transactionId
+        - transactionRequestState
+    ErrorCode:
+      title: ErrorCode
+      type: string
+      pattern: '^[1-9]\d{3}$'
+      description: >-
+        The API data type ErrorCode is a JSON String of four characters,
+        consisting of digits only. Negative numbers are not allowed. A leading
+        zero is not allowed. Each error code in the API is a four-digit number,
+        for example, 1234, where the first number (1 in the example) represents
+        the high-level error category, the second number (2 in the example)
+        represents the low-level error category, and the last two numbers (34 in
+        the example) represent the specific error.
+      example: '5100'
+    ErrorDescription:
+      title: ErrorDescription
+      type: string
+      minLength: 1
+      maxLength: 128
+      description: Error description string.
+    ExtensionKey:
+      title: ExtensionKey
+      type: string
+      minLength: 1
+      maxLength: 32
+      description: Extension key.
+    ExtensionValue:
+      title: ExtensionValue
+      type: string
+      minLength: 1
+      maxLength: 128
+      description: Extension value.
+    Extension:
+      title: Extension
+      type: object
+      description: Data model for the complex type Extension.
+      properties:
+        key:
+          $ref: '#/components/schemas/ExtensionKey'
+        value:
+          $ref: '#/components/schemas/ExtensionValue'
+      required:
+        - key
+        - value
+    ExtensionList:
+      title: ExtensionList
+      type: object
+      description: >-
+        Data model for the complex type ExtensionList. An optional list of
+        extensions, specific to deployment.
+      properties:
+        extension:
+          type: array
+          items:
+            $ref: '#/components/schemas/Extension'
+          minItems: 1
+          maxItems: 16
+          description: Number of Extension elements.
+      required:
+        - extension
+    ErrorInformation:
+      title: ErrorInformation
+      type: object
+      description: Data model for the complex type ErrorInformation.
+      properties:
+        errorCode:
+          $ref: '#/components/schemas/ErrorCode'
+        errorDescription:
+          $ref: '#/components/schemas/ErrorDescription'
+        extensionList:
+          $ref: '#/components/schemas/ExtensionList'
+      required:
+        - errorCode
+        - errorDescription
+    ErrorInformationResponse:
+      title: ErrorInformationResponse
+      type: object
+      description: >-
+        Data model for the complex type object that contains an optional element
+        ErrorInformation used along with 4xx and 5xx responses.
+      properties:
+        errorInformation:
+          $ref: '#/components/schemas/ErrorInformation'
+    TransactionState:
+      title: TransactionState
+      type: string
+      enum:
+        - RECEIVED
+        - PENDING
+        - COMPLETED
+        - REJECTED
+      description: |-
+        Below are the allowed values for the enumeration.
+        - RECEIVED - Payee FSP has received the transaction from the Payer FSP.
+        - PENDING - Payee FSP has validated the transaction.
+        - COMPLETED - Payee FSP has successfully performed the transaction.
+        - REJECTED - Payee FSP has failed to perform the transaction.
+      example: RECEIVED
+    ThirdpartyRequestsTransactionsIDPatchResponse:
+      title: ThirdpartyRequestsTransactionsIDPatchResponse
+      type: object
+      description: >-
+        The object sent in the PATCH /thirdpartyRequests/transactions/{ID}
+        callback.
+      properties:
+        transactionId:
+          $ref: '#/components/schemas/CorrelationId'
+        transactionRequestState:
+          $ref: '#/components/schemas/TransactionRequestState'
+        transactionState:
+          $ref: '#/components/schemas/TransactionState'
+      required:
+        - transactionId
+        - transactionRequestState
+        - transactionState
+    AccountAddress:
+      title: AccountAddress
+      type: string
+      description: >
+        A long-lived unique account identifier provided by the DFSP. This MUST
+        NOT
+
+        be Bank Account Number or anything that may expose a User's private bank
+
+        account information.
+      pattern: '^([0-9A-Za-z_~\-\.]+[0-9A-Za-z_~\-])$'
+      minLength: 1
+      maxLength: 1023
+    Currency:
+      title: Currency
+      description: >-
+        The currency codes defined in [ISO
+        4217](https://www.iso.org/iso-4217-currency-codes.html) as three-letter
+        alphabetic codes are used as the standard naming representation for
+        currencies.
+      type: string
+      minLength: 3
+      maxLength: 3
+      enum:
+        - AED
+        - AFN
+        - ALL
+        - AMD
+        - ANG
+        - AOA
+        - ARS
+        - AUD
+        - AWG
+        - AZN
+        - BAM
+        - BBD
+        - BDT
+        - BGN
+        - BHD
+        - BIF
+        - BMD
+        - BND
+        - BOB
+        - BRL
+        - BSD
+        - BTN
+        - BWP
+        - BYN
+        - BZD
+        - CAD
+        - CDF
+        - CHF
+        - CLP
+        - CNY
+        - COP
+        - CRC
+        - CUC
+        - CUP
+        - CVE
+        - CZK
+        - DJF
+        - DKK
+        - DOP
+        - DZD
+        - EGP
+        - ERN
+        - ETB
+        - EUR
+        - FJD
+        - FKP
+        - GBP
+        - GEL
+        - GGP
+        - GHS
+        - GIP
+        - GMD
+        - GNF
+        - GTQ
+        - GYD
+        - HKD
+        - HNL
+        - HRK
+        - HTG
+        - HUF
+        - IDR
+        - ILS
+        - IMP
+        - INR
+        - IQD
+        - IRR
+        - ISK
+        - JEP
+        - JMD
+        - JOD
+        - JPY
+        - KES
+        - KGS
+        - KHR
+        - KMF
+        - KPW
+        - KRW
+        - KWD
+        - KYD
+        - KZT
+        - LAK
+        - LBP
+        - LKR
+        - LRD
+        - LSL
+        - LYD
+        - MAD
+        - MDL
+        - MGA
+        - MKD
+        - MMK
+        - MNT
+        - MOP
+        - MRO
+        - MUR
+        - MVR
+        - MWK
+        - MXN
+        - MYR
+        - MZN
+        - NAD
+        - NGN
+        - NIO
+        - NOK
+        - NPR
+        - NZD
+        - OMR
+        - PAB
+        - PEN
+        - PGK
+        - PHP
+        - PKR
+        - PLN
+        - PYG
+        - QAR
+        - RON
+        - RSD
+        - RUB
+        - RWF
+        - SAR
+        - SBD
+        - SCR
+        - SDG
+        - SEK
+        - SGD
+        - SHP
+        - SLL
+        - SOS
+        - SPL
+        - SRD
+        - STD
+        - SVC
+        - SYP
+        - SZL
+        - THB
+        - TJS
+        - TMT
+        - TND
+        - TOP
+        - TRY
+        - TTD
+        - TVD
+        - TWD
+        - TZS
+        - UAH
+        - UGX
+        - USD
+        - UYU
+        - UZS
+        - VEF
+        - VND
+        - VUV
+        - WST
+        - XAF
+        - XCD
+        - XDR
+        - XOF
+        - XPF
+        - YER
+        - ZAR
+        - ZMW
+        - ZWD
+    Name:
+      title: Name
+      type: string
+      pattern: '^(?!\s*$)[\w .,''-]{1,128}$'
+      description: >-
+        The API data type Name is a JSON String, restricted by a regular
+        expression to avoid characters which are generally not used in a name.
+
+
+        Regular Expression - The regular expression for restricting the Name
+        type is "^(?!\s*$)[\w .,'-]{1,128}$". The restriction does not allow a
+        string consisting of whitespace only, all Unicode characters are
+        allowed, as well as the period (.) (apostrophe (‘), dash (-), comma (,)
+        and space characters ( ).
+
+
+        **Note:** In some programming languages, Unicode support must be
+        specifically enabled. For example, if Java is used, the flag
+        UNICODE_CHARACTER_CLASS must be enabled to allow Unicode characters.
+    Account:
+      title: Account
+      type: object
+      description: Data model for the complex type Account.
+      properties:
+        address:
+          $ref: '#/components/schemas/AccountAddress'
+        currency:
+          $ref: '#/components/schemas/Currency'
+        description:
+          $ref: '#/components/schemas/Name'
+      required:
+        - currency
+    AccountList:
+      title: AccountList
+      type: object
+      description: Data model for the complex type AccountList.
+      properties:
+        account:
+          type: array
+          items:
+            $ref: '#/components/schemas/Account'
+          minItems: 1
+          maxItems: 32
+          description: Accounts associated with the Party.
+      required:
+        - account
+    PartyIdType:
+      title: PartyIdType
+      type: string
+      enum:
+        - MSISDN
+        - EMAIL
+        - PERSONAL_ID
+        - BUSINESS
+        - DEVICE
+        - ACCOUNT_ID
+        - IBAN
+        - ALIAS
+        - CONSENT
+        - THIRD_PARTY_LINK
+      description: >
+        This is a variant based on FSPIOP `PartyIdType` specification.
+
+        Main difference being the CONSENT and THIRD_PARTY_LINK enums.
+
+
+        Below are the allowed values for the enumeration.
+
+        - MSISDN - An MSISDN (Mobile Station International Subscriber Directory
+
+        Number, that is, the phone number) is used as reference to a
+        participant.
+
+        The MSISDN identifier should be in international format according to the
+
+        [ITU-T E.164 standard](https://www.itu.int/rec/T-REC-E.164/en).
+
+        Optionally, the MSISDN may be prefixed by a single plus sign, indicating
+        the
+
+        international prefix.
+
+        - EMAIL - An email is used as reference to a
+
+        participant. The format of the email should be according to the
+        informational
+
+        [RFC 3696](https://tools.ietf.org/html/rfc3696).
+
+        - PERSONAL_ID - A personal identifier is used as reference to a
+        participant.
+
+        Examples of personal identification are passport number, birth
+        certificate
+
+        number, and national registration number. The identifier number is added
+        in
+
+        the PartyIdentifier element. The personal identifier type is added in
+        the
+
+        PartySubIdOrType element.
+
+        - BUSINESS - A specific Business (for example, an organization or a
+        company)
+
+        is used as reference to a participant. The BUSINESS identifier can be in
+        any
+
+        format. To make a transaction connected to a specific username or bill
+        number
+
+        in a Business, the PartySubIdOrType element should be used.
+
+        - DEVICE - A specific device (for example, a POS or ATM) ID connected to
+        a
+
+        specific business or organization is used as reference to a Party.
+
+        For referencing a specific device under a specific business or
+        organization,
+
+        use the PartySubIdOrType element.
+
+        - ACCOUNT_ID - A bank account number or FSP account ID should be used as
+
+        reference to a participant. The ACCOUNT_ID identifier can be in any
+        format,
+
+        as formats can greatly differ depending on country and FSP.
+
+        - IBAN - A bank account number or FSP account ID is used as reference to
+        a
+
+        participant. The IBAN identifier can consist of up to 34 alphanumeric
+
+        characters and should be entered without whitespace.
+
+        - ALIAS An alias is used as reference to a participant. The alias should
+        be
+
+        created in the FSP as an alternative reference to an account owner.
+
+        Another example of an alias is a username in the FSP system.
+
+        The ALIAS identifier can be in any format. It is also possible to use
+        the
+
+        PartySubIdOrType element for identifying an account under an Alias
+        defined
+
+        by the PartyIdentifier.
+
+        - CONSENT - TBD
+
+        - THIRD_PARTY_LINK - TBD
+      example: PERSONAL_ID
+    PartyIdentifier:
+      title: PartyIdentifier
+      type: string
+      minLength: 1
+      maxLength: 128
+      description: Identifier of the Party.
+      example: '16135551212'
+    PartySubIdOrType:
+      title: PartySubIdOrType
+      type: string
+      minLength: 1
+      maxLength: 128
+      description: >-
+        Either a sub-identifier of a PartyIdentifier, or a sub-type of the
+        PartyIdType, normally a PersonalIdentifierType.
+    FspId:
+      title: FspId
+      type: string
+      minLength: 1
+      maxLength: 32
+      description: FSP identifier.
+    PartyIdInfo:
+      title: PartyIdInfo
+      type: object
+      description: Data model for the complex type PartyIdInfo.
+      properties:
+        partyIdType:
+          $ref: '#/components/schemas/PartyIdType'
+        partyIdentifier:
+          $ref: '#/components/schemas/PartyIdentifier'
+        partySubIdOrType:
+          $ref: '#/components/schemas/PartySubIdOrType'
+        fspId:
+          $ref: '#/components/schemas/FspId'
+        extensionList:
+          $ref: '#/components/schemas/ExtensionList'
+      required:
+        - partyIdType
+        - partyIdentifier
+    MerchantClassificationCode:
+      title: MerchantClassificationCode
+      type: string
+      pattern: '^[\d]{1,4}$'
+      description: >-
+        A limited set of pre-defined numbers. This list would be a limited set
+        of numbers identifying a set of popular merchant types like School Fees,
+        Pubs and Restaurants, Groceries, etc.
+    PartyName:
+      title: PartyName
+      type: string
+      minLength: 1
+      maxLength: 128
+      description: Name of the Party. Could be a real name or a nickname.
+    FirstName:
+      title: FirstName
+      type: string
+      minLength: 1
+      maxLength: 128
+      pattern: '^(?!\s*$)[\w .,''-]{1,128}$'
+      description: First name of the Party (Name Type).
+      example: Henrik
+    MiddleName:
+      title: MiddleName
+      type: string
+      minLength: 1
+      maxLength: 128
+      pattern: '^(?!\s*$)[\w .,''-]{1,128}$'
+      description: Middle name of the Party (Name Type).
+      example: Johannes
+    LastName:
+      title: LastName
+      type: string
+      minLength: 1
+      maxLength: 128
+      pattern: '^(?!\s*$)[\w .,''-]{1,128}$'
+      description: Last name of the Party (Name Type).
+      example: Karlsson
+    PartyComplexName:
+      title: PartyComplexName
+      type: object
+      description: Data model for the complex type PartyComplexName.
+      properties:
+        firstName:
+          $ref: '#/components/schemas/FirstName'
+        middleName:
+          $ref: '#/components/schemas/MiddleName'
+        lastName:
+          $ref: '#/components/schemas/LastName'
+    DateOfBirth:
+      title: DateofBirth (type Date)
+      type: string
+      pattern: >-
+        ^(?:[1-9]\d{3}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\d|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[1-9]\d(?:0[48]|[2468][048]|[13579][26])|(?:[2468][048]|[13579][26])00)-02-29)$
+      description: Date of Birth of the Party.
+      example: '1966-06-16'
+    PartyPersonalInfo:
+      title: PartyPersonalInfo
+      type: object
+      description: Data model for the complex type PartyPersonalInfo.
+      properties:
+        complexName:
+          $ref: '#/components/schemas/PartyComplexName'
+        dateOfBirth:
+          $ref: '#/components/schemas/DateOfBirth'
+    Party:
+      title: Party
+      type: object
+      description: Data model for the complex type Party.
+      properties:
+        accounts:
+          $ref: '#/components/schemas/AccountList'
+        partyIdInfo:
+          $ref: '#/components/schemas/PartyIdInfo'
+        merchantClassificationCode:
+          $ref: '#/components/schemas/MerchantClassificationCode'
+        name:
+          $ref: '#/components/schemas/PartyName'
+        personalInfo:
+          $ref: '#/components/schemas/PartyPersonalInfo'
+      required:
+        - partyIdInfo
+    PartyIdTypeTPLink:
+      title: PartyIdTypeTPLink
+      type: string
+      enum:
+        - THIRD_PARTY_LINK
+      description: >
+        This is a variant based on FSPIOP `PartyIdType` specification.
+
+        This validation interface should be use by `POST
+        /thirdpartyRequests/transactions`
+
+        - THIRD_PARTY_LINK - is the DFSP's internal reference which allows DFSP
+        to find out the corresponding consent
+      example: PERSONAL_ID
+    PartyIdInfoTPLink:
+      title: PartyIdInfo
+      type: object
+      description: Data model for the complex type PartyIdInfo.
+      properties:
+        partyIdType:
+          $ref: '#/components/schemas/PartyIdTypeTPLink'
+        partyIdentifier:
+          $ref: '#/components/schemas/PartyIdentifier'
+        partySubIdOrType:
+          $ref: '#/components/schemas/PartySubIdOrType'
+        fspId:
+          $ref: '#/components/schemas/FspId'
+        extensionList:
+          $ref: '#/components/schemas/ExtensionList'
+      required:
+        - partyIdType
+        - partyIdentifier
+    AmountType:
+      title: AmountType
+      type: string
+      enum:
+        - SEND
+        - RECEIVE
+      description: >-
+        Below are the allowed values for the enumeration AmountType.
+
+        - SEND - Amount the Payer would like to send, that is, the amount that
+        should be withdrawn from the Payer account including any fees.
+
+        - RECEIVE - Amount the Payer would like the Payee to receive, that is,
+        the amount that should be sent to the receiver exclusive of any fees.
+      example: RECEIVE
+    Amount:
+      title: Amount
+      type: string
+      pattern: '^([0]|([1-9][0-9]{0,17}))([.][0-9]{0,3}[1-9])?$'
+      description: >-
+        The API data type Amount is a JSON String in a canonical format that is
+        restricted by a regular expression for interoperability reasons. This
+        pattern does not allow any trailing zeroes at all, but allows an amount
+        without a minor currency unit. It also only allows four digits in the
+        minor currency unit; a negative value is not allowed. Using more than 18
+        digits in the major currency unit is not allowed.
+      example: '123.45'
+    Money:
+      title: Money
+      type: object
+      description: Data model for the complex type Money.
+      properties:
+        currency:
+          $ref: '#/components/schemas/Currency'
+        amount:
+          $ref: '#/components/schemas/Amount'
+      required:
+        - currency
+        - amount
+    TransactionScenario:
+      title: TransactionScenario
+      type: string
+      enum:
+        - DEPOSIT
+        - WITHDRAWAL
+        - TRANSFER
+        - PAYMENT
+        - REFUND
+      description: >-
+        Below are the allowed values for the enumeration.
+
+        - DEPOSIT - Used for performing a Cash-In (deposit) transaction. In a
+        normal scenario, electronic funds are transferred from a Business
+        account to a Consumer account, and physical cash is given from the
+        Consumer to the Business User.
+
+        - WITHDRAWAL - Used for performing a Cash-Out (withdrawal) transaction.
+        In a normal scenario, electronic funds are transferred from a Consumer’s
+        account to a Business account, and physical cash is given from the
+        Business User to the Consumer.
+
+        - TRANSFER - Used for performing a P2P (Peer to Peer, or Consumer to
+        Consumer) transaction.
+
+        - PAYMENT - Usually used for performing a transaction from a Consumer to
+        a Merchant or Organization, but could also be for a B2B (Business to
+        Business) payment. The transaction could be online for a purchase in an
+        Internet store, in a physical store where both the Consumer and Business
+        User are present, a bill payment, a donation, and so on.
+
+        - REFUND - Used for performing a refund of transaction.
+      example: DEPOSIT
+    TransactionSubScenario:
+      title: TransactionSubScenario
+      type: string
+      pattern: '^[A-Z_]{1,32}$'
+      description: >-
+        Possible sub-scenario, defined locally within the scheme (UndefinedEnum
+        Type).
+      example: LOCALLY_DEFINED_SUBSCENARIO
+    TransactionInitiator:
+      title: TransactionInitiator
+      type: string
+      enum:
+        - PAYER
+        - PAYEE
+      description: >-
+        Below are the allowed values for the enumeration.
+
+        - PAYER - Sender of funds is initiating the transaction. The account to
+        send from is either owned by the Payer or is connected to the Payer in
+        some way.
+
+        - PAYEE - Recipient of the funds is initiating the transaction by
+        sending a transaction request. The Payer must approve the transaction,
+        either automatically by a pre-generated OTP or by pre-approval of the
+        Payee, or by manually approving in his or her own Device.
+      example: PAYEE
+    TransactionInitiatorType:
+      title: TransactionInitiatorType
+      type: string
+      enum:
+        - CONSUMER
+        - AGENT
+        - BUSINESS
+        - DEVICE
+      description: |-
+        Below are the allowed values for the enumeration.
+        - CONSUMER - Consumer is the initiator of the transaction.
+        - AGENT - Agent is the initiator of the transaction.
+        - BUSINESS - Business is the initiator of the transaction.
+        - DEVICE - Device is the initiator of the transaction.
+      example: CONSUMER
+    RefundReason:
+      title: RefundReason
+      type: string
+      minLength: 1
+      maxLength: 128
+      description: Reason for the refund.
+      example: Free text indicating reason for the refund.
+    Refund:
+      title: Refund
+      type: object
+      description: Data model for the complex type Refund.
+      properties:
+        originalTransactionId:
+          $ref: '#/components/schemas/CorrelationId'
+        refundReason:
+          $ref: '#/components/schemas/RefundReason'
+      required:
+        - originalTransactionId
+    BalanceOfPayments:
+      title: BalanceOfPayments
+      type: string
+      pattern: '^[1-9]\d{2}$'
+      description: >-
+        (BopCode) The API data type
+        [BopCode](https://www.imf.org/external/np/sta/bopcode/) is a JSON String
+        of 3 characters, consisting of digits only. Negative numbers are not
+        allowed. A leading zero is not allowed.
+      example: '123'
+    TransactionType:
+      title: TransactionType
+      type: object
+      description: Data model for the complex type TransactionType.
+      properties:
+        scenario:
+          $ref: '#/components/schemas/TransactionScenario'
+        subScenario:
+          $ref: '#/components/schemas/TransactionSubScenario'
+        initiator:
+          $ref: '#/components/schemas/TransactionInitiator'
+        initiatorType:
+          $ref: '#/components/schemas/TransactionInitiatorType'
+        refundInfo:
+          $ref: '#/components/schemas/Refund'
+        balanceOfPayments:
+          $ref: '#/components/schemas/BalanceOfPayments'
+      required:
+        - scenario
+        - initiator
+        - initiatorType
+    ThirdpartyRequestsTransactionsPostRequest:
+      title: ThirdpartyRequestsTransactionsPostRequest
+      type: object
+      description: The object sent in the POST /thirdpartyRequests/transactions request.
+      properties:
+        transactionRequestId:
+          allOf:
+            - $ref: '#/components/schemas/CorrelationId'
+          description: >
+            Common ID between the FSPs for the transaction request object. The
+            ID should be reused for resends of the same transaction request. A
+            new ID should be generated for each new transaction request.
+        payee:
+          allOf:
+            - $ref: '#/components/schemas/Party'
+          description: Information about the Payee in the proposed financial transaction.
+        payer:
+          allOf:
+            - $ref: '#/components/schemas/PartyIdInfoTPLink'
+          description: Information about the Payer in the proposed financial transaction.
+        amountType:
+          allOf:
+            - $ref: '#/components/schemas/AmountType'
+          description: 'SEND for sendAmount, RECEIVE for receiveAmount.'
+        amount:
+          allOf:
+            - $ref: '#/components/schemas/Money'
+          description: Requested amount to be transferred from the Payer to Payee.
+        transactionType:
+          allOf:
+            - $ref: '#/components/schemas/TransactionType'
+          description: Type of transaction.
+        expiration:
+          type: string
+          description: >
+            Date and time until when the transaction request is valid. It can be
+            set to get a quick failure in case the peer FSP takes too long to
+            respond.
+          example: '2016-05-24T08:38:08.699-04:00'
+      required:
+        - transactionRequestId
+        - payee
+        - payer
+        - amountType
+        - amount
+        - transactionType
+        - expiration
+    AuthorizationChannelType:
+      title: AuthorizationChannelType
+      type: string
+      enum:
+        - OTP
+        - QRCODE
+        - U2F
+      description: >
+        Below are the allowed values for the enumeration
+        AuthorizationChannelType.
+
+        - OTP - One-time password generated by the Payer FSP.
+
+        - QRCODE - QR code used as One Time Password.
+
+        - U2F - U2F is a new addition isolated to Thirdparty stream.
+    Integer:
+      title: Integer
+      type: string
+      pattern: '^[1-9]\d*$'
+      description: >-
+        The API data type Integer is a JSON String consisting of digits only.
+        Negative numbers and leading zeroes are not allowed. The data type is
+        always limited to a specific number of digits.
+    DateTime:
+      title: DateTime
+      type: string
+      pattern: >-
+        ^(?:[1-9]\d{3}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\d|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[1-9]\d(?:0[48]|[2468][048]|[13579][26])|(?:[2468][048]|[13579][26])00)-02-29)T(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:(\.\d{3}))(?:Z|[+-][01]\d:[0-5]\d)$
+      description: >-
+        The API data type DateTime is a JSON String in a lexical format that is
+        restricted by a regular expression for interoperability reasons. The
+        format is according to [ISO
+        8601](https://www.iso.org/iso-8601-date-and-time-format.html), expressed
+        in a combined date, time and time zone format. A more readable version
+        of the format is yyyy-MM-ddTHH:mm:ss.SSS[-HH:MM]. Examples are
+        "2016-05-24T08:38:08.699-04:00", "2016-05-24T08:38:08.699Z" (where Z
+        indicates Zulu time zone, same as UTC).
+      example: '2016-05-24T08:38:08.699-04:00'
+    Latitude:
+      title: Latitude
+      type: string
+      pattern: >-
+        ^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,6})?))$
+      description: >-
+        The API data type Latitude is a JSON String in a lexical format that is
+        restricted by a regular expression for interoperability reasons.
+      example: '+45.4215'
+    Longitude:
+      title: Longitude
+      type: string
+      pattern: >-
+        ^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,6})?))$
+      description: >-
+        The API data type Longitude is a JSON String in a lexical format that is
+        restricted by a regular expression for interoperability reasons.
+      example: '+75.6972'
+    GeoCode:
+      title: GeoCode
+      type: object
+      description: >-
+        Data model for the complex type GeoCode. Indicates the geographic
+        location from where the transaction was initiated.
+      properties:
+        latitude:
+          $ref: '#/components/schemas/Latitude'
+        longitude:
+          $ref: '#/components/schemas/Longitude'
+      required:
+        - latitude
+        - longitude
+    IlpPacket:
+      title: IlpPacket
+      type: string
+      pattern: '^[A-Za-z0-9-_]+[=]{0,2}$'
+      minLength: 1
+      maxLength: 32768
+      description: Information for recipient (transport layer information).
+      example: >-
+        AYIBgQAAAAAAAASwNGxldmVsb25lLmRmc3AxLm1lci45T2RTOF81MDdqUUZERmZlakgyOVc4bXFmNEpLMHlGTFGCAUBQU0svMS4wCk5vbmNlOiB1SXlweUYzY3pYSXBFdzVVc05TYWh3CkVuY3J5cHRpb246IG5vbmUKUGF5bWVudC1JZDogMTMyMzZhM2ItOGZhOC00MTYzLTg0NDctNGMzZWQzZGE5OGE3CgpDb250ZW50LUxlbmd0aDogMTM1CkNvbnRlbnQtVHlwZTogYXBwbGljYXRpb24vanNvbgpTZW5kZXItSWRlbnRpZmllcjogOTI4MDYzOTEKCiJ7XCJmZWVcIjowLFwidHJhbnNmZXJDb2RlXCI6XCJpbnZvaWNlXCIsXCJkZWJpdE5hbWVcIjpcImFsaWNlIGNvb3BlclwiLFwiY3JlZGl0TmFtZVwiOlwibWVyIGNoYW50XCIsXCJkZWJpdElkZW50aWZpZXJcIjpcIjkyODA2MzkxXCJ9IgA
+    IlpCondition:
+      title: IlpCondition
+      type: string
+      pattern: '^[A-Za-z0-9-_]{43}$'
+      maxLength: 48
+      description: Condition that must be attached to the transfer by the Payer.
+    QuotesIDPutResponse:
+      title: QuotesIDPutResponse
+      type: object
+      description: 'The object sent in the PUT /quotes/{ID} callback.'
+      properties:
+        transferAmount:
+          $ref: '#/components/schemas/Money'
+        payeeReceiveAmount:
+          $ref: '#/components/schemas/Money'
+        payeeFspFee:
+          $ref: '#/components/schemas/Money'
+        payeeFspCommission:
+          $ref: '#/components/schemas/Money'
+        expiration:
+          $ref: '#/components/schemas/DateTime'
+        geoCode:
+          $ref: '#/components/schemas/GeoCode'
+        ilpPacket:
+          $ref: '#/components/schemas/IlpPacket'
+        condition:
+          $ref: '#/components/schemas/IlpCondition'
+        extensionList:
+          $ref: '#/components/schemas/ExtensionList'
+      required:
+        - transferAmount
+        - expiration
+        - ilpPacket
+        - condition
+    AuthenticationType:
+      title: AuthenticationType
+      type: string
+      enum:
+        - OTP
+        - QRCODE
+        - U2F
+      description: |-
+        Below are the allowed values for the enumeration AuthenticationType.
+        - OTP - One-time password generated by the Payer FSP.
+        - QRCODE - QR code used as One Time Password.
+        - U2F - U2F is a new addition isolated to Thirdparty stream.
+      example: OTP
+    OtpValue:
+      title: OtpValue
+      type: string
+      pattern: '^\d{3,10}$'
+      description: >-
+        The API data type OtpValue is a JSON String of 3 to 10 characters,
+        consisting of digits only. Negative numbers are not allowed. One or more
+        leading zeros are allowed.
+    QRCODE:
+      title: QRCODE
+      type: string
+      minLength: 1
+      maxLength: 64
+      description: QR code used as a One Time Password.
+    U2FPIN:
+      title: U2FPIN
+      type: string
+      pattern: '^\S{1,64}$'
+      minLength: 1
+      maxLength: 64
+      description: >
+        U2F challenge-response, where payer FSP verifies if the response
+        provided by end-user device matches the previously registered key.
+    U2FPinValue:
+      title: U2FPinValue
+      type: object
+      description: >
+        U2F challenge-response, where payer FSP verifies if the response
+        provided by end-user device matches the previously registered key.
+      properties:
+        pinValue:
+          allOf:
+            - $ref: '#/components/schemas/U2FPIN'
+          description: U2F challenge-response.
+        counter:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+          description: >-
+            Sequential counter used for cloning detection. Present only for U2F
+            authentication.
+      required:
+        - pinValue
+        - counter
+    AuthenticationValue:
+      title: AuthenticationValue
+      anyOf:
+        - $ref: '#/components/schemas/OtpValue'
+        - $ref: '#/components/schemas/QRCODE'
+        - $ref: '#/components/schemas/U2FPinValue'
+      pattern: '^\d{3,10}$|^\S{1,64}$'
+      description: >-
+        Contains the authentication value. The format depends on the
+        authentication type used in the AuthenticationInfo complex type.
+    AuthenticationInfo:
+      title: AuthenticationInfo
+      type: object
+      description: Data model for the complex type AuthenticationInfo.
+      properties:
+        authentication:
+          $ref: '#/components/schemas/AuthenticationType'
+        authenticationValue:
+          $ref: '#/components/schemas/AuthenticationValue'
+      required:
+        - authentication
+        - authenticationValue
+    AuthorizationResponse:
+      title: AuthorizationResponse
+      type: string
+      enum:
+        - ENTERED
+        - REJECTED
+        - RESEND
+      description: |-
+        Below are the allowed values for the enumeration.
+        - ENTERED - Consumer entered the authentication value.
+        - REJECTED - Consumer rejected the transaction.
+        - RESEND - Consumer requested to resend the authentication value.
+      example: ENTERED
+    AuthorizationsIDPutResponse:
+      title: AuthorizationsIDPutResponse
+      type: object
+      description: 'The object sent in the PUT /authorizations/{ID} callback.'
+      properties:
+        authenticationInfo:
+          $ref: '#/components/schemas/AuthenticationInfo'
+        responseType:
+          $ref: '#/components/schemas/AuthorizationResponse'
+      required:
+        - responseType
+    ErrorInformationObject:
+      title: ErrorInformationObject
+      type: object
+      description: Data model for the complex type object that contains ErrorInformation.
+      properties:
+        errorInformation:
+          $ref: '#/components/schemas/ErrorInformation'
+      required:
+        - errorInformation
+    ConsentScopeType:
+      title: ConsentScopeType
+      type: string
+      enum:
+        - accounts.getBalance
+        - accounts.transfer
+      description: |
+        The scopes requested for a ConsentRequest.
+        - "accounts.getBalance" - Get the balance of a given account.
+        - "accounts.transfer" - Initiate a transfer from an account.
+    Scope:
+      title: Scope
+      type: object
+      description: Scope + Account Identifier mapping for a Consent.
+      example: |
+        {
+          accountId: "dfsp.username.5678",
+          actions: [ "accounts.transfer", "accounts.getBalance" ]
+        }
+      properties:
+        accountId:
+          $ref: '#/components/schemas/AccountAddress'
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConsentScopeType'
+      required:
+        - accountId
+        - actions
+    ConsentRequestChannelType:
+      title: ConsentRequestChannelType
+      type: string
+      enum:
+        - WEB
+        - OTP
+      description: |
+        The auth channel being used for the consentRequest.
+        - "WEB" - The Web auth channel.
+        - "OTP" - The OTP auth channel.
+    ConsentRequestsPostRequest:
+      title: ConsentRequestsPostRequest
+      type: object
+      description: The object sent in a `POST /consentRequests` request.
+      properties:
+        id:
+          $ref: '#/components/schemas/CorrelationId'
+        initiatorId:
+          type: string
+          description: >-
+            The id of the PISP who will initiate transactions on a user's
+            behalf.
+        scopes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Scope'
+        authChannels:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConsentRequestChannelType'
+        callbackUri:
+          type: string
+          description: >-
+            The callback uri that the user will be redirected to after
+            completing the WEB auth channel.
+      required:
+        - id
+        - initiatorId
+        - scopes
+        - authChannels
+        - callbackUri
+    ConsentRequestChannelTypeWeb:
+      title: ConsentRequestChannelTypeWeb
+      type: string
+      enum:
+        - WEB
+      description: |
+        The web auth channel being used for PUT consentRequest/{ID} request.
+    ConsentRequestsIDPutResponseWeb:
+      title: ConsentRequestsIDPutResponseWeb
+      type: object
+      description: >
+        The object sent in a `PUT /consentRequests/{ID}` request.
+
+
+        Schema used in the request consent phase of the account linking web
+        flow,
+
+        the result is the PISP being instructed on a specific URL where this
+
+        supposed user should be redirected. This URL should be a place where
+
+        the user can prove their identity (e.g., by logging in).
+      properties:
+        initiatorId:
+          type: string
+          description: >-
+            The id of the PISP who will initiate transactions on a user's
+            behalf.
+        scopes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Scope'
+        authChannels:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConsentRequestChannelTypeWeb'
+        callbackUri:
+          type: string
+          description: >-
+            The callback uri that the user will be redirected to after
+            completing the WEB auth channel.
+        authUri:
+          type: string
+          description: >-
+            The callback uri that the pisp app redirects to for user to complete
+            their login.
+      required:
+        - initiatorId
+        - scopes
+        - authChannels
+        - callbackUri
+        - authUri
+      additionalProperties: false
+    ConsentRequestsIDPutResponseWebAuth:
+      title: ConsentRequestsIDPutResponseWebAuth
+      type: object
+      description: >
+        The object sent in a `PUT /consentRequests/{ID}` request.
+
+
+        Schema used in the authentication phase of the account linking flow,
+
+        the user is expected to prove their identity to the DFSP by passing a
+        OTP
+
+        or secret to the PISP.
+      properties:
+        initiatorId:
+          type: string
+          description: >-
+            The id of the PISP who will initiate transactions on a user's
+            behalf.
+        scopes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Scope'
+        authChannels:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConsentRequestChannelTypeWeb'
+        callbackUri:
+          type: string
+          description: >-
+            The callback uri that the user will be redirected to after
+            completing the WEB auth channel.
+        authUri:
+          type: string
+          description: >-
+            The callback uri that the pisp app redirects to for user to complete
+            their login.
+        authToken:
+          type: string
+          description: The Auth token from the OTP or redirect to pisp app.
+      required:
+        - initiatorId
+        - scopes
+        - authChannels
+        - callbackUri
+        - authUri
+        - authToken
+      additionalProperties: false
+    ConsentRequestChannelTypeOTP:
+      title: ConsentRequestChannelTypeOTP
+      type: string
+      enum:
+        - OTP
+      description: |
+        The OTP auth channel being used for PUT consentRequest/{ID} request.
+    ConsentRequestsIDPutResponseOTP:
+      title: ConsentRequestsIDPutResponseOTP
+      type: object
+      description: >
+        The object sent in a `PUT /consentRequests/{ID}` request.
+
+
+        Schema used in the request consent phase of the account linking OTP/SMS
+        flow.
+      properties:
+        initiatorId:
+          type: string
+          description: >-
+            The id of the PISP who will initiate transactions on a user's
+            behalf.
+        scopes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Scope'
+        authChannels:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConsentRequestChannelTypeOTP'
+        callbackUri:
+          type: string
+          description: >-
+            The callback uri that the user will be redirected to after
+            completing the WEB auth channel.
+      required:
+        - initiatorId
+        - scopes
+        - authChannels
+        - callbackUri
+      additionalProperties: false
+    ConsentRequestsIDPutResponseOTPAuth:
+      title: ConsentRequestsIDPutResponseOTPAuth
+      type: object
+      description: >
+        The object sent in a `PUT /consentRequests/{ID}` request.
+
+
+        Schema used in the authentication phase of the account linking flow,
+
+        the user is expected to prove their identity to the DFSP by passing a
+        OTP
+
+        or secret to the PISP.
+      properties:
+        initiatorId:
+          type: string
+          description: >-
+            The id of the PISP who will initiate transactions on a user's
+            behalf.
+        scopes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Scope'
+        authChannels:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConsentRequestChannelTypeOTP'
+        callbackUri:
+          type: string
+          description: >-
+            The callback uri that the user will be redirected to after
+            completing the WEB auth channel.
+        authToken:
+          type: string
+          description: The Auth token from the OTP or redirect to pisp app.
+      required:
+        - initiatorId
+        - scopes
+        - authChannels
+        - callbackUri
+        - authToken
+      additionalProperties: false
+    ConsentRequestsIDPatchRequest:
+      title: ConsentRequestsIDPatchRequest
+      type: object
+      description: 'The object sent in a `PATCH /consentRequests/{ID}` request.'
+      properties:
+        authToken:
+          $ref: '#/components/schemas/OtpValue'
+      required:
+        - authToken
+    ConsentsPostRequest:
+      title: ConsentPostRequest
+      type: object
+      description: The object sent in a `POST /consents` request.
+      properties:
+        consentId:
+          allOf:
+            - $ref: '#/components/schemas/CorrelationId'
+          description: |
+            Common ID between the PISP and FSP for the Consent object
+            decided by the DFSP who creates the Consent
+            This field is REQUIRED for POST /consent.
+        consentRequestId:
+          allOf:
+            - $ref: '#/components/schemas/CorrelationId'
+          description: |
+            The id of the ConsentRequest that was used to initiate the
+            creation of this Consent.
+        scopes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Scope'
+      required:
+        - consentId
+        - consentRequestId
+        - scopes
+    CredentialType:
+      title: CredentialType
+      type: string
+      enum:
+        - FIDO
+      description: |
+        The type of the Credential.
+        - "FIDO" - A FIDO public/private keypair.
+    CredentialChallengeSigned:
+      title: CredentialChallengeSigned
+      type: object
+      description: |
+        The challenge that has been signed by a PISP.
+      properties:
+        payload:
+          type: string
+          description: >-
+            Base64 encoded binary of the challenge that must be answered by the
+            PISP.
+        signature:
+          type: string
+          description: >-
+            Base64 encoded binary string or result of the payload signed by the
+            PISP using the private key.
+      required:
+        - payload
+        - signature
+      additionalProperties: false
+    SignedCredential:
+      title: SignedCredential
+      type: object
+      description: >
+        A credential used to allow a user to prove their identity and access
+
+        to an account with a DFSP.
+
+
+        SignedCredential is a special formatting of the credential to allow us
+        to be
+
+        more explicit about the `status` field - it should only ever be PENDING
+        when updating
+
+        a credential.
+      properties:
+        id:
+          type: string
+          description: The id of a Credential.
+        type:
+          $ref: '#/components/schemas/CredentialType'
+        status:
+          type: string
+          enum:
+            - PENDING
+          description: The challenge has signed but not yet verified.
+        challenge:
+          $ref: '#/components/schemas/CredentialChallengeSigned'
+        payload:
+          type: string
+          description: Base64 encoded bytes - The public key of the Public/Private keypair.
+      required:
+        - id
+        - type
+        - status
+        - challenge
+        - payload
+      additionalProperties: false
+    ConsentsIDPutResponseSigned:
+      title: ConsentsIDPutResponseSigned
+      type: object
+      description: >
+        The HTTP request `PUT /consents/{ID}` is used by the PISP to update a
+        Consent
+
+        with a signed challenge and register a credential.
+
+
+        Called by a `PISP` to after signing a challenge. Sent to an
+        `auth-service` for verification.
+      properties:
+        requestId:
+          allOf:
+            - $ref: '#/components/schemas/CorrelationId'
+          description: |
+            The id of the ConsentRequest that was used to initiate the
+            creation of this Consent.
+        participantId:
+          $ref: '#/components/schemas/FspId'
+        initiatorId:
+          allOf:
+            - $ref: '#/components/schemas/FspId'
+          description: PISP identifier who uses this Consent.
+        scopes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Scope'
+        credential:
+          $ref: '#/components/schemas/SignedCredential'
+      required:
+        - requestId
+        - participantId
+        - initiatorId
+        - scopes
+        - credential
+    CredentialChallengeUnsigned:
+      title: CredentialChallengeSigned
+      type: object
+      description: |
+        The challenge issued by a DFSP that must be answered by the PISP.
+      properties:
+        payload:
+          type: string
+          description: >-
+            Base64 encoded binary of the challenge that must be answered by the
+            PISP.
+      required:
+        - payload
+      additionalProperties: false
+    UnsignedCredential:
+      title: UnsignedCredential
+      type: object
+      description: >
+        A credential used to allow a user to prove their identity and access
+
+        to an account with a DFSP.
+
+
+        UnsignedCredential is a special formatting of the credential to allow us
+        to be
+
+        more explicit about the `status` field - it should only ever be PENDING
+        when updating
+
+        a credential.
+      properties:
+        type:
+          $ref: '#/components/schemas/CredentialType'
+        status:
+          type: string
+          enum:
+            - PENDING
+          description: The challenge has initialized but not yet answered by the PISP.
+        challenge:
+          $ref: '#/components/schemas/CredentialChallengeUnsigned'
+      required:
+        - type
+        - status
+        - challenge
+      additionalProperties: false
+    ConsentsIDPutResponseUnsigned:
+      title: ConsentsIDPutResponseUnsigned
+      type: object
+      description: >
+        The HTTP request `PUT /consents/{ID}` is used to request a PISP to sign
+        a challenge.
+
+        The `{ID}` in the URI should contain the `{ID}` that was used in the
+        `POST /consents`.
+
+
+        Called by a `auth-service` to request PISP to add the credential
+        details.
+      properties:
+        requestId:
+          allOf:
+            - $ref: '#/components/schemas/CorrelationId'
+          description: |
+            The id of the ConsentRequest that was used to initiate the
+            creation of this Consent.
+        participantId:
+          $ref: '#/components/schemas/FspId'
+        initiatorId:
+          allOf:
+            - $ref: '#/components/schemas/FspId'
+          description: PISP identifier who uses this Consent.
+        scopes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Scope'
+        credential:
+          $ref: '#/components/schemas/UnsignedCredential'
+      required:
+        - requestId
+        - participantId
+        - initiatorId
+        - scopes
+        - credential
+    VerifiedCredential:
+      title: VerifiedCredential
+      type: object
+      description: >
+        A credential used to allow a user to prove their identity and access
+
+        to an account with a DFSP.
+
+
+        VerifiedCredential is a special formatting of the credential to allow us
+        to be
+
+        more explicit about the `status` field - it should only ever be VERIFIED
+        when updating
+
+        a credential.
+      properties:
+        id:
+          type: string
+          description: The id of a Credential.
+        type:
+          $ref: '#/components/schemas/CredentialType'
+        status:
+          type: string
+          enum:
+            - VERIFIED
+          description: 'The Credential is valid, and ready to be used by the PISP.'
+        challenge:
+          $ref: '#/components/schemas/CredentialChallengeSigned'
+        payload:
+          type: string
+          description: Base64 encoded bytes - The public key of the Public/Private keypair.
+      required:
+        - type
+        - status
+        - challenge
+      additionalProperties: false
+    ConsentsIDPutResponseVerified:
+      title: ConsentsIDPutResponseVerified
+      type: object
+      description: >
+        The HTTP request `PUT /consents/{ID}` is used by the DFSP or
+        Auth-Service to
+
+        update a Consent object once it has been Verified.
+
+
+        Called by a `auth-service` to notify a DFSP and PISP that a credential
+        has been verified and registered.
+      properties:
+        requestId:
+          allOf:
+            - $ref: '#/components/schemas/CorrelationId'
+          description: |
+            The id of the ConsentRequest that was used to initiate the
+            creation of this Consent.
+        participantId:
+          $ref: '#/components/schemas/FspId'
+        initiatorId:
+          allOf:
+            - $ref: '#/components/schemas/FspId'
+          description: PISP identifier who uses this Consent.
+        scopes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Scope'
+        credential:
+          $ref: '#/components/schemas/VerifiedCredential'
+      required:
+        - requestId
+        - participantId
+        - initiatorId
+        - scopes
+        - credential
+    ConsentStatusType:
+      title: ConsentStatusType
+      type: string
+      enum:
+        - REVOKED
+      description: |
+        The status of the Consent.
+        - "REVOKED" - The Consent is no longer valid and has been revoked.
+    ConsentsIDPatchResponse:
+      title: ConsentsIDPatchResponse
+      description: |
+        PATCH /consents/{ID} request object.
+
+        Sent to both the PISP and DFSP when a consent is revoked.
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/ConsentStatusType'
+        revokedAt:
+          $ref: '#/components/schemas/DateTime'
+      required:
+        - status
+        - revokedAt
+    ConsentsIDGenerateChallengePostRequest:
+      title: ConsentsIDGenerateChallengePostRequest
+      type: object
+      description: |
+        A credential used to allow a user to prove their identity
+        and access to an account with a DFSP.
+      properties:
+        type:
+          $ref: '#/components/schemas/CredentialType'
+      required:
+        - type
+    AccountsIDPutResponse:
+      title: AccountsIDPutResponse
+      type: object
+      description: 'The object sent in a `PUT /accounts/{ID}` request.'
+      properties:
+        accounts:
+          type: array
+          items:
+            type: object
+            description: |
+              The object sent in a `PUT /accounts/{ID}` request.
+            properties:
+              accountNickname:
+                $ref: '#/components/schemas/AccountAddress'
+              id:
+                $ref: '#/components/schemas/AccountAddress'
+              currency:
+                $ref: '#/components/schemas/Currency'
+            required:
+              - accountNickname
+              - id
+              - currency
+      required:
+        - accounts
+    ServicesServiceTypePutResponse:
+      title: ServicesServiceTypePutResponse
+      type: object
+      description: 'The object sent in a `PUT /services/{ServiceType}` request.'
+      properties:
+        providers:
+          type: array
+          items:
+            $ref: '#/components/schemas/FspId'
+      required:
+        - providers
+  parameters:
+    ID:
+      name: ID
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The identifier value.
+    Content-Length:
+      name: Content-Length
+      in: header
+      required: false
+      schema:
+        type: integer
+      description: >-
+        The `Content-Length` header field indicates the anticipated size of the
+        payload body. Only sent if there is a body.
+
+
+        **Note:** The API supports a maximum size of 5242880 bytes (5
+        Megabytes).
+    Content-Type:
+      name: Content-Type
+      in: header
+      schema:
+        type: string
+      required: true
+      description: >-
+        The `Content-Type` header indicates the specific version of the API used
+        to send the payload body.
+    Date:
+      name: Date
+      in: header
+      schema:
+        type: string
+      required: true
+      description: The `Date` header field indicates the date when the request was sent.
+    FSPIOP-Source:
+      name: FSPIOP-Source
+      in: header
+      schema:
+        type: string
+      required: true
+      description: >-
+        The `FSPIOP-Source` header field is a non-HTTP standard field used by
+        the API for identifying the sender of the HTTP request. The field should
+        be set by the original sender of the request. Required for routing and
+        signature verification (see header field `FSPIOP-Signature`).
+    FSPIOP-Destination:
+      name: FSPIOP-Destination
+      in: header
+      schema:
+        type: string
+      required: false
+      description: >-
+        The `FSPIOP-Destination` header field is a non-HTTP standard field used
+        by the API for HTTP header based routing of requests and responses to
+        the destination. The field must be set by the original sender of the
+        request if the destination is known (valid for all services except GET
+        /parties) so that any entities between the client and the server do not
+        need to parse the payload for routing purposes. If the destination is
+        not known (valid for service GET /parties), the field should be left
+        empty.
+    Accept:
+      name: Accept
+      in: header
+      required: true
+      schema:
+        type: string
+      description: >-
+        The `Accept` header field indicates the version of the API the client
+        would like the server to use.
+    X-Forwarded-For:
+      name: X-Forwarded-For
+      in: header
+      schema:
+        type: string
+      required: false
+      description: >-
+        The `X-Forwarded-For` header field is an unofficially accepted standard
+        used for informational purposes of the originating client IP address, as
+        a request might pass multiple proxies, firewalls, and so on. Multiple
+        `X-Forwarded-For` values should be expected and supported by
+        implementers of the API.
+
+
+        **Note:** An alternative to `X-Forwarded-For` is defined in [RFC
+        7239](https://tools.ietf.org/html/rfc7239). However, to this point RFC
+        7239 is less-used and supported than `X-Forwarded-For`.
+    FSPIOP-Encryption:
+      name: FSPIOP-Encryption
+      in: header
+      schema:
+        type: string
+      required: false
+      description: >-
+        The `FSPIOP-Encryption` header field is a non-HTTP standard field used
+        by the API for applying end-to-end encryption of the request.
+    FSPIOP-Signature:
+      name: FSPIOP-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+      description: >-
+        The `FSPIOP-Signature` header field is a non-HTTP standard field used by
+        the API for applying an end-to-end request signature.
+    FSPIOP-URI:
+      name: FSPIOP-URI
+      in: header
+      schema:
+        type: string
+      required: false
+      description: >-
+        The `FSPIOP-URI` header field is a non-HTTP standard field used by the
+        API for signature verification, should contain the service URI. Required
+        if signature verification is used, for more information, see [the API
+        Signature
+        document](https://github.com/mojaloop/docs/tree/master/Specification%20Document%20Set).
+    FSPIOP-HTTP-Method:
+      name: FSPIOP-HTTP-Method
+      in: header
+      schema:
+        type: string
+      required: false
+      description: >-
+        The `FSPIOP-HTTP-Method` header field is a non-HTTP standard field used
+        by the API for signature verification, should contain the service HTTP
+        method. Required if signature verification is used, for more
+        information, see [the API Signature
+        document](https://github.com/mojaloop/docs/tree/master/Specification%20Document%20Set).
+    ServiceType:
+      name: ServiceType
+      in: path
+      required: true
+      schema:
+        type: string
+      description: 'The type of the service identifier. For example, `THIRD_PARTY_DFSP`'
+  responses:
+    '200':
+      description: OK
+    '202':
+      description: Accepted
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorInformationResponse'
+      headers:
+        Content-Length:
+          $ref: '#/components/headers/Content-Length'
+        Content-Type:
+          $ref: '#/components/headers/Content-Type'
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorInformationResponse'
+      headers:
+        Content-Length:
+          $ref: '#/components/headers/Content-Length'
+        Content-Type:
+          $ref: '#/components/headers/Content-Type'
+    '403':
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorInformationResponse'
+      headers:
+        Content-Length:
+          $ref: '#/components/headers/Content-Length'
+        Content-Type:
+          $ref: '#/components/headers/Content-Type'
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorInformationResponse'
+      headers:
+        Content-Length:
+          $ref: '#/components/headers/Content-Length'
+        Content-Type:
+          $ref: '#/components/headers/Content-Type'
+    '405':
+      description: Method Not Allowed
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorInformationResponse'
+      headers:
+        Content-Length:
+          $ref: '#/components/headers/Content-Length'
+        Content-Type:
+          $ref: '#/components/headers/Content-Type'
+    '406':
+      description: Not Acceptable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorInformationResponse'
+      headers:
+        Content-Length:
+          $ref: '#/components/headers/Content-Length'
+        Content-Type:
+          $ref: '#/components/headers/Content-Type'
+    '501':
+      description: Not Implemented
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorInformationResponse'
+      headers:
+        Content-Length:
+          $ref: '#/components/headers/Content-Length'
+        Content-Type:
+          $ref: '#/components/headers/Content-Type'
+    '503':
+      description: Service Unavailable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorInformationResponse'
+      headers:
+        Content-Length:
+          $ref: '#/components/headers/Content-Length'
+        Content-Type:
+          $ref: '#/components/headers/Content-Type'
+  headers:
+    Content-Length:
+      required: false
+      schema:
+        type: integer
+      description: >-
+        The `Content-Length` header field indicates the anticipated size of the
+        payload body. Only sent if there is a body.
+
+
+        **Note:** The API supports a maximum size of 5242880 bytes (5
+        Megabytes).
+    Content-Type:
+      schema:
+        type: string
+      required: true
+      description: >-
+        The `Content-Type` header indicates the specific version of the API used
+        to send the payload body.

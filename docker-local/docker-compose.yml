@@ -6,7 +6,7 @@ networks:
 
 services:
   central-ledger:
-    image: mojaloop/central-ledger:v13.2.6
+    image: mojaloop/central-ledger:v13.10.0
     container_name: central-ledger
     command: sh -c "/opt/central-ledger/wait4/wait4.js central-ledger && node src/api/index.js"
     ports:
@@ -76,7 +76,7 @@ services:
       - "simulator.local:172.17.0.1"
 
   ml-api-adapter:
-    image: mojaloop/ml-api-adapter:v11.1.2
+    image: mojaloop/ml-api-adapter:v11.1.5
     container_name: ml-api-adapter
     command: sh -c "/opt/ml-api-adapter/wait4/wait4.js ml-api-adapter && node src/api/index.js"
     ports:
@@ -201,7 +201,6 @@ services:
       - "host.docker.internal:172.17.0.1"
       - "simulator.local:172.17.0.1"
 
-
   kafka:
     image: johnnypark/kafka-zookeeper:2.3.0
     container_name: kafka
@@ -237,7 +236,7 @@ services:
        - ./docker/wait4:/opt/central-settlement/wait4
 
   account-lookup-service:
-    image: mojaloop/account-lookup-service:v11.3.0
+    image: mojaloop/account-lookup-service:v11.3.2
     container_name: account-lookup-service
     command: sh -c "/opt/account-lookup-service/wait4/wait4.js account-lookup-service && npm run migrate && node src/index.js server"
     ports:
@@ -350,7 +349,7 @@ services:
       - "dfspa-backend:172.17.0.1"
 
   dfspa-thirdparty-scheme-adapter-inbound:
-    image: "mojaloop/thirdparty-scheme-adapter:v11.34.1"
+    image: "mojaloop/thirdparty-scheme-adapter:v11.36.1"
     # build:
     #   context: ../../thirdparty-scheme-adapter
     #   dockerfile: ./docker/Dockerfile
@@ -401,7 +400,7 @@ services:
       - "pisp-thirdparty-api-adapter:172.17.0.1"
 
   dfspa-thirdparty-scheme-adapter-outbound:
-    image: "mojaloop/thirdparty-scheme-adapter:v11.34.1"
+    image: "mojaloop/thirdparty-scheme-adapter:v11.36.1"
     # build:
     #   context: ../../thirdparty-scheme-adapter
     #   dockerfile: ./docker/Dockerfile
@@ -513,7 +512,7 @@ services:
       - "dfspb-backend:172.17.0.1"
 
   dfspb-thirdparty-scheme-adapter-inbound:
-    image: "mojaloop/thirdparty-scheme-adapter:v11.34.1"
+    image: "mojaloop/thirdparty-scheme-adapter:v11.36.1"
     # build:
     #   context: ../../thirdparty-scheme-adapter
     #   dockerfile: ./docker/Dockerfile
@@ -562,7 +561,7 @@ services:
       - "pisp-thirdparty-api-adapter:172.17.0.1"
 
   dfspb-thirdparty-scheme-adapter-outbound:
-    image: "mojaloop/thirdparty-scheme-adapter:v11.34.1"
+    image: "mojaloop/thirdparty-scheme-adapter:v11.36.1"
     # build:
     #   context: ../../thirdparty-scheme-adapter
     #   dockerfile: ./docker/Dockerfile
@@ -608,7 +607,6 @@ services:
       - "simulator.local:172.17.0.1"
       - "transaction-request-service:172.17.0.1"
       - "dfspb-backend:172.17.0.1"
-
 
   dfspb-redis:
     container_name: dfspb-redis
@@ -675,7 +673,7 @@ services:
       - "pisp-backend:172.17.0.1"
 
   pisp-thirdparty-scheme-adapter-inbound:
-    image: "mojaloop/thirdparty-scheme-adapter:v11.34.1"
+    image: "mojaloop/thirdparty-scheme-adapter:v11.36.1"
     # build:
     #   context: ../../thirdparty-scheme-adapter
     #   dockerfile: ./docker/Dockerfile
@@ -724,7 +722,7 @@ services:
       - "pisp-backend:172.17.0.1"
 
   pisp-thirdparty-scheme-adapter-outbound:
-    image: "mojaloop/thirdparty-scheme-adapter:v11.34.1"
+    image: "mojaloop/thirdparty-scheme-adapter:v11.36.1"
     # build:
     #   context: ../../thirdparty-scheme-adapter
     #   dockerfile: ./docker/Dockerfile
@@ -775,7 +773,7 @@ services:
       - "pisp-thirdparty-api-adapter:172.17.0.1"
 
   pisp-thirdparty-api-adapter:
-    image: "mojaloop/thirdparty-api-adapter:v11.16.0"
+    image: "mojaloop/thirdparty-api-adapter:v11.18.0"
     # build:
     #   context: ../../thirdparty-scheme-adapter
     #   dockerfile: ./docker/Dockerfile

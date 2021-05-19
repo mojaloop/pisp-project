@@ -66,11 +66,11 @@ services:
       - "3002:3002"
     volumes:
       - ./docker/quoting-service/default.json:/opt/quoting-service/config/default.json
-    # healthcheck:
-    #  test: wget -q http://172.17.0.1:3002/health -O /dev/null || exit 1
-    #  timeout: 20s
-    #  retries: 30
-    #  interval: 15s
+    healthcheck:
+      test: wget -q http://172.17.0.1:3002/health -O /dev/null || exit 1
+      timeout: 20s
+      retries: 30
+      interval: 15s
     extra_hosts:
       - "moja-simulator.local:172.17.0.1"
       - "simulator:172.17.0.1"
@@ -94,12 +94,12 @@ services:
       - kafka
       - central-ledger
       - account-lookup-service
-    healthcheck:
-      test: wget -q http://172.17.0.1:3000/health -O /dev/null || exit 1
-      timeout: 30s
-      retries: 40
-      interval: 30s
-      start_period: 30s
+    # healthcheck:
+      # test: wget -q http://172.17.0.1:3000/health -O /dev/null || exit 1
+      # timeout: 30s
+      # retries: 40
+      # interval: 30s
+      # start_period: 30s
     extra_hosts:
       - "central-ledger.local:172.17.0.1"
       - "central-ledger:172.17.0.1"

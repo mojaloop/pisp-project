@@ -349,7 +349,7 @@ services:
       - "dfspa-backend:172.17.0.1"
 
   dfspa-thirdparty-scheme-adapter-inbound:
-    image: "mojaloop/thirdparty-scheme-adapter:v11.37.1"
+    image: "mojaloop/thirdparty-scheme-adapter:v11.37.2"
     # build:
     #   context: ../../thirdparty-scheme-adapter
     #   dockerfile: ./docker/Dockerfile
@@ -400,7 +400,7 @@ services:
       - "pisp-thirdparty-api-adapter:172.17.0.1"
 
   dfspa-thirdparty-scheme-adapter-outbound:
-    image: "mojaloop/thirdparty-scheme-adapter:v11.37.1"
+    image: "mojaloop/thirdparty-scheme-adapter:v11.37.2"
     # build:
     #   context: ../../thirdparty-scheme-adapter
     #   dockerfile: ./docker/Dockerfile
@@ -512,7 +512,7 @@ services:
       - "dfspb-backend:172.17.0.1"
 
   dfspb-thirdparty-scheme-adapter-inbound:
-    image: "mojaloop/thirdparty-scheme-adapter:v11.37.1"
+    image: "mojaloop/thirdparty-scheme-adapter:v11.37.2"
     # build:
     #   context: ../../thirdparty-scheme-adapter
     #   dockerfile: ./docker/Dockerfile
@@ -561,7 +561,7 @@ services:
       - "pisp-thirdparty-api-adapter:172.17.0.1"
 
   dfspb-thirdparty-scheme-adapter-outbound:
-    image: "mojaloop/thirdparty-scheme-adapter:v11.37.1"
+    image: "mojaloop/thirdparty-scheme-adapter:v11.37.2"
     # build:
     #   context: ../../thirdparty-scheme-adapter
     #   dockerfile: ./docker/Dockerfile
@@ -673,7 +673,7 @@ services:
       - "pisp-backend:172.17.0.1"
 
   pisp-thirdparty-scheme-adapter-inbound:
-    image: "mojaloop/thirdparty-scheme-adapter:v11.37.1"
+    image: "mojaloop/thirdparty-scheme-adapter:v11.37.2"
     # build:
     #   context: ../../thirdparty-scheme-adapter
     #   dockerfile: ./docker/Dockerfile
@@ -722,7 +722,7 @@ services:
       - "pisp-backend:172.17.0.1"
 
   pisp-thirdparty-scheme-adapter-outbound:
-    image: "mojaloop/thirdparty-scheme-adapter:v11.37.1"
+    image: "mojaloop/thirdparty-scheme-adapter:v11.37.2"
     # build:
     #   context: ../../thirdparty-scheme-adapter
     #   dockerfile: ./docker/Dockerfile
@@ -773,7 +773,7 @@ services:
       - "pisp-thirdparty-api-adapter:172.17.0.1"
 
   pisp-thirdparty-api-adapter:
-    image: "mojaloop/thirdparty-api-adapter:v11.18.1"
+    image: "mojaloop/thirdparty-api-adapter:v11.18.2"
     # build:
     #   context: ../../thirdparty-scheme-adapter
     #   dockerfile: ./docker/Dockerfile
@@ -814,6 +814,7 @@ services:
       - "simulator.local:172.17.0.1"
       - "transaction-request-service:172.17.0.1"
       - "pisp-backend:172.17.0.1"
+      - "participant-list-service:172.17.0.1"
 
   pisp-redis:
     container_name: pisp-redis
@@ -882,7 +883,7 @@ services:
     networks:
       - mojaloop-net
     extra_hosts:
-      - "pisp-sim-scheme-adapter:172.17.0.1"
+      - "pisp-thirdparty-api-adapter:172.17.0.1"
       - "ml-testing-toolkit:172.17.0.1"
       - "ml-testing-toolkit-ui:172.17.0.1"
 

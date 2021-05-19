@@ -1,6 +1,6 @@
 {
   "VERSION": 1,
-  "CALLBACK_ENDPOINT": "http://inbound-thirdparty-scheme-adapter:4005",
+  "CALLBACK_ENDPOINT": "http://pisp-thirdparty-api-adapter:12000",
   "CALLBACK_RESOURCE_ENDPOINTS": {
     "enabled": true,
     "endpoints": [

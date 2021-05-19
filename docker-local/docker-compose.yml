@@ -26,8 +26,8 @@ services:
       - objstore
     healthcheck:
       test: wget -q http://172.17.0.1:3001/health -O /dev/null || exit 1
-      timeout: 20s
-      retries: 30
+      timeout: 30s
+      retries: 40
       interval: 15s
     extra_hosts:
       - "moja-simulator.local:172.17.0.1"

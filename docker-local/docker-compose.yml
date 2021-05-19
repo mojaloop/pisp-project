@@ -94,8 +94,8 @@ services:
       - account-lookup-service
     healthcheck:
       test: wget -q http://172.17.0.1:3000/health -O /dev/null || exit 1
-      timeout: 20s
-      retries: 10
+      timeout: 30s
+      retries: 30
       interval: 30s
       start_period: 30s
     extra_hosts:

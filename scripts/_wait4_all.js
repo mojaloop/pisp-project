@@ -29,7 +29,7 @@ const expectedContainers = [
   'pisp-thirdparty-api-adapter',
   // 'pisp-redis', no health check
   'kafka',
-  'ml-api-adapter',
+  // 'ml-api-adapter',
   'mysql',
   'mysql-als',
   'objstore',

@@ -16,7 +16,6 @@ services:
        - ./docker/wait4:/opt/central-ledger/wait4
     environment:
       - LOG_LEVEL=info
-      - CLEDG_SIDECAR__DISABLED=true
       - CLEDG_MONGODB__DISABLED=false
     networks:
       - mojaloop-net
@@ -67,11 +66,11 @@ services:
       - "3002:3002"
     volumes:
       - ./docker/quoting-service/default.json:/opt/quoting-service/config/default.json
-    healthcheck:
-      test: wget -q http://172.17.0.1:3002/health -O /dev/null || exit 1
-      timeout: 20s
-      retries: 30
-      interval: 15s
+    # healthcheck:
+    #  test: wget -q http://172.17.0.1:3002/health -O /dev/null || exit 1
+    #  timeout: 20s
+    #  retries: 30
+    #  interval: 15s
     extra_hosts:
       - "moja-simulator.local:172.17.0.1"
       - "simulator:172.17.0.1"

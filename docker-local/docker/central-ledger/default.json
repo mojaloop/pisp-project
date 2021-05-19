@@ -27,8 +27,15 @@
     "PRECISION": 18,
     "SCALE": 4
   },
+  "SIDECAR": {
+    "DISABLED": true,
+    "HOST": "localhost",
+    "PORT": 5678,
+    "CONNECT_TIMEOUT": 45000,
+    "RECONNECT_INTERVAL": 5000
+  },
   "MONGODB": {
-    "DISABLED": false,
+    "DISABLED": true,
     "URI": "mongodb://objstore:27017/mlos"
   },
   "ERROR_HANDLING": {
@@ -39,6 +46,11 @@
     "DISABLED": false,
     "API": {
       "DISABLED": false
+    },
+    "CRON": {
+      "DISABLED": false,
+      "TIMEXP": "*/10 * * * * *",
+      "TIMEZONE": "UTC"
     },
     "TIMEOUT": {
       "DISABLED": false,

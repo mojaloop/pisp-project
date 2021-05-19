@@ -6,7 +6,7 @@ networks:
 
 services:
   central-ledger:
-    image: mojaloop/central-ledger:v13.10.0
+    image: mojaloop/central-ledger:v13.6.0
     container_name: central-ledger
     command: sh -c "/opt/central-ledger/wait4/wait4.js central-ledger && node src/api/index.js"
     ports:
@@ -23,14 +23,12 @@ services:
       - mysql
       - kafka
       - objstore
-    # disable ledger health check due to unknown broker issue causing it to
-    # go unhealthy. needs investigation.
-    # healthcheck:
-    #  test: wget -q http://172.17.0.1:3001/health -O /dev/null || exit 1
-    #  timeout: 30s
-    #  retries: 40
-    #  interval: 30s
-    #  start_period: 30s
+    healthcheck:
+      test: wget -q http://172.17.0.1:3001/health -O /dev/null || exit 1
+      timeout: 20s
+      retries: 30
+      interval: 30s
+      start_period: 30s
     extra_hosts:
       - "moja-simulator.local:172.17.0.1"
       - "simulator:172.17.0.1"
@@ -94,12 +92,12 @@ services:
       - kafka
       - central-ledger
       - account-lookup-service
-    # healthcheck:
-      # test: wget -q http://172.17.0.1:3000/health -O /dev/null || exit 1
-      # timeout: 30s
-      # retries: 40
-      # interval: 30s
-      # start_period: 30s
+    healthcheck:
+      test: wget -q http://172.17.0.1:3000/health -O /dev/null || exit 1
+      timeout: 30s
+      retries: 30
+      interval: 30s
+      start_period: 30s
     extra_hosts:
       - "central-ledger.local:172.17.0.1"
       - "central-ledger:172.17.0.1"

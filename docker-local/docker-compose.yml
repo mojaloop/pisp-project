@@ -24,12 +24,14 @@ services:
       - mysql
       - kafka
       - objstore
-    healthcheck:
-      test: wget -q http://172.17.0.1:3001/health -O /dev/null || exit 1
-      timeout: 30s
-      retries: 60
-      interval: 30s
-      start_period: 30s
+    # disable ledger health check due to unknown broker issue causing it to
+    # go unhealthy. needs investigation.
+    # healthcheck:
+    #  test: wget -q http://172.17.0.1:3001/health -O /dev/null || exit 1
+    #  timeout: 30s
+    #  retries: 40
+    #  interval: 30s
+    #  start_period: 30s
     extra_hosts:
       - "moja-simulator.local:172.17.0.1"
       - "simulator:172.17.0.1"
@@ -96,7 +98,7 @@ services:
     healthcheck:
       test: wget -q http://172.17.0.1:3000/health -O /dev/null || exit 1
       timeout: 30s
-      retries: 60
+      retries: 40
       interval: 30s
       start_period: 30s
     extra_hosts:

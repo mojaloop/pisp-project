@@ -8,6 +8,8 @@ cd ${DIR}
 set -e
 set -u
 
+# need to run settlement models towards beginning
+./_12_seed_settlement_models.sh
 ./_02_seed_oracle.sh
 ./_03_seed_dfspa.sh
 ./_04_seed_dfspb.sh
@@ -18,4 +20,3 @@ set -u
 ./_09_seed_dfsp_simulator_msisdn.sh
 ./_10_seed_pisp_msisdn.sh
 ./_11_seed_dfsp_backend_parties.sh
-./_12_seed_settlement_models.sh

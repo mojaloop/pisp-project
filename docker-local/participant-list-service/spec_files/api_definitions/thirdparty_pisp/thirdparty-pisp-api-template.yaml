@@ -1,0 +1,15 @@
+openapi: 3.0.2
+info:
+  title: Participant List Service API
+  version: '1.0'
+  description: TBD
+  license:
+    name: TBD
+    url: TBD
+servers:
+  - url: /
+paths:
+  /services/{ServiceType}:
+    $ref: '../../../../../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/paths/services_ServiceType.yaml'
+  /services/{ServiceType}/error:
+    $ref: '../../../../../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/paths/services_ServiceType_error.yaml'

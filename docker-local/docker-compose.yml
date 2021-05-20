@@ -6,7 +6,7 @@ networks:
 
 services:
   central-ledger:
-    image: mojaloop/central-ledger:v13.2.6
+    image: mojaloop/central-ledger:v13.6.0
     container_name: central-ledger
     command: sh -c "/opt/central-ledger/wait4/wait4.js central-ledger && node src/api/index.js"
     ports:
@@ -16,7 +16,6 @@ services:
        - ./docker/wait4:/opt/central-ledger/wait4
     environment:
       - LOG_LEVEL=info
-      - CLEDG_SIDECAR__DISABLED=true
       - CLEDG_MONGODB__DISABLED=false
     networks:
       - mojaloop-net
@@ -28,7 +27,8 @@ services:
       test: wget -q http://172.17.0.1:3001/health -O /dev/null || exit 1
       timeout: 20s
       retries: 30
-      interval: 15s
+      interval: 30s
+      start_period: 30s
     extra_hosts:
       - "moja-simulator.local:172.17.0.1"
       - "simulator:172.17.0.1"
@@ -76,7 +76,7 @@ services:
       - "simulator.local:172.17.0.1"
 
   ml-api-adapter:
-    image: mojaloop/ml-api-adapter:v11.1.2
+    image: mojaloop/ml-api-adapter:v11.1.5
     container_name: ml-api-adapter
     command: sh -c "/opt/ml-api-adapter/wait4/wait4.js ml-api-adapter && node src/api/index.js"
     ports:
@@ -94,8 +94,8 @@ services:
       - account-lookup-service
     healthcheck:
       test: wget -q http://172.17.0.1:3000/health -O /dev/null || exit 1
-      timeout: 20s
-      retries: 10
+      timeout: 30s
+      retries: 30
       interval: 30s
       start_period: 30s
     extra_hosts:
@@ -201,7 +201,6 @@ services:
       - "host.docker.internal:172.17.0.1"
       - "simulator.local:172.17.0.1"
 
-
   kafka:
     image: johnnypark/kafka-zookeeper:2.3.0
     container_name: kafka
@@ -237,7 +236,7 @@ services:
        - ./docker/wait4:/opt/central-settlement/wait4
 
   account-lookup-service:
-    image: mojaloop/account-lookup-service:v11.3.0
+    image: mojaloop/account-lookup-service:v11.3.2
     container_name: account-lookup-service
     command: sh -c "/opt/account-lookup-service/wait4/wait4.js account-lookup-service && npm run migrate && node src/index.js server"
     ports:
@@ -292,7 +291,7 @@ services:
 
   ## DFSP A
   dfspa-backend:
-    image: "mojaloop/mojaloop-simulator:v11.3.0.5-pisp"
+    image: "mojaloop/mojaloop-simulator:v11.3.0.7-pisp"
     # build:
     #   context: ../../mojaloop-simulator
     #   dockerfile: ./Dockerfile
@@ -350,7 +349,7 @@ services:
       - "dfspa-backend:172.17.0.1"
 
   dfspa-thirdparty-scheme-adapter-inbound:
-    image: "mojaloop/thirdparty-scheme-adapter:v11.34.1"
+    image: "mojaloop/thirdparty-scheme-adapter:v11.37.2"
     # build:
     #   context: ../../thirdparty-scheme-adapter
     #   dockerfile: ./docker/Dockerfile
@@ -401,7 +400,7 @@ services:
       - "pisp-thirdparty-api-adapter:172.17.0.1"
 
   dfspa-thirdparty-scheme-adapter-outbound:
-    image: "mojaloop/thirdparty-scheme-adapter:v11.34.1"
+    image: "mojaloop/thirdparty-scheme-adapter:v11.37.2"
     # build:
     #   context: ../../thirdparty-scheme-adapter
     #   dockerfile: ./docker/Dockerfile
@@ -458,7 +457,7 @@ services:
 
   ## DFSP B
   dfspb-backend:
-    image: "mojaloop/mojaloop-simulator:v11.3.0.5-pisp"
+    image: "mojaloop/mojaloop-simulator:v11.3.0.7-pisp"
     container_name: dfspb-backend
     env_file: ./dfsp_b/dfsp_b_backend.env
     volumes:
@@ -513,7 +512,7 @@ services:
       - "dfspb-backend:172.17.0.1"
 
   dfspb-thirdparty-scheme-adapter-inbound:
-    image: "mojaloop/thirdparty-scheme-adapter:v11.34.1"
+    image: "mojaloop/thirdparty-scheme-adapter:v11.37.2"
     # build:
     #   context: ../../thirdparty-scheme-adapter
     #   dockerfile: ./docker/Dockerfile
@@ -562,7 +561,7 @@ services:
       - "pisp-thirdparty-api-adapter:172.17.0.1"
 
   dfspb-thirdparty-scheme-adapter-outbound:
-    image: "mojaloop/thirdparty-scheme-adapter:v11.34.1"
+    image: "mojaloop/thirdparty-scheme-adapter:v11.37.2"
     # build:
     #   context: ../../thirdparty-scheme-adapter
     #   dockerfile: ./docker/Dockerfile
@@ -609,7 +608,6 @@ services:
       - "transaction-request-service:172.17.0.1"
       - "dfspb-backend:172.17.0.1"
 
-
   dfspb-redis:
     container_name: dfspb-redis
     image: "redis:5.0.4-alpine"
@@ -619,7 +617,7 @@ services:
 
   ## PISP
   pisp-backend:
-    image: "mojaloop/mojaloop-simulator:v11.3.0.5-pisp"
+    image: "mojaloop/mojaloop-simulator:v11.3.0.7-pisp"
     container_name: pisp-backend
     env_file: ./pisp/pisp_backend.env
     volumes:
@@ -675,7 +673,7 @@ services:
       - "pisp-backend:172.17.0.1"
 
   pisp-thirdparty-scheme-adapter-inbound:
-    image: "mojaloop/thirdparty-scheme-adapter:v11.34.1"
+    image: "mojaloop/thirdparty-scheme-adapter:v11.37.2"
     # build:
     #   context: ../../thirdparty-scheme-adapter
     #   dockerfile: ./docker/Dockerfile
@@ -724,7 +722,7 @@ services:
       - "pisp-backend:172.17.0.1"
 
   pisp-thirdparty-scheme-adapter-outbound:
-    image: "mojaloop/thirdparty-scheme-adapter:v11.34.1"
+    image: "mojaloop/thirdparty-scheme-adapter:v11.37.2"
     # build:
     #   context: ../../thirdparty-scheme-adapter
     #   dockerfile: ./docker/Dockerfile
@@ -775,7 +773,7 @@ services:
       - "pisp-thirdparty-api-adapter:172.17.0.1"
 
   pisp-thirdparty-api-adapter:
-    image: "mojaloop/thirdparty-api-adapter:v11.16.0"
+    image: "mojaloop/thirdparty-api-adapter:v11.18.2"
     # build:
     #   context: ../../thirdparty-scheme-adapter
     #   dockerfile: ./docker/Dockerfile
@@ -816,6 +814,7 @@ services:
       - "simulator.local:172.17.0.1"
       - "transaction-request-service:172.17.0.1"
       - "pisp-backend:172.17.0.1"
+      - "participant-list-service:172.17.0.1"
 
   pisp-redis:
     container_name: pisp-redis
@@ -866,3 +865,46 @@ services:
       retries: 10
       start_period: 40s
       interval: 30s
+
+  participant-list-service:
+    image: mojaloop/ml-testing-toolkit:v11.8.1
+    container_name: participant-list-service
+    volumes:
+      - "./participant-list-service/spec_files:/opt/mojaloop-testing-toolkit/spec_files"
+      - "./participant-list-service/secrets:/opt/mojaloop-testing-toolkit/secrets"
+    ports:
+      - "25000:5000"
+      - "25050:5050"
+    environment:
+      - AUTH_ENABLED=FALSE
+    command: npm start
+    depends_on:
+      - mongo
+    networks:
+      - mojaloop-net
+    extra_hosts:
+      - "pisp-thirdparty-api-adapter:172.17.0.1"
+      - "ml-testing-toolkit:172.17.0.1"
+      - "ml-testing-toolkit-ui:172.17.0.1"
+
+  mongo:
+    image: mongo
+    ports:
+      - "27018:27017"
+
+  ml-testing-toolkit-ui:
+    image: mojaloop/ml-testing-toolkit-ui:v11.8.4.2-pisp
+    container_name: participant-list-service-testing-ui
+    ports:
+      - "26060:6060"
+    environment:
+      - API_BASE_URL=http://participant-list-service:25050
+      - AUTH_ENABLED=FALSE
+      - TP_SIM_URL=http://participant-list-service:25000
+    command:
+      - sh
+      - /usr/share/nginx/start.sh
+    networks:
+      - mojaloop-net
+    extra_hosts:
+      - "ml-testing-toolkit:172.17.0.1"

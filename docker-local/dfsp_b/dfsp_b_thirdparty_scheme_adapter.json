@@ -31,10 +31,13 @@
     "QUOTES_ENDPOINT": "quoting-service:3002",
     "TRANSFERS_ENDPOINT": "ml-api-adapter:3000",
     "BULK_TRANSFERS_ENDPOINT": "ml-api-adapter:3000",
+    "SERVICES_ENDPOINT": "pisp-thirdparty-api-adapter:12000",
     "THIRDPARTY_REQUESTS_ENDPOINT": "pisp-thirdparty-api-adapter:12000",
     "DFSP_ID": "dfspb",
     "DFSP_BACKEND_URI": "dfspb-backend:10000",
     "DFSP_BACKEND_HTTP_SCHEME": "http",
+    "DFSP_BACKEND_VERIFY_AUTHORIZATION_PATH": "verify-authorization",
+    "DFSP_BACKEND_VERIFY_CONSENT_PATH": "verify-consent",
     "JWS_SIGN": false,
     "JWS_SIGNING_KEY": "./secrets/jwsSigningKey.key",
     "TLS": {

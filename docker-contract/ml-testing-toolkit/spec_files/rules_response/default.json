@@ -1238,44 +1238,6 @@
   },
   {
     "ruleId": 21,
-    "priority": 1,
-    "description": "post /login",
-    "apiVersion": {
-      "minorVersion": 1,
-      "majorVersion": 0,
-      "type": "thirdparty_simulator",
-      "asynchronous": false
-    },
-    "conditions": {
-      "all": [
-        {
-          "fact": "operationPath",
-          "operator": "equal",
-          "value": "/login"
-        },
-        {
-          "fact": "method",
-          "operator": "equal",
-          "value": "post"
-        }
-      ]
-    },
-    "event": {
-      "method": null,
-      "path": null,
-      "params": {
-        "body": {},
-        "statusCode": "200",
-        "scripts": {}
-      },
-      "delay": 0,
-      "type": "FIXED_RESPONSE"
-    },
-    "type": "response",
-    "version": 1
-  },
-  {
-    "ruleId": 22,
     "priority": 2,
     "description": "post /login -Fail",
     "apiVersion": {
@@ -1310,6 +1272,44 @@
       "params": {
         "body": {},
         "statusCode": "401",
+        "scripts": {}
+      },
+      "delay": 0,
+      "type": "FIXED_RESPONSE"
+    },
+    "type": "response",
+    "version": 1
+  },
+  {
+    "ruleId": 22,
+    "priority": 1,
+    "description": "post /login",
+    "apiVersion": {
+      "minorVersion": 1,
+      "majorVersion": 0,
+      "type": "thirdparty_simulator",
+      "asynchronous": false
+    },
+    "conditions": {
+      "all": [
+        {
+          "fact": "operationPath",
+          "operator": "equal",
+          "value": "/login"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "post"
+        }
+      ]
+    },
+    "event": {
+      "method": null,
+      "path": null,
+      "params": {
+        "body": {},
+        "statusCode": "200",
         "scripts": {}
       },
       "delay": 0,

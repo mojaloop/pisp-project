@@ -99,3 +99,60 @@ Snapshots:   0 total
 Time:        2.282 s, estimated 3 s
 Ran all test suites.
 ```
+
+
+## Run SPA@TTK applications
+Single Page Application on TTK is for testing purposes where in PISP flow is the need to simulate users's authentication and authorization on DFSP side
+
+### Running using docker-compose
+```bash
+cd docker-contract
+docker-compose up ml-testing-toolkit ml-testing-toolkit-ui
+```
+## preparation
+Before running tests there is a need to make preparation and store the list of accounts for given `consentRequestId` so they will be available in SPA app
+###list of accounts url: POST: `http://ml-testing-toolkit:15000/store/consentRequests/3b346cec-47b3-4def-b870-edb255aaf6c3`
+
+```json
+{
+    "scopes": [
+        {
+            "accountId": "dfspa.username.1234",
+            "actions": [
+                "accounts.transfer",
+                "accounts.getBalance"
+            ]
+        },
+        {
+            "accountId": "dfspa.username.5678",
+            "actions": [
+                "accounts.transfer",
+                "accounts.getBalance"
+            ]
+        }
+    ]
+}
+```
+
+###sending OTP: POST: `http://ml-testing-toolkit:15000/sendOTP`
+```json
+{
+    "userName": "dfspa.user.name",
+    "consentRequestId": "3b346cec-47b3-4def-b870-edb255aaf6c3",
+    "message": "9876"
+}
+```
+
+### Login page - AUTHORIZE
+- the example url format is: `http://localhost:6060/admin/dfsp/authorize?consentRequestId=3b346cec-47b3-4def-b870-edb255aaf6c3&callbackUri=http://pisp-app.com.local:16000/callback` where parameters are:
+  - `localhost:6060` - testing toolkit UI host
+  - SPA resource path: `admin/dfsp/authorize`
+  - `consentRequestId` - the id of the consent request
+  - `callbackUri` - where the redirection should be done after the login / consent grant 
+- special user for testing authorize failure: `fail-test`
+
+After granting/rejecting the consent users is redirected from TTK back to PISP app using redirection URL in format
+- `http://pisp-app.com.local:16000/callback?status=accepted&consentRequestId=3b346cec-47b3-4def-b870-edb255aaf6c3&secret=some-secret` where parameters are:
+  - `pisp-app.com.local:16000` is the PISP web/mobile app
+  - `status`: `accepted | rejected`
+  - `consentRequestId` - the id of the consent request

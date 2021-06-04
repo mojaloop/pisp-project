@@ -111,7 +111,7 @@ docker-compose up ml-testing-toolkit ml-testing-toolkit-ui
 ```
 ## preparation
 Before running tests there is a need to make preparation and store the list of accounts for given `consentRequestId` so they will be available in SPA app
-###list of accounts url: POST: `http://ml-testing-toolkit:15000/store/consentRequests/3b346cec-47b3-4def-b870-edb255aaf6c3`
+### list of accounts url: POST: `http://ml-testing-toolkit:15000/store/consentRequests/3b346cec-47b3-4def-b870-edb255aaf6c3`
 
 ```json
 {
@@ -136,7 +136,7 @@ Before running tests there is a need to make preparation and store the list of a
 
 > For an example script to populate the list of accounts, see [`../scripts/_configure_web_simulator.sh`](../scripts/_configure_web_simulator.sh)
 
-###sending OTP: POST: `http://ml-testing-toolkit:15000/sendOTP`
+### sending OTP: POST: `http://ml-testing-toolkit:15000/sendOTP`
 ```json
 {
     "userName": "dfspa.user.name",

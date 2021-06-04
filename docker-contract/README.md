@@ -134,6 +134,8 @@ Before running tests there is a need to make preparation and store the list of a
 }
 ```
 
+> For an example script to populate the list of accounts, see [`../scripts/_configure_web_simulator.sh`](../scripts/_configure_web_simulator.sh)
+
 ###sending OTP: POST: `http://ml-testing-toolkit:15000/sendOTP`
 ```json
 {

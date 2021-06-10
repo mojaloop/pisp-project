@@ -28,6 +28,12 @@
     "bundle:openapi:dfsp": "swagger-cli bundle -o ./src/interface/thirdparty-dfsp-api.yaml -t yaml ./src/interface/thirdparty-dfsp-api-template.yaml",
     "validate:openapi:dfsp": "swagger-cli validate ./src/interface/thirdparty-dfsp-api.yaml",
     "build:openapi:dfsp": "npm run bundle:openapi:dfsp && npm run validate:openapi:dfsp",
+    "bundle:openapi:auth-service": "swagger-cli bundle -o ./docker-local/auth-service/spec_files/api_definitions/thirdparty_pisp/api_spec.yaml -t yaml ./docker-local/auth-service/spec_files/api_definitions/thirdparty_pisp/thirdparty-auth-api-template.yaml",
+    "validate:openapi:auth-service": "swagger-cli validate ./docker-local/auth-service/spec_files/api_definitions/thirdparty_pisp/api_spec.yaml",
+    "build:openapi:auth-service": "npm run bundle:openapi:auth-service && npm run validate:openapi:auth-service",
+    "bundle:openapi:participant-list-service": "swagger-cli bundle -o ./docker-local/participant-list-service/spec_files/api_definitions/thirdparty_pisp/api_spec.yaml -t yaml ./docker-local/participant-list-service/spec_files/api_definitions/thirdparty_pisp/thirdparty-service-api-template.yaml",
+    "validate:openapi:participant-list-service": "swagger-cli validate ./docker-local/participant-list-service/spec_files/api_definitions/thirdparty_pisp/api_spec.yaml",
+    "build:openapi:participant-list-service": "npm run bundle:openapi:participant-list-service && npm run validate:openapi:participant-list-service",
     "watch": "tsc -w",
     "reseed": "echo  '\\033[0;31m [WARN]: This command is deprecated and will be removed shortly. Use reseed:docker-local instead.\\033[0m' && npm run reseed:docker-local",
     "reseed:docker-contract": "echo \"seeding docker-contract environment\" && ./docker-contract/postman/scripts/_00_seed_all.sh",
@@ -79,7 +85,7 @@
     "chalk": "^4.1.0"
   },
   "devDependencies": {
-    "@mojaloop/api-snippets": "11.0.18",
+    "@mojaloop/api-snippets": "^12.4.2",
     "@types/jest": "25.2.2",
     "@types/uuid": "^8.3.0",
     "@typescript-eslint/eslint-plugin": "1.13.0",

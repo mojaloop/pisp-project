@@ -908,3 +908,22 @@ services:
       - mojaloop-net
     extra_hosts:
       - "ml-testing-toolkit:172.17.0.1"
+
+  auth-service:
+    image: mojaloop/ml-testing-toolkit:v11.8.1
+    container_name: auth-service
+    volumes:
+      - "./auth-service/spec_files:/opt/mojaloop-testing-toolkit/spec_files"
+      - "./auth-service/secrets:/opt/mojaloop-testing-toolkit/secrets"
+    ports:
+      - "26000:5000"
+      - "26050:5050"
+    environment:
+      - AUTH_ENABLED=FALSE
+    command: npm start
+    depends_on:
+      - mongo
+    networks:
+      - mojaloop-net
+    extra_hosts:
+      - "pisp-thirdparty-api-adapter:172.17.0.1"

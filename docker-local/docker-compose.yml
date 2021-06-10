@@ -349,7 +349,7 @@ services:
       - "dfspa-backend:172.17.0.1"
 
   dfspa-thirdparty-scheme-adapter-inbound:
-    image: "mojaloop/thirdparty-scheme-adapter:v11.37.2"
+    image: "mojaloop/thirdparty-scheme-adapter:v11.39.0"
     # build:
     #   context: ../../thirdparty-scheme-adapter
     #   dockerfile: ./docker/Dockerfile
@@ -400,7 +400,7 @@ services:
       - "pisp-thirdparty-api-adapter:172.17.0.1"
 
   dfspa-thirdparty-scheme-adapter-outbound:
-    image: "mojaloop/thirdparty-scheme-adapter:v11.37.2"
+    image: "mojaloop/thirdparty-scheme-adapter:v11.39.0"
     # build:
     #   context: ../../thirdparty-scheme-adapter
     #   dockerfile: ./docker/Dockerfile
@@ -512,7 +512,7 @@ services:
       - "dfspb-backend:172.17.0.1"
 
   dfspb-thirdparty-scheme-adapter-inbound:
-    image: "mojaloop/thirdparty-scheme-adapter:v11.37.2"
+    image: "mojaloop/thirdparty-scheme-adapter:v11.39.0"
     # build:
     #   context: ../../thirdparty-scheme-adapter
     #   dockerfile: ./docker/Dockerfile
@@ -561,7 +561,7 @@ services:
       - "pisp-thirdparty-api-adapter:172.17.0.1"
 
   dfspb-thirdparty-scheme-adapter-outbound:
-    image: "mojaloop/thirdparty-scheme-adapter:v11.37.2"
+    image: "mojaloop/thirdparty-scheme-adapter:v11.39.0"
     # build:
     #   context: ../../thirdparty-scheme-adapter
     #   dockerfile: ./docker/Dockerfile
@@ -673,7 +673,7 @@ services:
       - "pisp-backend:172.17.0.1"
 
   pisp-thirdparty-scheme-adapter-inbound:
-    image: "mojaloop/thirdparty-scheme-adapter:v11.37.2"
+    image: "mojaloop/thirdparty-scheme-adapter:v11.39.0"
     # build:
     #   context: ../../thirdparty-scheme-adapter
     #   dockerfile: ./docker/Dockerfile
@@ -722,7 +722,7 @@ services:
       - "pisp-backend:172.17.0.1"
 
   pisp-thirdparty-scheme-adapter-outbound:
-    image: "mojaloop/thirdparty-scheme-adapter:v11.37.2"
+    image: "mojaloop/thirdparty-scheme-adapter:v11.39.0"
     # build:
     #   context: ../../thirdparty-scheme-adapter
     #   dockerfile: ./docker/Dockerfile
@@ -773,10 +773,10 @@ services:
       - "pisp-thirdparty-api-adapter:172.17.0.1"
 
   pisp-thirdparty-api-adapter:
-    image: "mojaloop/thirdparty-api-adapter:v11.18.2"
+    image: "mojaloop/thirdparty-api-adapter:v11.18.3"
     # build:
-    #   context: ../../thirdparty-scheme-adapter
-    #   dockerfile: ./docker/Dockerfile
+    #  context: https://github.com/mojaloop/thirdparty-api-adapter.git#chore/branch
+    #  dockerfile: ./Dockerfile
     container_name: pisp-thirdparty-api-adapter
     command: sh -c "/opt/thirdparty-api-adapter/wait4/wait4.js thirdparty-api-adapter && npm run start"
     ports:

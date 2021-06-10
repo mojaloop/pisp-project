@@ -34,7 +34,7 @@
       "path": "/services/{ServiceType}",
       "params": {
         "headers": {
-          "Content-Type": "application/vnd.interoperability.parties+json;version=1.0",
+          "Content-Type": "application/vnd.interoperability.services+json;version=1.0",
           "Date": "Wed, 27 May 2020 11:13:34 GMT",
           "X-Forwarded-For": "sed eiusmod sunt",
           "FSPIOP-Source": "switch",

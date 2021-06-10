@@ -2,17 +2,18 @@
 import TestEnv from './TestEnv'
 import axios from 'axios'
 
-describe('/consentRequests/{ID}/validate: start->OTPIsValid', (): void => {
+// todo: rewrite tests once https://github.com/mojaloop/thirdparty-scheme-adapter/pull/102
+//       is merged and new image is published
+describe.skip('/consentRequests/{ID}/validate: start->OTPIsValid', (): void => {
   const consentRequestsId = 'c51ec534-ee48-4575-b6a9-ead2955b8069'
 
   it('state should be OTPIsValid on valid OTP', async (): Promise<void> => {
     // mojaloop-simulator is configured to return even authTokens as valid and
     // odd as invalid
     const validateRequest = {
-      authToken: '123456',
-      toParticipantId: 'dfspa'
+      authToken: '123456'
     }
-    const validateURI = `${TestEnv.baseUrls.pispThirdpartySchemeAdapterOutbound}/consentRequests/${consentRequestsId}/validate`
+    const validateURI = `${TestEnv.baseUrls.pispThirdpartySchemeAdapterOutbound}/linking/request-consent/${consentRequestsId}/authenticate`
     const validateResponse = await axios.patch(validateURI, validateRequest)
     expect(validateResponse.status).toEqual(200)
     expect(validateResponse.data.consent.consentRequestId).toEqual(consentRequestsId)
@@ -39,17 +40,18 @@ describe('/consentRequests/{ID}/validate: start->OTPIsValid', (): void => {
   })
 })
 
-describe('/consentRequests/{ID}/validate: start->errored', (): void => {
+// todo: rewrite tests once https://github.com/mojaloop/thirdparty-scheme-adapter/pull/102
+//       is merged and new image is published
+describe.skip('/consentRequests/{ID}/validate: start->errored', (): void => {
   const consentRequestsId = 'c51ec534-ee48-4575-b6a9-ead2955b8069'
 
   it('state should be errored on invalid OTP', async (): Promise<void> => {
     // mojaloop-simulator is configured to return even authTokens as valid and
     // odd as invalid
     const validateRequest = {
-      authToken: '123457',
-      toParticipantId: 'dfspa'
+      authToken: '123457'
     }
-    const validateURI = `${TestEnv.baseUrls.pispThirdpartySchemeAdapterOutbound}/consentRequests/${consentRequestsId}/validate`
+    const validateURI = `${TestEnv.baseUrls.pispThirdpartySchemeAdapterOutbound}/linking/request-consent/${consentRequestsId}/authenticate`
     try {
       await axios.patch(validateURI, validateRequest)
     } catch (error) {

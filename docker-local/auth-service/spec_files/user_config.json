@@ -11,7 +11,7 @@
     "dfsps": {}
   },
   "SEND_CALLBACK_ENABLE": true,
-  "FSPID": "auth-service",
+  "FSPID": "central-auth",
   "DEFAULT_USER_FSPID": "userdfsp",
   "TRANSFERS_VALIDATION_WITH_PREVIOUS_QUOTES": false,
   "TRANSFERS_VALIDATION_ILP_PACKET": false,

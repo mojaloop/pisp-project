@@ -14,6 +14,7 @@ set -u
 ./_03_seed_dfspa.sh
 ./_04_seed_dfspb.sh
 ./_05_seed_pisp.sh
+./_13_seed_centralAuth.sh
 ./_06_seed_dfsp_simulator.sh
 ./_07_seed_dfsp_a_msisdn.sh
 ./_08_seed_dfsp_b_msisdn.sh

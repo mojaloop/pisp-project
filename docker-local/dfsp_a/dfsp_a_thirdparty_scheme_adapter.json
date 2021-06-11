@@ -26,6 +26,7 @@
     "COLOR": true
   },
   "SHARED": {
+    "AUTH_SERVICE_PARTICIPANT_ID": "centralAuth",
     "PEER_ENDPOINT": "transaction-request-service:4003",
     "ALS_ENDPOINT": "account-lookup-service:4002",
     "QUOTES_ENDPOINT": "quoting-service:3002",

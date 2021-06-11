@@ -6566,6 +6566,301 @@
 					]
 				},
 				{
+					"name": "centralAuth auth-service (data setup)",
+					"item": [
+						{
+							"name": "Add centralAuth auth-service",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {",
+											"    pm.response.to.have.status(201);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"name\": \"centralAuth\",\"currency\": \"USD\"}"
+								},
+								"url": {
+									"raw": "{{HOST_CENTRAL_LEDGER}}/participants",
+									"host": [
+										"{{HOST_CENTRAL_LEDGER}}"
+									],
+									"path": [
+										"participants"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add initial position and limits - centralAuth",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {",
+											"    pm.response.to.have.status(201);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"currency\": \"{{currency}}\",\n\t\"limit\": {\n\t  \"type\": \"NET_DEBIT_CAP\",\n\t  \"value\": 1000000\n\t},\n\t\"initialPosition\": 0\n}"
+								},
+								"url": {
+									"raw": "{{HOST_CENTRAL_LEDGER}}/participants/centralAuth/initialPositionAndLimits",
+									"host": [
+										"{{HOST_CENTRAL_LEDGER}}"
+									],
+									"path": [
+										"participants",
+										"centralAuth",
+										"initialPositionAndLimits"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add centralAuth callback - PARTICIPANT PUT",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {",
+											"    pm.response.to.have.status(201);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"type\": \"FSPIOP_CALLBACK_URL_PARTICIPANT_PUT\",\n  \"value\": \"http://host.docker.internal:26000/participants/{{partyIdType}}/{{partyIdentifier}}\"\n}"
+								},
+								"url": {
+									"raw": "{{HOST_CENTRAL_LEDGER}}/participants/centralAuth/endpoints",
+									"host": [
+										"{{HOST_CENTRAL_LEDGER}}"
+									],
+									"path": [
+										"participants",
+										"centralAuth",
+										"endpoints"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add centralAuth callback - PARTICIPANT PUT Error",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {",
+											"    pm.response.to.have.status(201);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"type\": \"FSPIOP_CALLBACK_URL_PARTICIPANT_PUT_ERROR\",\n  \"value\": \"http://host.docker.internal:26000/participants/{{partyIdType}}/{{partyIdentifier}}/error\"\n}"
+								},
+								"url": {
+									"raw": "{{HOST_CENTRAL_LEDGER}}/participants/centralAuth/endpoints",
+									"host": [
+										"{{HOST_CENTRAL_LEDGER}}"
+									],
+									"path": [
+										"participants",
+										"centralAuth",
+										"endpoints"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add centralAuth callback - TP_CB_URL_CONSENT_POST",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"type\": \"TP_CB_URL_CONSENT_POST\",\n  \"value\": \"http://host.docker.internal:26000\"\n}"
+								},
+								"url": {
+									"raw": "{{HOST_CENTRAL_LEDGER}}/participants/centralAuth/endpoints",
+									"host": [
+										"{{HOST_CENTRAL_LEDGER}}"
+									],
+									"path": [
+										"participants",
+										"centralAuth",
+										"endpoints"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add centralAuth callback - TP_CB_URL_CONSENT_GET",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"type\": \"TP_CB_URL_CONSENT_GET\",\n  \"value\": \"http://host.docker.internal:26000\"\n}"
+								},
+								"url": {
+									"raw": "{{HOST_CENTRAL_LEDGER}}/participants/centralAuth/endpoints",
+									"host": [
+										"{{HOST_CENTRAL_LEDGER}}"
+									],
+									"path": [
+										"participants",
+										"centralAuth",
+										"endpoints"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add centralAuth callback - TP_CB_URL_CONSENT_PUT",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"type\": \"TP_CB_URL_CONSENT_PUT\",\n  \"value\": \"http://host.docker.internal:26000\"\n}"
+								},
+								"url": {
+									"raw": "{{HOST_CENTRAL_LEDGER}}/participants/centralAuth/endpoints",
+									"host": [
+										"{{HOST_CENTRAL_LEDGER}}"
+									],
+									"path": [
+										"participants",
+										"centralAuth",
+										"endpoints"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add centralAuth callback - TP_CB_URL_CONSENT_PUT_ERROR",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"type\": \"TP_CB_URL_CONSENT_PUT_ERROR\",\n  \"value\": \"http://host.docker.internal:26000\"\n}"
+								},
+								"url": {
+									"raw": "{{HOST_CENTRAL_LEDGER}}/participants/centralAuth/endpoints",
+									"host": [
+										"{{HOST_CENTRAL_LEDGER}}"
+									],
+									"path": [
+										"participants",
+										"centralAuth",
+										"endpoints"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
 					"name": "testfsp1 (Only for Settlements testing)",
 					"item": [
 						{

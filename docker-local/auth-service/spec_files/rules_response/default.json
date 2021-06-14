@@ -146,19 +146,18 @@
         "statusCode": "202",
         "scripts": {
           "exec": [
-            "",
-            "const userConfig = JSON.parse(pm.globals.get('userConfig'))",
             "const curDate = (new Date()).toUTCString();",
-            "const consentId = pm.request.url.path[1]",
-            "const url = 'http://pisp-thirdparty-api-adapter:12000/consents/' + consentId + '/error",
+            "const body = JSON.parse(pm.request.body)",
+            "const consentId = body.consentId",
+            "const url = 'http://172.17.0.1:12000/consents/' + consentId + '/error'",
             "const putConsentsErrorIDReq = {",
             "  url,",
-            "  method: 'PUT',",
+            "  method: 'put',",
             "  header: {",
             "    'Accept': 'application/vnd.interoperability.thirdparty+json;version=1.0',",
             "    'Content-Type': 'application/vnd.interoperability.thirdparty+json;version=1.0',",
             "    'Date': curDate,",
-            "    'FSPIOP-Source': 'centralAuth'",
+            "    'FSPIOP-Source': 'centralAuth',",
             "    'FSPIOP-Destination': 'dfspa'",
             "  },",
             "  body: {",
@@ -180,11 +179,10 @@
             "  }",
             "}",
             "  ",
-            "pm.sendRequest(putConsentsErrorIDReq, function (err, resp) {",
-            "  console.error('put /consents/{ID}/error response')",
-            "  console.error(resp.json())",
-            "  console.error(err)",
-            "})"
+            "pm.sendRequest(putConsentsErrorIDReq, function (err, response) {",
+            "  console.log('put /consents/{ID}/error response: '+JSON.stringify(response.json()))",
+            "})",
+            ""
           ]
         },
         "delay": 0

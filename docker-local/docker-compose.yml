@@ -773,7 +773,7 @@ services:
       - "pisp-thirdparty-api-adapter:172.17.0.1"
 
   pisp-thirdparty-api-adapter:
-    image: "mojaloop/thirdparty-api-adapter:v11.18.3"
+    image: "mojaloop/thirdparty-api-adapter:v11.19.0"
     # build:
     #  context: https://github.com/mojaloop/thirdparty-api-adapter.git#chore/branch
     #  dockerfile: ./Dockerfile

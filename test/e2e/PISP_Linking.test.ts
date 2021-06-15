@@ -41,6 +41,8 @@ const linkingRequestConsentURI = `${TestEnv.baseUrls.pispThirdpartySchemeAdapter
 
 describe('Account Linking', (): void => {
   describe('Happy Path - Web', (): void => {
+    let consentId: string
+
     it('/linking/request-consent should be success', async (): Promise<void> => {
       // dfspa mojaloop-simulator returns WEB response for id 'b51ec534-ee48-4575-b6a9-ead2955b8069'
       const consentRequest = {
@@ -96,6 +98,9 @@ describe('Account Linking', (): void => {
       expect(consentRequestsResponse.status).toEqual(200)
       expect(consentRequestsResponse.data.currentState).toEqual('consentReceivedAwaitingCredential')
       expect(consentRequestsResponse.data.consent).toEqual(expectedResponse)
+
+      // store the consentId for future assertion
+      consentId = consentRequestsResponse.data.consent.consentId
     })
 
     it('/linking/request-consent/consentRequestId/pass-credential should be success', async (): Promise<void> => {
@@ -136,9 +141,41 @@ describe('Account Linking', (): void => {
       expect(consentRequestsResponse.data.currentState).toEqual('accountsLinked')
       expect(consentRequestsResponse.data).toEqual(expectedResponse)
     })
+
+    it('created a CONSENT entry with the CONSENT Oracle', async (): Promise<void> => {
+      const participantsURI = `${TestEnv.baseUrls.consentOracle}/participants/CONSENT/${consentId}`
+      const options = {
+        headers: {
+          'Content-Type': 'application/vnd.interoperability.participants+json;version=1.0',
+          Accept: 'application/vnd.interoperability.participants+json;version=1',
+          'FSPIOP-Source': 'als',
+          Date: new Date().toUTCString()
+        }
+      }
+
+      // give the ALS some time to process the request
+      await new Promise(resolve => setTimeout(resolve, 200))
+
+      const result = await axios.get(participantsURI, options)
+
+      // Assert
+      expect(result.status).toBe(200)
+      expect(result.data).toEqual(
+        expect.objectContaining({
+          partyList: [
+            expect.objectContaining({
+              id: consentId,
+              fspId: 'centralAuth'
+            })
+          ]
+        })
+      )
+    })
   })
 
   describe('Happy Path - OTP', (): void => {
+    let consentId: string
+
     it('/linking/request-consent should be success', async (): Promise<void> => {
       // dfspa mojaloop-simulator returns OTP response for id 'c51ec534-ee48-4575-b6a9-ead2955b8069'
       const consentRequest = {
@@ -194,6 +231,9 @@ describe('Account Linking', (): void => {
       expect(consentRequestsResponse.status).toEqual(200)
       expect(consentRequestsResponse.data.currentState).toEqual('consentReceivedAwaitingCredential')
       expect(consentRequestsResponse.data.consent).toEqual(expectedResponse)
+
+      // store the consentId for future assertion
+      consentId = consentRequestsResponse.data.consent.consentId
     })
 
     it('/linking/request-consent/consentRequestId/pass-credential should be success', async (): Promise<void> => {
@@ -233,6 +273,34 @@ describe('Account Linking', (): void => {
       expect(consentRequestsResponse.status).toEqual(200)
       expect(consentRequestsResponse.data.currentState).toEqual('accountsLinked')
       expect(consentRequestsResponse.data).toEqual(expectedResponse)
+    })
+
+    it('created a CONSENT entry with the CONSENT Oracle', async (): Promise<void> => {
+      const participantsURI = `${TestEnv.baseUrls.consentOracle}/participants/CONSENT/${consentId}`
+      const options = {
+        headers: {
+          'Content-Type': 'application/vnd.interoperability.participants+json;version=1.0',
+          Accept: 'application/vnd.interoperability.participants+json;version=1',
+          'FSPIOP-Source': 'als',
+          Date: new Date().toUTCString()
+        }
+      }
+      // give the ALS some time to process the request
+      await new Promise(resolve => setTimeout(resolve, 200))
+
+      const result = await axios.get(participantsURI, options)
+      // Assert
+      expect(result.status).toBe(200)
+      expect(result.data).toEqual(
+        expect.objectContaining({
+          partyList: [
+            expect.objectContaining({
+              id: consentId,
+              fspId: 'centralAuth'
+            })
+          ]
+        })
+      )
     })
   })
 

@@ -98,11 +98,7 @@ describe('Account Linking', (): void => {
       expect(consentRequestsResponse.data.consent).toEqual(expectedResponse)
     })
 
-    // todo: need to update the scheme adapter to forward put /participant/{Type}/{ID}
-    //       requests and patch /consent/{ID} requests to finish this test
-    //       DFSP is waiting on that ALS request which should be the final
-    //       call that needs to be passed for the flow to complete.
-    it.skip('/linking/request-consent/consentRequestId/pass-credential should be success', async (): Promise<void> => {
+    it('/linking/request-consent/consentRequestId/pass-credential should be success', async (): Promise<void> => {
       const consentRequestId = 'b51ec534-ee48-4575-b6a9-ead2955b8069'
       const linkingRequestConsentPassCredentialURI = `${TestEnv.baseUrls.pispThirdpartySchemeAdapterOutbound}/linking/request-consent/${consentRequestId}/pass-credential`
 
@@ -200,12 +196,8 @@ describe('Account Linking', (): void => {
       expect(consentRequestsResponse.data.consent).toEqual(expectedResponse)
     })
 
-    // todo: need to update the scheme adapter to forward put /participant/{Type}/{ID}
-    //       requests and patch /consent/{ID} requests to finish this test
-    //       DFSP is waiting on that ALS request which should be the final
-    //       call that needs to be passed for the flow to complete.
-    it.skip('/linking/request-consent/consentRequestId/pass-credential should be success', async (): Promise<void> => {
-      const consentRequestId = 'b51ec534-ee48-4575-b6a9-ead2955b8069'
+    it('/linking/request-consent/consentRequestId/pass-credential should be success', async (): Promise<void> => {
+      const consentRequestId = 'c51ec534-ee48-4575-b6a9-ead2955b8069'
       const linkingRequestConsentPassCredentialURI = `${TestEnv.baseUrls.pispThirdpartySchemeAdapterOutbound}/linking/request-consent/${consentRequestId}/pass-credential`
 
       // ttk uses an credential.payload.id of below for a verified response

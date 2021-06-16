@@ -290,7 +290,7 @@ services:
       start_period: 40s
       interval: 30s
 
-    als-consent-oracle:
+  als-consent-oracle:
     container_name: als-consent-oracle
     image: "mojaloop/als-consent-oracle:v0.0.6"
     command: sh -c "/opt/als-consent-oracle/wait4/wait4.js als-consent-oracle && npm run migrate && npm run start"

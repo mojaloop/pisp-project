@@ -393,6 +393,49 @@ services:
     extra_hosts:
       - "pisp-thirdparty-api-adapter:172.17.0.1"
 
+  pisp-thirdparty-api-adapter:
+    image: "mojaloop/thirdparty-api-adapter:v11.18.3"
+    # build:
+    #  context: https://github.com/mojaloop/thirdparty-api-adapter.git#chore/branch
+    #  dockerfile: ./Dockerfile
+    container_name: pisp-thirdparty-api-adapter
+    command: sh -c "/opt/thirdparty-api-adapter/wait4/wait4.js thirdparty-api-adapter && npm run start"
+    ports:
+      - "12000:3008"
+    volumes:
+       - ./docker/thirdparty-api-adapter/default.json:/opt/thirdparty-api-adapter/config/default.json
+       - ./docker/wait4:/opt/thirdparty-api-adapter/wait4
+    networks:
+      - mojaloop-net
+    depends_on:
+      - kafka
+      - account-lookup-service
+      - central-ledger
+    healthcheck:
+      test: wget -q http://172.17.0.1:12000/health -O /dev/null || exit 1
+      timeout: 20s
+      retries: 30
+      interval: 15s
+    extra_hosts:
+      - "central-ledger.local:172.17.0.1"
+      - "central-settlement.local:172.17.0.1"
+      - "ml-api-adapter.local:172.17.0.1"
+      - "account-lookup-service.local:172.17.0.1"
+      - "account-lookup-service-admin.local:172.17.0.1"
+      - "quoting-service.local:172.17.0.1"
+      - "moja-simulator.local:172.17.0.1"
+      - "central-ledger:172.17.0.1"
+      - "central-settlement:172.17.0.1"
+      - "ml-api-adapter:172.17.0.1"
+      - "account-lookup-service:172.17.0.1"
+      - "account-lookup-service-admin:172.17.0.1"
+      - "quoting-service:172.17.0.1"
+      - "simulator:172.17.0.1"
+      - "host.docker.internal:172.17.0.1"
+      - "simulator.local:172.17.0.1"
+      - "transaction-request-service:172.17.0.1"
+      - "pisp-backend:172.17.0.1"
+      - "participant-list-service:172.17.0.1"
 
   ## DFSP A
   dfspa-backend:
@@ -876,50 +919,6 @@ services:
       - "pisp-backend:172.17.0.1"
       - "pisp-sdk-scheme-adapter:172.17.0.1"
       - "pisp-thirdparty-api-adapter:172.17.0.1"
-
-  pisp-thirdparty-api-adapter:
-    image: "mojaloop/thirdparty-api-adapter:v11.18.3"
-    # build:
-    #  context: https://github.com/mojaloop/thirdparty-api-adapter.git#chore/branch
-    #  dockerfile: ./Dockerfile
-    container_name: pisp-thirdparty-api-adapter
-    command: sh -c "/opt/thirdparty-api-adapter/wait4/wait4.js thirdparty-api-adapter && npm run start"
-    ports:
-      - "12000:3008"
-    volumes:
-       - ./docker/thirdparty-api-adapter/default.json:/opt/thirdparty-api-adapter/config/default.json
-       - ./docker/wait4:/opt/thirdparty-api-adapter/wait4
-    networks:
-      - mojaloop-net
-    depends_on:
-      - kafka
-      - account-lookup-service
-      - central-ledger
-    healthcheck:
-      test: wget -q http://172.17.0.1:12000/health -O /dev/null || exit 1
-      timeout: 20s
-      retries: 30
-      interval: 15s
-    extra_hosts:
-      - "central-ledger.local:172.17.0.1"
-      - "central-settlement.local:172.17.0.1"
-      - "ml-api-adapter.local:172.17.0.1"
-      - "account-lookup-service.local:172.17.0.1"
-      - "account-lookup-service-admin.local:172.17.0.1"
-      - "quoting-service.local:172.17.0.1"
-      - "moja-simulator.local:172.17.0.1"
-      - "central-ledger:172.17.0.1"
-      - "central-settlement:172.17.0.1"
-      - "ml-api-adapter:172.17.0.1"
-      - "account-lookup-service:172.17.0.1"
-      - "account-lookup-service-admin:172.17.0.1"
-      - "quoting-service:172.17.0.1"
-      - "simulator:172.17.0.1"
-      - "host.docker.internal:172.17.0.1"
-      - "simulator.local:172.17.0.1"
-      - "transaction-request-service:172.17.0.1"
-      - "pisp-backend:172.17.0.1"
-      - "participant-list-service:172.17.0.1"
 
   pisp-redis:
     container_name: pisp-redis

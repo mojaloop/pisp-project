@@ -7,31 +7,18 @@
     alsAdmin: 'http://beta.moja-lab.live/api/admin/account-lookup-service-admin',
     centralLedgerAdmin: 'http://beta.moja-lab.live/api/admin/central-ledger',
   },
+  // TODO: I think we can remove this...
   applicationUrls: {
     oracle: 'http://beta.moja-lab.live/api/admin/oracle-simulator'
   },
   oracles: [
-    { oracleIdType: "MSISDN", endpoint: "http://beta.moja-lab.live/api/admin/oracle-simulator"}
+    { oracleIdType: "MSISDN", endpoint: "http://simulator:8444/oracle"}
+    { oracleIdType: "CONSENT", endpoint: "http://als-consent-oracle:16000"}
   ],
   participants: [
     {
-      id: 'figmm',
+      id: 'payerfsp',
       type: 'DFSP',
-      // TODO: this is a hack for now, but we actually need to query the admin-api
-      // to get this value before setting it :(
-      settlementAccountId: '28',
-      simulatorAdminUrl: 'http://figmm-backend.beta.moja-lab.live',
-      fspiopCallbackUrl: 'http://figmm-ttk-backend-fspiop.beta.moja-lab.live',
-      thirdpartyCallbackUrl: 'n/a',
-      parties: [
-      ]
-    },
-    {
-      id: 'ppmm',
-      type: 'DFSP',
-      // TODO: this is a hack for now, but we actually need to query the admin-api
-      // to get this value before setting it :(
-      settlementAccountId: '48',
       simulatorAdminUrl: 'http://ppmm-backend.beta.moja-lab.live',
       fspiopCallbackUrl: 'http://ppmm-ttk-backend-fspiop.beta.moja-lab.live',
       thirdpartyCallbackUrl: 'n/a',

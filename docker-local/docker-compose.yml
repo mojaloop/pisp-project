@@ -5,6 +5,7 @@ networks:
     name: mojaloop-net
 
 services:
+  ## Switch
   central-ledger:
     image: mojaloop/central-ledger:v13.6.0
     container_name: central-ledger
@@ -288,6 +289,110 @@ services:
       retries: 10
       start_period: 40s
       interval: 30s
+
+    als-consent-oracle:
+    container_name: als-consent-oracle
+    image: "mojaloop/als-consent-oracle:v0.0.6"
+    command: sh -c "/opt/als-consent-oracle/wait4/wait4.js als-consent-oracle && npm run migrate && npm run start"
+    ports:
+      - "16000:3000"
+    networks:
+      - mojaloop-net
+    depends_on:
+      - als-consent-oracle-mysql
+    volumes:
+       - ./docker/wait4:/opt/als-consent-oracle/wait4
+       - ./docker/als-consent-oracle/default.json:/opt/als-consent-oracle/config/default.json
+    healthcheck:
+      test: wget -q http://172.17.0.1:16000/health -O /dev/null || exit 1
+      timeout: 20s
+      retries: 30
+      interval: 15s
+
+  als-consent-oracle-mysql:
+    image: mysql/mysql-server
+    container_name: als-consent-oracle-mysql
+    ports:
+      - "16006:3306"
+    environment:
+      - NODE_ENV=development
+      - MYSQL_USER=${DBUSER:-als-consent-oracle}
+      - MYSQL_PASSWORD=${DBPASS:-password}
+      - MYSQL_DATABASE=${DBUSER:-als-consent-oracle}
+      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+    volumes:
+      - ./docker/sql-consent-oracle-init/:/docker-entrypoint-initdb.d/
+    networks:
+      - mojaloop-net
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "als-consent-oracle-mysql"]
+      timeout: 20s
+      retries: 10
+      start_period: 40s
+      interval: 30s
+
+  participant-list-service:
+    image: mojaloop/ml-testing-toolkit:v11.8.1
+    container_name: participant-list-service
+    volumes:
+      - "./participant-list-service/spec_files:/opt/mojaloop-testing-toolkit/spec_files"
+      - "./participant-list-service/secrets:/opt/mojaloop-testing-toolkit/secrets"
+    ports:
+      - "25000:5000"
+      - "25050:5050"
+    environment:
+      - AUTH_ENABLED=FALSE
+    command: npm start
+    depends_on:
+      - mongo
+    networks:
+      - mojaloop-net
+    extra_hosts:
+      - "pisp-thirdparty-api-adapter:172.17.0.1"
+      - "ml-testing-toolkit:172.17.0.1"
+      - "ml-testing-toolkit-ui:172.17.0.1"
+
+  mongo:
+    image: mongo
+    ports:
+      - "27018:27017"
+
+  ml-testing-toolkit-ui:
+    image: mojaloop/ml-testing-toolkit-ui:v11.8.4.2-pisp
+    container_name: participant-list-service-testing-ui
+    ports:
+      - "26060:6060"
+    environment:
+      - API_BASE_URL=http://participant-list-service:25050
+      - AUTH_ENABLED=FALSE
+      - TP_SIM_URL=http://participant-list-service:25000
+    command:
+      - sh
+      - /usr/share/nginx/start.sh
+    networks:
+      - mojaloop-net
+    extra_hosts:
+      - "ml-testing-toolkit:172.17.0.1"
+
+  auth-service:
+    image: mojaloop/ml-testing-toolkit:v11.8.1
+    container_name: auth-service
+    volumes:
+      - "./auth-service/spec_files:/opt/mojaloop-testing-toolkit/spec_files"
+      - "./auth-service/secrets:/opt/mojaloop-testing-toolkit/secrets"
+    ports:
+      - "26000:5000"
+      - "26050:5050"
+    environment:
+      - AUTH_ENABLED=FALSE
+    command: npm start
+    depends_on:
+      - mongo
+    networks:
+      - mojaloop-net
+    extra_hosts:
+      - "pisp-thirdparty-api-adapter:172.17.0.1"
+
 
   ## DFSP A
   dfspa-backend:
@@ -824,106 +929,3 @@ services:
     restart: always
     ports:
       - "6379:6379"
-
-  als-consent-oracle:
-    container_name: als-consent-oracle
-    image: "mojaloop/als-consent-oracle:v0.0.6"
-    command: sh -c "/opt/als-consent-oracle/wait4/wait4.js als-consent-oracle && npm run migrate && npm run start"
-    ports:
-      - "16000:3000"
-    networks:
-      - mojaloop-net
-    depends_on:
-      - als-consent-oracle-mysql
-    volumes:
-       - ./docker/wait4:/opt/als-consent-oracle/wait4
-       - ./docker/als-consent-oracle/default.json:/opt/als-consent-oracle/config/default.json
-    healthcheck:
-      test: wget -q http://172.17.0.1:16000/health -O /dev/null || exit 1
-      timeout: 20s
-      retries: 30
-      interval: 15s
-
-  als-consent-oracle-mysql:
-    image: mysql/mysql-server
-    container_name: als-consent-oracle-mysql
-    ports:
-      - "16006:3306"
-    environment:
-      - NODE_ENV=development
-      - MYSQL_USER=${DBUSER:-als-consent-oracle}
-      - MYSQL_PASSWORD=${DBPASS:-password}
-      - MYSQL_DATABASE=${DBUSER:-als-consent-oracle}
-      - MYSQL_ALLOW_EMPTY_PASSWORD=true
-    volumes:
-      - ./docker/sql-consent-oracle-init/:/docker-entrypoint-initdb.d/
-    networks:
-      - mojaloop-net
-    healthcheck:
-      test: ["CMD", "mysqladmin" ,"ping", "-h", "als-consent-oracle-mysql"]
-      timeout: 20s
-      retries: 10
-      start_period: 40s
-      interval: 30s
-
-  participant-list-service:
-    image: mojaloop/ml-testing-toolkit:v11.8.1
-    container_name: participant-list-service
-    volumes:
-      - "./participant-list-service/spec_files:/opt/mojaloop-testing-toolkit/spec_files"
-      - "./participant-list-service/secrets:/opt/mojaloop-testing-toolkit/secrets"
-    ports:
-      - "25000:5000"
-      - "25050:5050"
-    environment:
-      - AUTH_ENABLED=FALSE
-    command: npm start
-    depends_on:
-      - mongo
-    networks:
-      - mojaloop-net
-    extra_hosts:
-      - "pisp-thirdparty-api-adapter:172.17.0.1"
-      - "ml-testing-toolkit:172.17.0.1"
-      - "ml-testing-toolkit-ui:172.17.0.1"
-
-  mongo:
-    image: mongo
-    ports:
-      - "27018:27017"
-
-  ml-testing-toolkit-ui:
-    image: mojaloop/ml-testing-toolkit-ui:v11.8.4.2-pisp
-    container_name: participant-list-service-testing-ui
-    ports:
-      - "26060:6060"
-    environment:
-      - API_BASE_URL=http://participant-list-service:25050
-      - AUTH_ENABLED=FALSE
-      - TP_SIM_URL=http://participant-list-service:25000
-    command:
-      - sh
-      - /usr/share/nginx/start.sh
-    networks:
-      - mojaloop-net
-    extra_hosts:
-      - "ml-testing-toolkit:172.17.0.1"
-
-  auth-service:
-    image: mojaloop/ml-testing-toolkit:v11.8.1
-    container_name: auth-service
-    volumes:
-      - "./auth-service/spec_files:/opt/mojaloop-testing-toolkit/spec_files"
-      - "./auth-service/secrets:/opt/mojaloop-testing-toolkit/secrets"
-    ports:
-      - "26000:5000"
-      - "26050:5050"
-    environment:
-      - AUTH_ENABLED=FALSE
-    command: npm start
-    depends_on:
-      - mongo
-    networks:
-      - mojaloop-net
-    extra_hosts:
-      - "pisp-thirdparty-api-adapter:172.17.0.1"

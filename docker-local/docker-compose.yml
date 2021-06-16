@@ -349,10 +349,10 @@ services:
       - "dfspa-backend:172.17.0.1"
 
   dfspa-thirdparty-scheme-adapter-inbound:
-    # image: "mojaloop/thirdparty-scheme-adapter:v11.39.0"
-    build:
-      context: https://github.com/kleyow/thirdparty-scheme-adapter.git#test/more-integration-tests
-      dockerfile: ./docker/Dockerfile
+    image: "mojaloop/thirdparty-scheme-adapter:v11.39.1"
+    #build:
+    #  context: https://github.com/username/thirdparty-scheme-adapter.git#branch
+    #  dockerfile: ./docker/Dockerfile
     container_name: dfspa-thirdparty-scheme-adapter-inbound
     environment:
       - NODE_ENV=e2e
@@ -400,10 +400,10 @@ services:
       - "pisp-thirdparty-api-adapter:172.17.0.1"
 
   dfspa-thirdparty-scheme-adapter-outbound:
-    #image: "mojaloop/thirdparty-scheme-adapter:v11.39.0"
-    build:
-      context: https://github.com/kleyow/thirdparty-scheme-adapter.git#test/more-integration-tests
-      dockerfile: ./docker/Dockerfile
+    image: "mojaloop/thirdparty-scheme-adapter:v11.39.1"
+    #build:
+    #  context: https://github.com/username/thirdparty-scheme-adapter.git#branch
+    #  dockerfile: ./docker/Dockerfile
     container_name: dfspa-thirdparty-scheme-adapter-outbound
     environment:
       - NODE_ENV=e2e
@@ -512,10 +512,10 @@ services:
       - "dfspb-backend:172.17.0.1"
 
   dfspb-thirdparty-scheme-adapter-inbound:
-    #image: "mojaloop/thirdparty-scheme-adapter:v11.39.0"
-    build:
-      context: https://github.com/kleyow/thirdparty-scheme-adapter.git#test/more-integration-tests
-      dockerfile: ./docker/Dockerfile
+    image: "mojaloop/thirdparty-scheme-adapter:v11.39.1"
+    #build:
+    #  context: https://github.com/username/thirdparty-scheme-adapter.git#branch
+    #  dockerfile: ./docker/Dockerfile
     container_name: dfspb-thirdparty-scheme-adapter-inbound
     environment:
       - NODE_ENV=e2e
@@ -561,10 +561,10 @@ services:
       - "pisp-thirdparty-api-adapter:172.17.0.1"
 
   dfspb-thirdparty-scheme-adapter-outbound:
-    #image: "mojaloop/thirdparty-scheme-adapter:v11.39.0"
-    build:
-      context: https://github.com/kleyow/thirdparty-scheme-adapter.git#test/more-integration-tests
-      dockerfile: ./docker/Dockerfile
+    image: "mojaloop/thirdparty-scheme-adapter:v11.39.1"
+    #build:
+    #  context: https://github.com/username/thirdparty-scheme-adapter.git#branch
+    #  dockerfile: ./docker/Dockerfile
     container_name: dfspb-thirdparty-scheme-adapter-outbound
     environment:
       - NODE_ENV=e2e
@@ -673,10 +673,10 @@ services:
       - "pisp-backend:172.17.0.1"
 
   pisp-thirdparty-scheme-adapter-inbound:
-    #image: "mojaloop/thirdparty-scheme-adapter:v11.39.0"
-    build:
-      context: https://github.com/kleyow/thirdparty-scheme-adapter.git#test/more-integration-tests
-      dockerfile: ./docker/Dockerfile
+    image: "mojaloop/thirdparty-scheme-adapter:v11.39.1"
+    #build:
+    #  context: https://github.com/username/thirdparty-scheme-adapter.git#branch
+    #  dockerfile: ./docker/Dockerfile
     container_name: pisp-thirdparty-scheme-adapter-inbound
     environment:
       - NODE_ENV=e2e
@@ -722,10 +722,10 @@ services:
       - "pisp-backend:172.17.0.1"
 
   pisp-thirdparty-scheme-adapter-outbound:
-    #image: "mojaloop/thirdparty-scheme-adapter:v11.39.0"
-    build:
-      context: https://github.com/kleyow/thirdparty-scheme-adapter.git#test/more-integration-tests
-      dockerfile: ./docker/Dockerfile
+    image: "mojaloop/thirdparty-scheme-adapter:v11.39.1"
+    #build:
+    #  context: https://github.com/username/thirdparty-scheme-adapter.git#branch
+    #  dockerfile: ./docker/Dockerfile
     container_name: pisp-thirdparty-scheme-adapter-outbound
     environment:
       - NODE_ENV=e2e

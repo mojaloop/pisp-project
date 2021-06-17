@@ -26,7 +26,7 @@ const expectedContainers = [
   // 'pisp-sdk-scheme-adapter', no health check
   'pisp-thirdparty-scheme-adapter-inbound',
   'pisp-thirdparty-scheme-adapter-outbound',
-  'pisp-thirdparty-api-adapter',
+  'thirdparty-api-adapter',
   // 'pisp-redis', no health check
   'kafka',
   'ml-api-adapter',

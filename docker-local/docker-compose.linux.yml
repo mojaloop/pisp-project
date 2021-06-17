@@ -102,7 +102,7 @@ services:
 
   participant-list-service:
     extra_hosts:
-      - "pisp-thirdparty-api-adapter:172.17.0.1"
+      - "thirdparty-api-adapter:172.17.0.1"
       - "ml-testing-toolkit:172.17.0.1"
       - "ml-testing-toolkit-ui:172.17.0.1"
 
@@ -112,9 +112,9 @@ services:
 
   auth-service:
     extra_hosts:
-      - "pisp-thirdparty-api-adapter:172.17.0.1"
+      - "thirdparty-api-adapter:172.17.0.1"
 
-  pisp-thirdparty-api-adapter:
+  thirdparty-api-adapter:
     extra_hosts:
       - "central-ledger.local:172.17.0.1"
       - "central-settlement.local:172.17.0.1"
@@ -186,7 +186,7 @@ services:
       - "dfspa-backend:172.17.0.1"
       - "dsfpa-sdk-scheme-adapter:172.17.0.1"
       - "pisp-thirdparty-scheme-adapter-inbound:172.17.0.1"
-      - "pisp-thirdparty-api-adapter:172.17.0.1"
+      - "thirdparty-api-adapter:172.17.0.1"
 
   dfspa-thirdparty-scheme-adapter-outbound:
     extra_hosts:
@@ -208,7 +208,7 @@ services:
       - "simulator.local:172.17.0.1"
       - "transaction-request-service:172.17.0.1"
       - "dfspa-backend:172.17.0.1"
-      - "pisp-thirdparty-api-adapter:172.17.0.1"
+      - "thirdparty-api-adapter:172.17.0.1"
 
   ## DFSP B
   dfspb-backend:
@@ -258,7 +258,7 @@ services:
       - "simulator.local:172.17.0.1"
       - "transaction-request-service:172.17.0.1"
       - "dfspb-backend:172.17.0.1"
-      - "pisp-thirdparty-api-adapter:172.17.0.1"
+      - "thirdparty-api-adapter:172.17.0.1"
 
   dfspb-thirdparty-scheme-adapter-outbound:
     extra_hosts:
@@ -351,4 +351,4 @@ services:
       - "transaction-request-service:172.17.0.1"
       - "pisp-backend:172.17.0.1"
       - "pisp-sdk-scheme-adapter:172.17.0.1"
-      - "pisp-thirdparty-api-adapter:172.17.0.1"
+      - "thirdparty-api-adapter:172.17.0.1"

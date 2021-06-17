@@ -120,6 +120,9 @@ docker-compose logs -f pisp-backend  pisp-sdk-scheme-adapter pisp-redis pisp-thi
 
 ### Set Up Seed Data
 
+> ***Note:** We are also testing out a new method for seeding the docker-local environment*
+> see [Seeding docker-local with ml-bootstrap](#using-ml-bootstrap) below.
+
 #### 1. cd to `postman` directory
 ```bash
 cd ./postman
@@ -360,6 +363,38 @@ Register a new MSISDN for this dfsp with this initial data
 ./scripts/_08_seed_dfsp_b_msisdn.sh
 ./scripts/_09_seed_dfsp_simulator_msisdn.sh
 ./scripts/_10_seed_pisp_msisdn.sh
+```
+
+## using-ml-bootstrap
+
+ml-bootstrap is a tool for seeding Mojaloop test environments. It replaces various postman collections and environments with a single tool and config file.
+
+- Check out the [`ml-bootstrap-config.json5`](./ml-bootstrap-config.json5) file for a simple, unified place to configure this test environment.
+- Read more about ml-bootstrap [here](https://github.com/vessels-tech/ml-bootstrap)
+
+
+```bash
+# from the project root
+
+
+# note - there is currently a bug in ml-bootstrap which causes it to refer to config files from
+# the wrong place - a fix is on the way!
+npx ml-bootstrap -c $PWD/docker-local/ml-bootstrap-config.json5
+```
+
+You can also use ml-bootstrap to run or rerun certain parts of the bootstrapping, eg.
+```bash
+# seed only hub config
+npx ml-bootstrap -c $PWD/docker-local/ml-bootstrap-config.json5 hub
+
+
+
+```
+
+You can also specify a specific version of ml-boostrap:
+
+```bash
+npx ml-bootstrap@0.2.6 -c $PWD/docker-local/ml-bootstrap-config.json5
 ```
 
 ## P2P Examples

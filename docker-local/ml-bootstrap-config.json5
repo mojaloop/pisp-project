@@ -3,17 +3,19 @@
 {
   currency: 'USD',
   urls: {
-    fspiop: 'http://beta.moja-lab.live/api/fspiop',
-    alsAdmin: 'http://beta.moja-lab.live/api/admin/account-lookup-service-admin',
-    centralLedgerAdmin: 'http://beta.moja-lab.live/api/admin/central-ledger',
+    // TODO: this won't work for our docker-local case... ml-bootstrap implies an API gateway here
+    // see https://github.com/vessels-tech/ml-bootstrap/issues/2
+    fspiop: 'http://localhost:3000',
+    alsAdmin: 'http://localhost:4001',
+    centralLedgerAdmin: 'http://localhost:3001',
   },
   // TODO: I think we can remove this...
   applicationUrls: {
     oracle: 'http://beta.moja-lab.live/api/admin/oracle-simulator'
   },
   oracles: [
-    { oracleIdType: "MSISDN", endpoint: "http://simulator:8444/oracle"}
-    { oracleIdType: "CONSENT", endpoint: "http://als-consent-oracle:16000"}
+    { oracleIdType: "MSISDN", endpoint: "localhost:8444"},
+    { oracleIdType: "CONSENT", endpoint: "localhost:16000"}
   ],
   participants: [
     {

@@ -475,6 +475,8 @@ services:
       - "10000:3000"
       - "10002:3002"
       - "10003:3003"
+    networks:
+      - mojaloop-net
 
   dfspb-sdk-scheme-adapter:
     image: "mojaloop/sdk-scheme-adapter:v11.10.1.3-pisp"

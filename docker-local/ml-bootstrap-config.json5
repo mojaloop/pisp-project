@@ -35,23 +35,22 @@
       ]
     },
     {
-      id: 'dfspa',
+      id: 'dfspb',
       type: 'DFSP',
       simulatorAdminUrl: 'http://localhost:10003',
-      fspiopCallbackUrl: 'http://dfspa-sdk-scheme-adapter:4000',
+      fspiopCallbackUrl: 'http://dfspb-sdk-scheme-adapter:4000',
       thirdpartyCallbackUrl: 'http://dfspb-thirdparty-scheme-adapter-inbound:4005',
       parties: [
-        // {
-        //   // TODO: detailed account list!
-        //   displayName: "Bob Babirusa",
-        //   firstName: "Bob",
-        //   middleName: "O",
-        //   lastName: "Babirusa",
-        //   dateOfBirth: "1970-01-01",
-        //   idType: "MSISDN",
-        //   idValue: "987654321"
-          
-        // },
+        {
+          // TODO: detailed account list!
+          displayName: "Bob Babirusa",
+          firstName: "Bob",
+          middleName: "O",
+          lastName: "Babirusa",
+          dateOfBirth: "1970-01-01",
+          idType: "MSISDN",
+          idValue: "987654321"   
+        },
       ]
     },
     {

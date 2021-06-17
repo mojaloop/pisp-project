@@ -110,7 +110,7 @@ jobs:
             npm run wait-4-docker
 
             # seed the environment
-            npm run reseed:docker-local
+            npm run reseed:docker-local-new
       - run:
           name: Run the E2E tests
           command: |

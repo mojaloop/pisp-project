@@ -374,32 +374,27 @@ ml-bootstrap is a tool for seeding Mojaloop test environments. It replaces vario
 
 
 ```bash
-# from the project root
-
-
-# note - there is currently a bug in ml-bootstrap which causes it to refer to config files from
-# the wrong place - a fix is on the way!
-npx ml-bootstrap -c $PWD/docker-local/ml-bootstrap-config.json5
+# from the docker-local directory
+npx ml-bootstrap -c ./ml-bootstrap-config.json5
 ```
 
 You can also use ml-bootstrap to run or rerun certain parts of the bootstrapping, eg.
 ```bash
 # seed only hub config
-npx ml-bootstrap -c $PWD/docker-local/ml-bootstrap-config.json5 hub
+npx ml-bootstrap -c ./ml-bootstrap-config.json5 hub
 
 # Seed only participants
-npx ml-bootstrap -c $PWD/docker-local/ml-bootstrap-config.json5 participants
+npx ml-bootstrap -c ./ml-bootstrap-config.json5 participants
 
 # Seed only parties
-npx ml-bootstrap -c $PWD/docker-local/ml-bootstrap-config.json5 parties
+npx ml-bootstrap -c ./ml-bootstrap-config.json5 parties
 ```
 
 You can also specify a specific version of ml-boostrap:
 
 ```bash
-npx ml-bootstrap@0.2.6 -c $PWD/docker-local/ml-bootstrap-config.json5
+npx ml-bootstrap@0.2.6 -c ./ml-bootstrap-config.json5
 ```
-
 
 ### Handy Snippets
 

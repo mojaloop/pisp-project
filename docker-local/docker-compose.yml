@@ -312,6 +312,7 @@ services:
     networks:
       - mojaloop-net
 
+  # TODO: this needs to be replaced with the actual auth-service
   auth-service:
     image: mojaloop/ml-testing-toolkit:v11.8.1
     container_name: auth-service
@@ -328,12 +329,13 @@ services:
       - mongo
     networks:
       - mojaloop-net
-    healthcheck:
-      test: wget -q http://localhost:16000/health -O /dev/null || exit 1
-      timeout: 20s
-      retries: 30
-      start_period: 30s
-      interval: 15s
+    # TODO: reenable when we are using the proper auth-service
+    # healthcheck:
+    #   test: wget -q http://localhost:5000 -O /dev/null || exit 1
+    #   timeout: 20s
+    #   retries: 30
+    #   start_period: 30s
+    #   interval: 15s
 
   pisp-thirdparty-api-adapter:
     image: "mojaloop/thirdparty-api-adapter:v11.18.3"
@@ -354,7 +356,7 @@ services:
       - account-lookup-service
       - central-ledger
     healthcheck:
-      test: wget -q http://localhost:12000/health -O /dev/null || exit 1
+      test: wget -q http://localhost:3008/health -O /dev/null || exit 1
       timeout: 20s
       retries: 30
       interval: 15s
@@ -418,7 +420,7 @@ services:
       - pisp-thirdparty-api-adapter
     restart: always
     healthcheck:
-      test: wget -q http://localhost:5005/health -O /dev/null || exit 1
+      test: wget -q http://localhost:4005/health -O /dev/null || exit 1
       timeout: 3s
       retries: 10
       start_period: 30s
@@ -447,7 +449,7 @@ services:
       - pisp-thirdparty-api-adapter
     restart: always
     healthcheck:
-      test: wget -q http://localhost:5006/health -O /dev/null || exit 1
+      test: wget -q http://localhost:4006/health -O /dev/null || exit 1
       timeout: 3s
       retries: 10
       start_period: 10s
@@ -516,7 +518,7 @@ services:
       - pisp-thirdparty-api-adapter
     restart: always
     healthcheck:
-      test: wget -q http://localhost:6005/health -O /dev/null || exit 1
+      test: wget -q http://localhost:4005/health -O /dev/null || exit 1
       timeout: 3s
       retries: 10
       start_period: 10s
@@ -545,7 +547,7 @@ services:
       - pisp-thirdparty-api-adapter
     restart: always
     healthcheck:
-      test: wget -q http://localhost:6006/health -O /dev/null || exit 1
+      test: wget -q http://localhost:4006/health -O /dev/null || exit 1
       timeout: 3s
       retries: 10
       start_period: 10s
@@ -615,7 +617,7 @@ services:
       - pisp-thirdparty-api-adapter
     restart: always
     healthcheck:
-      test: wget -q http://localhost:7005/health -O /dev/null || exit 1
+      test: wget -q http://localhost:4005/health -O /dev/null || exit 1
       timeout: 3s
       retries: 10
       start_period: 10s
@@ -645,7 +647,7 @@ services:
       - pisp-thirdparty-api-adapter
     restart: always
     healthcheck:
-      test: wget -q http://localhost:7006/health -O /dev/null || exit 1
+      test: wget -q http://localhost:4006/health -O /dev/null || exit 1
       timeout: 3s
       retries: 10
       start_period: 10s

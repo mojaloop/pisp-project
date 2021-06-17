@@ -107,7 +107,9 @@ jobs:
             docker-compose up -d
 
             # TODO: remove this hack!
-            sleep 100
+            sleep 200
+
+            docker-compose ps
 
             # wait for services to be up and running
             npm run wait-4-docker

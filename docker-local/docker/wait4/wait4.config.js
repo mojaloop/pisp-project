@@ -7,7 +7,8 @@ module.exports = {
   retries: 60,
 
   // How many ms to wait before retrying a service connection?
-  waitMs: 2500,
+  // waitMs: 2500,
+  waitMs: 10000,
 
   // services definitions
   services: [

@@ -16,7 +16,7 @@
   participants: [
     {
       id: 'dfspa',
-      type: 'DFSP',
+      type: 'DFSP_SUPPORTING_PISP',
       simulatorAdminUrl: 'http://localhost:9003',
       fspiopCallbackUrl: 'http://dfspa-sdk-scheme-adapter:4000',
       thirdpartyCallbackUrl: 'http://dfspa-thirdparty-scheme-adapter-inbound:4005',
@@ -36,6 +36,7 @@
     },
     {
       id: 'dfspb',
+      // TODO: should this be `DFSP_SUPPORTING_PISP`?
       type: 'DFSP',
       simulatorAdminUrl: 'http://localhost:10003',
       fspiopCallbackUrl: 'http://dfspb-sdk-scheme-adapter:4000',
@@ -54,11 +55,11 @@
       ]
     },
     {
-      id: 'pispa',
+      id: 'pisp',
       type: 'PISP',
       // TODO: double check!
-      fspiopCallbackUrl: 'http://localhost:7000',
-      thirdpartyCallbackUrl: 'http://localhost:7005'
+      fspiopCallbackUrl: 'http://pisp-sdk-scheme-adapter:4000',
+      thirdpartyCallbackUrl: 'http://pisp-thirdparty-scheme-adapter-inbound:4005'
     },
   ]
 }

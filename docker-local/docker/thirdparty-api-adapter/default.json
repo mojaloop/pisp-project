@@ -10,8 +10,8 @@
     "expiresIn": 180000,
     "generateTimeout": 30000
   },
-  "PARTICIPANT_LIST_SERVICE_URL": "http://participant-list-service:25000",
-  "ENDPOINT_SERVICE_URL": "http://central-ledger.local:3001",
+  "PARTICIPANT_LIST_SERVICE_URL": "http://participant-list-service:5000",
+  "ENDPOINT_SERVICE_URL": "http://central-ledger:3001",
   "ERROR_HANDLING": {
     "includeCauseExtension": true,
     "truncateExtensions": true

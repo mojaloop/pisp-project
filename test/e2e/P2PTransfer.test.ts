@@ -6,7 +6,7 @@ import axios from 'axios'
  * @description This is more of a sanity check so we know our environment is up and running
  */
 describe('Peer to Peer transfer', (): void => {
-  it.only('Performs a P2P transfer from Alice -> Bob', async (): Promise<void> => {
+  it('Performs a P2P transfer from Alice -> Bob', async (): Promise<void> => {
     // Arrange
     const scenariosURI = `${TestEnv.baseUrls.dfspa}/scenarios`
     const options = [
@@ -53,8 +53,6 @@ describe('Peer to Peer transfer', (): void => {
 
     // Act
     const result = await axios.post(scenariosURI, options)
-
-    console.log('result is', result.data)
 
     // Assert
     expect(result.status).toBe(200)

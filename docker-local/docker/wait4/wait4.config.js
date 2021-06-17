@@ -63,6 +63,8 @@ module.exports = {
           // we have to wait much longer for central-ledger
           // to spin up so we overload `retires` default parameter value
           retries: 60
+          // Wait 10 seconds between retries
+          waitMs: 10 * 1000
         },
         {
           description: 'MySQL ALS',

@@ -26,7 +26,7 @@ async function main () {
 
     // merge config with environment or defaults
     config.retries = parseInt(process.env.WAIT4_RETRIES || config.retries || 10)
-    config.waitMs = parseInt(process.env.WAIT4_WAIT_MS || config.waitMs || 1000)
+    config.waitMs = parseInt(process.env.WAIT4_WAIT_MS || config.waitMs || 2000)
 
     // wait for services connections or paradox to be ready
     const waitresses = getWaiters(service.wait4, config)

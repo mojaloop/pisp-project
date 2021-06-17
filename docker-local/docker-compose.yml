@@ -383,7 +383,7 @@ services:
     # build:
     #   context: ../../sdk-scheme-adapter
     #   dockerfile: ./Dockerfile
-    container_name: dsfpa-sdk-scheme-adapter
+    container_name: dfspa-sdk-scheme-adapter
     env_file: ./dfsp_a/dfsp_a_scheme_adapter.env
     volumes:
       - "./dfsp_a/secrets:/secrets"

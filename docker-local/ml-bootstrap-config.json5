@@ -18,8 +18,8 @@
       id: 'dfspa',
       type: 'DFSP',
       simulatorAdminUrl: 'http://localhost:9003',
-      fspiopCallbackUrl: 'http://localhost:5005',
-      thirdpartyCallbackUrl: 'n/a',
+      fspiopCallbackUrl: 'http://dfspa-sdk-scheme-adapter:4000',
+      thirdpartyCallbackUrl: 'http://dfspa-thirdparty-scheme-adapter-inbound:4005',
       parties: [
         {
           // TODO: detailed account list!
@@ -38,8 +38,8 @@
       id: 'dfspa',
       type: 'DFSP',
       simulatorAdminUrl: 'http://localhost:10003',
-      fspiopCallbackUrl: 'http://localhost:6005',
-      thirdpartyCallbackUrl: 'n/a',
+      fspiopCallbackUrl: 'http:/dfspa-sdk-scheme-adapter:4000',
+      thirdpartyCallbackUrl: 'http://dfspb-thirdparty-scheme-adapter-inbound:4005',
       parties: [
         {
           // TODO: detailed account list!

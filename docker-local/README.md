@@ -87,6 +87,16 @@ docker-compose ps
 
 It may take a little while for the services to healthy.
 
+> ***Note:** Docker networking issues on Linux*
+> On some linux hosts, we've noticed issues with networking between containers
+> The workaround for now is to add an `extra_hosts` entry for some containers
+> Which adds entries to the container's `/etc/hosts` file, allowing containers to
+> communicate on the host network (is that right?)
+> This was causing issues on other machines (sigh), so we are now trying to use
+> docker compose file composition to get around this issue. 
+> Use:
+> `docker-compose -f docker-compose.yml -f docker-compose.linux.yml up -d`
+> to start docker-local with additional `extra_hosts` entries.
 
 ### Logging:
 

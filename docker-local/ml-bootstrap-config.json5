@@ -17,9 +17,8 @@
     {
       id: 'dfspa',
       type: 'DFSP',
-      // TODO: double check these!
       simulatorAdminUrl: 'http://localhost:9003',
-      fspiopCallbackUrl: 'http://localhost:5000',
+      fspiopCallbackUrl: 'http://localhost:5005',
       thirdpartyCallbackUrl: 'n/a',
       parties: [
         {
@@ -38,9 +37,8 @@
     {
       id: 'dfspa',
       type: 'DFSP',
-      // TODO: double check these!
       simulatorAdminUrl: 'http://localhost:10003',
-      fspiopCallbackUrl: 'http://localhost:6000',
+      fspiopCallbackUrl: 'http://localhost:6005',
       thirdpartyCallbackUrl: 'n/a',
       parties: [
         {
@@ -56,7 +54,12 @@
         },
       ]
     },
-    
-    // TODO: reinstate PISP Steps!!!
+    {
+      id: 'pispa',
+      type: 'PISP',
+      // TODO: double check!
+      fspiopCallbackUrl: 'http://localhost:7000',
+      thirdpartyCallbackUrl: 'http://localhost:7005'
+    },
   ]
 }

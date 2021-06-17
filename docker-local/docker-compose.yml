@@ -362,7 +362,7 @@ services:
       interval: 15s
 
   ## DFSP A
-  dfspa-backend:
+  dfspa-backend: 
     image: "mojaloop/mojaloop-simulator:v11.3.0.7-pisp"
     # build:
     #   context: ../../mojaloop-simulator
@@ -375,6 +375,8 @@ services:
       - "9000:3000"
       - "9002:3002"
       - "9003:3003"
+    networks:
+      - mojaloop-net
 
   dfspa-sdk-scheme-adapter:
     image: "mojaloop/sdk-scheme-adapter:v11.10.1.3-pisp"

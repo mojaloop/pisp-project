@@ -10,8 +10,8 @@
     centralLedgerAdmin: 'http://localhost:3001',
   },
   oracles: [
-    { oracleIdType: "MSISDN", endpoint: "localhost:8444"},
-    { oracleIdType: "CONSENT", endpoint: "localhost:16000"}
+    { oracleIdType: "MSISDN", endpoint: "http://simulator:8444"},
+    { oracleIdType: "CONSENT", endpoint: "http://als-consent-oracle:3000"}
   ],
   participants: [
     {
@@ -41,17 +41,17 @@
       fspiopCallbackUrl: 'http://dfspa-sdk-scheme-adapter:4000',
       thirdpartyCallbackUrl: 'http://dfspb-thirdparty-scheme-adapter-inbound:4005',
       parties: [
-        {
-          // TODO: detailed account list!
-          displayName: "Bob Babirusa",
-          firstName: "Bob",
-          middleName: "O",
-          lastName: "Babirusa",
-          dateOfBirth: "1970-01-01",
-          idType: "MSISDN",
-          idValue: "987654321"
+        // {
+        //   // TODO: detailed account list!
+        //   displayName: "Bob Babirusa",
+        //   firstName: "Bob",
+        //   middleName: "O",
+        //   lastName: "Babirusa",
+        //   dateOfBirth: "1970-01-01",
+        //   idType: "MSISDN",
+        //   idValue: "987654321"
           
-        },
+        // },
       ]
     },
     {

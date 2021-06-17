@@ -38,7 +38,7 @@
       id: 'dfspa',
       type: 'DFSP',
       simulatorAdminUrl: 'http://localhost:10003',
-      fspiopCallbackUrl: 'http:/dfspa-sdk-scheme-adapter:4000',
+      fspiopCallbackUrl: 'http://dfspa-sdk-scheme-adapter:4000',
       thirdpartyCallbackUrl: 'http://dfspb-thirdparty-scheme-adapter-inbound:4005',
       parties: [
         {

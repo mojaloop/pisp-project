@@ -708,3 +708,15 @@ curl -v  -X  \ POST http://localhost:5002/requestToPayTransfer/70c522c9-0880-40b
     }
 }
 ```
+
+
+#### Simple Party Lookup
+
+```bash
+curl -v localhost:4002/parties/MSISDN/987654321 \
+  -H 'Accept: application/vnd.interoperability.parties+json;version=1' \
+  -H 'Content-Type: application/vnd.interoperability.parties+json;version=1.0' \
+  -H 'FSPIOP-Source: dfspa' \
+  -H 'Date: 2021-01-01'
+
+```

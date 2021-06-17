@@ -387,14 +387,28 @@ You can also use ml-bootstrap to run or rerun certain parts of the bootstrapping
 # seed only hub config
 npx ml-bootstrap -c $PWD/docker-local/ml-bootstrap-config.json5 hub
 
+# Seed only participants
+npx ml-bootstrap -c $PWD/docker-local/ml-bootstrap-config.json5 participants
 
-
+# Seed only parties
+npx ml-bootstrap -c $PWD/docker-local/ml-bootstrap-config.json5 parties
 ```
 
 You can also specify a specific version of ml-boostrap:
 
 ```bash
 npx ml-bootstrap@0.2.6 -c $PWD/docker-local/ml-bootstrap-config.json5
+```
+
+
+### Handy Snippets
+
+```bash
+# check the parties registered at a simulator:
+curl localhost:9003/repository/parties 
+
+# expected response
+# [{"displayName":"Alice Alpaca","firstName":"Alice","middleName":"K","lastName":"Alpaca","dateOfBirth":"1970-01-01","idType":"MSISDN","idValue":"123456789"}]
 ```
 
 ## P2P Examples

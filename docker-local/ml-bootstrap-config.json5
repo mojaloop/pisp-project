@@ -15,6 +15,16 @@
   ],
   participants: [
     {
+      id: 'centralAuth',
+      // TODO: make another type for auth-service...
+      type: 'DFSP_SUPPORTING_PISP',
+      simulatorAdminUrl: 'n/a',
+      // TODO: maybe this should be 5050?
+      fspiopCallbackUrl: 'http://auth-service:5000',
+      thirdpartyCallbackUrl: 'http://auth-service:5000',
+      parties: []
+    },
+    {
       id: 'dfspa',
       type: 'DFSP_SUPPORTING_PISP',
       simulatorAdminUrl: 'http://localhost:9003',

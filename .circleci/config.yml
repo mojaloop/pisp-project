@@ -106,13 +106,12 @@ jobs:
             docker-compose pull
             docker-compose up -d
 
-            # TODO: remove this hack!
-            sleep 200
-
             docker-compose ps
 
             # wait for services to be up and running
             npm run wait-4-docker
+
+            docker logs account-lookup-service
 
             # seed the environment
             npm run reseed:docker-local-new

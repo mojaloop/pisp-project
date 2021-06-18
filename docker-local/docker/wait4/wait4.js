@@ -94,8 +94,8 @@ async function wrapWithRetries (method, waitJob, retries, waitTimeMs) {
       // let retry wait job again
       return new Promise((resolve) => {
         waitJob.retries = (waitJob.retries || 0) + 1
-        // Wait just a little bit longer each time...
-        setTimeout(() => resolve(wrapWithRetries(method, waitJob, retries - 1, Math.floor(waitTimeMs * 1.5))), waitTimeMs)
+        // Wait just a little bit longer each time.
+        setTimeout(() => resolve(wrapWithRetries(method, waitJob, retries - 1, waitTimeMs * 1.5)), waitTimeMs)
       })
     }
     // no more retries left

@@ -2,9 +2,11 @@
 # on linux, start docker-local with the following command
 #
 # docker-compose -f docker-compose.yml -f docker-compose.linux.yml up -d
-
-# TODO: will the health checks be broken on these environments now as well?
-# How do we get around that if so? And what about the wait4 scripts? Will they also fail?
+# 
+# I suspect that with some of the recent changes to the way containers refer to one another inside the
+# docker-local environment, this will no longer be needed. Please delete this file if you are reading this message
+# past July and we haven't run into issues...
+# 
 
 version: "3.7"
 

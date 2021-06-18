@@ -7,7 +7,7 @@ networks:
 services:
   ## Switch
   central-ledger:
-    image: mojaloop/central-ledger:v13.6.0
+    image: mojaloop/central-ledger:v13.11.1
     container_name: central-ledger
     command: sh -c "/opt/central-ledger/wait4/wait4.js central-ledger && node src/api/index.js"
     ports:
@@ -69,7 +69,7 @@ services:
     user: root
 
   ml-api-adapter:
-    image: mojaloop/ml-api-adapter:v11.1.5
+    image: mojaloop/ml-api-adapter:v11.1.6
     container_name: ml-api-adapter
     command: sh -c "/opt/ml-api-adapter/wait4/wait4.js ml-api-adapter && node src/api/index.js"
     ports:
@@ -336,9 +336,24 @@ services:
     #   retries: 30
     #   start_period: 30s
     #   interval: 15s
-
+  
+  auth-service-testing-ui:
+    image: mojaloop/ml-testing-toolkit-ui:v11.8.4.2-pisp
+    container_name: auth-service-testing-ui
+    ports:
+      - "27060:6060"
+    environment:
+      - API_BASE_URL=http://auth-service:5000
+      - AUTH_ENABLED=FALSE
+      - TP_SIM_URL=http://auth-service:5050
+    command:
+      - sh
+      - /usr/share/nginx/start.sh
+    networks:
+      - mojaloop-net
+    
   thirdparty-api-adapter:
-    image: "mojaloop/thirdparty-api-adapter:v11.18.3"
+    image: "mojaloop/thirdparty-api-adapter:v11.19.0"
     # build:
     #  context: https://github.com/mojaloop/thirdparty-api-adapter.git#chore/branch
     #  dockerfile: ./Dockerfile
@@ -362,8 +377,8 @@ services:
       interval: 15s
 
   ## DFSP A
-  dfspa-backend: 
-    image: "mojaloop/mojaloop-simulator:v11.3.0.7-pisp"
+  dfspa-backend:
+    image: "mojaloop/mojaloop-simulator:v11.3.0.8-pisp"
     # build:
     #   context: ../../mojaloop-simulator
     #   dockerfile: ./Dockerfile
@@ -400,10 +415,10 @@ services:
     restart: always
 
   dfspa-thirdparty-scheme-adapter-inbound:
-    image: "mojaloop/thirdparty-scheme-adapter:v11.39.0"
-    # build:
-    #   context: ../../thirdparty-scheme-adapter
-    #   dockerfile: ./docker/Dockerfile
+    image: "mojaloop/thirdparty-scheme-adapter:v11.39.1"
+    #build:
+    #  context: https://github.com/username/thirdparty-scheme-adapter.git#branch
+    #  dockerfile: ./docker/Dockerfile
     container_name: dfspa-thirdparty-scheme-adapter-inbound
     environment:
       - NODE_ENV=e2e
@@ -429,10 +444,10 @@ services:
       interval: 30s
 
   dfspa-thirdparty-scheme-adapter-outbound:
-    image: "mojaloop/thirdparty-scheme-adapter:v11.39.0"
-    # build:
-    #   context: ../../thirdparty-scheme-adapter
-    #   dockerfile: ./docker/Dockerfile
+    image: "mojaloop/thirdparty-scheme-adapter:v11.39.1"
+    #build:
+    #  context: https://github.com/username/thirdparty-scheme-adapter.git#branch
+    #  dockerfile: ./docker/Dockerfile
     container_name: dfspa-thirdparty-scheme-adapter-outbound
     environment:
       - NODE_ENV=e2e
@@ -466,7 +481,7 @@ services:
 
   ## DFSP B
   dfspb-backend:
-    image: "mojaloop/mojaloop-simulator:v11.3.0.7-pisp"
+    image: "mojaloop/mojaloop-simulator:v11.3.0.8-pisp"
     container_name: dfspb-backend
     env_file: ./dfsp_b/dfsp_b_backend.env
     volumes:
@@ -500,10 +515,10 @@ services:
     restart: always
 
   dfspb-thirdparty-scheme-adapter-inbound:
-    image: "mojaloop/thirdparty-scheme-adapter:v11.39.0"
-    # build:
-    #   context: ../../thirdparty-scheme-adapter
-    #   dockerfile: ./docker/Dockerfile
+    image: "mojaloop/thirdparty-scheme-adapter:v11.39.1"
+    #build:
+    #  context: https://github.com/username/thirdparty-scheme-adapter.git#branch
+    #  dockerfile: ./docker/Dockerfile
     container_name: dfspb-thirdparty-scheme-adapter-inbound
     environment:
       - NODE_ENV=e2e
@@ -529,10 +544,10 @@ services:
       interval: 30s
 
   dfspb-thirdparty-scheme-adapter-outbound:
-    image: "mojaloop/thirdparty-scheme-adapter:v11.39.0"
-    # build:
-    #   context: ../../thirdparty-scheme-adapter
-    #   dockerfile: ./docker/Dockerfile
+    image: "mojaloop/thirdparty-scheme-adapter:v11.39.1"
+    #build:
+    #  context: https://github.com/username/thirdparty-scheme-adapter.git#branch
+    #  dockerfile: ./docker/Dockerfile
     container_name: dfspb-thirdparty-scheme-adapter-outbound
     environment:
       - NODE_ENV=e2e
@@ -566,7 +581,7 @@ services:
 
   ## PISP
   pisp-backend:
-    image: "mojaloop/mojaloop-simulator:v11.3.0.7-pisp"
+    image: "mojaloop/mojaloop-simulator:v11.3.0.8-pisp"
     container_name: pisp-backend
     env_file: ./pisp/pisp_backend.env
     volumes:
@@ -598,10 +613,10 @@ services:
     restart: always
 
   pisp-thirdparty-scheme-adapter-inbound:
-    image: "mojaloop/thirdparty-scheme-adapter:v11.39.0"
-    # build:
-    #   context: ../../thirdparty-scheme-adapter
-    #   dockerfile: ./docker/Dockerfile
+    image: "mojaloop/thirdparty-scheme-adapter:v11.39.1"
+    #build:
+    #  context: https://github.com/username/thirdparty-scheme-adapter.git#branch
+    #  dockerfile: ./docker/Dockerfile
     container_name: pisp-thirdparty-scheme-adapter-inbound
     environment:
       - NODE_ENV=e2e
@@ -628,10 +643,10 @@ services:
       interval: 30s
 
   pisp-thirdparty-scheme-adapter-outbound:
-    image: "mojaloop/thirdparty-scheme-adapter:v11.39.0"
-    # build:
-    #   context: ../../thirdparty-scheme-adapter
-    #   dockerfile: ./docker/Dockerfile
+    image: "mojaloop/thirdparty-scheme-adapter:v11.39.1"
+    #build:
+    #  context: https://github.com/username/thirdparty-scheme-adapter.git#branch
+    #  dockerfile: ./docker/Dockerfile
     container_name: pisp-thirdparty-scheme-adapter-outbound
     environment:
       - NODE_ENV=e2e
@@ -665,3 +680,4 @@ services:
     restart: always
     ports:
       - "6379:6379"
+

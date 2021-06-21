@@ -10,7 +10,7 @@
     centralLedgerAdmin: 'http://localhost:3001',
   },
   oracles: [
-    { oracleIdType: "MSISDN", endpoint: "http://simulator:8444"},
+    { oracleIdType: "MSISDN", endpoint: "http://simulator:8444/oracle"},
     { oracleIdType: "CONSENT", endpoint: "http://als-consent-oracle:3000"}
   ],
   participants: [

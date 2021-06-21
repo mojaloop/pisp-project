@@ -101,6 +101,9 @@ describe('Account Linking', (): void => {
 
       // store the consentId for future assertion
       consentId = consentRequestsResponse.data.consent.consentId
+
+      // Print consentId for debugging purposes:
+      console.log(`consentRequestId: ${consentRequestId} ---> consentId: ${consentId}`)
     })
 
     it('/linking/request-consent/consentRequestId/pass-credential should be success', async (): Promise<void> => {

@@ -729,7 +729,6 @@ curl -v localhost:4002/parties/MSISDN/987654321 \
 
 
 # Update auth-service with consent
-
 curl -v -X POST localhost:26000/consents \
     -H 'content-type application/vnd.interoperability.thirdparty+json;version=1.0'\
     -H 'date: Fri, 18 Jun 2021 05:22:03 GMT'\
@@ -755,5 +754,27 @@ curl -v -X POST localhost:26000/consents \
             }
         ],
     }'
+
+
+# create a participant entry with the ALS
+curl -v -X POST localhost:4002/participants/CONSENT/123456789 \
+      -H 'Accept: application/vnd.interoperability.participants+json;version=1' \
+    -H 'Content-Type: application/vnd.interoperability.participants+json;version=1.0' \
+    -H 'date: Fri, 18 Jun 2021 05:22:03 GMT'\
+    -H 'fspiop-source: centralAuth'\
+    -d '{
+        "fspId": "centralAuth"
+    }'
+
+
+
+
+# Check the participants with the ALS Consent Oracle
+curl -v localhost:16000/participants/CONSENT/81ca21ce-ad62-4e8c-a321-f21cad2bc28b \
+  -H 'Accept: application/vnd.interoperability.participants+json;version=1' \
+  -H 'Content-Type: application/vnd.interoperability.participants+json;version=1.0' \
+  -H 'FSPIOP-Source: als' \
+  -H 'Date: 2021-01-01'
+
 
 ```

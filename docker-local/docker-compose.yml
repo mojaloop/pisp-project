@@ -343,9 +343,11 @@ services:
     ports:
       - "27060:6060"
     environment:
-      - API_BASE_URL=http://auth-service:5000
+      # this must be external, since we will load the 
+      # webpage on the host machine's browser 
+      - API_BASE_URL=http://localhost:26050
       - AUTH_ENABLED=FALSE
-      - TP_SIM_URL=http://auth-service:5050
+      - TP_SIM_URL=http://localhost:26000
     command:
       - sh
       - /usr/share/nginx/start.sh

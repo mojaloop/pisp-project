@@ -727,4 +727,33 @@ curl -v localhost:4002/parties/MSISDN/987654321 \
   -H 'FSPIOP-Source: dfspa' \
   -H 'Date: 2021-01-01'
 
+
+# Update auth-service with consent
+
+curl -v -X POST localhost:26000/consents \
+    -H 'content-type application/vnd.interoperability.thirdparty+json;version=1.0'\
+    -H 'date: Fri, 18 Jun 2021 05:22:03 GMT'\
+    -H 'fspiop-source: dfspa'\
+    -H 'fspiop-destination: centralAuth'\
+    -H 'accept: application/vnd.interoperability.thirdparty+json;version=1' \
+    -d '{
+        "consentId": "d3f2e02c-10f4-4f90-9da7-9f8e3714f393",
+        "scopes": [
+            {
+            "accountId": "dfspa.username.1234",
+            "actions": [
+                "accounts.getBalance",
+                "accounts.transfer"
+            ]
+            },
+            {
+            "accountId": "dfspa.username.5678",
+            "actions": [
+                "accounts.getBalance",
+                "accounts.transfer"
+            ]
+            }
+        ],
+    }'
+
 ```

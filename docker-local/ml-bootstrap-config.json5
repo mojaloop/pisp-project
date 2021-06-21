@@ -1,0 +1,76 @@
+// This is a config file based on 
+// https://github.com/vessels-tech/ml-bootstrap/blob/master/example/default.json5
+{
+  currency: 'USD',
+  urls: {
+    // Note: we don't set `fspiop` here, since docker-local isn't running behind an api gateway
+    // that means ml-bootstrap needs to talk individually to the components making up the fspiop api.
+    // For now, the only part of the fspiop-api ml-bootstrap needs to know about is /parties and /participants
+    alsEndpoint: 'http://localhost:4002',
+    alsAdmin: 'http://localhost:4001',
+    centralLedgerAdmin: 'http://localhost:3001',
+  },
+  oracles: [
+    { oracleIdType: "MSISDN", endpoint: "http://simulator:8444/oracle"},
+    { oracleIdType: "CONSENT", endpoint: "http://als-consent-oracle:3000"}
+  ],
+  participants: [
+    {
+      id: 'centralAuth',
+      // TODO: make another type for auth-service...
+      type: 'DFSP_SUPPORTING_PISP',
+      simulatorAdminUrl: 'n/a',
+      // TODO: maybe this should be 5050?
+      fspiopCallbackUrl: 'http://auth-service:5000',
+      thirdpartyCallbackUrl: 'http://auth-service:5000',
+      parties: []
+    },
+    {
+      id: 'dfspa',
+      type: 'DFSP_SUPPORTING_PISP',
+      simulatorAdminUrl: 'http://localhost:9003',
+      fspiopCallbackUrl: 'http://dfspa-sdk-scheme-adapter:4000',
+      thirdpartyCallbackUrl: 'http://dfspa-thirdparty-scheme-adapter-inbound:4005',
+      parties: [
+        {
+          // TODO: detailed account list!
+          displayName: "Alice Alpaca",
+          firstName: "Alice",
+          middleName: "K",
+          lastName: "Alpaca",
+          dateOfBirth: "1970-01-01",
+          idType: "MSISDN",
+          idValue: "123456789"
+          
+        },
+      ]
+    },
+    {
+      id: 'dfspb',
+      // TODO: should this be `DFSP_SUPPORTING_PISP`?
+      type: 'DFSP',
+      simulatorAdminUrl: 'http://localhost:10003',
+      fspiopCallbackUrl: 'http://dfspb-sdk-scheme-adapter:4000',
+      thirdpartyCallbackUrl: 'http://dfspb-thirdparty-scheme-adapter-inbound:4005',
+      parties: [
+        {
+          // TODO: detailed account list!
+          displayName: "Bob Babirusa",
+          firstName: "Bob",
+          middleName: "O",
+          lastName: "Babirusa",
+          dateOfBirth: "1970-01-01",
+          idType: "MSISDN",
+          idValue: "987654321"   
+        },
+      ]
+    },
+    {
+      id: 'pisp',
+      type: 'PISP',
+      // TODO: double check!
+      fspiopCallbackUrl: 'http://pisp-sdk-scheme-adapter:4000',
+      thirdpartyCallbackUrl: 'http://pisp-thirdparty-scheme-adapter-inbound:4005'
+    },
+  ]
+}

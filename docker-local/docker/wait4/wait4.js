@@ -26,7 +26,7 @@ async function main () {
 
     // merge config with environment or defaults
     config.retries = parseInt(process.env.WAIT4_RETRIES || config.retries || 10)
-    config.waitMs = parseInt(process.env.WAIT4_WAIT_MS || config.waitMs || 1000)
+    config.waitMs = parseInt(process.env.WAIT4_WAIT_MS || config.waitMs || 2000)
 
     // wait for services connections or paradox to be ready
     const waitresses = getWaiters(service.wait4, config)
@@ -94,7 +94,8 @@ async function wrapWithRetries (method, waitJob, retries, waitTimeMs) {
       // let retry wait job again
       return new Promise((resolve) => {
         waitJob.retries = (waitJob.retries || 0) + 1
-        setTimeout(() => resolve(wrapWithRetries(method, waitJob, retries - 1, waitTimeMs)), waitTimeMs)
+        // Wait just a little bit longer each time.
+        setTimeout(() => resolve(wrapWithRetries(method, waitJob, retries - 1, waitTimeMs * 1.5)), waitTimeMs)
       })
     }
     // no more retries left

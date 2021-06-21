@@ -86,7 +86,10 @@ jobs:
       - restore_cache:
           keys:
             - dependency-cache-{{ checksum "package-lock.json" }}
-      # TODO: set up /etc/hosts!
+      - run:
+          name: Make a test output file
+          command: |
+            mkdir -p /tmp/test/results
       - run:
           name: Add /etc/hosts entries
           command: |
@@ -106,26 +109,28 @@ jobs:
             docker-compose pull
             docker-compose up -d
 
+            # Check straight away to see if any containers have exited
+            docker-compose ps
+
             # wait for services to be up and running
             npm run wait-4-docker
 
             # seed the environment
-            npm run reseed
+            npm run reseed:docker-local-new
       - run:
           name: Run the E2E tests
           command: |
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             npm run test:e2e -- --reporters=default --reporters=jest-junit
       - run:
-          name: prepare test/results
+          name: prepare test results
           command: |
-            mkdir -p test/results
-            mv junit.xml test/results
+            mv junit.xml /tmp/test/results
       - store_artifacts:
-          path: ./test/results
+          path: /tmp/test/results
           prefix: test
       - store_test_results:
-          path: ./test/results
+          path: /tmp/test/results
 
   test-contract:
     executor: default-machine

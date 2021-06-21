@@ -1,0 +1,356 @@
+# This is an extension docker-compose file that contains `extra_hosts` entries to work arouind entworking
+# on linux, start docker-local with the following command
+#
+# docker-compose -f docker-compose.yml -f docker-compose.linux.yml up -d
+# 
+# I suspect that with some of the recent changes to the way containers refer to one another inside the
+# docker-local environment, this will no longer be needed. Please delete this file if you are reading this message
+# past July and we haven't run into issues...
+# 
+
+version: "3.7"
+
+services:
+  ## Switch
+  central-ledger: 
+    extra_hosts:
+      - "moja-simulator.local:172.17.0.1"
+      - "simulator:172.17.0.1"
+      - "host.docker.internal:172.17.0.1"
+      - "simulator.local:172.17.0.1"
+
+  # objstore:
+  #   image: mongo:latest
+  #   container_name: objstore
+  #   # Disable logging, this container is not that important and rather verbose
+  #   logging:
+  #     driver: none
+  #   ports:
+  #     - "27017:27017"
+  #   networks:
+  #     - mojaloop-net
+  #   healthcheck:
+  #     test: echo 'db.runCommand("ping").ok' | mongo localhost:27017/test --quiet
+  #     interval: 10s
+  #     timeout: 10s
+  #     retries: 5
+  #     start_period: 40s
+
+  quoting-service:
+    extra_hosts:
+      - "moja-simulator.local:172.17.0.1"
+      - "simulator:172.17.0.1"
+      - "host.docker.internal:172.17.0.1"
+      - "simulator.local:172.17.0.1"
+
+  ml-api-adapter:
+    extra_hosts:
+      - "central-ledger.local:172.17.0.1"
+      - "central-ledger:172.17.0.1"
+      - "simulator:172.17.0.1"
+      - "moja-simulator.local:172.17.0.1"
+      - "host.docker.internal:172.17.0.1"
+      - "simulator.local:172.17.0.1"
+
+
+  simulator:
+    extra_hosts:
+      - "central-ledger.local:172.17.0.1"
+      - "central-settlement.local:172.17.0.1"
+      - "ml-api-adapter.local:172.17.0.1"
+      - "account-lookup-service.local:172.17.0.1"
+      - "account-lookup-service-admin.local:172.17.0.1"
+      - "quoting-service.local:172.17.0.1"
+      - "moja-simulator.local:172.17.0.1"
+      - "central-ledger:172.17.0.1"
+      - "central-settlement:172.17.0.1"
+      - "ml-api-adapter:172.17.0.1"
+      - "account-lookup-service:172.17.0.1"
+      - "account-lookup-service-admin:172.17.0.1"
+      - "quoting-service:172.17.0.1"
+      - "simulator:172.17.0.1"
+      - "host.docker.internal:172.17.0.1"
+      - "simulator.local:172.17.0.1"
+      - "transaction-request-service:172.17.0.1"
+
+  transaction-requests-service:
+    extra_hosts:
+      - "central-ledger.local:172.17.0.1"
+      - "central-settlement.local:172.17.0.1"
+      - "ml-api-adapter.local:172.17.0.1"
+      - "account-lookup-service.local:172.17.0.1"
+      - "account-lookup-service-admin.local:172.17.0.1"
+      - "quoting-service.local:172.17.0.1"
+      - "moja-simulator.local:172.17.0.1"
+      - "central-ledger:172.17.0.1"
+      - "central-settlement:172.17.0.1"
+      - "ml-api-adapter:172.17.0.1"
+      - "account-lookup-service:172.17.0.1"
+      - "account-lookup-service-admin:172.17.0.1"
+      - "quoting-service:172.17.0.1"
+      - "simulator:172.17.0.1"
+      - "host.docker.internal:172.17.0.1"
+      - "simulator.local:172.17.0.1"
+
+  account-lookup-service:
+    extra_hosts:
+      - "moja-simulator.local:172.17.0.1"
+      - "simulator:172.17.0.1"
+      - "host.docker.internal:172.17.0.1"
+      - "simulator.local:172.17.0.1"
+      - "transaction-request-service:172.17.0.1"
+      - "central-ledger:172.17.0.1"
+      - "als-consent-oracle:172.17.0.1"
+
+  participant-list-service:
+    extra_hosts:
+      - "thirdparty-api-adapter:172.17.0.1"
+      - "ml-testing-toolkit:172.17.0.1"
+      - "ml-testing-toolkit-ui:172.17.0.1"
+
+  ml-testing-toolkit-ui:
+    extra_hosts:
+      - "ml-testing-toolkit:172.17.0.1"
+
+  auth-service:
+    extra_hosts:
+      - "thirdparty-api-adapter:172.17.0.1"
+
+  thirdparty-api-adapter:
+    extra_hosts:
+      - "central-ledger.local:172.17.0.1"
+      - "central-settlement.local:172.17.0.1"
+      - "ml-api-adapter.local:172.17.0.1"
+      - "account-lookup-service.local:172.17.0.1"
+      - "account-lookup-service-admin.local:172.17.0.1"
+      - "quoting-service.local:172.17.0.1"
+      - "moja-simulator.local:172.17.0.1"
+      - "central-ledger:172.17.0.1"
+      - "central-settlement:172.17.0.1"
+      - "ml-api-adapter:172.17.0.1"
+      - "account-lookup-service:172.17.0.1"
+      - "account-lookup-service-admin:172.17.0.1"
+      - "quoting-service:172.17.0.1"
+      - "simulator:172.17.0.1"
+      - "host.docker.internal:172.17.0.1"
+      - "simulator.local:172.17.0.1"
+      - "transaction-request-service:172.17.0.1"
+      - "pisp-backend:172.17.0.1"
+      - "participant-list-service:172.17.0.1"
+
+  ## DFSP A
+  dfspa-backend:
+    extra_hosts:
+      - "dfspa-sdk-scheme-adapter:172.17.0.1"
+      - "dfspa-thirdparty-scheme-adapter-inbound:172.17.0.1"
+      - "dfspa-thirdparty-scheme-adapter-outbound:172.17.0.1"
+
+  dfspa-sdk-scheme-adapter:
+    extra_hosts:
+      - "central-ledger.local:172.17.0.1"
+      - "central-settlement.local:172.17.0.1"
+      - "ml-api-adapter.local:172.17.0.1"
+      - "account-lookup-service.local:172.17.0.1"
+      - "account-lookup-service-admin.local:172.17.0.1"
+      - "quoting-service.local:172.17.0.1"
+      - "moja-simulator.local:172.17.0.1"
+      - "central-ledger:172.17.0.1"
+      - "central-settlement:172.17.0.1"
+      - "ml-api-adapter:172.17.0.1"
+      - "account-lookup-service:172.17.0.1"
+      - "account-lookup-service-admin:172.17.0.1"
+      - "quoting-service:172.17.0.1"
+      - "simulator:172.17.0.1"
+      - "host.docker.internal:172.17.0.1"
+      - "simulator.local:172.17.0.1"
+      - "transaction-request-service:172.17.0.1"
+      - "dfspa-backend:172.17.0.1"
+
+  dfspa-thirdparty-scheme-adapter-inbound:
+    extra_hosts:
+      - "central-ledger.local:172.17.0.1"
+      - "central-settlement.local:172.17.0.1"
+      - "ml-api-adapter.local:172.17.0.1"
+      - "account-lookup-service.local:172.17.0.1"
+      - "account-lookup-service-admin.local:172.17.0.1"
+      - "quoting-service.local:172.17.0.1"
+      - "moja-simulator.local:172.17.0.1"
+      - "central-ledger:172.17.0.1"
+      - "central-settlement:172.17.0.1"
+      - "ml-api-adapter:172.17.0.1"
+      - "account-lookup-service:172.17.0.1"
+      - "account-lookup-service-admin:172.17.0.1"
+      - "quoting-service:172.17.0.1"
+      - "simulator:172.17.0.1"
+      - "host.docker.internal:172.17.0.1"
+      - "simulator.local:172.17.0.1"
+      - "transaction-request-service:172.17.0.1"
+      - "dfspa-backend:172.17.0.1"
+      - "dsfpa-sdk-scheme-adapter:172.17.0.1"
+      - "pisp-thirdparty-scheme-adapter-inbound:172.17.0.1"
+      - "thirdparty-api-adapter:172.17.0.1"
+
+  dfspa-thirdparty-scheme-adapter-outbound:
+    extra_hosts:
+      - "central-ledger.local:172.17.0.1"
+      - "central-settlement.local:172.17.0.1"
+      - "ml-api-adapter.local:172.17.0.1"
+      - "account-lookup-service.local:172.17.0.1"
+      - "account-lookup-service-admin.local:172.17.0.1"
+      - "quoting-service.local:172.17.0.1"
+      - "moja-simulator.local:172.17.0.1"
+      - "central-ledger:172.17.0.1"
+      - "central-settlement:172.17.0.1"
+      - "ml-api-adapter:172.17.0.1"
+      - "account-lookup-service:172.17.0.1"
+      - "account-lookup-service-admin:172.17.0.1"
+      - "quoting-service:172.17.0.1"
+      - "simulator:172.17.0.1"
+      - "host.docker.internal:172.17.0.1"
+      - "simulator.local:172.17.0.1"
+      - "transaction-request-service:172.17.0.1"
+      - "dfspa-backend:172.17.0.1"
+      - "thirdparty-api-adapter:172.17.0.1"
+
+  ## DFSP B
+  dfspb-backend:
+    extra_hosts:
+      - "dfspb-sdk-scheme-adapter:172.17.0.1"
+      - "dfspb-thirdparty-scheme-adapter-inbound:172.17.0.1"
+      - "dfspb-thirdparty-scheme-adapter-outbound:172.17.0.1"
+
+  dfspb-sdk-scheme-adapter:
+    extra_hosts:
+      - "central-ledger.local:172.17.0.1"
+      - "central-settlement.local:172.17.0.1"
+      - "ml-api-adapter.local:172.17.0.1"
+      - "account-lookup-service.local:172.17.0.1"
+      - "account-lookup-service-admin.local:172.17.0.1"
+      - "quoting-service.local:172.17.0.1"
+      - "moja-simulator.local:172.17.0.1"
+      - "central-ledger:172.17.0.1"
+      - "central-settlement:172.17.0.1"
+      - "ml-api-adapter:172.17.0.1"
+      - "account-lookup-service:172.17.0.1"
+      - "account-lookup-service-admin:172.17.0.1"
+      - "quoting-service:172.17.0.1"
+      - "simulator:172.17.0.1"
+      - "host.docker.internal:172.17.0.1"
+      - "simulator.local:172.17.0.1"
+      - "transaction-request-service:172.17.0.1"
+      - "dfspb-backend:172.17.0.1"
+
+  dfspb-thirdparty-scheme-adapter-inbound:
+    extra_hosts:
+      - "central-ledger.local:172.17.0.1"
+      - "central-settlement.local:172.17.0.1"
+      - "ml-api-adapter.local:172.17.0.1"
+      - "account-lookup-service.local:172.17.0.1"
+      - "account-lookup-service-admin.local:172.17.0.1"
+      - "quoting-service.local:172.17.0.1"
+      - "moja-simulator.local:172.17.0.1"
+      - "central-ledger:172.17.0.1"
+      - "central-settlement:172.17.0.1"
+      - "ml-api-adapter:172.17.0.1"
+      - "account-lookup-service:172.17.0.1"
+      - "account-lookup-service-admin:172.17.0.1"
+      - "quoting-service:172.17.0.1"
+      - "simulator:172.17.0.1"
+      - "host.docker.internal:172.17.0.1"
+      - "simulator.local:172.17.0.1"
+      - "transaction-request-service:172.17.0.1"
+      - "dfspb-backend:172.17.0.1"
+      - "thirdparty-api-adapter:172.17.0.1"
+
+  dfspb-thirdparty-scheme-adapter-outbound:
+    extra_hosts:
+      - "central-ledger.local:172.17.0.1"
+      - "central-settlement.local:172.17.0.1"
+      - "ml-api-adapter.local:172.17.0.1"
+      - "account-lookup-service.local:172.17.0.1"
+      - "account-lookup-service-admin.local:172.17.0.1"
+      - "quoting-service.local:172.17.0.1"
+      - "moja-simulator.local:172.17.0.1"
+      - "central-ledger:172.17.0.1"
+      - "central-settlement:172.17.0.1"
+      - "ml-api-adapter:172.17.0.1"
+      - "account-lookup-service:172.17.0.1"
+      - "account-lookup-service-admin:172.17.0.1"
+      - "quoting-service:172.17.0.1"
+      - "simulator:172.17.0.1"
+      - "host.docker.internal:172.17.0.1"
+      - "simulator.local:172.17.0.1"
+      - "transaction-request-service:172.17.0.1"
+      - "dfspb-backend:172.17.0.1"
+
+  ## PISP
+  pisp-backend:
+    extra_hosts:
+      - "pisp-sdk-scheme-adapter:172.17.0.1"
+      - "pisp-thirdparty-scheme-adapter-inbound:172.17.0.1"
+      - "pisp-thirdparty-scheme-adapter-outbound:172.17.0.1"
+
+  pisp-sdk-scheme-adapter:
+    extra_hosts:
+      - "central-ledger.local:172.17.0.1"
+      - "central-settlement.local:172.17.0.1"
+      - "ml-api-adapter.local:172.17.0.1"
+      - "account-lookup-service.local:172.17.0.1"
+      - "account-lookup-service-admin.local:172.17.0.1"
+      - "quoting-service.local:172.17.0.1"
+      - "moja-simulator.local:172.17.0.1"
+      - "central-ledger:172.17.0.1"
+      - "central-settlement:172.17.0.1"
+      - "ml-api-adapter:172.17.0.1"
+      - "account-lookup-service:172.17.0.1"
+      - "account-lookup-service-admin:172.17.0.1"
+      - "quoting-service:172.17.0.1"
+      - "simulator:172.17.0.1"
+      - "host.docker.internal:172.17.0.1"
+      - "simulator.local:172.17.0.1"
+      - "transaction-request-service:172.17.0.1"
+      - "pisp-backend:172.17.0.1"
+
+  pisp-thirdparty-scheme-adapter-inbound:
+    extra_hosts:
+      - "central-ledger.local:172.17.0.1"
+      - "central-settlement.local:172.17.0.1"
+      - "ml-api-adapter.local:172.17.0.1"
+      - "account-lookup-service.local:172.17.0.1"
+      - "account-lookup-service-admin.local:172.17.0.1"
+      - "quoting-service.local:172.17.0.1"
+      - "moja-simulator.local:172.17.0.1"
+      - "central-ledger:172.17.0.1"
+      - "central-settlement:172.17.0.1"
+      - "ml-api-adapter:172.17.0.1"
+      - "account-lookup-service:172.17.0.1"
+      - "account-lookup-service-admin:172.17.0.1"
+      - "quoting-service:172.17.0.1"
+      - "simulator:172.17.0.1"
+      - "host.docker.internal:172.17.0.1"
+      - "simulator.local:172.17.0.1"
+      - "transaction-request-service:172.17.0.1"
+      - "pisp-backend:172.17.0.1"
+
+  pisp-thirdparty-scheme-adapter-outbound:
+    extra_hosts:
+      - "central-ledger.local:172.17.0.1"
+      - "central-settlement.local:172.17.0.1"
+      - "ml-api-adapter.local:172.17.0.1"
+      - "account-lookup-service.local:172.17.0.1"
+      - "account-lookup-service-admin.local:172.17.0.1"
+      - "quoting-service.local:172.17.0.1"
+      - "moja-simulator.local:172.17.0.1"
+      - "central-ledger:172.17.0.1"
+      - "central-settlement:172.17.0.1"
+      - "ml-api-adapter:172.17.0.1"
+      - "account-lookup-service:172.17.0.1"
+      - "account-lookup-service-admin:172.17.0.1"
+      - "quoting-service:172.17.0.1"
+      - "simulator:172.17.0.1"
+      - "host.docker.internal:172.17.0.1"
+      - "simulator.local:172.17.0.1"
+      - "transaction-request-service:172.17.0.1"
+      - "pisp-backend:172.17.0.1"
+      - "pisp-sdk-scheme-adapter:172.17.0.1"
+      - "thirdparty-api-adapter:172.17.0.1"

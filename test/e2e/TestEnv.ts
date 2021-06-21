@@ -70,6 +70,7 @@ const TestEnv: TestEnvType = {
       idValue: '987654321'
     }
   },
+  // TODO: what is the purpose of this? Parties is a confusing term here.
   parties: {
     pisp: 'pisp'
   }

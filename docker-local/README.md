@@ -87,6 +87,16 @@ docker-compose ps
 
 It may take a little while for the services to healthy.
 
+> ***Note:** Docker networking issues on Linux*
+> On some linux hosts, we've noticed issues with networking between containers
+> The workaround for now is to add an `extra_hosts` entry for some containers
+> Which adds entries to the container's `/etc/hosts` file, allowing containers to
+> communicate on the host network (is that right?)
+> This was causing issues on other machines (sigh), so we are now trying to use
+> docker compose file composition to get around this issue. 
+> Use:
+> `docker-compose -f docker-compose.yml -f docker-compose.linux.yml up -d`
+> to start docker-local with additional `extra_hosts` entries.
 
 ### Logging:
 
@@ -109,6 +119,9 @@ docker-compose logs -f pisp-backend  pisp-sdk-scheme-adapter pisp-redis pisp-thi
 ## Create some initial data
 
 ### Set Up Seed Data
+
+> ***Note:** We are also testing out a new method for seeding the docker-local environment*
+> see [Seeding docker-local with ml-bootstrap](#using-ml-bootstrap) below.
 
 #### 1. cd to `postman` directory
 ```bash
@@ -350,6 +363,47 @@ Register a new MSISDN for this dfsp with this initial data
 ./scripts/_08_seed_dfsp_b_msisdn.sh
 ./scripts/_09_seed_dfsp_simulator_msisdn.sh
 ./scripts/_10_seed_pisp_msisdn.sh
+```
+
+## using-ml-bootstrap
+
+ml-bootstrap is a tool for seeding Mojaloop test environments. It replaces various postman collections and environments with a single tool and config file.
+
+- Check out the [`ml-bootstrap-config.json5`](./ml-bootstrap-config.json5) file for a simple, unified place to configure this test environment.
+- Read more about ml-bootstrap [here](https://github.com/vessels-tech/ml-bootstrap)
+
+
+```bash
+# from the docker-local directory
+npx ml-bootstrap -c ./ml-bootstrap-config.json5
+```
+
+You can also use ml-bootstrap to run or rerun certain parts of the bootstrapping, eg.
+```bash
+# seed only hub config
+npx ml-bootstrap -c ./ml-bootstrap-config.json5 hub
+
+# Seed only participants
+npx ml-bootstrap -c ./ml-bootstrap-config.json5 participants
+
+# Seed only parties
+npx ml-bootstrap -c ./ml-bootstrap-config.json5 parties
+```
+
+You can also specify a specific version of ml-boostrap:
+
+```bash
+npx ml-bootstrap@0.2.6 -c ./ml-bootstrap-config.json5
+```
+
+### Handy Snippets
+
+```bash
+# check the parties registered at a simulator:
+curl localhost:9003/repository/parties 
+
+# expected response
+# [{"displayName":"Alice Alpaca","firstName":"Alice","middleName":"K","lastName":"Alpaca","dateOfBirth":"1970-01-01","idType":"MSISDN","idValue":"123456789"}]
 ```
 
 ## P2P Examples
@@ -648,4 +702,77 @@ curl -v  -X  \ POST http://localhost:5002/requestToPayTransfer/70c522c9-0880-40b
         "fulfilment": "PjQaZGeBajwGGv-Oqa2F-gYX21ngMVJZOLc6hxNDS74"
     }
 }
+```
+
+
+#### Simple FSPIOP Calls
+
+```bash
+# create party
+curl -X POST localhost:4002/participants/MSISDN/123456789 \
+  -H 'Accept: application/vnd.interoperability.participants+json;version=1' \
+  -H 'Content-Type: application/vnd.interoperability.participants+json;version=1.0' \
+  -H 'FSPIOP-Source: dfspa' \
+  -H 'Date: 2021-01-01' \
+  -d '{ 
+      "fspId": "dfspa",
+      "currency": "USD"
+  }'
+
+
+# party lookup
+curl -v localhost:4002/parties/MSISDN/987654321 \
+  -H 'Accept: application/vnd.interoperability.parties+json;version=1' \
+  -H 'Content-Type: application/vnd.interoperability.parties+json;version=1.0' \
+  -H 'FSPIOP-Source: dfspa' \
+  -H 'Date: 2021-01-01'
+
+
+# Update auth-service with consent
+curl -v -X POST localhost:26000/consents \
+    -H 'content-type application/vnd.interoperability.thirdparty+json;version=1.0'\
+    -H 'date: Fri, 18 Jun 2021 05:22:03 GMT'\
+    -H 'fspiop-source: dfspa'\
+    -H 'fspiop-destination: centralAuth'\
+    -H 'accept: application/vnd.interoperability.thirdparty+json;version=1' \
+    -d '{
+        "consentId": "d3f2e02c-10f4-4f90-9da7-9f8e3714f393",
+        "scopes": [
+            {
+            "accountId": "dfspa.username.1234",
+            "actions": [
+                "accounts.getBalance",
+                "accounts.transfer"
+            ]
+            },
+            {
+            "accountId": "dfspa.username.5678",
+            "actions": [
+                "accounts.getBalance",
+                "accounts.transfer"
+            ]
+            }
+        ],
+    }'
+
+
+# create a participant entry with the ALS
+curl -v -X POST localhost:4002/participants/CONSENT/123456789 \
+      -H 'Accept: application/vnd.interoperability.participants+json;version=1' \
+    -H 'Content-Type: application/vnd.interoperability.participants+json;version=1.0' \
+    -H 'date: Fri, 18 Jun 2021 05:22:03 GMT'\
+    -H 'fspiop-source: centralAuth'\
+    -d '{
+        "fspId": "centralAuth"
+    }'
+
+
+# Check the participants with the ALS Consent Oracle
+curl -v localhost:16000/participants/CONSENT/81ca21ce-ad62-4e8c-a321-f21cad2bc28b \
+  -H 'Accept: application/vnd.interoperability.participants+json;version=1' \
+  -H 'Content-Type: application/vnd.interoperability.participants+json;version=1.0' \
+  -H 'FSPIOP-Source: als' \
+  -H 'Date: 2021-01-01'
+
+
 ```

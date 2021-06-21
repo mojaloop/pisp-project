@@ -72,5 +72,12 @@
       fspiopCallbackUrl: 'http://pisp-sdk-scheme-adapter:4000',
       thirdpartyCallbackUrl: 'http://pisp-thirdparty-scheme-adapter-inbound:4005'
     },
+    {
+      id: 'pineapplepay',
+      type: 'PISP',
+      // fspiopCallbackUrl: 'http://pisp-sdk-scheme-adapter:4000',
+      fspiopCallbackUrl: 'https://hard-fox-14.loca.lt/mojaloop',
+      thirdpartyCallbackUrl: 'https://hard-fox-14.loca.lt/mojaloop'
+    },
   ]
 }

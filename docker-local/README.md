@@ -767,8 +767,6 @@ curl -v -X POST localhost:4002/participants/CONSENT/123456789 \
     }'
 
 
-
-
 # Check the participants with the ALS Consent Oracle
 curl -v localhost:16000/participants/CONSENT/81ca21ce-ad62-4e8c-a321-f21cad2bc28b \
   -H 'Accept: application/vnd.interoperability.participants+json;version=1' \

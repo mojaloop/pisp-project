@@ -40,7 +40,7 @@ const consentRequestsPutPartialData = {
 const linkingRequestConsentURI = `${TestEnv.baseUrls.pispThirdpartySchemeAdapterOutbound}/linking/request-consent`
 
 describe('Account Linking', (): void => {
-  describe.only('Happy Path - Web', (): void => {
+  describe('Happy Path - Web', (): void => {
     let consentId: string
 
     it('/linking/request-consent should be success', async (): Promise<void> => {

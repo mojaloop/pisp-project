@@ -5,6 +5,7 @@
   urls: {
     // Note: we don't set `fspiop` here, since docker-local isn't running behind an api gateway
     // that means ml-bootstrap needs to talk individually to the components making up the fspiop api.
+    // For now, the only part of the fspiop-api ml-bootstrap needs to know about is /parties and /participants
     alsEndpoint: 'http://localhost:4002',
     alsAdmin: 'http://localhost:4001',
     centralLedgerAdmin: 'http://localhost:3001',

@@ -689,7 +689,7 @@ services:
   ## OTP and Web Flow Simulator - using TTK for now
   login-flow-simulator:
     image: mojaloop/ml-testing-toolkit:v11.8.1
-    container_name: dl_ml-testing-toolkit
+    container_name: login-flow-simulator
     volumes:
       - "./ml-testing-toolkit/spec_files:/opt/mojaloop-testing-toolkit/spec_files"
       - "./ml-testing-toolkit/secrets:/opt/mojaloop-testing-toolkit/secrets"
@@ -706,12 +706,10 @@ services:
 
   login-flow-simulator-mongo:
     image: mongo
-    ports:
-      - "27018:27017"
 
   login-flow-simulator-ui:
     image: mojaloop/ml-testing-toolkit-ui:v11.8.4.2-pisp
-    container_name: dl_ml-testing-toolkit-ui
+    container_name: login-flow-simulator-ui
     ports:
       - "6060:6060"
     environment:

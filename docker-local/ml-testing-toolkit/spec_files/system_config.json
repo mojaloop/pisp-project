@@ -9,7 +9,7 @@
     "userSettings": 1
   },
   "DB": {
-    "URI": "mongodb://mongo:27018/dfsps"
+    "URI": "mongodb://login-flow-simulator-mongo:27017/dfsps"
   },
   "OAUTH": {
     "AUTH_ENABLED": false,

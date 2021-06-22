@@ -1,0 +1,49 @@
+{
+  "/login": {
+    "post": {
+      "response": {
+        "bodyOverride": {}
+      }
+    }
+  },
+  "/authorize": {
+    "post": {
+      "response": {
+        "bodyOverride": {}
+      }
+    }
+  },
+  "/sendOTP": {
+    "post": {
+      "response": {
+        "bodyOverride": {}
+      }
+    }
+  },
+  "/verifyOTPorSecret": {
+    "post": {
+      "response": {
+        "bodyOverride": {}
+      }
+    }
+  },
+  "/OTPorSecret/{ID}": {
+    "get": {
+      "response": {
+        "bodyOverride": {}
+      }
+    }
+  },
+  "/store/consentRequests/{ID}": {
+    "get": {
+      "response": {
+        "bodyOverride": {}
+      }
+    },
+    "post": {
+      "response": {
+        "bodyOverride": {}
+      }
+    }
+  }
+}

@@ -396,6 +396,19 @@ You can also specify a specific version of ml-boostrap:
 npx ml-bootstrap@0.2.6 -c ./ml-bootstrap-config.json5
 ```
 
+## Seed the ttk with demo OTP and Auth Token Data
+
+```bash
+# make sure you edit the rules.json file in the corresponding DFSP that user selects to
+# contain the following authUri to redirect the user to
+# "authUri": "http://localhost:26060/admin/dfsp/authorize?consentRequestId=b51ec534-ee48-4575-b6a9-ead2955b8069"
+
+# in this instance, we are pointing to the participant-list-service ttk... but you get the idea
+export TTK_HOST=localhost:25000
+export CONSENT_REQUEST_ID=b51ec534-ee48-4575-b6a9-ead2955b8069
+./scripts/_configure_web_simulator.sh
+```
+
 ### Handy Snippets
 
 ```bash

@@ -1358,7 +1358,7 @@
             "pm.request.url.query.all().forEach((param) => { query[param.key] = param.value})",
             "const consReqId = query.consentRequestId",
             "pm.environment.set(consReqId, 'some-secret-' + consReqId)",
-            "pm.environment.set('secretOrOTPAuth', 'some-secret-' + consReqId)"
+            "pm.environment.set('secretOrOTPAuth', '123456')"
           ]
         }
       },

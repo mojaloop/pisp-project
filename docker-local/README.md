@@ -788,4 +788,39 @@ curl -v localhost:16000/participants/CONSENT/81ca21ce-ad62-4e8c-a321-f21cad2bc28
   -H 'Date: 2021-01-01'
 
 
+# Test calling the Auth-Service from the DFSP
+
+curl -X POST localhost:26000/consents\
+  -H 'Accept: application/vnd.interoperability.participants+json;version=1' \
+  -H 'Content-Type: application/vnd.interoperability.participants+json;version=1.0' \
+  -H 'FSPIOP-Source: dfspa' \
+  -H 'FSPIOP-Destination: centralAuth' \
+  -H 'Date: 2021-01-01'\
+  -d '{
+    "consentId": "71fc944e-519d-48f1-af2b-26670e6c9d41",
+    "scopes": [
+      {
+        "accountId": "dfspa.username.1234",
+        "actions": [ "accounts.transfer"]
+      },
+      {
+        "actions": ["accounts.transfer"  ],
+        "accountId": "dfspa.username.5678"
+      }
+    ],
+    "credential": {
+      "payload": {
+        "type": "public-key",
+        "rawId": "bgKpdUZgkf3Emp+i6cjdk6rCMYY1Icb1+Z9TdMZq03VAbceSX5Hp/54NEj1AV776QXJufRSU3DLWpaLHa+T1bQ==",
+        "response": {
+          "attestationObject": "o2NmbXRmcGFja2VkZ2F0dFN0bXSjY2FsZyZjc2lnWEcwRQIgbeVMNz1IQjNvEvRNIwnfhD9FXypX6A/SlvVR05oijlwCIQDjvmoHwjRQOJJrUU+cWvOVteEh1lXv022wPF40ytjsDmN4NWOBWQLBMIICvTCCAaWgAwIBAgIECwXNUzANBgkqhkiG9w0BAQsFADAuMSwwKgYDVQQDEyNZdWJpY28gVTJGIFJvb3QgQ0EgU2VyaWFsIDQ1NzIwMDYzMTAgFw0xNDA4MDEwMDAwMDBaGA8yMDUwMDkwNDAwMDAwMFowbjELMAkGA1UEBhMCU0UxEjAQBgNVBAoMCVl1YmljbyBBQjEiMCAGA1UECwwZQXV0aGVudGljYXRvciBBdHRlc3RhdGlvbjEnMCUGA1UEAwweWXViaWNvIFUyRiBFRSBTZXJpYWwgMTg0OTI5NjE5MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEIRpvsbWJJcsKwRhffCrjqLSIEBR5sR7/9VXgfZdRvSsXaiUt7lns44WZIFuz6ii/j9f8fadcBUJyrkhY5ZH8WqNsMGowIgYJKwYBBAGCxAoCBBUxLjMuNi4xLjQuMS40MTQ4Mi4xLjEwEwYLKwYBBAGC5RwCAQEEBAMCBDAwIQYLKwYBBAGC5RwBAQQEEgQQFJogIY72QTOWuIH41bfx9TAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBCwUAA4IBAQA+/qPfPSrgclePfgTQ3VpLaNsBr+hjLhi04LhzQxiRGWwYS+vB1TOiPXeLsQQIwbmqQU51doVbCTaXGLNIr1zvbLAwhnLWH7i9m4ahCqaCzowtTvCQ7VBUGP5T1M4eYnoo83IDCVjQj/pZG8QYgOGOigztGoWAf5CWcUF6C0UyFbONwUcqJEl2QLToa/7E8VRjm4W46IAUljYkODVZASv8h3wLROx9p5TSBlSymtwdulxQe/DKbfNSvM3edA0up+EIJKLOOU+QTR2ZQV46fEW1/ih6m8vcaY6L3NW0eYpc7TXeijUJAgoUtya/vzmnRAecuY9bncoJt8PrvL2ir2kDaGF1dGhEYXRhWMRJlg3liA6MaHQ0Fw9kdmBbj+SuuaKGMseZXPO6gx2XY0EAAAAEFJogIY72QTOWuIH41bfx9QBAbgKpdUZgkf3Emp+i6cjdk6rCMYY1Icb1+Z9TdMZq03VAbceSX5Hp/54NEj1AV776QXJufRSU3DLWpaLHa+T1baUBAgMmIAEhWCDPYbC9sE7AqtUUqjK0uwygXpv4CDhC+KMiO0/V46ZvIiJYIIXAJfywupD7z73ClG5h7vkWyaxfAru2LtT4Gl+NAc7K",
+          "clientDataJSON": "eyJ0eXBlIjoid2ViYXV0aG4uY3JlYXRlIiwiY2hhbGxlbmdlIjoiWWdCa0FHUUFNd0F4QUdFQU9RQmxBR1VBWVFBd0FHWUFOd0ExQURRQU53QXlBRFVBTUFCa0FHRUFNQUF3QURFQVpRQmhBR0VBT1FBeEFETUFZUUF3QUdZQU5RQTVBRGtBT1FBNEFEY0FZd0EyQURNQU5nQmhBR0lBWlFBeUFHTUFNZ0F6QURRQU5BQXhBRFFBWmdCakFHSUFNQUJoQURVQU5nQmlBRFlBTkFBIiwib3JpZ2luIjoiaHR0cDovL2xvY2FsaG9zdDo0MjE4MSIsImNyb3NzT3JpZ2luIjpmYWxzZX0="
+        },
+        "id": "bgKpdUZgkf3Emp-i6cjdk6rCMYY1Icb1-Z9TdMZq03VAbceSX5Hp_54NEj1AV776QXJufRSU3DLWpaLHa-T1bQ"
+      },
+      "status": "PENDING",
+      "credentialType": "FIDO"
+    }
+  }'
+
 ```

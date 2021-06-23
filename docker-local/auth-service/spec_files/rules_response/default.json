@@ -1,8 +1,8 @@
 [
   {
     "ruleId": 1,
-    "priority": 1,
-    "description": "auth-service post /consents - verify credential happy flow",
+    "priority": 3,
+    "description": "auth-service post /consents - consentId wildcard",
     "apiVersion": {
       "minorVersion": 1,
       "majorVersion": 0,
@@ -11,12 +11,6 @@
     },
     "conditions": {
       "all": [
-        {
-          "fact": "body",
-          "operator": "equal",
-          "value": "credential id: identifier of pair of keys, base64 encoded, min length 59",
-          "path": "credential.payload.id"
-        },
         {
           "fact": "operationPath",
           "operator": "equal",
@@ -41,8 +35,11 @@
             "const body = JSON.parse(pm.request.body)",
             "const consentId = body.consentId",
             "const url = 'http://thirdparty-api-adapter:3008/consents/' + consentId",
+            "const credential = body.credential",
+            "credential.status = 'VERIFIED'",
+            "const putConsentsIdBody = {scopes: body.scopes, credential: credential}",
             "const putConsentsIDReq = {",
-            "  url,",
+            "url,",
             "  method: 'put',",
             "  header: {",
             "    'Accept': 'application/vnd.interoperability.thirdparty+json;version=1.0',",
@@ -53,24 +50,7 @@
             "  },",
             "  body: {",
             "    mode: 'raw',",
-            "    raw: JSON.stringify({",
-            "      \"scopes\":[",
-            "        {\"accountId\":\"dfspa.username.1234\",\"actions\":[\"accounts.getBalance\",\"accounts.transfer\"]},",
-            "        {\"accountId\":\"dfspa.username.5678\",\"actions\":[\"accounts.getBalance\",\"accounts.transfer\"]}",
-            "      ],",
-            "      \"credential\":{",
-            "        \"credentialType\":\"FIDO\",",
-            "        \"status\":\"VERIFIED\",",
-            "        \"payload\":{",
-            "          \"id\":\"credential id: identifier of pair of keys, base64 encoded, min length 59\",",
-            "          \"rawId\":\"raw credential id: identifier of pair of keys, base64 encoded, min length 59\",",
-            "          \"response\":{",
-            "            \"clientDataJSON\":\"clientDataJSON-must-not-have-fewer-than-121-characters Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\",\"attestationObject\":\"attestationObject-must-not-have-fewer-than-306-characters Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.\"",
-            "          },",
-            "          \"type\":\"public-key\"",
-            "        }",
-            "      }",
-            "    })",
+            "    raw: JSON.stringify(putConsentsIdBody)",
             "  }",
             "}",
             "",

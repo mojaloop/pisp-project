@@ -131,7 +131,7 @@
             "authChannels": [
               "WEB"
             ],
-            "authUri": "dfspa.com/authorize?consentRequestId=b51ec534-ee48-4575-b6a9-ead2955b8069"
+            "authUri": "http://localhost:6060/admin/dfsp/authorize?consentRequestId=b51ec534-ee48-4575-b6a9-ead2955b8069&callbackUri=http://localhost:42181/flutter-web-auth.html"
           }
         }
       }
@@ -359,6 +359,44 @@
             "errorCode": "7211",
             "errorDescription": "FSP does not allow consent requests for specified username"
           }
+        }
+      }
+    }
+  },
+  {
+    "ruleId": 11,
+    "description": "Returns list of user account for username user@example.com",
+    "conditions": {
+      "all": [
+        {
+          "fact": "path",
+          "operator": "equal",
+          "value": "/accounts/user@example.com"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "GET"
+        }
+      ]
+    },
+    "event": {
+      "type": "FIXED_CALLBACK",
+      "params": {
+        "statusCode": 200,
+        "body": {
+          "accounts": [
+            {
+              "accountNickname": "Chequing Account",
+              "id": "dfspa.username.1234",
+              "currency": "TZS"
+            },
+            {
+              "accountNickname": "Everyday Spending",
+              "id": "dfspa.username.5678",
+              "currency": "TZS"
+            }
+          ]
         }
       }
     }

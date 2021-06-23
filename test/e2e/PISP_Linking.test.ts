@@ -55,7 +55,7 @@ describe('Account Linking', (): void => {
           ...consentRequestsPutPartialData,
           authChannels: ['WEB'],
           consentRequestId: 'b51ec534-ee48-4575-b6a9-ead2955b8069',
-          authUri: 'dfspa.com/authorize?consentRequestId=b51ec534-ee48-4575-b6a9-ead2955b8069'
+          authUri: 'http://localhost:6060/admin/dfsp/authorize?consentRequestId=b51ec534-ee48-4575-b6a9-ead2955b8069&callbackUri=http://localhost:42181/flutter-web-auth.html'
         },
         currentState: 'WebAuthenticationChannelResponseRecieved'
       }
@@ -349,7 +349,7 @@ describe('Account Linking', (): void => {
           ...consentRequestsPutPartialData,
           authChannels: ['WEB'],
           consentRequestId: 'b51ec534-ee48-4575-b6a9-ead2955b8069',
-          authUri: 'dfspa.com/authorize?consentRequestId=b51ec534-ee48-4575-b6a9-ead2955b8069'
+          authUri: 'http://localhost:6060/admin/dfsp/authorize?consentRequestId=b51ec534-ee48-4575-b6a9-ead2955b8069&callbackUri=http://localhost:42181/flutter-web-auth.html'
         },
         currentState: 'WebAuthenticationChannelResponseRecieved'
       }
@@ -400,7 +400,7 @@ describe('Account Linking', (): void => {
           ...consentRequestsPutPartialData,
           authChannels: ['WEB'],
           consentRequestId: 'b51ec534-ee48-4575-b6a9-ead2955b8069',
-          authUri: 'dfspa.com/authorize?consentRequestId=b51ec534-ee48-4575-b6a9-ead2955b8069'
+          authUri: 'http://localhost:6060/admin/dfsp/authorize?consentRequestId=b51ec534-ee48-4575-b6a9-ead2955b8069&callbackUri=http://localhost:42181/flutter-web-auth.html'
         },
         currentState: 'WebAuthenticationChannelResponseRecieved'
       }

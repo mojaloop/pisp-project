@@ -7,7 +7,7 @@
     "PORT": 4006,
     "HOST": "0.0.0.0"
   },
-  "REQUEST_PROCESSING_TIMEOUT_SECONDS": 30,
+  "REQUEST_PROCESSING_TIMEOUT_SECONDS": 300,
   "WSO2_AUTH": {
     "staticToken": "0706c62f-c022-3c42-8d14-8b5df128876d",
     "tokenEndpoint": "",

@@ -211,9 +211,6 @@ services:
       start_period: 40s
       interval: 30s
     user: root
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
-      # - "host.docker.internal:172.28.0.21"
 
   mysql-als:
     image: mysql/mysql-server

@@ -303,9 +303,9 @@ services:
     ports:
       - "26060:6060"
     environment:
-      - API_BASE_URL=http://participant-list-service:25050
+      - API_BASE_URL=http://localhost:25050
       - AUTH_ENABLED=FALSE
-      - TP_SIM_URL=http://participant-list-service:25000
+      - TP_SIM_URL=http://localhost:25000
     command:
       - sh
       - /usr/share/nginx/start.sh

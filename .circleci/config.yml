@@ -81,8 +81,6 @@ jobs:
 
   test-e2e:
     executor: default-machine
-    # TODO: will this work?
-    resource_class: large
     steps:
       - checkout
       - restore_cache:

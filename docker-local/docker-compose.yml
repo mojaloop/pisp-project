@@ -420,10 +420,13 @@ services:
     restart: always
 
   dfspa-thirdparty-scheme-adapter-inbound:
-    image: "mojaloop/thirdparty-scheme-adapter:v11.39.1"
+    # image: "mojaloop/thirdparty-scheme-adapter:v11.39.1"
     #build:
     #  context: https://github.com/username/thirdparty-scheme-adapter.git#branch
     #  dockerfile: ./docker/Dockerfile
+    build:
+      context: /home/lew/developer/mojaloop/thirdparty-scheme-adapter
+      dockerfile: ./docker/Dockerfile
     container_name: dfspa-thirdparty-scheme-adapter-inbound
     environment:
       - NODE_ENV=e2e
@@ -449,10 +452,13 @@ services:
       interval: 30s
 
   dfspa-thirdparty-scheme-adapter-outbound:
-    image: "mojaloop/thirdparty-scheme-adapter:v11.39.1"
+    # image: "mojaloop/thirdparty-scheme-adapter:v11.39.1"
     #build:
     #  context: https://github.com/username/thirdparty-scheme-adapter.git#branch
     #  dockerfile: ./docker/Dockerfile
+    build:
+      context: /home/lew/developer/mojaloop/thirdparty-scheme-adapter
+      dockerfile: ./docker/Dockerfile
     container_name: dfspa-thirdparty-scheme-adapter-outbound
     environment:
       - NODE_ENV=e2e

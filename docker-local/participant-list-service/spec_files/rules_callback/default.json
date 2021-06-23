@@ -38,12 +38,12 @@
           "Date": "Wed, 27 May 2020 11:13:34 GMT",
           "X-Forwarded-For": "sed eiusmod sunt",
           "FSPIOP-Source": "switch",
-          "FSPIOP-Destination": "{$request.header.FSPIOP-Source}",
           "FSPIOP-Encryption": "magna Excepteur dolore nisi fugiat",
           "FSPIOP-Signature": "nisi",
           "FSPIOP-URI": "veniam reprehenderit anim ut",
           "FSPIOP-HTTP-Method": "PUT",
-          "Content-Length": ""
+          "Content-Length": "",
+          "FSPIOP-Destination": "{$request.header['FSPIOP-Source']}"
         },
         "body": {
           "providers": [

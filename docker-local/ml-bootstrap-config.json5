@@ -76,8 +76,8 @@
       id: 'pineapplepay',
       type: 'PISP',
       // fspiopCallbackUrl: 'http://pisp-sdk-scheme-adapter:4000',
-      fspiopCallbackUrl: 'https://curvy-fox-74.loca.lt/mojaloop',
-      thirdpartyCallbackUrl: 'https://curvy-fox-74.loca.lt/mojaloop'
+      fspiopCallbackUrl: 'https://hard-starfish-41.loca.lt/mojaloop',
+      thirdpartyCallbackUrl: 'https://hard-starfish-41.loca.lt/mojaloop'
     },
   ]
 }

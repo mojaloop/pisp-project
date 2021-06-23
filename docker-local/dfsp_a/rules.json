@@ -362,5 +362,43 @@
         }
       }
     }
+  },
+  {
+    "ruleId": 11,
+    "description": "Returns list of user account for username user@example.com",
+    "conditions": {
+      "all": [
+        {
+          "fact": "path",
+          "operator": "equal",
+          "value": "/accounts/user@example.com"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "GET"
+        }
+      ]
+    },
+    "event": {
+      "type": "FIXED_CALLBACK",
+      "params": {
+        "statusCode": 200,
+        "body": {
+          "accounts": [
+            {
+              "accountNickname": "Chequing Account",
+              "id": "dfspa.username.1234",
+              "currency": "TZS"
+            },
+            {
+              "accountNickname": "Everyday Spending",
+              "id": "dfspa.username.5678",
+              "currency": "TZS"
+            }
+          ]
+        }
+      }
+    }
   }
 ]

@@ -789,7 +789,6 @@ curl -v localhost:16000/participants/CONSENT/81ca21ce-ad62-4e8c-a321-f21cad2bc28
 
 
 # Test calling the Auth-Service from the DFSP
-
 curl -X POST localhost:26000/consents\
   -H 'Accept: application/vnd.interoperability.participants+json;version=1' \
   -H 'Content-Type: application/vnd.interoperability.participants+json;version=1.0' \
@@ -821,6 +820,51 @@ curl -X POST localhost:26000/consents\
       "status": "PENDING",
       "credentialType": "FIDO"
     }
+  }'
+
+
+
+curl -X POST localhost:12000/thirdpartyRequests/transactions \
+  -H 'Accept: application/vnd.interoperability.thirdparty+json;version=1' \
+  -H 'Content-Type: application/vnd.interoperability.thirdparty+json;version=1.0' \
+  -H 'FSPIOP-Source: pineapplepay' \
+  -H 'FSPIOP-Destination: applebank' \
+  -H 'Date: 2021-01-01'\
+  -d '{
+    "transactionRequestId": "02e28448-3c05-4059-b5f7-d518d0a2d8ea",
+      "payee": {
+        "personalInfo": {
+          "dateOfBirth": "1970-01-01",
+          "complexName": {
+            "lastName": "Babirusa",
+            "firstName": "Bob",
+            "middleName": "O"
+          }
+        },
+        "name": "Billy Bairus",
+        "partyIdInfo": {
+          "fspId": "dfspb",
+          "partyIdentifier": "255255255255",
+          "partyIdType": "MSISDN"
+        }
+      },
+      "payer": {
+        "partyIdType": "THIRD_PARTY_LINK",
+        "partyIdentifier": "1234-1234-1234-1234"
+      },
+      "amountType": "RECEIVE",
+      "amount": {
+        "currency": "TZS",
+        "amount": "12"
+      },
+      "transactionType": {
+        "scenario": "TRANSFER",
+        "initiator": "PAYER",
+        "initiatorType": "CONSUMER"
+      },
+      "expiration": "1970-01-01T00:00:00.029Z",
+      "sourceAccountId": "1234-1234-1234-1234",
+      "consentId": "b51ec534-ee48-4575-b6a9-ead2955b8069"
   }'
 
 ```

@@ -823,7 +823,7 @@ curl -X POST localhost:26000/consents\
   }'
 
 
-
+# Start a 3rd party transaction request
 curl -X POST localhost:12000/thirdpartyRequests/transactions \
   -H 'Accept: application/vnd.interoperability.thirdparty+json;version=1' \
   -H 'Content-Type: application/vnd.interoperability.thirdparty+json;version=1.0' \
@@ -865,6 +865,19 @@ curl -X POST localhost:12000/thirdpartyRequests/transactions \
       "expiration": "1970-01-01T00:00:00.029Z",
       "sourceAccountId": "1234-1234-1234-1234",
       "consentId": "b51ec534-ee48-4575-b6a9-ead2955b8069"
+  }'
+
+
+#DFSP's response to a 3rd party transaction request
+curl -X PUT localhost:12000/thirdpartyRequests/transactions/02e28448-3c05-4059-b5f7-d518d0a2d8ea \
+  -H 'Content-Type: application/vnd.interoperability.thirdparty+json;version=1.0' \
+  -H 'Accept: application/vnd.interoperability.thirdparty+json;version=1' \
+  -H 'FSPIOP-Source: dfspa' \
+  -H 'FSPIOP-Destination: pineapplepay' \
+  -H 'Date: 2021-01-01'\
+  -d '{
+    "transactionId": "e1a60f05-1c1b-4d9f-bcd9-3822ebad29d5",
+    "transactionRequestState": "RECEIVED"
   }'
 
 ```

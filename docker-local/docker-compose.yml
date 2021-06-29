@@ -396,7 +396,7 @@ services:
       - mojaloop-net
 
   dfspa-sdk-scheme-adapter:
-    image: "mojaloop/sdk-scheme-adapter:v11.10.1.3-pisp"
+    image: "mojaloop/sdk-scheme-adapter:v11.16.2"
     # build:
     #   context: ../../sdk-scheme-adapter
     #   dockerfile: ./Dockerfile

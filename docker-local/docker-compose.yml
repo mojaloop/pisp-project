@@ -355,7 +355,7 @@ services:
       - mojaloop-net
     
   thirdparty-api-adapter:
-    image: "mojaloop/thirdparty-api-adapter:v11.19.0"
+    image: "mojaloop/thirdparty-api-adapter:v11.19.1"
     # build:
     #  context: https://github.com/mojaloop/thirdparty-api-adapter.git#chore/branch
     #  dockerfile: ./Dockerfile

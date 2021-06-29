@@ -869,9 +869,10 @@ curl -X POST localhost:12000/thirdpartyRequests/transactions \
 
 
 #DFSP's response to a 3rd party transaction request
-curl -X PUT localhost:12000/thirdpartyRequests/transactions/02e28448-3c05-4059-b5f7-d518d0a2d8ea \
-  -H 'Content-Type: application/vnd.interoperability.thirdparty+json;version=1.0' \
   -H 'Accept: application/vnd.interoperability.thirdparty+json;version=1' \
+curl -v -X PUT localhost:12000/thirdpartyRequests/transactions/02e28448-3c05-4059-b5f7-d518d0a2d8ea \
+  -H 'Accept:' \
+  -H 'Content-Type: application/vnd.interoperability.thirdparty+json;version=1.0' \
   -H 'FSPIOP-Source: dfspa' \
   -H 'FSPIOP-Destination: pineapplepay' \
   -H 'Date: 2021-01-01'\

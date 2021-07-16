@@ -316,10 +316,7 @@ services:
       - mojaloop-net
 
   auth-service:
-    # image: mojaloop/auth-service:v11.5.0
-    build:
-      context: https://github.com/kleyow/auth-service.git#fix/add-missing-header
-      dockerfile: ./Dockerfile
+    image: mojaloop/auth-service:v11.5.1
     container_name: auth-service
     ports:
       - "26050:4004"

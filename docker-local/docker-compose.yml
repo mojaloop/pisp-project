@@ -298,10 +298,7 @@ services:
       - "27018:27017"
 
   participant-list-service-ui:
-    # image: mojaloop/ml-testing-toolkit-ui:v11.8.4.2-pisp
-    build:
-      context: https://github.com/kleyow/ml-testing-toolkit-ui.git#fix/normalize-headers
-      dockerfile: ./Dockerfile
+    image: mojaloop/ml-testing-toolkit-ui:v11.8.4.2-pisp
     container_name: participant-list-service-testing-ui
     ports:
       - "26060:6060"

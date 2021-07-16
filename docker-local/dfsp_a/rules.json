@@ -55,7 +55,7 @@
       "params": {
         "statusCode": 200,
         "body": {
-          "verifyResult": "OK"
+          "isValid": true
         }
       }
     }

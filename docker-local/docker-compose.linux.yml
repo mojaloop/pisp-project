@@ -358,7 +358,3 @@ services:
   auth-service:
     extra_hosts:
       - "auth-service-redis:172.17.0.1"
-
-  ml-testing-toolkit:
-    extra_hosts:
-      - "auth-service:172.17.0.1"

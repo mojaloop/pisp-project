@@ -417,7 +417,7 @@ services:
     restart: always
 
   dfspa-thirdparty-scheme-adapter-inbound:
-    image: "mojaloop/thirdparty-scheme-adapter:v11.39.2"
+    image: "mojaloop/thirdparty-scheme-adapter:v11.40.0"
     #build:
     #  context: https://github.com/username/thirdparty-scheme-adapter.git#branch
     #  dockerfile: ./docker/Dockerfile
@@ -446,7 +446,7 @@ services:
       interval: 30s
 
   dfspa-thirdparty-scheme-adapter-outbound:
-    image: "mojaloop/thirdparty-scheme-adapter:v11.39.2"
+    image: "mojaloop/thirdparty-scheme-adapter:v11.40.0"
     #build:
     #  context: https://github.com/username/thirdparty-scheme-adapter.git#branch
     #  dockerfile: ./docker/Dockerfile
@@ -517,7 +517,7 @@ services:
     restart: always
 
   dfspb-thirdparty-scheme-adapter-inbound:
-    image: "mojaloop/thirdparty-scheme-adapter:v11.39.1"
+    image: "mojaloop/thirdparty-scheme-adapter:v11.40.0"
     #build:
     #  context: https://github.com/username/thirdparty-scheme-adapter.git#branch
     #  dockerfile: ./docker/Dockerfile
@@ -546,7 +546,7 @@ services:
       interval: 30s
 
   dfspb-thirdparty-scheme-adapter-outbound:
-    image: "mojaloop/thirdparty-scheme-adapter:v11.39.1"
+    image: "mojaloop/thirdparty-scheme-adapter:v11.40.0"
     #build:
     #  context: https://github.com/username/thirdparty-scheme-adapter.git#branch
     #  dockerfile: ./docker/Dockerfile

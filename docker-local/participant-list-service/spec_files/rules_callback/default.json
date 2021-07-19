@@ -12,15 +12,15 @@
     "conditions": {
       "all": [
         {
-          "fact": "operationPath",
-          "operator": "equal",
-          "value": "/services/{ServiceType}"
-        },
-        {
           "fact": "pathParams",
           "operator": "equal",
           "value": "THIRD_PARTY_DFSP",
           "path": "ServiceType"
+        },
+        {
+          "fact": "operationPath",
+          "operator": "equal",
+          "value": "/services/{ServiceType}"
         },
         {
           "fact": "method",
@@ -38,7 +38,7 @@
           "Date": "Wed, 27 May 2020 11:13:34 GMT",
           "X-Forwarded-For": "sed eiusmod sunt",
           "FSPIOP-Source": "switch",
-          "FSPIOP-Destination": "pisp",
+          "FSPIOP-Destination": "{$request.headers.fspiop-source}",
           "FSPIOP-Encryption": "magna Excepteur dolore nisi fugiat",
           "FSPIOP-Signature": "nisi",
           "FSPIOP-URI": "veniam reprehenderit anim ut",
@@ -46,8 +46,12 @@
           "Content-Length": ""
         },
         "body": {
-          "providers": ["dfspA", "dfspB"]
-        }
+          "providers": [
+            "dfspA",
+            "dfspB"
+          ]
+        },
+        "scripts": {}
       },
       "delay": 0,
       "type": "FIXED_CALLBACK"

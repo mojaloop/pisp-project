@@ -1,4 +1,4 @@
-// This is a config file based on 
+// This is a config file based on
 // https://github.com/vessels-tech/ml-bootstrap/blob/master/example/default.json5
 {
   currency: 'USD',
@@ -20,9 +20,8 @@
       // TODO: make another type for auth-service...
       type: 'DFSP_SUPPORTING_PISP',
       simulatorAdminUrl: 'n/a',
-      // TODO: maybe this should be 5050?
-      fspiopCallbackUrl: 'http://auth-service:5000',
-      thirdpartyCallbackUrl: 'http://auth-service:5000',
+      fspiopCallbackUrl: 'http://auth-service:4004',
+      thirdpartyCallbackUrl: 'http://auth-service:4004',
       parties: []
     },
     {
@@ -41,7 +40,7 @@
           dateOfBirth: "1970-01-01",
           idType: "MSISDN",
           idValue: "123456789"
-          
+
         },
       ]
     },
@@ -61,7 +60,7 @@
           lastName: "Babirusa",
           dateOfBirth: "1970-01-01",
           idType: "MSISDN",
-          idValue: "987654321"   
+          idValue: "987654321"
         },
       ]
     },

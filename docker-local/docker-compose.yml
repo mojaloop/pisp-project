@@ -297,7 +297,7 @@ services:
     ports:
       - "27018:27017"
 
-  ml-testing-toolkit-ui:
+  participant-list-service-ui:
     image: mojaloop/ml-testing-toolkit-ui:v11.8.4.2-pisp
     container_name: participant-list-service-testing-ui
     ports:
@@ -312,48 +312,55 @@ services:
     networks:
       - mojaloop-net
 
-  # TODO: this needs to be replaced with the actual auth-service
   auth-service:
-    image: mojaloop/ml-testing-toolkit:v11.8.1
+    image: mojaloop/auth-service:v11.5.1
     container_name: auth-service
-    volumes:
-      - "./auth-service/spec_files:/opt/mojaloop-testing-toolkit/spec_files"
-      - "./auth-service/secrets:/opt/mojaloop-testing-toolkit/secrets"
     ports:
-      - "26000:5000"
-      - "26050:5050"
-    environment:
-      - AUTH_ENABLED=FALSE
-    command: npm start
+      - "26050:4004"
+    networks:
+      - mojaloop-net
     depends_on:
-      - mongo
-    networks:
-      - mojaloop-net
-    # TODO: reenable when we are using the proper auth-service
-    # healthcheck:
-    #   test: wget -q http://localhost:5000 -O /dev/null || exit 1
-    #   timeout: 20s
-    #   retries: 30
-    #   start_period: 30s
-    #   interval: 15s
-  
-  auth-service-testing-ui:
-    image: mojaloop/ml-testing-toolkit-ui:v11.8.4.2-pisp
-    container_name: auth-service-testing-ui
-    ports:
-      - "27060:6060"
+      - auth-service-mysql
+      - auth-service-redis
+    volumes:
+      - ./docker/wait4:/opt/auth-service/wait4
+      - ./docker/auth-service/default.json:/opt/auth-service/config/integration.json
     environment:
-      # this must be external, since we will load the 
-      # webpage on the host machine's browser 
-      - API_BASE_URL=http://localhost:26050
-      - AUTH_ENABLED=FALSE
-      - TP_SIM_URL=http://localhost:26000
-    command:
-      - sh
-      - /usr/share/nginx/start.sh
+      - NODE_ENV=integration
+    healthcheck:
+      test: wget -q http://localhost:4004/health -O /dev/null || exit 1
+      timeout: 20s
+      retries: 30
+      interval: 15s
+
+  auth-service-mysql:
+    image: mysql/mysql-server
+    container_name: auth-service-mysql
+    ports:
+      - "3308:3306"
+    volumes:
+      - ./docker/sql-auth-service-service-init/:/docker-entrypoint-initdb.d/
+    environment:
+      - MYSQL_USER=${DBUSER:-auth-service}
+      - MYSQL_PASSWORD=${DBPASS:-password}
+      - MYSQL_DATABASE=${DBUSER:-auth-service}
+      - MYSQL_ALLOW_EMPTY_PASSWORD=true
     networks:
       - mojaloop-net
-    
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "mysql"]
+      timeout: 20s
+      retries: 10
+      start_period: 40s
+      interval: 30s
+
+  auth-service-redis:
+    container_name: auth-service-redis
+    image: "redis:6.2.4-alpine"
+    networks:
+      - mojaloop-net
+    restart: always
+
   thirdparty-api-adapter:
     image: "mojaloop/thirdparty-api-adapter:v11.19.1"
     # build:
@@ -684,8 +691,6 @@ services:
     networks:
       - mojaloop-net
     restart: always
-    ports:
-      - "6379:6379"
 
   ## OTP and Web Flow Simulator - using TTK for now
   login-flow-simulator:

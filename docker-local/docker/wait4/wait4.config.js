@@ -128,7 +128,6 @@ module.exports = {
         }
       ]
     },
-
     {
       name: 'als-consent-oracle',
       wait4: [
@@ -141,6 +140,23 @@ module.exports = {
             configPath: '../config/default.json'
           },
           retries: 60
+        }
+      ]
+    },
+    {
+      name: 'auth-service',
+      wait4: [
+        {
+          description: 'MySQL Database',
+          uri: 'auth-service-mysql:3306',
+          method: 'mysql',
+          retries: 30
+        },
+        {
+          description: 'auth-service',
+          uri: 'auth-service:4004',
+          method: 'ncat',
+          retries: 30
         }
       ]
     }

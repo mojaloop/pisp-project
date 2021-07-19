@@ -276,7 +276,7 @@ services:
       interval: 30s
 
   participant-list-service:
-    image: mojaloop/ml-testing-toolkit:v11.8.1
+    image: mojaloop/ml-testing-toolkit:v13.1.0
     container_name: participant-list-service
     volumes:
       - "./participant-list-service/spec_files:/opt/mojaloop-testing-toolkit/spec_files"
@@ -298,7 +298,7 @@ services:
       - "27018:27017"
 
   participant-list-service-ui:
-    image: mojaloop/ml-testing-toolkit-ui:v11.8.4.2-pisp
+    image: mojaloop/ml-testing-toolkit-ui:v13.0.1
     container_name: participant-list-service-testing-ui
     ports:
       - "26060:6060"

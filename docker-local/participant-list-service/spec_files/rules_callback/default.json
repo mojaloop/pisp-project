@@ -43,7 +43,7 @@
           "FSPIOP-URI": "veniam reprehenderit anim ut",
           "FSPIOP-HTTP-Method": "PUT",
           "Content-Length": "",
-          "FSPIOP-Destination": "{$request.header['FSPIOP-Source']}"
+          "FSPIOP-Destination": "{$request.headers.fspiop-source}"
         },
         "body": {
           "providers": [
@@ -51,7 +51,9 @@
             "dfspb"
           ]
         },
-        "scripts": {}
+        "scripts": {
+          "scriptingEngine": "postman"
+        }
       },
       "delay": 0,
       "type": "FIXED_CALLBACK"

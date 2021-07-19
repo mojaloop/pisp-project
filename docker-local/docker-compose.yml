@@ -427,6 +427,7 @@ services:
     container_name: dfspa-thirdparty-scheme-adapter-inbound
     environment:
       - NODE_ENV=e2e
+      - LOG_LEVEL=debug
     command: sh -c "/opt/thirdparty-scheme-adapter/wait4/wait4.js dfspa-thirdparty-scheme-adapter && npm run start:inbound"
     volumes:
       - "./dfsp_a/secrets:/opt/thirdparty-scheme-adapter/secrets"

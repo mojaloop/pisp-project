@@ -86,8 +86,8 @@
       id: 'pineapplepay',
       type: 'PISP',
       // fspiopCallbackUrl: 'http://pisp-sdk-scheme-adapter:4000',
-      fspiopCallbackUrl: 'https://chilly-lizard-68.loca.lt/mojaloop',
-      thirdpartyCallbackUrl: 'https://chilly-lizard-68.loca.lt/mojaloop'
+      fspiopCallbackUrl: 'https://itchy-goose-40.loca.lt/mojaloop',
+      thirdpartyCallbackUrl: 'https://itchy-goose-40.loca.lt/mojaloop'
     },
   ]
 }

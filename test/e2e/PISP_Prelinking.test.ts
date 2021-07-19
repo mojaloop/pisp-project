@@ -4,7 +4,7 @@ import axios from 'axios'
 describe('GET /linking/providers', (): void => {
   const expectedResp = {
     currentState: 'providersLookupSuccess',
-    providers: ['dfspA', 'dfspB']
+    providers: ['dfspa', 'dfspb']
   }
 
   it('PISP requests Thirdparty service enabled DFSPs', async (): Promise<void> => {

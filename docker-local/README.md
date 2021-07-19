@@ -160,6 +160,85 @@ curl localhost:9003/repository/parties
 # [{"displayName":"Alice Alpaca","firstName":"Alice","middleName":"K","lastName":"Alpaca","dateOfBirth":"1970-01-01","idType":"MSISDN","idValue":"123456789"}]
 ```
 
+## Running docker-local with the PISP Demo
+
+Prerequisites:
+- this repository
+- https://github.com/mojaloop/contrib-pisp-demo-ui
+- https://github.com/mojaloop/contrib-pisp-demo-svc/
+- configured firebase token in contrib-pisp-demo-svc and contrib-pisp-demo-ui repos. See [here](https://github.com/mojaloop/contrib-pisp-demo-svc/#1-firebase-sdk-admin-key) for more information
+- FIDO device, such as a Macbook with touchID, a yubikey, or SoftU2F
+
+### Config and setup:
+
+```bash
+# run docker-local from this repository
+docker-compose up -d
+
+# wait for docker-compose
+npm run wait-4-docker
+
+# make sure there is a pisp participant called `pineapplepay` 
+# in the ml-boostrap-config.json5 file
+cat https://mighty-bobcat-2.loca.lt | grep pineapple
+
+# edit the file, and make sure the callback urls for the pisp-demo-svc are correct.
+
+# seed the environment
+npm run reseed:docker-local
+
+# configure the ttk-based login simulators
+export TTK_HOST=localhost:15000
+export CONSENT_REQUEST_ID=b51ec534-ee48-4575-b6a9-ead2955b8069
+../scripts/_configure_web_simulator.sh
+
+# run the demo server with some environment vars configured
+cd ../contrib-pisp-demo-svc
+export THIRDPARTY_API_URL=localhost:12000
+export FSPIOP_API_URL=localhost:4002
+export TEMP_TRANSACTION_REQUEST_SERVICE_API_URL=localhost:4003
+export PARTICIPANT_ID=pineapplepay
+export LOCAL_SIMULATOR=false
+npm run dev
+
+# in another terminal, start the UI
+cd ../contrib-pisp-demo-ui
+flutter run -d chrome --web-port 42181
+```
+
+A chrome window should open with the pineapple pay application.
+
+### Account Linking
+
+1. Go the chrome page with the pineapplepay app
+2. From the pineapplepay app
+3. Click "Profile", and ensure the following are set:
+- Demo Type: `liveSwitch`
+- Linking Scenario: `webLoginSuccess`
+
+4. Click "Link" in the bottom navigation bar
+5. Select `dfspa` in the dfsp selection screen
+6. Enter `"username1234"` in the lookup account screen. This is a demo account that the dfspa simulator knows about.
+7. You should see a number of account listed. Select which accounts you wish to list, and select "Link Account(s)"
+8. At the next screen, select "Log in with financial service provider"
+9. You should be redirected to the ttk's login simulator. Enter some details to log in.
+10. On the next screen, select the accounts to link, "approve" and click "submit"
+11. You should be redirected back to pineapplepay
+12. Click "link", and use your fido device to set up your credential.
+13. You should get the success page, and be redirected to your home page, where your linked accounts should be added.
+
+
+### Transfer
+
+1. Once you have linked an account, select "Transfer" from the bottom nav bar
+2. The person you want to send to should exist on the Mojaloop switch, so double check `https://mighty-bobcat-2.loca.lt` if you are unsure of an identifer to use
+3. Send to Billy with a phone number of `+255 25 525 5255`
+4. Enter an amount to send to Billy, and the account you wish to use. Click "Next"
+5. Approve the transfe by selecting "Authorize Payment", and using your fido device, confirm the transaction
+6. You should get the success page, and be redirected to your home page
+
+
+
 ## P2P Examples
 
 ### 1. Transfer USD 100 from MSISDN 123456789 (DFSP A) to MSISDN 987654321 (DFSP B)

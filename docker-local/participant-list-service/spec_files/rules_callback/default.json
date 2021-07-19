@@ -38,20 +38,22 @@
           "Date": "Wed, 27 May 2020 11:13:34 GMT",
           "X-Forwarded-For": "sed eiusmod sunt",
           "FSPIOP-Source": "switch",
-          "FSPIOP-Destination": "{$request.headers.fspiop-source}",
           "FSPIOP-Encryption": "magna Excepteur dolore nisi fugiat",
           "FSPIOP-Signature": "nisi",
           "FSPIOP-URI": "veniam reprehenderit anim ut",
           "FSPIOP-HTTP-Method": "PUT",
-          "Content-Length": ""
+          "Content-Length": "",
+          "FSPIOP-Destination": "{$request.headers.fspiop-source}"
         },
         "body": {
           "providers": [
-            "dfspA",
-            "dfspB"
+            "dfspa",
+            "dfspb"
           ]
         },
-        "scripts": {}
+        "scripts": {
+          "scriptingEngine": "postman"
+        }
       },
       "delay": 0,
       "type": "FIXED_CALLBACK"

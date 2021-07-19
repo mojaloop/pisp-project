@@ -50,6 +50,7 @@
         "cert": "./secrets/dfsp_b_client.crt",
         "key": "./secrets/dfsp_b_client.crt"
       }
-    }
+    },
+    "TEMP_OVERRIDE_QUOTES_PARTY_ID_TYPE": "MSISDN"
   }
 }

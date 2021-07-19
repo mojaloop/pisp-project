@@ -62,6 +62,16 @@
           idType: "MSISDN",
           idValue: "987654321"
         },
+        {
+          // TODO: detailed account list!
+          displayName: "Billy Bairus",
+          firstName: "Bob",
+          middleName: "O",
+          lastName: "Babirusa",
+          dateOfBirth: "1970-01-01",
+          idType: "MSISDN",
+          idValue: "255255255255"   
+        },
       ]
     },
     {
@@ -75,8 +85,8 @@
       id: 'pineapplepay',
       type: 'PISP',
       // fspiopCallbackUrl: 'http://pisp-sdk-scheme-adapter:4000',
-      fspiopCallbackUrl: 'https://shy-lion-65.loca.lt/mojaloop',
-      thirdpartyCallbackUrl: 'https://shy-lion-65.loca.lt/mojaloop'
+      fspiopCallbackUrl: 'https://lazy-bulldog-54.loca.lt/mojaloop',
+      thirdpartyCallbackUrl: 'https://lazy-bulldog-54.loca.lt/mojaloop'
     },
   ]
 }

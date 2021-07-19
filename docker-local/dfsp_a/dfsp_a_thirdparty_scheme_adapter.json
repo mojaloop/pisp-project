@@ -40,7 +40,7 @@
     "DFSP_BACKEND_VERIFY_AUTHORIZATION_PATH": "verify-authorization",
     "DFSP_BACKEND_VERIFY_CONSENT_PATH": "verify-consent",
     "SDK_REQUEST_TO_PAY_TRANSFER_URI": "dsfpa-sdk-scheme-adapter:5002/requestToPayTransfer",
-    "SDK_OUTGOING_URI": "sdk-scheme-adapter:7002",
+    "SDK_OUTGOING_URI": "dfspa-sdk-scheme-adapter:4001",
     "SDK_OUTGOING_HTTP_SCHEME": "http",
     "SDK_OUTGOING_PARTIES_INFORMATION_PATH": "parties/{Type}/{ID}/{SubId}",
     "SDK_NOTIFY_ABOUT_TRANSFER_URI": "pisp-thirdparty-scheme-adapter-inbound:7005/thirdpartyRequests/transactions/{ID}",
@@ -55,6 +55,7 @@
         "cert": "./secrets/dfsp_a_client.crt",
         "key": "./secrets/dfsp_a_client.crt"
       }
-    }
+    },
+    "TEMP_OVERRIDE_QUOTES_PARTY_ID_TYPE": "MSISDN"
   }
 }

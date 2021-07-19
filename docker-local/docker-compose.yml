@@ -276,7 +276,7 @@ services:
       interval: 30s
 
   participant-list-service:
-    image: mojaloop/ml-testing-toolkit:v11.8.1
+    image: mojaloop/ml-testing-toolkit:v13.1.0
     container_name: participant-list-service
     volumes:
       - "./participant-list-service/spec_files:/opt/mojaloop-testing-toolkit/spec_files"
@@ -298,14 +298,14 @@ services:
       - "27018:27017"
 
   participant-list-service-ui:
-    image: mojaloop/ml-testing-toolkit-ui:v11.8.4.2-pisp
+    image: mojaloop/ml-testing-toolkit-ui:v13.0.1
     container_name: participant-list-service-testing-ui
     ports:
       - "26060:6060"
     environment:
-      - API_BASE_URL=http://participant-list-service:25050
+      - API_BASE_URL=http://localhost:25050
       - AUTH_ENABLED=FALSE
-      - TP_SIM_URL=http://participant-list-service:25000
+      - TP_SIM_URL=http://localhost:25000
     command:
       - sh
       - /usr/share/nginx/start.sh
@@ -362,7 +362,7 @@ services:
     restart: always
 
   thirdparty-api-adapter:
-    image: "mojaloop/thirdparty-api-adapter:v11.19.0"
+    image: "mojaloop/thirdparty-api-adapter:v11.19.1"
     # build:
     #  context: https://github.com/mojaloop/thirdparty-api-adapter.git#chore/branch
     #  dockerfile: ./Dockerfile
@@ -403,7 +403,7 @@ services:
       - mojaloop-net
 
   dfspa-sdk-scheme-adapter:
-    image: "mojaloop/sdk-scheme-adapter:v11.10.1.3-pisp"
+    image: "mojaloop/sdk-scheme-adapter:v11.16.2"
     # build:
     #   context: ../../sdk-scheme-adapter
     #   dockerfile: ./Dockerfile
@@ -424,13 +424,14 @@ services:
     restart: always
 
   dfspa-thirdparty-scheme-adapter-inbound:
-    image: "mojaloop/thirdparty-scheme-adapter:v11.39.2"
+    image: "mojaloop/thirdparty-scheme-adapter:v11.40.0"
     #build:
     #  context: https://github.com/username/thirdparty-scheme-adapter.git#branch
     #  dockerfile: ./docker/Dockerfile
     container_name: dfspa-thirdparty-scheme-adapter-inbound
     environment:
       - NODE_ENV=e2e
+      - LOG_LEVEL=debug
     command: sh -c "/opt/thirdparty-scheme-adapter/wait4/wait4.js dfspa-thirdparty-scheme-adapter && npm run start:inbound"
     volumes:
       - "./dfsp_a/secrets:/opt/thirdparty-scheme-adapter/secrets"
@@ -453,7 +454,7 @@ services:
       interval: 30s
 
   dfspa-thirdparty-scheme-adapter-outbound:
-    image: "mojaloop/thirdparty-scheme-adapter:v11.39.2"
+    image: "mojaloop/thirdparty-scheme-adapter:v11.40.0"
     #build:
     #  context: https://github.com/username/thirdparty-scheme-adapter.git#branch
     #  dockerfile: ./docker/Dockerfile
@@ -524,7 +525,7 @@ services:
     restart: always
 
   dfspb-thirdparty-scheme-adapter-inbound:
-    image: "mojaloop/thirdparty-scheme-adapter:v11.39.1"
+    image: "mojaloop/thirdparty-scheme-adapter:v11.40.0"
     #build:
     #  context: https://github.com/username/thirdparty-scheme-adapter.git#branch
     #  dockerfile: ./docker/Dockerfile
@@ -553,7 +554,7 @@ services:
       interval: 30s
 
   dfspb-thirdparty-scheme-adapter-outbound:
-    image: "mojaloop/thirdparty-scheme-adapter:v11.39.1"
+    image: "mojaloop/thirdparty-scheme-adapter:v11.40.0"
     #build:
     #  context: https://github.com/username/thirdparty-scheme-adapter.git#branch
     #  dockerfile: ./docker/Dockerfile

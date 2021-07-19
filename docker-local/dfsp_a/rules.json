@@ -55,7 +55,7 @@
       "params": {
         "statusCode": 200,
         "body": {
-          "verifyResult": "OK"
+          "isValid": true
         }
       }
     }
@@ -397,6 +397,33 @@
               "currency": "TZS"
             }
           ]
+        }
+      }
+    }
+  },
+  {
+    "ruleId": 12,
+    "description": "verify received thirdparty transaction request",
+    "conditions": {
+      "all": [
+        {
+          "fact": "path",
+          "operator": "equal",
+          "value": "/validate-thirdparty-transaction-request"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "POST"
+        }
+      ]
+    },
+    "event": {
+      "type": "FIXED_CALLBACK",
+      "params": {
+        "statusCode": 200,
+        "body": {
+          "isValid": true
         }
       }
     }

@@ -424,10 +424,7 @@ services:
     restart: always
 
   dfspa-thirdparty-scheme-adapter-inbound:
-    build:
-      context: /home/lew/developer/mojaloop/thirdparty-scheme-adapter
-      dockerfile:  ./docker/Dockerfile
-    # image: "mojaloop/thirdparty-scheme-adapter:v11.40.0"
+    image: "mojaloop/thirdparty-scheme-adapter:v11.40.0"
     #build:
     #  context: https://github.com/username/thirdparty-scheme-adapter.git#branch
     #  dockerfile: ./docker/Dockerfile

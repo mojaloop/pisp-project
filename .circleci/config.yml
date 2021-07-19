@@ -107,6 +107,34 @@ jobs:
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             cd ./docker-local/
             docker-compose pull
+
+            # Start the services piecemeal to not overwhelm circleci
+            docker-compose up -d central-ledger
+            sleep 10
+            docker-compose up -d account-lookup-service simulator
+            sleep 10
+            docker-compose up -d als-consent-oracle
+            sleep 10
+            docker-compose up -d auth-service
+            sleep 10
+            docker-compose up -d central-settlement
+            sleep 10
+            docker-compose up -d dfspa-sdk-scheme-adapter dfspa-thirdparty-scheme-adapter-inbound dfspa-thirdparty-scheme-adapter-outbound
+            sleep 10
+            docker-compose up -d dfspb-sdk-scheme-adapter dfspb-thirdparty-scheme-adapter-inbound dfspb-thirdparty-scheme-adapter-outbound
+            sleep 10
+            docker-compose up -d login-flow-simulator-ui login-flow-simulator
+            sleep 10
+            docker-compose up -d ml-api-adapter
+            sleep 10
+            docker-compose up -d thirdparty-api-adapter
+            sleep 10
+            docker-compose up -d quoting-service
+            sleep 10
+            docker-compose up -d pisp-sdk-scheme-adapter pisp-redis pisp-thirdparty-scheme-adapter-inbound pisp-backend pisp-thirdparty-scheme-adapter-outbound
+            sleep 10
+
+            # everything else
             docker-compose up -d
 
             # Check straight away to see if any containers have exited

@@ -1,0 +1,43 @@
+openapi: 3.0.1
+info:
+  title: Mojaloop Third Party API (PISP)
+  description: This API is a part of Mojaloop's Thirdparty API suite, and describes
+    the interactions between a PISP and the Mojaloop Switch or a DFSP
+  license:
+    name: Apache 2.0
+  version: "1.1"
+servers:
+  - url: /
+paths:
+  # /accounts/{ID}:
+  #   $ref: '../../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/paths/accounts_ID.yaml'
+  # /accounts/{ID}/error:
+  #   $ref: '../../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/paths/accounts_ID_error.yaml'
+  # /authorizations:
+  #   $ref: '../../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/paths/authorizations.yaml'
+  # /consentRequests/{ID}:
+  #   $ref: '../../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/paths/consentRequests_ID.yaml'
+  # /consentRequests/{ID}/error:
+  #   $ref: '../../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/paths/consentRequests_ID_error.yaml'
+  # /consents:
+  #   $ref: '../../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/paths/consents.yaml'
+  # /consents/{ID}:
+  #   $ref: '../../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/paths/consents_ID.yaml'
+  # /consents/{ID}/error:
+  #   $ref: '../../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/paths/consents_ID_error.yaml'
+  # /thirdpartyRequests/transactions/{ID}:
+  #   $ref: '../../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/paths/thirdpartyRequests_transactions_ID.yaml'
+  # /thirdpartyRequests/transactions/{ID}/error:
+  #   $ref: '../../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/paths/thirdpartyRequests_transactions_ID_error.yaml'
+  /parties/{Type}/{ID}:
+    $ref: '../../../node_modules/@mojaloop/api-snippets/fspiop/v1_1/openapi3/paths/parties_Type_ID.yaml'
+  /parties/{Type}/{ID}/error:
+    $ref: '../../../node_modules/@mojaloop/api-snippets/fspiop/v1_1/openapi3/paths/parties_Type_ID_error.yaml'
+  /parties/{Type}/{ID}/{SubId}:
+    $ref: '../../../node_modules/@mojaloop/api-snippets/fspiop/v1_1/openapi3/paths/parties_Type_ID_SubId.yaml'
+  /parties/{Type}/{ID}/{SubId}/error:
+    $ref: '../../../node_modules/@mojaloop/api-snippets/fspiop/v1_1/openapi3/paths/parties_Type_ID_SubId_error.yaml'
+  # /services/{ServiceType}:
+  #   $ref: '../../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/paths/services_ServiceType.yaml'
+  # /services/{ServiceType}/error:
+  #   $ref: '../../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/paths/services_ServiceType_error.yaml'

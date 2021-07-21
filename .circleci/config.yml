@@ -109,9 +109,9 @@ jobs:
             docker-compose pull
 
             # Start the services piecemeal to not overwhelm circleci
-            docker-compose up -d central-ledger
-            sleep 10
             docker-compose up -d account-lookup-service simulator
+            sleep 30
+            docker-compose up -d central-ledger
             sleep 10
             docker-compose up -d als-consent-oracle
             sleep 10

@@ -20,7 +20,7 @@
     "bundle:openapi:auth-service": "swagger-cli bundle -o ./docker-local/auth-service/spec_files/api_definitions/thirdparty_pisp/api_spec.yaml -t yaml ./docker-local/auth-service/spec_files/api_definitions/thirdparty_pisp/thirdparty-auth-api-template.yaml",
     "bundle:openapi:dfsp": "swagger-cli bundle -o ./src/interface/thirdparty-dfsp-api.yaml -t yaml ./src/interface/thirdparty-dfsp-api-template.yaml",
     "bundle:openapi:participant-list-service": "swagger-cli bundle -o ./docker-local/participant-list-service/spec_files/api_definitions/thirdparty_pisp/api_spec.yaml -t yaml ./docker-local/participant-list-service/spec_files/api_definitions/thirdparty_pisp/thirdparty-service-api-template.yaml",
-    "bundle:openapi:pisp": "swagger-cli bundle -o ./src/interface/thirdparty-pisp-api.yaml -t yaml ./src/interface/thirdparty-pisp-api-template.yaml",
+    "bundle:openapi:pisp": "swagger-cli bundle -o ./src/interface/thirdparty-pisp-api.yaml -t yaml ./src/interface/thirdparty-pisp-api.template.yaml",
     "bundle:ttk-thirdparty-sim:api": "swagger-cli bundle -o ./src/interface/ttk-thirdparty-sim-api.yaml -t yaml ./src/interface/ttk-thirdparty-sim-api-template.yaml && swagger-cli validate ./src/interface/ttk-thirdparty-sim-api.yaml",
     "bundle:ttk-thirdparty:api": "swagger-cli bundle -o ./src/interface/ttk-thirdparty-api.yaml -t yaml ./src/interface/ttk-thirdparty-api-template.yaml && swagger-cli validate ./src/interface/ttk-thirdparty-api.yaml",
     "docker:clean:all": "docker rm -f $(docker ps -a -q); docker volume rm (docker volume ls -q)",

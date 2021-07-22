@@ -1,0 +1,94 @@
+[
+  {
+    "ruleId": 1,
+    "priority": 1,
+    "description": "Default response for an account lookup",
+    "apiVersion": {
+      "minorVersion": 1,
+      "majorVersion": 0,
+      "type": "thirdparty_scheme_adapter_sync"
+    },
+    "conditions": {
+      "all": [
+        {
+          "fact": "operationPath",
+          "operator": "equal",
+          "value": "/linking/accounts/{fspId}/{userId}"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "get"
+        }
+      ]
+    },
+    "event": {
+      "method": null,
+      "path": null,
+      "params": {
+        "body": {
+          "accounts": [
+            {
+              "accountNickname": "dfspa.user.nickname1",
+              "id": "dfspa.username.1234",
+              "currency": "ZAR"
+            },
+            {
+              "accountNickname": "dfspa.user.nickname2",
+              "id": "dfspa.username.5678",
+              "currency": "USD"
+            }
+          ],
+          "currentState": "COMPLETED"
+        },
+        "statusCode": "200",
+        "scripts": {}
+      },
+      "type": "MOCK_RESPONSE"
+    },
+    "type": "response",
+    "version": 1
+  },
+  {
+    "ruleId": 2,
+    "priority": 1,
+    "description": "get /linking/providers\n\nThis could be a Mock Response callback, but this tool doesn't seem to like the oneOf swagger annotation",
+    "apiVersion": {
+      "minorVersion": 1,
+      "majorVersion": 0,
+      "type": "thirdparty_scheme_adapter_sync"
+    },
+    "conditions": {
+      "all": [
+        {
+          "fact": "operationPath",
+          "operator": "equal",
+          "value": "/linking/providers"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "get"
+        }
+      ]
+    },
+    "event": {
+      "method": null,
+      "path": null,
+      "params": {
+        "body": {
+          "providers": [
+            "dfspa",
+            "dfspb"
+          ],
+          "currentState": "providersLookupSuccess"
+        },
+        "statusCode": "200",
+        "scripts": {}
+      },
+      "type": "FIXED_RESPONSE"
+    },
+    "type": "response",
+    "version": 1
+  }
+]

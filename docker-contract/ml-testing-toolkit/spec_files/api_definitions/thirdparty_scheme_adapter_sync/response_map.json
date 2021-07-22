@@ -1,9 +1,17 @@
 {
-  "/health": {
+  "/health/": {
     "get": {
-      "response": {
-        "bodyOverride": {}
-      }
+      "response": {}
+    }
+  },
+  "/linking/providers": {
+    "get": {
+      "response": {}
+    }
+  },
+  "/linking/accounts/{fspId}/{userId}": {
+    "get": {
+      "response": {}
     }
   }
 }

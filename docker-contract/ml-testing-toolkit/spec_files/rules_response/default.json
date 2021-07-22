@@ -1666,40 +1666,5 @@
     },
     "type": "response",
     "version": 1
-  },
-  {
-    "ruleId": 30,
-    "priority": 1,
-    "description": "get /health",
-    "apiVersion": {
-      "minorVersion": 1,
-      "majorVersion": 0,
-      "type": "thirdparty_scheme_adapter_sync"
-    },
-    "conditions": {
-      "all": [
-        {
-          "fact": "operationPath",
-          "operator": "equal",
-          "value": "/health"
-        },
-        {
-          "fact": "method",
-          "operator": "equal",
-          "value": "get"
-        }
-      ]
-    },
-    "event": {
-      "method": null,
-      "path": null,
-      "params": {
-        "scripts": {},
-        "statusCode": "200"
-      },
-      "type": "MOCK_RESPONSE"
-    },
-    "type": "response",
-    "version": 1
   }
 ]

@@ -1,0 +1,9 @@
+{
+  "/health": {
+    "get": {
+      "response": {
+        "bodyOverride": {}
+      }
+    }
+  }
+}

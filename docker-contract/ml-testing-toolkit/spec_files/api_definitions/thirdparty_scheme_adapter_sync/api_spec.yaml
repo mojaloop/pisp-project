@@ -1,3 +1,8 @@
+# Note: I've manually edited the `responses` section to replace all errors with a single
+# `default` entry, as suggested in https://swagger.io/docs/specification/describing-responses/
+# This is because each of the error responses contains the same schema.
+# Doing do makes the swagger doc much more readable, especially when rendered
+
 openapi: 3.0.1
 info:
   title: Mojaloop Thirdparty Outbound Scheme Adapter
@@ -14,94 +19,56 @@ info:
     name: TBD
     url: TBD
   version: 0.1.0
+servers:
+  - url: http://switch-ttk-backend-fspiop.beta.moja-lab.live
+    description: The mock 3p-scheme-adapter server running in the Mojaloop Sandbox
 paths:
-  /health:
-    get:
-      tags:
-        - health
-      responses:
-        '200':
-          $ref: '#/components/responses/200'
-        '400':
-          $ref: '#/components/responses/400'
-        '401':
-          $ref: '#/components/responses/401'
-        '403':
-          $ref: '#/components/responses/403'
-        '404':
-          $ref: '#/components/responses/404'
-        '405':
-          $ref: '#/components/responses/405'
-        '406':
-          $ref: '#/components/responses/406'
-        '501':
-          $ref: '#/components/responses/501'
-        '503':
-          $ref: '#/components/responses/503'
-      operationId: HealthGet
-      summary: Health check endpoint
-      description: >-
-        The HTTP request GET /health is used to return the current status of the
-        API.
-  /metrics:
-    get:
-      tags:
-        - health
-      responses:
-        '200':
-          $ref: '#/components/responses/200'
-        '400':
-          $ref: '#/components/responses/400'
-        '401':
-          $ref: '#/components/responses/401'
-        '403':
-          $ref: '#/components/responses/403'
-        '404':
-          $ref: '#/components/responses/404'
-        '405':
-          $ref: '#/components/responses/405'
-        '406':
-          $ref: '#/components/responses/406'
-        '501':
-          $ref: '#/components/responses/501'
-        '503':
-          $ref: '#/components/responses/503'
-      operationId: MetricsGet
-      summary: Prometheus metrics endpoint
-      description: The HTTP request GET /metrics is used to return metrics for the API.
-  /authorizations:
-    post:
-      operationId: OutboundAuthorizationsPost
-      summary: Outbound Authorizations endpoint
-      description: DFSP Requests Authorization of Transaction from the End User
-      tags:
-        - authorizations
-      requestBody:
-        description: Authorization request details
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AuthorizationsRequest'
-      responses:
-        '200':
-          $ref: '#/components/responses/AuthorizationsResponse'
-        '400':
-          $ref: '#/components/responses/400'
-        '401':
-          $ref: '#/components/responses/401'
-        '403':
-          $ref: '#/components/responses/403'
-        '404':
-          $ref: '#/components/responses/404'
-        '405':
-          $ref: '#/components/responses/405'
-        '406':
-          $ref: '#/components/responses/406'
-        '501':
-          $ref: '#/components/responses/501'
-        '503':
-          $ref: '#/components/responses/503'
+  # Skipping these for now, they will just confuse users
+  # /health:
+  #   get:
+  #     tags:
+  #       - health
+  #     responses:
+  #       '200':
+  #         $ref: '#/components/responses/200'
+  #       'default':
+  #         $ref: '#/components/responses/400'
+  #     operationId: HealthGet
+  #     summary: Health check endpoint
+  #     description: >-
+  #       The HTTP request GET /health is used to return the current status of the
+  #       API.
+  # /metrics:
+  #   get:
+  #     tags:
+  #       - health
+  #     responses:
+  #       '200':
+  #         $ref: '#/components/responses/200'
+  #       'default':
+  #         $ref: '#/components/responses/400'
+  #     operationId: MetricsGet
+  #     summary: Prometheus metrics endpoint
+  #     description: The HTTP request GET /metrics is used to return metrics for the API.
+  # /authorizations:
+  #   post:
+  #     operationId: OutboundAuthorizationsPost
+  #     summary: Outbound Authorizations endpoint
+  #     description: DFSP Requests Authorization of Transaction from the End User
+  #     tags:
+  #       - authorizations
+  #     requestBody:
+  #       description: Authorization request details
+  #       required: true
+  #       content:
+  #         application/json:
+  #           schema:
+  #             $ref: '#/components/schemas/AuthorizationsRequest'
+  #     responses:
+  #       '200':
+  #         $ref: '#/components/responses/AuthorizationsResponse'
+  #       'default':
+  #         $ref: '#/components/responses/400'
   /thirdpartyTransaction/partyLookup:
     post:
       operationId: ThirdpartyTransactionPartyLookup
@@ -122,22 +89,8 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/ThirdpartyTransactionPartyLookupResponse'
-        '400':
+        'default':
           $ref: '#/components/responses/400'
-        '401':
-          $ref: '#/components/responses/401'
-        '403':
-          $ref: '#/components/responses/403'
-        '404':
-          $ref: '#/components/responses/404'
-        '405':
-          $ref: '#/components/responses/405'
-        '406':
-          $ref: '#/components/responses/406'
-        '501':
-          $ref: '#/components/responses/501'
-        '503':
-          $ref: '#/components/responses/503'
   '/thirdpartyTransaction/{ID}/initiate':
     post:
       operationId: ThirdpartyTransactionIDInitiate
@@ -159,22 +112,8 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/ThirdpartyTransactionIDInitiateResponse'
-        '400':
+        'default':
           $ref: '#/components/responses/400'
-        '401':
-          $ref: '#/components/responses/401'
-        '403':
-          $ref: '#/components/responses/403'
-        '404':
-          $ref: '#/components/responses/404'
-        '405':
-          $ref: '#/components/responses/405'
-        '406':
-          $ref: '#/components/responses/406'
-        '501':
-          $ref: '#/components/responses/501'
-        '503':
-          $ref: '#/components/responses/503'
   '/thirdpartyTransaction/{ID}/approve':
     post:
       operationId: ThirdpartyTransactionIDApprove
@@ -198,22 +137,8 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/ThirdpartyTransactionIDApproveResponse'
-        '400':
+        'default':
           $ref: '#/components/responses/400'
-        '401':
-          $ref: '#/components/responses/401'
-        '403':
-          $ref: '#/components/responses/403'
-        '404':
-          $ref: '#/components/responses/404'
-        '405':
-          $ref: '#/components/responses/405'
-        '406':
-          $ref: '#/components/responses/406'
-        '501':
-          $ref: '#/components/responses/501'
-        '503':
-          $ref: '#/components/responses/503'
   '/thirdpartyRequests/transactions/{ID}/authorizations':
     post:
       operationId: VerifyThirdPartyAuthorization
@@ -237,22 +162,8 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/ThirdpartyRequestsTransactionsIDAuthzResponse'
-        '400':
+        'default':
           $ref: '#/components/responses/400'
-        '401':
-          $ref: '#/components/responses/401'
-        '403':
-          $ref: '#/components/responses/403'
-        '404':
-          $ref: '#/components/responses/404'
-        '405':
-          $ref: '#/components/responses/405'
-        '406':
-          $ref: '#/components/responses/406'
-        '501':
-          $ref: '#/components/responses/501'
-        '503':
-          $ref: '#/components/responses/503'
   /linking/providers:
     get:
       operationId: GetLinkingProviders
@@ -265,22 +176,8 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/LinkingProvidersResponse'
-        '400':
+        'default':
           $ref: '#/components/responses/400'
-        '401':
-          $ref: '#/components/responses/401'
-        '403':
-          $ref: '#/components/responses/403'
-        '404':
-          $ref: '#/components/responses/404'
-        '405':
-          $ref: '#/components/responses/405'
-        '406':
-          $ref: '#/components/responses/406'
-        '501':
-          $ref: '#/components/responses/501'
-        '503':
-          $ref: '#/components/responses/503'
   '/linking/accounts/{fspId}/{userId}':
     get:
       operationId: GetLinkingAccountsByUserId
@@ -304,22 +201,8 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/AccountsByUserIdResponse'
-        '400':
+        'default':
           $ref: '#/components/responses/400'
-        '401':
-          $ref: '#/components/responses/401'
-        '403':
-          $ref: '#/components/responses/403'
-        '404':
-          $ref: '#/components/responses/404'
-        '405':
-          $ref: '#/components/responses/405'
-        '406':
-          $ref: '#/components/responses/406'
-        '501':
-          $ref: '#/components/responses/501'
-        '503':
-          $ref: '#/components/responses/503'
   /linking/request-consent:
     post:
       operationId: PostLinkingRequestConsent
@@ -349,22 +232,8 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/LinkingRequestConsentResponse'
-        '400':
+        'default':
           $ref: '#/components/responses/400'
-        '401':
-          $ref: '#/components/responses/401'
-        '403':
-          $ref: '#/components/responses/403'
-        '404':
-          $ref: '#/components/responses/404'
-        '405':
-          $ref: '#/components/responses/405'
-        '406':
-          $ref: '#/components/responses/406'
-        '501':
-          $ref: '#/components/responses/501'
-        '503':
-          $ref: '#/components/responses/503'
   '/linking/request-consent/{ID}/authenticate':
     patch:
       operationId: PatchLinkingRequestConsentIDAuthenticate
@@ -392,22 +261,8 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/LinkingRequestConsentIDAuthenticateResponse'
-        '400':
+        'default':
           $ref: '#/components/responses/400'
-        '401':
-          $ref: '#/components/responses/401'
-        '403':
-          $ref: '#/components/responses/403'
-        '404':
-          $ref: '#/components/responses/404'
-        '405':
-          $ref: '#/components/responses/405'
-        '406':
-          $ref: '#/components/responses/406'
-        '501':
-          $ref: '#/components/responses/501'
-        '503':
-          $ref: '#/components/responses/503'
   '/linking/request-consent/{ID}/pass-credential':
     post:
       operationId: PostLinkingRequestConsentIDPassCredential
@@ -436,22 +291,8 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/LinkingRequestConsentIDPassCredentialResponse'
-        '400':
+        'default':
           $ref: '#/components/responses/400'
-        '401':
-          $ref: '#/components/responses/401'
-        '403':
-          $ref: '#/components/responses/403'
-        '404':
-          $ref: '#/components/responses/404'
-        '405':
-          $ref: '#/components/responses/405'
-        '406':
-          $ref: '#/components/responses/406'
-        '501':
-          $ref: '#/components/responses/501'
-        '503':
-          $ref: '#/components/responses/503'
 components:
   responses:
     '200':
@@ -571,6 +412,16 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ThirdpartyTransactionPartyLookupResponse'
+          example:
+            currentState: 'partyLookupSuccess'
+            party:
+              partyIdInfo:
+                partyIdType: MSISDN
+                partyIdentifier: '16135551212'
+                fspId: dfspa
+              name: "Bob bobbington"
+              # personalInfo:
+
     ThirdpartyTransactionIDInitiateResponse:
       description: ThirdpartyTransactionIDInitiate response
       content:

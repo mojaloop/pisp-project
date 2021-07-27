@@ -1,5 +1,5 @@
 {
-  "/health/": {
+  "/health": {
     "get": {
       "response": {}
     }
@@ -11,6 +11,11 @@
   },
   "/linking/accounts/{fspId}/{userId}": {
     "get": {
+      "response": {}
+    }
+  },
+  "/thirdpartyTransaction/partyLookup": {
+    "post": {
       "response": {}
     }
   }

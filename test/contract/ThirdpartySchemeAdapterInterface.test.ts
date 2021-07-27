@@ -44,7 +44,7 @@ describe('Thirdparty Scheme Adapter Interface', () => {
   })
 
   describe('thirdpartyRequests', () => {
-    it.only('POST /thirdpartyTransaction/partyLookup', async () => {
+    it('POST /thirdpartyTransaction/partyLookup', async () => {
       // Arrange
       const tprURI = `${TestEnv.baseUrls.mlTestingToolkit}/thirdpartyTransaction/partyLookup`
       const body = {
@@ -74,7 +74,59 @@ describe('Thirdparty Scheme Adapter Interface', () => {
       expect(result.data).toStrictEqual(expected)
     })
 
-    it.todo('POST /thirdpartyTransaction/{ID}/initiate')
+    it.only('POST /thirdpartyTransaction/{ID}/initiate', async () => {
+      // Arrange
+      const tprURI = `${TestEnv.baseUrls.mlTestingToolkit}/thirdpartyTransaction/b51ec534-ee48-4575-b6a9-ead2955b8069/initiate`
+      const body = {
+        "payee": {
+          "partyIdInfo": {
+            "partyIdType": "PERSONAL_ID",
+            "partyIdentifier": "16135551212",
+            "fspId": "dfspb",
+          },
+          "name": "Bob Bobbington",
+          "personalInfo": {
+            "complexName": {
+              "firstName": "Bob",
+              "middleName": "Johannes",
+              "lastName": "Bobbington"
+            },
+            "dateOfBirth": "1966-06-16"
+          }
+        },
+        "payer": {
+          "partyIdType": "THIRD_PARTY_LINK",
+          "partyIdentifier": "16135551212",
+          "fspId": "dfspa",
+        },
+        "amountType": "RECEIVE",
+        "amount": {
+          "currency": "AED",
+          "amount": "123.45"
+        },
+        "transactionType": {
+          "scenario": "DEPOSIT",
+          "subScenario": "LOCALLY_DEFINED_SUBSCENARIO",
+          "initiator": "PAYEE",
+          "initiatorType": "CONSUMER",
+          "refundInfo": {
+            "originalTransactionId": "b51ec534-ee48-4575-b6a9-ead2955b8069",
+            "refundReason": "Free text indicating reason for the refund."
+          },
+          "balanceOfPayments": "123"
+        },
+        "expiration": "2021-05-24T08:38:08.699-04:00"
+      }
+      const expected = 'string'
+
+      // Act
+      const result = await axios.post(tprURI, body)
+
+      // Assert
+      expect(result.status).toBe(200)
+      expect(result.data).toStrictEqual(expected)
+    })
+
     it.todo('POST /thirdpartyTransaction/{ID}/approve')
     it.todo('POST /thirdpartyRequests/transactions/{ID}/authorizations')
   })

@@ -428,6 +428,26 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ThirdpartyTransactionIDInitiateResponse'
+          example:
+            currentState: authorizationReceived
+            authorization:
+              authenticationType: 'U2F'
+              retriesLeft: '1'
+              amount:
+                currency: USD
+                amount: '10.00'
+              # TODO: proper one here...
+              transactionId: '1234-1234-1234-1234'
+              transactionRequestId: '1234-1234-1234-1234'
+              quote:
+                transferAmount:
+                  currency: USD
+                  amount: '10.00'
+                expiration: '2021-01-01T08:38:08.699-04:00'
+                ilpPacket: AYIBgQAAAAAAAASwNGxldmVsb25lLmRmc3AxLm1lci45T2RTOF81MDdqUUZERmZlakgyOVc4bXFmNEpLMHlGTFGCAUBQU0svMS4wCk5vbmNlOiB1SXlweUYzY3pYSXBFdzVVc05TYWh3CkVuY3J5cHRpb246IG5vbmUKUGF5bWVudC1JZDogMTMyMzZhM2ItOGZhOC00MTYzLTg0NDctNGMzZWQzZGE5OGE3CgpDb250ZW50LUxlbmd0aDogMTM1CkNvbnRlbnQtVHlwZTogYXBwbGljYXRpb24vanNvbgpTZW5kZXItSWRlbnRpZmllcjogOTI4MDYzOTEKCiJ7XCJmZWVcIjowLFwidHJhbnNmZXJDb2RlXCI6XCJpbnZvaWNlXCIsXCJkZWJpdE5hbWVcIjpcImFsaWNlIGNvb3BlclwiLFwiY3JlZGl0TmFtZVwiOlwibWVyIGNoYW50XCIsXCJkZWJpdElkZW50aWZpZXJcIjpcIjkyODA2MzkxXCJ9IgA
+                condition: 'todo real condition here!'
+
+
     ThirdpartyTransactionIDApproveResponse:
       description: ThirdpartyTransactionIDApproveResponse
       content:

@@ -18,5 +18,10 @@
     "post": {
       "response": {}
     }
+  },
+  "/thirdpartyTransaction/{ID}/initiate": {
+    "post": {
+      "response": {}
+    }
   }
 }

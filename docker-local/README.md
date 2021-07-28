@@ -73,6 +73,7 @@ npm install
 127.0.0.1 dfspb-backend dfspb-thirdparty-scheme-adapter-inbound dfspb-thirdparty-scheme-adapter-outbound dfspb-sdk-scheme-adapter
 127.0.0.1 pisp-backend pisp-thirdparty-scheme-adapter-inbound pisp-thirdparty-scheme-adapter-outbound pisp-sdk-scheme-adapter
 127.0.0.1 als-consent-oracle
+127.0.0.1 auth-service
 ```
 
 ## Start services using `docker-compose`
@@ -93,7 +94,7 @@ It may take a little while for the services to healthy.
 > Which adds entries to the container's `/etc/hosts` file, allowing containers to
 > communicate on the host network (is that right?)
 > This was causing issues on other machines (sigh), so we are now trying to use
-> docker compose file composition to get around this issue. 
+> docker compose file composition to get around this issue.
 > Use:
 > `docker-compose -f docker-compose.yml -f docker-compose.linux.yml up -d`
 > to start docker-local with additional `extra_hosts` entries.
@@ -413,7 +414,7 @@ export CONSENT_REQUEST_ID=b51ec534-ee48-4575-b6a9-ead2955b8069
 
 ```bash
 # check the parties registered at a simulator:
-curl localhost:9003/repository/parties 
+curl localhost:9003/repository/parties
 
 # expected response
 # [{"displayName":"Alice Alpaca","firstName":"Alice","middleName":"K","lastName":"Alpaca","dateOfBirth":"1970-01-01","idType":"MSISDN","idValue":"123456789"}]
@@ -727,7 +728,7 @@ curl -X POST localhost:4002/participants/MSISDN/123456789 \
   -H 'Content-Type: application/vnd.interoperability.participants+json;version=1.0' \
   -H 'FSPIOP-Source: dfspa' \
   -H 'Date: 2021-01-01' \
-  -d '{ 
+  -d '{
       "fspId": "dfspa",
       "currency": "USD"
   }'

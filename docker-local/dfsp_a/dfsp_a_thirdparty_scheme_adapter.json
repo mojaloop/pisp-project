@@ -56,6 +56,7 @@
         "key": "./secrets/dfsp_a_client.crt"
       }
     },
-    "TEMP_OVERRIDE_QUOTES_PARTY_ID_TYPE": "MSISDN"
+    "TEMP_OVERRIDE_QUOTES_PARTY_ID_TYPE": "MSISDN",
+    "TEST_OVERRIDE_CONSENT_ID": "76059a0a-684f-4002-a880-b01159afe119"
   }
 }

@@ -61,6 +61,7 @@ function getWaiters (wait4, config) {
   const methods = {
     mongo: methodMongoDB,
     mysql: methodMySQL,
+    mysqlAlt: methodMySQLAlt,
     ncat: methodNCat
   }
   console.log(`wait4 Dependencies to wait for:\n${util.inspect(wait4, false, 5, true)}`)
@@ -159,6 +160,32 @@ async function methodMySQL (waitJob, RC) {
       user: RC.DATABASE.USER,
       password: RC.DATABASE.PASSWORD,
       database: RC.DATABASE.SCHEMA
+    }
+  })
+  await knex.select(1)
+
+  return waitJob
+}
+
+// TODO: update auth-service config to be standardized like other services
+/**
+ * @function methodMySQLAlt
+ * @description Waits for the MySQL service to be up and running based on deprecated config files
+ * @param {*} waitJob
+ * @param {*} RC
+ */
+async function methodMySQLAlt (waitJob, RC) {
+  console.log(waitJob)
+  console.log(RC)
+  // make connection to MySQL using `knex`
+  const knex = require('knex')({
+    client: RC.DATABASE.client,
+    connection: {
+      host: RC.DATABASE.connection.host.replace(/\/$/, ''),
+      port: RC.DATABASE.connection.port,
+      user: RC.DATABASE.connection.user,
+      password: RC.DATABASE.connection.password,
+      database: RC.DATABASE.connection.database
     }
   })
   await knex.select(1)

@@ -149,13 +149,11 @@ module.exports = {
         {
           description: 'MySQL Database',
           uri: 'auth-service-mysql:3306',
-          method: 'mysql',
-          retries: 30
-        },
-        {
-          description: 'auth-service',
-          uri: 'auth-service:4004',
-          method: 'ncat',
+          method: 'mysqlAlt',
+          rc: {
+            namespace: '',
+            configPath: '../config/integration.json'
+          },
           retries: 30
         }
       ]

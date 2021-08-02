@@ -329,7 +329,6 @@ services:
     volumes:
       - ./docker/wait4:/opt/auth-service/wait4
       - ./docker/auth-service/default.json:/opt/auth-service/config/integration.json
-      - ./docker/auth-service/default.json:/opt/auth-service/config/default.json
     environment:
       - NODE_ENV=integration
     healthcheck:

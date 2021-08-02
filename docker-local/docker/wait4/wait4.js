@@ -175,8 +175,6 @@ async function methodMySQL (waitJob, RC) {
  * @param {*} RC
  */
 async function methodMySQLAlt (waitJob, RC) {
-  console.log(waitJob)
-  console.log(RC)
   // make connection to MySQL using `knex`
   const knex = require('knex')({
     client: RC.DATABASE.client,

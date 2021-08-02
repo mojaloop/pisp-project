@@ -150,6 +150,10 @@ module.exports = {
           description: 'MySQL Database',
           uri: 'auth-service-mysql:3306',
           method: 'mysqlAlt',
+          rc: {
+            namespace: '',
+            configPath: '../config/integration.json'
+          },
           retries: 30
         }
       ]

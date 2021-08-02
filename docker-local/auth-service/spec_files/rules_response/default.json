@@ -1,0 +1,180 @@
+[
+  {
+    "ruleId": 1,
+    "priority": 3,
+    "description": "auth-service post /consents - consentId wildcard",
+    "apiVersion": {
+      "minorVersion": 1,
+      "majorVersion": 0,
+      "type": "thirdparty_pisp",
+      "asynchronous": true
+    },
+    "conditions": {
+      "all": [
+        {
+          "fact": "operationPath",
+          "operator": "equal",
+          "value": "/consents"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "post"
+        }
+      ]
+    },
+    "event": {
+      "method": null,
+      "path": null,
+      "params": {
+        "body": {},
+        "statusCode": "202",
+        "scripts": {
+          "exec": [
+            "const curDate = (new Date()).toUTCString();",
+            "const body = JSON.parse(pm.request.body)",
+            "const consentId = body.consentId",
+            "const url = 'http://thirdparty-api-adapter:3008/consents/' + consentId",
+            "const credential = body.credential",
+            "credential.status = 'VERIFIED'",
+            "const putConsentsIdBody = {scopes: body.scopes, credential: credential}",
+            "const putConsentsIDReq = {",
+            "url,",
+            "  method: 'put',",
+            "  header: {",
+            "    'Accept': 'application/vnd.interoperability.thirdparty+json;version=1.0',",
+            "    'Content-Type': 'application/vnd.interoperability.thirdparty+json;version=1.0',",
+            "    'Date': curDate,",
+            "    'FSPIOP-Source': 'centralAuth',",
+            "    'FSPIOP-Destination': 'dfspa'",
+            "  },",
+            "  body: {",
+            "    mode: 'raw',",
+            "    raw: JSON.stringify(putConsentsIdBody)",
+            "  }",
+            "}",
+            "",
+            "// the auth-service is required to create the CONSENT record with the ALS.",
+            "// we will check for it's existance.",
+            "const postParticipantsToALS = {",
+            "  url: 'http://account-lookup-service:4002/participants/CONSENT/' + consentId,",
+            "  method: 'post',",
+            "  header: {",
+            "    'Accept': 'application/vnd.interoperability.participants+json;version=1.0',",
+            "    'Content-Type': 'application/vnd.interoperability.participants+json;version=1.0',",
+            "    'Date': curDate,",
+            "    'FSPIOP-Source': 'centralAuth'",
+            "  },",
+            "  body: {",
+            "    mode: 'raw',",
+            "    raw: JSON.stringify({",
+            "      \"fspId\": \"centralAuth\"",
+            "    })",
+            "  }",
+            "}",
+            "",
+            "// send /participant request to ALS before sending back PUT /consents to dfsp",
+            "pm.sendRequest(postParticipantsToALS, function (err, response) {",
+            "  console.log('participant response : '+JSON.stringify(response.json()))",
+            "  ",
+            "  pm.sendRequest(putConsentsIDReq, function (err, response) {",
+            "    console.log('consent response : '+JSON.stringify(response.json()))",
+            "  })",
+            "})",
+            "",
+            "",
+            ""
+          ]
+        },
+        "delay": 0
+      },
+      "type": "FIXED_RESPONSE"
+    },
+    "type": "response",
+    "version": 1
+  },
+  {
+    "ruleId": 2,
+    "priority": 1,
+    "description": "auth-service post /consents - verify credential error flow",
+    "apiVersion": {
+      "minorVersion": 1,
+      "majorVersion": 0,
+      "type": "thirdparty_pisp",
+      "asynchronous": true
+    },
+    "conditions": {
+      "all": [
+        {
+          "fact": "body",
+          "operator": "equal",
+          "value": "credential id error: identifier of pair of keys, base64 encoded, min length 59",
+          "path": "credential.payload.id"
+        },
+        {
+          "fact": "operationPath",
+          "operator": "equal",
+          "value": "/consents"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "post"
+        }
+      ]
+    },
+    "event": {
+      "method": null,
+      "path": null,
+      "params": {
+        "body": {},
+        "statusCode": "202",
+        "scripts": {
+          "exec": [
+            "const curDate = (new Date()).toUTCString();",
+            "const body = JSON.parse(pm.request.body)",
+            "const consentId = body.consentId",
+            "const url = 'http://thirdparty-api-adapter:3008/consents/' + consentId + '/error'",
+            "const putConsentsErrorIDReq = {",
+            "  url,",
+            "  method: 'put',",
+            "  header: {",
+            "    'Accept': 'application/vnd.interoperability.thirdparty+json;version=1.0',",
+            "    'Content-Type': 'application/vnd.interoperability.thirdparty+json;version=1.0',",
+            "    'Date': curDate,",
+            "    'FSPIOP-Source': 'centralAuth',",
+            "    'FSPIOP-Destination': 'dfspa'",
+            "  },",
+            "  body: {",
+            "    mode: 'raw',",
+            "    raw: JSON.stringify({",
+            "      \"errorInformation\": {",
+            "        \"errorCode\": \"7213\",",
+            "        \"errorDescription\": \"Consent is invalid\",",
+            "        \"extensionList\": {",
+            "          \"extension\": [",
+            "            {",
+            "              \"key\": \"test\",",
+            "              \"value\": \"test\"",
+            "            }",
+            "          ]",
+            "        }",
+            "      }",
+            "    })",
+            "  }",
+            "}",
+            "  ",
+            "pm.sendRequest(putConsentsErrorIDReq, function (err, response) {",
+            "  console.log('put /consents/{ID}/error response: '+JSON.stringify(response.json()))",
+            "})",
+            ""
+          ]
+        },
+        "delay": 0
+      },
+      "type": "FIXED_RESPONSE"
+    },
+    "type": "response",
+    "version": 1
+  }
+]

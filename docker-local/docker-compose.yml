@@ -313,10 +313,10 @@ services:
       - mojaloop-net
 
   auth-service:
-    # image: mojaloop/auth-service:v11.5.1
-    build:
-      context: https://github.com/kleyow/auth-service.git#feat/consent-registration
-      dockerfile: ./Dockerfile
+    image: mojaloop/auth-service:v11.6.0
+    #build:
+    #  context: https://github.com/username/auth-service.git#feat/branch
+    #  dockerfile: ./Dockerfile
     command: sh -c "/opt/auth-service/wait4/wait4.js auth-service && npm run migrate && npm run start"
     container_name: auth-service
     ports:
@@ -429,10 +429,10 @@ services:
     restart: always
 
   dfspa-thirdparty-scheme-adapter-inbound:
-    # image: "mojaloop/thirdparty-scheme-adapter:v11.40.0"
-    build:
-      context: https://github.com/kleyow/thirdparty-scheme-adapter.git#chore/e2e-test-config
-      dockerfile: ./docker/Dockerfile
+    image: "mojaloop/thirdparty-scheme-adapter:v11.41.0"
+    #build:
+    #  context: https://github.com/username/thirdparty-scheme-adapter.git#feat/branch
+    #  dockerfile: ./docker/Dockerfile
     container_name: dfspa-thirdparty-scheme-adapter-inbound
     environment:
       - NODE_ENV=e2e
@@ -459,10 +459,10 @@ services:
       interval: 30s
 
   dfspa-thirdparty-scheme-adapter-outbound:
-    #image: "mojaloop/thirdparty-scheme-adapter:v11.40.0"
-    build:
-      context: https://github.com/kleyow/thirdparty-scheme-adapter.git#chore/e2e-test-config
-      dockerfile: ./docker/Dockerfile
+    image: "mojaloop/thirdparty-scheme-adapter:v11.41.0"
+    #build:
+    #  context: https://github.com/username/thirdparty-scheme-adapter.git#feat/branch
+    #  dockerfile: ./docker/Dockerfile
     container_name: dfspa-thirdparty-scheme-adapter-outbound
     environment:
       - NODE_ENV=e2e
@@ -530,10 +530,10 @@ services:
     restart: always
 
   dfspb-thirdparty-scheme-adapter-inbound:
-    #image: "mojaloop/thirdparty-scheme-adapter:v11.40.0"
-    build:
-      context: https://github.com/kleyow/thirdparty-scheme-adapter.git#chore/e2e-test-config
-      dockerfile: ./docker/Dockerfile
+    image: "mojaloop/thirdparty-scheme-adapter:v11.41.0"
+    #build:
+    #  context: https://github.com/username/thirdparty-scheme-adapter.git#feat/branch
+    #  dockerfile: ./docker/Dockerfile
     container_name: dfspb-thirdparty-scheme-adapter-inbound
     environment:
       - NODE_ENV=e2e
@@ -559,10 +559,10 @@ services:
       interval: 30s
 
   dfspb-thirdparty-scheme-adapter-outbound:
-    #image: "mojaloop/thirdparty-scheme-adapter:v11.40.0"
-    build:
-      context: https://github.com/kleyow/thirdparty-scheme-adapter.git#chore/e2e-test-config
-      dockerfile: ./docker/Dockerfile
+    image: "mojaloop/thirdparty-scheme-adapter:v11.41.0"
+    #build:
+    #  context: https://github.com/username/thirdparty-scheme-adapter.git#feat/branch
+    #  dockerfile: ./docker/Dockerfile
     container_name: dfspb-thirdparty-scheme-adapter-outbound
     environment:
       - NODE_ENV=e2e
@@ -628,10 +628,10 @@ services:
     restart: always
 
   pisp-thirdparty-scheme-adapter-inbound:
-    #image: "mojaloop/thirdparty-scheme-adapter:v11.39.1"
-    build:
-      context: https://github.com/kleyow/thirdparty-scheme-adapter.git#chore/e2e-test-config
-      dockerfile: ./docker/Dockerfile
+    image: "mojaloop/thirdparty-scheme-adapter:v11.41.0"
+    #build:
+    #  context: https://github.com/username/thirdparty-scheme-adapter.git#feat/branch
+    #  dockerfile: ./docker/Dockerfile
     container_name: pisp-thirdparty-scheme-adapter-inbound
     environment:
       - NODE_ENV=e2e
@@ -658,10 +658,10 @@ services:
       interval: 30s
 
   pisp-thirdparty-scheme-adapter-outbound:
-    # image: "mojaloop/thirdparty-scheme-adapter:v11.39.1"
-    build:
-      context: https://github.com/kleyow/thirdparty-scheme-adapter.git#chore/e2e-test-config
-      dockerfile: ./docker/Dockerfile
+    image: "mojaloop/thirdparty-scheme-adapter:v11.41.0"
+    #build:
+    #  context: https://github.com/username/thirdparty-scheme-adapter.git#feat/branch
+    #  dockerfile: ./docker/Dockerfile
     container_name: pisp-thirdparty-scheme-adapter-outbound
     environment:
       - NODE_ENV=e2e

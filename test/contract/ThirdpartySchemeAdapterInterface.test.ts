@@ -246,7 +246,7 @@ describe('Thirdparty Scheme Adapter Interface', () => {
       expect(result.data).toStrictEqual(expected)
     })
 
-    it.only(`POST /linking/request-consent/{ID}/pass-credential`, async () => {
+    it(`POST /linking/request-consent/{ID}/pass-credential`, async () => {
       // Arrange
       const tprURI = `${TestEnv.baseUrls.mlTestingToolkit}/linking/request-consent/${consentRequestId}/pass-credential`
       const body = {

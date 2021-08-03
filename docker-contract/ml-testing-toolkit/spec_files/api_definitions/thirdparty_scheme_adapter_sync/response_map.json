@@ -23,5 +23,10 @@
     "post": {
       "response": {}
     }
+  },
+  "/thirdpartyTransaction/{ID}/approve": {
+    "post": {
+      "response": {}
+    }
   }
 }

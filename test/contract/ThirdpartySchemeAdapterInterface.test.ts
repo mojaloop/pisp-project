@@ -27,6 +27,7 @@ describe('Thirdparty Scheme Adapter Interface', () => {
   })
   
   // Hmm what's the purpose of this endpoint? Maybe we can skip it for now
+  // TODO: double check with Kevin...
   describe('authorizations', () => {
     it.skip('POST /authorizations', async () => {
       // Arrange
@@ -44,6 +45,7 @@ describe('Thirdparty Scheme Adapter Interface', () => {
   })
 
   describe('thirdpartyRequests', () => {
+    const transactionRequestId = `b51ec534-ee48-4575-b6a9-ead2955b8069`
     it('POST /thirdpartyTransaction/partyLookup', async () => {
       // Arrange
       const tprURI = `${TestEnv.baseUrls.mlTestingToolkit}/thirdpartyTransaction/partyLookup`
@@ -62,7 +64,7 @@ describe('Thirdparty Scheme Adapter Interface', () => {
             ]
           }
         },
-        "transactionRequestId": "b51ec534-ee48-4575-b6a9-ead2955b8069"
+        transactionRequestId
       }
       const expected = 'string'
 
@@ -74,9 +76,9 @@ describe('Thirdparty Scheme Adapter Interface', () => {
       expect(result.data).toStrictEqual(expected)
     })
 
-    it.only('POST /thirdpartyTransaction/{ID}/initiate', async () => {
+    it('POST /thirdpartyTransaction/{ID}/initiate', async () => {
       // Arrange
-      const tprURI = `${TestEnv.baseUrls.mlTestingToolkit}/thirdpartyTransaction/b51ec534-ee48-4575-b6a9-ead2955b8069/initiate`
+      const tprURI = `${TestEnv.baseUrls.mlTestingToolkit}/thirdpartyTransaction/${transactionRequestId}/initiate`
       const body = {
         "payee": {
           "partyIdInfo": {
@@ -97,7 +99,7 @@ describe('Thirdparty Scheme Adapter Interface', () => {
         "payer": {
           "partyIdType": "THIRD_PARTY_LINK",
           "partyIdentifier": "16135551212",
-          "fspId": "dfspa",
+          "fspId": "dfspa", 
         },
         "amountType": "RECEIVE",
         "amount": {
@@ -127,12 +129,52 @@ describe('Thirdparty Scheme Adapter Interface', () => {
       expect(result.data).toStrictEqual(expected)
     })
 
-    it.todo('POST /thirdpartyTransaction/{ID}/approve')
-    it.todo('POST /thirdpartyRequests/transactions/{ID}/authorizations')
+    it('POST /thirdpartyTransaction/{ID}/approve', async () => {
+      // Arrange
+      const tprURI = `${TestEnv.baseUrls.mlTestingToolkit}/thirdpartyTransaction/${transactionRequestId}/approve`
+      const body = {
+        authorizationResponse: {
+          authenticationInfo: {
+            authentication: 'U2F',
+            // TODO: fill in with real values...
+            authenticationValue: {
+              pinValue: 'xxxxxxxxxxx',
+              counter: '1'
+            }
+          },
+          responseType: 'ENTERED'
+        }
+      }
+      const expected = 'string'
+
+      // Act
+      const result = await axios.post(tprURI, body)
+
+      // Assert
+      expect(result.status).toBe(200)
+      expect(result.data).toStrictEqual(expected)
+    })
+
+
+    // TODO: I don't think this is needed...
+    // TODO: double check with Kevin...
+    it.skip('POST /thirdpartyRequests/transactions/{ID}/authorizations')
   })
 
   describe('linking', () => {
-    it.todo(`GET /linking/providers`)
+    it(`GET /linking/providers`, async () => {
+      // Arrange
+      const tprURI = `${TestEnv.baseUrls.mlTestingToolkit}/linking/providers`
+      const expected = { providers: ["dfspa", "dfspb"], currentState: "providersLookupSuccess" }
+
+      // Act
+      const result = await axios.get(tprURI, {})
+
+      // Assert
+      expect(result.status).toBe(200)
+      expect(result.data).toStrictEqual(expected)
+    })
+
     it(`GET /linking/accounts/{fspId}/{userId}`, async () => {
       // Arrange
       const tprURI = `${TestEnv.baseUrls.mlTestingToolkit}/linking/accounts/dfspa/username1234`
@@ -148,7 +190,40 @@ describe('Thirdparty Scheme Adapter Interface', () => {
       expect(result.status).toBe(200)
       expect(result.data).toStrictEqual(expected)
     })
-    it.todo(`POST /linking/request-consent`)
+
+    it.only(`POST /linking/request-consent`, async () => {
+      // Arrange
+      const tprURI = `${TestEnv.baseUrls.mlTestingToolkit}/linking/request-consent`
+      const body = {
+        accounts: [
+          { accountNickname: "XXXXXXnt", id: "dfspa.username.1234", currency: "ZAR" },
+          { accountNickname: "SpeXXXXXXXXnt", id: "dfspa.username.5678", currency: "USD" }
+        ],
+        userId: "username1234", 
+        callbackURI: 'pisp-app://callback'
+      }
+      const expected = {
+        channelResponse: {
+          consentRequestId: 6789,
+          scopes: [
+            {accountId: 'dfspa.username.1234', actions: ['accounts.getBalance', 'accounts.transfer']}, 
+            {accountId: 'dfspa.username.5678', actions: ['accounts.getBalance', 'accounts.transfer']}
+          ], 
+        authChannels: ["OTP"], 
+        callbackURI: 'pisp-app://callback...', 
+        authURI: 'dfspa.com/authorize?consentRequestId=6789'},
+        currentState: "OTPAuthenticationChannelResponseReceived"
+      }
+
+      // Act
+      const result = await axios.post(tprURI, body)
+
+      // Assert
+      expect(result.status).toBe(200)
+      expect(result.data).toStrictEqual(expected)
+    })
+
+
     it.todo(`PATCH /linking/request-consent/{ID}/authenticate`)
     it.todo(`POST /linking/request-consent/{ID}/pass-credential`)
   })

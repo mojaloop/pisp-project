@@ -44,7 +44,7 @@ describe('Thirdparty Scheme Adapter Interface', () => {
     })
   })
 
-  describe.only('thirdpartyRequests', () => {
+  describe('thirdpartyRequests', () => {
     const transactionRequestId = `b51ec534-ee48-4575-b6a9-ead2955b8069`
     it('POST /thirdpartyTransaction/partyLookup', async () => {
       // Arrange
@@ -180,7 +180,7 @@ describe('Thirdparty Scheme Adapter Interface', () => {
   })
 
   describe('linking', () => {
-    const consentRequestId = 'f6ab43b0-71cc-49f9-b763-2ac3f05ac8c1'
+    const consentRequestIdOTP = 'f6ab43b0-71cc-49f9-b763-2ac3f05ac8c1'
 
     it(`GET /linking/providers`, async () => {
       // Arrange
@@ -211,14 +211,13 @@ describe('Thirdparty Scheme Adapter Interface', () => {
       expect(result.data).toStrictEqual(expected)
     })
 
-    it(`POST /linking/request-consent`, async () => {
+    it(`POST /linking/request-consent OTP`, async () => {
       // Arrange
       const tprURI = `${TestEnv.baseUrls.mlTestingToolkit}/linking/request-consent`
       const body = {
-        consentRequestId,
+        consentRequestId: consentRequestIdOTP,
         toParticipantId: 'dfspa',
         accounts: [
-          { accountNickname: 'XXXXXXnt', id: 'dfspa.username.1234', currency: 'ZAR' },
           { accountNickname: 'SpeXXXXXXXXnt', id: 'dfspa.username.5678', currency: 'USD' }
         ],
         userId: 'username1234', 
@@ -226,14 +225,13 @@ describe('Thirdparty Scheme Adapter Interface', () => {
       }
       const expected = {
         channelResponse: {
-          consentRequestId,
+          consentRequestId: consentRequestIdOTP,
           scopes: [
-            {accountId: 'dfspa.username.1234', actions: ['accounts.getBalance', 'accounts.transfer']}, 
-            {accountId: 'dfspa.username.5678', actions: ['accounts.getBalance', 'accounts.transfer']}
+            {accountId: 'dfspa.username.5678', actions: [ 'accounts.transfer']}
           ], 
-        authChannels: ['OTP'], 
-        callbackURI: 'pisp-app://callback...', 
-        authURI: 'dfspa.com/authorize?consentRequestId=6789'},
+          authChannels: ['OTP'], 
+          callbackUri: 'pisp-app://callback', 
+        },
         currentState: 'OTPAuthenticationChannelResponseReceived'
       }
 
@@ -245,15 +243,22 @@ describe('Thirdparty Scheme Adapter Interface', () => {
       expect(result.data).toStrictEqual(expected)
     })
 
-    it(`PATCH /linking/request-consent/{ID}/authenticate`, async () => {
+    it.only(`PATCH /linking/request-consent/{ID}/authenticate`, async () => {
       // Arrange
-      const tprURI = `${TestEnv.baseUrls.mlTestingToolkit}/linking/request-consent/${consentRequestId}/authenticate`
+      const tprURI = `${TestEnv.baseUrls.mlTestingToolkit}/linking/request-consent/${consentRequestIdOTP}/authenticate`
       const body = {
         authToken: '123456'
       }
       const expected = {
-        currentState: 'consentReceivedAwaitingCredential',
-        challenge: 'challenge'
+        consent: {
+          consentId: '76059a0a-684f-4002-a880-b01159afe119',
+          consentRequestId: consentRequestIdOTP,
+          scopes: [
+            { accountId: 'dfspa.username.5678', actions: ['accounts.transfer'] }
+          ],
+        },
+        challenge: 'c4adabb33e9306b038088132affcde556c50d82f603f47711a9510bf3beef6d6',
+        currentState: 'consentReceivedAwaitingCredential'
       }
 
       // Act
@@ -266,7 +271,7 @@ describe('Thirdparty Scheme Adapter Interface', () => {
 
     it(`POST /linking/request-consent/{ID}/pass-credential`, async () => {
       // Arrange
-      const tprURI = `${TestEnv.baseUrls.mlTestingToolkit}/linking/request-consent/${consentRequestId}/pass-credential`
+      const tprURI = `${TestEnv.baseUrls.mlTestingToolkit}/linking/request-consent/${consentRequestIdOTP}/pass-credential`
       const body = {
         // This is a valid FIDO credential
         credential: {

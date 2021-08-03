@@ -473,6 +473,11 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/LinkingProvidersResponse'
+          example:
+            providers: 
+              - dfspa
+              - dfspb
+            currentState: providersLookupSuccess
     AccountsByUserIdResponse:
       description: >
         response body of GET /accounts/{ID} 
@@ -497,12 +502,40 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/LinkingRequestConsentResponse'
+          example:
+            channelResponse:
+              consentRequestId: f6ab43b0-71cc-49f9-b763-2ac3f05ac8c1
+              scopes: 
+                - accountId: 'dfspa.username.1234'
+                  actions:
+                    - accounts.getBalance
+                    - accounts.transfer
+                - accountId: 'dfspa.username.5678'
+                  actions:
+                    - accounts.getBalance
+                    - accounts.transfer
+              authChannels: 
+                - OTP
+              callbackUri: 'pisp-app://callback...'
+            currentState: OTPAuthenticationChannelResponseReceived
+
     LinkingRequestConsentIDAuthenticateResponse:
       description: Linking request consent authenticate response
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/LinkingRequestConsentIDAuthenticateResponse'
+          example:
+            consent:
+              consentId: 76059a0a-684f-4002-a880-b01159afe119
+              consentRequestId: f6ab43b0-71cc-49f9-b763-2ac3f05ac8c1
+              scopes:
+                - accountId: dfspa.username.5678
+                  actions:
+                    - accounts.transfer
+            challenge: c4adabb33e9306b038088132affcde556c50d82f603f47711a9510bf3beef6d6
+            currentState: consentReceivedAwaitingCredential
+
     LinkingRequestConsentIDPassCredentialResponse:
       description: Linking request consent pass credential response
       content:

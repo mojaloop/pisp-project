@@ -139,31 +139,32 @@ paths:
           $ref: '#/components/responses/ThirdpartyTransactionIDApproveResponse'
         'default':
           $ref: '#/components/responses/400'
-  '/thirdpartyRequests/transactions/{ID}/authorizations':
-    post:
-      operationId: VerifyThirdPartyAuthorization
-      summary: VerifyThirdPartyAuthorization
-      description: >
-        The HTTP request `POST
-        /thirdpartyRequests/transactions/{ID}/authorizations` is used by the
-        DFSP to verify a third party authorization.
-      tags:
-        - thirdpartyRequests
-      parameters:
-        - $ref: '#/components/parameters/ID'
-      requestBody:
-        description: The thirdparty authorization details to verify
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: >-
-                #/components/schemas/ThirdpartyRequestsTransactionsIDAuthorizationsPostRequest
-      responses:
-        '200':
-          $ref: '#/components/responses/ThirdpartyRequestsTransactionsIDAuthzResponse'
-        'default':
-          $ref: '#/components/responses/400'
+  # I don't think this is required anymore
+  # '/thirdpartyRequests/transactions/{ID}/authorizations':
+  #   post:
+  #     operationId: VerifyThirdPartyAuthorization
+  #     summary: VerifyThirdPartyAuthorization
+  #     description: >
+  #       The HTTP request `POST
+  #       /thirdpartyRequests/transactions/{ID}/authorizations` is used by the
+  #       DFSP to verify a third party authorization.
+  #     tags:
+  #       - thirdpartyRequests
+  #     parameters:
+  #       - $ref: '#/components/parameters/ID'
+  #     requestBody:
+  #       description: The thirdparty authorization details to verify
+  #       required: true
+  #       content:
+  #         application/json:
+  #           schema:
+  #             $ref: >-
+  #               #/components/schemas/ThirdpartyRequestsTransactionsIDAuthorizationsPostRequest
+  #     responses:
+  #       '200':
+  #         $ref: '#/components/responses/ThirdpartyRequestsTransactionsIDAuthzResponse'
+  #       'default':
+  #         $ref: '#/components/responses/400'
   /linking/providers:
     get:
       operationId: GetLinkingProviders
@@ -418,7 +419,7 @@ components:
               partyIdInfo:
                 partyIdType: MSISDN
                 partyIdentifier: '16135551212'
-                fspId: dfspa
+                fspId: dfspb
               name: "Bob bobbington"
               # personalInfo:
 

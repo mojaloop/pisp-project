@@ -3,8 +3,8 @@
 
 // Tests out the 3p API interface running in the ttk
 
-import axios from "axios"
-import TestEnv from "../e2e/TestEnv"
+import axios from 'axios'
+import TestEnv from '../e2e/TestEnv'
 
 
 describe('Thirdparty Scheme Adapter Interface', () => {
@@ -50,23 +50,23 @@ describe('Thirdparty Scheme Adapter Interface', () => {
       // Arrange
       const tprURI = `${TestEnv.baseUrls.mlTestingToolkit}/thirdpartyTransaction/partyLookup`
       const body = {
-        "payee": {
-          "partyIdType": "PERSONAL_ID",
-            "partyIdentifier": "16135551212",
-              "partySubIdOrType": "string",
-                "fspId": "string",
-                  "extensionList": {
-            "extension": [
-              {
-                "key": "string",
-                "value": "string"
-              }
-            ]
-          }
+        transactionRequestId,
+        payee: {
+          partyIdType: 'MSISDN',
+          partyIdentifier: '16135551212',
         },
-        transactionRequestId
       }
-      const expected = 'string'
+      const expected = {
+        currentState: 'partyLookupSuccess', 
+        party: { 
+          name: 'Bob bobbington',
+          partyIdInfo: {
+            fspId: 'dfspb',
+            partyIdType: 'MSISDN',
+            partyIdentifier: '16135551212'
+          }
+        }
+      }
 
       // Act
       const result = await axios.post(tprURI, body)
@@ -76,50 +76,61 @@ describe('Thirdparty Scheme Adapter Interface', () => {
       expect(result.data).toStrictEqual(expected)
     })
 
-    it('POST /thirdpartyTransaction/{ID}/initiate', async () => {
+    it.only('POST /thirdpartyTransaction/{ID}/initiate', async () => {
       // Arrange
       const tprURI = `${TestEnv.baseUrls.mlTestingToolkit}/thirdpartyTransaction/${transactionRequestId}/initiate`
       const body = {
-        "payee": {
-          "partyIdInfo": {
-            "partyIdType": "PERSONAL_ID",
-            "partyIdentifier": "16135551212",
-            "fspId": "dfspb",
-          },
-          "name": "Bob Bobbington",
-          "personalInfo": {
-            "complexName": {
-              "firstName": "Bob",
-              "middleName": "Johannes",
-              "lastName": "Bobbington"
-            },
-            "dateOfBirth": "1966-06-16"
+        payee: {
+          name: 'Bob bobbington',
+          partyIdInfo: {
+            fspId: 'dfspb',
+            partyIdType: 'MSISDN',
+            partyIdentifier: '16135551212'
           }
         },
-        "payer": {
-          "partyIdType": "THIRD_PARTY_LINK",
-          "partyIdentifier": "16135551212",
-          "fspId": "dfspa", 
+        payer: {
+          partyIdType: 'THIRD_PARTY_LINK',
+          partyIdentifier: '16135551212',
+          fspId: 'dfspa', 
         },
-        "amountType": "RECEIVE",
-        "amount": {
-          "currency": "AED",
-          "amount": "123.45"
+        amountType: 'RECEIVE',
+        amount: {
+          currency: 'USD',
+          amount: '123.45'
         },
-        "transactionType": {
-          "scenario": "DEPOSIT",
-          "subScenario": "LOCALLY_DEFINED_SUBSCENARIO",
-          "initiator": "PAYEE",
-          "initiatorType": "CONSUMER",
-          "refundInfo": {
-            "originalTransactionId": "b51ec534-ee48-4575-b6a9-ead2955b8069",
-            "refundReason": "Free text indicating reason for the refund."
-          },
-          "balanceOfPayments": "123"
+        transactionType: {
+          // TODO: can we make these better?
+          scenario: 'DEPOSIT',
+          initiator: 'PAYER',
+          initiatorType: 'CONSUMER',
         },
-        "expiration": "2021-05-24T08:38:08.699-04:00"
+        'expiration': '2021-05-24T08:38:08.699-04:00'
       }
-      const expected = 'string'
+      const expected = { 
+        authorization: {
+          amount: { 
+            // TODO: override in ttk...
+            amount: '10.00', 
+            currency: 'USD' 
+          }, 
+          authenticationType: 'U2F', 
+          quote: {
+            condition: 'todo real condition here!',
+            // TODO: realistic quote expiration
+            expiration: '2021-01-01T08:38:08.699-04:00', 
+            ilpPacket: 'AYIBgQAAAAAAAASwNGxldmVsb25lLmRmc3AxLm1lci45T2RTOF81MDdqUUZERmZlakgyOVc4bXFmNEpLMHlGTFGCAUBQU0svMS4wCk5vbmNlOiB1SXlweUYzY3pYSXBFdzVVc05TYWh3CkVuY3J5cHRpb246IG5vbmUKUGF5bWVudC1JZDogMTMyMzZhM2ItOGZhOC00MTYzLTg0NDctNGMzZWQzZGE5OGE3CgpDb250ZW50LUxlbmd0aDogMTM1CkNvbnRlbnQtVHlwZTogYXBwbGljYXRpb24vanNvbgpTZW5kZXItSWRlbnRpZmllcjogOTI4MDYzOTEKCiJ7XCJmZWVcIjowLFwidHJhbnNmZXJDb2RlXCI6XCJpbnZvaWNlXCIsXCJkZWJpdE5hbWVcIjpcImFsaWNlIGNvb3BlclwiLFwiY3JlZGl0TmFtZVwiOlwibWVyIGNoYW50XCIsXCJkZWJpdElkZW50aWZpZXJcIjpcIjkyODA2MzkxXCJ9IgA',
+            transferAmount: { 
+              amount: '10.00', 
+              currency: 'USD' 
+            } 
+          }, 
+          retriesLeft: '1', 
+          transactionId: '1234-1234-1234-1234', 
+          // TODO: override txRequestId for things to work!
+          transactionRequestId: '1234-1234-1234-1234' 
+        }, 
+        currentState: 'authorizationReceived' 
+      }
 
       // Act
       const result = await axios.post(tprURI, body)
@@ -167,7 +178,7 @@ describe('Thirdparty Scheme Adapter Interface', () => {
     it(`GET /linking/providers`, async () => {
       // Arrange
       const tprURI = `${TestEnv.baseUrls.mlTestingToolkit}/linking/providers`
-      const expected = { providers: ["dfspa", "dfspb"], currentState: "providersLookupSuccess" }
+      const expected = { providers: ['dfspa', 'dfspb'], currentState: 'providersLookupSuccess' }
 
       // Act
       const result = await axios.get(tprURI, {})
@@ -181,8 +192,8 @@ describe('Thirdparty Scheme Adapter Interface', () => {
       // Arrange
       const tprURI = `${TestEnv.baseUrls.mlTestingToolkit}/linking/accounts/dfspa/username1234`
       const expected = [
-        { "accountNickname": "dfspa.user.nickname1", "currency": "ZAR", "id": "dfspa.username.1234" },
-        { "accountNickname": "dfspa.user.nickname2", "currency": "USD", "id": "dfspa.username.5678" }
+        { 'accountNickname': 'dfspa.user.nickname1', 'currency': 'ZAR', 'id': 'dfspa.username.1234' },
+        { 'accountNickname': 'dfspa.user.nickname2', 'currency': 'USD', 'id': 'dfspa.username.5678' }
       ]
      
       // Act
@@ -200,10 +211,10 @@ describe('Thirdparty Scheme Adapter Interface', () => {
         consentRequestId,
         toParticipantId: 'dfspa',
         accounts: [
-          { accountNickname: "XXXXXXnt", id: "dfspa.username.1234", currency: "ZAR" },
-          { accountNickname: "SpeXXXXXXXXnt", id: "dfspa.username.5678", currency: "USD" }
+          { accountNickname: 'XXXXXXnt', id: 'dfspa.username.1234', currency: 'ZAR' },
+          { accountNickname: 'SpeXXXXXXXXnt', id: 'dfspa.username.5678', currency: 'USD' }
         ],
-        userId: "username1234", 
+        userId: 'username1234', 
         callbackUri: 'pisp-app://callback',
       }
       const expected = {
@@ -213,10 +224,10 @@ describe('Thirdparty Scheme Adapter Interface', () => {
             {accountId: 'dfspa.username.1234', actions: ['accounts.getBalance', 'accounts.transfer']}, 
             {accountId: 'dfspa.username.5678', actions: ['accounts.getBalance', 'accounts.transfer']}
           ], 
-        authChannels: ["OTP"], 
+        authChannels: ['OTP'], 
         callbackURI: 'pisp-app://callback...', 
         authURI: 'dfspa.com/authorize?consentRequestId=6789'},
-        currentState: "OTPAuthenticationChannelResponseReceived"
+        currentState: 'OTPAuthenticationChannelResponseReceived'
       }
 
       // Act
@@ -234,7 +245,7 @@ describe('Thirdparty Scheme Adapter Interface', () => {
         authToken: '123456'
       }
       const expected = {
-        currentState: "consentReceivedAwaitingCredential",
+        currentState: 'consentReceivedAwaitingCredential',
         challenge: 'challenge'
       }
 
@@ -332,9 +343,9 @@ describe('Thirdparty Scheme Adapter Interface', () => {
       }
       const expected = {
         credential: { 
-          status: "VERIFIED" 
+          status: 'VERIFIED' 
         },
-        currentState: "accountsLinked"
+        currentState: 'accountsLinked'
       }
 
       // Act

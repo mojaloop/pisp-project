@@ -96,7 +96,7 @@ describe('Thirdparty Scheme Adapter Interface', () => {
         amountType: 'RECEIVE',
         amount: {
           currency: 'USD',
-          amount: '123.45'
+          amount: '123.47'
         },
         transactionType: {
           // TODO: can we make these better?
@@ -110,24 +110,23 @@ describe('Thirdparty Scheme Adapter Interface', () => {
         authorization: {
           amount: { 
             // TODO: override in ttk...
-            amount: '10.00', 
+            amount: '123.47',
             currency: 'USD' 
           }, 
           authenticationType: 'U2F', 
           quote: {
-            condition: 'todo real condition here!',
+            condition: 'TODO real condition here',
             // TODO: realistic quote expiration
-            expiration: '2021-01-01T08:38:08.699-04:00', 
+            expiration: 'TODO: realistic date...',
             ilpPacket: 'AYIBgQAAAAAAAASwNGxldmVsb25lLmRmc3AxLm1lci45T2RTOF81MDdqUUZERmZlakgyOVc4bXFmNEpLMHlGTFGCAUBQU0svMS4wCk5vbmNlOiB1SXlweUYzY3pYSXBFdzVVc05TYWh3CkVuY3J5cHRpb246IG5vbmUKUGF5bWVudC1JZDogMTMyMzZhM2ItOGZhOC00MTYzLTg0NDctNGMzZWQzZGE5OGE3CgpDb250ZW50LUxlbmd0aDogMTM1CkNvbnRlbnQtVHlwZTogYXBwbGljYXRpb24vanNvbgpTZW5kZXItSWRlbnRpZmllcjogOTI4MDYzOTEKCiJ7XCJmZWVcIjowLFwidHJhbnNmZXJDb2RlXCI6XCJpbnZvaWNlXCIsXCJkZWJpdE5hbWVcIjpcImFsaWNlIGNvb3BlclwiLFwiY3JlZGl0TmFtZVwiOlwibWVyIGNoYW50XCIsXCJkZWJpdElkZW50aWZpZXJcIjpcIjkyODA2MzkxXCJ9IgA',
             transferAmount: { 
-              amount: '10.00', 
+              amount: '123.47',
               currency: 'USD' 
             } 
           }, 
           retriesLeft: '1', 
-          transactionId: '1234-1234-1234-1234', 
-          // TODO: override txRequestId for things to work!
-          transactionRequestId: '1234-1234-1234-1234' 
+          transactionId: 'TODO: realistic UUID',
+          transactionRequestId
         }, 
         currentState: 'authorizationReceived' 
       }

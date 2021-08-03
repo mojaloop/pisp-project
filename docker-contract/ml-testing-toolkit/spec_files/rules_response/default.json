@@ -1666,5 +1666,62 @@
     },
     "type": "response",
     "version": 1
+  },
+  {
+    "ruleId": 30,
+    "priority": 1,
+    "description": "post /thirdpartyTransaction/{ID}/initiate",
+    "apiVersion": {
+      "minorVersion": 1,
+      "majorVersion": 0,
+      "type": "thirdparty_scheme_adapter_sync"
+    },
+    "conditions": {
+      "all": [
+        {
+          "fact": "operationPath",
+          "operator": "equal",
+          "value": "/thirdpartyTransaction/{ID}/initiate"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "post"
+        }
+      ]
+    },
+    "event": {
+      "method": null,
+      "path": null,
+      "params": {
+        "body": {
+          "authorization": {
+            "amount": {
+              "amount": "{$request.body.amount.amount}",
+              "currency": "{$request.body.amount.currency}"
+            },
+            "authenticationType": "U2F",
+            "quote": {
+              "condition": "TODO real condition here",
+              "expiration": "TODO: realistic date...",
+              "ilpPacket": "AYIBgQAAAAAAAASwNGxldmVsb25lLmRmc3AxLm1lci45T2RTOF81MDdqUUZERmZlakgyOVc4bXFmNEpLMHlGTFGCAUBQU0svMS4wCk5vbmNlOiB1SXlweUYzY3pYSXBFdzVVc05TYWh3CkVuY3J5cHRpb246IG5vbmUKUGF5bWVudC1JZDogMTMyMzZhM2ItOGZhOC00MTYzLTg0NDctNGMzZWQzZGE5OGE3CgpDb250ZW50LUxlbmd0aDogMTM1CkNvbnRlbnQtVHlwZTogYXBwbGljYXRpb24vanNvbgpTZW5kZXItSWRlbnRpZmllcjogOTI4MDYzOTEKCiJ7XCJmZWVcIjowLFwidHJhbnNmZXJDb2RlXCI6XCJpbnZvaWNlXCIsXCJkZWJpdE5hbWVcIjpcImFsaWNlIGNvb3BlclwiLFwiY3JlZGl0TmFtZVwiOlwibWVyIGNoYW50XCIsXCJkZWJpdElkZW50aWZpZXJcIjpcIjkyODA2MzkxXCJ9IgA",
+              "transferAmount": {
+                "amount": "{$request.body.amount.amount}",
+                "currency": "{$request.body.amount.currency}"
+              }
+            },
+            "retriesLeft": "1",
+            "transactionId": "TODO: realistic UUID",
+            "transactionRequestId": "{$request.params.ID}"
+          },
+          "currentState": "authorizationReceived"
+        },
+        "statusCode": "200",
+        "scripts": {}
+      },
+      "type": "FIXED_RESPONSE"
+    },
+    "type": "response",
+    "version": 1
   }
 ]

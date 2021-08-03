@@ -542,6 +542,10 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/LinkingRequestConsentIDPassCredentialResponse'
+          example:
+            credential:
+              status: VERIFIED
+            currentState: accountsLinked
   headers:
     Content-Length:
       required: false

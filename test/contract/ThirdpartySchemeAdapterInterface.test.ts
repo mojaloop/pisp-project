@@ -99,25 +99,22 @@ describe('Thirdparty Scheme Adapter Interface', () => {
           amount: '123.47'
         },
         transactionType: {
-          // TODO: can we make these better?
           scenario: 'DEPOSIT',
           initiator: 'PAYER',
           initiatorType: 'CONSUMER',
         },
-        'expiration': '2021-05-24T08:38:08.699-04:00'
+        expiration: '2021-05-24T08:38:08.699-04:00'
       }
       const expected = { 
         authorization: {
           amount: { 
-            // TODO: override in ttk...
             amount: '123.47',
             currency: 'USD' 
           }, 
           authenticationType: 'U2F', 
           quote: {
-            condition: 'TODO real condition here',
-            // TODO: realistic quote expiration
-            expiration: 'TODO: realistic date...',
+            condition: 'HOr22-H3AfTDHrSkPjJtVPRdKouuMkDXTR4ejlQa8Ks',
+            expiration: '20212-01-01T00:00:00.000-04:00',
             ilpPacket: 'AYIBgQAAAAAAAASwNGxldmVsb25lLmRmc3AxLm1lci45T2RTOF81MDdqUUZERmZlakgyOVc4bXFmNEpLMHlGTFGCAUBQU0svMS4wCk5vbmNlOiB1SXlweUYzY3pYSXBFdzVVc05TYWh3CkVuY3J5cHRpb246IG5vbmUKUGF5bWVudC1JZDogMTMyMzZhM2ItOGZhOC00MTYzLTg0NDctNGMzZWQzZGE5OGE3CgpDb250ZW50LUxlbmd0aDogMTM1CkNvbnRlbnQtVHlwZTogYXBwbGljYXRpb24vanNvbgpTZW5kZXItSWRlbnRpZmllcjogOTI4MDYzOTEKCiJ7XCJmZWVcIjowLFwidHJhbnNmZXJDb2RlXCI6XCJpbnZvaWNlXCIsXCJkZWJpdE5hbWVcIjpcImFsaWNlIGNvb3BlclwiLFwiY3JlZGl0TmFtZVwiOlwibWVyIGNoYW50XCIsXCJkZWJpdElkZW50aWZpZXJcIjpcIjkyODA2MzkxXCJ9IgA',
             transferAmount: { 
               amount: '123.47',
@@ -243,7 +240,7 @@ describe('Thirdparty Scheme Adapter Interface', () => {
       expect(result.data).toStrictEqual(expected)
     })
 
-    it.only(`PATCH /linking/request-consent/{ID}/authenticate`, async () => {
+    it(`PATCH /linking/request-consent/{ID}/authenticate`, async () => {
       // Arrange
       const tprURI = `${TestEnv.baseUrls.mlTestingToolkit}/linking/request-consent/${consentRequestIdOTP}/authenticate`
       const body = {
@@ -259,7 +256,7 @@ describe('Thirdparty Scheme Adapter Interface', () => {
         },
         challenge: 'c4adabb33e9306b038088132affcde556c50d82f603f47711a9510bf3beef6d6',
         currentState: 'consentReceivedAwaitingCredential'
-      }
+      } 
 
       // Act
       const result = await axios.patch(tprURI, body)

@@ -162,6 +162,8 @@ describe('Thirdparty Scheme Adapter Interface', () => {
   })
 
   describe('linking', () => {
+    const consentRequestId = 'f6ab43b0-71cc-49f9-b763-2ac3f05ac8c1'
+
     it(`GET /linking/providers`, async () => {
       // Arrange
       const tprURI = `${TestEnv.baseUrls.mlTestingToolkit}/linking/providers`
@@ -191,11 +193,11 @@ describe('Thirdparty Scheme Adapter Interface', () => {
       expect(result.data).toStrictEqual(expected)
     })
 
-    it.only(`POST /linking/request-consent`, async () => {
+    it(`POST /linking/request-consent`, async () => {
       // Arrange
       const tprURI = `${TestEnv.baseUrls.mlTestingToolkit}/linking/request-consent`
       const body = {
-        consentRequestId: 'f6ab43b0-71cc-49f9-b763-2ac3f05ac8c1',
+        consentRequestId,
         toParticipantId: 'dfspa',
         accounts: [
           { accountNickname: "XXXXXXnt", id: "dfspa.username.1234", currency: "ZAR" },
@@ -206,7 +208,7 @@ describe('Thirdparty Scheme Adapter Interface', () => {
       }
       const expected = {
         channelResponse: {
-          consentRequestId: 'f6ab43b0-71cc-49f9-b763-2ac3f05ac8c1',
+          consentRequestId,
           scopes: [
             {accountId: 'dfspa.username.1234', actions: ['accounts.getBalance', 'accounts.transfer']}, 
             {accountId: 'dfspa.username.5678', actions: ['accounts.getBalance', 'accounts.transfer']}
@@ -225,8 +227,25 @@ describe('Thirdparty Scheme Adapter Interface', () => {
       expect(result.data).toStrictEqual(expected)
     })
 
+    it.only(`PATCH /linking/request-consent/{ID}/authenticate`, async () => {
+      // Arrange
+      const tprURI = `${TestEnv.baseUrls.mlTestingToolkit}/linking/request-consent/${consentRequestId}/authenticate`
+      const body = {
+        authToken: '123456'
+      }
+      const expected = {
+        currentState: "consentReceivedAwaitingCredential",
+        challenge: 'challenge'
+      }
 
-    it.todo(`PATCH /linking/request-consent/{ID}/authenticate`)
+      // Act
+      const result = await axios.patch(tprURI, body)
+
+      // Assert
+      expect(result.status).toBe(200)
+      expect(result.data).toStrictEqual(expected)
+    })
+
     it.todo(`POST /linking/request-consent/{ID}/pass-credential`)
   })
 })

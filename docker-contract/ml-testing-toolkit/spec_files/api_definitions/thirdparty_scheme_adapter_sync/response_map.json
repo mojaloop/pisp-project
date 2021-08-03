@@ -33,5 +33,10 @@
     "post": {
       "response": {}
     }
+  },
+  "/linking/request-consent/{ID}/authenticate": {
+    "patch": {
+      "response": {}
+    }
   }
 }

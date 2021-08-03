@@ -195,16 +195,18 @@ describe('Thirdparty Scheme Adapter Interface', () => {
       // Arrange
       const tprURI = `${TestEnv.baseUrls.mlTestingToolkit}/linking/request-consent`
       const body = {
+        consentRequestId: 'f6ab43b0-71cc-49f9-b763-2ac3f05ac8c1',
+        toParticipantId: 'dfspa',
         accounts: [
           { accountNickname: "XXXXXXnt", id: "dfspa.username.1234", currency: "ZAR" },
           { accountNickname: "SpeXXXXXXXXnt", id: "dfspa.username.5678", currency: "USD" }
         ],
         userId: "username1234", 
-        callbackURI: 'pisp-app://callback'
+        callbackUri: 'pisp-app://callback',
       }
       const expected = {
         channelResponse: {
-          consentRequestId: 6789,
+          consentRequestId: 'f6ab43b0-71cc-49f9-b763-2ac3f05ac8c1',
           scopes: [
             {accountId: 'dfspa.username.1234', actions: ['accounts.getBalance', 'accounts.transfer']}, 
             {accountId: 'dfspa.username.5678', actions: ['accounts.getBalance', 'accounts.transfer']}

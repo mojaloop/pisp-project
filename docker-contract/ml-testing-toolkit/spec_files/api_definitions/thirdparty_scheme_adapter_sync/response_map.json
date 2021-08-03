@@ -28,5 +28,10 @@
     "post": {
       "response": {}
     }
+  },
+  "/linking/request-consent": {
+    "post": {
+      "response": {}
+    }
   }
 }

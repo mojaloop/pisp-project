@@ -421,7 +421,6 @@ components:
                 partyIdentifier: '16135551212'
                 fspId: dfspb
               name: "Bob bobbington"
-              # personalInfo:
 
     ThirdpartyTransactionIDInitiateResponse:
       description: ThirdpartyTransactionIDInitiate response
@@ -455,6 +454,11 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ThirdpartyTransactionIDApproveResponse'
+          example:
+            transactionStatus:
+              transactionId: '8f6b2a9c-df32-4248-b115-799beada85ec'
+              transactionRequestState: 'ACCEPTED'
+            currentState: 'transactionStatusReceived'
     ThirdpartyRequestsTransactionsIDAuthzResponse:
       description: Thirdparty requests transactions authorizations response
       content:

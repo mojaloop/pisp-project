@@ -44,7 +44,7 @@ describe('Thirdparty Scheme Adapter Interface', () => {
     })
   })
 
-  describe('thirdpartyRequests', () => {
+  describe.only('thirdpartyRequests', () => {
     const transactionRequestId = `b51ec534-ee48-4575-b6a9-ead2955b8069`
     it('POST /thirdpartyTransaction/partyLookup', async () => {
       // Arrange
@@ -76,7 +76,7 @@ describe('Thirdparty Scheme Adapter Interface', () => {
       expect(result.data).toStrictEqual(expected)
     })
 
-    it.only('POST /thirdpartyTransaction/{ID}/initiate', async () => {
+    it('POST /thirdpartyTransaction/{ID}/initiate', async () => {
       // Arrange
       const tprURI = `${TestEnv.baseUrls.mlTestingToolkit}/thirdpartyTransaction/${transactionRequestId}/initiate`
       const body = {
@@ -125,7 +125,7 @@ describe('Thirdparty Scheme Adapter Interface', () => {
             } 
           }, 
           retriesLeft: '1', 
-          transactionId: 'TODO: realistic UUID',
+          transactionId: '8f6b2a9c-df32-4248-b115-799beada85ec',
           transactionRequestId
         }, 
         currentState: 'authorizationReceived' 
@@ -139,14 +139,16 @@ describe('Thirdparty Scheme Adapter Interface', () => {
       expect(result.data).toStrictEqual(expected)
     })
 
+
     it('POST /thirdpartyTransaction/{ID}/approve', async () => {
       // Arrange
+      // Note: this body will change with: mojaloop/project#2275
       const tprURI = `${TestEnv.baseUrls.mlTestingToolkit}/thirdpartyTransaction/${transactionRequestId}/approve`
       const body = {
         authorizationResponse: {
           authenticationInfo: {
             authentication: 'U2F',
-            // TODO: fill in with real values...
+            // TODO: fill in with real authentication value - blocked by mojaloop/project#2275
             authenticationValue: {
               pinValue: 'xxxxxxxxxxx',
               counter: '1'
@@ -155,7 +157,13 @@ describe('Thirdparty Scheme Adapter Interface', () => {
           responseType: 'ENTERED'
         }
       }
-      const expected = 'string'
+      const expected = {
+        transactionStatus: {
+          transactionId: '8f6b2a9c-df32-4248-b115-799beada85ec',
+          transactionRequestState: 'ACCEPTED'
+        },
+        currentState: 'transactionStatusReceived'
+      }
 
       // Act
       const result = await axios.post(tprURI, body)
@@ -168,7 +176,7 @@ describe('Thirdparty Scheme Adapter Interface', () => {
 
     // TODO: I don't think this is needed...
     // TODO: double check with Kevin...
-    it.skip('POST /thirdpartyRequests/transactions/{ID}/authorizations')
+    it.todo('POST /thirdpartyRequests/transactions/{ID}/authorizations')
   })
 
   describe('linking', () => {

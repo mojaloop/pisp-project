@@ -1711,7 +1711,7 @@
               }
             },
             "retriesLeft": "1",
-            "transactionId": "TODO: realistic UUID",
+            "transactionId": "8f6b2a9c-df32-4248-b115-799beada85ec",
             "transactionRequestId": "{$request.params.ID}"
           },
           "currentState": "authorizationReceived"

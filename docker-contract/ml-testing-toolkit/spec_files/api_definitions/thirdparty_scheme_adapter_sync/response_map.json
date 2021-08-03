@@ -38,5 +38,10 @@
     "patch": {
       "response": {}
     }
+  },
+  "/linking/request-consent/{ID}/pass-credential": {
+    "post": {
+      "response": {}
+    }
   }
 }

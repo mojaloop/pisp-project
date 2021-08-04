@@ -73,6 +73,7 @@ npm install
 127.0.0.1 dfspb-backend dfspb-thirdparty-scheme-adapter-inbound dfspb-thirdparty-scheme-adapter-outbound dfspb-sdk-scheme-adapter
 127.0.0.1 pisp-backend pisp-thirdparty-scheme-adapter-inbound pisp-thirdparty-scheme-adapter-outbound pisp-sdk-scheme-adapter
 127.0.0.1 als-consent-oracle
+127.0.0.1 auth-service
 ```
 
 ## Start services using `docker-compose`
@@ -86,18 +87,6 @@ docker-compose ps
 ```
 
 It may take a little while for the services to healthy.
-
-> ***Note:** Docker networking issues on Linux*
-> On some linux hosts, we've noticed issues with networking between containers
-> The workaround for now is to add an `extra_hosts` entry for some containers
-> Which adds entries to the container's `/etc/hosts` file, allowing containers to
-> communicate on the host network (is that right?)
-> This was causing issues on other machines (sigh), so we are now trying to use
-> docker compose file composition to get around this issue. 
-> Use:
-> `docker-compose -f docker-compose.yml -f docker-compose.linux.yml up -d`
-> to start docker-local with additional `extra_hosts` entries.
-
 ### Logging:
 
 Use `docker-compose logs -f` to tail the logs of any given container.
@@ -119,253 +108,6 @@ docker-compose logs -f pisp-backend  pisp-sdk-scheme-adapter pisp-redis pisp-thi
 ## Create some initial data
 
 ### Set Up Seed Data
-
-> ***Note:** We are also testing out a new method for seeding the docker-local environment*
-> see [Seeding docker-local with ml-bootstrap](#using-ml-bootstrap) below.
-
-#### 1. cd to `postman` directory
-```bash
-cd ./postman
-```
-
-#### 2. Run the FullSetup script
-Use this convenience script to run all the setup scripts and forgo having to run the setup scripts individually.
-
-```bash
-./scripts/_00_seed_all.sh
-```
-> This script runs all of the below `setupDockerCompose*` scripts, so you can skip ahead to [Run P2P E2E tests](#13-run-p2p-e2e-tests)
-
-
-#### 3. Setup hub account
-
-```bash
-./scripts/_01_seed_hub_account.sh
-```
-
-```
-OSS-New-Deployment-FSP-Setup
-
-❏ Hub Account
-↳ Add Hub Account-HUB_MULTILATERAL_SETTLEMENT
-  POST http://central-ledger.local:3001/participants/Hub/accounts [201 Created, 511B, 6.2s]
-  ✓  Status code is 201
-
-↳ Add Hub Account-HUB_RECONCILIATION
-  POST http://central-ledger.local:3001/participants/Hub/accounts [201 Created, 654B, 78ms]
-  ✓  Status code is 201
-
-↳ Hub Set Endpoint-SETTLEMENT_TRANSFER_POSITION_CHANGE_EMAIL Copy
-  POST http://central-ledger.local:3001/participants/hub/endpoints [201 Created, 129B, 29ms]
-  ✓  Status code is 201
-
-↳ Hub Set Endpoint-NET_DEBIT_CAP_ADJUSTMENT_EMAIL Copy
-  POST http://central-ledger.local:3001/participants/hub/endpoints [201 Created, 129B, 35ms]
-  ✓  Status code is 201
-
-↳ Hub Endpoint-NET_DEBIT_CAP_THRESHOLD_BREACH_EMAIL Copy
-  POST http://central-ledger.local:3001/participants/Hub/endpoints [201 Created, 129B, 38ms]
-  ✓  Status code is 201
-
-┌─────────────────────────┬────────────────────┬───────────────────┐
-│                         │           executed │            failed │
-├─────────────────────────┼────────────────────┼───────────────────┤
-│              iterations │                  1 │                 0 │
-├─────────────────────────┼────────────────────┼───────────────────┤
-│                requests │                  5 │                 0 │
-├─────────────────────────┼────────────────────┼───────────────────┤
-│            test-scripts │                 10 │                 0 │
-├─────────────────────────┼────────────────────┼───────────────────┤
-│      prerequest-scripts │                  5 │                 0 │
-├─────────────────────────┼────────────────────┼───────────────────┤
-│              assertions │                  5 │                 0 │
-├─────────────────────────┴────────────────────┴───────────────────┤
-│ total run duration: 17.2s                                        │
-├──────────────────────────────────────────────────────────────────┤
-│ total data received: 809B (approx)                               │
-├──────────────────────────────────────────────────────────────────┤
-│ average response time: 1278ms [min: 29ms, max: 6.2s, s.d.: 2.5s] │
-└──────────────────────────────────────────────────────────────────┘
-```
-
-#### 4. Setup the oracle for ALS
-
-```bash
-./scripts/_02_seed_oracle.sh
-```
-
-```
-OSS-New-Deployment-FSP-Setup
-
-❏ Oracle Onboarding
-↳ Register Simulator Oracle for MSISDN
-  POST http://account-lookup-service-admin.local:4001/oracles [201 Created, 213B, 5.2s]
-
-┌─────────────────────────┬──────────────────┬──────────────────┐
-│                         │         executed │           failed │
-├─────────────────────────┼──────────────────┼──────────────────┤
-│              iterations │                1 │                0 │
-├─────────────────────────┼──────────────────┼──────────────────┤
-│                requests │                1 │                0 │
-├─────────────────────────┼──────────────────┼──────────────────┤
-│            test-scripts │                1 │                0 │
-├─────────────────────────┼──────────────────┼──────────────────┤
-│      prerequest-scripts │                1 │                0 │
-├─────────────────────────┼──────────────────┼──────────────────┤
-│              assertions │                0 │                0 │
-├─────────────────────────┴──────────────────┴──────────────────┤
-│ total run duration: 7.5s                                      │
-├───────────────────────────────────────────────────────────────┤
-│ total data received: 0B (approx)                              │
-├───────────────────────────────────────────────────────────────┤
-│ average response time: 5.2s [min: 5.2s, max: 5.2s, s.d.: 0µs] │
-└───────────────────────────────────────────────────────────────┘
-```
-
-#### 5. Create DFSP A (use SDK + backend)
-
-It will create a new participant with its endpoints and some init data. For this case, name, position, and limits will be
-
-| Parameter | Value |
-|-----------|---------|
-| `name`       | `dfspa`  |
-| `currency`       | `USD`  |
-| `limit.type`       | `NET_DEBIT_CAP` |
-| `limit.value`   | `1000000` |
-| `initialPosition`     | `0` |`
-
-```bash
-./scripts/_03_seed_dfspa.sh
-```
-
-#### 6. Create DFSP B(use SDK + backend)
-
-It will create a new participant with its endpoints and some init data. For this case, name, position, and limits will be
-
-| Parameter | Value |
-|-----------|---------|
-| `name`       | `dfspb`  |
-| `currency`       | `USD`  |
-| `limit.type`       | `NET_DEBIT_CAP` |
-| `limit.value`   | `1000000` |
-| `initialPosition`     | `0` |`
-
-```bash
-./scripts/_04_seed_dfspb.sh
-```
-
-#### 7. Create PISP (use SDK + backend)
-
-It will create a new participant with its endpoints and some init data. For this case, name, position, and limits will be
-
-| Parameter | Value |
-|-----------|---------|
-| `name`       | `pisp`  |
-| `currency`       | `USD`  |
-| `limit.type`       | `NET_DEBIT_CAP` |
-| `limit.value`   | `1000000` |
-| `initialPosition`     | `0` |`
-
-```bash
-./scripts/_05_seed_pisp.sh
-```
-
-#### 8. Create a Simulator DFSP (implement mojaloop api)
-
-It will create a new participant with its endpoints and some init data. For this case, name, position, and limits will be
-
-| Parameter | Value |
-|-----------|---------|
-| `name`       | `payeefsp`  |
-| `currency`       | `USD`  |
-| `limit.type`       | `NET_DEBIT_CAP` |
-| `limit.value`   | `1000000` |
-| `initialPosition`     | `0` |`
-
-```bash
-./scripts/_06_seed_dfsp_simulator.sh
-```
-
-#### 9. Add MSISDN (123456789) for DFSP A
-
-Register a new MSISDN for this dfsp with this initial data
-
-| Parameter | Value |
-|-----------|---------|
-| `currency`       | `USD`  |
-
-
-```bash
-./scripts/_07_seed_dfsp_a_msisdn.sh
-```
-
-#### 10. Add MSISDN (987654321) for DFSP B
-
-Register a new MSISDN for this dfsp with this initial data
-
-| Parameter | Value |
-|-----------|---------|
-| `currency`       | `USD`  |
-
-```bash
-./scripts/_08_seed_dfsp_b_msisdn.sh
-```
-
-#### 11. Add MSISDN (333333333) for Simulator
-
-Register a new MSISDN for this dfsp with this initial data
-
-| Parameter | Value |
-|-----------|---------|
-| `currency`       | `USD`  |
-
-```bash
-./scripts/_09_seed_dfsp_simulator_msisdn.sh
-```
-
-#### 12. Add MSISDN (999999999) for PISP
-
-Register a new MSISDN for this dfsp with this initial data
-
-| Parameter | Value |
-|-----------|---------|
-| `currency`       | `USD`  |
-
-```bash
-./scripts/_10_seed_pisp_msisdn.sh
-```
-
-#### 13. Add parties to the backends of DFSP A, DFSP B and PISP.
-
-```bash
-./scripts/_11_seed_dfsp_backend_parties.sh
-```
-
-#### 13. Run P2P E2E tests.
-
-
-```bash
-./scripts/testE2ETransfers.sh
-```
-
-#### 14. Run PISP E2E tests.
-
-```bash
-./scripts/test-E2E-transaction-req-initiated-by-PISP.sh
-```
-
-
-> **Note: Restarting `docker-compose`**
->
-> If you restart docker compose you'll need to re-run these scripts to setup ALS
-```bash
-./scripts/_07_seed_dfsp_a_msisdn.sh
-./scripts/_08_seed_dfsp_b_msisdn.sh
-./scripts/_09_seed_dfsp_simulator_msisdn.sh
-./scripts/_10_seed_pisp_msisdn.sh
-```
-
-## using-ml-bootstrap
 
 ml-bootstrap is a tool for seeding Mojaloop test environments. It replaces various postman collections and environments with a single tool and config file.
 
@@ -396,7 +138,7 @@ You can also specify a specific version of ml-boostrap:
 npx ml-bootstrap@0.2.6 -c ./ml-bootstrap-config.json5
 ```
 
-## Seed the ttk with demo OTP and Auth Token Data
+### Seed the ttk with demo OTP and Auth Token Data
 
 ```bash
 # make sure you edit the rules.json file in the corresponding DFSP that user selects to
@@ -418,6 +160,85 @@ curl localhost:9003/repository/parties
 # expected response
 # [{"displayName":"Alice Alpaca","firstName":"Alice","middleName":"K","lastName":"Alpaca","dateOfBirth":"1970-01-01","idType":"MSISDN","idValue":"123456789"}]
 ```
+
+## Running docker-local with the PISP Demo
+
+Prerequisites:
+- this repository
+- https://github.com/mojaloop/contrib-pisp-demo-ui
+- https://github.com/mojaloop/contrib-pisp-demo-svc/
+- configured firebase token in contrib-pisp-demo-svc and contrib-pisp-demo-ui repos. See [here](https://github.com/mojaloop/contrib-pisp-demo-svc/#1-firebase-sdk-admin-key) for more information
+- FIDO device, such as a Macbook with touchID, a yubikey, or SoftU2F
+
+### Config and setup:
+
+```bash
+# run docker-local from this repository
+docker-compose up -d
+
+# wait for docker-compose
+npm run wait-4-docker
+
+# make sure there is a pisp participant called `pineapplepay` 
+# in the ml-boostrap-config.json5 file
+cat https://mighty-bobcat-2.loca.lt | grep pineapple
+
+# edit the file, and make sure the callback urls for the pisp-demo-svc are correct.
+
+# seed the environment
+npm run reseed:docker-local
+
+# configure the ttk-based login simulators
+export TTK_HOST=localhost:15000
+export CONSENT_REQUEST_ID=b51ec534-ee48-4575-b6a9-ead2955b8069
+../scripts/_configure_web_simulator.sh
+
+# run the demo server with some environment vars configured
+cd ../contrib-pisp-demo-svc
+export THIRDPARTY_API_URL=localhost:12000
+export FSPIOP_API_URL=localhost:4002
+export TEMP_TRANSACTION_REQUEST_SERVICE_API_URL=localhost:4003
+export PARTICIPANT_ID=pineapplepay
+export LOCAL_SIMULATOR=false
+npm run dev
+
+# in another terminal, start the UI
+cd ../contrib-pisp-demo-ui
+flutter run -d chrome --web-port 42181
+```
+
+A chrome window should open with the pineapple pay application.
+
+### Account Linking
+
+1. Go the chrome page with the pineapplepay app
+2. From the pineapplepay app
+3. Click "Profile", and ensure the following are set:
+- Demo Type: `liveSwitch`
+- Linking Scenario: `webLoginSuccess`
+
+4. Click "Link" in the bottom navigation bar
+5. Select `dfspa` in the dfsp selection screen
+6. Enter `"username1234"` in the lookup account screen. This is a demo account that the dfspa simulator knows about.
+7. You should see a number of account listed. Select which accounts you wish to list, and select "Link Account(s)"
+8. At the next screen, select "Log in with financial service provider"
+9. You should be redirected to the ttk's login simulator. Enter some details to log in.
+10. On the next screen, select the accounts to link, "approve" and click "submit"
+11. You should be redirected back to pineapplepay
+12. Click "link", and use your fido device to set up your credential.
+13. You should get the success page, and be redirected to your home page, where your linked accounts should be added.
+
+
+### Transfer
+
+1. Once you have linked an account, select "Transfer" from the bottom nav bar
+2. The person you want to send to should exist on the Mojaloop switch, so double check `https://mighty-bobcat-2.loca.lt` if you are unsure of an identifer to use
+3. Send to Billy with a phone number of `+255 25 525 5255`
+4. Enter an amount to send to Billy, and the account you wish to use. Click "Next"
+5. Approve the transfe by selecting "Authorize Payment", and using your fido device, confirm the transaction
+6. You should get the success page, and be redirected to your home page
+
+
 
 ## P2P Examples
 

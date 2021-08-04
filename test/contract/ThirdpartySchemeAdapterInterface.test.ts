@@ -199,6 +199,9 @@ describe('Thirdparty Scheme Adapter Interface', () => {
         accounts: [
           { accountNickname: 'SpeXXXXXXXXnt', id: 'dfspa.username.5678', currency: 'USD' }
         ],
+        actions: [
+          'accounts.transfer'
+        ],
         userId: 'username1234', 
         callbackUri: 'pisp-app://callback',
       }

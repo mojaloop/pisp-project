@@ -1,24 +1,21 @@
-# Note: I've manually edited the `responses` section to replace all errors with a single
-# `default` entry, as suggested in https://swagger.io/docs/specification/describing-responses/
-# This is because each of the error responses contains the same schema.
-# Doing do makes the swagger doc much more readable, especially when rendered
 openapi: 3.0.1
 info:
   title: Mojaloop Thirdparty Outbound Scheme Adapter
   description: >
     Specification for the Thirdparty Outbound Scheme Adapter API.
 
-    This API is a synchronous API which makes integrating with the Mojaloop 3rd Party API easier. 
+    This API is a synchronous API which makes integrating with the Mojaloop 3rd
+    Party API easier. 
 
     Please see other documentation on
     https://github.com/mojaloop/thirdparty-scheme-adapter for more information.
   license:
     name: Apache 2.0
-  version: 0.1.0
+  version: 0.1.1
 servers:
-  - url: http://sandbox.mojaloop.io/switch-ttk-backend
+  - url: 'http://sandbox.mojaloop.io/switch-ttk-backend'
     description: The mock 3p-scheme-adapter server running in the Mojaloop Sandbox
-  - url: http://localhost:15000
+  - url: 'http://localhost:15000'
     description: A locally running TTK instance
 paths:
   /health:
@@ -28,8 +25,22 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/200'
-        'default':
+        '400':
           $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
       operationId: HealthGet
       summary: Health check endpoint
       description: >-
@@ -42,8 +53,22 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/200'
-        'default':
+        '400':
           $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '501':
+          $ref: '#/components/responses/501'
+        '503':
+          $ref: '#/components/responses/503'
       operationId: MetricsGet
       summary: Prometheus metrics endpoint
       description: The HTTP request GET /metrics is used to return metrics for the API.
@@ -72,7 +97,7 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/ThirdpartyTransactionPartyLookupResponse'
-        'default':
+        default:
           $ref: '#/components/responses/400'
   '/thirdpartyTransaction/{ID}/initiate':
     post:
@@ -94,28 +119,28 @@ paths:
               $ref: '#/components/schemas/ThirdpartyTransactionIDInitiateRequest'
             example:
               payee:
-                name: 'Bob bobbington'
+                name: Bob bobbington
                 partyIdInfo:
-                  fspId: 'dfspb'
-                  partyIdType: 'MSISDN'
+                  fspId: dfspb
+                  partyIdType: MSISDN
                   partyIdentifier: '16135551212'
               payer:
-                partyIdType: 'THIRD_PARTY_LINK'
+                partyIdType: THIRD_PARTY_LINK
                 partyIdentifier: '16135551212'
-                fspId: 'dfspa'
-              amountType: 'RECEIVE'
+                fspId: dfspa
+              amountType: RECEIVE
               amount:
-                currency: 'USD'
+                currency: USD
                 amount: '123.47'
-              transactionType: 
-                scenario: 'DEPOSIT'
-                initiator: 'PAYER'
-                initiatorType: 'CONSUMER'
+              transactionType:
+                scenario: DEPOSIT
+                initiator: PAYER
+                initiatorType: CONSUMER
               expiration: '2021-05-24T08:38:08.699-04:00'
       responses:
         '200':
           $ref: '#/components/responses/ThirdpartyTransactionIDInitiateResponse'
-        'default':
+        default:
           $ref: '#/components/responses/400'
   '/thirdpartyTransaction/{ID}/approve':
     post:
@@ -138,17 +163,17 @@ paths:
             schema:
               $ref: '#/components/schemas/ThirdpartyTransactionIDApproveRequest'
             example:
-               authorizationResponse:
+              authorizationResponse:
                 authenticationInfo:
-                  authentication: 'U2F'
+                  authentication: U2F
                   authenticationValue:
-                    pinValue: 'xxxxxxxxxxx'
+                    pinValue: xxxxxxxxxxx
                     counter: '1'
-                responseType: 'ENTERED'
+                responseType: ENTERED
       responses:
         '200':
           $ref: '#/components/responses/ThirdpartyTransactionIDApproveResponse'
-        'default':
+        default:
           $ref: '#/components/responses/400'
   /linking/providers:
     get:
@@ -162,7 +187,7 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/LinkingProvidersResponse'
-        'default':
+        default:
           $ref: '#/components/responses/400'
   '/linking/accounts/{fspId}/{userId}':
     get:
@@ -187,7 +212,7 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/AccountsByUserIdResponse'
-        'default':
+        default:
           $ref: '#/components/responses/400'
   /linking/request-consent:
     post:
@@ -223,11 +248,11 @@ paths:
                   id: dfspa.username.5678
                   currency: USD
               userId: username1234
-              callbackUri: pisp-app://callback
+              callbackUri: 'pisp-app://callback'
       responses:
         '200':
           $ref: '#/components/responses/LinkingRequestConsentResponse'
-        'default':
+        default:
           $ref: '#/components/responses/400'
   '/linking/request-consent/{ID}/authenticate':
     patch:
@@ -258,7 +283,7 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/LinkingRequestConsentIDAuthenticateResponse'
-        'default':
+        default:
           $ref: '#/components/responses/400'
   '/linking/request-consent/{ID}/pass-credential':
     post:
@@ -290,16 +315,20 @@ paths:
                 credentialType: FIDO
                 status: PENDING
                 payload:
-                  id: HskU2gw4np09IUtYNHnxMM696jJHqvccUdBmd0xP6XEWwH0xLei1PUzDJCM19SZ3A2Ex0fNLw0nc2hrIlFnAtw
-                  rawId: HskU2gw4np09IUtYNHnxMM696jJHqvccUdBmd0xP6XEWwH0xLei1PUzDJCM19SZ3A2Ex0fNLw0nc2hrIlFnAtw==
-                  response: 
-                    clientDataJSON: eyJ0eXBlIjoid2ViYXV0aG4uY3JlYXRlIiwiY2hhbGxlbmdlIjoiWXpSaFpHRmlZak16WlRrek1EWmlNRE00TURnNE1UTXlZV1ptWTJSbE5UVTJZelV3WkRneVpqWXdNMlkwTnpjeE1XRTVOVEV3WW1ZelltVmxaalprTmciLCJvcmlnaW4iOiJodHRwOi8vbG9jYWxob3N0OjQyMTgxIiwiY3Jvc3NPcmlnaW4iOmZhbHNlfQ==
-                    attestationObject: o2NmbXRmcGFja2VkZ2F0dFN0bXSjY2FsZyZjc2lnWEcwRQIhAN2JDPPTse/45EHSqSpEJiiok5sns+HqdJch3+gsL09VAiAh7W7ZhQC8gMIkgwcA+S4rQkaHoHnP9AkkohaKCuuA62N4NWOBWQLBMIICvTCCAaWgAwIBAgIECwXNUzANBgkqhkiG9w0BAQsFADAuMSwwKgYDVQQDEyNZdWJpY28gVTJGIFJvb3QgQ0EgU2VyaWFsIDQ1NzIwMDYzMTAgFw0xNDA4MDEwMDAwMDBaGA8yMDUwMDkwNDAwMDAwMFowbjELMAkGA1UEBhMCU0UxEjAQBgNVBAoMCVl1YmljbyBBQjEiMCAGA1UECwwZQXV0aGVudGljYXRvciBBdHRlc3RhdGlvbjEnMCUGA1UEAwweWXViaWNvIFUyRiBFRSBTZXJpYWwgMTg0OTI5NjE5MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEIRpvsbWJJcsKwRhffCrjqLSIEBR5sR7/9VXgfZdRvSsXaiUt7lns44WZIFuz6ii/j9f8fadcBUJyrkhY5ZH8WqNsMGowIgYJKwYBBAGCxAoCBBUxLjMuNi4xLjQuMS40MTQ4Mi4xLjEwEwYLKwYBBAGC5RwCAQEEBAMCBDAwIQYLKwYBBAGC5RwBAQQEEgQQFJogIY72QTOWuIH41bfx9TAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBCwUAA4IBAQA+/qPfPSrgclePfgTQ3VpLaNsBr+hjLhi04LhzQxiRGWwYS+vB1TOiPXeLsQQIwbmqQU51doVbCTaXGLNIr1zvbLAwhnLWH7i9m4ahCqaCzowtTvCQ7VBUGP5T1M4eYnoo83IDCVjQj/pZG8QYgOGOigztGoWAf5CWcUF6C0UyFbONwUcqJEl2QLToa/7E8VRjm4W46IAUljYkODVZASv8h3wLROx9p5TSBlSymtwdulxQe/DKbfNSvM3edA0up+EIJKLOOU+QTR2ZQV46fEW1/ih6m8vcaY6L3NW0eYpc7TXeijUJAgoUtya/vzmnRAecuY9bncoJt8PrvL2ir2kDaGF1dGhEYXRhWMRJlg3liA6MaHQ0Fw9kdmBbj+SuuaKGMseZXPO6gx2XY0EAAAAEFJogIY72QTOWuIH41bfx9QBAHskU2gw4np09IUtYNHnxMM696jJHqvccUdBmd0xP6XEWwH0xLei1PUzDJCM19SZ3A2Ex0fNLw0nc2hrIlFnAt6UBAgMmIAEhWCBYz+SV6fSy7ZjFzdj+SWxaMbfaw4ZT+wYgClN3v93kVSJYIGSzY41DNLrh1jXp4J53qCnq4+b9HYXud/0UEsZquDeV
+                  id: >-
+                    HskU2gw4np09IUtYNHnxMM696jJHqvccUdBmd0xP6XEWwH0xLei1PUzDJCM19SZ3A2Ex0fNLw0nc2hrIlFnAtw
+                  rawId: >-
+                    HskU2gw4np09IUtYNHnxMM696jJHqvccUdBmd0xP6XEWwH0xLei1PUzDJCM19SZ3A2Ex0fNLw0nc2hrIlFnAtw==
+                  response:
+                    clientDataJSON: >-
+                      eyJ0eXBlIjoid2ViYXV0aG4uY3JlYXRlIiwiY2hhbGxlbmdlIjoiWXpSaFpHRmlZak16WlRrek1EWmlNRE00TURnNE1UTXlZV1ptWTJSbE5UVTJZelV3WkRneVpqWXdNMlkwTnpjeE1XRTVOVEV3WW1ZelltVmxaalprTmciLCJvcmlnaW4iOiJodHRwOi8vbG9jYWxob3N0OjQyMTgxIiwiY3Jvc3NPcmlnaW4iOmZhbHNlfQ==
+                    attestationObject: >-
+                      o2NmbXRmcGFja2VkZ2F0dFN0bXSjY2FsZyZjc2lnWEcwRQIhAN2JDPPTse/45EHSqSpEJiiok5sns+HqdJch3+gsL09VAiAh7W7ZhQC8gMIkgwcA+S4rQkaHoHnP9AkkohaKCuuA62N4NWOBWQLBMIICvTCCAaWgAwIBAgIECwXNUzANBgkqhkiG9w0BAQsFADAuMSwwKgYDVQQDEyNZdWJpY28gVTJGIFJvb3QgQ0EgU2VyaWFsIDQ1NzIwMDYzMTAgFw0xNDA4MDEwMDAwMDBaGA8yMDUwMDkwNDAwMDAwMFowbjELMAkGA1UEBhMCU0UxEjAQBgNVBAoMCVl1YmljbyBBQjEiMCAGA1UECwwZQXV0aGVudGljYXRvciBBdHRlc3RhdGlvbjEnMCUGA1UEAwweWXViaWNvIFUyRiBFRSBTZXJpYWwgMTg0OTI5NjE5MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEIRpvsbWJJcsKwRhffCrjqLSIEBR5sR7/9VXgfZdRvSsXaiUt7lns44WZIFuz6ii/j9f8fadcBUJyrkhY5ZH8WqNsMGowIgYJKwYBBAGCxAoCBBUxLjMuNi4xLjQuMS40MTQ4Mi4xLjEwEwYLKwYBBAGC5RwCAQEEBAMCBDAwIQYLKwYBBAGC5RwBAQQEEgQQFJogIY72QTOWuIH41bfx9TAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBCwUAA4IBAQA+/qPfPSrgclePfgTQ3VpLaNsBr+hjLhi04LhzQxiRGWwYS+vB1TOiPXeLsQQIwbmqQU51doVbCTaXGLNIr1zvbLAwhnLWH7i9m4ahCqaCzowtTvCQ7VBUGP5T1M4eYnoo83IDCVjQj/pZG8QYgOGOigztGoWAf5CWcUF6C0UyFbONwUcqJEl2QLToa/7E8VRjm4W46IAUljYkODVZASv8h3wLROx9p5TSBlSymtwdulxQe/DKbfNSvM3edA0up+EIJKLOOU+QTR2ZQV46fEW1/ih6m8vcaY6L3NW0eYpc7TXeijUJAgoUtya/vzmnRAecuY9bncoJt8PrvL2ir2kDaGF1dGhEYXRhWMRJlg3liA6MaHQ0Fw9kdmBbj+SuuaKGMseZXPO6gx2XY0EAAAAEFJogIY72QTOWuIH41bfx9QBAHskU2gw4np09IUtYNHnxMM696jJHqvccUdBmd0xP6XEWwH0xLei1PUzDJCM19SZ3A2Ex0fNLw0nc2hrIlFnAt6UBAgMmIAEhWCBYz+SV6fSy7ZjFzdj+SWxaMbfaw4ZT+wYgClN3v93kVSJYIGSzY41DNLrh1jXp4J53qCnq4+b9HYXud/0UEsZquDeV
                   type: public-key
       responses:
         '200':
           $ref: '#/components/responses/LinkingRequestConsentIDPassCredentialResponse'
-        'default':
+        default:
           $ref: '#/components/responses/400'
 components:
   responses:
@@ -393,27 +422,6 @@ components:
           $ref: '#/components/headers/Content-Length'
         Content-Type:
           $ref: '#/components/headers/Content-Type'
-    AuthorizationsResponse:
-      description: >
-        response body of POST/authorizations 
-
-        derived from AuthorizationsIDPutResponse by Inbound Service via Pub/Sub
-        channel
-      content:
-        application/json:
-          schema:
-            title: OutboundAuthorizationsPostResponse
-            type: object
-            required:
-              - responseType
-            additionalProperties: false
-            properties:
-              authenticationInfo:
-                $ref: '#/components/schemas/AuthenticationInfo'
-              responseType:
-                $ref: '#/components/schemas/AuthorizationResponse'
-              currentState:
-                $ref: '#/components/schemas/AuthorizationsState'
     ThirdpartyTransactionPartyLookupResponse:
       description: ThirdpartyTransaction partyLookup response
       content:
@@ -421,14 +429,13 @@ components:
           schema:
             $ref: '#/components/schemas/ThirdpartyTransactionPartyLookupResponse'
           example:
-            currentState: 'partyLookupSuccess'
+            currentState: partyLookupSuccess
             party:
               partyIdInfo:
                 partyIdType: MSISDN
                 partyIdentifier: '16135551212'
                 fspId: dfspb
-              name: "Bob bobbington"
-
+              name: Bob bobbington
     ThirdpartyTransactionIDInitiateResponse:
       description: ThirdpartyTransactionIDInitiate response
       content:
@@ -438,22 +445,21 @@ components:
           example:
             currentState: authorizationReceived
             authorization:
-              authenticationType: 'U2F'
+              authenticationType: U2F
               retriesLeft: '1'
               amount:
                 currency: USD
                 amount: '10.00'
-              transactionId: '1234-1234-1234-1234'
-              transactionRequestId: '1234-1234-1234-1234'
+              transactionId: 1234-1234-1234-1234
+              transactionRequestId: 1234-1234-1234-1234
               quote:
                 transferAmount:
                   currency: USD
                   amount: '10.00'
-                expiration: '2021-01-01T08:38:08.699-04:00'
-                ilpPacket: AYIBgQAAAAAAAASwNGxldmVsb25lLmRmc3AxLm1lci45T2RTOF81MDdqUUZERmZlakgyOVc4bXFmNEpLMHlGTFGCAUBQU0svMS4wCk5vbmNlOiB1SXlweUYzY3pYSXBFdzVVc05TYWh3CkVuY3J5cHRpb246IG5vbmUKUGF5bWVudC1JZDogMTMyMzZhM2ItOGZhOC00MTYzLTg0NDctNGMzZWQzZGE5OGE3CgpDb250ZW50LUxlbmd0aDogMTM1CkNvbnRlbnQtVHlwZTogYXBwbGljYXRpb24vanNvbgpTZW5kZXItSWRlbnRpZmllcjogOTI4MDYzOTEKCiJ7XCJmZWVcIjowLFwidHJhbnNmZXJDb2RlXCI6XCJpbnZvaWNlXCIsXCJkZWJpdE5hbWVcIjpcImFsaWNlIGNvb3BlclwiLFwiY3JlZGl0TmFtZVwiOlwibWVyIGNoYW50XCIsXCJkZWJpdElkZW50aWZpZXJcIjpcIjkyODA2MzkxXCJ9IgA
-                condition: 'todo real condition here!'
-
-
+                expiration: '2022-01-01T08:38:08.699-04:00'
+                ilpPacket: >-
+                  AYIBgQAAAAAAAASwNGxldmVsb25lLmRmc3AxLm1lci45T2RTOF81MDdqUUZERmZlakgyOVc4bXFmNEpLMHlGTFGCAUBQU0svMS4wCk5vbmNlOiB1SXlweUYzY3pYSXBFdzVVc05TYWh3CkVuY3J5cHRpb246IG5vbmUKUGF5bWVudC1JZDogMTMyMzZhM2ItOGZhOC00MTYzLTg0NDctNGMzZWQzZGE5OGE3CgpDb250ZW50LUxlbmd0aDogMTM1CkNvbnRlbnQtVHlwZTogYXBwbGljYXRpb24vanNvbgpTZW5kZXItSWRlbnRpZmllcjogOTI4MDYzOTEKCiJ7XCJmZWVcIjowLFwidHJhbnNmZXJDb2RlXCI6XCJpbnZvaWNlXCIsXCJkZWJpdE5hbWVcIjpcImFsaWNlIGNvb3BlclwiLFwiY3JlZGl0TmFtZVwiOlwibWVyIGNoYW50XCIsXCJkZWJpdElkZW50aWZpZXJcIjpcIjkyODA2MzkxXCJ9IgA
+                condition: f5sqb7tBTWPd5Y8BDFdMm9BJR_MNI4isf8p8n4D5pH
     ThirdpartyTransactionIDApproveResponse:
       description: ThirdpartyTransactionIDApproveResponse
       content:
@@ -462,16 +468,9 @@ components:
             $ref: '#/components/schemas/ThirdpartyTransactionIDApproveResponse'
           example:
             transactionStatus:
-              transactionId: '8f6b2a9c-df32-4248-b115-799beada85ec'
-              transactionRequestState: 'ACCEPTED'
-            currentState: 'transactionStatusReceived'
-    ThirdpartyRequestsTransactionsIDAuthzResponse:
-      description: Thirdparty requests transactions authorizations response
-      content:
-        application/json:
-          schema:
-            $ref: >-
-              #/components/schemas/ThirdpartyRequestsTransactionsIDAuthorizationsPutResponse
+              transactionId: 8f6b2a9c-df32-4248-b115-799beada85ec
+              transactionRequestState: ACCEPTED
+            currentState: transactionStatusReceived
     LinkingProvidersResponse:
       description: |
         Response body of GET /linking/providers
@@ -480,7 +479,7 @@ components:
           schema:
             $ref: '#/components/schemas/LinkingProvidersResponse'
           example:
-            providers: 
+            providers:
               - dfspa
               - dfspb
             currentState: providersLookupSuccess
@@ -511,20 +510,19 @@ components:
           example:
             channelResponse:
               consentRequestId: f6ab43b0-71cc-49f9-b763-2ac3f05ac8c1
-              scopes: 
-                - accountId: 'dfspa.username.1234'
+              scopes:
+                - accountId: dfspa.username.1234
                   actions:
                     - accounts.getBalance
                     - accounts.transfer
-                - accountId: 'dfspa.username.5678'
+                - accountId: dfspa.username.5678
                   actions:
                     - accounts.getBalance
                     - accounts.transfer
-              authChannels: 
+              authChannels:
                 - OTP
               callbackUri: 'pisp-app://callback...'
             currentState: OTPAuthenticationChannelResponseReceived
-
     LinkingRequestConsentIDAuthenticateResponse:
       description: Linking request consent authenticate response
       content:
@@ -541,7 +539,6 @@ components:
                     - accounts.transfer
             challenge: c4adabb33e9306b038088132affcde556c50d82f603f47711a9510bf3beef6d6
             currentState: consentReceivedAwaitingCredential
-
     LinkingRequestConsentIDPassCredentialResponse:
       description: Linking request consent pass credential response
       content:
@@ -654,26 +651,351 @@ components:
       properties:
         errorInformation:
           $ref: '#/components/schemas/ErrorInformation'
-    AuthenticationType:
-      title: AuthenticationType
+    PartyIdType:
+      title: PartyIdType
       type: string
       enum:
-        - OTP
-        - QRCODE
-        - U2F
-      description: |-
-        Below are the allowed values for the enumeration AuthenticationType.
-        - OTP - One-time password generated by the Payer FSP.
-        - QRCODE - QR code used as One Time Password.
-        - U2F - U2F is a new addition isolated to Thirdparty stream.
-    Integer:
-      title: Integer
+        - MSISDN
+        - EMAIL
+        - PERSONAL_ID
+        - BUSINESS
+        - DEVICE
+        - ACCOUNT_ID
+        - IBAN
+        - ALIAS
+        - CONSENT
+        - THIRD_PARTY_LINK
+      description: >
+        This is a variant based on FSPIOP `PartyIdType` specification.
+
+        Main difference being the CONSENT and THIRD_PARTY_LINK enums.
+
+
+        Below are the allowed values for the enumeration.
+
+        - MSISDN - An MSISDN (Mobile Station International Subscriber Directory
+
+        Number, that is, the phone number) is used as reference to a
+        participant.
+
+        The MSISDN identifier should be in international format according to the
+
+        [ITU-T E.164 standard](https://www.itu.int/rec/T-REC-E.164/en).
+
+        Optionally, the MSISDN may be prefixed by a single plus sign, indicating
+        the
+
+        international prefix.
+
+        - EMAIL - An email is used as reference to a
+
+        participant. The format of the email should be according to the
+        informational
+
+        [RFC 3696](https://tools.ietf.org/html/rfc3696).
+
+        - PERSONAL_ID - A personal identifier is used as reference to a
+        participant.
+
+        Examples of personal identification are passport number, birth
+        certificate
+
+        number, and national registration number. The identifier number is added
+        in
+
+        the PartyIdentifier element. The personal identifier type is added in
+        the
+
+        PartySubIdOrType element.
+
+        - BUSINESS - A specific Business (for example, an organization or a
+        company)
+
+        is used as reference to a participant. The BUSINESS identifier can be in
+        any
+
+        format. To make a transaction connected to a specific username or bill
+        number
+
+        in a Business, the PartySubIdOrType element should be used.
+
+        - DEVICE - A specific device (for example, a POS or ATM) ID connected to
+        a
+
+        specific business or organization is used as reference to a Party.
+
+        For referencing a specific device under a specific business or
+        organization,
+
+        use the PartySubIdOrType element.
+
+        - ACCOUNT_ID - A bank account number or FSP account ID should be used as
+
+        reference to a participant. The ACCOUNT_ID identifier can be in any
+        format,
+
+        as formats can greatly differ depending on country and FSP.
+
+        - IBAN - A bank account number or FSP account ID is used as reference to
+        a
+
+        participant. The IBAN identifier can consist of up to 34 alphanumeric
+
+        characters and should be entered without whitespace.
+
+        - ALIAS An alias is used as reference to a participant. The alias should
+        be
+
+        created in the FSP as an alternative reference to an account owner.
+
+        Another example of an alias is a username in the FSP system.
+
+        The ALIAS identifier can be in any format. It is also possible to use
+        the
+
+        PartySubIdOrType element for identifying an account under an Alias
+        defined
+
+        by the PartyIdentifier.
+
+        - CONSENT - TBD
+
+        - THIRD_PARTY_LINK - TBD
+      example: PERSONAL_ID
+    PartyIdentifier:
+      title: PartyIdentifier
       type: string
-      pattern: '^[1-9]\d*$'
+      minLength: 1
+      maxLength: 128
+      description: Identifier of the Party.
+      example: '16135551212'
+    PartySubIdOrType:
+      title: PartySubIdOrType
+      type: string
+      minLength: 1
+      maxLength: 128
       description: >-
-        The API data type Integer is a JSON String consisting of digits only.
-        Negative numbers and leading zeroes are not allowed. The data type is
-        always limited to a specific number of digits.
+        Either a sub-identifier of a PartyIdentifier, or a sub-type of the
+        PartyIdType, normally a PersonalIdentifierType.
+    FspId:
+      title: FspId
+      type: string
+      minLength: 1
+      maxLength: 32
+      description: FSP identifier.
+    PartyIdInfo:
+      title: PartyIdInfo
+      type: object
+      description: Data model for the complex type PartyIdInfo.
+      properties:
+        partyIdType:
+          $ref: '#/components/schemas/PartyIdType'
+        partyIdentifier:
+          $ref: '#/components/schemas/PartyIdentifier'
+        partySubIdOrType:
+          $ref: '#/components/schemas/PartySubIdOrType'
+        fspId:
+          $ref: '#/components/schemas/FspId'
+        extensionList:
+          $ref: '#/components/schemas/ExtensionList'
+      required:
+        - partyIdType
+        - partyIdentifier
+    CorrelationId:
+      title: CorrelationId
+      type: string
+      pattern: >-
+        ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+      description: >-
+        Identifier that correlates all messages of the same sequence. The API
+        data type UUID (Universally Unique Identifier) is a JSON String in
+        canonical format, conforming to [RFC
+        4122](https://tools.ietf.org/html/rfc4122), that is restricted by a
+        regular expression for interoperability reasons. A UUID is always 36
+        characters long, 32 hexadecimal symbols and 4 dashes (‘-‘).
+      example: b51ec534-ee48-4575-b6a9-ead2955b8069
+    ThirdpartyTransactionPartyLookupRequest:
+      type: object
+      description: ThirdpartyTransaction partyLookup request
+      properties:
+        payee:
+          $ref: '#/components/schemas/PartyIdInfo'
+        transactionRequestId:
+          $ref: '#/components/schemas/CorrelationId'
+      required:
+        - payee
+        - transactionRequestId
+    ThirdpartyTransactionPartyLookupState:
+      title: ThirdpartyTransactionPartyLookupState
+      description: state of thirdparty transaction partyLookup phase
+      type: string
+      enum:
+        - start
+        - partyLookupSuccess
+        - partyLookupFailure
+        - errored
+    ThirdpartyTransactionPartyLookupResponseError:
+      title: ThirdpartyTransactionPartyLookupResponseError
+      type: object
+      properties:
+        currentState:
+          $ref: '#/components/schemas/ThirdpartyTransactionPartyLookupState'
+        errorInformation:
+          $ref: '#/components/schemas/ErrorInformation'
+      required:
+        - errorInformation
+        - currentState
+    MerchantClassificationCode:
+      title: MerchantClassificationCode
+      type: string
+      pattern: '^[\d]{1,4}$'
+      description: >-
+        A limited set of pre-defined numbers. This list would be a limited set
+        of numbers identifying a set of popular merchant types like School Fees,
+        Pubs and Restaurants, Groceries, etc.
+    PartyName:
+      title: PartyName
+      type: string
+      minLength: 1
+      maxLength: 128
+      description: Name of the Party. Could be a real name or a nickname.
+    FirstName:
+      title: FirstName
+      type: string
+      minLength: 1
+      maxLength: 128
+      pattern: '^(?!\s*$)[\w .,''-]{1,128}$'
+      description: First name of the Party (Name Type).
+      example: Henrik
+    MiddleName:
+      title: MiddleName
+      type: string
+      minLength: 1
+      maxLength: 128
+      pattern: '^(?!\s*$)[\w .,''-]{1,128}$'
+      description: Middle name of the Party (Name Type).
+      example: Johannes
+    LastName:
+      title: LastName
+      type: string
+      minLength: 1
+      maxLength: 128
+      pattern: '^(?!\s*$)[\w .,''-]{1,128}$'
+      description: Last name of the Party (Name Type).
+      example: Karlsson
+    PartyComplexName:
+      title: PartyComplexName
+      type: object
+      description: Data model for the complex type PartyComplexName.
+      properties:
+        firstName:
+          $ref: '#/components/schemas/FirstName'
+        middleName:
+          $ref: '#/components/schemas/MiddleName'
+        lastName:
+          $ref: '#/components/schemas/LastName'
+    DateOfBirth:
+      title: DateofBirth (type Date)
+      type: string
+      pattern: >-
+        ^(?:[1-9]\d{3}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\d|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[1-9]\d(?:0[48]|[2468][048]|[13579][26])|(?:[2468][048]|[13579][26])00)-02-29)$
+      description: Date of Birth of the Party.
+      example: '1966-06-16'
+    PartyPersonalInfo:
+      title: PartyPersonalInfo
+      type: object
+      description: Data model for the complex type PartyPersonalInfo.
+      properties:
+        complexName:
+          $ref: '#/components/schemas/PartyComplexName'
+        dateOfBirth:
+          $ref: '#/components/schemas/DateOfBirth'
+    ThirdpartyTransactionPartyLookupResponseSuccess:
+      title: ThirdpartyTransactionPartyLookupResponseSuccess
+      type: object
+      properties:
+        currentState:
+          $ref: '#/components/schemas/ThirdpartyTransactionPartyLookupState'
+        party:
+          type: object
+          properties:
+            partyIdInfo:
+              $ref: '#/components/schemas/PartyIdInfo'
+            merchantClassificationCode:
+              $ref: '#/components/schemas/MerchantClassificationCode'
+            name:
+              $ref: '#/components/schemas/PartyName'
+            personalInfo:
+              $ref: '#/components/schemas/PartyPersonalInfo'
+      required:
+        - party
+        - currentState
+    ThirdpartyTransactionPartyLookupResponse:
+      oneOf:
+        - $ref: '#/components/schemas/ThirdpartyTransactionPartyLookupResponseError'
+        - $ref: '#/components/schemas/ThirdpartyTransactionPartyLookupResponseSuccess'
+    Party:
+      title: Party
+      type: object
+      description: Data model for the complex type Party.
+      properties:
+        partyIdInfo:
+          $ref: '#/components/schemas/PartyIdInfo'
+        merchantClassificationCode:
+          $ref: '#/components/schemas/MerchantClassificationCode'
+        name:
+          $ref: '#/components/schemas/PartyName'
+        personalInfo:
+          $ref: '#/components/schemas/PartyPersonalInfo'
+      required:
+        - partyIdInfo
+    PartyIdTypeTPLink:
+      title: PartyIdTypeTPLink
+      type: string
+      enum:
+        - THIRD_PARTY_LINK
+      description: >
+        This is a variant based on FSPIOP `PartyIdType` specification.
+
+        This validation interface should be use by `POST
+        /thirdpartyRequests/transactions`
+
+        - THIRD_PARTY_LINK - is the DFSP's internal reference which allows DFSP
+        to find out the corresponding consent
+      example: PERSONAL_ID
+    PartyIdInfoTPLink:
+      title: PartyIdInfo
+      type: object
+      description: Data model for the complex type PartyIdInfo.
+      properties:
+        partyIdType:
+          $ref: '#/components/schemas/PartyIdTypeTPLink'
+        partyIdentifier:
+          $ref: '#/components/schemas/PartyIdentifier'
+        partySubIdOrType:
+          $ref: '#/components/schemas/PartySubIdOrType'
+        fspId:
+          $ref: '#/components/schemas/FspId'
+        extensionList:
+          $ref: '#/components/schemas/ExtensionList'
+      required:
+        - partyIdType
+        - partyIdentifier
+    AmountType:
+      title: AmountType
+      type: string
+      enum:
+        - SEND
+        - RECEIVE
+      description: >-
+        Below are the allowed values for the enumeration AmountType.
+
+        - SEND - Amount the Payer would like to send, that is, the amount that
+        should be withdrawn from the Payer account including any fees.
+
+        - RECEIVE - Amount the Payer would like the Payee to receive, that is,
+        the amount that should be sent to the receiver exclusive of any fees.
+      example: RECEIVE
     Currency:
       title: Currency
       description: >-
@@ -871,553 +1193,6 @@ components:
       required:
         - currency
         - amount
-    CorrelationId:
-      title: CorrelationId
-      type: string
-      pattern: >-
-        ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
-      description: >-
-        Identifier that correlates all messages of the same sequence. The API
-        data type UUID (Universally Unique Identifier) is a JSON String in
-        canonical format, conforming to [RFC
-        4122](https://tools.ietf.org/html/rfc4122), that is restricted by a
-        regular expression for interoperability reasons. A UUID is always 36
-        characters long, 32 hexadecimal symbols and 4 dashes (‘-‘).
-      example: b51ec534-ee48-4575-b6a9-ead2955b8069
-    DateTime:
-      title: DateTime
-      type: string
-      pattern: >-
-        ^(?:[1-9]\d{3}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\d|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[1-9]\d(?:0[48]|[2468][048]|[13579][26])|(?:[2468][048]|[13579][26])00)-02-29)T(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:(\.\d{3}))(?:Z|[+-][01]\d:[0-5]\d)$
-      description: >-
-        The API data type DateTime is a JSON String in a lexical format that is
-        restricted by a regular expression for interoperability reasons. The
-        format is according to [ISO
-        8601](https://www.iso.org/iso-8601-date-and-time-format.html), expressed
-        in a combined date, time and time zone format. A more readable version
-        of the format is yyyy-MM-ddTHH:mm:ss.SSS[-HH:MM]. Examples are
-        "2016-05-24T08:38:08.699-04:00", "2016-05-24T08:38:08.699Z" (where Z
-        indicates Zulu time zone, same as UTC).
-      example: '2016-05-24T08:38:08.699-04:00'
-    Latitude:
-      title: Latitude
-      type: string
-      pattern: >-
-        ^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,6})?))$
-      description: >-
-        The API data type Latitude is a JSON String in a lexical format that is
-        restricted by a regular expression for interoperability reasons.
-      example: '+45.4215'
-    Longitude:
-      title: Longitude
-      type: string
-      pattern: >-
-        ^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,6})?))$
-      description: >-
-        The API data type Longitude is a JSON String in a lexical format that is
-        restricted by a regular expression for interoperability reasons.
-      example: '+75.6972'
-    GeoCode:
-      title: GeoCode
-      type: object
-      description: >-
-        Data model for the complex type GeoCode. Indicates the geographic
-        location from where the transaction was initiated.
-      properties:
-        latitude:
-          $ref: '#/components/schemas/Latitude'
-        longitude:
-          $ref: '#/components/schemas/Longitude'
-      required:
-        - latitude
-        - longitude
-    IlpPacket:
-      title: IlpPacket
-      type: string
-      pattern: '^[A-Za-z0-9-_]+[=]{0,2}$'
-      minLength: 1
-      maxLength: 32768
-      description: Information for recipient (transport layer information).
-      example: >-
-        AYIBgQAAAAAAAASwNGxldmVsb25lLmRmc3AxLm1lci45T2RTOF81MDdqUUZERmZlakgyOVc4bXFmNEpLMHlGTFGCAUBQU0svMS4wCk5vbmNlOiB1SXlweUYzY3pYSXBFdzVVc05TYWh3CkVuY3J5cHRpb246IG5vbmUKUGF5bWVudC1JZDogMTMyMzZhM2ItOGZhOC00MTYzLTg0NDctNGMzZWQzZGE5OGE3CgpDb250ZW50LUxlbmd0aDogMTM1CkNvbnRlbnQtVHlwZTogYXBwbGljYXRpb24vanNvbgpTZW5kZXItSWRlbnRpZmllcjogOTI4MDYzOTEKCiJ7XCJmZWVcIjowLFwidHJhbnNmZXJDb2RlXCI6XCJpbnZvaWNlXCIsXCJkZWJpdE5hbWVcIjpcImFsaWNlIGNvb3BlclwiLFwiY3JlZGl0TmFtZVwiOlwibWVyIGNoYW50XCIsXCJkZWJpdElkZW50aWZpZXJcIjpcIjkyODA2MzkxXCJ9IgA
-    IlpCondition:
-      title: IlpCondition
-      type: string
-      pattern: '^[A-Za-z0-9-_]{43}$'
-      maxLength: 48
-      description: Condition that must be attached to the transfer by the Payer.
-    QuotesIDPutResponse:
-      title: QuotesIDPutResponse
-      type: object
-      description: 'The object sent in the PUT /quotes/{ID} callback.'
-      properties:
-        transferAmount:
-          $ref: '#/components/schemas/Money'
-        payeeReceiveAmount:
-          $ref: '#/components/schemas/Money'
-        payeeFspFee:
-          $ref: '#/components/schemas/Money'
-        payeeFspCommission:
-          $ref: '#/components/schemas/Money'
-        expiration:
-          $ref: '#/components/schemas/DateTime'
-        geoCode:
-          $ref: '#/components/schemas/GeoCode'
-        ilpPacket:
-          $ref: '#/components/schemas/IlpPacket'
-        condition:
-          $ref: '#/components/schemas/IlpCondition'
-        extensionList:
-          $ref: '#/components/schemas/ExtensionList'
-      required:
-        - transferAmount
-        - expiration
-        - ilpPacket
-        - condition
-    AuthorizationsRequest:
-      title: authorizationsRequest
-      description: POST /authorizations Request object
-      type: object
-      properties:
-        toParticipantId:
-          type: string
-        authenticationType:
-          $ref: '#/components/schemas/AuthenticationType'
-        retriesLeft:
-          $ref: '#/components/schemas/Integer'
-        amount:
-          $ref: '#/components/schemas/Money'
-        transactionId:
-          $ref: '#/components/schemas/CorrelationId'
-        transactionRequestId:
-          $ref: '#/components/schemas/CorrelationId'
-        quote:
-          $ref: '#/components/schemas/QuotesIDPutResponse'
-      required:
-        - authenticationType
-        - retriesLeft
-        - amount
-        - transactionId
-        - transactionRequestId
-        - quote
-      additionalProperties: false
-    OtpValue:
-      title: OtpValue
-      type: string
-      pattern: '^\d{3,10}$'
-      description: >-
-        The API data type OtpValue is a JSON String of 3 to 10 characters,
-        consisting of digits only. Negative numbers are not allowed. One or more
-        leading zeros are allowed.
-    QRCODE:
-      title: QRCODE
-      type: string
-      minLength: 1
-      maxLength: 64
-      description: QR code used as a One Time Password.
-    U2FPIN:
-      title: U2FPIN
-      type: string
-      pattern: '^\S{1,64}$'
-      minLength: 1
-      maxLength: 64
-      description: >
-        U2F challenge-response, where payer FSP verifies if the response
-        provided by end-user device matches the previously registered key.
-    U2FPinValue:
-      title: U2FPinValue
-      type: object
-      description: >
-        U2F challenge-response, where payer FSP verifies if the response
-        provided by end-user device matches the previously registered key.
-      properties:
-        pinValue:
-          allOf:
-            - $ref: '#/components/schemas/U2FPIN'
-          description: U2F challenge-response.
-        counter:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-          description: >-
-            Sequential counter used for cloning detection. Present only for U2F
-            authentication.
-      required:
-        - pinValue
-        - counter
-    AuthenticationValue:
-      title: AuthenticationValue
-      anyOf:
-        - $ref: '#/components/schemas/OtpValue'
-        - $ref: '#/components/schemas/QRCODE'
-        - $ref: '#/components/schemas/U2FPinValue'
-      description: >-
-        Contains the authentication value. The format depends on the
-        authentication type used in the AuthenticationInfo complex type.
-    AuthenticationInfo:
-      title: AuthenticationInfo
-      type: object
-      description: Data model for the complex type AuthenticationInfo.
-      properties:
-        authentication:
-          $ref: '#/components/schemas/AuthenticationType'
-        authenticationValue:
-          $ref: '#/components/schemas/AuthenticationValue'
-      required:
-        - authentication
-        - authenticationValue
-    AuthorizationResponse:
-      title: AuthorizationResponse
-      type: string
-      enum:
-        - ENTERED
-        - REJECTED
-        - RESEND
-      description: |-
-        Below are the allowed values for the enumeration.
-        - ENTERED - Consumer entered the authentication value.
-        - REJECTED - Consumer rejected the transaction.
-        - RESEND - Consumer requested to resend the authentication value.
-      example: ENTERED
-    AuthorizationsState:
-      title: AuthorizationsState
-      description: state of POST authorizations
-      type: string
-      enum:
-        - WAITING_FOR_AUTHORIZATION_REQUEST
-        - COMPLETED
-        - ERROR_OCCURRED
-    PartyIdType:
-      title: PartyIdType
-      type: string
-      enum:
-        - MSISDN
-        - EMAIL
-        - PERSONAL_ID
-        - BUSINESS
-        - DEVICE
-        - ACCOUNT_ID
-        - IBAN
-        - ALIAS
-        - CONSENT
-        - THIRD_PARTY_LINK
-      description: >
-        This is a variant based on FSPIOP `PartyIdType` specification.
-
-        Main difference being the CONSENT and THIRD_PARTY_LINK enums.
-
-
-        Below are the allowed values for the enumeration.
-
-        - MSISDN - An MSISDN (Mobile Station International Subscriber Directory
-
-        Number, that is, the phone number) is used as reference to a
-        participant.
-
-        The MSISDN identifier should be in international format according to the
-
-        [ITU-T E.164 standard](https://www.itu.int/rec/T-REC-E.164/en).
-
-        Optionally, the MSISDN may be prefixed by a single plus sign, indicating
-        the
-
-        international prefix.
-
-        - EMAIL - An email is used as reference to a
-
-        participant. The format of the email should be according to the
-        informational
-
-        [RFC 3696](https://tools.ietf.org/html/rfc3696).
-
-        - PERSONAL_ID - A personal identifier is used as reference to a
-        participant.
-
-        Examples of personal identification are passport number, birth
-        certificate
-
-        number, and national registration number. The identifier number is added
-        in
-
-        the PartyIdentifier element. The personal identifier type is added in
-        the
-
-        PartySubIdOrType element.
-
-        - BUSINESS - A specific Business (for example, an organization or a
-        company)
-
-        is used as reference to a participant. The BUSINESS identifier can be in
-        any
-
-        format. To make a transaction connected to a specific username or bill
-        number
-
-        in a Business, the PartySubIdOrType element should be used.
-
-        - DEVICE - A specific device (for example, a POS or ATM) ID connected to
-        a
-
-        specific business or organization is used as reference to a Party.
-
-        For referencing a specific device under a specific business or
-        organization,
-
-        use the PartySubIdOrType element.
-
-        - ACCOUNT_ID - A bank account number or FSP account ID should be used as
-
-        reference to a participant. The ACCOUNT_ID identifier can be in any
-        format,
-
-        as formats can greatly differ depending on country and FSP.
-
-        - IBAN - A bank account number or FSP account ID is used as reference to
-        a
-
-        participant. The IBAN identifier can consist of up to 34 alphanumeric
-
-        characters and should be entered without whitespace.
-
-        - ALIAS An alias is used as reference to a participant. The alias should
-        be
-
-        created in the FSP as an alternative reference to an account owner.
-
-        Another example of an alias is a username in the FSP system.
-
-        The ALIAS identifier can be in any format. It is also possible to use
-        the
-
-        PartySubIdOrType element for identifying an account under an Alias
-        defined
-
-        by the PartyIdentifier.
-
-        - CONSENT - TBD
-
-        - THIRD_PARTY_LINK - TBD
-      example: PERSONAL_ID
-    PartyIdentifier:
-      title: PartyIdentifier
-      type: string
-      minLength: 1
-      maxLength: 128
-      description: Identifier of the Party.
-      example: '16135551212'
-    PartySubIdOrType:
-      title: PartySubIdOrType
-      type: string
-      minLength: 1
-      maxLength: 128
-      description: >-
-        Either a sub-identifier of a PartyIdentifier, or a sub-type of the
-        PartyIdType, normally a PersonalIdentifierType.
-    FspId:
-      title: FspId
-      type: string
-      minLength: 1
-      maxLength: 32
-      description: FSP identifier.
-    PartyIdInfo:
-      title: PartyIdInfo
-      type: object
-      description: Data model for the complex type PartyIdInfo.
-      properties:
-        partyIdType:
-          $ref: '#/components/schemas/PartyIdType'
-        partyIdentifier:
-          $ref: '#/components/schemas/PartyIdentifier'
-        partySubIdOrType:
-          $ref: '#/components/schemas/PartySubIdOrType'
-        fspId:
-          $ref: '#/components/schemas/FspId'
-        extensionList:
-          $ref: '#/components/schemas/ExtensionList'
-      required:
-        - partyIdType
-        - partyIdentifier
-    ThirdpartyTransactionPartyLookupRequest:
-      type: object
-      description: ThirdpartyTransaction partyLookup request
-      properties:
-        payee:
-          $ref: '#/components/schemas/PartyIdInfo'
-        transactionRequestId:
-          $ref: '#/components/schemas/CorrelationId'
-      required:
-        - payee
-        - transactionRequestId
-    ThirdpartyTransactionPartyLookupState:
-      title: ThirdpartyTransactionPartyLookupState
-      description: state of thirdparty transaction partyLookup phase
-      type: string
-      enum:
-        - start
-        - partyLookupSuccess
-        - partyLookupFailure
-        - errored
-    ThirdpartyTransactionPartyLookupResponseError:
-      title: ThirdpartyTransactionPartyLookupResponseError
-      type: object
-      properties:
-        currentState:
-          $ref: '#/components/schemas/ThirdpartyTransactionPartyLookupState'
-        errorInformation:
-          $ref: '#/components/schemas/ErrorInformation'
-      required:
-        - errorInformation
-        - currentState
-    MerchantClassificationCode:
-      title: MerchantClassificationCode
-      type: string
-      pattern: '^[\d]{1,4}$'
-      description: >-
-        A limited set of pre-defined numbers. This list would be a limited set
-        of numbers identifying a set of popular merchant types like School Fees,
-        Pubs and Restaurants, Groceries, etc.
-    PartyName:
-      title: PartyName
-      type: string
-      minLength: 1
-      maxLength: 128
-      description: Name of the Party. Could be a real name or a nickname.
-    FirstName:
-      title: FirstName
-      type: string
-      minLength: 1
-      maxLength: 128
-      pattern: '^(?!\s*$)[\w .,''-]{1,128}$'
-      description: First name of the Party (Name Type).
-      example: Henrik
-    MiddleName:
-      title: MiddleName
-      type: string
-      minLength: 1
-      maxLength: 128
-      pattern: '^(?!\s*$)[\w .,''-]{1,128}$'
-      description: Middle name of the Party (Name Type).
-      example: Johannes
-    LastName:
-      title: LastName
-      type: string
-      minLength: 1
-      maxLength: 128
-      pattern: '^(?!\s*$)[\w .,''-]{1,128}$'
-      description: Last name of the Party (Name Type).
-      example: Karlsson
-    PartyComplexName:
-      title: PartyComplexName
-      type: object
-      description: Data model for the complex type PartyComplexName.
-      properties:
-        firstName:
-          $ref: '#/components/schemas/FirstName'
-        middleName:
-          $ref: '#/components/schemas/MiddleName'
-        lastName:
-          $ref: '#/components/schemas/LastName'
-    DateOfBirth:
-      title: DateofBirth (type Date)
-      type: string
-      pattern: >-
-        ^(?:[1-9]\d{3}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\d|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[1-9]\d(?:0[48]|[2468][048]|[13579][26])|(?:[2468][048]|[13579][26])00)-02-29)$
-      description: Date of Birth of the Party.
-      example: '1966-06-16'
-    PartyPersonalInfo:
-      title: PartyPersonalInfo
-      type: object
-      description: Data model for the complex type PartyPersonalInfo.
-      properties:
-        complexName:
-          $ref: '#/components/schemas/PartyComplexName'
-        dateOfBirth:
-          $ref: '#/components/schemas/DateOfBirth'
-    ThirdpartyTransactionPartyLookupResponseSuccess:
-      title: ThirdpartyTransactionPartyLookupResponseSuccess
-      type: object
-      properties:
-        currentState:
-          $ref: '#/components/schemas/ThirdpartyTransactionPartyLookupState'
-        party:
-          type: object
-          properties:
-            partyIdInfo:
-              $ref: '#/components/schemas/PartyIdInfo'
-            merchantClassificationCode:
-              $ref: '#/components/schemas/MerchantClassificationCode'
-            name:
-              $ref: '#/components/schemas/PartyName'
-            personalInfo:
-              $ref: '#/components/schemas/PartyPersonalInfo'
-      required:
-        - party
-        - currentState
-    ThirdpartyTransactionPartyLookupResponse:
-      oneOf:
-        - $ref: '#/components/schemas/ThirdpartyTransactionPartyLookupResponseError'
-        - $ref: '#/components/schemas/ThirdpartyTransactionPartyLookupResponseSuccess'
-    Party:
-      title: Party
-      type: object
-      description: Data model for the complex type Party.
-      properties:
-        partyIdInfo:
-          $ref: '#/components/schemas/PartyIdInfo'
-        merchantClassificationCode:
-          $ref: '#/components/schemas/MerchantClassificationCode'
-        name:
-          $ref: '#/components/schemas/PartyName'
-        personalInfo:
-          $ref: '#/components/schemas/PartyPersonalInfo'
-      required:
-        - partyIdInfo
-    PartyIdTypeTPLink:
-      title: PartyIdTypeTPLink
-      type: string
-      enum:
-        - THIRD_PARTY_LINK
-      description: >
-        This is a variant based on FSPIOP `PartyIdType` specification.
-
-        This validation interface should be use by `POST
-        /thirdpartyRequests/transactions`
-
-        - THIRD_PARTY_LINK - is the DFSP's internal reference which allows DFSP
-        to find out the corresponding consent
-      example: PERSONAL_ID
-    PartyIdInfoTPLink:
-      title: PartyIdInfo
-      type: object
-      description: Data model for the complex type PartyIdInfo.
-      properties:
-        partyIdType:
-          $ref: '#/components/schemas/PartyIdTypeTPLink'
-        partyIdentifier:
-          $ref: '#/components/schemas/PartyIdentifier'
-        partySubIdOrType:
-          $ref: '#/components/schemas/PartySubIdOrType'
-        fspId:
-          $ref: '#/components/schemas/FspId'
-        extensionList:
-          $ref: '#/components/schemas/ExtensionList'
-      required:
-        - partyIdType
-        - partyIdentifier
-    AmountType:
-      title: AmountType
-      type: string
-      enum:
-        - SEND
-        - RECEIVE
-      description: >-
-        Below are the allowed values for the enumeration AmountType.
-
-        - SEND - Amount the Payer would like to send, that is, the amount that
-        should be withdrawn from the Payer account including any fees.
-
-        - RECEIVE - Amount the Payer would like the Payee to receive, that is,
-        the amount that should be sent to the receiver exclusive of any fees.
-      example: RECEIVE
     TransactionScenario:
       title: TransactionScenario
       type: string
@@ -1587,6 +1362,116 @@ components:
       required:
         - currentState
         - errorInformation
+    AuthenticationType:
+      title: AuthenticationType
+      type: string
+      enum:
+        - OTP
+        - QRCODE
+        - U2F
+      description: |-
+        Below are the allowed values for the enumeration AuthenticationType.
+        - OTP - One-time password generated by the Payer FSP.
+        - QRCODE - QR code used as One Time Password.
+        - U2F - U2F is a new addition isolated to Thirdparty stream.
+    Integer:
+      title: Integer
+      type: string
+      pattern: '^[1-9]\d*$'
+      description: >-
+        The API data type Integer is a JSON String consisting of digits only.
+        Negative numbers and leading zeroes are not allowed. The data type is
+        always limited to a specific number of digits.
+    DateTime:
+      title: DateTime
+      type: string
+      pattern: >-
+        ^(?:[1-9]\d{3}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\d|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[1-9]\d(?:0[48]|[2468][048]|[13579][26])|(?:[2468][048]|[13579][26])00)-02-29)T(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:(\.\d{3}))(?:Z|[+-][01]\d:[0-5]\d)$
+      description: >-
+        The API data type DateTime is a JSON String in a lexical format that is
+        restricted by a regular expression for interoperability reasons. The
+        format is according to [ISO
+        8601](https://www.iso.org/iso-8601-date-and-time-format.html), expressed
+        in a combined date, time and time zone format. A more readable version
+        of the format is yyyy-MM-ddTHH:mm:ss.SSS[-HH:MM]. Examples are
+        "2016-05-24T08:38:08.699-04:00", "2016-05-24T08:38:08.699Z" (where Z
+        indicates Zulu time zone, same as UTC).
+      example: '2016-05-24T08:38:08.699-04:00'
+    Latitude:
+      title: Latitude
+      type: string
+      pattern: >-
+        ^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,6})?))$
+      description: >-
+        The API data type Latitude is a JSON String in a lexical format that is
+        restricted by a regular expression for interoperability reasons.
+      example: '+45.4215'
+    Longitude:
+      title: Longitude
+      type: string
+      pattern: >-
+        ^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,6})?))$
+      description: >-
+        The API data type Longitude is a JSON String in a lexical format that is
+        restricted by a regular expression for interoperability reasons.
+      example: '+75.6972'
+    GeoCode:
+      title: GeoCode
+      type: object
+      description: >-
+        Data model for the complex type GeoCode. Indicates the geographic
+        location from where the transaction was initiated.
+      properties:
+        latitude:
+          $ref: '#/components/schemas/Latitude'
+        longitude:
+          $ref: '#/components/schemas/Longitude'
+      required:
+        - latitude
+        - longitude
+    IlpPacket:
+      title: IlpPacket
+      type: string
+      pattern: '^[A-Za-z0-9-_]+[=]{0,2}$'
+      minLength: 1
+      maxLength: 32768
+      description: Information for recipient (transport layer information).
+      example: >-
+        AYIBgQAAAAAAAASwNGxldmVsb25lLmRmc3AxLm1lci45T2RTOF81MDdqUUZERmZlakgyOVc4bXFmNEpLMHlGTFGCAUBQU0svMS4wCk5vbmNlOiB1SXlweUYzY3pYSXBFdzVVc05TYWh3CkVuY3J5cHRpb246IG5vbmUKUGF5bWVudC1JZDogMTMyMzZhM2ItOGZhOC00MTYzLTg0NDctNGMzZWQzZGE5OGE3CgpDb250ZW50LUxlbmd0aDogMTM1CkNvbnRlbnQtVHlwZTogYXBwbGljYXRpb24vanNvbgpTZW5kZXItSWRlbnRpZmllcjogOTI4MDYzOTEKCiJ7XCJmZWVcIjowLFwidHJhbnNmZXJDb2RlXCI6XCJpbnZvaWNlXCIsXCJkZWJpdE5hbWVcIjpcImFsaWNlIGNvb3BlclwiLFwiY3JlZGl0TmFtZVwiOlwibWVyIGNoYW50XCIsXCJkZWJpdElkZW50aWZpZXJcIjpcIjkyODA2MzkxXCJ9IgA
+    IlpCondition:
+      title: IlpCondition
+      type: string
+      pattern: '^[A-Za-z0-9-_]{43}$'
+      maxLength: 48
+      description: Condition that must be attached to the transfer by the Payer.
+    QuotesIDPutResponse:
+      title: QuotesIDPutResponse
+      type: object
+      description: 'The object sent in the PUT /quotes/{ID} callback.'
+      properties:
+        transferAmount:
+          $ref: '#/components/schemas/Money'
+        payeeReceiveAmount:
+          $ref: '#/components/schemas/Money'
+        payeeFspFee:
+          $ref: '#/components/schemas/Money'
+        payeeFspCommission:
+          $ref: '#/components/schemas/Money'
+        expiration:
+          $ref: '#/components/schemas/DateTime'
+        geoCode:
+          $ref: '#/components/schemas/GeoCode'
+        ilpPacket:
+          $ref: '#/components/schemas/IlpPacket'
+        condition:
+          $ref: '#/components/schemas/IlpCondition'
+        extensionList:
+          $ref: '#/components/schemas/ExtensionList'
+      required:
+        - transferAmount
+        - expiration
+        - ilpPacket
+        - condition
     AuthorizationsPostRequest:
       title: AuthorizationsPostRequest
       description: POST /authorizations request object.
@@ -1627,6 +1512,83 @@ components:
       oneOf:
         - $ref: '#/components/schemas/ThirdpartyTransactionIDInitiateResponseError'
         - $ref: '#/components/schemas/ThirdpartyTransactionIDInitiateResponseSuccess'
+    OtpValue:
+      title: OtpValue
+      type: string
+      pattern: '^\d{3,10}$'
+      description: >-
+        The API data type OtpValue is a JSON String of 3 to 10 characters,
+        consisting of digits only. Negative numbers are not allowed. One or more
+        leading zeros are allowed.
+    QRCODE:
+      title: QRCODE
+      type: string
+      minLength: 1
+      maxLength: 64
+      description: QR code used as a One Time Password.
+    U2FPIN:
+      title: U2FPIN
+      type: string
+      pattern: '^\S{1,64}$'
+      minLength: 1
+      maxLength: 64
+      description: >
+        U2F challenge-response, where payer FSP verifies if the response
+        provided by end-user device matches the previously registered key.
+    U2FPinValue:
+      title: U2FPinValue
+      type: object
+      description: >
+        U2F challenge-response, where payer FSP verifies if the response
+        provided by end-user device matches the previously registered key.
+      properties:
+        pinValue:
+          allOf:
+            - $ref: '#/components/schemas/U2FPIN'
+          description: U2F challenge-response.
+        counter:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+          description: >-
+            Sequential counter used for cloning detection. Present only for U2F
+            authentication.
+      required:
+        - pinValue
+        - counter
+    AuthenticationValue:
+      title: AuthenticationValue
+      anyOf:
+        - $ref: '#/components/schemas/OtpValue'
+        - $ref: '#/components/schemas/QRCODE'
+        - $ref: '#/components/schemas/U2FPinValue'
+      description: >-
+        Contains the authentication value. The format depends on the
+        authentication type used in the AuthenticationInfo complex type.
+    AuthenticationInfo:
+      title: AuthenticationInfo
+      type: object
+      description: Data model for the complex type AuthenticationInfo.
+      properties:
+        authentication:
+          $ref: '#/components/schemas/AuthenticationType'
+        authenticationValue:
+          $ref: '#/components/schemas/AuthenticationValue'
+      required:
+        - authentication
+        - authenticationValue
+    AuthorizationResponse:
+      title: AuthorizationResponse
+      type: string
+      enum:
+        - ENTERED
+        - REJECTED
+        - RESEND
+      description: |-
+        Below are the allowed values for the enumeration.
+        - ENTERED - Consumer entered the authentication value.
+        - REJECTED - Consumer rejected the transaction.
+        - RESEND - Consumer requested to resend the authentication value.
+      example: ENTERED
     AuthorizationsIDPutResponse:
       title: AuthorizationsIDPutResponse
       type: object
@@ -1702,104 +1664,6 @@ components:
       oneOf:
         - $ref: '#/components/schemas/ThirdpartyTransactionIDApproveResponseError'
         - $ref: '#/components/schemas/ThirdpartyTransactionIDApproveResponseSuccess'
-    BinaryString:
-      type: string
-      pattern: '^[A-Za-z0-9-_]+[=]{0,2}$'
-      description: >-
-        The API data type BinaryString is a JSON String. The string is a
-        base64url  encoding of a string of raw bytes, where padding (character
-        ‘=’) is added at the end of the data if needed to ensure that the string
-        is a multiple of 4 characters. The length restriction indicates the
-        allowed number of characters.
-    AccountId:
-      title: AccountId
-      type: string
-      description: >
-        A long-lived unique account identifier provided by the DFSP. This MUST
-        NOT
-
-        be Bank Account Number or anything that may expose a User's private bank
-
-        account information.
-      pattern: '^([0-9A-Za-z_~\-\.]+[0-9A-Za-z_~\-])$'
-      minLength: 1
-      maxLength: 1023
-    ThirdpartyRequestsTransactionsIDAuthorizationsPostRequest:
-      title: ThirdpartyRequestsTransactionsIDAuthorizationsPostRequest
-      type: object
-      description: >-
-        The object sent in the POST
-        /thirdpartyRequests/transactions/{id}/authorizations request.
-      properties:
-        challenge:
-          type: string
-          description: Base64 encoded binary string - the original challenge.
-        value:
-          allOf:
-            - $ref: '#/components/schemas/BinaryString'
-          description: Base64 encoded binary string - the signed challenge
-        consentId:
-          allOf:
-            - $ref: '#/components/schemas/CorrelationId'
-          description: >
-            Common ID between the PISP and FSP for the Consent object This tells
-            DFSP and auth-service which constent allows the PISP to initiate
-            transaction.
-        sourceAccountId:
-          allOf:
-            - $ref: '#/components/schemas/AccountId'
-          description: 'DFSP specific account identifiers, e.g. `dfspa.alice.1234`'
-        status:
-          type: string
-          enum:
-            - PENDING
-          description: >-
-            The status of the authorization. This MUST be PENDING for a POST
-            request
-      required:
-        - challenge
-        - value
-        - consentId
-        - sourceAccountId
-        - status
-    ThirdpartyRequestsTransactionsIDAuthorizationsPutResponse:
-      title: ThirdpartyRequestsTransactionsIDAuthorizationsPutResponse
-      type: object
-      description: >-
-        The object sent in the PUT
-        /thirdpartyRequests/transactions/{id}/authorizations request.
-      properties:
-        challenge:
-          type: string
-          description: Base64 encoded binary string - the original challenge.
-        value:
-          allOf:
-            - $ref: '#/components/schemas/BinaryString'
-          description: Base64 encoded binary string - the signed challenge.
-        consentId:
-          allOf:
-            - $ref: '#/components/schemas/CorrelationId'
-          description: >
-            Common ID between the PISP and FSP for the Consent object This tells
-            DFSP and auth-service which consent allows the PISP to initiate
-            transaction.
-        sourceAccountId:
-          allOf:
-            - $ref: '#/components/schemas/AccountId'
-          description: 'DFSP specific account identifiers, e.g. `dfspa.alice.1234`'
-        status:
-          type: string
-          enum:
-            - VERIFIED
-          description: >-
-            The status of the authorization. This value must be `VERIFIED` for a
-            PUT request.
-      required:
-        - challenge
-        - value
-        - consentId
-        - sourceAccountId
-        - status
     LinkingProvidersState:
       title: LinkingProvidersState
       description: State of GET /linking/providers request
@@ -1836,6 +1700,19 @@ components:
       oneOf:
         - $ref: '#/components/schemas/LinkingProvidersResponseError'
         - $ref: '#/components/schemas/LinkingProvidersResponseSuccess'
+    AccountId:
+      title: AccountId
+      type: string
+      description: >
+        A long-lived unique account identifier provided by the DFSP. This MUST
+        NOT
+
+        be Bank Account Number or anything that may expose a User's private bank
+
+        account information.
+      pattern: '^([0-9A-Za-z_~\-\.]+[0-9A-Za-z_~\-])$'
+      minLength: 1
+      maxLength: 1023
     Name:
       title: Name
       type: string
@@ -1881,6 +1758,16 @@ components:
             $ref: '#/components/schemas/Account'
       required:
         - accounts
+    ConsentScopeType:
+      title: ConsentScopeType
+      type: string
+      enum:
+        - accounts.getBalance
+        - accounts.transfer
+      description: |
+        The scopes requested for a ConsentRequest.
+        - "accounts.getBalance" - Get the balance of a given account.
+        - "accounts.transfer" - Initiate a transfer from an account.
     LinkingRequestConsentPostRequest:
       title: LinkingRequestConsentPostRequest
       type: object
@@ -1894,6 +1781,10 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Account'
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConsentScopeType'
         userId:
           type: string
           description: ID used to associate request with GET /accounts request.
@@ -1908,6 +1799,7 @@ components:
         - accounts
         - userId
         - callbackUri
+        - actions
     LinkingRequestConsentState:
       title: LinkingRequestConsentState
       description: State of `POST /linking/request-consent` request
@@ -1929,16 +1821,6 @@ components:
       required:
         - errorInformation
         - currentState
-    ConsentScopeType:
-      title: ConsentScopeType
-      type: string
-      enum:
-        - accounts.getBalance
-        - accounts.transfer
-      description: |
-        The scopes requested for a ConsentRequest.
-        - "accounts.getBalance" - Get the balance of a given account.
-        - "accounts.transfer" - Initiate a transfer from an account.
     Scope:
       title: Scope
       type: object

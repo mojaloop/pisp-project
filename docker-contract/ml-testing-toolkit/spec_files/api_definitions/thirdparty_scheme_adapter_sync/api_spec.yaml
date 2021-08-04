@@ -7,20 +7,17 @@ openapi: 3.0.1
 info:
   title: Mojaloop Thirdparty Outbound Scheme Adapter
   description: >
-    Specification for the Thirdparty Outbound Scheme Adapter API
+    Specification for the Thirdparty Outbound Scheme Adapter API.
+
+    This API is a synchronous API which makes integrating with the Mojaloop 3rd Party API easier. 
 
     Please see other documentation on
     https://github.com/mojaloop/thirdparty-scheme-adapter for more information.
-
-
-    **Note on terminology:** The term "Switch" is equal to the term "Hub", and
-    the term "FSP" is equal to the term "DFSP".
   license:
-    name: TBD
-    url: TBD
+    name: Apache 2.0
   version: 0.1.0
 servers:
-  - url: http://switch-ttk-backend-fspiop.beta.moja-lab.live
+  - url: http://sandbox.mojaloop.io/switch-ttk-backend
     description: The mock 3p-scheme-adapter server running in the Mojaloop Sandbox
 paths:
   # Skipping these for now, they will just confuse users
@@ -86,6 +83,11 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/ThirdpartyTransactionPartyLookupRequest'
+            example:
+              transactionRequestId: b51ec534-ee48-4575-b6a9-ead2955b8069
+              payee:
+                partyIdType: MSISDN
+                partyIdentifier: '16135551212'
       responses:
         '200':
           $ref: '#/components/responses/ThirdpartyTransactionPartyLookupResponse'
@@ -139,7 +141,7 @@ paths:
           $ref: '#/components/responses/ThirdpartyTransactionIDApproveResponse'
         'default':
           $ref: '#/components/responses/400'
-  # I don't think this is required anymore
+  # No longer required. Should be removed
   # '/thirdpartyRequests/transactions/{ID}/authorizations':
   #   post:
   #     operationId: VerifyThirdPartyAuthorization

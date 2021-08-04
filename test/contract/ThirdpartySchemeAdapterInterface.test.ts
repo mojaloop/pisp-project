@@ -25,24 +25,6 @@ describe('Thirdparty Scheme Adapter Interface', () => {
       expect(result.data).toStrictEqual(expected)
     })
   })
-  
-  // Hmm what's the purpose of this endpoint? Maybe we can skip it for now
-  // TODO: double check with Kevin...
-  describe('authorizations', () => {
-    it.skip('POST /authorizations', async () => {
-      // Arrange
-      const tprURI = `${TestEnv.baseUrls.mlTestingToolkit}/authorizations`
-      const body = {}
-      const expected = 'string'
-
-      // Act
-      const result = await axios.post(tprURI, body)
-
-      // Assert
-      expect(result.status).toBe(200)
-      expect(result.data).toStrictEqual(expected)
-    })
-  })
 
   describe('thirdpartyRequests', () => {
     const transactionRequestId = `b51ec534-ee48-4575-b6a9-ead2955b8069`

@@ -19,6 +19,8 @@ info:
 servers:
   - url: http://sandbox.mojaloop.io/switch-ttk-backend
     description: The mock 3p-scheme-adapter server running in the Mojaloop Sandbox
+  - url: http://localhost:15000
+    description: A locally running TTK instance
 paths:
   # Skipping these for now, they will just confuse users
   # /health:
@@ -111,6 +113,26 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/ThirdpartyTransactionIDInitiateRequest'
+            example:
+              payee:
+                name: 'Bob bobbington'
+                partyIdInfo:
+                  fspId: 'dfspb'
+                  partyIdType: 'MSISDN'
+                  partyIdentifier: '16135551212'
+              payer:
+                partyIdType: 'THIRD_PARTY_LINK'
+                partyIdentifier: '16135551212'
+                fspId: 'dfspa'
+              amountType: 'RECEIVE'
+              amount:
+                currency: 'USD'
+                amount: '123.47'
+              transactionType: 
+                scenario: 'DEPOSIT'
+                initiator: 'PAYER'
+                initiatorType: 'CONSUMER'
+              expiration: '2021-05-24T08:38:08.699-04:00'
       responses:
         '200':
           $ref: '#/components/responses/ThirdpartyTransactionIDInitiateResponse'
@@ -136,6 +158,14 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/ThirdpartyTransactionIDApproveRequest'
+            example:
+               authorizationResponse:
+                authenticationInfo:
+                  authentication: 'U2F'
+                  authenticationValue:
+                    pinValue: 'xxxxxxxxxxx'
+                    counter: '1'
+                responseType: 'ENTERED'
       responses:
         '200':
           $ref: '#/components/responses/ThirdpartyTransactionIDApproveResponse'

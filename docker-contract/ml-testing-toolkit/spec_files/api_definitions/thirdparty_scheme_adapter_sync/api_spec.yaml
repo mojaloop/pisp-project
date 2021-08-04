@@ -2,7 +2,6 @@
 # `default` entry, as suggested in https://swagger.io/docs/specification/describing-responses/
 # This is because each of the error responses contains the same schema.
 # Doing do makes the swagger doc much more readable, especially when rendered
-
 openapi: 3.0.1
 info:
   title: Mojaloop Thirdparty Outbound Scheme Adapter
@@ -22,52 +21,32 @@ servers:
   - url: http://localhost:15000
     description: A locally running TTK instance
 paths:
-  # Skipping these for now, they will just confuse users
-  # /health:
-  #   get:
-  #     tags:
-  #       - health
-  #     responses:
-  #       '200':
-  #         $ref: '#/components/responses/200'
-  #       'default':
-  #         $ref: '#/components/responses/400'
-  #     operationId: HealthGet
-  #     summary: Health check endpoint
-  #     description: >-
-  #       The HTTP request GET /health is used to return the current status of the
-  #       API.
-  # /metrics:
-  #   get:
-  #     tags:
-  #       - health
-  #     responses:
-  #       '200':
-  #         $ref: '#/components/responses/200'
-  #       'default':
-  #         $ref: '#/components/responses/400'
-  #     operationId: MetricsGet
-  #     summary: Prometheus metrics endpoint
-  #     description: The HTTP request GET /metrics is used to return metrics for the API.
-  # /authorizations:
-  #   post:
-  #     operationId: OutboundAuthorizationsPost
-  #     summary: Outbound Authorizations endpoint
-  #     description: DFSP Requests Authorization of Transaction from the End User
-  #     tags:
-  #       - authorizations
-  #     requestBody:
-  #       description: Authorization request details
-  #       required: true
-  #       content:
-  #         application/json:
-  #           schema:
-  #             $ref: '#/components/schemas/AuthorizationsRequest'
-  #     responses:
-  #       '200':
-  #         $ref: '#/components/responses/AuthorizationsResponse'
-  #       'default':
-  #         $ref: '#/components/responses/400'
+  /health:
+    get:
+      tags:
+        - health
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        'default':
+          $ref: '#/components/responses/400'
+      operationId: HealthGet
+      summary: Health check endpoint
+      description: >-
+        The HTTP request GET /health is used to return the current status of the
+        API.
+  /metrics:
+    get:
+      tags:
+        - health
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        'default':
+          $ref: '#/components/responses/400'
+      operationId: MetricsGet
+      summary: Prometheus metrics endpoint
+      description: The HTTP request GET /metrics is used to return metrics for the API.
   /thirdpartyTransaction/partyLookup:
     post:
       operationId: ThirdpartyTransactionPartyLookup
@@ -171,32 +150,6 @@ paths:
           $ref: '#/components/responses/ThirdpartyTransactionIDApproveResponse'
         'default':
           $ref: '#/components/responses/400'
-  # No longer required. Should be removed
-  # '/thirdpartyRequests/transactions/{ID}/authorizations':
-  #   post:
-  #     operationId: VerifyThirdPartyAuthorization
-  #     summary: VerifyThirdPartyAuthorization
-  #     description: >
-  #       The HTTP request `POST
-  #       /thirdpartyRequests/transactions/{ID}/authorizations` is used by the
-  #       DFSP to verify a third party authorization.
-  #     tags:
-  #       - thirdpartyRequests
-  #     parameters:
-  #       - $ref: '#/components/parameters/ID'
-  #     requestBody:
-  #       description: The thirdparty authorization details to verify
-  #       required: true
-  #       content:
-  #         application/json:
-  #           schema:
-  #             $ref: >-
-  #               #/components/schemas/ThirdpartyRequestsTransactionsIDAuthorizationsPostRequest
-  #     responses:
-  #       '200':
-  #         $ref: '#/components/responses/ThirdpartyRequestsTransactionsIDAuthzResponse'
-  #       'default':
-  #         $ref: '#/components/responses/400'
   /linking/providers:
     get:
       operationId: GetLinkingProviders
@@ -490,7 +443,6 @@ components:
               amount:
                 currency: USD
                 amount: '10.00'
-              # TODO: proper one here...
               transactionId: '1234-1234-1234-1234'
               transactionRequestId: '1234-1234-1234-1234'
               quote:

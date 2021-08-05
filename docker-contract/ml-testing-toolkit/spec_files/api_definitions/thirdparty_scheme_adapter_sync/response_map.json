@@ -1,0 +1,47 @@
+{
+  "/health": {
+    "get": {
+      "response": {}
+    }
+  },
+  "/linking/providers": {
+    "get": {
+      "response": {}
+    }
+  },
+  "/linking/accounts/{fspId}/{userId}": {
+    "get": {
+      "response": {}
+    }
+  },
+  "/thirdpartyTransaction/partyLookup": {
+    "post": {
+      "response": {}
+    }
+  },
+  "/thirdpartyTransaction/{ID}/initiate": {
+    "post": {
+      "response": {}
+    }
+  },
+  "/thirdpartyTransaction/{ID}/approve": {
+    "post": {
+      "response": {}
+    }
+  },
+  "/linking/request-consent": {
+    "post": {
+      "response": {}
+    }
+  },
+  "/linking/request-consent/{ID}/authenticate": {
+    "patch": {
+      "response": {}
+    }
+  },
+  "/linking/request-consent/{ID}/pass-credential": {
+    "post": {
+      "response": {}
+    }
+  }
+}

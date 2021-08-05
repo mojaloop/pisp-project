@@ -68,6 +68,11 @@
       "version": "0.1",
       "folderPath": "thirdparty_pisp",
       "asynchronous": true
+    },
+    {
+      "type": "thirdparty_scheme_adapter_sync",
+      "version": "0.1",
+      "folderPath": "thirdparty_scheme_adapter_sync"
     }
   ]
 }

@@ -92,10 +92,42 @@ could be derived.
 #### <a name='SignedAuthorization'></a>1.2.3 Signed Authorization
 
 Upon receiving the `POST /thirdpartyRequests/authorizations` request from the DFSP, the PISP confirms the details of the 
-transaction with the user, and uses the [FIDO Authentication](https://webauthn.guide/#authentication) flow to sign the `challenge`
-with the private key on the user's device that was registered in [1.6.2 Registering the credential](../linking/README.md#162-registering-the-credential)
+transaction with the user, and asks the user to sign the `challenge` field. This API supports either (1) signing the challenge using a GENERIC public/private keypair, or (2) using the FIDO Attestation flow to securely sign the challenge on the user's device.
 
-After retrieving the signed challenge from the user's device, the PISP sends a `PUT /thirdpartyRequests/authorizations/{ID}` call to the DFSP.
+##### <a name='SigningTheChallenge'></a>1.2.3.1 Signing the Challlenge
+
+Signing of the challenge can happen either 2 ways, depending on the `credentialType` of the `Consent.credential`
+1. If `GENERIC`, the private key created during the [credential registration process](../linking/README.md#162-registering-the-credential) is used along with the challenge as the inputs to a SHA256 HMAC function [todo: finish]
+2. If `FIDO`, the PISP asks the user to complete the [FIDO Assertion](https://webauthn.guide/#authentication) flow to sign the challenge. The `authenticationValue` is the `FIDOPublicKeyCredentialAssertion` returned from the FIDO Assertion process.
+
+
+```json
+SignedPayloadGeneric {
+    "authenticationValue": "<base64 encoded utf8 - the signed challenge>",
+    "signedPayloadType": "GENERIC"
+}
+```
+
+```json
+SignedPayloadFIDO {
+    "authenticationValue": FIDOPublicKeyCredentialAssertion,
+    "signedPayloadType": "FIDO"
+}
+```
+
+```json
+FIDOPublicKeyCredentialAssertion {
+    "id": "string",
+    "rawId": "string - base64 encoded utf-8",
+    "response": {
+        "authenticatorData": "string - base64 encoded utf-8",
+        "clientDataJSON": "string - base64 encoded utf-8",
+        "signature": "string - base64 encoded utf-8",
+        "userHandle": "string - base64 encoded utf-8",
+    },
+    "type": "public-key"
+}
+```
 
 
 ![1-2-3-signed-authorization](../out/transfer/1-2-3-signed-authorization.svg)

@@ -22,15 +22,16 @@ rnote left of D2 #Light
   "verificationRequestId": "44444444-0000-0000-0000-000000000000",
   "challenge": ""<base64 encoded binary - the encoded challenge>"",
   "value": {
-    "authenticationInfo": {
-      "authentication": "U2F",
-      "authenticationValue": {
-        "pinValue": "<base64 encoded binary - the signed challenge>",
-        "counter": "1"
-      }
-    }
-    "responseType": "ENTERED"
-  },
+    "id": "string",
+    "rawId": "string - base64 encoded utf-8",
+    "response": {
+      "authenticatorData": "string - base64 encoded utf-8",
+      "clientDataJSON": "string - base64 encoded utf-8",
+      "signature": "string - base64 encoded utf-8",
+      "userHandle": "string - base64 encoded utf-8",
+    },
+    "type": "public-key"
+  }
   "consentId": "123"
 }
 end note

@@ -38,6 +38,9 @@
       }
     }
   },
+  "DEMO_SKIP_VALIDATION_FOR_CREDENTIAL_IDS": [
+    "HskU2gw4np09IUtYNHnxMM696jJHqvccUdBmd0xP6XEWwH0xLei1PUzDJCM19SZ3A2Ex0fNLw0nc2hrIlFnAtw"
+  ],
   "DATABASE": {
     "client": "mysql",
     "version": "5.5",

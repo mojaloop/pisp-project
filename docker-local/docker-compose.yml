@@ -313,10 +313,12 @@ services:
       - mojaloop-net
 
   auth-service:
-    image: mojaloop/auth-service:v11.10.0
-    #build:
+    # image: mojaloop/auth-service:v11.10.0
+    # TODO: change back to upstream
+    build:
     #  context: https://github.com/username/auth-service.git#feat/branch
-    #  dockerfile: ./Dockerfile
+     context: /home/lew/developer/mojaloop/auth-service
+     dockerfile: ./Dockerfile
     command: sh -c "/opt/auth-service/wait4/wait4.js auth-service && npm run migrate && npm run start"
     container_name: auth-service
     ports:
@@ -331,6 +333,7 @@ services:
       - ./docker/auth-service/default.json:/opt/auth-service/config/integration.json
     environment:
       - NODE_ENV=integration
+      - LOG_LEVEL=debug
     healthcheck:
       test: wget -q http://localhost:4004/health -O /dev/null || exit 1
       timeout: 20s
@@ -391,7 +394,7 @@ services:
 
   ## DFSP A
   dfspa-backend:
-    image: "mojaloop/mojaloop-simulator:v11.3.0.8-pisp"
+    image: "mojaloop/mojaloop-simulator:v11.3.0.10-pisp"
     # build:
     #   context: ../../mojaloop-simulator
     #   dockerfile: ./Dockerfile

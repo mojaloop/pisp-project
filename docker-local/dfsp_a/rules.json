@@ -427,5 +427,31 @@
         }
       }
     }
+  },
+  {
+    "ruleId": 13,
+    "description": "stores the final consent",
+    "conditions": {
+      "all": [
+        {
+          "fact": "path",
+          "operator": "equal",
+          "value": "/store/consent"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "POST"
+        }
+      ]
+    },
+    "event": {
+      "type": "FIXED_CALLBACK",
+      "params": {
+        "statusCode": 200,
+        "body": {
+        }
+      }
+    }
   }
 ]

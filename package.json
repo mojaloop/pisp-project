@@ -83,6 +83,7 @@
     "atob": "^2.1.2",
     "axios": "^0.21.1",
     "btoa": "^1.2.1",
+    "cbor": "^8.0.0",
     "chalk": "^4.1.0"
   },
   "devDependencies": {

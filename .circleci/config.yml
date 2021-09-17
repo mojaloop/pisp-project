@@ -102,6 +102,12 @@ jobs:
             nvm install v12.16.1
             nvm alias default v12.16.1
       - run:
+          name: build any containers that need building
+          command: |
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            cd ./docker-local/
+            docker-compose build
+      - run:
           name: Spin up the E2E test environment
           command: |
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"

@@ -313,12 +313,10 @@ services:
       - mojaloop-net
 
   auth-service:
-    # image: mojaloop/auth-service:v11.10.0
-    # TODO: change back to upstream
-    build:
-    #  context: https://github.com/username/auth-service.git#feat/branch
-     context: /home/lew/developer/mojaloop/auth-service
-     dockerfile: ./Dockerfile
+    image: mojaloop/auth-service:v11.10.0
+    # build:
+    #  context: /home/lew/developer/mojaloop/auth-service
+    #  dockerfile: ./Dockerfile
     command: sh -c "/opt/auth-service/wait4/wait4.js auth-service && npm run migrate && npm run start"
     container_name: auth-service
     ports:

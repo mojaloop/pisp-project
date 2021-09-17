@@ -319,7 +319,7 @@ describe('pispLinkAndTransfer', () => {
   })
 
   describe('happy path - initiate transfer', () => {
-    it.only('sends a transfer', async () => {
+    it('sends a transfer', async () => {
       //shortcut
       const baseUrl = TestEnv.baseUrls.pispThirdpartySchemeAdapterOutbound
 

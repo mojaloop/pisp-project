@@ -145,6 +145,7 @@ jobs:
 
             # seed the environment
             npm run reseed:docker-local
+          no_output_timeout: 20m
       - run:
           name: Run the E2E tests
           command: |

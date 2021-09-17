@@ -670,6 +670,7 @@ services:
     environment:
       - NODE_ENV=e2e
       - DFSP_ID=pisp
+      - LOG_LEVEL=debug
     command: sh -c "/opt/thirdparty-scheme-adapter/wait4/wait4.js pisp-thirdparty-scheme-adapter && npm run start:outbound"
     volumes:
       - "./pisp/secrets:/opt/thirdparty-scheme-adapter/secrets"

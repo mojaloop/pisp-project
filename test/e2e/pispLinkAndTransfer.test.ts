@@ -346,22 +346,60 @@ describe('pispLinkAndTransfer', () => {
         consentId: '46876aac-5db8-4353-bb3c-a6a905843ce7'
       }
 
-      // LOOKUP PHASE
-      // lookup for Bob
-      const lookupRequest = {
+      // // LOOKUP PHASE
+      // // lookup for Bob
+      // const lookupRequest = {
+      //   payee: {
+      //     partyIdType: TestEnv.users.bob.idType,
+      //     partyIdentifier: TestEnv.users.bob.idValue
+      //   },
+      //   transactionRequestId: ids.transactionRequestId
+      // }
+      // const lookupURI = `${baseUrl}/thirdpartyTransaction/partyLookup`
+      // const lookupResponse = await axios.post(lookupURI, lookupRequest)
+      // expect(lookupResponse.status).toEqual(200)
+      // expect(lookupResponse.data.currentState).toEqual('partyLookupSuccess')
+
+      // INITIATE PHASE
+      const initiateURI = `${baseUrl}/thirdpartyTransaction/${ids.transactionRequestId}/initiate`
+      const initiateRequest = {
+        sourceAccountId: 'dfspa.alice.1234',
+        consentId: '8e34f91d-d078-4077-8263-2c047876fcf6',
         payee: {
-          partyIdType: TestEnv.users.bob.idType,
-          partyIdentifier: TestEnv.users.bob.idValue
+          partyIdInfo: {
+            partyIdType: 'MSISDN',
+            partyIdentifier: '987654321',
+            fspId: 'dfspb'
+          },
         },
-        transactionRequestId: ids.transactionRequestId
+        payer: {
+          // this is important!
+          // it tells the DFSP which consentId + source of funds account!
+          partyIdType: 'THIRD_PARTY_LINK',
+          // partyIdType: 'MSISDN',
+          partyIdentifier: '244431e2-7a56-40c6-814c-932631760fa9',
+          fspId: 'dfspa'
+        },
+        amountType: 'SEND',
+        amount: {
+          amount: '100',
+          currency: 'USD'
+        },
+        transactionType: {
+          scenario: 'TRANSFER',
+          initiator: 'PAYER',
+          initiatorType: 'CONSUMER'
+        },
+        expiration: '2020-07-15T22:17:28.985-01:00'
       }
-      const lookupURI = `${baseUrl}/thirdpartyTransaction/partyLookup`
-      const lookupResponse = await axios.post(lookupURI, lookupRequest)
-      expect(lookupResponse.status).toEqual(200)
-      expect(lookupResponse.data.currentState).toEqual('partyLookupSuccess')
-
-
+      try {
+        const initiateResponse = await axios.post(initiateURI, initiateRequest)
+        expect(initiateResponse.status).toEqual(200)
+        expect(initiateResponse.data.currentState).toEqual('authorizationReceived')
+      } catch (err) {
+        console.log('err', err)
+        throw err
+      }
     })
-
   })
 })

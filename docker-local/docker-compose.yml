@@ -313,7 +313,7 @@ services:
       - mojaloop-net
 
   auth-service:
-    image: mojaloop/auth-service:v11.6.0
+    image: mojaloop/auth-service:v11.10.0
     #build:
     #  context: https://github.com/username/auth-service.git#feat/branch
     #  dockerfile: ./Dockerfile
@@ -428,10 +428,11 @@ services:
     restart: always
 
   dfspa-thirdparty-scheme-adapter-inbound:
-    image: "mojaloop/thirdparty-scheme-adapter:v11.41.0"
-    #build:
-    #  context: https://github.com/username/thirdparty-scheme-adapter.git#feat/branch
-    #  dockerfile: ./docker/Dockerfile
+    # image: "mojaloop/thirdparty-scheme-adapter:v11.41.0"
+    # TODO: change back to mainline image
+    build:
+     context: https://github.com/mojaloop/thirdparty-scheme-adapter.git#feat/deterministic-test-consentids
+     dockerfile: ./docker/Dockerfile
     container_name: dfspa-thirdparty-scheme-adapter-inbound
     environment:
       - NODE_ENV=e2e
@@ -458,10 +459,11 @@ services:
       interval: 30s
 
   dfspa-thirdparty-scheme-adapter-outbound:
-    image: "mojaloop/thirdparty-scheme-adapter:v11.41.0"
-    #build:
-    #  context: https://github.com/username/thirdparty-scheme-adapter.git#feat/branch
-    #  dockerfile: ./docker/Dockerfile
+    # image: "mojaloop/thirdparty-scheme-adapter:v11.41.0"
+    # TODO: change back to mainline image
+    build:
+     context: https://github.com/mojaloop/thirdparty-scheme-adapter.git#feat/deterministic-test-consentids
+     dockerfile: ./docker/Dockerfile
     container_name: dfspa-thirdparty-scheme-adapter-outbound
     environment:
       - NODE_ENV=e2e

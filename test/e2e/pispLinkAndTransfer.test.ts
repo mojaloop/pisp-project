@@ -168,50 +168,33 @@ const linkingRequestConsentPassCredentialBody = {
 /*
 
 
- {"challenge":{"0":117,"1":110,"2":105,"3":109,"4":112,"5":108,"6":101,"7":109,"8":101,"9":110,"10":116,"11":101,"12":100,"13":49,"14":50,"15":51},"allowCredentials":[{"i
- d":{"0":118,"1":20,"2":112,"3":74,"4":147,"5":206,"6":59,"7":182,"8":115,"9":218,"10":175,"11":6,"12":18,"13":106,"14":6,"15":153,"16":46,"17":178,"18":180,"19":77,"20":
- 197,"21":244,"22":226,"23":146,"24":1,"25":15,"26":210,"27":154,"28":72,"29":100,"30":41,"31":19,"32":53,"33":230,"34":168,"35":212,"36":80,"37":112,"38":27,"39":159,"40
- ":53,"41":60,"42":190,"43":246,"44":8,"45":92,"46":108,"47":169,"48":135,"49":167,"50":71,"51":66,"52":149,"53":44,"54":167,"55":199,"56":142,"57":100,"58":43,"59":226,"
- 60":136,"61":59,"62":249,"63":241},"type":"public-key"}],"timeout":60000}
-assertion is
-⚠️  main - Signed credential is: {id: dhRwSpPOO7Zz2q8GEmoGmS6ytE3F9OKSAQ_SmkhkKRM15qjUUHAbnzU8vvYIXGyph6dHQpUsp8eOZCviiDv58Q, rawId: [118, 20, 112, 74, 147, 206, 59, 182,
-115, 218, 175, 6, 18, 106, 6, 153, 46, 178, 180, 77, 197, 244, 226, 146, 1, 15, 210, 154, 72, 100, 41, 19, 53, 230, 168, 212, 80, 112, 27, 159, 53, 60, 190, 246, 8, 92,
-108, 169, 135, 167, 71, 66, 149, 44, 167, 199, 142, 100, 43, 226, 136, 59, 249, 241], response: {authenticatorData: [73, 150, 13, 229, 136, 14, 140, 104, 116, 52, 23, 15,
-100, 118, 96, 91, 143, 228, 174, 185, 162, 134, 50, 199, 153, 92, 243, 186, 131, 29, 151, 99, 1, 0, 0, 0, 6], clientDataJSON: [123, 34, 116, 121, 112, 101, 34, 58, 34,
-119, 101, 98, 97, 117, 116, 104, 110, 46, 103, 101, 116, 34, 44, 34, 99, 104, 97, 108, 108, 101, 110, 103, 101, 34, 58, 34, 100, 87, 53, 112, 98, 88, 66, 115, 90, 87, 49,
-108, 98, 110, 82, 108, 90, 68, 69, 121, 77, 119, 34, 44, 34, 111, 114, 105, 103, 105, 110, 34, 58, 34, 104, 116, 116, 112, 58, 47, 47, 108, 111, 99, 97, 108, 104, 111,
-115, 116, 58, 52, 50, 49, 56, 49, 34, 44, 34, 99, 114, 111, 115, 115, 79, 114, 105, 103, 105, 110, 34, 58, 102, 97, 108, 115, 101, 125], signature: [48, 70, 2, 33, 0,
-159, 74, 109, 71, 229, 244, 201, 135, 30, 73, 115, 110, 108, 179, 170, 83, 175, 146, 127, 235, 37, 19, 74, 167, 109, 40, 97, 58, 28, 254, 115, 45, 2, 33, 0, 143, 4, 101,
-180, 248, 164, 185, 16, 198, 128, 141, 216, 87, 163, 18, 155, 147, 213, 116, 162, 229, 250, 133, 90, 201, 243, 16, 139, 50, 167, 151, 242], userHandle: []}}
-
+{id: dhRwSpPOO7Zz2q8GEmoGmS6ytE3F9OKSAQ_SmkhkKRM15qjUUHAbnzU8vvYIXGyph6dHQpUsp8eOZCviiDv58Q, rawId: [118, 20, 112, 74, 147, 206, 59, 182, 115, 218, 175, 6, 18, 106, 6, 153,
+46, 178, 180, 77, 197, 244, 226, 146, 1, 15, 210, 154, 72, 100, 41, 19, 53, 230, 168, 212, 80, 112, 27, 159, 53, 60, 190, 246, 8, 92, 108, 169, 135, 167, 71, 66, 149, 44, 167, 199, 142, 100, 43, 226, 136, 59,
+249, 241], response: {authenticatorData: [73, 150, 13, 229, 136, 14, 140, 104, 116, 52, 23, 15, 100, 118, 96, 91, 143, 228, 174, 185, 162, 134, 50, 199, 153, 92, 243, 186, 131, 29, 151, 99, 1, 0, 0, 0, 9],
+clientDataJSON: [123, 34, 116, 121, 112, 101, 34, 58, 34, 119, 101, 98, 97, 117, 116, 104, 110, 46, 103, 101, 116, 34, 44, 34, 99, 104, 97, 108, 108, 101, 110, 103, 101, 34, 58, 34, 79, 87, 90, 104, 89, 106,
+65, 120, 90, 84, 99, 119, 89, 106, 85, 52, 89, 122, 82, 104, 77, 122, 82, 109, 79, 87, 81, 119, 78, 122, 66, 109, 90, 106, 108, 108, 90, 68, 70, 105, 78, 106, 99, 50, 78, 87, 86, 104, 77, 122, 65, 49, 78, 71,
+73, 49, 77, 87, 90, 106, 90, 84, 104, 106, 90, 71, 70, 106, 78, 68, 69, 121, 90, 68, 66, 109, 78, 109, 77, 50, 77, 87, 70, 104, 77, 81, 34, 44, 34, 111, 114, 105, 103, 105, 110, 34, 58, 34, 104, 116, 116,
+112, 58, 47, 47, 108, 111, 99, 97, 108, 104, 111, 115, 116, 58, 52, 50, 49, 56, 49, 34, 44, 34, 99, 114, 111, 115, 115, 79, 114, 105, 103, 105, 110, 34, 58, 102, 97, 108, 115, 101, 125], signature: [48, 70,
+2, 33, 0, 190, 66, 136, 84, 190, 252, 127, 75, 205, 39, 133, 166, 165, 211, 43, 162, 98, 2, 173, 248, 77, 126, 201, 21, 28, 78, 100, 208, 159, 202, 74, 115, 2, 33, 0, 160, 135, 105, 213, 152, 53, 139, 200,
+40, 179, 207, 204, 9, 25, 210, 206, 250, 132, 137, 181, 187, 18, 128, 69, 2, 27, 143, 194, 223, 156, 243, 139], userHandle: []}}
 */
 
-export const validVerificationRequest = {
-  verificationRequestId: '835a8444-8cdc-41ef-bf18-ca4916c2e005',
-  // This is stubbed out for pisp-demo-svc, where we generated these payloads
-  // FIDO library actually signs the base64 hash of this challenge
-  challenge: btoa('unimplemented123'),
-  consentId: 'be433b9e-9473-4b7d-bdd5-ac5b42463afb',
-  signedPayloadType: 'FIDO',
-  signedPayload: {
-    id: atob('vwWPva1iiTJIk_c7n9a49spEtJZBqrn4SECerci0b-Ue-6Jv9_DZo3rNX02Lq5PU4N5kGlkEPAkIoZ3499AzWQ'),
-    rawId: 'vwWPva1iiTJIk_c7n9a49spEtJZBqrn4SECerci0b-Ue-6Jv9_DZo3rNX02Lq5PU4N5kGlkEPAkIoZ3499AzWQ',
-    response: {
-      authenticatorData: Buffer.from([73, 150, 13, 229, 136, 14, 140, 104, 116, 52, 23,
-        15, 100, 118, 96, 91, 143, 228, 174, 185, 162, 134, 50, 199, 153, 92, 243, 186, 131, 29, 151, 99, 1, 0, 0, 0, 18]).toString('base64'),
-      clientDataJSON: Buffer.from([123, 34, 116, 121, 112, 101, 34, 58,
-        34, 119, 101, 98, 97, 117, 116, 104, 110, 46, 103, 101, 116, 34, 44, 34, 99, 104, 97, 108, 108, 101, 110, 103, 101, 34, 58, 34, 100, 87, 53, 112, 98, 88, 66, 115, 90, 87,
-        49, 108, 98, 110, 82, 108, 90, 68, 69, 121, 77, 119, 34, 44, 34, 111, 114, 105, 103, 105, 110, 34, 58, 34, 104, 116, 116, 112, 58, 47, 47, 108, 111, 99, 97, 108, 104,
-        111, 115, 116, 58, 52, 50, 49, 56, 49, 34, 44, 34, 99, 114, 111, 115, 115, 79, 114, 105, 103, 105, 110, 34, 58, 102, 97, 108, 115, 101, 44, 34, 111, 116, 104, 101, 114,
-        95, 107, 101, 121, 115, 95, 99, 97, 110, 95, 98, 101, 95, 97, 100, 100, 101, 100, 95, 104, 101, 114, 101, 34, 58, 34, 100, 111, 32, 110, 111, 116, 32, 99, 111, 109, 112,
-        97, 114, 101, 32, 99, 108, 105, 101, 110, 116, 68, 97, 116, 97, 74, 83, 79, 78, 32, 97, 103, 97, 105, 110, 115, 116, 32, 97, 32, 116, 101, 109, 112, 108, 97, 116, 101,
-        46, 32, 83, 101, 101, 32, 104, 116, 116, 112, 115, 58, 47, 47, 103, 111, 111, 46, 103, 108, 47, 121, 97, 98, 80, 101, 120, 34, 125]).toString('base64'),
-      signature: Buffer.from([48, 68, 2, 32, 104, 17,
-        39, 167, 189, 118, 136, 100, 84, 72, 120, 29, 255, 74, 131, 59, 254, 132, 36, 19, 184, 24, 93, 103, 67, 195, 25, 252, 6, 224, 120, 69, 2, 32, 56, 251, 234, 96, 138, 6,
-        158, 231, 246, 168, 254, 147, 129, 142, 100, 145, 234, 99, 91, 152, 199, 15, 72, 19, 176, 237, 209, 176, 131, 243, 70, 167]).toString('base64')
-    },
-    type: 'public-key'
-  }
+export const validVerificationRequestSignedPayload = {
+  id: atob('dhRwSpPOO7Zz2q8GEmoGmS6ytE3F9OKSAQ_SmkhkKRM15qjUUHAbnzU8vvYIXGyph6dHQpUsp8eOZCviiDv58Q'),
+  rawId: Buffer.from([118, 20, 112, 74, 147, 206, 59, 182, 115, 218, 175, 6, 18, 106, 6, 153,
+    46, 178, 180, 77, 197, 244, 226, 146, 1, 15, 210, 154, 72, 100, 41, 19, 53, 230, 168, 212, 80, 112, 27, 159, 53, 60, 190, 246, 8, 92, 108, 169, 135, 167, 71, 66, 149, 44, 167, 199, 142, 100, 43, 226, 136, 59,
+    249, 241]).toString('base64'),
+  response: {
+    authenticatorData: Buffer.from([73, 150, 13, 229, 136, 14, 140, 104, 116, 52, 23, 15, 100, 118, 96, 91, 143, 228, 174, 185, 162, 134, 50, 199, 153, 92, 243, 186, 131, 29, 151, 99, 1, 0, 0, 0, 9]).toString('base64'),
+    clientDataJSON: Buffer.from([123, 34, 116, 121, 112, 101, 34, 58, 34, 119, 101, 98, 97, 117, 116, 104, 110, 46, 103, 101, 116, 34, 44, 34, 99, 104, 97, 108, 108, 101, 110, 103, 101, 34, 58, 34, 79, 87, 90, 104, 89, 106,
+65, 120, 90, 84, 99, 119, 89, 106, 85, 52, 89, 122, 82, 104, 77, 122, 82, 109, 79, 87, 81, 119, 78, 122, 66, 109, 90, 106, 108, 108, 90, 68, 70, 105, 78, 106, 99, 50, 78, 87, 86, 104, 77, 122, 65, 49, 78, 71,
+73, 49, 77, 87, 90, 106, 90, 84, 104, 106, 90, 71, 70, 106, 78, 68, 69, 121, 90, 68, 66, 109, 78, 109, 77, 50, 77, 87, 70, 104, 77, 81, 34, 44, 34, 111, 114, 105, 103, 105, 110, 34, 58, 34, 104, 116, 116,
+112, 58, 47, 47, 108, 111, 99, 97, 108, 104, 111, 115, 116, 58, 52, 50, 49, 56, 49, 34, 44, 34, 99, 114, 111, 115, 115, 79, 114, 105, 103, 105, 110, 34, 58, 102, 97, 108, 115, 101, 125]).toString('base64'),
+    signature: Buffer.from([48, 70,
+      2, 33, 0, 190, 66, 136, 84, 190, 252, 127, 75, 205, 39, 133, 166, 165, 211, 43, 162, 98, 2, 173, 248, 77, 126, 201, 21, 28, 78, 100, 208, 159, 202, 74, 115, 2, 33, 0, 160, 135, 105, 213, 152, 53, 139, 200,
+      40, 179, 207, 204, 9, 25, 210, 206, 250, 132, 137, 181, 187, 18, 128, 69, 2, 27, 143, 194, 223, 156, 243, 139]).toString('base64')
+  },
+  type: 'public-key'
 }
 
 export const invalidVerificationRequest = {
@@ -346,21 +329,28 @@ describe('pispLinkAndTransfer', () => {
         consentId: '46876aac-5db8-4353-bb3c-a6a905843ce7'
       }
 
-      // // LOOKUP PHASE
-      // // lookup for Bob
-      // const lookupRequest = {
-      //   payee: {
-      //     partyIdType: TestEnv.users.bob.idType,
-      //     partyIdentifier: TestEnv.users.bob.idValue
-      //   },
-      //   transactionRequestId: ids.transactionRequestId
-      // }
-      // const lookupURI = `${baseUrl}/thirdpartyTransaction/partyLookup`
-      // const lookupResponse = await axios.post(lookupURI, lookupRequest)
-      // expect(lookupResponse.status).toEqual(200)
-      // expect(lookupResponse.data.currentState).toEqual('partyLookupSuccess')
+      
+      // LOOKUP PHASE
+      // lookup for Bob
+      console.log("LOOKUP PHASE")
+      const lookupRequest = {
+        payee: {
+          partyIdType: TestEnv.users.bob.idType,
+          partyIdentifier: TestEnv.users.bob.idValue
+        },
+        transactionRequestId: ids.transactionRequestId
+      }
+      const lookupURI = `${baseUrl}/thirdpartyTransaction/partyLookup`
+      const lookupResponse = await axios.post(lookupURI, lookupRequest)
+      expect(lookupResponse.status).toEqual(200)
+      expect(lookupResponse.data.currentState).toEqual('partyLookupSuccess')
 
+      
       // INITIATE PHASE
+      console.log("INITIATE PHASE")
+      const expirationDate = new Date();
+      expirationDate.setHours(expirationDate.getHours() + 4);
+
       const initiateURI = `${baseUrl}/thirdpartyTransaction/${ids.transactionRequestId}/initiate`
       const initiateRequest = {
         sourceAccountId: 'dfspa.alice.1234',
@@ -390,16 +380,28 @@ describe('pispLinkAndTransfer', () => {
           initiator: 'PAYER',
           initiatorType: 'CONSUMER'
         },
-        expiration: '2020-07-15T22:17:28.985-01:00'
+        expiration: expirationDate.toISOString()
       }
-      try {
-        const initiateResponse = await axios.post(initiateURI, initiateRequest)
-        expect(initiateResponse.status).toEqual(200)
-        expect(initiateResponse.data.currentState).toEqual('authorizationReceived')
-      } catch (err) {
-        console.log('err', err)
-        throw err
+
+      const initiateResponse = await axios.post(initiateURI, initiateRequest)
+      expect(initiateResponse.status).toEqual(200)
+      expect(initiateResponse.data.currentState).toEqual('authorizationReceived')
+    
+
+      // APPROVE PHASE
+      console.log('APPROVE PHASE')
+      const approveURI = `${baseUrl}/thirdpartyTransaction/${ids.transactionRequestId}/approve`
+      const approveRequest = {
+        authorizationResponse: {
+          signedPayloadType: 'FIDO',
+          signedPayload: validVerificationRequestSignedPayload
+        }
       }
+      const approveResponse = await axios.post(approveURI, approveRequest)
+      expect(approveResponse.status).toEqual(200)
+      expect(approveResponse.data.currentState).toEqual('transactionStatusReceived')
+      expect(approveResponse.data.transactionStatus.transactionRequestState).toEqual('ACCEPTED')
+
     })
   })
 })

@@ -91,29 +91,35 @@ could be derived.
 
 #### <a name='SignedAuthorization'></a>1.2.3 Signed Authorization
 
-Upon receiving the `POST /thirdpartyRequests/authorizations` request from the DFSP, the PISP confirms the details of the 
-transaction with the user, and asks the user to sign the `challenge` field. This API supports either (1) signing the challenge using a GENERIC public/private keypair, or (2) using the FIDO Attestation flow to securely sign the challenge on the user's device.
+Upon receiving the `POST /thirdpartyRequests/authorizations` request from the DFSP, the PISP presents the terms of the proposed
+transaction to the user, and asks them if they want to proceed. 
 
-##### <a name='SigningTheChallenge'></a>1.2.3.1 Signing the Challlenge
+The results of the authorization request are returned to the DFSP via the `PUT /thirdpartyRequests/authorizations/{ID}`, where
+the `{ID}` is the `authorizationRequestId`.
 
-Signing of the challenge can happen either 2 ways, depending on the `credentialType` of the `Consent.credential`
-1. If `GENERIC`, the private key created during the [credential registration process](../linking/README.md#162-registering-the-credential) is used along with the challenge as the inputs to a SHA256 HMAC function [todo: finish]
-2. If `FIDO`, the PISP asks the user to complete the [FIDO Assertion](https://webauthn.guide/#authentication) flow to sign the challenge. The `authenticationValue` is the `FIDOPublicKeyCredentialAssertion` returned from the FIDO Assertion process.
 
+If the user rejects the transaction, the following is the payload sent in `PUT /thirdpartyRequests/authorizations/{ID}`:
 
 ```json
-SignedPayloadGeneric {
-    "authenticationValue": "<base64 encoded utf8 - the signed challenge>",
-    "signedPayloadType": "GENERIC"
+{
+    "responseType": "REJECTED"
 }
 ```
 
-```json
-SignedPayloadFIDO {
-    "authenticationValue": FIDOPublicKeyCredentialAssertion,
-    "signedPayloadType": "FIDO"
-}
-```
+![1-2-3-rejected-authorization](../out/transfer/1-2-3-rejected-authorization.svg)
+
+
+Should the user accept the transaction, the payload will depend on the `credentialType` of the `Consent.credential`:
+
+1. If `FIDO`, the PISP asks the user to complete the [FIDO Assertion](https://webauthn.guide/#authentication) flow to sign the challenge. The `signedPayload.value` is the `FIDOPublicKeyCredentialAssertion` returned from the FIDO Assertion process. See [1.2.3.2 1.2.3.1 Signing the Challlenge FIDO](#SigningTheChallengeFIDO)
+
+2. If `GENERIC`, the private key created during the [credential registration process](../linking/README.md#162-registering-the-credential) is
+   used to sign the challenge. See [1.2.3.2 Signing the Challenge with a GENERIC Credential](#SigningTheChallengeGeneric)
+
+##### <a name='SigningTheChallengeFIDO'></a>1.2.3.1 Signing the Challlenge FIDO
+
+For a `FIDO` `credentialType`, the PISP asks the user to complete the [FIDO Assertion](https://webauthn.guide/#authentication) flow to sign the challenge. The `signedPayload.value` is the [`PublicKeyCredential`](https://w3c.github.io/webauthn/#publickeycredential) returned from the FIDO Assertion process, where the `ArrayBuffer`s are parsed as base64 encoded utf-8 strings. As a `PublicKeyCredential` is the response of both the FIDO Attesttation and Assertion, we define the following interface: `FIDOPublicKeyCredentialAssertion`:
+
 
 ```json
 FIDOPublicKeyCredentialAssertion {
@@ -129,8 +135,51 @@ FIDOPublicKeyCredentialAssertion {
 }
 ```
 
+The final payload of the `PUT /thirdpartyRequests/authorizations/{ID}` is then:
 
-![1-2-3-signed-authorization](../out/transfer/1-2-3-signed-authorization.svg)
+```json
+{
+    "responseType": "ACCEPTED",
+    "signedPayload": {
+        "signedPayloadType": "FIDO",
+        "value": FIDOPublicKeyCredentialAssertion
+    }
+}
+```
+
+![1-2-3-signed-authorization-fido](../out/transfer/1-2-3-signed-authorization-fido.svg)
+
+
+##### <a name='SigningTheChallengeGeneric'></a>1.2.3.2 Signing the Challenge with a GENERIC Credential
+
+For a `GENERIC` credential, the PISP will perform the following steps:
+
+<!-- TODO: need some more help formatting this nicely -->
+
+1. Given the inputs:
+    - _challenge_ (`authorizationRequest.challenge`) as a base64 encoded utf-8 string
+    - _privatekey_ (stored by the PISP when creating the credential), as a base64 encoded utf-8 string
+    - SHA256() is a one way hash function, as defined in [RFC6234](https://datatracker.ietf.org/doc/html/rfc6234)
+    - sign(data, key) is a signature function that takes some data and a private key to produce a signature
+2. let _challengeHash_ be the result of applying the SHA256() function over the _challenge_
+3. let _signature_ be the result of applying the sign() function to the _challengeHash_ and _privateKey_
+
+The response from the PISP to the DFSP then uses this _signature_ as the `signedPayload.value` field:
+
+
+The final payload of the `PUT /thirdpartyRequests/authorizations/{ID}` is then:
+
+```json
+{
+    "responseType": "ACCEPTED",
+    "signedPayload": {
+        "signedPayloadType": "GENERIC",
+        "value": "utf-8 base64 encoded signature"
+    }
+}
+```
+
+![1-2-3-signed-authorization-generic](../out/transfer/1-2-3-signed-authorization-generic.svg)
 
 
 #### <a name='ValidateAuthorization'></a>1.2.4 Validate Authorization

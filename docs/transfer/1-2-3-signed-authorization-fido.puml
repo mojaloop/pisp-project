@@ -1,6 +1,6 @@
 @startuml
 
-title Transfer: 1.2.3 Signed Authorization
+title Transfer: 1.2.3 Signed Authorization FIDO
 
 
 box "PISP"
@@ -15,8 +15,10 @@ end box
 == Agreement Phase ==
 note right of D1
   PISP looks up the ""transactionRequestId"" and
-  checks the quote with the user,
-  and uses the FIDO API to sign the 
+  checks the terms with the user.
+
+  If the user agrees to the terms, the PISP
+  uses the FIDO API on the user's device to sign the 
   the **""challenge""** string
 end note
 
@@ -25,17 +27,20 @@ rnote right of D1 #Light
 ""FSPIOP-Source: pispa""
 ""FSPIOP-Destination: dfspa""
 {
-  "signedPayloadType": "FIDO"
-  "authenticationValue": {
-    "id": "string",
-    "rawId": "string - base64 encoded utf-8",
-    "response": {
-      "authenticatorData": "string - base64 encoded utf-8",
-      "clientDataJSON": "string - base64 encoded utf-8",
-      "signature": "string - base64 encoded utf-8",
-      "userHandle": "string - base64 encoded utf-8",
-    },
-    "type": "public-key"
+  "responseType": "ACCEPTED"
+  "signedPayload": {
+    "signedPayloadType": "FIDO",
+    "value": {
+      "id": "string",
+      "rawId": "string - base64 encoded utf-8",
+      "response": {
+        "authenticatorData": "string - base64 encoded utf-8",
+        "clientDataJSON": "string - base64 encoded utf-8",
+        "signature": "string - base64 encoded utf-8",
+        "userHandle": "string - base64 encoded utf-8",
+      },
+      "type": "public-key"
+    }
   }
 }
 end note

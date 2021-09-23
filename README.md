@@ -145,8 +145,8 @@ Corresponding excerpt from package.json:
 
 ## Updating Thirdparty API Specification
 
-1. Edit `src/interface/api-template.yaml`.
+1. Update the version of `@mojaloop/api-snippets` in `package.json` to be the latest
 
-2. Wherever possible use snippets defined in https://github.com/mojaloop/api-snippets
+2. Edit `src/interface/api-template.yaml`.
 
-3. Run `npm run build:openapi` to bundle, render and validate the generated api.
+3. Run `npm run build:openapi` to bundle, render and validate the generated apis.

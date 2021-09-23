@@ -309,16 +309,6 @@ Should the signed challenge be invalid, the DFSP sends a `PUT /thirdpartyRequest
 
 ![3-4-2-bad-signed-challenge-auth-service](../out/transfer/3-4-2-bad-signed-challenge-auth-service.svg)
 
-## 3.5 User Rejects the terms of the Thirdparty Transaction Request
-
-In the case where the user rejects the terms of the Thirdparty Transaction Request, a PISP should send a `PUT /thirdpartyRequests/authorizations/{ID}` request with a `responseType` of `REJECTED`.
-
-> ***Note**: this is not considered an Error, so the DFSP should not send an `.../error` callback to the PISP*
-
-The DFSP shall respond with the callback `PATCH /thirdpartyRequests/transactions/{ID}`.
-
-![3-5-user-rejects-tpr](../out/transfer/3-5-user-rejects-tpr.svg)
-
 ## 3.5 Thirdparty Transaction Request Timeout
 
 If a PISP doesn't recieve either of the above callbacks within the `expiration` DateTime specified in the `POST /thirdpartyRequests/transactions`, it can assume the Thirdparty Transaction Request failed, and inform their user accordingly.

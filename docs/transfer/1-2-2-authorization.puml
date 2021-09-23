@@ -39,10 +39,9 @@ rnote left of D2 #Light
       }
     },
     "partyIdInfo": {
-      "partyIdType": "THIRD_PARTY_LINK",
-      "partyIdentifier": "qwerty-56789",
+      "partyIdType": "MSISDN",
+      "partyIdentifier": "123456789",
       "fspId": "dfspa"
-    },
     },
   },
   "amountType": "SEND",
@@ -106,19 +105,27 @@ rnote left of D2 #Light
   "authorizationRequestId": "33333333-0000-0000-0000-000000000000",
   "transactionRequestId": "00000000-0000-0000-0000-000000000000",
   "challenge": ""<base64 encoded binary - the encoded challenge>"",
-  "quote": {
-    "transferAmount": {"amount": "100", "currency": "USD"},
-    "payeeReceiveAmount": {"amount": "99", "currency": "USD"},
-    "payeeFspFee": {"amount": "1", "currency": "USD"},
-    "expiration": "2020-06-15T12:00:00.000",
-    "ilpPacket": "...",
-    "condition": "...",
+  "transferAmount": {"amount": "100", "currency": "USD"},
+  "payeeReceiveAmount": {"amount": "99", "currency": "USD"},
+  "fees": {"amount": "1", "currency": "USD"},
+  "payer": {
+    "partyIdType": "THIRD_PARTY_LINK",
+    "partyIdentifier": "qwerty-56789",
+    "fspId": "dfspa"
+  },
+  "payee": {
+    "partyIdInfo": {
+      "partyIdType": "MSISDN",
+      "partyIdentifier": "+4412345678",
+      "fspId": "dfspb"
+    }
   },
   "transactionType": {
     "scenario": "TRANSFER",
     "initiator": "PAYER",
     "initiatorType": "CONSUMER"
-  }
+  },
+  "expiration": "2020-06-15T12:00:00.000",
 }
 end note
 D2 -> S: ""POST /thirdpartyRequests/authorizations""

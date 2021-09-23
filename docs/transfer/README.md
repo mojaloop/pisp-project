@@ -111,7 +111,7 @@ If the user rejects the transaction, the following is the payload sent in `PUT /
 
 Should the user accept the transaction, the payload will depend on the `credentialType` of the `Consent.credential`:
 
-1. If `FIDO`, the PISP asks the user to complete the [FIDO Assertion](https://webauthn.guide/#authentication) flow to sign the challenge. The `signedPayload.value` is the `FIDOPublicKeyCredentialAssertion` returned from the FIDO Assertion process. See [1.2.3.2 1.2.3.1 Signing the Challlenge FIDO](#SigningTheChallengeFIDO)
+1. If `FIDO`, the PISP asks the user to complete the [FIDO Assertion](https://webauthn.guide/#authentication) flow to sign the challenge. The `signedPayload.value` is the `FIDOPublicKeyCredentialAssertion` returned from the FIDO Assertion process. See [1.2.3.1 Signing the Challlenge FIDO](#SigningTheChallengeFIDO)
 
 2. If `GENERIC`, the private key created during the [credential registration process](../linking/README.md#162-registering-the-credential) is
    used to sign the challenge. See [1.2.3.2 Signing the Challenge with a GENERIC Credential](#SigningTheChallengeGeneric)
@@ -213,21 +213,21 @@ Upon receiving this callback, the PISP knows that the transfer has completed suc
 
 ## <a name='RequestTransactionRequestStatus'></a>2. Request TransactionRequest Status
 
-A PISP can issue a `GET /thirdpartyRequests/{id}/transactions` to find the status of a transaction request.
+A PISP can issue a `GET /thirdpartyRequests/transactions/{ID}` to find the status of a transaction request.
 
 ![PISPTransferSimpleAPI](../out/transfer/get_transaction_request.svg)
 
-1. PISP issues a `GET /thirdpartyRequests/transactions/{id}`
+1. PISP issues a `GET /thirdpartyRequests/transactions/{ID}`
 1. Switch validates request and responds with `202 Accepted`
 1. Switch looks up the endpoint for `dfspa` for forwards to DFSP A
 1. DFSPA validates the request and responds with `202 Accepted`
 1. DFSP looks up the transaction request based on it's `transactionRequestId` (`123` in this case)
-    - If it can't be found, it calls `PUT /thirdpartyRequests/transactions/{id}/error` to the Switch, with a relevant error message
+    - If it can't be found, it calls `PUT /thirdpartyRequests/transactions/{ID}/error` to the Switch, with a relevant error message
 
 1. DFSP Ensures that the `FSPIOP-Source` header matches that of the originator of the `POST //thirdpartyRequests/transactions`
-    - If it does not match, it calls `PUT /thirdpartyRequests/transactions/{id}/error` to the Switch, with a relevant error message
+    - If it does not match, it calls `PUT /thirdpartyRequests/transactions/{ID}/error` to the Switch, with a relevant error message
 
-1. DFSP calls `PUT /thirdpartyRequests/transactions/{id}` with the following request body:
+1. DFSP calls `PUT /thirdpartyRequests/transactions/{ID}` with the following request body:
     ```
     {
       transactionId: <transactionId>

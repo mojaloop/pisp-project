@@ -366,17 +366,17 @@ services:
       - mojaloop-net
     restart: always
 
-  thirdparty-api-adapter:
+  thirdparty-api-svc:
     image: "mojaloop/thirdparty-api-svc:v11.21.0"
     # build:
-    #  context: https://github.com/mojaloop/thirdparty-api-adapter.git#chore/branch
+    #  context: https://github.com/mojaloop/thirdparty-api-svc.git#chore/branch
     #  dockerfile: ./Dockerfile
-    container_name: thirdparty-api-adapter
-    command: sh -c "/opt/thirdparty-api-svc/wait4/wait4.js thirdparty-api-adapter && npm run start"
+    container_name: thirdparty-api-svc
+    command: sh -c "/opt/thirdparty-api-svc/wait4/wait4.js thirdparty-api-svc && npm run start"
     ports:
       - "12000:3008"
     volumes:
-       - ./docker/thirdparty-api-adapter/default.json:/opt/thirdparty-api-svc/config/default.json
+       - ./docker/thirdparty-api-svc/default.json:/opt/thirdparty-api-svc/config/default.json
        - ./docker/wait4:/opt/thirdparty-api-svc/wait4
     networks:
       - mojaloop-net
@@ -449,7 +449,7 @@ services:
     depends_on:
       - dfspa-redis
       - dfspa-sdk-scheme-adapter
-      - thirdparty-api-adapter
+      - thirdparty-api-svc
     restart: always
     healthcheck:
       test: wget -q http://localhost:4005/health -O /dev/null || exit 1
@@ -478,7 +478,7 @@ services:
     depends_on:
       - dfspa-redis
       - dfspa-sdk-scheme-adapter
-      - thirdparty-api-adapter
+      - thirdparty-api-svc
     restart: always
     healthcheck:
       test: wget -q http://localhost:4006/health -O /dev/null || exit 1
@@ -549,7 +549,7 @@ services:
     depends_on:
       - dfspb-redis
       - dfspb-sdk-scheme-adapter
-      - thirdparty-api-adapter
+      - thirdparty-api-svc
     restart: always
     healthcheck:
       test: wget -q http://localhost:4005/health -O /dev/null || exit 1
@@ -578,7 +578,7 @@ services:
     depends_on:
       - dfspb-redis
       - dfspb-sdk-scheme-adapter
-      - thirdparty-api-adapter
+      - thirdparty-api-svc
     restart: always
     healthcheck:
       test: wget -q http://localhost:4006/health -O /dev/null || exit 1
@@ -648,7 +648,7 @@ services:
     depends_on:
       - pisp-redis
       - pisp-sdk-scheme-adapter
-      - thirdparty-api-adapter
+      - thirdparty-api-svc
     restart: always
     healthcheck:
       test: wget -q http://localhost:4005/health -O /dev/null || exit 1
@@ -679,7 +679,7 @@ services:
     depends_on:
       - pisp-redis
       - pisp-sdk-scheme-adapter
-      - thirdparty-api-adapter
+      - thirdparty-api-svc
     restart: always
     healthcheck:
       test: wget -q http://localhost:4006/health -O /dev/null || exit 1

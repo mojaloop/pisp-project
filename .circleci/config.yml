@@ -133,7 +133,7 @@ jobs:
             sleep 10
             docker-compose up -d ml-api-adapter
             sleep 10
-            docker-compose up -d thirdparty-api-adapter
+            docker-compose up -d thirdparty-api-svc
             sleep 10
             docker-compose up -d quoting-service
             sleep 10

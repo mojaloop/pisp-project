@@ -13,7 +13,7 @@
     "COLOR": true
   },
   "SHARED": {
-    "PEER_ENDPOINT": "thirdparty-api-adapter:3008",
+    "PEER_ENDPOINT": "thirdparty-api-svc:3008",
     "ALS_ENDPOINT": "account-lookup-service:4002",
     "QUOTES_ENDPOINT": "quoting-service:3002",
     "TRANSFERS_ENDPOINT": "ml-api-adapter:3000",

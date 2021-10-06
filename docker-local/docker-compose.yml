@@ -275,42 +275,42 @@ services:
       start_period: 40s
       interval: 30s
 
-  participant-list-service:
-    image: mojaloop/ml-testing-toolkit:v13.1.0
-    container_name: participant-list-service
-    volumes:
-      - "./participant-list-service/spec_files:/opt/mojaloop-testing-toolkit/spec_files"
-      - "./participant-list-service/secrets:/opt/mojaloop-testing-toolkit/secrets"
-    ports:
-      - "25000:5000"
-      - "25050:5050"
-    environment:
-      - AUTH_ENABLED=FALSE
-    command: npm start
-    depends_on:
-      - mongo
-    networks:
-      - mojaloop-net
+  # participant-list-service:
+  #   image: mojaloop/ml-testing-toolkit:v13.1.0
+  #   container_name: participant-list-service
+  #   volumes:
+  #     - "./participant-list-service/spec_files:/opt/mojaloop-testing-toolkit/spec_files"
+  #     - "./participant-list-service/secrets:/opt/mojaloop-testing-toolkit/secrets"
+  #   ports:
+  #     - "25000:5000"
+  #     - "25050:5050"
+  #   environment:
+  #     - AUTH_ENABLED=FALSE
+  #   command: npm start
+  #   depends_on:
+  #     - mongo
+  #   networks:
+  #     - mojaloop-net
 
-  mongo:
-    image: mongo
-    ports:
-      - "27018:27017"
+  # mongo:
+  #   image: mongo
+  #   ports:
+  #     - "27018:27017"
 
-  participant-list-service-ui:
-    image: mojaloop/ml-testing-toolkit-ui:v13.0.1
-    container_name: participant-list-service-testing-ui
-    ports:
-      - "26060:6060"
-    environment:
-      - API_BASE_URL=http://localhost:25050
-      - AUTH_ENABLED=FALSE
-      - TP_SIM_URL=http://localhost:25000
-    command:
-      - sh
-      - /usr/share/nginx/start.sh
-    networks:
-      - mojaloop-net
+  # participant-list-service-ui:
+  #   image: mojaloop/ml-testing-toolkit-ui:v13.0.1
+  #   container_name: participant-list-service-testing-ui
+  #   ports:
+  #     - "26060:6060"
+  #   environment:
+  #     - API_BASE_URL=http://localhost:25050
+  #     - AUTH_ENABLED=FALSE
+  #     - TP_SIM_URL=http://localhost:25000
+  #   command:
+  #     - sh
+  #     - /usr/share/nginx/start.sh
+  #   networks:
+  #     - mojaloop-net
 
   auth-service:
     image: mojaloop/auth-service:v11.10.0
@@ -367,7 +367,7 @@ services:
     restart: always
 
   thirdparty-api-adapter:
-    image: "mojaloop/thirdparty-api-svc:v11.20.0"
+    image: "mojaloop/thirdparty-api-svc:v11.21.0"
     # build:
     #  context: https://github.com/mojaloop/thirdparty-api-adapter.git#chore/branch
     #  dockerfile: ./Dockerfile

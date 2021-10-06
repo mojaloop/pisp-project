@@ -40,7 +40,7 @@
     "PISP_BACKEND_URI": "pisp-backend:11000",
     "PISP_BACKEND_HTTP_SCHEME": "http",
     "PISP_BACKEND_SIGN_AUTHORIZATION_PATH": "signchallenge",
-    "SDK_OUTGOING_URI": "pisp-sdk-scheme-adapter:7002",
+    "SDK_OUTGOING_URI": "pisp-sdk-scheme-adapter:4001",
     "SDK_OUTGOING_HTTP_SCHEME": "http",
     "SDK_OUTGOING_PARTIES_INFORMATION_PATH": "parties/{Type}/{ID}/{SubId}",
     "SDK_REQUEST_TO_PAY_TRANSFER_URI": "requestToPay",

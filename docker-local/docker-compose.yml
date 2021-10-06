@@ -7,7 +7,7 @@ networks:
 services:
   ## Switch
   central-ledger:
-    image: mojaloop/central-ledger:v13.11.1
+    image: mojaloop/central-ledger:v13.14.1
     container_name: central-ledger
     command: sh -c "/opt/central-ledger/wait4/wait4.js central-ledger && node src/api/index.js"
     ports:
@@ -313,9 +313,9 @@ services:
       - mojaloop-net
 
   auth-service:
-    image: mojaloop/auth-service:v11.6.0
-    #build:
-    #  context: https://github.com/username/auth-service.git#feat/branch
+    image: mojaloop/auth-service:v11.10.0
+    # build:
+    #  context: /home/lew/developer/mojaloop/auth-service
     #  dockerfile: ./Dockerfile
     command: sh -c "/opt/auth-service/wait4/wait4.js auth-service && npm run migrate && npm run start"
     container_name: auth-service
@@ -331,6 +331,7 @@ services:
       - ./docker/auth-service/default.json:/opt/auth-service/config/integration.json
     environment:
       - NODE_ENV=integration
+      - LOG_LEVEL=debug
     healthcheck:
       test: wget -q http://localhost:4004/health -O /dev/null || exit 1
       timeout: 20s
@@ -366,17 +367,17 @@ services:
     restart: always
 
   thirdparty-api-adapter:
-    image: "mojaloop/thirdparty-api-adapter:v11.19.1"
+    image: "mojaloop/thirdparty-api-svc:v11.20.0"
     # build:
     #  context: https://github.com/mojaloop/thirdparty-api-adapter.git#chore/branch
     #  dockerfile: ./Dockerfile
     container_name: thirdparty-api-adapter
-    command: sh -c "/opt/thirdparty-api-adapter/wait4/wait4.js thirdparty-api-adapter && npm run start"
+    command: sh -c "/opt/thirdparty-api-svc/wait4/wait4.js thirdparty-api-adapter && npm run start"
     ports:
       - "12000:3008"
     volumes:
-       - ./docker/thirdparty-api-adapter/default.json:/opt/thirdparty-api-adapter/config/default.json
-       - ./docker/wait4:/opt/thirdparty-api-adapter/wait4
+       - ./docker/thirdparty-api-adapter/default.json:/opt/thirdparty-api-svc/config/default.json
+       - ./docker/wait4:/opt/thirdparty-api-svc/wait4
     networks:
       - mojaloop-net
     depends_on:
@@ -391,7 +392,7 @@ services:
 
   ## DFSP A
   dfspa-backend:
-    image: "mojaloop/mojaloop-simulator:v11.3.0.8-pisp"
+    image: "mojaloop/mojaloop-simulator:v11.3.0.10-pisp"
     # build:
     #   context: ../../mojaloop-simulator
     #   dockerfile: ./Dockerfile
@@ -428,9 +429,9 @@ services:
     restart: always
 
   dfspa-thirdparty-scheme-adapter-inbound:
-    image: "mojaloop/thirdparty-scheme-adapter:v11.41.0"
-    #build:
-    #  context: https://github.com/username/thirdparty-scheme-adapter.git#feat/branch
+    image: "mojaloop/thirdparty-scheme-adapter:v11.55.0"
+    # build:
+    #  context: https://github.com/mojaloop/thirdparty-scheme-adapter.git#feat/deterministic-test-consentids
     #  dockerfile: ./docker/Dockerfile
     container_name: dfspa-thirdparty-scheme-adapter-inbound
     environment:
@@ -458,9 +459,9 @@ services:
       interval: 30s
 
   dfspa-thirdparty-scheme-adapter-outbound:
-    image: "mojaloop/thirdparty-scheme-adapter:v11.41.0"
-    #build:
-    #  context: https://github.com/username/thirdparty-scheme-adapter.git#feat/branch
+    image: "mojaloop/thirdparty-scheme-adapter:v11.55.0"
+    # build:
+    #  context: https://github.com/mojaloop/thirdparty-scheme-adapter.git#feat/deterministic-test-consentids
     #  dockerfile: ./docker/Dockerfile
     container_name: dfspa-thirdparty-scheme-adapter-outbound
     environment:
@@ -627,7 +628,7 @@ services:
     restart: always
 
   pisp-thirdparty-scheme-adapter-inbound:
-    image: "mojaloop/thirdparty-scheme-adapter:v11.41.0"
+    image: "mojaloop/thirdparty-scheme-adapter:v11.54.0"
     #build:
     #  context: https://github.com/username/thirdparty-scheme-adapter.git#feat/branch
     #  dockerfile: ./docker/Dockerfile
@@ -657,7 +658,7 @@ services:
       interval: 30s
 
   pisp-thirdparty-scheme-adapter-outbound:
-    image: "mojaloop/thirdparty-scheme-adapter:v11.41.0"
+    image: "mojaloop/thirdparty-scheme-adapter:v11.54.0"
     #build:
     #  context: https://github.com/username/thirdparty-scheme-adapter.git#feat/branch
     #  dockerfile: ./docker/Dockerfile
@@ -665,6 +666,7 @@ services:
     environment:
       - NODE_ENV=e2e
       - DFSP_ID=pisp
+      - LOG_LEVEL=debug
     command: sh -c "/opt/thirdparty-scheme-adapter/wait4/wait4.js pisp-thirdparty-scheme-adapter && npm run start:outbound"
     volumes:
       - "./pisp/secrets:/opt/thirdparty-scheme-adapter/secrets"

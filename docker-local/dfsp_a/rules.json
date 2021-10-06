@@ -423,7 +423,39 @@
       "params": {
         "statusCode": 200,
         "body": {
-          "isValid": true
+          "isValid": true,
+          "payerPartyIdInfo": {
+            "partyIdType": "MSISDN",
+            "partyIdentifier": "123456789",
+            "fspId": "dfspa"
+          },
+          "consentId": "46876aac-5db8-4353-bb3c-a6a905843ce7"
+        }
+      }
+    }
+  },
+  {
+    "ruleId": 13,
+    "description": "stores the final consent",
+    "conditions": {
+      "all": [
+        {
+          "fact": "path",
+          "operator": "equal",
+          "value": "/store/consent"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "POST"
+        }
+      ]
+    },
+    "event": {
+      "type": "FIXED_CALLBACK",
+      "params": {
+        "statusCode": 200,
+        "body": {
         }
       }
     }

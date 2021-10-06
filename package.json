@@ -80,7 +80,10 @@
   "homepage": "https://github.com/mojaloop/pisp#readme",
   "dependencies": {
     "@mojaloop/sdk-standard-components": "^12.0.1",
+    "atob": "^2.1.2",
     "axios": "^0.21.1",
+    "btoa": "^1.2.1",
+    "cbor": "^8.0.0",
     "chalk": "^4.1.0"
   },
   "devDependencies": {
@@ -104,7 +107,7 @@
     "jest-cucumber": "^2.0.11",
     "jest-junit": "10.0.0",
     "lint-staged": "^10.2.3",
-    "ml-bootstrap": "0.3.20",
+    "ml-bootstrap": "0.3.21",
     "newman": "^5.2.2",
     "node-plantuml": "^0.9.0",
     "plantuml-encoder": "^1.4.0",

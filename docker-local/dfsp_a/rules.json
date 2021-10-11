@@ -117,7 +117,7 @@
           "fact": "body",
           "operator": "equal",
           "value": "b51ec534-ee48-4575-b6a9-ead2955b8069",
-          "path": ".consentRequestId"
+          "path": "$.consentRequestId"
         }
       ]
     },
@@ -156,7 +156,7 @@
           "fact": "body",
           "operator": "equal",
           "value": "c51ec534-ee48-4575-b6a9-ead2955b8069",
-          "path": ".consentRequestId"
+          "path": "$.consentRequestId"
         }
       ]
     },
@@ -192,7 +192,7 @@
           "fact": "body",
           "operator": "equal",
           "value": "d51ec534-ee48-4575-b6a9-ead2955b8069",
-          "path": ".consentRequestId"
+          "path": "$.consentRequestId"
         }
       ]
     },
@@ -230,7 +230,7 @@
           "fact": "body",
           "operator": "equal",
           "value": "e51ec534-ee48-4575-b6a9-ead2955b8069",
-          "path": ".consentRequestId"
+          "path": "$.consentRequestId"
         }
       ]
     },
@@ -268,7 +268,7 @@
           "fact": "body",
           "operator": "equal",
           "value": "f51ec534-ee48-4575-b6a9-ead2955b8069",
-          "path": ".consentRequestId"
+          "path": "$.consentRequestId"
         }
       ]
     },
@@ -306,7 +306,7 @@
           "fact": "body",
           "operator": "equal",
           "value": "f61ec534-ee48-4575-b6a9-ead2955b8069",
-          "path": ".consentRequestId"
+          "path": "$.consentRequestId"
         }
       ]
     },
@@ -344,7 +344,7 @@
           "fact": "body",
           "operator": "equal",
           "value": "f71ec534-ee48-4575-b6a9-ead2955b8069",
-          "path": ".consentRequestId"
+          "path": "$.consentRequestId"
         }
       ]
     },

@@ -12,7 +12,7 @@ const baseRequestConfig = {
   }
 }
 
-jest.setTimeout(15 * 1000) // 10 seconds
+jest.setTimeout(15 * 1000) // 15 seconds
 
 describe('test', () => {
   it('Calls `POST /participants/{Type}/{ID}`', async () => {

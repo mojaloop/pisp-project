@@ -9,8 +9,6 @@
 import axios from "axios"
 import TestEnv from "./TestEnv"
 
-jest.setTimeout(15 * 1000) // 15 seconds
-
 
 const atob = require('atob')
 const btoa = require('btoa')

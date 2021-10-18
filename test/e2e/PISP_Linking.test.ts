@@ -302,6 +302,7 @@ describe('Account Linking', (): void => {
       expect(consentRequestsResponse.data).toEqual(expectedResponse)
     })
 
+    // TODO: how do we translate this test to the TTK?
     it('created a CONSENT entry with the CONSENT Oracle', async (): Promise<void> => {
       const participantsURI = `${TestEnv.baseUrls.consentOracle}/participants/CONSENT/${consentId}`
       const options = {

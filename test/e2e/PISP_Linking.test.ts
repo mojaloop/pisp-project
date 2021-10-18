@@ -107,7 +107,7 @@ const linkingRequestConsentPassCredentialBody = {
 }
 
 describe('Account Linking', (): void => {
-  describe('Happy Path - Web', (): void => {
+  describe.skip('Happy Path - Web', (): void => {
     let consentId: string
 
     it('/linking/request-consent should be success', async (): Promise<void> => {
@@ -224,7 +224,7 @@ describe('Account Linking', (): void => {
   // so we can only run one set of happy path for now
   // until we have either 1) route to delete consents or 2) more valid
   // test credentials
-  describe.skip('Happy Path - OTP', (): void => {
+  describe('Happy Path - OTP', (): void => {
     let consentId: string
 
     it('/linking/request-consent should be success', async (): Promise<void> => {
@@ -275,6 +275,9 @@ describe('Account Linking', (): void => {
       expect(consentRequestsResponse.data.currentState).toEqual('consentReceivedAwaitingCredential')
       expect(consentRequestsResponse.data.consent).toEqual(expectedResponse)
 
+      console.log('Consent is:', JSON.stringify(consentRequestsResponse.data.consent))
+
+
       // store the consentId for future assertion
       consentId = consentRequestsResponse.data.consent.consentId
     })
@@ -285,8 +288,15 @@ describe('Account Linking', (): void => {
 
       const linkingRequestConsentPassCredentialRequest = {
         credential: {
+          // Newly generated credential from front end
           payload: {
-            ...linkingRequestConsentPassCredentialBody
+            "id": "UMyM71BqZ5G-NWnD1k3RtR6Ry_zQPLEh_ntU3zOO_3dur80eHxDOqJSvc83FnDczRTdv6hVCZ86Kuynrz5OKrw",
+            "rawId": "UMyM71BqZ5G+NWnD1k3RtR6Ry/zQPLEh/ntU3zOO/3dur80eHxDOqJSvc83FnDczRTdv6hVCZ86Kuynrz5OKrw==",
+            "response": {
+              "attestationObject": "o2NmbXRoZmlkby11MmZnYXR0U3RtdKJjc2lnWEgwRgIhALlL18WMrdV+eVDKRoNgb3iTDNxANrbC93w/sG6BDcWEAiEA1WGNy/sZPJcboqHD8YgqXjxZni9ZT4M1EL+O+gRFWSxjeDVjgVkCwTCCAr0wggGloAMCAQICBAsFzVMwDQYJKoZIhvcNAQELBQAwLjEsMCoGA1UEAxMjWXViaWNvIFUyRiBSb290IENBIFNlcmlhbCA0NTcyMDA2MzEwIBcNMTQwODAxMDAwMDAwWhgPMjA1MDA5MDQwMDAwMDBaMG4xCzAJBgNVBAYTAlNFMRIwEAYDVQQKDAlZdWJpY28gQUIxIjAgBgNVBAsMGUF1dGhlbnRpY2F0b3IgQXR0ZXN0YXRpb24xJzAlBgNVBAMMHll1YmljbyBVMkYgRUUgU2VyaWFsIDE4NDkyOTYxOTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABCEab7G1iSXLCsEYX3wq46i0iBAUebEe//VV4H2XUb0rF2olLe5Z7OOFmSBbs+oov4/X/H2nXAVCcq5IWOWR/FqjbDBqMCIGCSsGAQQBgsQKAgQVMS4zLjYuMS40LjEuNDE0ODIuMS4xMBMGCysGAQQBguUcAgEBBAQDAgQwMCEGCysGAQQBguUcAQEEBBIEEBSaICGO9kEzlriB+NW38fUwDAYDVR0TAQH/BAIwADANBgkqhkiG9w0BAQsFAAOCAQEAPv6j3z0q4HJXj34E0N1aS2jbAa/oYy4YtOC4c0MYkRlsGEvrwdUzoj13i7EECMG5qkFOdXaFWwk2lxizSK9c72ywMIZy1h+4vZuGoQqmgs6MLU7wkO1QVBj+U9TOHmJ6KPNyAwlY0I/6WRvEGIDhjooM7RqFgH+QlnFBegtFMhWzjcFHKiRJdkC06Gv+xPFUY5uFuOiAFJY2JDg1WQEr/Id8C0TsfaeU0gZUsprcHbpcUHvwym3zUrzN3nQNLqfhCCSizjlPkE0dmUFeOnxFtf4oepvL3GmOi9zVtHmKXO013oo1CQIKFLcmv785p0QHnLmPW53KCbfD67y9oq9pA2hhdXRoRGF0YVjESZYN5YgOjGh0NBcPZHZgW4/krrmihjLHmVzzuoMdl2NBAAAAAAAAAAAAAAAAAAAAAAAAAAAAQFDMjO9QameRvjVpw9ZN0bUekcv80DyxIf57VN8zjv93bq/NHh8QzqiUr3PNxZw3M0U3b+oVQmfOirsp68+Tiq+lAQIDJiABIVggy/NJCW5QMqfxRdvjCT6PeJMC/enM2b/83KeuHJAwENAiWCCLLEUZifuehFbVabqd/Cni7GvAEZikU3J6Q0+b+CXnqg==",
+              "clientDataJSON": "eyJjaGFsbGVuZ2UiOiJORGxqT1RjeFltWXdZVFExWm1Ka1pUa3pOek13Tm1SalpUazNZVFl6TURjM01HSmtZamMzWW1FellqWm1OemcwWkRJMU5HWTJPR0UwTm1Sa05EQmhNZyIsImNsaWVudEV4dGVuc2lvbnMiOnt9LCJoYXNoQWxnb3JpdGhtIjoiU0hBLTI1NiIsIm9yaWdpbiI6Imh0dHA6Ly9sb2NhbGhvc3Q6ODA4MCIsInR5cGUiOiJ3ZWJhdXRobi5jcmVhdGUifQ=="
+            },
+            "type": "public-key"
           }
         }
       }
@@ -303,7 +313,7 @@ describe('Account Linking', (): void => {
     })
 
     // TODO: how do we translate this test to the TTK?
-    it('created a CONSENT entry with the CONSENT Oracle', async (): Promise<void> => {
+    it.skip('created a CONSENT entry with the CONSENT Oracle', async (): Promise<void> => {
       const participantsURI = `${TestEnv.baseUrls.consentOracle}/participants/CONSENT/${consentId}`
       const options = {
         headers: {
@@ -332,7 +342,7 @@ describe('Account Linking', (): void => {
     })
   })
 
-  describe('PISP Linking flow - Error @ consent request stage', (): void => {
+  describe.skip('PISP Linking flow - Error @ consent request stage', (): void => {
     it('validateRequest should be errored', async (done): Promise<void> => {
       // validateRequest is a backend call to a DFSP.
       // dfspA's simulator rules throws an error on a request containing the
@@ -360,7 +370,7 @@ describe('Account Linking', (): void => {
     })
   })
 
-  describe('PISP Linking flow - Error @ consent request authenticate stage', (): void => {
+  describe.skip('PISP Linking flow - Error @ consent request authenticate stage', (): void => {
     it('request consent should be success', async (): Promise<void> => {
       // proceed with web happy flow using consentRequestID
       // b51ec534-ee48-4575-b6a9-ead2955b8069
@@ -411,7 +421,7 @@ describe('Account Linking', (): void => {
     })
   })
 
-  describe('PISP Linking flow - Error @ consent request register credential stage', (): void => {
+  describe.skip('PISP Linking flow - Error @ consent request register credential stage', (): void => {
     it('request consent should be success', async (): Promise<void> => {
       // proceed with web happy flow using consentRequestID
       // b51ec534-ee48-4575-b6a9-ead2955b8069

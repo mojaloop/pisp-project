@@ -276,7 +276,7 @@ services:
       interval: 30s
 
   auth-service:
-    image: mojaloop/auth-service:v11.10.0
+    image: mojaloop/auth-service:v11.11.0
     # build:
     #  context: /home/lew/developer/mojaloop/auth-service
     #  dockerfile: ./Dockerfile

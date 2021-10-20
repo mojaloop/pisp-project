@@ -276,7 +276,7 @@ services:
       interval: 30s
 
   auth-service:
-    image: mojaloop/auth-service:v11.10.0
+    image: mojaloop/auth-service:v11.11.0
     # build:
     #  context: /home/lew/developer/mojaloop/auth-service
     #  dockerfile: ./Dockerfile
@@ -688,6 +688,40 @@ services:
       - API_BASE_URL=http:/localhost:5050
       - AUTH_ENABLED=FALSE
       - TP_SIM_URL=http://localhost:15000
+    command:
+      - sh
+      - /usr/share/nginx/start.sh
+    networks:
+      - mojaloop-net
+
+
+## Test Runner - ttk
+  test-runner:
+    image: mojaloop/ml-testing-toolkit:v13.5.2
+    #image: mojaloop-testing-toolkit:local
+    #build:
+    #  context: .
+    #  target: builder
+    volumes:
+      - "./test-runner/spec_files:/opt/mojaloop-testing-toolkit/spec_files"
+      # - "./secrets:/opt/mojaloop-testing-toolkit/secrets"
+    ports:
+      - "35000:5000"
+      - "35050:5050"
+    command:
+      - sh
+      - -c
+      - "npm start"
+    networks:
+      - mojaloop-net
+
+  test-runner-ui:
+    image: mojaloop/ml-testing-toolkit-ui:v13.5.3
+    ports:
+      - "26060:6060"
+    environment:
+      - API_BASE_URL=http://localhost:35050
+      - AUTH_ENABLED=FALSE
     command:
       - sh
       - /usr/share/nginx/start.sh

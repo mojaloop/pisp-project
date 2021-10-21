@@ -876,6 +876,176 @@
               }
             ]
           }
+        },
+        {
+          "id": 4,
+          "description": "party lookup",
+          "apiVersion": {
+            "minorVersion": 1,
+            "majorVersion": 0,
+            "type": "thirdparty_sdk_outbound"
+          },
+          "operationPath": "/thirdpartyTransaction/partyLookup",
+          "path": "/thirdpartyTransaction/partyLookup",
+          "method": "post",
+          "body": {
+            "payee": {
+              "partyIdType": "MSISDN",
+              "partyIdentifier": "987654321"
+            },
+            "transactionRequestId": "c2470148-1be2-4c0b-aece-aa8dcb92a6cc"
+          },
+          "url": "http://pisp-thirdparty-scheme-adapter-outbound:4006",
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "response",
+                "exec": [
+                  "const expected = {",
+                  "  \"party\": {",
+                  "    \"partyIdInfo\": {",
+                  "      \"partyIdType\": \"MSISDN\",",
+                  "      \"partyIdentifier\": \"987654321\",",
+                  "      \"fspId\": \"dfspb\"",
+                  "    },",
+                  "    \"personalInfo\": {",
+                  "      \"complexName\": {",
+                  "        \"firstName\": \"Bob\",",
+                  "        \"middleName\": \"O\",",
+                  "        \"lastName\": \"Babirusa\"",
+                  "      },",
+                  "      \"dateOfBirth\": \"1970-01-01\"",
+                  "    },",
+                  "    \"name\": \"Bob Babirusa\"",
+                  "  },",
+                  "  \"currentState\": \"partyLookupSuccess\"",
+                  "}",
+                  "",
+                  "expect(response.body).to.deep.equal(expected)"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "id": 5,
+          "description": "initiate third party transaction request",
+          "apiVersion": {
+            "minorVersion": 1,
+            "majorVersion": 0,
+            "type": "thirdparty_sdk_outbound"
+          },
+          "operationPath": "/thirdpartyTransaction/{ID}/initiate",
+          "path": "/thirdpartyTransaction/c2470148-1be2-4c0b-aece-aa8dcb92a6cc/initiate",
+          "method": "post",
+          "params": {
+            "ID": "c2470148-1be2-4c0b-aece-aa8dcb92a6cc"
+          },
+          "body": {
+            "consentId": "2acf1dfa-ce45-486e-b19e-ae4ad9804a63",
+            "payee": {
+              "partyIdInfo": {
+                "partyIdType": "MSISDN",
+                "partyIdentifier": "987654321",
+                "fspId": "dfspb"
+              }
+            },
+            "payer": {
+              "partyIdType": "THIRD_PARTY_LINK",
+              "partyIdentifier": "244431e2-7a56-40c6-814c-932631760fa9",
+              "fspId": "dfspa"
+            },
+            "amountType": "SEND",
+            "amount": {
+              "amount": "100",
+              "currency": "USD"
+            },
+            "transactionType": {
+              "scenario": "TRANSFER",
+              "initiator": "PAYER",
+              "initiatorType": "CONSUMER"
+            },
+            "expiration": "{$requestVariables.expiration}"
+          },
+          "url": "http://pisp-thirdparty-scheme-adapter-outbound:4006",
+          "tests": {
+            "assertions": [
+              {
+                "id": 2,
+                "description": "dynamic fields",
+                "exec": [
+                  "expect(response.body.authorization.expiration).to.match(/[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}Z/)",
+                  "",
+                  "expect(response.body.authorization.authorizationRequestId).to.match(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/)"
+                ]
+              },
+              {
+                "id": 1,
+                "description": "response body",
+                "exec": [
+                  "const expected = {",
+                  "  \"authorization\": {",
+                  "    \"transactionRequestId\": \"c2470148-1be2-4c0b-aece-aa8dcb92a6cc\",",
+                  "    \"transferAmount\": {",
+                  "      \"amount\": \"100\",",
+                  "      \"currency\": \"USD\"",
+                  "    },",
+                  "    \"payeeReceiveAmount\": {",
+                  "      \"amount\": \"100\",",
+                  "      \"currency\": \"USD\"",
+                  "    },",
+                  "    \"fees\": {",
+                  "      \"amount\": \"0\",",
+                  "      \"currency\": \"USD\"",
+                  "    },",
+                  "    \"payer\": {",
+                  "      \"partyIdType\": \"THIRD_PARTY_LINK\",",
+                  "      \"partyIdentifier\": \"244431e2-7a56-40c6-814c-932631760fa9\",",
+                  "      \"fspId\": \"dfspa\"",
+                  "    },",
+                  "    \"payee\": {",
+                  "      \"partyIdInfo\": {",
+                  "        \"partyIdType\": \"MSISDN\",",
+                  "        \"partyIdentifier\": \"987654321\",",
+                  "        \"fspId\": \"dfspb\"",
+                  "      }",
+                  "    },",
+                  "    \"transactionType\": {",
+                  "      \"scenario\": \"TRANSFER\",",
+                  "      \"initiator\": \"PAYER\",",
+                  "      \"initiatorType\": \"CONSUMER\"",
+                  "    },",
+                  "    \"challenge\": \"OWZhYjAxZTcwYjU4YzRhMzRmOWQwNzBmZjllZDFiNjc2NWVhMzA1NGI1MWZjZThjZGFjNDEyZDBmNmM2MWFhMQ\"",
+                  "  },",
+                  "  \"currentState\": \"authorizationReceived\"",
+                  "}",
+                  "",
+                  "// Test these dynamic variables separately",
+                  "delete response.body.authorization.authorizationRequestId",
+                  "delete response.body.authorization.expiration",
+                  "",
+                  "",
+                  "expect(response.body).to.deep.equal(expected)"
+                ]
+              }
+            ]
+          },
+          "scriptingEngine": "javascript",
+          "scripts": {
+            "postRequest": {
+              "exec": [
+                ""
+              ]
+            },
+            "preRequest": {
+              "exec": [
+                "const expirationDate = new Date();",
+                "expirationDate.setHours(expirationDate.getHours() + 5);",
+                "requestVariables.expiration = expirationDate.toISOString()"
+              ]
+            }
+          }
         }
       ]
     }

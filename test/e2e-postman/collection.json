@@ -1046,6 +1046,58 @@
               ]
             }
           }
+        },
+        {
+          "id": 6,
+          "description": "approve third party authorization request",
+          "apiVersion": {
+            "minorVersion": 1,
+            "majorVersion": 0,
+            "type": "thirdparty_sdk_outbound"
+          },
+          "operationPath": "/thirdpartyTransaction/{ID}/approve",
+          "path": "/thirdpartyTransaction/c2470148-1be2-4c0b-aece-aa8dcb92a6cc/approve",
+          "method": "post",
+          "params": {
+            "ID": "c2470148-1be2-4c0b-aece-aa8dcb92a6cc"
+          },
+          "body": {
+            "authorizationResponse": {
+              "signedPayloadType": "FIDO",
+              "signedPayload": {
+                "id": "DVFXZuLI5po4eDNPCH7Vtrjan5h-yGxeAUzS3QH3uMAP8O-7xg0AObz0mdTRy7veAflN201NlqoI-lByRug5ow",
+                "rawId": "DVFXZuLI5po4eDNPCH7Vtrjan5h+yGxeAUzS3QH3uMAP8O+7xg0AObz0mdTRy7veAflN201NlqoI+lByRug5ow==",
+                "response": {
+                  "authenticatorData": "y1+ZGYWlLBhlFSbz3enn0Sh1b1jKp63+LttwL5cw3XQBAAAAIw==",
+                  "clientDataJSON": "eyJjaGFsbGVuZ2UiOiJUMWRhYUZscVFYaGFWR04zV1dwVk5GbDZVbWhOZWxKdFQxZFJkMDU2UW0xYWFteHNXa1JHYVU1cVl6Sk9WMVpvVFhwQk1VNUhTVEZOVjFwcVdsUm9hbHBIUm1wT1JFVjVXa1JDYlU1dFRUSk5WMFpvVFZFIiwiY2xpZW50RXh0ZW5zaW9ucyI6e30sImhhc2hBbGdvcml0aG0iOiJTSEEtMjU2Iiwib3JpZ2luIjoiaHR0cHM6Ly9zYW5kYm94Lm1vamFsb29wLmlvIiwidHlwZSI6IndlYmF1dGhuLmdldCJ9",
+                  "signature": "MEQCIEonIaMwgHySe/1apQScRxp8GjFNwy9Ajykus3pVWX15AiAUIywSDZWWACclQ0ue47QbkTPb62zg1sR8uY9pNHG6jA=="
+                },
+                "type": "public-key"
+              }
+            }
+          },
+          "url": "http://pisp-thirdparty-scheme-adapter-outbound:4006",
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "response",
+                "exec": [
+                  "delete response.body.transactionStatus.transactionId",
+                  "",
+                  "const expected = {",
+                  "  \"transactionStatus\": {",
+                  "    \"transactionRequestState\": \"ACCEPTED\",",
+                  "    \"transactionState\": \"COMPLETED\"",
+                  "  },",
+                  "  \"currentState\": \"transactionStatusReceived\"",
+                  "}",
+                  "",
+                  "expect(response.body).to.deep.equal(expected)"
+                ]
+              }
+            ]
+          }
         }
       ]
     }

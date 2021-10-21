@@ -241,7 +241,7 @@ describe('pispLinkAndTransfer', () => {
       const approveResponse = await axios.post(approveURI, approveRequest)
       expect(approveResponse.status).toEqual(200)
       expect(approveResponse.data.currentState).toEqual('transactionStatusReceived')
-      console.log('approve repsonse:', approveResponse.data)
+      console.log('approve response:', approveResponse.data)
       expect(approveResponse.data.transactionStatus.transactionRequestState).toEqual('ACCEPTED')
 
     })

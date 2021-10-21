@@ -171,8 +171,8 @@ jobs:
       - run:
           name: run the tests with the TTK-cli
           command: |
-          cd ./docker-local/
-          docker-compose -f ./docker-compose.ttk-cli.yml up ttk-cli
+            cd ./docker-local/
+            docker-compose -f ./docker-compose.ttk-cli.yml up ttk-cli
       - store_artifacts:
           path: /tmp/test/results
           prefix: test

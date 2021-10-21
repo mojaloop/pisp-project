@@ -39,9 +39,9 @@ export const validVerificationRequestSignedPayload = {
   "id": "DVFXZuLI5po4eDNPCH7Vtrjan5h-yGxeAUzS3QH3uMAP8O-7xg0AObz0mdTRy7veAflN201NlqoI-lByRug5ow",
   "rawId": "DVFXZuLI5po4eDNPCH7Vtrjan5h+yGxeAUzS3QH3uMAP8O+7xg0AObz0mdTRy7veAflN201NlqoI+lByRug5ow==",
   "response": {
-    "authenticatorData": "y1+ZGYWlLBhlFSbz3enn0Sh1b1jKp63+LttwL5cw3XQBAAAAGw==",
-    "clientDataJSON": "eyJjaGFsbGVuZ2UiOiJPV1poWWpBeFpUY3dZalU0WXpSaE16Um1PV1F3TnpCbVpqbGxaREZpTmpjMk5XVmhNekExTkdJMU1XWmpaVGhqWkdGak5ERXlaREJtTm1NMk1XRmhNUSIsImNsaWVudEV4dGVuc2lvbnMiOnt9LCJoYXNoQWxnb3JpdGhtIjoiU0hBLTI1NiIsIm9yaWdpbiI6Imh0dHBzOi8vc2FuZGJveC5tb2phbG9vcC5pbyIsInR5cGUiOiJ3ZWJhdXRobi5nZXQifQ==",
-    "signature": "MEYCIQDHUvPRMI+6pKuyPcJdGEIAaL5nnPpjMHHO1zUCSI5jJQIhAMV7p0HLKDeKImSR+apReVtZtRh2ktWHWP1rao0njbBv"
+    "authenticatorData": "y1+ZGYWlLBhlFSbz3enn0Sh1b1jKp63+LttwL5cw3XQBAAAAIw==",
+    "clientDataJSON": "eyJjaGFsbGVuZ2UiOiJUMWRhYUZscVFYaGFWR04zV1dwVk5GbDZVbWhOZWxKdFQxZFJkMDU2UW0xYWFteHNXa1JHYVU1cVl6Sk9WMVpvVFhwQk1VNUhTVEZOVjFwcVdsUm9hbHBIUm1wT1JFVjVXa1JDYlU1dFRUSk5WMFpvVFZFIiwiY2xpZW50RXh0ZW5zaW9ucyI6e30sImhhc2hBbGdvcml0aG0iOiJTSEEtMjU2Iiwib3JpZ2luIjoiaHR0cHM6Ly9zYW5kYm94Lm1vamFsb29wLmlvIiwidHlwZSI6IndlYmF1dGhuLmdldCJ9",
+    "signature": "MEQCIEonIaMwgHySe/1apQScRxp8GjFNwy9Ajykus3pVWX15AiAUIywSDZWWACclQ0ue47QbkTPb62zg1sR8uY9pNHG6jA=="
   },
   "type": "public-key"
 }
@@ -241,7 +241,7 @@ describe('pispLinkAndTransfer', () => {
       const approveResponse = await axios.post(approveURI, approveRequest)
       expect(approveResponse.status).toEqual(200)
       expect(approveResponse.data.currentState).toEqual('transactionStatusReceived')
-      console.log('approve repsonse:', approveResponse.data)
+      console.log('approve response:', approveResponse.data)
       expect(approveResponse.data.transactionStatus.transactionRequestState).toEqual('ACCEPTED')
 
     })

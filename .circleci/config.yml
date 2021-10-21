@@ -79,6 +79,10 @@ jobs:
           paths:
             - node_modules
 
+  # This test currently runs both the Jest base e2e tests as well as 
+  # the TTK e2e test runner. 
+  # In the future, we will likely remove the jest runner in favour of
+  # using the ttk only
   test-e2e:
     executor: default-machine
     steps:
@@ -161,9 +165,19 @@ jobs:
           name: prepare test results
           command: |
             mv junit.xml /tmp/test/results
+      - run:
+          name: reset the test state before next test
+          command: ./scripts/_reset_test_state.sh
+      - run:
+          name: run the tests with the TTK-cli
+          command: |
+          cd ./docker-local/
+          docker-compose -f ./docker-compose.ttk-cli.yml up ttk-cli
       - store_artifacts:
           path: /tmp/test/results
           prefix: test
+      - store_artifacts:
+          path: ./test/e2e-ttk/results.html
       - store_test_results:
           path: /tmp/test/results
 

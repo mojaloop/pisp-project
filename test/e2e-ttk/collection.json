@@ -24,7 +24,7 @@
                 "exec": [
                   "const expected = {",
                   "    currentState: 'providersLookupSuccess',",
-                  "    providers: ['dfspa', 'dfspc']",
+                  "    providers: ['dfspa', 'dfspb']",
                   "  }",
                   "expect(response.body).to.deep.equal(expected)"
                 ]

@@ -169,10 +169,15 @@ jobs:
           name: reset the test state before next test
           command: ./scripts/_reset_test_state.sh
       - run:
+          name: wait for services to be healthy again
+          command: |
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            npm run wait-4-docker
+      - run:
           name: run the tests with the TTK-cli
           command: |
             cd ./docker-local/
-            docker-compose -f ./docker-compose.ttk-cli.yml up ttk-cli
+            docker-compose -f ./docker-compose.ttk-cli.yml up --exit-code-from ttk-cli ttk-cli
       - store_artifacts:
           path: /tmp/test/results
           prefix: test

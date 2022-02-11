@@ -337,5 +337,73 @@
         }
       }
     }
+  },
+  {
+    "ruleId": 10,
+    "description": "Returns an Payee rejected transcaction error (ML error 5105) from the simulator when transfer value is 5105 in any currency",
+    "conditions": {
+      "all": [
+        {
+          "fact": "path",
+          "operator": "equal",
+          "value": "/quotes"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "POST"
+        },
+        {
+          "fact": "body",
+          "operator": "equal",
+          "value": "331a6xxx-1be2-4c0b-aece-aa8dcb92a6cc",
+          "path": "$.transactionRequestId"
+        }
+      ]
+    },
+    "event": {
+      "type": "simulateError",
+      "params": {
+        "statusCode": 500,
+        "body": {
+          "statusCode": "6000",
+          "message": "Downstream request failed"
+        }
+      }
+    }
+  },
+  {
+    "ruleId": 11,
+    "description": "Returns an Payee rejected transcaction error (ML error 5105) from the simulator when transfer value is 5105 in any currency",
+    "conditions": {
+      "all": [
+        {
+          "fact": "path",
+          "operator": "equal",
+          "value": "/transfer"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "POST"
+        },
+        {
+          "fact": "body",
+          "operator": "equal",
+          "value": "332",
+          "path": "$.amount.amount"
+        }
+      ]
+    },
+    "event": {
+      "type": "simulateError",
+      "params": {
+        "statusCode": 500,
+        "body": {
+          "statusCode": "7100",
+          "message": "Downstream request failed"
+        }
+      }
+    }
   }
 ]

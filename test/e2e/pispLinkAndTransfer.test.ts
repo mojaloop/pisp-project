@@ -3,6 +3,8 @@
  * 
  */
 
+// aaaa7105-1be2-4c0b-aece-aa8dcb92a6cc
+
 import axios from "axios"
 import TestEnv from "./TestEnv"
 
@@ -49,17 +51,17 @@ export const validVerificationRequestSignedPayload = {
 export const invalidVerificationRequest = {
   verificationRequestId: '835a8444-8cdc-41ef-bf18-ca4916c2e005',
   challenge: btoa('incorrect challenge!'),
-  consentId: 'be433b9e-9473-4b7d-bdd5-ac5b42463afb',
+  consentId: '2acf1dfa-ce45-486e-b19e-ae4ad9804a63',
   signedPayloadType: 'FIDO',
   signedPayload: {
-    id: 'vwWPva1iiTJIk_c7n9a49spEtJZBqrn4SECerci0b-Ue-6Jv9_DZo3rNX02Lq5PU4N5kGlkEPAkIoZ3499AzWQ',
-    rawId: 'vwWPva1iiTJIk_c7n9a49spEtJZBqrn4SECerci0b-Ue-6Jv9_DZo3rNX02Lq5PU4N5kGlkEPAkIoZ3499AzWQ',
-    response: {
-      authenticatorData: 'SZYN5YgOjGh0NBcPZHZgW4/krrmihjLHmVzzuoMdl2MBAAAAEg==',
-      clientDataJSON: 'eyJ0eXBlIjoid2ViYXV0aG4uZ2V0IiwiY2hhbGxlbmdlIjoiZFc1cGJYQnNaVzFsYm5SbFpERXlNdyIsIm9yaWdpbiI6Imh0dHA6Ly9sb2NhbGhvc3Q6NDIxODEiLCJjcm9zc09yaWdpbiI6ZmFsc2UsIm90aGVyX2tleXNfY2FuX2JlX2FkZGVkX2hlcmUiOiJkbyBub3QgY29tcGFyZSBjbGllbnREYXRhSlNPTiBhZ2FpbnN0IGEgdGVtcGxhdGUuIFNlZSBodHRwczovL2dvby5nbC95YWJQZXgifQ==',
-      signature: 'MEQCIGgRJ6e9dohkVEh4Hf9Kgzv+hCQTuBhdZ0PDGfwG4HhFAiA4++pgigae5/ao/pOBjmSR6mNbmMcPSBOw7dGwg/NGpw=='
+    "id": "DVFXZuLI5po4eDNPCH7Vtrjan5h-yGxeAUzS3QH3uMAP8O-7xg0AObz0mdTRy7veAflN201NlqoI-lByRug5ow",
+    "rawId": "DVFXZuLI5po4eDNPCH7Vtrjan5h+yGxeAUzS3QH3uMAP8O+7xg0AObz0mdTRy7veAflN201NlqoI+lByRug5ow==",
+    "response": {
+      "authenticatorData": "y1+ZGYWlLBhlFSbz3enn0Sh1b1jKp63+LttwL5cw3XQBAAAAIw==",
+      "clientDataJSON": "eyJjaGFsbGVuZ2UiOiJUMWRhYUZscVFYaGFWR04zV1dwVk5GbDZVbWhOZWxKdFQxZFJkMDU2UW0xYWFteHNXa1JHYVU1cVl6Sk9WMVpvVFhwQk1VNUhTVEZOVjFwcVdsUm9hbHBIUm1wT1JFVjVXa1JDYlU1dFRUSk5WMFpvVFZFIiwiY2xpZW50RXh0ZW5zaW9ucyI6e30sImhhc2hBbGdvcml0aG0iOiJTSEEtMjU2Iiwib3JpZ2luIjoiaHR0cHM6Ly9zYW5kYm94Lm1vamFsb29wLmlvIiwidHlwZSI6IndlYmF1dGhuLmdldCJ9",
+      "signature": "MEQCIEonIaMwgHySe/1apQScRxp8GjFNwy9Ajykus3pVWX15AiAUIywSDZWWACclQ0ue47QbkTPb62zg1sR8uY9pNHG6jA=="
     },
-    type: 'public-key'
+    "type": "public-key"
   }
 }
 
@@ -158,14 +160,275 @@ describe('pispLinkAndTransfer', () => {
     })
   })
 
-  describe('happy path - initiate transfer', () => {
-    it('sends a transfer', async () => {
+  describe('unhappy path - thirdparty transfer', () => {
+    const baseUrl = TestEnv.baseUrls.pispThirdpartySchemeAdapterOutbound
+    const expirationDate = new Date();
+    expirationDate.setHours(expirationDate.getHours() + 4);
+    const initiateRequest = {
+      sourceAccountId: 'dfspa.alice.1234',
+      consentId: '2acf1dfa-ce45-486e-b19e-ae4ad9804a63',
+      payee: {
+        partyIdInfo: {
+          partyIdType: 'MSISDN',
+          partyIdentifier: '987654321',
+          fspId: 'dfspb'
+        },
+      },
+      payer: {
+        // this is important!
+        // it tells the DFSP which consentId + source of funds account!
+        partyIdType: 'THIRD_PARTY_LINK',
+        // partyIdType: 'MSISDN',
+        partyIdentifier: '244431e2-7a56-40c6-814c-932631760fa9',
+        fspId: 'dfspa'
+      },
+      amountType: 'SEND',
+      amount: {
+        amount: '100',
+        currency: 'USD'
+      },
+      transactionType: {
+        scenario: 'TRANSFER',
+        initiator: 'PAYER',
+        initiatorType: 'CONSUMER'
+      },
+      expiration: expirationDate.toISOString()
+    }
+
+    it('bad payee lookup', async () => {
+
+      const ids = {
+        transactionRequestId: 'aaaa3204-1be2-4c0b-aece-aa8dcb92a6cc'
+      }
+
+      const lookupRequest = {
+        payee: {
+          partyIdType: TestEnv.users.bob.idType,
+          partyIdentifier: "111111111"
+        },
+        transactionRequestId: ids.transactionRequestId
+      }
+      const lookupURI = `${baseUrl}/thirdpartyTransaction/partyLookup`
+      const lookupResponse = await axios.post(lookupURI, lookupRequest)
+      const expected = {
+        errorInformation: { errorCode: '3204', errorDescription: 'Party not found' },
+        currentState: 'partyLookupFailure'
+      }
+
+      expect(lookupResponse.status).toEqual(200)
+      expect(lookupResponse.data).toEqual(expected)
+
+    })
+
+    it('initiate phase - bad payer partyIdType', async () => {
+      const ids = {
+        transactionRequestId: 'aaaa0001-1be2-4c0b-aece-aa8dcb92a6cc'
+      }
+      
+      // LOOKUP PHASE
+      // lookup for Bob
+      console.log("LOOKUP PHASE")
+      const lookupRequest = {
+        payee: {
+          partyIdType: TestEnv.users.bob.idType,
+          partyIdentifier: TestEnv.users.bob.idValue
+        },
+        transactionRequestId: ids.transactionRequestId
+      }
+      const lookupURI = `${baseUrl}/thirdpartyTransaction/partyLookup`
+      const lookupResponse = await axios.post(lookupURI, lookupRequest)
+      expect(lookupResponse.status).toEqual(200)
+      expect(lookupResponse.data.currentState).toEqual('partyLookupSuccess')
+
+      
+      // INITIATE PHASE
+      console.log("INITIATE PHASE")
+      const initiateURI = `${baseUrl}/thirdpartyTransaction/${ids.transactionRequestId}/initiate`
+      
+      const initiateRequestCopy = JSON.parse(JSON.stringify(initiateRequest))
+
+      initiateRequestCopy.payer.partyIdType = "MSISDN"
+      const expected = {
+        errorInformation: {
+          errorCode: '3100',
+          errorDescription: 'Generic validation error - /requestBody/payer/partyIdType must be equal to one of the allowed values'
+        }
+      }
+
+      const initiateResponse = await axios.post(initiateURI, initiateRequestCopy)
+        .catch(error => {
+          expect(error.response.status).toEqual(400)
+          expect(error.response.data).toEqual(expected)
+        })
+      
+      expect(initiateResponse).toEqual(undefined)
+
+    })
+
+    it('initiate phase - bad payer partyIdentifier', async () => {
+      const ids = {
+        transactionRequestId: '321a7105-1be2-4c0b-aece-aa8dcb92a6cc'
+      }
+      
+      // LOOKUP PHASE
+      // lookup for Bob
+      console.log("LOOKUP PHASE")
+      const lookupRequest = {
+        payee: {
+          partyIdType: TestEnv.users.bob.idType,
+          partyIdentifier: TestEnv.users.bob.idValue
+        },
+        transactionRequestId: ids.transactionRequestId
+      }
+      const lookupURI = `${baseUrl}/thirdpartyTransaction/partyLookup`
+      const lookupResponse = await axios.post(lookupURI, lookupRequest)
+      expect(lookupResponse.status).toEqual(200)
+      expect(lookupResponse.data.currentState).toEqual('partyLookupSuccess')
+
+      
+      // INITIATE PHASE
+      console.log("INITIATE PHASE")
+      const initiateURI = `${baseUrl}/thirdpartyTransaction/${ids.transactionRequestId}/initiate`
+      
+      const initiateRequestCopy = JSON.parse(JSON.stringify(initiateRequest))
+
+      initiateRequestCopy.payer.partyIdentifier = "111111111"
+
+      const initiateResponse = await axios.post(initiateURI, initiateRequestCopy)
+      
+      expect(initiateResponse.status).toEqual(200)
+
+    })
+
+    it('initiate phase - bad payer amount currency', async () => {
+      const ids = {
+        transactionRequestId: '321b7105-1be2-4c0b-aece-aa8dcb92a6cc'
+      }
+      
+      // LOOKUP PHASE
+      // lookup for Bob
+      console.log("LOOKUP PHASE")
+      const lookupRequest = {
+        payee: {
+          partyIdType: TestEnv.users.bob.idType,
+          partyIdentifier: TestEnv.users.bob.idValue
+        },
+        transactionRequestId: ids.transactionRequestId
+      }
+      const lookupURI = `${baseUrl}/thirdpartyTransaction/partyLookup`
+      const lookupResponse = await axios.post(lookupURI, lookupRequest)
+      expect(lookupResponse.status).toEqual(200)
+      expect(lookupResponse.data.currentState).toEqual('partyLookupSuccess')
+
+      
+      // INITIATE PHASE
+      console.log("INITIATE PHASE")
+      const initiateURI = `${baseUrl}/thirdpartyTransaction/${ids.transactionRequestId}/initiate`
+      
+      const initiateRequestCopy = JSON.parse(JSON.stringify(initiateRequest))
+
+      initiateRequestCopy.amount.currency = "EUR"
+
+      const initiateResponse = await axios.post(initiateURI, initiateRequestCopy)
+      
+      expect(initiateResponse.status).toEqual(200)
+
+    })
+
+    it('initiate phase - bad payee.partyIdInfo.fspId', async () => {
+      const ids = {
+        transactionRequestId: '321c7105-1be2-4c0b-aece-aa8dcb92a6cc'
+      }
+      
+      // LOOKUP PHASE
+      // lookup for Bob
+      console.log("LOOKUP PHASE")
+      const lookupRequest = {
+        payee: {
+          partyIdType: TestEnv.users.bob.idType,
+          partyIdentifier: TestEnv.users.bob.idValue
+        },
+        transactionRequestId: ids.transactionRequestId
+      }
+      const lookupURI = `${baseUrl}/thirdpartyTransaction/partyLookup`
+      const lookupResponse = await axios.post(lookupURI, lookupRequest)
+      expect(lookupResponse.status).toEqual(200)
+      expect(lookupResponse.data.currentState).toEqual('partyLookupSuccess')
+
+      
+      // INITIATE PHASE
+      console.log("INITIATE PHASE")
+      const initiateURI = `${baseUrl}/thirdpartyTransaction/${ids.transactionRequestId}/initiate`
+      
+      const initiateRequestCopy = JSON.parse(JSON.stringify(initiateRequest))
+
+      initiateRequestCopy.payee.partyIdInfo.fspId = "dfspa"
+
+      const initiateResponse = await axios.post(initiateURI, initiateRequestCopy)
+      
+      expect(initiateResponse.status).toEqual(200)
+
+    })
+
+    it('bad quote for transactionRequestId: 331a7105-1be2-4c0b-aece-aa8dcb92a6cc', async () => {
       //shortcut
       const baseUrl = TestEnv.baseUrls.pispThirdpartySchemeAdapterOutbound
 
       // a map of predefined ids that we will use in our test
       const ids = {
-        transactionRequestId: 'c2470148-1be2-4c0b-aece-aa8dcb92a6cc',
+        transactionRequestId: '331a7105-1be2-4c0b-aece-aa8dcb92a6cc',
+        consentId: '2acf1dfa-ce45-486e-b19e-ae4ad9804a63'
+      }
+      
+      // LOOKUP PHASE
+      // lookup for Bob
+      console.log("LOOKUP PHASE")
+      const lookupRequest = {
+        payee: {
+          partyIdType: TestEnv.users.bob.idType,
+          partyIdentifier: TestEnv.users.bob.idValue
+        },
+        transactionRequestId: ids.transactionRequestId
+      }
+      const lookupURI = `${baseUrl}/thirdpartyTransaction/partyLookup`
+      const lookupResponse = await axios.post(lookupURI, lookupRequest)
+      expect(lookupResponse.status).toEqual(200)
+      expect(lookupResponse.data.currentState).toEqual('partyLookupSuccess')
+
+      
+      // INITIATE PHASE
+      console.log("INITIATE PHASE")
+
+      const initiateURI = `${baseUrl}/thirdpartyTransaction/${ids.transactionRequestId}/initiate`
+      const initiateResponse = await axios.post(initiateURI, initiateRequest)
+      
+      expect(initiateResponse.status).toEqual(200)
+      expect(initiateResponse.data.currentState).toEqual('authorizationReceived')
+
+      console.log("challenge from DFSP is:", initiateResponse.data.authorization.challenge)
+
+      // APPROVE PHASE
+      console.log('APPROVE PHASE')
+      const approveURI = `${baseUrl}/thirdpartyTransaction/${ids.transactionRequestId}/approve`
+      const approveRequest = {
+        authorizationResponse: invalidVerificationRequest
+      }
+      
+      const approveResponse = await axios.post(approveURI, approveRequest)
+      expect(approveResponse.status).toEqual(200)
+      expect(approveResponse.data.transactionStatus.transactionRequestState).toEqual("ACCEPTED")
+      expect(approveResponse.data.transactionStatus.transactionState).toEqual("COMPLETED")
+      expect(approveResponse.data.currentState).toEqual("transactionStatusReceived")
+
+    })
+
+    it('bad transfer for transactionRequestId: 332a7105-1be2-4c0b-aece-aa8dcb92a6cc', async () => {
+      //shortcut
+      const baseUrl = TestEnv.baseUrls.pispThirdpartySchemeAdapterOutbound
+
+      // a map of predefined ids that we will use in our test
+      const ids = {
+        transactionRequestId: '332a7105-1be2-4c0b-aece-aa8dcb92a6cc',
         consentId: '2acf1dfa-ce45-486e-b19e-ae4ad9804a63'
       }
 
@@ -188,42 +451,14 @@ describe('pispLinkAndTransfer', () => {
       
       // INITIATE PHASE
       console.log("INITIATE PHASE")
-      const expirationDate = new Date();
-      expirationDate.setHours(expirationDate.getHours() + 4);
 
       const initiateURI = `${baseUrl}/thirdpartyTransaction/${ids.transactionRequestId}/initiate`
-      const initiateRequest = {
-        sourceAccountId: 'dfspa.alice.1234',
-        consentId: ids.consentId,
-        payee: {
-          partyIdInfo: {
-            partyIdType: 'MSISDN',
-            partyIdentifier: '987654321',
-            fspId: 'dfspb'
-          },
-        },
-        payer: {
-          // this is important!
-          // it tells the DFSP which consentId + source of funds account!
-          partyIdType: 'THIRD_PARTY_LINK',
-          // partyIdType: 'MSISDN',
-          partyIdentifier: '244431e2-7a56-40c6-814c-932631760fa9',
-          fspId: 'dfspa'
-        },
-        amountType: 'SEND',
-        amount: {
-          amount: '100',
-          currency: 'USD'
-        },
-        transactionType: {
-          scenario: 'TRANSFER',
-          initiator: 'PAYER',
-          initiatorType: 'CONSUMER'
-        },
-        expiration: expirationDate.toISOString()
-      }
+      const initiateRequestCopy = JSON.parse(JSON.stringify(initiateRequest))
 
-      const initiateResponse = await axios.post(initiateURI, initiateRequest)
+      initiateRequestCopy.amount.amount = "332"
+
+      const initiateResponse = await axios.post(initiateURI, initiateRequestCopy)
+      
       expect(initiateResponse.status).toEqual(200)
       expect(initiateResponse.data.currentState).toEqual('authorizationReceived')
 
@@ -233,17 +468,16 @@ describe('pispLinkAndTransfer', () => {
       console.log('APPROVE PHASE')
       const approveURI = `${baseUrl}/thirdpartyTransaction/${ids.transactionRequestId}/approve`
       const approveRequest = {
-        authorizationResponse: {
-          signedPayloadType: 'FIDO',
-          signedPayload: validVerificationRequestSignedPayload
-        }
+        authorizationResponse: invalidVerificationRequest
       }
+      
       const approveResponse = await axios.post(approveURI, approveRequest)
       expect(approveResponse.status).toEqual(200)
-      expect(approveResponse.data.currentState).toEqual('transactionStatusReceived')
-      console.log('approve response:', approveResponse.data)
-      expect(approveResponse.data.transactionStatus.transactionRequestState).toEqual('ACCEPTED')
+      expect(approveResponse.data.transactionStatus.transactionRequestState).toEqual("ACCEPTED")
+      expect(approveResponse.data.transactionStatus.transactionState).toEqual("COMPLETED")
+      expect(approveResponse.data.currentState).toEqual("transactionStatusReceived")
 
     })
+
   })
 })

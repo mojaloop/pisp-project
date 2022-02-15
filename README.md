@@ -12,7 +12,7 @@ This repo contains the documentation, specifications and tests for the Mojaloop-
 
 
 ## External Links
- - [Proposal Documentation on Google drive](https://docs.google.com/document/d/17rLpCPM2NY-i4oKGxhlBMbQahGY0k83rij2EOiU_OR4/edit)
+ - [Third-party API documentation](https://github.com/mojaloop/mojaloop-specification/tree/master/thirdparty-api)
  - [ZenHub board](https://app.zenhub.com/workspaces/mojaloop-project-59edee71d1407922110cf083/board?labels=oss-pisp,oss-pisp-ref&filterLogic=any&useDefaultFilterLogic=false&repos=116650553,106737677)
 
 

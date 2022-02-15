@@ -1,6 +1,6 @@
 # Participant Endpoint Enums
 
-This is the list of endpoints that a PISP or DFSP must register with the switch to get callbacks from the `thirdparty-api-adapter` and `transaction-request-service`.
+This is the list of endpoints that a PISP or DFSP must register with the switch to get callbacks from the `thirdparty-api-svc` and `transaction-request-service`.
 
 These endpoints should be added to the enums of `central-services-shared`, and the seeds of `central-ledger`
 

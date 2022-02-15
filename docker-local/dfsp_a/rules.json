@@ -18,7 +18,7 @@
           "fact": "body",
           "operator": "equal",
           "value": "5105",
-          "path": ".amount"
+          "path": "$.amount"
         }
       ]
     },
@@ -117,7 +117,7 @@
           "fact": "body",
           "operator": "equal",
           "value": "b51ec534-ee48-4575-b6a9-ead2955b8069",
-          "path": ".consentRequestId"
+          "path": "$.consentRequestId"
         }
       ]
     },
@@ -156,7 +156,7 @@
           "fact": "body",
           "operator": "equal",
           "value": "c51ec534-ee48-4575-b6a9-ead2955b8069",
-          "path": ".consentRequestId"
+          "path": "$.consentRequestId"
         }
       ]
     },
@@ -192,7 +192,7 @@
           "fact": "body",
           "operator": "equal",
           "value": "d51ec534-ee48-4575-b6a9-ead2955b8069",
-          "path": ".consentRequestId"
+          "path": "$.consentRequestId"
         }
       ]
     },
@@ -230,7 +230,7 @@
           "fact": "body",
           "operator": "equal",
           "value": "e51ec534-ee48-4575-b6a9-ead2955b8069",
-          "path": ".consentRequestId"
+          "path": "$.consentRequestId"
         }
       ]
     },
@@ -268,7 +268,7 @@
           "fact": "body",
           "operator": "equal",
           "value": "f51ec534-ee48-4575-b6a9-ead2955b8069",
-          "path": ".consentRequestId"
+          "path": "$.consentRequestId"
         }
       ]
     },
@@ -306,7 +306,7 @@
           "fact": "body",
           "operator": "equal",
           "value": "f61ec534-ee48-4575-b6a9-ead2955b8069",
-          "path": ".consentRequestId"
+          "path": "$.consentRequestId"
         }
       ]
     },
@@ -344,7 +344,7 @@
           "fact": "body",
           "operator": "equal",
           "value": "f71ec534-ee48-4575-b6a9-ead2955b8069",
-          "path": ".consentRequestId"
+          "path": "$.consentRequestId"
         }
       ]
     },
@@ -415,6 +415,12 @@
           "fact": "method",
           "operator": "equal",
           "value": "POST"
+        },
+        {
+          "fact": "body",
+          "operator": "equal",
+          "value": "c2470148-1be2-4c0b-aece-aa8dcb92a6cc",
+          "path": "$.transactionRequestId"
         }
       ]
     },
@@ -423,7 +429,77 @@
       "params": {
         "statusCode": 200,
         "body": {
-          "isValid": true
+          "isValid": true,
+          "payerPartyIdInfo": {
+            "partyIdType": "MSISDN",
+            "partyIdentifier": "123456789",
+            "fspId": "dfspa"
+          },
+          "consentId": "2acf1dfa-ce45-486e-b19e-ae4ad9804a63"
+        }
+      }
+    }
+  },
+  {
+    "ruleId": 13,
+    "description": "stores the final consent",
+    "conditions": {
+      "all": [
+        {
+          "fact": "path",
+          "operator": "equal",
+          "value": "/store/consent"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "POST"
+        }
+      ]
+    },
+    "event": {
+      "type": "FIXED_CALLBACK",
+      "params": {
+        "statusCode": 200,
+        "body": {
+        }
+      }
+    }
+  },
+  {
+    "ruleId": 14,
+    "description": "validate consentRequests - OTP",
+    "conditions": {
+      "all": [
+        {
+          "fact": "path",
+          "operator": "equal",
+          "value": "/validateConsentRequests"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "POST"
+        },
+        {
+          "fact": "body",
+          "operator": "equal",
+          "value": "b5d6206c-4f06-497d-af15-ed866ea6958f",
+          "path": "$.consentRequestId"
+        }
+      ]
+    },
+    "event": {
+      "type": "FIXED_CALLBACK",
+      "params": {
+        "statusCode": 200,
+        "body": {
+          "isValid": true,
+          "data": {
+            "authChannels": [
+              "OTP"
+            ]
+          }
         }
       }
     }

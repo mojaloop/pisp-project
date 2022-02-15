@@ -18,7 +18,7 @@
           "fact": "body",
           "operator": "equal",
           "value": "5105",
-          "path": ".amount"
+          "path": "$.amount"
         }
       ]
     },

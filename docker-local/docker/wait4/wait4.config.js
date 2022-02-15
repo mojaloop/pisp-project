@@ -90,7 +90,7 @@ module.exports = {
       ]
     },
     {
-      name: 'thirdparty-api-adapter',
+      name: 'thirdparty-api-svc',
       wait4: [
         {
           uri: 'kafka:29092',

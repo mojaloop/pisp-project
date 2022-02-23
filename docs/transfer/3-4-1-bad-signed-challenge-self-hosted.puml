@@ -29,14 +29,21 @@ rnote right of D1 #Light
 ""FSPIOP-Source: pispa""
 ""FSPIOP-Destination: dfspa""
 {
-  "authenticationInfo": {
-    "authentication": "U2F",
-    "authenticationValue": {
-      "pinValue": "<base64 encoded binary - the signed challenge>",
-      "counter": "1"
+  "responseType": "ACCEPTED"
+  "signedPayload": {
+    "signedPayloadType": "FIDO",
+    "value": {
+      "id": "string",
+      "rawId": "string - base64 encoded utf-8",
+      "response": {
+        "authenticatorData": "string - base64 encoded utf-8",
+        "clientDataJSON": "string - base64 encoded utf-8",
+        "signature": "string - base64 encoded utf-8",
+        "userHandle": "string - base64 encoded utf-8",
+      },
+      "type": "public-key"
     }
   }
-  "responseType": "ENTERED"
 }
 end note
 D1 -> S: ""PUT /thirdpartyRequests/authorizations/33333333-0000-0000-0000-000000000000""

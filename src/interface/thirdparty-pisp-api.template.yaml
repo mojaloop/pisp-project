@@ -1,11 +1,17 @@
 openapi: 3.0.1
 info:
   title: Mojaloop Third Party API (PISP)
-  description: This API is a part of Mojaloop's Thirdparty API suite, and describes
-    the interactions between a PISP and the Mojaloop Switch or a DFSP
+  version: "1.0"
+  description: >
+    A Mojaloop API for Payment Initiation Service Providers (PISPs) to 
+    perform Third Party functions on DFSPs' User's accounts.
+
+    DFSPs who want to enable Payment Initiation Service Providers
+    (PISPs) should implement the accompanying API - Mojaloop Third 
+    Party API (DFSP) instead.
   license:
-    name: Apache 2.0
-  version: "1.1"
+    name: Open API for FSP Interoperability (FSPIOP) (Implementation Friendly Version)
+    url: https://github.com/mojaloop/mojaloop-specification/blob/master/LICENSE.md
 servers:
   - url: /
 paths:

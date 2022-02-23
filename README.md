@@ -12,7 +12,7 @@ This repo contains the documentation, specifications and tests for the Mojaloop-
 
 
 ## External Links
- - [Proposal Documentation on Google drive](https://docs.google.com/document/d/17rLpCPM2NY-i4oKGxhlBMbQahGY0k83rij2EOiU_OR4/edit)
+ - [Third-party API documentation](https://github.com/mojaloop/mojaloop-specification/tree/master/thirdparty-api)
  - [ZenHub board](https://app.zenhub.com/workspaces/mojaloop-project-59edee71d1407922110cf083/board?labels=oss-pisp,oss-pisp-ref&filterLogic=any&useDefaultFilterLogic=false&repos=116650553,106737677)
 
 
@@ -45,6 +45,38 @@ npm run test:e2e
 ```bash
 npm run test:e2e -- --watch
 ```
+
+### End To End Testing with TTK
+
+To support the wider adoption of the Third Party API and Services, we 
+are currently translating our jest-based E2E test to TTK collections.
+
+While this process will soon be automated and handled outside of this
+repo, for now, this is how you can run the e2e tests with the ttk:
+
+
+```bash
+cd docker-local;
+
+docker-compose up -d
+
+# wait for services to be healthy
+npm run wait-4-docker
+
+# Seed the environment with test data
+npm run reseed
+```
+
+- Next, go to the test-runner ttk site at localhost:26060 > Test Runner > collections Manager
+- Browse for for the collection.json file in ./test/e2e-ttk/collection.json and import
+- click "run" and see the test cases get run.
+
+If you want to re-run the test cases, make sure you reset the test state with:
+```bash
+./scripts/_reset_test_state.sh
+```
+
+Then run again, or run the individual test cases as you need.
 
 ### Contract Tests
 
@@ -145,8 +177,8 @@ Corresponding excerpt from package.json:
 
 ## Updating Thirdparty API Specification
 
-1. Edit `src/interface/api-template.yaml`.
+1. Update the version of `@mojaloop/api-snippets` in `package.json` to be the latest
 
-2. Wherever possible use snippets defined in https://github.com/mojaloop/api-snippets
+2. Edit `src/interface/api-template.yaml`.
 
-3. Run `npm run build:openapi` to bundle, render and validate the generated api.
+3. Run `npm run build:openapi` to bundle, render and validate the generated apis.

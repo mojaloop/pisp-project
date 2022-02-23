@@ -1,0 +1,24 @@
+version: "3.7"
+
+networks:
+  mojaloop-net:
+    name: mojaloop-net
+
+# Runs a ttk in CLI mode that runs the tests on startup
+# run alongside the environment docker-compose.yml
+services:
+  ttk-cli:
+    container_name: ttk-cli
+    image: mojaloop/ml-testing-toolkit:v13.5.2
+    volumes:
+      - "../test/e2e-ttk:/opt/mojaloop-testing-toolkit/tests"
+    ports:
+      - "45000:5000"
+      - "45050:5050"
+    command:
+      - sh
+      - -c
+      # - "sleep infinity"
+      - "npm run cli -- -m outbound -i tests/collection.json -e tests/environment.json -u http://test-runner:5050 --report-target file:///opt/mojaloop-testing-toolkit/tests/results.html --report-format html --report-auto-filename-enable false"
+    networks:
+      - mojaloop-net

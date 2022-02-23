@@ -79,6 +79,10 @@ jobs:
           paths:
             - node_modules
 
+  # This test currently runs both the Jest base e2e tests as well as 
+  # the TTK e2e test runner. 
+  # In the future, we will likely remove the jest runner in favour of
+  # using the ttk only
   test-e2e:
     executor: default-machine
     steps:
@@ -101,6 +105,12 @@ jobs:
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             nvm install v12.16.1
             nvm alias default v12.16.1
+      - run:
+          name: build any containers that need building
+          command: |
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            cd ./docker-local/
+            docker-compose build
       - run:
           name: Spin up the E2E test environment
           command: |
@@ -127,7 +137,7 @@ jobs:
             sleep 10
             docker-compose up -d ml-api-adapter
             sleep 10
-            docker-compose up -d thirdparty-api-adapter
+            docker-compose up -d thirdparty-api-svc
             sleep 10
             docker-compose up -d quoting-service
             sleep 10
@@ -145,6 +155,7 @@ jobs:
 
             # seed the environment
             npm run reseed:docker-local
+          no_output_timeout: 20m
       - run:
           name: Run the E2E tests
           command: |
@@ -154,9 +165,24 @@ jobs:
           name: prepare test results
           command: |
             mv junit.xml /tmp/test/results
+      - run:
+          name: reset the test state before next test
+          command: ./scripts/_reset_test_state.sh
+      - run:
+          name: wait for services to be healthy again
+          command: |
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            npm run wait-4-docker
+      - run:
+          name: run the tests with the TTK-cli
+          command: |
+            cd ./docker-local/
+            docker-compose -f ./docker-compose.ttk-cli.yml up --exit-code-from ttk-cli ttk-cli
       - store_artifacts:
           path: /tmp/test/results
           prefix: test
+      - store_artifacts:
+          path: ./test/e2e-ttk/results.html
       - store_test_results:
           path: /tmp/test/results
 

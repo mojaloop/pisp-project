@@ -1,0 +1,1105 @@
+{
+  "name": "multi",
+  "test_cases": [
+    {
+      "id": 1,
+      "name": "Account Linking: Prelinking",
+      "requests": [
+        {
+          "id": 1,
+          "description": "GET /linking/providers",
+          "apiVersion": {
+            "minorVersion": 1,
+            "majorVersion": 0,
+            "type": "thirdparty_sdk_outbound"
+          },
+          "operationPath": "/linking/providers",
+          "path": "/linking/providers",
+          "method": "get",
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "response state",
+                "exec": [
+                  "const expected = {",
+                  "    currentState: 'providersLookupSuccess',",
+                  "    providers: ['dfspa', 'dfspb']",
+                  "  }",
+                  "expect(response.body).to.deep.equal(expected)"
+                ]
+              }
+            ]
+          },
+          "url": "http://pisp-thirdparty-scheme-adapter-outbound:4006"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Account Linking: Discovery",
+      "requests": [
+        {
+          "id": 1,
+          "description": "GET /linking/accounts/{fspId}/{userId}",
+          "apiVersion": {
+            "minorVersion": 1,
+            "majorVersion": 0,
+            "type": "thirdparty_sdk_outbound"
+          },
+          "operationPath": "/linking/accounts/{fspId}/{userId}",
+          "path": "/linking/accounts/dfspa/username1234",
+          "method": "get",
+          "params": {
+            "fspId": "dfspa",
+            "userId": "username1234"
+          },
+          "url": "http://pisp-thirdparty-scheme-adapter-outbound:4006",
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "expected response",
+                "exec": [
+                  "const expected = {",
+                  "  accounts: [",
+                  "    {",
+                  "      accountNickname: 'dfspa.user.nickname1',",
+                  "      id: 'dfspa.username.1234',",
+                  "      currency: 'ZAR'",
+                  "    },",
+                  "    {",
+                  "      accountNickname: 'dfspa.user.nickname2',",
+                  "      id: 'dfspa.username.5678',",
+                  "      currency: 'USD'",
+                  "    }",
+                  "],",
+                  "  currentState: 'COMPLETED'",
+                  "}",
+                  "",
+                  "expect(response.body).to.deep.equal(expected)"
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Account Linking - Happy Path WEB",
+      "requests": [
+        {
+          "id": 1,
+          "description": "POST /linking/request-consent",
+          "apiVersion": {
+            "minorVersion": 1,
+            "majorVersion": 0,
+            "type": "thirdparty_sdk_outbound"
+          },
+          "operationPath": "/linking/request-consent",
+          "path": "/linking/request-consent",
+          "method": "post",
+          "body": {
+            "toParticipantId": "dfspa",
+            "userId": "dfspa.username",
+            "consentRequestId": "b51ec534-ee48-4575-b6a9-ead2955b8069",
+            "authChannels": [
+              "WEB",
+              "OTP"
+            ],
+            "accounts": [
+              {
+                "accountNickname": "SpeXXXXXXXXnt",
+                "id": "dfspa.username.5678",
+                "currency": "USD"
+              }
+            ],
+            "actions": [
+              "accounts.transfer"
+            ],
+            "callbackUri": "pisp-app://callback.com"
+          },
+          "url": "http://pisp-thirdparty-scheme-adapter-outbound:4006",
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "response",
+                "exec": [
+                  "const expected = {",
+                  "  channelResponse: {",
+                  "  scopes: [",
+                  "  {",
+                  "    accountId: 'dfspa.username.5678',",
+                  "    actions: [",
+                  "      'accounts.transfer'",
+                  "    ]",
+                  "  }",
+                  "  ],",
+                  "  callbackUri: 'pisp-app://callback.com',",
+                  "  authChannels: ['WEB'],",
+                  "  consentRequestId: 'b51ec534-ee48-4575-b6a9-ead2955b8069',",
+                  "  authUri: 'http://localhost:6060/admin/dfsp/authorize?consentRequestId=b51ec534-ee48-4575-b6a9-ead2955b8069&callbackUri=http://localhost:42181/flutter-web-auth.html'",
+                  "  },",
+                  "  currentState: 'WebAuthenticationChannelResponseRecieved'",
+                  "}",
+                  "",
+                  "expect(response.body).to.deep.equal(expected)"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "id": 2,
+          "description": "PATCH /linking/request-consent/{ID}/authenticate",
+          "apiVersion": {
+            "minorVersion": 1,
+            "majorVersion": 0,
+            "type": "thirdparty_sdk_outbound"
+          },
+          "operationPath": "/linking/request-consent/{ID}/authenticate",
+          "path": "/linking/request-consent/b51ec534-ee48-4575-b6a9-ead2955b8069/authenticate",
+          "method": "patch",
+          "params": {
+            "ID": "b51ec534-ee48-4575-b6a9-ead2955b8069"
+          },
+          "body": {
+            "authToken": "123456"
+          },
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "response",
+                "exec": [
+                  "const expectedScopes = [{",
+                  "  accountId: 'dfspa.username.5678',",
+                  "  actions: [ 'accounts.transfer' ]",
+                  "}]",
+                  "",
+                  "",
+                  "expect(response.body.consent.consentId).to.be.a('string')",
+                  "expect(response.body.consent.consentRequestId).to.equal('b51ec534-ee48-4575-b6a9-ead2955b8069')",
+                  "expect(response.body.consent.scopes).to.deep.equal(expectedScopes)",
+                  "expect(response.body.currentState).to.equal('consentReceivedAwaitingCredential')"
+                ]
+              }
+            ]
+          },
+          "url": "http://pisp-thirdparty-scheme-adapter-outbound:4006"
+        },
+        {
+          "id": 3,
+          "description": "POST //linking/request-consent/{ID}/pass-credential",
+          "apiVersion": {
+            "minorVersion": 1,
+            "majorVersion": 0,
+            "type": "thirdparty_sdk_outbound"
+          },
+          "operationPath": "/linking/request-consent/{ID}/pass-credential",
+          "path": "/linking/request-consent/b51ec534-ee48-4575-b6a9-ead2955b8069/pass-credential",
+          "method": "post",
+          "params": {
+            "ID": "b51ec534-ee48-4575-b6a9-ead2955b8069"
+          },
+          "url": "http://pisp-thirdparty-scheme-adapter-outbound:4006",
+          "body": {
+            "credential": {
+              "payload": {
+                "id": "HskU2gw4np09IUtYNHnxMM696jJHqvccUdBmd0xP6XEWwH0xLei1PUzDJCM19SZ3A2Ex0fNLw0nc2hrIlFnAtw",
+                "rawId": "HskU2gw4np09IUtYNHnxMM696jJHqvccUdBmd0xP6XEWwH0xLei1PUzDJCM19SZ3A2Ex0fNLw0nc2hrIlFnAtw==",
+                "response": {
+                  "clientDataJSON": "eyJ0eXBlIjoid2ViYXV0aG4uY3JlYXRlIiwiY2hhbGxlbmdlIjoiWXpSaFpHRmlZak16WlRrek1EWmlNRE00TURnNE1UTXlZV1ptWTJSbE5UVTJZelV3WkRneVpqWXdNMlkwTnpjeE1XRTVOVEV3WW1ZelltVmxaalprTmciLCJvcmlnaW4iOiJodHRwOi8vbG9jYWxob3N0OjQyMTgxIiwiY3Jvc3NPcmlnaW4iOmZhbHNlfQ==",
+                  "attestationObject": "o2NmbXRmcGFja2VkZ2F0dFN0bXSjY2FsZyZjc2lnWEcwRQIhAN2JDPPTse/45EHSqSpEJiiok5sns+HqdJch3+gsL09VAiAh7W7ZhQC8gMIkgwcA+S4rQkaHoHnP9AkkohaKCuuA62N4NWOBWQLBMIICvTCCAaWgAwIBAgIECwXNUzANBgkqhkiG9w0BAQsFADAuMSwwKgYDVQQDEyNZdWJpY28gVTJGIFJvb3QgQ0EgU2VyaWFsIDQ1NzIwMDYzMTAgFw0xNDA4MDEwMDAwMDBaGA8yMDUwMDkwNDAwMDAwMFowbjELMAkGA1UEBhMCU0UxEjAQBgNVBAoMCVl1YmljbyBBQjEiMCAGA1UECwwZQXV0aGVudGljYXRvciBBdHRlc3RhdGlvbjEnMCUGA1UEAwweWXViaWNvIFUyRiBFRSBTZXJpYWwgMTg0OTI5NjE5MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEIRpvsbWJJcsKwRhffCrjqLSIEBR5sR7/9VXgfZdRvSsXaiUt7lns44WZIFuz6ii/j9f8fadcBUJyrkhY5ZH8WqNsMGowIgYJKwYBBAGCxAoCBBUxLjMuNi4xLjQuMS40MTQ4Mi4xLjEwEwYLKwYBBAGC5RwCAQEEBAMCBDAwIQYLKwYBBAGC5RwBAQQEEgQQFJogIY72QTOWuIH41bfx9TAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBCwUAA4IBAQA+/qPfPSrgclePfgTQ3VpLaNsBr+hjLhi04LhzQxiRGWwYS+vB1TOiPXeLsQQIwbmqQU51doVbCTaXGLNIr1zvbLAwhnLWH7i9m4ahCqaCzowtTvCQ7VBUGP5T1M4eYnoo83IDCVjQj/pZG8QYgOGOigztGoWAf5CWcUF6C0UyFbONwUcqJEl2QLToa/7E8VRjm4W46IAUljYkODVZASv8h3wLROx9p5TSBlSymtwdulxQe/DKbfNSvM3edA0up+EIJKLOOU+QTR2ZQV46fEW1/ih6m8vcaY6L3NW0eYpc7TXeijUJAgoUtya/vzmnRAecuY9bncoJt8PrvL2ir2kDaGF1dGhEYXRhWMRJlg3liA6MaHQ0Fw9kdmBbj+SuuaKGMseZXPO6gx2XY0EAAAAEFJogIY72QTOWuIH41bfx9QBAHskU2gw4np09IUtYNHnxMM696jJHqvccUdBmd0xP6XEWwH0xLei1PUzDJCM19SZ3A2Ex0fNLw0nc2hrIlFnAt6UBAgMmIAEhWCBYz+SV6fSy7ZjFzdj+SWxaMbfaw4ZT+wYgClN3v93kVSJYIGSzY41DNLrh1jXp4J53qCnq4+b9HYXud/0UEsZquDeV"
+                },
+                "type": "public-key"
+              }
+            }
+          },
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "response",
+                "exec": [
+                  "const expected = {",
+                  "    credential: {",
+                  "      status: 'VERIFIED'",
+                  "    },",
+                  "    currentState: 'accountsLinked'",
+                  "}",
+                  "",
+                  "expect(response.body).to.deep.equal(expected)"
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Account Linking - Happy Path OTP",
+      "requests": [
+        {
+          "id": 1,
+          "description": "POST /linking/request-consent",
+          "apiVersion": {
+            "minorVersion": 1,
+            "majorVersion": 0,
+            "type": "thirdparty_sdk_outbound"
+          },
+          "operationPath": "/linking/request-consent",
+          "path": "/linking/request-consent",
+          "method": "post",
+          "body": {
+            "toParticipantId": "dfspa",
+            "userId": "dfspa.username",
+            "consentRequestId": "c51ec534-ee48-4575-b6a9-ead2955b8069",
+            "authChannels": [
+              "WEB",
+              "OTP"
+            ],
+            "accounts": [
+              {
+                "accountNickname": "SpeXXXXXXXXnt",
+                "id": "dfspa.username.5678",
+                "currency": "USD"
+              }
+            ],
+            "actions": [
+              "accounts.transfer"
+            ],
+            "callbackUri": "pisp-app://callback.com"
+          },
+          "url": "http://pisp-thirdparty-scheme-adapter-outbound:4006",
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "response",
+                "exec": [
+                  "const expected = {",
+                  "channelResponse: {",
+                  "scopes: [",
+                  "{",
+                  "  accountId: 'dfspa.username.5678',",
+                  "  actions: [",
+                  "    'accounts.transfer'",
+                  "  ]",
+                  "}",
+                  "],",
+                  "callbackUri: 'pisp-app://callback.com',",
+                  "authChannels: ['OTP'],",
+                  "consentRequestId: 'c51ec534-ee48-4575-b6a9-ead2955b8069',",
+                  "},",
+                  "currentState: 'OTPAuthenticationChannelResponseRecieved'",
+                  "}",
+                  "",
+                  "expect(response.body).to.deep.equal(expected)"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "id": 2,
+          "description": "PATCH /linking/request-consent/{ID}/authenticate",
+          "apiVersion": {
+            "minorVersion": 1,
+            "majorVersion": 0,
+            "type": "thirdparty_sdk_outbound"
+          },
+          "operationPath": "/linking/request-consent/{ID}/authenticate",
+          "path": "/linking/request-consent/c51ec534-ee48-4575-b6a9-ead2955b8069/authenticate",
+          "method": "patch",
+          "params": {
+            "ID": "c51ec534-ee48-4575-b6a9-ead2955b8069"
+          },
+          "body": {
+            "authToken": "123456"
+          },
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "response",
+                "exec": [
+                  "const expectedScopes = [{",
+                  "  accountId: 'dfspa.username.5678',",
+                  "  actions: [ 'accounts.transfer' ]",
+                  "}]",
+                  "",
+                  "",
+                  "expect(response.body.consent.consentId).to.be.a('string')",
+                  "expect(response.body.consent.consentRequestId).to.equal('c51ec534-ee48-4575-b6a9-ead2955b8069')",
+                  "expect(response.body.consent.scopes).to.deep.equal(expectedScopes)",
+                  "expect(response.body.currentState).to.equal('consentReceivedAwaitingCredential')"
+                ]
+              }
+            ]
+          },
+          "url": "http://pisp-thirdparty-scheme-adapter-outbound:4006"
+        },
+        {
+          "id": 3,
+          "description": "POST //linking/request-consent/{ID}/pass-credential",
+          "apiVersion": {
+            "minorVersion": 1,
+            "majorVersion": 0,
+            "type": "thirdparty_sdk_outbound"
+          },
+          "operationPath": "/linking/request-consent/{ID}/pass-credential",
+          "path": "/linking/request-consent/c51ec534-ee48-4575-b6a9-ead2955b8069/pass-credential",
+          "method": "post",
+          "params": {
+            "ID": "c51ec534-ee48-4575-b6a9-ead2955b8069"
+          },
+          "url": "http://pisp-thirdparty-scheme-adapter-outbound:4006",
+          "body": {
+            "credential": {
+              "payload": {
+                "id": "UMyM71BqZ5G-NWnD1k3RtR6Ry_zQPLEh_ntU3zOO_3dur80eHxDOqJSvc83FnDczRTdv6hVCZ86Kuynrz5OKrw",
+                "rawId": "UMyM71BqZ5G+NWnD1k3RtR6Ry/zQPLEh/ntU3zOO/3dur80eHxDOqJSvc83FnDczRTdv6hVCZ86Kuynrz5OKrw==",
+                "response": {
+                  "attestationObject": "o2NmbXRoZmlkby11MmZnYXR0U3RtdKJjc2lnWEgwRgIhALlL18WMrdV+eVDKRoNgb3iTDNxANrbC93w/sG6BDcWEAiEA1WGNy/sZPJcboqHD8YgqXjxZni9ZT4M1EL+O+gRFWSxjeDVjgVkCwTCCAr0wggGloAMCAQICBAsFzVMwDQYJKoZIhvcNAQELBQAwLjEsMCoGA1UEAxMjWXViaWNvIFUyRiBSb290IENBIFNlcmlhbCA0NTcyMDA2MzEwIBcNMTQwODAxMDAwMDAwWhgPMjA1MDA5MDQwMDAwMDBaMG4xCzAJBgNVBAYTAlNFMRIwEAYDVQQKDAlZdWJpY28gQUIxIjAgBgNVBAsMGUF1dGhlbnRpY2F0b3IgQXR0ZXN0YXRpb24xJzAlBgNVBAMMHll1YmljbyBVMkYgRUUgU2VyaWFsIDE4NDkyOTYxOTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABCEab7G1iSXLCsEYX3wq46i0iBAUebEe//VV4H2XUb0rF2olLe5Z7OOFmSBbs+oov4/X/H2nXAVCcq5IWOWR/FqjbDBqMCIGCSsGAQQBgsQKAgQVMS4zLjYuMS40LjEuNDE0ODIuMS4xMBMGCysGAQQBguUcAgEBBAQDAgQwMCEGCysGAQQBguUcAQEEBBIEEBSaICGO9kEzlriB+NW38fUwDAYDVR0TAQH/BAIwADANBgkqhkiG9w0BAQsFAAOCAQEAPv6j3z0q4HJXj34E0N1aS2jbAa/oYy4YtOC4c0MYkRlsGEvrwdUzoj13i7EECMG5qkFOdXaFWwk2lxizSK9c72ywMIZy1h+4vZuGoQqmgs6MLU7wkO1QVBj+U9TOHmJ6KPNyAwlY0I/6WRvEGIDhjooM7RqFgH+QlnFBegtFMhWzjcFHKiRJdkC06Gv+xPFUY5uFuOiAFJY2JDg1WQEr/Id8C0TsfaeU0gZUsprcHbpcUHvwym3zUrzN3nQNLqfhCCSizjlPkE0dmUFeOnxFtf4oepvL3GmOi9zVtHmKXO013oo1CQIKFLcmv785p0QHnLmPW53KCbfD67y9oq9pA2hhdXRoRGF0YVjESZYN5YgOjGh0NBcPZHZgW4/krrmihjLHmVzzuoMdl2NBAAAAAAAAAAAAAAAAAAAAAAAAAAAAQFDMjO9QameRvjVpw9ZN0bUekcv80DyxIf57VN8zjv93bq/NHh8QzqiUr3PNxZw3M0U3b+oVQmfOirsp68+Tiq+lAQIDJiABIVggy/NJCW5QMqfxRdvjCT6PeJMC/enM2b/83KeuHJAwENAiWCCLLEUZifuehFbVabqd/Cni7GvAEZikU3J6Q0+b+CXnqg==",
+                  "clientDataJSON": "eyJjaGFsbGVuZ2UiOiJORGxqT1RjeFltWXdZVFExWm1Ka1pUa3pOek13Tm1SalpUazNZVFl6TURjM01HSmtZamMzWW1FellqWm1OemcwWkRJMU5HWTJPR0UwTm1Sa05EQmhNZyIsImNsaWVudEV4dGVuc2lvbnMiOnt9LCJoYXNoQWxnb3JpdGhtIjoiU0hBLTI1NiIsIm9yaWdpbiI6Imh0dHA6Ly9sb2NhbGhvc3Q6ODA4MCIsInR5cGUiOiJ3ZWJhdXRobi5jcmVhdGUifQ=="
+                },
+                "type": "public-key"
+              }
+            }
+          },
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "response",
+                "exec": [
+                  "const expected = {",
+                  "    credential: {",
+                  "      status: 'VERIFIED'",
+                  "    },",
+                  "    currentState: 'accountsLinked'",
+                  "}",
+                  "",
+                  "expect(response.body).to.deep.equal(expected)"
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Account Linking - Error @ consent request stage",
+      "requests": [
+        {
+          "id": 1,
+          "description": "validateRequest should return an error",
+          "apiVersion": {
+            "minorVersion": 1,
+            "majorVersion": 0,
+            "type": "thirdparty_sdk_outbound"
+          },
+          "operationPath": "/linking/request-consent",
+          "path": "/linking/request-consent",
+          "method": "post",
+          "body": {
+            "toParticipantId": "dfspa",
+            "userId": "dfspa.username",
+            "consentRequestId": "d51ec534-ee48-4575-b6a9-ead2955b8069",
+            "authChannels": [
+              "WEB",
+              "OTP"
+            ],
+            "accounts": [
+              {
+                "accountNickname": "SpeXXXXXXXXnt",
+                "id": "dfspa.username.5678",
+                "currency": "USD"
+              }
+            ],
+            "actions": [
+              "accounts.transfer"
+            ],
+            "callbackUri": "pisp-app://callback.com"
+          },
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "response body",
+                "exec": [
+                  "const expected = {",
+                  "  errorInformation: {",
+                  "    errorCode: '7203',",
+                  "    errorDescription: 'FSP does not support any requested authentication channels'",
+                  "  },",
+                  "  currentState: 'errored'",
+                  "}",
+                  "",
+                  "expect(response.body).to.deep.equal(expected)"
+                ]
+              }
+            ]
+          },
+          "url": "http://pisp-thirdparty-scheme-adapter-outbound:4006"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Account Linking - Error @ consent request authenticate stage",
+      "requests": [
+        {
+          "id": 1,
+          "description": "POST /linking/request-consent",
+          "apiVersion": {
+            "minorVersion": 1,
+            "majorVersion": 0,
+            "type": "thirdparty_sdk_outbound"
+          },
+          "operationPath": "/linking/request-consent",
+          "path": "/linking/request-consent",
+          "method": "post",
+          "body": {
+            "toParticipantId": "dfspa",
+            "userId": "dfspa.username",
+            "consentRequestId": "b51ec534-ee48-4575-b6a9-ead2955b8069",
+            "authChannels": [
+              "WEB",
+              "OTP"
+            ],
+            "accounts": [
+              {
+                "accountNickname": "SpeXXXXXXXXnt",
+                "id": "dfspa.username.5678",
+                "currency": "USD"
+              }
+            ],
+            "actions": [
+              "accounts.transfer"
+            ],
+            "callbackUri": "pisp-app://callback.com"
+          },
+          "url": "http://pisp-thirdparty-scheme-adapter-outbound:4006",
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "response",
+                "exec": [
+                  "const expected = {",
+                  "channelResponse: {",
+                  "scopes: [",
+                  "{",
+                  "  accountId: 'dfspa.username.5678',",
+                  "  actions: [",
+                  "    'accounts.transfer'",
+                  "  ]",
+                  "}",
+                  "],",
+                  "callbackUri: 'pisp-app://callback.com',",
+                  "authChannels: ['WEB'],",
+                  "authUri: \"http://localhost:6060/admin/dfsp/authorize?consentRequestId=b51ec534-ee48-4575-b6a9-ead2955b8069&callbackUri=http://localhost:42181/flutter-web-auth.html\",",
+                  "consentRequestId: 'b51ec534-ee48-4575-b6a9-ead2955b8069',",
+                  "},",
+                  "currentState: 'WebAuthenticationChannelResponseRecieved'",
+                  "}",
+                  "",
+                  "expect(response.body).to.deep.equal(expected)"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "id": 2,
+          "description": "PATCH /linking/request-consent/{ID}/authenticate",
+          "apiVersion": {
+            "minorVersion": 1,
+            "majorVersion": 0,
+            "type": "thirdparty_sdk_outbound"
+          },
+          "operationPath": "/linking/request-consent/{ID}/authenticate",
+          "path": "/linking/request-consent/b51ec534-ee48-4575-b6a9-ead2955b8069/authenticate",
+          "method": "patch",
+          "params": {
+            "ID": "b51ec534-ee48-4575-b6a9-ead2955b8069"
+          },
+          "body": {
+            "authToken": "654321"
+          },
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "response",
+                "exec": [
+                  "const expected = {",
+                  "  errorInformation: {",
+                  "    errorCode: '7205',",
+                  "    errorDescription: 'OTP failed validation'",
+                  "  },",
+                  "  currentState: 'errored'",
+                  "}",
+                  "",
+                  "expect(response.body).to.deep.equal(expected)",
+                  ""
+                ]
+              }
+            ]
+          },
+          "url": "http://pisp-thirdparty-scheme-adapter-outbound:4006"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Account Linking - Error @ consent request register credential stage",
+      "requests": [
+        {
+          "id": 1,
+          "description": "POST /linking/request-consent",
+          "apiVersion": {
+            "minorVersion": 1,
+            "majorVersion": 0,
+            "type": "thirdparty_sdk_outbound"
+          },
+          "operationPath": "/linking/request-consent",
+          "path": "/linking/request-consent",
+          "method": "post",
+          "body": {
+            "toParticipantId": "dfspa",
+            "userId": "dfspa.username",
+            "consentRequestId": "b51ec534-ee48-4575-b6a9-ead2955b8069",
+            "authChannels": [
+              "WEB",
+              "OTP"
+            ],
+            "accounts": [
+              {
+                "accountNickname": "SpeXXXXXXXXnt",
+                "id": "dfspa.username.5678",
+                "currency": "USD"
+              }
+            ],
+            "actions": [
+              "accounts.transfer"
+            ],
+            "callbackUri": "pisp-app://callback.com"
+          },
+          "url": "http://pisp-thirdparty-scheme-adapter-outbound:4006",
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "response",
+                "exec": [
+                  "const expected = {",
+                  "  channelResponse: {",
+                  "  scopes: [",
+                  "  {",
+                  "    accountId: 'dfspa.username.5678',",
+                  "    actions: [",
+                  "      'accounts.transfer'",
+                  "    ]",
+                  "  }",
+                  "  ],",
+                  "  callbackUri: 'pisp-app://callback.com',",
+                  "  authChannels: ['WEB'],",
+                  "  consentRequestId: 'b51ec534-ee48-4575-b6a9-ead2955b8069',",
+                  "  authUri: 'http://localhost:6060/admin/dfsp/authorize?consentRequestId=b51ec534-ee48-4575-b6a9-ead2955b8069&callbackUri=http://localhost:42181/flutter-web-auth.html'",
+                  "  },",
+                  "  currentState: 'WebAuthenticationChannelResponseRecieved'",
+                  "}",
+                  "",
+                  "expect(response.body).to.deep.equal(expected)"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "id": 2,
+          "description": "PATCH /linking/request-consent/{ID}/authenticate",
+          "apiVersion": {
+            "minorVersion": 1,
+            "majorVersion": 0,
+            "type": "thirdparty_sdk_outbound"
+          },
+          "operationPath": "/linking/request-consent/{ID}/authenticate",
+          "path": "/linking/request-consent/b51ec534-ee48-4575-b6a9-ead2955b8069/authenticate",
+          "method": "patch",
+          "params": {
+            "ID": "b51ec534-ee48-4575-b6a9-ead2955b8069"
+          },
+          "body": {
+            "authToken": "123456"
+          },
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "response",
+                "exec": [
+                  "const expectedScopes = [{",
+                  "  accountId: 'dfspa.username.5678',",
+                  "  actions: [ 'accounts.transfer' ]",
+                  "}]",
+                  "",
+                  "",
+                  "expect(response.body.consent.consentId).to.be.a('string')",
+                  "expect(response.body.consent.consentRequestId).to.equal('b51ec534-ee48-4575-b6a9-ead2955b8069')",
+                  "expect(response.body.consent.scopes).to.deep.equal(expectedScopes)",
+                  "expect(response.body.currentState).to.equal('consentReceivedAwaitingCredential')"
+                ]
+              }
+            ]
+          },
+          "url": "http://pisp-thirdparty-scheme-adapter-outbound:4006"
+        },
+        {
+          "id": 3,
+          "description": "POST /linking/request-consent/{ID}/pass-credential",
+          "apiVersion": {
+            "minorVersion": 1,
+            "majorVersion": 0,
+            "type": "thirdparty_sdk_outbound"
+          },
+          "operationPath": "/linking/request-consent/{ID}/pass-credential",
+          "path": "/linking/request-consent/b51ec534-ee48-4575-b6a9-ead2955b8069/pass-credential",
+          "method": "post",
+          "params": {
+            "ID": "b51ec534-ee48-4575-b6a9-ead2955b8069"
+          },
+          "url": "http://pisp-thirdparty-scheme-adapter-outbound:4006",
+          "body": {
+            "credential": {
+              "payload": {
+                "id": "DVFXZuLI5po4eDNPCH7Vtrjan5h+yGxeAUzS3QH3uMAP8O+7xg0AObz0mdTRy7veAflN201NlqoI+lByRug5ow==",
+                "rawId": "DVFXZuLI5po4eDNPCH7Vtrjan5h+yGxeAUzS3QH3uMAP8O+7xg0AObz0mdTRy7veAflN201NlqoI+lByRug5ow==",
+                "response": {
+                  "clientDataJSON": "eyJjaGFsbGVuZ2UiOiJUMWRhYUZscVFYaGFWR04zV1dwVk5GbDZVbWhOZWxKdFQxZFJkMDU2UW0xYWFteHNXa1JHYVU1cVl6Sk9WMVpvVFhwQk1VNUhTVEZOVjFwcVdsUm9hbHBIUm1wT1JFVjVXa1JDYlU1dFRUSk5WMFpvVFZFIiwiY2xpZW50RXh0ZW5zaW9ucyI6e30sImhhc2hBbGdvcml0aG0iOiJTSEEtMjU2Iiwib3JpZ2luIjoiaHR0cHM6Ly9zYW5kYm94Lm1vamFsb29wLmlvIiwidHlwZSI6IndlYmF1dGhuLmdldCJ9",
+                  "attestationObject": "o2NmbXRmcGFja2VkZ2F0dFN0bXSjY2FsZyZjc2lnWEcwRQIhAN2JDPPTse/45EHSqSpEJiiok5sns+HqdJch3+gsL09VAiAh7W7ZhQC8gMIkgwcA+S4rQkaHoHnP9AkkohaKCuuA62N4NWOBWQLBMIICvTCCAaWgAwIBAgIECwXNUzANBgkqhkiG9w0BAQsFADAuMSwwKgYDVQQDEyNZdWJpY28gVTJGIFJvb3QgQ0EgU2VyaWFsIDQ1NzIwMDYzMTAgFw0xNDA4MDEwMDAwMDBaGA8yMDUwMDkwNDAwMDAwMFowbjELMAkGA1UEBhMCU0UxEjAQBgNVBAoMCVl1YmljbyBBQjEiMCAGA1UECwwZQXV0aGVudGljYXRvciBBdHRlc3RhdGlvbjEnMCUGA1UEAwweWXViaWNvIFUyRiBFRSBTZXJpYWwgMTg0OTI5NjE5MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEIRpvsbWJJcsKwRhffCrjqLSIEBR5sR7/9VXgfZdRvSsXaiUt7lns44WZIFuz6ii/j9f8fadcBUJyrkhY5ZH8WqNsMGowIgYJKwYBBAGCxAoCBBUxLjMuNi4xLjQuMS40MTQ4Mi4xLjEwEwYLKwYBBAGC5RwCAQEEBAMCBDAwIQYLKwYBBAGC5RwBAQQEEgQQFJogIY72QTOWuIH41bfx9TAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBCwUAA4IBAQA+/qPfPSrgclePfgTQ3VpLaNsBr+hjLhi04LhzQxiRGWwYS+vB1TOiPXeLsQQIwbmqQU51doVbCTaXGLNIr1zvbLAwhnLWH7i9m4ahCqaCzowtTvCQ7VBUGP5T1M4eYnoo83IDCVjQj/pZG8QYgOGOigztGoWAf5CWcUF6C0UyFbONwUcqJEl2QLToa/7E8VRjm4W46IAUljYkODVZASv8h3wLROx9p5TSBlSymtwdulxQe/DKbfNSvM3edA0up+EIJKLOOU+QTR2ZQV46fEW1/ih6m8vcaY6L3NW0eYpc7TXeijUJAgoUtya/vzmnRAecuY9bncoJt8PrvL2ir2kDaGF1dGhEYXRhWMRJlg3liA6MaHQ0Fw9kdmBbj+SuuaKGMseZXPO6gx2XY0EAAAAEFJogIY72QTOWuIH41bfx9QBAHskU2gw4np09IUtYNHnxMM696jJHqvccUdBmd0xP6XEWwH0xLei1PUzDJCM19SZ3A2Ex0fNLw0nc2hrIlFnAt6UBAgMmIAEhWCBYz+SV6fSy7ZjFzdj+SWxaMbfaw4ZT+wYgClN3v93kVSJYIGSzY41DNLrh1jXp4J53qCnq4+b9HYXud/0UEsZquDeV"
+                },
+                "type": "public-key"
+              }
+            }
+          },
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "response",
+                "exec": [
+                  "const expected = {",
+                  "    errorInformation: {",
+                  "      errorCode: '7213',",
+                  "      errorDescription: 'Consent is invalid'",
+                  "    },",
+                  "    currentState: 'errored'",
+                  "}",
+                  "",
+                  "expect(response.body).to.deep.equal(expected)"
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Third Party Transaction Request - Happy Path",
+      "requests": [
+        {
+          "id": 1,
+          "description": "POST /linking/request-consent",
+          "apiVersion": {
+            "minorVersion": 1,
+            "majorVersion": 0,
+            "type": "thirdparty_sdk_outbound"
+          },
+          "operationPath": "/linking/request-consent",
+          "path": "/linking/request-consent",
+          "method": "post",
+          "body": {
+            "toParticipantId": "dfspa",
+            "userId": "dfspa.username",
+            "consentRequestId": "b5d6206c-4f06-497d-af15-ed866ea6958f",
+            "authChannels": [
+              "WEB",
+              "OTP"
+            ],
+            "accounts": [
+              {
+                "accountNickname": "SpeXXXXXXXXnt",
+                "id": "244431e2-7a56-40c6-814c-932631760fa9",
+                "currency": "USD"
+              },
+              {
+                "accountNickname": "SpeXXXXXXXXnt",
+                "id": "6b6e6d77-dbf4-423f-abd5-bc5854e4ab1c",
+                "currency": "USD"
+              }
+            ],
+            "actions": [
+              "accounts.getBalance",
+              "accounts.transfer"
+            ],
+            "callbackUri": "pisp-app://callback.com"
+          },
+          "url": "http://pisp-thirdparty-scheme-adapter-outbound:4006",
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "response",
+                "exec": [
+                  "const expected = {",
+                  "  channelResponse: {",
+                  "    consentRequestId: 'b5d6206c-4f06-497d-af15-ed866ea6958f',",
+                  "    scopes: [",
+                  "      {",
+                  "      accountId: '244431e2-7a56-40c6-814c-932631760fa9',",
+                  "        actions: ['accounts.getBalance', 'accounts.transfer'],",
+                  "      },",
+                  "      { ",
+                  "        accountId: '6b6e6d77-dbf4-423f-abd5-bc5854e4ab1c',",
+                  "        actions: ['accounts.getBalance', 'accounts.transfer']",
+                  "      }",
+                  "    ],",
+                  "    callbackUri: 'pisp-app://callback.com',",
+                  "    authChannels: ['OTP'],",
+                  "  },",
+                  "  currentState: 'OTPAuthenticationChannelResponseRecieved'",
+                  "}",
+                  "",
+                  "expect(response.body).to.deep.equal(expected)"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "id": 2,
+          "description": "PATCH /linking/request-consent/{ID}/authenticate",
+          "apiVersion": {
+            "minorVersion": 1,
+            "majorVersion": 0,
+            "type": "thirdparty_sdk_outbound"
+          },
+          "operationPath": "/linking/request-consent/{ID}/authenticate",
+          "path": "/linking/request-consent/b5d6206c-4f06-497d-af15-ed866ea6958f/authenticate",
+          "method": "patch",
+          "params": {
+            "ID": "b5d6206c-4f06-497d-af15-ed866ea6958f"
+          },
+          "body": {
+            "authToken": "123456"
+          },
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "response",
+                "exec": [
+                  "const expected = {",
+                  "  consent: {",
+                  "    // this is configured in dfspa's thirdparty-sdk",
+                  "    consentId: \"2acf1dfa-ce45-486e-b19e-ae4ad9804a63\",",
+                  "  consentRequestId: 'b5d6206c-4f06-497d-af15-ed866ea6958f',",
+                  "    scopes: [",
+                  "      { actions: ['accounts.getBalance', 'accounts.transfer'], accountId: '244431e2-7a56-40c6-814c-932631760fa9' },",
+                  "      { actions: ['accounts.getBalance', 'accounts.transfer'], accountId: '6b6e6d77-dbf4-423f-abd5-bc5854e4ab1c' }",
+                  "    ]",
+                  "",
+                  "  },",
+                  "  challenge: \"fc315dc625bb0bb00029e706de7f38eed98dc370cd386281de46a438b8080e57\",",
+                  "  currentState: 'consentReceivedAwaitingCredential'",
+                  "}",
+                  "",
+                  "expect(response.body).to.deep.equal(expected)"
+                ]
+              }
+            ]
+          },
+          "url": "http://pisp-thirdparty-scheme-adapter-outbound:4006"
+        },
+        {
+          "id": 3,
+          "description": "POST /linking/request-consent/{ID}/pass-credential",
+          "apiVersion": {
+            "minorVersion": 1,
+            "majorVersion": 0,
+            "type": "thirdparty_sdk_outbound"
+          },
+          "operationPath": "/linking/request-consent/{ID}/pass-credential",
+          "path": "/linking/request-consent/b5d6206c-4f06-497d-af15-ed866ea6958f/pass-credential",
+          "method": "post",
+          "params": {
+            "ID": "b5d6206c-4f06-497d-af15-ed866ea6958f"
+          },
+          "url": "http://pisp-thirdparty-scheme-adapter-outbound:4006",
+          "body": {
+            "credential": {
+              "payload": {
+                "id": "DVFXZuLI5po4eDNPCH7Vtrjan5h-yGxeAUzS3QH3uMAP8O-7xg0AObz0mdTRy7veAflN201NlqoI-lByRug5ow",
+                "rawId": "DVFXZuLI5po4eDNPCH7Vtrjan5h+yGxeAUzS3QH3uMAP8O+7xg0AObz0mdTRy7veAflN201NlqoI+lByRug5ow==",
+                "response": {
+                  "attestationObject": "o2NmbXRoZmlkby11MmZnYXR0U3RtdKJjc2lnWEcwRQIhAJ/3xIiXAdSa6Dhl5Jx85u1sg7Sfy9Qz//PcuNKa80d2AiBPB+UCpuhM+Lt4AhvYyXpMKAcoyGSPIfUfCMqwkFj6wGN4NWOBWQLBMIICvTCCAaWgAwIBAgIECwXNUzANBgkqhkiG9w0BAQsFADAuMSwwKgYDVQQDEyNZdWJpY28gVTJGIFJvb3QgQ0EgU2VyaWFsIDQ1NzIwMDYzMTAgFw0xNDA4MDEwMDAwMDBaGA8yMDUwMDkwNDAwMDAwMFowbjELMAkGA1UEBhMCU0UxEjAQBgNVBAoMCVl1YmljbyBBQjEiMCAGA1UECwwZQXV0aGVudGljYXRvciBBdHRlc3RhdGlvbjEnMCUGA1UEAwweWXViaWNvIFUyRiBFRSBTZXJpYWwgMTg0OTI5NjE5MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEIRpvsbWJJcsKwRhffCrjqLSIEBR5sR7/9VXgfZdRvSsXaiUt7lns44WZIFuz6ii/j9f8fadcBUJyrkhY5ZH8WqNsMGowIgYJKwYBBAGCxAoCBBUxLjMuNi4xLjQuMS40MTQ4Mi4xLjEwEwYLKwYBBAGC5RwCAQEEBAMCBDAwIQYLKwYBBAGC5RwBAQQEEgQQFJogIY72QTOWuIH41bfx9TAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBCwUAA4IBAQA+/qPfPSrgclePfgTQ3VpLaNsBr+hjLhi04LhzQxiRGWwYS+vB1TOiPXeLsQQIwbmqQU51doVbCTaXGLNIr1zvbLAwhnLWH7i9m4ahCqaCzowtTvCQ7VBUGP5T1M4eYnoo83IDCVjQj/pZG8QYgOGOigztGoWAf5CWcUF6C0UyFbONwUcqJEl2QLToa/7E8VRjm4W46IAUljYkODVZASv8h3wLROx9p5TSBlSymtwdulxQe/DKbfNSvM3edA0up+EIJKLOOU+QTR2ZQV46fEW1/ih6m8vcaY6L3NW0eYpc7TXeijUJAgoUtya/vzmnRAecuY9bncoJt8PrvL2ir2kDaGF1dGhEYXRhWMTLX5kZhaUsGGUVJvPd6efRKHVvWMqnrf4u23AvlzDddEEAAAAAAAAAAAAAAAAAAAAAAAAAAABADVFXZuLI5po4eDNPCH7Vtrjan5h+yGxeAUzS3QH3uMAP8O+7xg0AObz0mdTRy7veAflN201NlqoI+lByRug5o6UBAgMmIAEhWCDD5L66Sy7QEkshHkp0OFDNNd7Yj3VcW9iULwYva/VlVCJYIFk/fr99IJ2zL1dYGgTvNpF/3daUxWYBMr556Dc7K4i1",
+                  "clientDataJSON": "eyJjaGFsbGVuZ2UiOiJabU16TVRWa1l6WXlOV0ppTUdKaU1EQXdNamxsTnpBMlpHVTNaak00WldWa09UaGtZek0zTUdOa016ZzJNamd4WkdVME5tRTBNemhpT0RBNE1HVTFOdyIsImNsaWVudEV4dGVuc2lvbnMiOnt9LCJoYXNoQWxnb3JpdGhtIjoiU0hBLTI1NiIsIm9yaWdpbiI6Imh0dHBzOi8vc2FuZGJveC5tb2phbG9vcC5pbyIsInR5cGUiOiJ3ZWJhdXRobi5jcmVhdGUifQ=="
+                },
+                "type": "public-key"
+              }
+            }
+          },
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "response",
+                "exec": [
+                  "const expected = {",
+                  "        credential: {",
+                  "          status: 'VERIFIED'",
+                  "        },",
+                  "        currentState: 'accountsLinked'",
+                  "      }",
+                  "",
+                  "expect(response.body).to.deep.equal(expected)"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "id": 4,
+          "description": "party lookup",
+          "apiVersion": {
+            "minorVersion": 1,
+            "majorVersion": 0,
+            "type": "thirdparty_sdk_outbound"
+          },
+          "operationPath": "/thirdpartyTransaction/partyLookup",
+          "path": "/thirdpartyTransaction/partyLookup",
+          "method": "post",
+          "body": {
+            "payee": {
+              "partyIdType": "MSISDN",
+              "partyIdentifier": "987654321"
+            },
+            "transactionRequestId": "c2470148-1be2-4c0b-aece-aa8dcb92a6cc"
+          },
+          "url": "http://pisp-thirdparty-scheme-adapter-outbound:4006",
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "response",
+                "exec": [
+                  "const expected = {",
+                  "  \"party\": {",
+                  "    \"partyIdInfo\": {",
+                  "      \"partyIdType\": \"MSISDN\",",
+                  "      \"partyIdentifier\": \"987654321\",",
+                  "      \"fspId\": \"dfspb\"",
+                  "    },",
+                  "    \"personalInfo\": {",
+                  "      \"complexName\": {",
+                  "        \"firstName\": \"Bob\",",
+                  "        \"middleName\": \"O\",",
+                  "        \"lastName\": \"Babirusa\"",
+                  "      },",
+                  "      \"dateOfBirth\": \"1970-01-01\"",
+                  "    },",
+                  "    \"name\": \"Bob Babirusa\"",
+                  "  },",
+                  "  \"currentState\": \"partyLookupSuccess\"",
+                  "}",
+                  "",
+                  "expect(response.body).to.deep.equal(expected)"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "id": 5,
+          "description": "initiate third party transaction request",
+          "apiVersion": {
+            "minorVersion": 1,
+            "majorVersion": 0,
+            "type": "thirdparty_sdk_outbound"
+          },
+          "operationPath": "/thirdpartyTransaction/{ID}/initiate",
+          "path": "/thirdpartyTransaction/c2470148-1be2-4c0b-aece-aa8dcb92a6cc/initiate",
+          "method": "post",
+          "params": {
+            "ID": "c2470148-1be2-4c0b-aece-aa8dcb92a6cc"
+          },
+          "body": {
+            "consentId": "2acf1dfa-ce45-486e-b19e-ae4ad9804a63",
+            "payee": {
+              "partyIdInfo": {
+                "partyIdType": "MSISDN",
+                "partyIdentifier": "987654321",
+                "fspId": "dfspb"
+              }
+            },
+            "payer": {
+              "partyIdType": "THIRD_PARTY_LINK",
+              "partyIdentifier": "244431e2-7a56-40c6-814c-932631760fa9",
+              "fspId": "dfspa"
+            },
+            "amountType": "SEND",
+            "amount": {
+              "amount": "100",
+              "currency": "USD"
+            },
+            "transactionType": {
+              "scenario": "TRANSFER",
+              "initiator": "PAYER",
+              "initiatorType": "CONSUMER"
+            },
+            "expiration": "{$requestVariables.expiration}"
+          },
+          "url": "http://pisp-thirdparty-scheme-adapter-outbound:4006",
+          "tests": {
+            "assertions": [
+              {
+                "id": 2,
+                "description": "dynamic fields",
+                "exec": [
+                  "expect(response.body.authorization.expiration).to.match(/[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}Z/)",
+                  "",
+                  "expect(response.body.authorization.authorizationRequestId).to.match(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/)"
+                ]
+              },
+              {
+                "id": 1,
+                "description": "response body",
+                "exec": [
+                  "const expected = {",
+                  "  \"authorization\": {",
+                  "    \"transactionRequestId\": \"c2470148-1be2-4c0b-aece-aa8dcb92a6cc\",",
+                  "    \"transferAmount\": {",
+                  "      \"amount\": \"100\",",
+                  "      \"currency\": \"USD\"",
+                  "    },",
+                  "    \"payeeReceiveAmount\": {",
+                  "      \"amount\": \"100\",",
+                  "      \"currency\": \"USD\"",
+                  "    },",
+                  "    \"fees\": {",
+                  "      \"amount\": \"0\",",
+                  "      \"currency\": \"USD\"",
+                  "    },",
+                  "    \"payer\": {",
+                  "      \"partyIdType\": \"THIRD_PARTY_LINK\",",
+                  "      \"partyIdentifier\": \"244431e2-7a56-40c6-814c-932631760fa9\",",
+                  "      \"fspId\": \"dfspa\"",
+                  "    },",
+                  "    \"payee\": {",
+                  "      \"partyIdInfo\": {",
+                  "        \"partyIdType\": \"MSISDN\",",
+                  "        \"partyIdentifier\": \"987654321\",",
+                  "        \"fspId\": \"dfspb\"",
+                  "      }",
+                  "    },",
+                  "    \"transactionType\": {",
+                  "      \"scenario\": \"TRANSFER\",",
+                  "      \"initiator\": \"PAYER\",",
+                  "      \"initiatorType\": \"CONSUMER\"",
+                  "    },",
+                  "    \"challenge\": \"OWZhYjAxZTcwYjU4YzRhMzRmOWQwNzBmZjllZDFiNjc2NWVhMzA1NGI1MWZjZThjZGFjNDEyZDBmNmM2MWFhMQ\"",
+                  "  },",
+                  "  \"currentState\": \"authorizationReceived\"",
+                  "}",
+                  "",
+                  "// Test these dynamic variables separately",
+                  "delete response.body.authorization.authorizationRequestId",
+                  "delete response.body.authorization.expiration",
+                  "",
+                  "",
+                  "expect(response.body).to.deep.equal(expected)"
+                ]
+              }
+            ]
+          },
+          "scriptingEngine": "javascript",
+          "scripts": {
+            "postRequest": {
+              "exec": [
+                ""
+              ]
+            },
+            "preRequest": {
+              "exec": [
+                "const expirationDate = new Date();",
+                "expirationDate.setHours(expirationDate.getHours() + 5);",
+                "requestVariables.expiration = expirationDate.toISOString()"
+              ]
+            }
+          }
+        },
+        {
+          "id": 6,
+          "description": "approve third party authorization request",
+          "apiVersion": {
+            "minorVersion": 1,
+            "majorVersion": 0,
+            "type": "thirdparty_sdk_outbound"
+          },
+          "operationPath": "/thirdpartyTransaction/{ID}/approve",
+          "path": "/thirdpartyTransaction/c2470148-1be2-4c0b-aece-aa8dcb92a6cc/approve",
+          "method": "post",
+          "params": {
+            "ID": "c2470148-1be2-4c0b-aece-aa8dcb92a6cc"
+          },
+          "body": {
+            "authorizationResponse": {
+              "signedPayloadType": "FIDO",
+              "signedPayload": {
+                "id": "DVFXZuLI5po4eDNPCH7Vtrjan5h-yGxeAUzS3QH3uMAP8O-7xg0AObz0mdTRy7veAflN201NlqoI-lByRug5ow",
+                "rawId": "DVFXZuLI5po4eDNPCH7Vtrjan5h+yGxeAUzS3QH3uMAP8O+7xg0AObz0mdTRy7veAflN201NlqoI+lByRug5ow==",
+                "response": {
+                  "authenticatorData": "y1+ZGYWlLBhlFSbz3enn0Sh1b1jKp63+LttwL5cw3XQBAAAAIw==",
+                  "clientDataJSON": "eyJjaGFsbGVuZ2UiOiJUMWRhYUZscVFYaGFWR04zV1dwVk5GbDZVbWhOZWxKdFQxZFJkMDU2UW0xYWFteHNXa1JHYVU1cVl6Sk9WMVpvVFhwQk1VNUhTVEZOVjFwcVdsUm9hbHBIUm1wT1JFVjVXa1JDYlU1dFRUSk5WMFpvVFZFIiwiY2xpZW50RXh0ZW5zaW9ucyI6e30sImhhc2hBbGdvcml0aG0iOiJTSEEtMjU2Iiwib3JpZ2luIjoiaHR0cHM6Ly9zYW5kYm94Lm1vamFsb29wLmlvIiwidHlwZSI6IndlYmF1dGhuLmdldCJ9",
+                  "signature": "MEQCIEonIaMwgHySe/1apQScRxp8GjFNwy9Ajykus3pVWX15AiAUIywSDZWWACclQ0ue47QbkTPb62zg1sR8uY9pNHG6jA=="
+                },
+                "type": "public-key"
+              }
+            }
+          },
+          "url": "http://pisp-thirdparty-scheme-adapter-outbound:4006",
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "response",
+                "exec": [
+                  "delete response.body.transactionStatus.transactionId",
+                  "",
+                  "const expected = {",
+                  "  \"transactionStatus\": {",
+                  "    \"transactionRequestState\": \"ACCEPTED\",",
+                  "    \"transactionState\": \"COMPLETED\"",
+                  "  },",
+                  "  \"currentState\": \"transactionStatusReceived\"",
+                  "}",
+                  "",
+                  "expect(response.body).to.deep.equal(expected)"
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

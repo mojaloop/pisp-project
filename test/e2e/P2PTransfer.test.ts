@@ -105,7 +105,6 @@ describe('Peer to Peer transfer', (): void => {
     }
 
     // Act
-    // TODO: use client library
     const result = await axios.post(scenariosURI, options)
 
     // Assert
@@ -148,7 +147,6 @@ describe('Peer to Peer transfer', (): void => {
     }
 
     // Act
-    // TODO: use client library
     const result = await axios.post(scenariosURI, options)
 
     // Assert

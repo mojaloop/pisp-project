@@ -43,7 +43,7 @@
     "SDK_OUTGOING_URI": "dfspa-sdk-scheme-adapter:4001",
     "SDK_OUTGOING_HTTP_SCHEME": "http",
     "SDK_OUTGOING_PARTIES_INFORMATION_PATH": "parties/{Type}/{ID}/{SubId}",
-    "SDK_NOTIFY_ABOUT_TRANSFER_URI": "pisp-thirdparty-scheme-adapter-inbound:7005/thirdpartyRequests/transactions/{ID}",
+    "SDK_NOTIFY_ABOUT_TRANSFER_URI": "pisp-thirdparty-sdk-inbound:7005/thirdpartyRequests/transactions/{ID}",
     "JWS_SIGN": false,
     "JWS_SIGNING_KEY": "./secrets/jwsSigningKey.key",
     "TLS": {

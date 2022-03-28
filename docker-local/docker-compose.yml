@@ -135,7 +135,7 @@ services:
       interval: 30s
 
   transaction-requests-service:
-    image: mojaloop/transaction-requests-service:v11.1.3.0-pisp
+    image: mojaloop/transaction-requests-service:v13.0.0
 
     container_name: transaction-requests-service
     ports:
@@ -276,7 +276,7 @@ services:
       interval: 30s
 
   auth-service:
-    image: mojaloop/auth-service:v11.11.1
+    image: mojaloop/auth-service:v12.0.1
     # build:
     #  context: /home/lew/developer/mojaloop/auth-service
     #  dockerfile: ./Dockerfile
@@ -330,7 +330,7 @@ services:
     restart: always
 
   thirdparty-api-svc:
-    image: "mojaloop/thirdparty-api-svc:v11.21.0"
+    image: "mojaloop/thirdparty-api-svc:v12.0.0"
     # build:
     #  context: https://github.com/mojaloop/thirdparty-api-svc.git#chore/branch
     #  dockerfile: ./Dockerfile
@@ -355,7 +355,7 @@ services:
 
   ## DFSP A
   dfspa-backend:
-    image: "mojaloop/mojaloop-simulator:v11.6.1"
+    image: "mojaloop/mojaloop-simulator:v12.0.0"
     # build
     #   context: ../../mojaloop-simulator
     #   dockerfile: ./Dockerfile
@@ -371,7 +371,7 @@ services:
       - mojaloop-net
 
   dfspa-sdk-scheme-adapter:
-    image: "mojaloop/sdk-scheme-adapter:v11.18.12"
+    image: "mojaloop/sdk-scheme-adapter:v12.0.0"
     # build:
     #   context: ../../sdk-scheme-adapter
     #   dockerfile: ./Dockerfile
@@ -391,20 +391,20 @@ services:
       - ml-api-adapter
     restart: always
 
-  dfspa-thirdparty-scheme-adapter-inbound:
-    image: "mojaloop/thirdparty-scheme-adapter:v11.55.0"
+  dfspa-thirdparty-sdk-inbound:
+    image: "mojaloop/thirdparty-sdk:v12.0.0"
     # build:
-    #  context: https://github.com/mojaloop/thirdparty-scheme-adapter.git#feat/deterministic-test-consentids
+    #  context: https://github.com/mojaloop/thirdparty-sdk.git#feat/deterministic-test-consentids
     #  dockerfile: ./docker/Dockerfile
-    container_name: dfspa-thirdparty-scheme-adapter-inbound
+    container_name: dfspa-thirdparty-sdk-inbound
     environment:
       - NODE_ENV=e2e
       - LOG_LEVEL=debug
-    command: sh -c "/opt/thirdparty-scheme-adapter/wait4/wait4.js dfspa-thirdparty-scheme-adapter && npm run start:inbound"
+    command: sh -c "/opt/thirdparty-sdk/wait4/wait4.js dfspa-thirdparty-sdk && npm run start:inbound"
     volumes:
-      - "./dfsp_a/secrets:/opt/thirdparty-scheme-adapter/secrets"
-      - "./dfsp_a/dfsp_a_thirdparty_scheme_adapter.json:/opt/thirdparty-scheme-adapter/config/e2e.json"
-      - "./docker/wait4:/opt/thirdparty-scheme-adapter/wait4"
+      - "./dfsp_a/secrets:/opt/thirdparty-sdk/secrets"
+      - "./dfsp_a/dfsp_a_thirdparty_sdk.json:/opt/thirdparty-sdk/config/e2e.json"
+      - "./docker/wait4:/opt/thirdparty-sdk/wait4"
     ports:
       - "5005:4005"
     networks:
@@ -421,19 +421,19 @@ services:
       start_period: 30s
       interval: 30s
 
-  dfspa-thirdparty-scheme-adapter-outbound:
-    image: "mojaloop/thirdparty-scheme-adapter:v11.55.0"
+  dfspa-thirdparty-sdk-outbound:
+    image: "mojaloop/thirdparty-sdk:v12.0.0"
     # build:
-    #  context: https://github.com/mojaloop/thirdparty-scheme-adapter.git#feat/deterministic-test-consentids
+    #  context: https://github.com/mojaloop/thirdparty-sdk.git#feat/deterministic-test-consentids
     #  dockerfile: ./docker/Dockerfile
-    container_name: dfspa-thirdparty-scheme-adapter-outbound
+    container_name: dfspa-thirdparty-sdk-outbound
     environment:
       - NODE_ENV=e2e
-    command: sh -c "/opt/thirdparty-scheme-adapter/wait4/wait4.js dfspa-thirdparty-scheme-adapter && npm run start:outbound"
+    command: sh -c "/opt/thirdparty-sdk/wait4/wait4.js dfspa-thirdparty-sdk && npm run start:outbound"
     volumes:
-      - "./dfsp_a/secrets:/opt/thirdparty-scheme-adapter/secrets"
-      - "./dfsp_a/dfsp_a_thirdparty_scheme_adapter.json:/opt/thirdparty-scheme-adapter/config/e2e.json"
-      - "./docker/wait4:/opt/thirdparty-scheme-adapter/wait4"
+      - "./dfsp_a/secrets:/opt/thirdparty-sdk/secrets"
+      - "./dfsp_a/dfsp_a_thirdparty_sdk.json:/opt/thirdparty-sdk/config/e2e.json"
+      - "./docker/wait4:/opt/thirdparty-sdk/wait4"
     ports:
       - "5006:4006"
     networks:
@@ -459,7 +459,7 @@ services:
 
   ## DFSP B
   dfspb-backend:
-    image: "mojaloop/mojaloop-simulator:v11.6.1"
+    image: "mojaloop/mojaloop-simulator:v12.0.0"
     container_name: dfspb-backend
     env_file: ./dfsp_b/dfsp_b_backend.env
     volumes:
@@ -472,7 +472,7 @@ services:
       - mojaloop-net
 
   dfspb-sdk-scheme-adapter:
-    image: "mojaloop/sdk-scheme-adapter:v11.10.1.3-pisp"
+    image: "mojaloop/sdk-scheme-adapter:v12.0.0"
     # build:
     #   context: ../../sdk-scheme-adapter
     #   dockerfile: ./Dockerfile
@@ -492,19 +492,19 @@ services:
       - ml-api-adapter
     restart: always
 
-  dfspb-thirdparty-scheme-adapter-inbound:
-    image: "mojaloop/thirdparty-scheme-adapter:v11.41.0"
+  dfspb-thirdparty-sdk-inbound:
+    image: "mojaloop/thirdparty-sdk:v12.0.0"
     #build:
-    #  context: https://github.com/username/thirdparty-scheme-adapter.git#feat/branch
+    #  context: https://github.com/username/thirdparty-sdk.git#feat/branch
     #  dockerfile: ./docker/Dockerfile
-    container_name: dfspb-thirdparty-scheme-adapter-inbound
+    container_name: dfspb-thirdparty-sdk-inbound
     environment:
       - NODE_ENV=e2e
-    command: sh -c "/opt/thirdparty-scheme-adapter/wait4/wait4.js dfspb-thirdparty-scheme-adapter && npm run start:inbound"
+    command: sh -c "/opt/thirdparty-sdk/wait4/wait4.js dfspb-thirdparty-sdk && npm run start:inbound"
     volumes:
-      - "./dfsp_b/secrets:/opt/thirdparty-scheme-adapter/secrets"
-      - "./dfsp_b/dfsp_b_thirdparty_scheme_adapter.json:/opt/thirdparty-scheme-adapter/config/e2e.json"
-      - "./docker/wait4:/opt/thirdparty-scheme-adapter/wait4"
+      - "./dfsp_b/secrets:/opt/thirdparty-sdk/secrets"
+      - "./dfsp_b/dfsp_b_thirdparty_sdk.json:/opt/thirdparty-sdk/config/e2e.json"
+      - "./docker/wait4:/opt/thirdparty-sdk/wait4"
     ports:
       - "6005:4005"
     networks:
@@ -521,19 +521,19 @@ services:
       start_period: 10s
       interval: 30s
 
-  dfspb-thirdparty-scheme-adapter-outbound:
-    image: "mojaloop/thirdparty-scheme-adapter:v11.41.0"
+  dfspb-thirdparty-sdk-outbound:
+    image: "mojaloop/thirdparty-sdk:v12.0.0"
     #build:
-    #  context: https://github.com/username/thirdparty-scheme-adapter.git#feat/branch
+    #  context: https://github.com/username/thirdparty-sdk.git#feat/branch
     #  dockerfile: ./docker/Dockerfile
-    container_name: dfspb-thirdparty-scheme-adapter-outbound
+    container_name: dfspb-thirdparty-sdk-outbound
     environment:
       - NODE_ENV=e2e
-    command: sh -c "/opt/thirdparty-scheme-adapter/wait4/wait4.js dfspb-thirdparty-scheme-adapter && npm run start:outbound"
+    command: sh -c "/opt/thirdparty-sdk/wait4/wait4.js dfspb-thirdparty-sdk && npm run start:outbound"
     volumes:
-      - "./dfsp_b/secrets:/opt/thirdparty-scheme-adapter/secrets"
-      - "./dfsp_b/dfsp_b_thirdparty_scheme_adapter.json:/opt/thirdparty-scheme-adapter/config/e2e.json"
-      - "./docker/wait4:/opt/thirdparty-scheme-adapter/wait4"
+      - "./dfsp_b/secrets:/opt/thirdparty-sdk/secrets"
+      - "./dfsp_b/dfsp_b_thirdparty_sdk.json:/opt/thirdparty-sdk/config/e2e.json"
+      - "./docker/wait4:/opt/thirdparty-sdk/wait4"
     ports:
       - "6006:4006"
     networks:
@@ -559,7 +559,7 @@ services:
 
   ## PISP
   pisp-backend:
-    image: "mojaloop/mojaloop-simulator:v11.3.0.8-pisp"
+    image: "mojaloop/mojaloop-simulator:v12.0.0"
     container_name: pisp-backend
     env_file: ./pisp/pisp_backend.env
     volumes:
@@ -570,7 +570,7 @@ services:
       - "11003:3003"
 
   pisp-sdk-scheme-adapter:
-    image: "mojaloop/sdk-scheme-adapter:v11.10.1.3-pisp"
+    image: "mojaloop/sdk-scheme-adapter:v12.0.0"
     # build:
     #   context: ../../sdk-scheme-adapter
     #   dockerfile: ./Dockerfile
@@ -590,20 +590,20 @@ services:
       - ml-api-adapter
     restart: always
 
-  pisp-thirdparty-scheme-adapter-inbound:
-    image: "mojaloop/thirdparty-scheme-adapter:v11.54.0"
+  pisp-thirdparty-sdk-inbound:
+    image: "mojaloop/thirdparty-sdk:v12.0.0"
     #build:
-    #  context: https://github.com/username/thirdparty-scheme-adapter.git#feat/branch
+    #  context: https://github.com/username/thirdparty-sdk.git#feat/branch
     #  dockerfile: ./docker/Dockerfile
-    container_name: pisp-thirdparty-scheme-adapter-inbound
+    container_name: pisp-thirdparty-sdk-inbound
     environment:
       - NODE_ENV=e2e
       - DFSP_ID=pisp
-    command: sh -c "/opt/thirdparty-scheme-adapter/wait4/wait4.js pisp-thirdparty-scheme-adapter && npm run start:inbound"
+    command: sh -c "/opt/thirdparty-sdk/wait4/wait4.js pisp-thirdparty-sdk && npm run start:inbound"
     volumes:
-      - "./pisp/secrets:/opt/thirdparty-scheme-adapter/secrets"
-      - "./pisp/pisp_thirdparty_scheme_adapter.json:/opt/thirdparty-scheme-adapter/config/e2e.json"
-      - "./docker/wait4:/opt/thirdparty-scheme-adapter/wait4"
+      - "./pisp/secrets:/opt/thirdparty-sdk/secrets"
+      - "./pisp/pisp_thirdparty_sdk.json:/opt/thirdparty-sdk/config/e2e.json"
+      - "./docker/wait4:/opt/thirdparty-sdk/wait4"
     ports:
       - "7005:4005"
     networks:
@@ -620,21 +620,24 @@ services:
       start_period: 10s
       interval: 30s
 
-  pisp-thirdparty-scheme-adapter-outbound:
-    image: "mojaloop/thirdparty-scheme-adapter:v11.54.0"
+  pisp-thirdparty-sdk-outbound:
+    image: "mojaloop/thirdparty-sdk:v12.0.0"
     #build:
-    #  context: https://github.com/username/thirdparty-scheme-adapter.git#feat/branch
+    #  context: https://github.com/username/thirdparty-sdk.git#feat/branch
     #  dockerfile: ./docker/Dockerfile
-    container_name: pisp-thirdparty-scheme-adapter-outbound
+    container_name: pisp-thirdparty-sdk-outbound
     environment:
       - NODE_ENV=e2e
       - DFSP_ID=pisp
       - LOG_LEVEL=debug
-    command: sh -c "/opt/thirdparty-scheme-adapter/wait4/wait4.js pisp-thirdparty-scheme-adapter && npm run start:outbound"
+    command: sh -c "/opt/thirdparty-sdk/wait4/wait4.js pisp-thirdparty-sdk && npm run start:outbound"
     volumes:
-      - "./pisp/secrets:/opt/thirdparty-scheme-adapter/secrets"
-      - "./pisp/pisp_thirdparty_scheme_adapter.json:/opt/thirdparty-scheme-adapter/config/e2e.json"
-      - "./docker/wait4:/opt/thirdparty-scheme-adapter/wait4"
+      - "./pisp/secrets:/opt/thirdparty-sdk/secrets"
+      - "./pisp/pisp_thirdparty_sdk.json:/opt/thirdparty-sdk/config/e2e.json"
+      - "./pisp/pisp_thirdparty_sdk.json:/opt/thirdparty-sdk/config/development.json"
+      - "./pisp/pisp_thirdparty_sdk.json:/opt/thirdparty-sdk/config/test.json"
+      - "./pisp/pisp_thirdparty_sdk.json:/opt/thirdparty-sdk/config/integration.json"
+      - "./docker/wait4:/opt/thirdparty-sdk/wait4"
     ports:
       - "7006:4006"
     networks:

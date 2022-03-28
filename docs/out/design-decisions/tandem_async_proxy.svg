@@ -17,7 +17,7 @@
   </text>
   <path fill="#DDD" stroke="#a80036" d="M769 6h445.5v706.117H769z"/>
   <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="202" x="890.75" y="18.067">
-    Thirdparty-scheme-adapter
+    thirdparty-sdk
   </text>
   <path fill="#FFF" filter="url(#a)" stroke="#a80036" d="M32.5 308.625h10v130.398h-10zM263.5 439.023h10v116.398h-10zM608.5 135.828h10v231.93h-10zM845.5 525.422h10v59.133h-10zM1127.5 106.695h10v231.93h-10zM1127.5 584.555h10v80.266h-10zM1735.5 106.695h10V664.82h-10z"/>
   <path stroke="#a80036" stroke-dasharray="5,5" d="M37 60.43v613.39M268 60.43v613.39M613.5 60.43v613.39M850 60.43v613.39M1132.5 60.43v613.39M1740.5 60.43v613.39"/>
@@ -94,7 +94,7 @@
     discover that this call is comming
   </text>
   <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="209" x="625.5" y="204.161">
-    from Thirdparty-scheme-adapter
+    from thirdparty-sdk
   </text>
   <path stroke="#a80036" d="M1137.5 266.492h42M1179.5 266.492v13M1138.5 279.492h41"/>
   <path fill="#A80036" stroke="#a80036" d="M1148.5 275.492l-10 4 10 4-4-4z"/>
@@ -130,7 +130,7 @@
     discover that this call should be propagated
   </text>
   <text font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="321" x="280.5" y="478.223">
-    to the proper Thirdparty-scheme-adapter&apos; callback
+    to the proper thirdparty-sdk&apos; callback
   </text>
   <path fill="#A80036" stroke="#a80036" d="M833.5 521.422l10 4-10 4 4-4z"/>
   <path stroke="#a80036" d="M273.5 525.422h566"/>

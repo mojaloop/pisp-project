@@ -330,10 +330,10 @@ services:
     restart: always
 
   thirdparty-api-svc:
-    #image: "mojaloop/thirdparty-api-svc:v12.0.0"
-    build:
-      context: https://kleyow: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@github.com/kleyow/thirdparty-api-adapter.git#chore/regen-api
-      dockerfile: ./Dockerfile
+    image: "mojaloop/thirdparty-api-svc:v12.0.1"
+    #build:
+    #  context: https://@github.com/username/thirdparty-api-adapter.git#branch-name
+    #  dockerfile: ./Dockerfile
     container_name: thirdparty-api-svc
     command: sh -c "/opt/thirdparty-api-svc/wait4/wait4.js thirdparty-api-svc && npm run start"
     ports:

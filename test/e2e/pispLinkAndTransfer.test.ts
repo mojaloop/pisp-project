@@ -17,7 +17,11 @@ import TestEnv from './TestEnv'
     (You will need to run this at localhost or behind https, webbrowser crypto libraries only
      work behind secure contexts)
     to sign the request and update
-    `Happy Path - OTP/linking/request-consent/consentRequestId/pass-credential should be success`
+    `happy path - link account/link account`
+
+    After account linking you will also need to sign the output of
+    console.log('challenge from DFSP is:', initiateResponse.data.authorization.challenge)
+    and update `validVerificationRequestSignedPayload` with the FIDO assertion data.
 */
 
 const btoa = require('btoa')

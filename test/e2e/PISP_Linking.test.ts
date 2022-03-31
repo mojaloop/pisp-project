@@ -2,28 +2,30 @@
 import TestEnv from './TestEnv'
 import axios from 'axios'
 
-const consentRequestsPost = {
+const consentRequestsPostPartialData = {
   toParticipantId: 'dfspa',
+  accounts: [
+    { accountNickname: 'XXXXXXnt', address: 'dfspa.username.1234', currency: 'ZAR' },
+    { accountNickname: 'SpeXXXXXXXXnt', address: 'dfspa.username.5678', currency: 'USD' }
+  ],
+  actions: ['ACCOUNTS_GET_BALANCE', 'ACCOUNTS_TRANSFER'],
   userId: 'dfspa.username',
-  consentRequestId: 'b51ec534-ee48-4575-b6a9-ead2955b8069',
+  callbackUri: 'pisp-app://callback.com',
   authChannels: [
     'WEB',
     'OTP'
-  ],
-  accounts: [
-    { accountNickname: 'SpeXXXXXXXXnt', id: 'dfspa.username.5678', currency: 'USD' }
-  ],
-  actions: ['accounts.transfer'],
-  callbackUri: 'pisp-app://callback.com'
+  ]
 }
 
 const consentRequestsPutPartialData = {
   scopes: [
     {
-      accountId: 'dfspa.username.5678',
-      actions: [
-        'accounts.transfer'
-      ]
+      address: 'dfspa.username.1234',
+      actions: ['ACCOUNTS_GET_BALANCE', 'ACCOUNTS_TRANSFER']
+    },
+    {
+      address: 'dfspa.username.5678',
+      actions: ['ACCOUNTS_GET_BALANCE', 'ACCOUNTS_TRANSFER']
     }
   ],
   callbackUri: 'pisp-app://callback.com'
@@ -41,13 +43,17 @@ const linkingRequestConsentPassCredentialBody = {
 }
 
 describe('Account Linking', (): void => {
+  // Happy Path - Web uses a special `linkingRequestConsentPassCredentialBody.id`
+  // which skips FIDO validation in the `auth-service`. This id is set in
+  // `docker-local/docker/auth-service/default.json` under the
+  // DEMO_SKIP_VALIDATION_FOR_CREDENTIAL_IDS config option
   describe('Happy Path - Web', (): void => {
     let consentId: string
 
     it('/linking/request-consent should be success', async (): Promise<void> => {
       // dfspa mojaloop-simulator returns WEB response for id 'b51ec534-ee48-4575-b6a9-ead2955b8069'
       const consentRequest = {
-        ...consentRequestsPost,
+        ...consentRequestsPostPartialData,
         consentRequestId: 'b51ec534-ee48-4575-b6a9-ead2955b8069',
         toParticipantId: 'dfspa'
       }
@@ -55,10 +61,9 @@ describe('Account Linking', (): void => {
         channelResponse: {
           ...consentRequestsPutPartialData,
           authChannels: ['WEB'],
-          consentRequestId: 'b51ec534-ee48-4575-b6a9-ead2955b8069',
           authUri: 'http://localhost:6060/admin/dfsp/authorize?consentRequestId=b51ec534-ee48-4575-b6a9-ead2955b8069&callbackUri=http://localhost:42181/flutter-web-auth.html'
         },
-        currentState: 'WebAuthenticationChannelResponseRecieved'
+        currentState: 'WebAuthenticationChannelResponseReceived'
       }
 
       const consentRequestsResponse = await axios.post(linkingRequestConsentURI, consentRequest)
@@ -79,12 +84,15 @@ describe('Account Linking', (): void => {
         consentRequestId: consentRequestId,
         scopes: [
           {
-            accountId: 'dfspa.username.5678',
-            actions: [
-              'accounts.transfer'
-            ]
+            address: 'dfspa.username.1234',
+            actions: ['ACCOUNTS_GET_BALANCE', 'ACCOUNTS_TRANSFER']
+          },
+          {
+            address: 'dfspa.username.5678',
+            actions: ['ACCOUNTS_GET_BALANCE', 'ACCOUNTS_TRANSFER']
           }
-        ]
+        ],
+        status: 'ISSUED'
       }
       const consentRequestsResponse = await axios.patch(linkingRequestConsentAuthenticateURI, linkingRequestConsentAuthenticateRequest)
 
@@ -153,13 +161,28 @@ describe('Account Linking', (): void => {
     })
   })
 
+  /* IMPORTANT
+    // Happy Path - OTP uses a request that will go through actual FIDO attestion.
+
+    The fido challenges found in `Happy Path - OTP` are signed with
+    Kevin Leyow's <kevin.leyow@modusbox.com> Yubikey. If the POST /consent
+    `consentId` and `scopes` ever change form you will need to derive and resign the challenges,
+    update the `credential` object and update this PSA.
+    Take the console output of
+    `console.log('Consent is:', JSON.stringify(consentRequestsResponse.data.consent))`
+    and use https://github.com/mojaloop/contrib-fido-test-ui#creating-a-test-credential
+    (You will need to run this at localhost or behind https, webbrowser crypto libraries only
+     work behind secure contexts)
+    to sign the request and update
+    `Happy Path - OTP/linking/request-consent/consentRequestId/pass-credential should be success`
+  */
   describe('Happy Path - OTP', (): void => {
     let consentId: string
 
     it('/linking/request-consent should be success', async (): Promise<void> => {
       // dfspa mojaloop-simulator returns OTP response for id 'c51ec534-ee48-4575-b6a9-ead2955b8069'
       const consentRequest = {
-        ...consentRequestsPost,
+        ...consentRequestsPostPartialData,
         consentRequestId: 'c51ec534-ee48-4575-b6a9-ead2955b8069',
         toParticipantId: 'dfspa'
       }
@@ -167,10 +190,9 @@ describe('Account Linking', (): void => {
       const expectedResponse = {
         channelResponse: {
           ...consentRequestsPutPartialData,
-          consentRequestId: 'c51ec534-ee48-4575-b6a9-ead2955b8069',
           authChannels: ['OTP']
         },
-        currentState: 'OTPAuthenticationChannelResponseRecieved'
+        currentState: 'OTPAuthenticationChannelResponseReceived'
       }
 
       const consentRequestsResponse = await axios.post(linkingRequestConsentURI, consentRequest)
@@ -188,15 +210,18 @@ describe('Account Linking', (): void => {
       }
       const expectedResponse = {
         consentId: expect.any(String),
-        consentRequestId: consentRequestId,
+        consentRequestId: 'c51ec534-ee48-4575-b6a9-ead2955b8069',
         scopes: [
           {
-            accountId: 'dfspa.username.5678',
-            actions: [
-              'accounts.transfer'
-            ]
+            address: 'dfspa.username.1234',
+            actions: ['ACCOUNTS_GET_BALANCE', 'ACCOUNTS_TRANSFER']
+          },
+          {
+            address: 'dfspa.username.5678',
+            actions: ['ACCOUNTS_GET_BALANCE', 'ACCOUNTS_TRANSFER']
           }
-        ]
+        ],
+        status: 'ISSUED'
       }
       const consentRequestsResponse = await axios.patch(linkingRequestConsentAuthenticateURI, linkingRequestConsentAuthenticateRequest)
 
@@ -205,7 +230,6 @@ describe('Account Linking', (): void => {
       expect(consentRequestsResponse.data.consent).toEqual(expectedResponse)
 
       console.log('Consent is:', JSON.stringify(consentRequestsResponse.data.consent))
-
 
       // store the consentId for future assertion
       consentId = consentRequestsResponse.data.consent.consentId
@@ -216,16 +240,17 @@ describe('Account Linking', (): void => {
       const linkingRequestConsentPassCredentialURI = `${TestEnv.baseUrls.pispThirdpartySchemeAdapterOutbound}/linking/request-consent/${consentRequestId}/pass-credential`
 
       const linkingRequestConsentPassCredentialRequest = {
-        // Newly generated credential from front end
+        // NOTE: Update this credential when consent If the POST /consent
+        //       `consentId` and `scopes` ever change. Read `IMPORTANT` instructions above
         credential: {
-          "payload": {
-            "id": "UMyM71BqZ5G-NWnD1k3RtR6Ry_zQPLEh_ntU3zOO_3dur80eHxDOqJSvc83FnDczRTdv6hVCZ86Kuynrz5OKrw",
-            "rawId": "UMyM71BqZ5G+NWnD1k3RtR6Ry/zQPLEh/ntU3zOO/3dur80eHxDOqJSvc83FnDczRTdv6hVCZ86Kuynrz5OKrw==",
-            "response": {
-              "attestationObject": "o2NmbXRoZmlkby11MmZnYXR0U3RtdKJjc2lnWEgwRgIhALlL18WMrdV+eVDKRoNgb3iTDNxANrbC93w/sG6BDcWEAiEA1WGNy/sZPJcboqHD8YgqXjxZni9ZT4M1EL+O+gRFWSxjeDVjgVkCwTCCAr0wggGloAMCAQICBAsFzVMwDQYJKoZIhvcNAQELBQAwLjEsMCoGA1UEAxMjWXViaWNvIFUyRiBSb290IENBIFNlcmlhbCA0NTcyMDA2MzEwIBcNMTQwODAxMDAwMDAwWhgPMjA1MDA5MDQwMDAwMDBaMG4xCzAJBgNVBAYTAlNFMRIwEAYDVQQKDAlZdWJpY28gQUIxIjAgBgNVBAsMGUF1dGhlbnRpY2F0b3IgQXR0ZXN0YXRpb24xJzAlBgNVBAMMHll1YmljbyBVMkYgRUUgU2VyaWFsIDE4NDkyOTYxOTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABCEab7G1iSXLCsEYX3wq46i0iBAUebEe//VV4H2XUb0rF2olLe5Z7OOFmSBbs+oov4/X/H2nXAVCcq5IWOWR/FqjbDBqMCIGCSsGAQQBgsQKAgQVMS4zLjYuMS40LjEuNDE0ODIuMS4xMBMGCysGAQQBguUcAgEBBAQDAgQwMCEGCysGAQQBguUcAQEEBBIEEBSaICGO9kEzlriB+NW38fUwDAYDVR0TAQH/BAIwADANBgkqhkiG9w0BAQsFAAOCAQEAPv6j3z0q4HJXj34E0N1aS2jbAa/oYy4YtOC4c0MYkRlsGEvrwdUzoj13i7EECMG5qkFOdXaFWwk2lxizSK9c72ywMIZy1h+4vZuGoQqmgs6MLU7wkO1QVBj+U9TOHmJ6KPNyAwlY0I/6WRvEGIDhjooM7RqFgH+QlnFBegtFMhWzjcFHKiRJdkC06Gv+xPFUY5uFuOiAFJY2JDg1WQEr/Id8C0TsfaeU0gZUsprcHbpcUHvwym3zUrzN3nQNLqfhCCSizjlPkE0dmUFeOnxFtf4oepvL3GmOi9zVtHmKXO013oo1CQIKFLcmv785p0QHnLmPW53KCbfD67y9oq9pA2hhdXRoRGF0YVjESZYN5YgOjGh0NBcPZHZgW4/krrmihjLHmVzzuoMdl2NBAAAAAAAAAAAAAAAAAAAAAAAAAAAAQFDMjO9QameRvjVpw9ZN0bUekcv80DyxIf57VN8zjv93bq/NHh8QzqiUr3PNxZw3M0U3b+oVQmfOirsp68+Tiq+lAQIDJiABIVggy/NJCW5QMqfxRdvjCT6PeJMC/enM2b/83KeuHJAwENAiWCCLLEUZifuehFbVabqd/Cni7GvAEZikU3J6Q0+b+CXnqg==",
-              "clientDataJSON": "eyJjaGFsbGVuZ2UiOiJORGxqT1RjeFltWXdZVFExWm1Ka1pUa3pOek13Tm1SalpUazNZVFl6TURjM01HSmtZamMzWW1FellqWm1OemcwWkRJMU5HWTJPR0UwTm1Sa05EQmhNZyIsImNsaWVudEV4dGVuc2lvbnMiOnt9LCJoYXNoQWxnb3JpdGhtIjoiU0hBLTI1NiIsIm9yaWdpbiI6Imh0dHA6Ly9sb2NhbGhvc3Q6ODA4MCIsInR5cGUiOiJ3ZWJhdXRobi5jcmVhdGUifQ=="
+          payload: {
+            id: 'zMEeRCOGrJU53n-MWfZFtdQkkknJCLn_nIRD6TIO9uO4Mgd9WEefoII3ZBhfGiWQRYkqP_UAY4GxYiUT_0OZbA',
+            rawId: 'zMEeRCOGrJU53n+MWfZFtdQkkknJCLn/nIRD6TIO9uO4Mgd9WEefoII3ZBhfGiWQRYkqP/UAY4GxYiUT/0OZbA==',
+            response: {
+              attestationObject: 'o2NmbXRoZmlkby11MmZnYXR0U3RtdKJjc2lnWEcwRQIgK5O/5iZlFuvThVhjj9DWRmImAk2fTJz3ecP1KyrDCKgCIQC1REKU+64f6o51HEAZxp2weSGMkmWte3kjcYKnFPOIy2N4NWOBWQLcMIIC2DCCAcCgAwIBAgIJALA5KjdfOKLrMA0GCSqGSIb3DQEBCwUAMC4xLDAqBgNVBAMTI1l1YmljbyBVMkYgUm9vdCBDQSBTZXJpYWwgNDU3MjAwNjMxMCAXDTE0MDgwMTAwMDAwMFoYDzIwNTAwOTA0MDAwMDAwWjBuMQswCQYDVQQGEwJTRTESMBAGA1UECgwJWXViaWNvIEFCMSIwIAYDVQQLDBlBdXRoZW50aWNhdG9yIEF0dGVzdGF0aW9uMScwJQYDVQQDDB5ZdWJpY28gVTJGIEVFIFNlcmlhbCA5MjU1MTQxNjAwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAATBUzDbxw7VyKPri/NcB5oy/eVWBkwkXfQNU1gLc+nLR5EP7xcV93l5aHDpq1wXjOuZA5jBJoWpb6nbhhWOI9nCo4GBMH8wEwYKKwYBBAGCxAoNAQQFBAMFBAMwIgYJKwYBBAGCxAoCBBUxLjMuNi4xLjQuMS40MTQ4Mi4xLjcwEwYLKwYBBAGC5RwCAQEEBAMCBDAwIQYLKwYBBAGC5RwBAQQEEgQQL8BXn4ETR+qxFrtajbkgKjAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBCwUAA4IBAQABaTFk5Jj2iKM7SQ+rIS9YLEj4xxyJlJ9fGOoidDllzj4z7UpdC2JQ+ucOBPY81JO6hJTwcEkIdwoQPRZO5ZAScmBDNuIizJxqiQct7vF4J6SJHwEexWpF4XztIHtWEmd8JbnlvMw1lMwx+UuD06l11LxkfhK/LN613S91FABcf/ViH6rqmSpHu+II26jWeYEltk0Wf7jvOtRFKkROFBl2WPc2Dg1eRRYOKSJMqQhQn2Bud83uPFxT1H5yT29MKtjy6DJyzP4/UQjhLmuy9NDt+tlbtvfrXbrIitVMRE6oRert0juvM8PPMb6tvVYQfiM2IaYLKChn5yFCywvR9Xa+aGF1dGhEYXRhWMRJlg3liA6MaHQ0Fw9kdmBbj+SuuaKGMseZXPO6gx2XY0EAAAAAAAAAAAAAAAAAAAAAAAAAAABAzMEeRCOGrJU53n+MWfZFtdQkkknJCLn/nIRD6TIO9uO4Mgd9WEefoII3ZBhfGiWQRYkqP/UAY4GxYiUT/0OZbKUBAgMmIAEhWCD0T3++oAlCdCKgtoxjMuuiXbHMCmKvDo5BkVZgwRHKASJYIG3A5XS9CQ4XmFK7n+vmYo862BR94WSKJ+DpmgVnXNzd',
+              clientDataJSON: 'eyJ0eXBlIjoid2ViYXV0aG4uY3JlYXRlIiwiY2hhbGxlbmdlIjoiWldRMFpUQXdZelUwWVRVME5XRTBOVFU1TXprMU1qazNPRGs1WVRSbU1UQTVZbU5rWlRCaU9ETTVaVGcxTjJJd1l6VXdNakJqTWpaa1pHVTFZMkZpWWciLCJvcmlnaW4iOiJodHRwOi8vbG9jYWxob3N0OjgwODAiLCJjcm9zc09yaWdpbiI6ZmFsc2UsIm90aGVyX2tleXNfY2FuX2JlX2FkZGVkX2hlcmUiOiJkbyBub3QgY29tcGFyZSBjbGllbnREYXRhSlNPTiBhZ2FpbnN0IGEgdGVtcGxhdGUuIFNlZSBodHRwczovL2dvby5nbC95YWJQZXgifQ=='
             },
-            "type": "public-key"
+            type: 'public-key'
           }
         }
       }
@@ -276,10 +301,10 @@ describe('Account Linking', (): void => {
       // validateRequest is a backend call to a DFSP.
       // dfspA's simulator rules throws an error on a request containing the
       // consentRequestId of 'd51ec534-ee48-4575-b6a9-ead2955b8069'.
-      // dfspA's thirdparty-scheme-adapter then sends a PUT /consents/{ID}/error
+      // dfspA's thirdparty-sdk then sends a PUT /consents/{ID}/error
       // callback to the pisp containing that error.
       const linkingRequestConsentRequest = {
-        ...consentRequestsPost,
+        ...consentRequestsPostPartialData,
         consentRequestId: 'd51ec534-ee48-4575-b6a9-ead2955b8069',
         toParticipantId: 'dfspa'
       }
@@ -304,7 +329,7 @@ describe('Account Linking', (): void => {
       // proceed with web happy flow using consentRequestID
       // b51ec534-ee48-4575-b6a9-ead2955b8069
       const linkingRequestConsentRequest = {
-        ...consentRequestsPost,
+        ...consentRequestsPostPartialData,
         consentRequestId: 'b51ec534-ee48-4575-b6a9-ead2955b8069',
         toParticipantId: 'dfspa'
       }
@@ -312,10 +337,9 @@ describe('Account Linking', (): void => {
         channelResponse: {
           ...consentRequestsPutPartialData,
           authChannels: ['WEB'],
-          consentRequestId: 'b51ec534-ee48-4575-b6a9-ead2955b8069',
           authUri: 'http://localhost:6060/admin/dfsp/authorize?consentRequestId=b51ec534-ee48-4575-b6a9-ead2955b8069&callbackUri=http://localhost:42181/flutter-web-auth.html'
         },
-        currentState: 'WebAuthenticationChannelResponseRecieved'
+        currentState: 'WebAuthenticationChannelResponseReceived'
       }
       const consentRequestsResponse = await axios.post(linkingRequestConsentURI, linkingRequestConsentRequest)
       expect(consentRequestsResponse.status).toEqual(200)
@@ -355,7 +379,7 @@ describe('Account Linking', (): void => {
       // proceed with web happy flow using consentRequestID
       // b51ec534-ee48-4575-b6a9-ead2955b8069
       const linkingRequestConsentRequest = {
-        ...consentRequestsPost,
+        ...consentRequestsPostPartialData,
         consentRequestId: 'b51ec534-ee48-4575-b6a9-ead2955b8069',
         toParticipantId: 'dfspa'
       }
@@ -363,10 +387,9 @@ describe('Account Linking', (): void => {
         channelResponse: {
           ...consentRequestsPutPartialData,
           authChannels: ['WEB'],
-          consentRequestId: 'b51ec534-ee48-4575-b6a9-ead2955b8069',
           authUri: 'http://localhost:6060/admin/dfsp/authorize?consentRequestId=b51ec534-ee48-4575-b6a9-ead2955b8069&callbackUri=http://localhost:42181/flutter-web-auth.html'
         },
-        currentState: 'WebAuthenticationChannelResponseRecieved'
+        currentState: 'WebAuthenticationChannelResponseReceived'
       }
       const consentRequestsResponse = await axios.post(linkingRequestConsentURI, linkingRequestConsentRequest)
       expect(consentRequestsResponse.status).toEqual(200)
@@ -385,12 +408,15 @@ describe('Account Linking', (): void => {
         consentRequestId: consentRequestId,
         scopes: [
           {
-            accountId: 'dfspa.username.5678',
-            actions: [
-              'accounts.transfer'
-            ]
+            address: 'dfspa.username.1234',
+            actions: ['ACCOUNTS_GET_BALANCE', 'ACCOUNTS_TRANSFER']
+          },
+          {
+            address: 'dfspa.username.5678',
+            actions: ['ACCOUNTS_GET_BALANCE', 'ACCOUNTS_TRANSFER']
           }
-        ]
+        ],
+        status: 'ISSUED'
       }
 
       const consentRequestsResponse = await axios.patch(linkingRequestConsentAuthenticateURI, linkingRequestConsentAuthenticateRequest)

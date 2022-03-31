@@ -1,6 +1,6 @@
 # Scheme Adapters: SDK & Thirdparty
 
-## layout of sdk-scheme-adapter and Thirdparty-scheme-adapter
+## layout of sdk-scheme-adapter and thirdparty-sdk
 
 ![adapters-layout](./adapters-layout.png)
 
@@ -11,17 +11,17 @@
 ![generic-pattern](../out/design-decisions/tandem_generic_pattern.svg)
 
 - sync API - synchronous api endpoints to be used by thirdparty scheme-adapter
-  
+
 ### list of endpoints to be exposed
 
-> **=>** Outgoing  
+> **=>** Outgoing
 > **<=** Incoming
 
 #### Linking flow
 
 **Discovery**
 - => GET /parties/{Type}/{ID} <= PUT /parties/{Type}/{ID}
-  
+
 **Request consent**
 - => POST /consentRequests <= PUT /consentRequests/{ID}
 
@@ -32,11 +32,11 @@
 - => POST /consents <= POST /consents
 
 **Credential registration**
-- => POST /consents/{ID}/generateChallenge <= PUT /consents/{ID}` 
-  
+- => POST /consents/{ID}/generateChallenge <= PUT /consents/{ID}`
+
 #### Unlinking flow
 - => POST /consents/{ID}/revoke <= PATCH /consents/{ID}
-  
+
 ### Thirdparty credential registration
 - TODO
 

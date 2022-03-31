@@ -31,7 +31,7 @@
               }
             ]
           },
-          "url": "http://pisp-thirdparty-scheme-adapter-outbound:4006"
+          "url": "http://pisp-thirdparty-sdk-outbound:4006"
         }
       ]
     },
@@ -54,7 +54,7 @@
             "fspId": "dfspa",
             "userId": "username1234"
           },
-          "url": "http://pisp-thirdparty-scheme-adapter-outbound:4006",
+          "url": "http://pisp-thirdparty-sdk-outbound:4006",
           "tests": {
             "assertions": [
               {
@@ -111,7 +111,7 @@
             "accounts": [
               {
                 "accountNickname": "SpeXXXXXXXXnt",
-                "id": "dfspa.username.5678",
+                "address": "dfspa.username.5678",
                 "currency": "USD"
               }
             ],
@@ -120,7 +120,7 @@
             ],
             "callbackUri": "pisp-app://callback.com"
           },
-          "url": "http://pisp-thirdparty-scheme-adapter-outbound:4006",
+          "url": "http://pisp-thirdparty-sdk-outbound:4006",
           "tests": {
             "assertions": [
               {
@@ -188,7 +188,7 @@
               }
             ]
           },
-          "url": "http://pisp-thirdparty-scheme-adapter-outbound:4006"
+          "url": "http://pisp-thirdparty-sdk-outbound:4006"
         },
         {
           "id": 3,
@@ -204,7 +204,7 @@
           "params": {
             "ID": "b51ec534-ee48-4575-b6a9-ead2955b8069"
           },
-          "url": "http://pisp-thirdparty-scheme-adapter-outbound:4006",
+          "url": "http://pisp-thirdparty-sdk-outbound:4006",
           "body": {
             "credential": {
               "payload": {
@@ -265,7 +265,7 @@
             "accounts": [
               {
                 "accountNickname": "SpeXXXXXXXXnt",
-                "id": "dfspa.username.5678",
+                "address": "dfspa.username.5678",
                 "currency": "USD"
               }
             ],
@@ -274,7 +274,7 @@
             ],
             "callbackUri": "pisp-app://callback.com"
           },
-          "url": "http://pisp-thirdparty-scheme-adapter-outbound:4006",
+          "url": "http://pisp-thirdparty-sdk-outbound:4006",
           "tests": {
             "assertions": [
               {
@@ -341,7 +341,7 @@
               }
             ]
           },
-          "url": "http://pisp-thirdparty-scheme-adapter-outbound:4006"
+          "url": "http://pisp-thirdparty-sdk-outbound:4006"
         },
         {
           "id": 3,
@@ -357,7 +357,7 @@
           "params": {
             "ID": "c51ec534-ee48-4575-b6a9-ead2955b8069"
           },
-          "url": "http://pisp-thirdparty-scheme-adapter-outbound:4006",
+          "url": "http://pisp-thirdparty-sdk-outbound:4006",
           "body": {
             "credential": {
               "payload": {
@@ -418,7 +418,7 @@
             "accounts": [
               {
                 "accountNickname": "SpeXXXXXXXXnt",
-                "id": "dfspa.username.5678",
+                "address": "dfspa.username.5678",
                 "currency": "USD"
               }
             ],
@@ -446,7 +446,7 @@
               }
             ]
           },
-          "url": "http://pisp-thirdparty-scheme-adapter-outbound:4006"
+          "url": "http://pisp-thirdparty-sdk-outbound:4006"
         }
       ]
     },
@@ -476,7 +476,7 @@
             "accounts": [
               {
                 "accountNickname": "SpeXXXXXXXXnt",
-                "id": "dfspa.username.5678",
+                "address": "dfspa.username.5678",
                 "currency": "USD"
               }
             ],
@@ -485,7 +485,7 @@
             ],
             "callbackUri": "pisp-app://callback.com"
           },
-          "url": "http://pisp-thirdparty-scheme-adapter-outbound:4006",
+          "url": "http://pisp-thirdparty-sdk-outbound:4006",
           "tests": {
             "assertions": [
               {
@@ -553,7 +553,7 @@
               }
             ]
           },
-          "url": "http://pisp-thirdparty-scheme-adapter-outbound:4006"
+          "url": "http://pisp-thirdparty-sdk-outbound:4006"
         }
       ]
     },
@@ -583,7 +583,7 @@
             "accounts": [
               {
                 "accountNickname": "SpeXXXXXXXXnt",
-                "id": "dfspa.username.5678",
+                "address": "dfspa.username.5678",
                 "currency": "USD"
               }
             ],
@@ -592,7 +592,7 @@
             ],
             "callbackUri": "pisp-app://callback.com"
           },
-          "url": "http://pisp-thirdparty-scheme-adapter-outbound:4006",
+          "url": "http://pisp-thirdparty-sdk-outbound:4006",
           "tests": {
             "assertions": [
               {
@@ -660,7 +660,7 @@
               }
             ]
           },
-          "url": "http://pisp-thirdparty-scheme-adapter-outbound:4006"
+          "url": "http://pisp-thirdparty-sdk-outbound:4006"
         },
         {
           "id": 3,
@@ -676,7 +676,7 @@
           "params": {
             "ID": "b51ec534-ee48-4575-b6a9-ead2955b8069"
           },
-          "url": "http://pisp-thirdparty-scheme-adapter-outbound:4006",
+          "url": "http://pisp-thirdparty-sdk-outbound:4006",
           "body": {
             "credential": {
               "payload": {
@@ -753,7 +753,7 @@
             ],
             "callbackUri": "pisp-app://callback.com"
           },
-          "url": "http://pisp-thirdparty-scheme-adapter-outbound:4006",
+          "url": "http://pisp-thirdparty-sdk-outbound:4006",
           "tests": {
             "assertions": [
               {
@@ -828,7 +828,7 @@
               }
             ]
           },
-          "url": "http://pisp-thirdparty-scheme-adapter-outbound:4006"
+          "url": "http://pisp-thirdparty-sdk-outbound:4006"
         },
         {
           "id": 3,
@@ -844,7 +844,7 @@
           "params": {
             "ID": "b5d6206c-4f06-497d-af15-ed866ea6958f"
           },
-          "url": "http://pisp-thirdparty-scheme-adapter-outbound:4006",
+          "url": "http://pisp-thirdparty-sdk-outbound:4006",
           "body": {
             "credential": {
               "payload": {
@@ -895,7 +895,7 @@
             },
             "transactionRequestId": "c2470148-1be2-4c0b-aece-aa8dcb92a6cc"
           },
-          "url": "http://pisp-thirdparty-scheme-adapter-outbound:4006",
+          "url": "http://pisp-thirdparty-sdk-outbound:4006",
           "tests": {
             "assertions": [
               {
@@ -968,7 +968,7 @@
             },
             "expiration": "{$requestVariables.expiration}"
           },
-          "url": "http://pisp-thirdparty-scheme-adapter-outbound:4006",
+          "url": "http://pisp-thirdparty-sdk-outbound:4006",
           "tests": {
             "assertions": [
               {
@@ -1076,7 +1076,7 @@
               }
             }
           },
-          "url": "http://pisp-thirdparty-scheme-adapter-outbound:4006",
+          "url": "http://pisp-thirdparty-sdk-outbound:4006",
           "tests": {
             "assertions": [
               {

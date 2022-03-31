@@ -5,12 +5,12 @@ box "Mojaloop"
   participant Switch as S
 end box
 
-box "SDK-scheme-adapter" 
+box "SDK-scheme-adapter"
   participant "SDK-Incoming" as Sin
   participant "SDK-Outgoing" as Sout
 end box
 
-box "Thirdparty-scheme-adapter"
+box "thirdparty-sdk"
   participant "Thirdparty-Incoming" as Tin
   participant "Thirdparty-Outgoing" as Tout
 end box

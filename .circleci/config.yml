@@ -79,8 +79,8 @@ jobs:
           paths:
             - node_modules
 
-  # This test currently runs both the Jest base e2e tests as well as 
-  # the TTK e2e test runner. 
+  # This test currently runs both the Jest base e2e tests as well as
+  # the TTK e2e test runner.
   # In the future, we will likely remove the jest runner in favour of
   # using the ttk only
   test-e2e:
@@ -129,9 +129,9 @@ jobs:
             sleep 10
             docker-compose up -d central-settlement
             sleep 10
-            docker-compose up -d dfspa-sdk-scheme-adapter dfspa-thirdparty-scheme-adapter-inbound dfspa-thirdparty-scheme-adapter-outbound
+            docker-compose up -d dfspa-sdk-scheme-adapter dfspa-thirdparty-sdk-inbound dfspa-thirdparty-sdk-outbound
             sleep 10
-            docker-compose up -d dfspb-sdk-scheme-adapter dfspb-thirdparty-scheme-adapter-inbound dfspb-thirdparty-scheme-adapter-outbound
+            docker-compose up -d dfspb-sdk-scheme-adapter dfspb-thirdparty-sdk-inbound dfspb-thirdparty-sdk-outbound
             sleep 10
             docker-compose up -d login-flow-simulator-ui login-flow-simulator
             sleep 10
@@ -141,7 +141,7 @@ jobs:
             sleep 10
             docker-compose up -d quoting-service
             sleep 10
-            docker-compose up -d pisp-sdk-scheme-adapter pisp-redis pisp-thirdparty-scheme-adapter-inbound pisp-backend pisp-thirdparty-scheme-adapter-outbound
+            docker-compose up -d pisp-sdk-scheme-adapter pisp-redis pisp-thirdparty-sdk-inbound pisp-backend pisp-thirdparty-sdk-outbound
             sleep 10
 
             # everything else

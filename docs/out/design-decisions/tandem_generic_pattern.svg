@@ -16,7 +16,7 @@
     SDK-scheme-adapter
   </text>
   <path fill="#DDD" stroke="#a80036" d="M635 6h329v544.586H635z"/>
-  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="202" x="698.5" y="18.067">
+  <text font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="106" x="746.5" y="18.067">
     thirdparty-sdk
   </text>
   <path fill="#FFF" filter="url(#a)" stroke="#a80036" d="M32.5 249.227h10v100.398h-10zM213.5 349.625h10v29.133h-10zM504.5 120.695h10v157.664h-10zM504.5 378.758h10v29.133h-10zM877 70.43h10v432.859h-10zM1160 70.43h10v432.859h-10z"/>

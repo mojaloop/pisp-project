@@ -152,7 +152,7 @@ module.exports = {
           method: 'mysqlAlt',
           rc: {
             namespace: '',
-            configPath: '../config/integration.json'
+            configPath: '../dist/config/integration.json'
           },
           retries: 30
         }

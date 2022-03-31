@@ -58,12 +58,12 @@
           "accounts": [
               {
               "accountNickname": "dfspb.user.nickname1",
-              "id": "dfspb.username.1234",
+              "address": "dfspb.username.1234",
               "currency": "ZAR"
             },
             {
               "accountNickname": "dfspb.user.nickname2",
-              "id": "dfspb.username.5678",
+              "address": "dfspb.username.5678",
               "currency": "USD"
             }
           ]

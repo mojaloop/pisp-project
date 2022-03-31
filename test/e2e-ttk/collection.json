@@ -65,12 +65,12 @@
                   "  accounts: [",
                   "    {",
                   "      accountNickname: 'dfspa.user.nickname1',",
-                  "      id: 'dfspa.username.1234',",
+                  "      address: 'dfspa.username.1234',",
                   "      currency: 'ZAR'",
                   "    },",
                   "    {",
                   "      accountNickname: 'dfspa.user.nickname2',",
-                  "      id: 'dfspa.username.5678',",
+                  "      address: 'dfspa.username.5678',",
                   "      currency: 'USD'",
                   "    }",
                   "],",
@@ -109,15 +109,10 @@
               "OTP"
             ],
             "accounts": [
-              {
-                "accountNickname": "SpeXXXXXXXXnt",
-                "address": "dfspa.username.5678",
-                "currency": "USD"
-              }
+              { "accountNickname": "XXXXXXnt", "address": "dfspa.username.1234", "currency": "ZAR" },
+              { "accountNickname": "SpeXXXXXXXXnt", "address": "dfspa.username.5678", "currency": "USD" }
             ],
-            "actions": [
-              "accounts.transfer"
-            ],
+            "actions": ["ACCOUNTS_GET_BALANCE", "ACCOUNTS_TRANSFER"],
             "callbackUri": "pisp-app://callback.com"
           },
           "url": "http://pisp-thirdparty-sdk-outbound:4006",
@@ -131,18 +126,23 @@
                   "  channelResponse: {",
                   "  scopes: [",
                   "  {",
-                  "    accountId: 'dfspa.username.5678',",
+                  "    address: 'dfspa.username.1234',",
                   "    actions: [",
-                  "      'accounts.transfer'",
+                  "      'ACCOUNTS_GET_BALANCE', 'ACCOUNTS_TRANSFER'",
+                  "    ]",
+                  "  },",
+                  "  {",
+                  "    address: 'dfspa.username.5678',",
+                  "    actions: [",
+                  "      'ACCOUNTS_GET_BALANCE', 'ACCOUNTS_TRANSFER'",
                   "    ]",
                   "  }",
                   "  ],",
                   "  callbackUri: 'pisp-app://callback.com',",
                   "  authChannels: ['WEB'],",
-                  "  consentRequestId: 'b51ec534-ee48-4575-b6a9-ead2955b8069',",
                   "  authUri: 'http://localhost:6060/admin/dfsp/authorize?consentRequestId=b51ec534-ee48-4575-b6a9-ead2955b8069&callbackUri=http://localhost:42181/flutter-web-auth.html'",
                   "  },",
-                  "  currentState: 'WebAuthenticationChannelResponseRecieved'",
+                  "  currentState: 'WebAuthenticationChannelResponseReceived'",
                   "}",
                   "",
                   "expect(response.body).to.deep.equal(expected)"
@@ -174,10 +174,19 @@
                 "id": 1,
                 "description": "response",
                 "exec": [
-                  "const expectedScopes = [{",
-                  "  accountId: 'dfspa.username.5678',",
-                  "  actions: [ 'accounts.transfer' ]",
-                  "}]",
+                  "const expectedScopes =  [",
+                  "  {",
+                  "    address: 'dfspa.username.1234',",
+                  "    actions: [",
+                  "      'ACCOUNTS_GET_BALANCE', 'ACCOUNTS_TRANSFER'",
+                  "    ]",
+                  "  },",
+                  "  {",
+                  "    address: 'dfspa.username.5678',",
+                  "    actions: [",
+                  "      'ACCOUNTS_GET_BALANCE', 'ACCOUNTS_TRANSFER'",
+                  "    ]",
+                  "  }]",
                   "",
                   "",
                   "expect(response.body.consent.consentId).to.be.a('string')",
@@ -263,15 +272,10 @@
               "OTP"
             ],
             "accounts": [
-              {
-                "accountNickname": "SpeXXXXXXXXnt",
-                "address": "dfspa.username.5678",
-                "currency": "USD"
-              }
+              { "accountNickname": "XXXXXXnt", "address": "dfspa.username.1234", "currency": "ZAR" },
+              { "accountNickname": "SpeXXXXXXXXnt", "address": "dfspa.username.5678", "currency": "USD" }
             ],
-            "actions": [
-              "accounts.transfer"
-            ],
+            "actions": ["ACCOUNTS_GET_BALANCE", "ACCOUNTS_TRANSFER"],
             "callbackUri": "pisp-app://callback.com"
           },
           "url": "http://pisp-thirdparty-sdk-outbound:4006",
@@ -283,19 +287,24 @@
                 "exec": [
                   "const expected = {",
                   "channelResponse: {",
-                  "scopes: [",
-                  "{",
-                  "  accountId: 'dfspa.username.5678',",
-                  "  actions: [",
-                  "    'accounts.transfer'",
-                  "  ]",
-                  "}",
-                  "],",
+                  "  scopes: [",
+                  "  {",
+                  "    address: 'dfspa.username.1234',",
+                  "    actions: [",
+                  "      'ACCOUNTS_GET_BALANCE', 'ACCOUNTS_TRANSFER'",
+                  "    ]",
+                  "  },",
+                  "  {",
+                  "    address: 'dfspa.username.5678',",
+                  "    actions: [",
+                  "      'ACCOUNTS_GET_BALANCE', 'ACCOUNTS_TRANSFER'",
+                  "    ]",
+                  "  }",
+                  "  ],",
                   "callbackUri: 'pisp-app://callback.com',",
                   "authChannels: ['OTP'],",
-                  "consentRequestId: 'c51ec534-ee48-4575-b6a9-ead2955b8069',",
                   "},",
-                  "currentState: 'OTPAuthenticationChannelResponseRecieved'",
+                  "currentState: 'OTPAuthenticationChannelResponseReceived'",
                   "}",
                   "",
                   "expect(response.body).to.deep.equal(expected)"
@@ -327,10 +336,19 @@
                 "id": 1,
                 "description": "response",
                 "exec": [
-                  "const expectedScopes = [{",
-                  "  accountId: 'dfspa.username.5678',",
-                  "  actions: [ 'accounts.transfer' ]",
-                  "}]",
+                  "const expectedScopes =  [",
+                  "  {",
+                  "    address: 'dfspa.username.1234',",
+                  "    actions: [",
+                  "      'ACCOUNTS_GET_BALANCE', 'ACCOUNTS_TRANSFER'",
+                  "    ]",
+                  "  },",
+                  "  {",
+                  "    address: 'dfspa.username.5678',",
+                  "    actions: [",
+                  "      'ACCOUNTS_GET_BALANCE', 'ACCOUNTS_TRANSFER'",
+                  "    ]",
+                  "  }]",
                   "",
                   "",
                   "expect(response.body.consent.consentId).to.be.a('string')",
@@ -361,11 +379,11 @@
           "body": {
             "credential": {
               "payload": {
-                "id": "UMyM71BqZ5G-NWnD1k3RtR6Ry_zQPLEh_ntU3zOO_3dur80eHxDOqJSvc83FnDczRTdv6hVCZ86Kuynrz5OKrw",
-                "rawId": "UMyM71BqZ5G+NWnD1k3RtR6Ry/zQPLEh/ntU3zOO/3dur80eHxDOqJSvc83FnDczRTdv6hVCZ86Kuynrz5OKrw==",
+                "id": "zMEeRCOGrJU53n-MWfZFtdQkkknJCLn_nIRD6TIO9uO4Mgd9WEefoII3ZBhfGiWQRYkqP_UAY4GxYiUT_0OZbA",
+                "rawId": "zMEeRCOGrJU53n+MWfZFtdQkkknJCLn/nIRD6TIO9uO4Mgd9WEefoII3ZBhfGiWQRYkqP/UAY4GxYiUT/0OZbA==",
                 "response": {
-                  "attestationObject": "o2NmbXRoZmlkby11MmZnYXR0U3RtdKJjc2lnWEgwRgIhALlL18WMrdV+eVDKRoNgb3iTDNxANrbC93w/sG6BDcWEAiEA1WGNy/sZPJcboqHD8YgqXjxZni9ZT4M1EL+O+gRFWSxjeDVjgVkCwTCCAr0wggGloAMCAQICBAsFzVMwDQYJKoZIhvcNAQELBQAwLjEsMCoGA1UEAxMjWXViaWNvIFUyRiBSb290IENBIFNlcmlhbCA0NTcyMDA2MzEwIBcNMTQwODAxMDAwMDAwWhgPMjA1MDA5MDQwMDAwMDBaMG4xCzAJBgNVBAYTAlNFMRIwEAYDVQQKDAlZdWJpY28gQUIxIjAgBgNVBAsMGUF1dGhlbnRpY2F0b3IgQXR0ZXN0YXRpb24xJzAlBgNVBAMMHll1YmljbyBVMkYgRUUgU2VyaWFsIDE4NDkyOTYxOTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABCEab7G1iSXLCsEYX3wq46i0iBAUebEe//VV4H2XUb0rF2olLe5Z7OOFmSBbs+oov4/X/H2nXAVCcq5IWOWR/FqjbDBqMCIGCSsGAQQBgsQKAgQVMS4zLjYuMS40LjEuNDE0ODIuMS4xMBMGCysGAQQBguUcAgEBBAQDAgQwMCEGCysGAQQBguUcAQEEBBIEEBSaICGO9kEzlriB+NW38fUwDAYDVR0TAQH/BAIwADANBgkqhkiG9w0BAQsFAAOCAQEAPv6j3z0q4HJXj34E0N1aS2jbAa/oYy4YtOC4c0MYkRlsGEvrwdUzoj13i7EECMG5qkFOdXaFWwk2lxizSK9c72ywMIZy1h+4vZuGoQqmgs6MLU7wkO1QVBj+U9TOHmJ6KPNyAwlY0I/6WRvEGIDhjooM7RqFgH+QlnFBegtFMhWzjcFHKiRJdkC06Gv+xPFUY5uFuOiAFJY2JDg1WQEr/Id8C0TsfaeU0gZUsprcHbpcUHvwym3zUrzN3nQNLqfhCCSizjlPkE0dmUFeOnxFtf4oepvL3GmOi9zVtHmKXO013oo1CQIKFLcmv785p0QHnLmPW53KCbfD67y9oq9pA2hhdXRoRGF0YVjESZYN5YgOjGh0NBcPZHZgW4/krrmihjLHmVzzuoMdl2NBAAAAAAAAAAAAAAAAAAAAAAAAAAAAQFDMjO9QameRvjVpw9ZN0bUekcv80DyxIf57VN8zjv93bq/NHh8QzqiUr3PNxZw3M0U3b+oVQmfOirsp68+Tiq+lAQIDJiABIVggy/NJCW5QMqfxRdvjCT6PeJMC/enM2b/83KeuHJAwENAiWCCLLEUZifuehFbVabqd/Cni7GvAEZikU3J6Q0+b+CXnqg==",
-                  "clientDataJSON": "eyJjaGFsbGVuZ2UiOiJORGxqT1RjeFltWXdZVFExWm1Ka1pUa3pOek13Tm1SalpUazNZVFl6TURjM01HSmtZamMzWW1FellqWm1OemcwWkRJMU5HWTJPR0UwTm1Sa05EQmhNZyIsImNsaWVudEV4dGVuc2lvbnMiOnt9LCJoYXNoQWxnb3JpdGhtIjoiU0hBLTI1NiIsIm9yaWdpbiI6Imh0dHA6Ly9sb2NhbGhvc3Q6ODA4MCIsInR5cGUiOiJ3ZWJhdXRobi5jcmVhdGUifQ=="
+                  "attestationObject": "o2NmbXRoZmlkby11MmZnYXR0U3RtdKJjc2lnWEcwRQIgK5O/5iZlFuvThVhjj9DWRmImAk2fTJz3ecP1KyrDCKgCIQC1REKU+64f6o51HEAZxp2weSGMkmWte3kjcYKnFPOIy2N4NWOBWQLcMIIC2DCCAcCgAwIBAgIJALA5KjdfOKLrMA0GCSqGSIb3DQEBCwUAMC4xLDAqBgNVBAMTI1l1YmljbyBVMkYgUm9vdCBDQSBTZXJpYWwgNDU3MjAwNjMxMCAXDTE0MDgwMTAwMDAwMFoYDzIwNTAwOTA0MDAwMDAwWjBuMQswCQYDVQQGEwJTRTESMBAGA1UECgwJWXViaWNvIEFCMSIwIAYDVQQLDBlBdXRoZW50aWNhdG9yIEF0dGVzdGF0aW9uMScwJQYDVQQDDB5ZdWJpY28gVTJGIEVFIFNlcmlhbCA5MjU1MTQxNjAwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAATBUzDbxw7VyKPri/NcB5oy/eVWBkwkXfQNU1gLc+nLR5EP7xcV93l5aHDpq1wXjOuZA5jBJoWpb6nbhhWOI9nCo4GBMH8wEwYKKwYBBAGCxAoNAQQFBAMFBAMwIgYJKwYBBAGCxAoCBBUxLjMuNi4xLjQuMS40MTQ4Mi4xLjcwEwYLKwYBBAGC5RwCAQEEBAMCBDAwIQYLKwYBBAGC5RwBAQQEEgQQL8BXn4ETR+qxFrtajbkgKjAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBCwUAA4IBAQABaTFk5Jj2iKM7SQ+rIS9YLEj4xxyJlJ9fGOoidDllzj4z7UpdC2JQ+ucOBPY81JO6hJTwcEkIdwoQPRZO5ZAScmBDNuIizJxqiQct7vF4J6SJHwEexWpF4XztIHtWEmd8JbnlvMw1lMwx+UuD06l11LxkfhK/LN613S91FABcf/ViH6rqmSpHu+II26jWeYEltk0Wf7jvOtRFKkROFBl2WPc2Dg1eRRYOKSJMqQhQn2Bud83uPFxT1H5yT29MKtjy6DJyzP4/UQjhLmuy9NDt+tlbtvfrXbrIitVMRE6oRert0juvM8PPMb6tvVYQfiM2IaYLKChn5yFCywvR9Xa+aGF1dGhEYXRhWMRJlg3liA6MaHQ0Fw9kdmBbj+SuuaKGMseZXPO6gx2XY0EAAAAAAAAAAAAAAAAAAAAAAAAAAABAzMEeRCOGrJU53n+MWfZFtdQkkknJCLn/nIRD6TIO9uO4Mgd9WEefoII3ZBhfGiWQRYkqP/UAY4GxYiUT/0OZbKUBAgMmIAEhWCD0T3++oAlCdCKgtoxjMuuiXbHMCmKvDo5BkVZgwRHKASJYIG3A5XS9CQ4XmFK7n+vmYo862BR94WSKJ+DpmgVnXNzd",
+                  "clientDataJSON": "eyJ0eXBlIjoid2ViYXV0aG4uY3JlYXRlIiwiY2hhbGxlbmdlIjoiWldRMFpUQXdZelUwWVRVME5XRTBOVFU1TXprMU1qazNPRGs1WVRSbU1UQTVZbU5rWlRCaU9ETTVaVGcxTjJJd1l6VXdNakJqTWpaa1pHVTFZMkZpWWciLCJvcmlnaW4iOiJodHRwOi8vbG9jYWxob3N0OjgwODAiLCJjcm9zc09yaWdpbiI6ZmFsc2UsIm90aGVyX2tleXNfY2FuX2JlX2FkZGVkX2hlcmUiOiJkbyBub3QgY29tcGFyZSBjbGllbnREYXRhSlNPTiBhZ2FpbnN0IGEgdGVtcGxhdGUuIFNlZSBodHRwczovL2dvby5nbC95YWJQZXgifQ=="
                 },
                 "type": "public-key"
               }
@@ -416,15 +434,10 @@
               "OTP"
             ],
             "accounts": [
-              {
-                "accountNickname": "SpeXXXXXXXXnt",
-                "address": "dfspa.username.5678",
-                "currency": "USD"
-              }
+              { "accountNickname": "XXXXXXnt", "address": "dfspa.username.1234", "currency": "ZAR" },
+              { "accountNickname": "SpeXXXXXXXXnt", "address": "dfspa.username.5678", "currency": "USD" }
             ],
-            "actions": [
-              "accounts.transfer"
-            ],
+            "actions": ["ACCOUNTS_GET_BALANCE", "ACCOUNTS_TRANSFER"],
             "callbackUri": "pisp-app://callback.com"
           },
           "tests": {
@@ -474,15 +487,10 @@
               "OTP"
             ],
             "accounts": [
-              {
-                "accountNickname": "SpeXXXXXXXXnt",
-                "address": "dfspa.username.5678",
-                "currency": "USD"
-              }
+              { "accountNickname": "XXXXXXnt", "address": "dfspa.username.1234", "currency": "ZAR" },
+              { "accountNickname": "SpeXXXXXXXXnt", "address": "dfspa.username.5678", "currency": "USD" }
             ],
-            "actions": [
-              "accounts.transfer"
-            ],
+            "actions": ["ACCOUNTS_GET_BALANCE", "ACCOUNTS_TRANSFER"],
             "callbackUri": "pisp-app://callback.com"
           },
           "url": "http://pisp-thirdparty-sdk-outbound:4006",
@@ -494,20 +502,25 @@
                 "exec": [
                   "const expected = {",
                   "channelResponse: {",
-                  "scopes: [",
-                  "{",
-                  "  accountId: 'dfspa.username.5678',",
-                  "  actions: [",
-                  "    'accounts.transfer'",
-                  "  ]",
-                  "}",
-                  "],",
+                  "  scopes: [",
+                  "  {",
+                  "    address: 'dfspa.username.1234',",
+                  "    actions: [",
+                  "      'ACCOUNTS_GET_BALANCE', 'ACCOUNTS_TRANSFER'",
+                  "    ]",
+                  "  },",
+                  "  {",
+                  "    address: 'dfspa.username.5678',",
+                  "    actions: [",
+                  "      'ACCOUNTS_GET_BALANCE', 'ACCOUNTS_TRANSFER'",
+                  "    ]",
+                  "  }",
+                  "  ],",
                   "callbackUri: 'pisp-app://callback.com',",
                   "authChannels: ['WEB'],",
                   "authUri: \"http://localhost:6060/admin/dfsp/authorize?consentRequestId=b51ec534-ee48-4575-b6a9-ead2955b8069&callbackUri=http://localhost:42181/flutter-web-auth.html\",",
-                  "consentRequestId: 'b51ec534-ee48-4575-b6a9-ead2955b8069',",
                   "},",
-                  "currentState: 'WebAuthenticationChannelResponseRecieved'",
+                  "currentState: 'WebAuthenticationChannelResponseReceived'",
                   "}",
                   "",
                   "expect(response.body).to.deep.equal(expected)"
@@ -581,15 +594,10 @@
               "OTP"
             ],
             "accounts": [
-              {
-                "accountNickname": "SpeXXXXXXXXnt",
-                "address": "dfspa.username.5678",
-                "currency": "USD"
-              }
+              { "accountNickname": "XXXXXXnt", "address": "dfspa.username.1234", "currency": "ZAR" },
+              { "accountNickname": "SpeXXXXXXXXnt", "address": "dfspa.username.5678", "currency": "USD" }
             ],
-            "actions": [
-              "accounts.transfer"
-            ],
+            "actions": ["ACCOUNTS_GET_BALANCE", "ACCOUNTS_TRANSFER"],
             "callbackUri": "pisp-app://callback.com"
           },
           "url": "http://pisp-thirdparty-sdk-outbound:4006",
@@ -603,18 +611,23 @@
                   "  channelResponse: {",
                   "  scopes: [",
                   "  {",
-                  "    accountId: 'dfspa.username.5678',",
+                  "    address: 'dfspa.username.1234',",
                   "    actions: [",
-                  "      'accounts.transfer'",
+                  "      'ACCOUNTS_GET_BALANCE', 'ACCOUNTS_TRANSFER'",
+                  "    ]",
+                  "  },",
+                  "  {",
+                  "    address: 'dfspa.username.5678',",
+                  "    actions: [",
+                  "      'ACCOUNTS_GET_BALANCE', 'ACCOUNTS_TRANSFER'",
                   "    ]",
                   "  }",
                   "  ],",
                   "  callbackUri: 'pisp-app://callback.com',",
                   "  authChannels: ['WEB'],",
-                  "  consentRequestId: 'b51ec534-ee48-4575-b6a9-ead2955b8069',",
                   "  authUri: 'http://localhost:6060/admin/dfsp/authorize?consentRequestId=b51ec534-ee48-4575-b6a9-ead2955b8069&callbackUri=http://localhost:42181/flutter-web-auth.html'",
                   "  },",
-                  "  currentState: 'WebAuthenticationChannelResponseRecieved'",
+                  "  currentState: 'WebAuthenticationChannelResponseReceived'",
                   "}",
                   "",
                   "expect(response.body).to.deep.equal(expected)"
@@ -646,10 +659,19 @@
                 "id": 1,
                 "description": "response",
                 "exec": [
-                  "const expectedScopes = [{",
-                  "  accountId: 'dfspa.username.5678',",
-                  "  actions: [ 'accounts.transfer' ]",
-                  "}]",
+                  "const expectedScopes =  [",
+                  "  {",
+                  "    address: 'dfspa.username.1234',",
+                  "    actions: [",
+                  "      'ACCOUNTS_GET_BALANCE', 'ACCOUNTS_TRANSFER'",
+                  "    ]",
+                  "  },",
+                  "  {",
+                  "    address: 'dfspa.username.5678',",
+                  "    actions: [",
+                  "      'ACCOUNTS_GET_BALANCE', 'ACCOUNTS_TRANSFER'",
+                  "    ]",
+                  "  }]",
                   "",
                   "",
                   "expect(response.body.consent.consentId).to.be.a('string')",
@@ -738,19 +760,16 @@
             "accounts": [
               {
                 "accountNickname": "SpeXXXXXXXXnt",
-                "id": "244431e2-7a56-40c6-814c-932631760fa9",
+                "address": "244431e2-7a56-40c6-814c-932631760fa9",
                 "currency": "USD"
               },
               {
                 "accountNickname": "SpeXXXXXXXXnt",
-                "id": "6b6e6d77-dbf4-423f-abd5-bc5854e4ab1c",
+                "address": "6b6e6d77-dbf4-423f-abd5-bc5854e4ab1c",
                 "currency": "USD"
               }
             ],
-            "actions": [
-              "accounts.getBalance",
-              "accounts.transfer"
-            ],
+            "actions": ["ACCOUNTS_GET_BALANCE", "ACCOUNTS_TRANSFER"],
             "callbackUri": "pisp-app://callback.com"
           },
           "url": "http://pisp-thirdparty-sdk-outbound:4006",
@@ -762,21 +781,20 @@
                 "exec": [
                   "const expected = {",
                   "  channelResponse: {",
-                  "    consentRequestId: 'b5d6206c-4f06-497d-af15-ed866ea6958f',",
                   "    scopes: [",
                   "      {",
-                  "      accountId: '244431e2-7a56-40c6-814c-932631760fa9',",
-                  "        actions: ['accounts.getBalance', 'accounts.transfer'],",
+                  "      address: '244431e2-7a56-40c6-814c-932631760fa9',",
+                  "        actions: ['ACCOUNTS_GET_BALANCE', 'ACCOUNTS_TRANSFER'],",
                   "      },",
                   "      { ",
-                  "        accountId: '6b6e6d77-dbf4-423f-abd5-bc5854e4ab1c',",
-                  "        actions: ['accounts.getBalance', 'accounts.transfer']",
+                  "        address: '6b6e6d77-dbf4-423f-abd5-bc5854e4ab1c',",
+                  "        actions: ['ACCOUNTS_GET_BALANCE', 'ACCOUNTS_TRANSFER']",
                   "      }",
                   "    ],",
                   "    callbackUri: 'pisp-app://callback.com',",
                   "    authChannels: ['OTP'],",
                   "  },",
-                  "  currentState: 'OTPAuthenticationChannelResponseRecieved'",
+                  "  currentState: 'OTPAuthenticationChannelResponseReceived'",
                   "}",
                   "",
                   "expect(response.body).to.deep.equal(expected)"
@@ -810,16 +828,17 @@
                 "exec": [
                   "const expected = {",
                   "  consent: {",
+                  "    status: \"ISSUED\",",
                   "    // this is configured in dfspa's thirdparty-sdk",
                   "    consentId: \"2acf1dfa-ce45-486e-b19e-ae4ad9804a63\",",
-                  "  consentRequestId: 'b5d6206c-4f06-497d-af15-ed866ea6958f',",
+                  "    consentRequestId: 'b5d6206c-4f06-497d-af15-ed866ea6958f',",
                   "    scopes: [",
-                  "      { actions: ['accounts.getBalance', 'accounts.transfer'], accountId: '244431e2-7a56-40c6-814c-932631760fa9' },",
-                  "      { actions: ['accounts.getBalance', 'accounts.transfer'], accountId: '6b6e6d77-dbf4-423f-abd5-bc5854e4ab1c' }",
+                  "      { actions: ['ACCOUNTS_GET_BALANCE', 'ACCOUNTS_TRANSFER'], address: '244431e2-7a56-40c6-814c-932631760fa9' },",
+                  "      { actions: ['ACCOUNTS_GET_BALANCE', 'ACCOUNTS_TRANSFER'], address: '6b6e6d77-dbf4-423f-abd5-bc5854e4ab1c' }",
                   "    ]",
                   "",
                   "  },",
-                  "  challenge: \"fc315dc625bb0bb00029e706de7f38eed98dc370cd386281de46a438b8080e57\",",
+                  "  challenge: \"bb8030548a0f06ad0f105487528195df2110931324f4004389088e6cbdfeabb1\",",
                   "  currentState: 'consentReceivedAwaitingCredential'",
                   "}",
                   "",
@@ -848,11 +867,11 @@
           "body": {
             "credential": {
               "payload": {
-                "id": "DVFXZuLI5po4eDNPCH7Vtrjan5h-yGxeAUzS3QH3uMAP8O-7xg0AObz0mdTRy7veAflN201NlqoI-lByRug5ow",
-                "rawId": "DVFXZuLI5po4eDNPCH7Vtrjan5h+yGxeAUzS3QH3uMAP8O+7xg0AObz0mdTRy7veAflN201NlqoI+lByRug5ow==",
+                "id": "nJGhvWOzo6-bc4OTIuT9UWPmUGrzLlKbZ0ONvLPwWOEzOUr45Mov4vRWwMOYIGkGF_UTIL3nkSEug3ChycAryA",
+                "rawId": "nJGhvWOzo6+bc4OTIuT9UWPmUGrzLlKbZ0ONvLPwWOEzOUr45Mov4vRWwMOYIGkGF/UTIL3nkSEug3ChycAryA==",
                 "response": {
-                  "attestationObject": "o2NmbXRoZmlkby11MmZnYXR0U3RtdKJjc2lnWEcwRQIhAJ/3xIiXAdSa6Dhl5Jx85u1sg7Sfy9Qz//PcuNKa80d2AiBPB+UCpuhM+Lt4AhvYyXpMKAcoyGSPIfUfCMqwkFj6wGN4NWOBWQLBMIICvTCCAaWgAwIBAgIECwXNUzANBgkqhkiG9w0BAQsFADAuMSwwKgYDVQQDEyNZdWJpY28gVTJGIFJvb3QgQ0EgU2VyaWFsIDQ1NzIwMDYzMTAgFw0xNDA4MDEwMDAwMDBaGA8yMDUwMDkwNDAwMDAwMFowbjELMAkGA1UEBhMCU0UxEjAQBgNVBAoMCVl1YmljbyBBQjEiMCAGA1UECwwZQXV0aGVudGljYXRvciBBdHRlc3RhdGlvbjEnMCUGA1UEAwweWXViaWNvIFUyRiBFRSBTZXJpYWwgMTg0OTI5NjE5MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEIRpvsbWJJcsKwRhffCrjqLSIEBR5sR7/9VXgfZdRvSsXaiUt7lns44WZIFuz6ii/j9f8fadcBUJyrkhY5ZH8WqNsMGowIgYJKwYBBAGCxAoCBBUxLjMuNi4xLjQuMS40MTQ4Mi4xLjEwEwYLKwYBBAGC5RwCAQEEBAMCBDAwIQYLKwYBBAGC5RwBAQQEEgQQFJogIY72QTOWuIH41bfx9TAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBCwUAA4IBAQA+/qPfPSrgclePfgTQ3VpLaNsBr+hjLhi04LhzQxiRGWwYS+vB1TOiPXeLsQQIwbmqQU51doVbCTaXGLNIr1zvbLAwhnLWH7i9m4ahCqaCzowtTvCQ7VBUGP5T1M4eYnoo83IDCVjQj/pZG8QYgOGOigztGoWAf5CWcUF6C0UyFbONwUcqJEl2QLToa/7E8VRjm4W46IAUljYkODVZASv8h3wLROx9p5TSBlSymtwdulxQe/DKbfNSvM3edA0up+EIJKLOOU+QTR2ZQV46fEW1/ih6m8vcaY6L3NW0eYpc7TXeijUJAgoUtya/vzmnRAecuY9bncoJt8PrvL2ir2kDaGF1dGhEYXRhWMTLX5kZhaUsGGUVJvPd6efRKHVvWMqnrf4u23AvlzDddEEAAAAAAAAAAAAAAAAAAAAAAAAAAABADVFXZuLI5po4eDNPCH7Vtrjan5h+yGxeAUzS3QH3uMAP8O+7xg0AObz0mdTRy7veAflN201NlqoI+lByRug5o6UBAgMmIAEhWCDD5L66Sy7QEkshHkp0OFDNNd7Yj3VcW9iULwYva/VlVCJYIFk/fr99IJ2zL1dYGgTvNpF/3daUxWYBMr556Dc7K4i1",
-                  "clientDataJSON": "eyJjaGFsbGVuZ2UiOiJabU16TVRWa1l6WXlOV0ppTUdKaU1EQXdNamxsTnpBMlpHVTNaak00WldWa09UaGtZek0zTUdOa016ZzJNamd4WkdVME5tRTBNemhpT0RBNE1HVTFOdyIsImNsaWVudEV4dGVuc2lvbnMiOnt9LCJoYXNoQWxnb3JpdGhtIjoiU0hBLTI1NiIsIm9yaWdpbiI6Imh0dHBzOi8vc2FuZGJveC5tb2phbG9vcC5pbyIsInR5cGUiOiJ3ZWJhdXRobi5jcmVhdGUifQ=="
+                  "attestationObject": "o2NmbXRoZmlkby11MmZnYXR0U3RtdKJjc2lnWEYwRAIgUuRpqNZMN3IdUm4wiYfoD4eHS1fE8MBuC7SQWsp0q98CIF05dJl1nPud2BeFVqZS7fiDRaOIWdxYjn/f6SE2YWy7Y3g1Y4FZAtwwggLYMIIBwKADAgECAgkAsDkqN184ouswDQYJKoZIhvcNAQELBQAwLjEsMCoGA1UEAxMjWXViaWNvIFUyRiBSb290IENBIFNlcmlhbCA0NTcyMDA2MzEwIBcNMTQwODAxMDAwMDAwWhgPMjA1MDA5MDQwMDAwMDBaMG4xCzAJBgNVBAYTAlNFMRIwEAYDVQQKDAlZdWJpY28gQUIxIjAgBgNVBAsMGUF1dGhlbnRpY2F0b3IgQXR0ZXN0YXRpb24xJzAlBgNVBAMMHll1YmljbyBVMkYgRUUgU2VyaWFsIDkyNTUxNDE2MDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABMFTMNvHDtXIo+uL81wHmjL95VYGTCRd9A1TWAtz6ctHkQ/vFxX3eXlocOmrXBeM65kDmMEmhalvqduGFY4j2cKjgYEwfzATBgorBgEEAYLECg0BBAUEAwUEAzAiBgkrBgEEAYLECgIEFTEuMy42LjEuNC4xLjQxNDgyLjEuNzATBgsrBgEEAYLlHAIBAQQEAwIEMDAhBgsrBgEEAYLlHAEBBAQSBBAvwFefgRNH6rEWu1qNuSAqMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcNAQELBQADggEBAAFpMWTkmPaIoztJD6shL1gsSPjHHImUn18Y6iJ0OWXOPjPtSl0LYlD65w4E9jzUk7qElPBwSQh3ChA9Fk7lkBJyYEM24iLMnGqJBy3u8XgnpIkfAR7FakXhfO0ge1YSZ3wlueW8zDWUzDH5S4PTqXXUvGR+Er8s3rXdL3UUAFx/9WIfquqZKke74gjbqNZ5gSW2TRZ/uO861EUqRE4UGXZY9zYODV5FFg4pIkypCFCfYG53ze48XFPUfnJPb0wq2PLoMnLM/j9RCOEua7L00O362Vu29+tdusiK1UxETqhF6u3SO68zw88xvq29VhB+IzYhpgsoKGfnIULLC9H1dr5oYXV0aERhdGFYxEmWDeWIDoxodDQXD2R2YFuP5K65ooYyx5lc87qDHZdjQQAAAAAAAAAAAAAAAAAAAAAAAAAAAECckaG9Y7Ojr5tzg5Mi5P1RY+ZQavMuUptnQ428s/BY4TM5Svjkyi/i9FbAw5ggaQYX9RMgveeRIS6DcKHJwCvIpQECAyYgASFYIEqdwNFG63wL5iYN7dGCJsWs9ebN809I2MSJMhVTGqrgIlggSHmkRWVb/cQWepnVvjeYHg9CtDsY3rRQdI8crM1TDRI=",
+                  "clientDataJSON": "eyJ0eXBlIjoid2ViYXV0aG4uY3JlYXRlIiwiY2hhbGxlbmdlIjoiWW1JNE1ETXdOVFE0WVRCbU1EWmhaREJtTVRBMU5EZzNOVEk0TVRrMVpHWXlNVEV3T1RNeE16STBaalF3TURRek9Ea3dPRGhsTm1OaVpHWmxZV0ppTVEiLCJvcmlnaW4iOiJodHRwOi8vbG9jYWxob3N0OjgwODAiLCJjcm9zc09yaWdpbiI6ZmFsc2V9"
                 },
                 "type": "public-key"
               }
@@ -1063,16 +1082,19 @@
           },
           "body": {
             "authorizationResponse": {
-              "signedPayloadType": "FIDO",
+              "responseType": "ACCEPTED",
               "signedPayload": {
-                "id": "DVFXZuLI5po4eDNPCH7Vtrjan5h-yGxeAUzS3QH3uMAP8O-7xg0AObz0mdTRy7veAflN201NlqoI-lByRug5ow",
-                "rawId": "DVFXZuLI5po4eDNPCH7Vtrjan5h+yGxeAUzS3QH3uMAP8O+7xg0AObz0mdTRy7veAflN201NlqoI+lByRug5ow==",
-                "response": {
-                  "authenticatorData": "y1+ZGYWlLBhlFSbz3enn0Sh1b1jKp63+LttwL5cw3XQBAAAAIw==",
-                  "clientDataJSON": "eyJjaGFsbGVuZ2UiOiJUMWRhYUZscVFYaGFWR04zV1dwVk5GbDZVbWhOZWxKdFQxZFJkMDU2UW0xYWFteHNXa1JHYVU1cVl6Sk9WMVpvVFhwQk1VNUhTVEZOVjFwcVdsUm9hbHBIUm1wT1JFVjVXa1JDYlU1dFRUSk5WMFpvVFZFIiwiY2xpZW50RXh0ZW5zaW9ucyI6e30sImhhc2hBbGdvcml0aG0iOiJTSEEtMjU2Iiwib3JpZ2luIjoiaHR0cHM6Ly9zYW5kYm94Lm1vamFsb29wLmlvIiwidHlwZSI6IndlYmF1dGhuLmdldCJ9",
-                  "signature": "MEQCIEonIaMwgHySe/1apQScRxp8GjFNwy9Ajykus3pVWX15AiAUIywSDZWWACclQ0ue47QbkTPb62zg1sR8uY9pNHG6jA=="
-                },
-                "type": "public-key"
+                "signedPayloadType": "FIDO",
+                "fidoSignedPayload": {
+                  "id": "nJGhvWOzo6-bc4OTIuT9UWPmUGrzLlKbZ0ONvLPwWOEzOUr45Mov4vRWwMOYIGkGF_UTIL3nkSEug3ChycAryA",
+                  "rawId": "nJGhvWOzo6+bc4OTIuT9UWPmUGrzLlKbZ0ONvLPwWOEzOUr45Mov4vRWwMOYIGkGF/UTIL3nkSEug3ChycAryA==",
+                  "response": {
+                    "authenticatorData": "SZYN5YgOjGh0NBcPZHZgW4/krrmihjLHmVzzuoMdl2MBAAAAAw==",
+                    "clientDataJSON": "eyJ0eXBlIjoid2ViYXV0aG4uZ2V0IiwiY2hhbGxlbmdlIjoiVDFkYWFGbHFRWGhhVkdOM1dXcFZORmw2VW1oTmVsSnRUMWRSZDA1NlFtMWFhbXhzV2tSR2FVNXFZekpPVjFab1RYcEJNVTVIU1RGTlYxcHFXbFJvYWxwSFJtcE9SRVY1V2tSQ2JVNXRUVEpOVjBab1RWRSIsIm9yaWdpbiI6Imh0dHA6Ly9sb2NhbGhvc3Q6ODA4MCIsImNyb3NzT3JpZ2luIjpmYWxzZX0=",
+                    "signature": "MEQCIH1ZF7jLnehGV7kkSTpRXIhn/XVhLh97tIf4DxBqY7sAAiBs6XD4XHlCdaCImxEvtibEGGEHM2XjzuhGsbAiPVNcLg=="
+                  },
+                  "type": "public-key"
+                }
               }
             }
           },

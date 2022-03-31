@@ -278,7 +278,7 @@ services:
   auth-service:
     image: mojaloop/auth-service:v12.0.2
     #build:
-    #  context: https://kleyow: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@github.com/kleyow/auth-service.git#chore/fix-knex
+    #  context: https://github.com/username/auth-service.git#branch
     #  dockerfile: ./Dockerfile
     command: sh -c "/opt/auth-service/wait4/wait4.js auth-service && npm run migrate && npm run start"
     container_name: auth-service
@@ -300,7 +300,7 @@ services:
       timeout: 20s
       retries: 30
       interval: 15s
-    user: root
+
   auth-service-mysql:
     image: mysql/mysql-server
     container_name: auth-service-mysql

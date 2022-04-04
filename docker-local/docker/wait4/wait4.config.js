@@ -99,7 +99,7 @@ module.exports = {
       ]
     },
     {
-      name: 'pisp-thirdparty-scheme-adapter',
+      name: 'pisp-thirdparty-sdk',
       wait4: [
         {
           description: 'PISP Redis Cache',
@@ -109,7 +109,7 @@ module.exports = {
       ]
     },
     {
-      name: 'dfspa-thirdparty-scheme-adapter',
+      name: 'dfspa-thirdparty-sdk',
       wait4: [
         {
           description: 'DFSP A Redis Cache',
@@ -119,7 +119,7 @@ module.exports = {
       ]
     },
     {
-      name: 'dfspb-thirdparty-scheme-adapter',
+      name: 'dfspb-thirdparty-sdk',
       wait4: [
         {
           description: 'DFSP B Redis Cache',
@@ -152,7 +152,7 @@ module.exports = {
           method: 'mysqlAlt',
           rc: {
             namespace: '',
-            configPath: '../config/integration.json'
+            configPath: '../dist/config/integration.json'
           },
           retries: 30
         }

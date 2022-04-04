@@ -6,20 +6,19 @@ describe('GET /linking/accounts/{fspId}/{userId}', (): void => {
     accounts: [
       {
         accountNickname: 'dfspa.user.nickname1',
-        id: 'dfspa.username.1234',
+        address: 'dfspa.username.1234',
         currency: 'ZAR'
       },
       {
         accountNickname: 'dfspa.user.nickname2',
-        id: 'dfspa.username.5678',
+        address: 'dfspa.username.5678',
         currency: 'USD'
       }
     ],
     currentState: 'COMPLETED'
   }
 
-  // TODO: reenable this test! 
-  it.skip('PISP requests DFSP to return user accounts for linking', async (): Promise<void> => {
+  it('PISP requests DFSP to return user accounts for linking', async (): Promise<void> => {
     const scenariosURI = `${TestEnv.baseUrls.pispThirdpartySchemeAdapterOutbound}/linking/accounts/dfspa/username1234`
     const response = await axios.get(scenariosURI)
 

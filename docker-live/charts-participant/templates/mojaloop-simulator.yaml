@@ -43,7 +43,7 @@ spec:
             - name: OUTBOUND_ENDPOINT
               value: http://{{ $participantId }}-sdk-scheme-adapter:4001
             - name: THIRDPARTY_OUTBOUND_ENDPOINT
-              value: http://{{ $participantId }}-thirdparty-scheme-adapter:4005
+              value: http://{{ $participantId }}-thirdparty-sdk:4005
             - name: HTTPS_ENABLED
               value: 'false'
             - name: MUTUAL_TLS_ENABLED

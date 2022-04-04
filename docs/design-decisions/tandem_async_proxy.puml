@@ -4,11 +4,11 @@ box "Mojaloop"
   participant Switch as S
 end box
 
-box "SDK-scheme-adapter" 
+box "SDK-scheme-adapter"
   participant "SDK-Incoming" as Sin
   participant "SDK-Outgoing" as Sout
 end box
-box "Thirdparty-scheme-adapter"
+box "thirdparty-sdk"
   participant "Thirdparty-Incoming" as Tin
   participant "Thirdparty-Outgoing" as Tout
 end box
@@ -22,7 +22,7 @@ activate Tout
 Tout -> Sout: GET /parties/MSISDN/12345678
 activate Sout
 Sout --> Tout: 200 OK
-Sout -> Sout: discover that this call is comming\nfrom Thirdparty-scheme-adapter
+Sout -> Sout: discover that this call is comming\nfrom thirdparty-sdk
 Tout -> Tout: register to PUB/SUB channel\nand wait for response
 
 Sout -> S: GET /parties/MSISDN/12345678
@@ -36,7 +36,7 @@ S -> S: finding party information
 S -> Sin: PUT /parties/MSISDN/12345678
 deactivate S
 activate Sin
-Sin -> Sin: discover that this call should be propagated\nto the proper Thirdparty-scheme-adapter' callback
+Sin -> Sin: discover that this call should be propagated\nto the proper thirdparty-sdk' callback
 Sin -> Tin: PUT /parties/MSISDN/12345678
 activate Tin
 deactivate Sin

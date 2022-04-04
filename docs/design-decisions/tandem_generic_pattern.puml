@@ -4,11 +4,11 @@ box "Mojaloop"
   participant Switch as S
 end box
 
-box "SDK-scheme-adapter" 
+box "SDK-scheme-adapter"
   participant "SDK-Incoming" as Sin
   participant "SDK-Outgoing" as Sout
 end box
-box "Thirdparty-scheme-adapter"
+box "thirdparty-sdk"
   participant "Thirdparty-Incoming" as Tin
   participant "Thirdparty-Outgoing" as Tout
 end box
@@ -32,7 +32,7 @@ S -> S: finding party information
 S -> Sin: PUT <urlResource>
 deactivate S
 activate Sin
-Sin -> Sout: publish PUT payload to PUB/SUB channel 
+Sin -> Sout: publish PUT payload to PUB/SUB channel
 deactivate Sin
 activate Sout
 Sout -> Tout: send PUT payload as http response

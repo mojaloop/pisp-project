@@ -29,7 +29,7 @@
       type: 'DFSP_SUPPORTING_PISP',
       simulatorAdminUrl: 'http://localhost:9003',
       fspiopCallbackUrl: 'http://dfspa-sdk-scheme-adapter:4000',
-      thirdpartyCallbackUrl: 'http://dfspa-thirdparty-scheme-adapter-inbound:4005',
+      thirdpartyCallbackUrl: 'http://dfspa-thirdparty-sdk-inbound:4005',
       parties: [
         {
           // TODO: detailed account list!
@@ -50,7 +50,7 @@
       type: 'DFSP',
       simulatorAdminUrl: 'http://localhost:10003',
       fspiopCallbackUrl: 'http://dfspb-sdk-scheme-adapter:4000',
-      thirdpartyCallbackUrl: 'http://dfspb-thirdparty-scheme-adapter-inbound:4005',
+      thirdpartyCallbackUrl: 'http://dfspb-thirdparty-sdk-inbound:4005',
       parties: [
         {
           // TODO: detailed account list!
@@ -70,7 +70,7 @@
           lastName: "Babirusa",
           dateOfBirth: "1970-01-01",
           idType: "MSISDN",
-          idValue: "255255255255"   
+          idValue: "255255255255"
         },
       ]
     },
@@ -79,7 +79,7 @@
       type: 'PISP',
       // TODO: double check!
       fspiopCallbackUrl: 'http://pisp-sdk-scheme-adapter:4000',
-      thirdpartyCallbackUrl: 'http://pisp-thirdparty-scheme-adapter-inbound:4005'
+      thirdpartyCallbackUrl: 'http://pisp-thirdparty-sdk-inbound:4005'
     },
     {
       id: 'pineapplepay',

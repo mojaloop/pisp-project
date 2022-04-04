@@ -111,8 +111,8 @@ health-check-participants:
 # No health check on /inbound
 # curl -s $(ELB_URL)/dfspa/sdk-scheme-adapter/inbound | jq
 	curl -s $(ELB_URL)/dfspa/sdk-scheme-adapter/outbound | jq
-	curl -s $(ELB_URL)/dfspa/thirdparty-scheme-adapter/inbound/health | jq
-	curl -s $(ELB_URL)/dfspa/thirdparty-scheme-adapter/outbound/health | jq
+	curl -s $(ELB_URL)/dfspa/thirdparty-sdk/inbound/health | jq
+	curl -s $(ELB_URL)/dfspa/thirdparty-sdk/outbound/health | jq
 	curl -s $(ELB_URL)/dfspa/mojaloop-simulator/simulator | jq
 # No health check on /report or /test
 # curl -s $(ELB_URL)/dfspa/mojaloop-simulator/report/reports | jq
@@ -122,16 +122,16 @@ health-check-participants:
 # No health check on /inbound
 # curl -s $(ELB_URL)/dfspb/sdk-scheme-adapter/inbound | jq
 	curl -s $(ELB_URL)/dfspb/sdk-scheme-adapter/outbound | jq
-	curl -s $(ELB_URL)/dfspb/thirdparty-scheme-adapter/inbound/health | jq
-	curl -s $(ELB_URL)/dfspb/thirdparty-scheme-adapter/outbound/health | jq
+	curl -s $(ELB_URL)/dfspb/thirdparty-sdk/inbound/health | jq
+	curl -s $(ELB_URL)/dfspb/thirdparty-sdk/outbound/health | jq
 	curl -s $(ELB_URL)/dfspb/mojaloop-simulator/simulator | jq
 # No health check on /report or /test
 # curl -s $(ELB_URL)/dfspb/mojaloop-simulator/report | jq
 # curl -s $(ELB_URL)/dfspb/mojaloop-simulator/test | jq
 
 #pispa
-	curl -s $(ELB_URL)/pispa/thirdparty-scheme-adapter/inbound/health | jq
-	curl -s $(ELB_URL)/pispa/thirdparty-scheme-adapter/outbound/health | jq
+	curl -s $(ELB_URL)/pispa/thirdparty-sdk/inbound/health | jq
+	curl -s $(ELB_URL)/pispa/thirdparty-sdk/outbound/health | jq
 	curl -s $(ELB_URL)/pispa/mojaloop-simulator/simulator | jq
 #@ No health check on /report or /test
 #@ curl -s $(ELB_URL)/pispa/mojaloop-simulator/report | jq

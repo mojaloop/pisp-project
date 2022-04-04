@@ -32,21 +32,21 @@ Services are composed in the testing layout as:
 - _PISP_  is a new party in Mojaloop system to represent Payment Initiate System Provider where its dependencies are:
     - pisp-backend: [mojaloop-simulator](https://github.com/mojaloop/mojaloop-simulator)
     - pisp-sdk-scheme-adapter: [scheme-adapter](https://github.com/mojaloop/sdk-scheme-adapter)
-    - pisp-thirdparty-scheme-adapter: [thirdparty-scheme-adapter](https://github.com/mojaloop/thirdparty-scheme-adapter)
+    - pisp-thirdparty-sdk: [thirdparty-sdk](https://github.com/mojaloop/thirdparty-sdk)
     - pisp-redis: redisDB
   > configuration folder: [pisp](./pisp)
 
 - _DFSP A_ is a bank account holder
     - dfspa-backend: [mojaloop-simulator](https://github.com/mojaloop/mojaloop-simulator)
     - dfspa-sdk-scheme-adapter: [scheme-adapter](https://github.com/mojaloop/sdk-scheme-adapter)
-    - dfspa-thirdparty-scheme-adapter: [thirdparty-scheme-adapter](https://github.com/mojaloop/thirdparty-scheme-adapter)
+    - dfspa-thirdparty-sdk: [thirdparty-sdk](https://github.com/mojaloop/thirdparty-sdk)
     - dfspa-redis: redisDB
   > configuration folder: [dfsp_a](./dfsp_a)
 
 - _DFSP B_ is a bank account holder
     - dfspb-backend: [mojaloop-simulator](https://github.com/mojaloop/mojaloop-simulator)
     - dfspb-sdk-scheme-adapter: [scheme-adapter](https://github.com/mojaloop/sdk-scheme-adapter)
-    - dfspb-thirdparty-scheme-adapter: [thirdparty-scheme-adapter](https://github.com/mojaloop/thirdparty-scheme-adapter)
+    - dfspb-thirdparty-sdk: [thirdparty-sdk](https://github.com/mojaloop/thirdparty-sdk)
     - dfspb-redis: redisDB
   > configuration folder: [dfsp_b](./dfsp_b)
 
@@ -69,9 +69,9 @@ npm install
 - A hosts file with the following entries:
 ```
 127.0.0.1       central-ledger.local central-settlement.local ml-api-adapter.local account-lookup-service.local account-lookup-service-admin.local quoting-service.local moja-simulator.local central-ledger central-settlement ml-api-adapter account-lookup-service account-lookup-service-admin quoting-service simulator host.docker.internal transaction-request-service
-127.0.0.1 dfspa-backend dfspa-thirdparty-scheme-adapter-inbound dfspa-thirdparty-scheme-adapter-outbound dfspa-sdk-scheme-adapter
-127.0.0.1 dfspb-backend dfspb-thirdparty-scheme-adapter-inbound dfspb-thirdparty-scheme-adapter-outbound dfspb-sdk-scheme-adapter
-127.0.0.1 pisp-backend pisp-thirdparty-scheme-adapter-inbound pisp-thirdparty-scheme-adapter-outbound pisp-sdk-scheme-adapter
+127.0.0.1 dfspa-backend dfspa-thirdparty-sdk-inbound dfspa-thirdparty-sdk-outbound dfspa-sdk-scheme-adapter
+127.0.0.1 dfspb-backend dfspb-thirdparty-sdk-inbound dfspb-thirdparty-sdk-outbound dfspb-sdk-scheme-adapter
+127.0.0.1 pisp-backend pisp-thirdparty-sdk-inbound pisp-thirdparty-sdk-outbound pisp-sdk-scheme-adapter
 127.0.0.1 als-consent-oracle
 127.0.0.1 auth-service
 ```
@@ -99,10 +99,10 @@ docker-compose logs -f quoting-service
 docker-compose logs -f ml-api-adapter
 docker-compose logs -f central-settlement
 docker-compose logs -f account-lookup-service
-docker-compose logs -f dfspa-sdk-scheme-adapter dfspa-backend dfspa-thirdparty-scheme-adapter-inbound dfspa-thirdparty-scheme-adapter-outbound
-docker-compose logs -f dfspb-sdk-scheme-adapter dfspb-backend dfspb-thirdparty-scheme-adapter-inbound dfspb-thirdparty-scheme-adapter-outbound
+docker-compose logs -f dfspa-sdk-scheme-adapter dfspa-backend dfspa-thirdparty-sdk-inbound dfspa-thirdparty-sdk-outbound
+docker-compose logs -f dfspb-sdk-scheme-adapter dfspb-backend dfspb-thirdparty-sdk-inbound dfspb-thirdparty-sdk-outbound
 docker-compose logs -f transaction-requests-service
-docker-compose logs -f pisp-backend  pisp-sdk-scheme-adapter pisp-redis pisp-thirdparty-scheme-adapter-inbound pisp-thirdparty-scheme-adapter-outbound
+docker-compose logs -f pisp-backend  pisp-sdk-scheme-adapter pisp-redis pisp-thirdparty-sdk-inbound pisp-thirdparty-sdk-outbound
 ```
 
 ## Create some initial data
@@ -155,7 +155,7 @@ export CONSENT_REQUEST_ID=b51ec534-ee48-4575-b6a9-ead2955b8069
 
 ```bash
 # check the parties registered at a simulator:
-curl localhost:9003/repository/parties 
+curl localhost:9003/repository/parties
 
 # expected response
 # [{"displayName":"Alice Alpaca","firstName":"Alice","middleName":"K","lastName":"Alpaca","dateOfBirth":"1970-01-01","idType":"MSISDN","idValue":"123456789"}]
@@ -179,7 +179,7 @@ docker-compose up -d
 # wait for docker-compose
 npm run wait-4-docker
 
-# make sure there is a pisp participant called `pineapplepay` 
+# make sure there is a pisp participant called `pineapplepay`
 # in the ml-boostrap-config.json5 file
 cat https://mighty-bobcat-2.loca.lt | grep pineapple
 
@@ -548,7 +548,7 @@ curl -X POST localhost:4002/participants/MSISDN/123456789 \
   -H 'Content-Type: application/vnd.interoperability.participants+json;version=1.0' \
   -H 'FSPIOP-Source: dfspa' \
   -H 'Date: 2021-01-01' \
-  -d '{ 
+  -d '{
       "fspId": "dfspa",
       "currency": "USD"
   }'

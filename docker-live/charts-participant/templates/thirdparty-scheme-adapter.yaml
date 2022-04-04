@@ -3,9 +3,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ $participantId }}-thirdparty-scheme-adapter
+  name: {{ $participantId }}-thirdparty-sdk
   labels:
-    app: {{ $participantId }}-thirdparty-scheme-adapter
+    app: {{ $participantId }}-thirdparty-sdk
 spec:
   replicas: 1
   strategy:
@@ -14,16 +14,16 @@ spec:
       maxSurge: 1 # exeed the replicas by 1 pod
   selector:
     matchLabels:
-      app: {{ $participantId }}-thirdparty-scheme-adapter
+      app: {{ $participantId }}-thirdparty-sdk
   template:
     metadata:
       labels:
-        app: {{ $participantId }}-thirdparty-scheme-adapter
+        app: {{ $participantId }}-thirdparty-sdk
     spec:
       containers:
         # Inbound Container
         - name: inbound
-          image: mojaloop/thirdparty-scheme-adapter:v11.15.0
+          image: mojaloop/thirdparty-sdk:v11.15.0
           livenessProbe:
             initialDelaySeconds: 30
             httpGet:
@@ -41,13 +41,13 @@ spec:
               value: {{ $participantId }}-redis
           volumeMounts:
             - name: {{ $participantId }}-config-volume
-              mountPath: /opt/thirdparty-scheme-adapter/config
+              mountPath: /opt/thirdparty-sdk/config
           command: [ "npm", "run", "start:inbound" ]
           # command: [ "tail", "-f", "/dev/null" ]
 
         # Outbound Container
         - name: outbound
-          image: mojaloop/thirdparty-scheme-adapter:v11.15.0
+          image: mojaloop/thirdparty-sdk:v11.15.0
           livenessProbe:
             initialDelaySeconds: 30
             httpGet:
@@ -67,7 +67,7 @@ spec:
               value: {{ $participantId }}-redis
           volumeMounts:
             - name: {{ $participantId }}-config-volume
-              mountPath: /opt/thirdparty-scheme-adapter/config
+              mountPath: /opt/thirdparty-sdk/config
           command: [ "npm", "run", "start:outbound" ]
           # command: [ "tail", "-f", "/dev/null" ]
       volumes:
@@ -83,12 +83,12 @@ kind: ConfigMap
 metadata:
   name: {{ $participantId }}-config-map
 data:
-  production.json: {{ (tpl (.Files.Get "configs/thirdparty-scheme-adapter.json") . ) | quote }}
+  production.json: {{ (tpl (.Files.Get "configs/thirdparty-sdk.json") . ) | quote }}
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ $participantId }}-thirdparty-scheme-adapter
+  name: {{ $participantId }}-thirdparty-sdk
 spec:
   ports:
     - port: 4005
@@ -96,14 +96,14 @@ spec:
     - port: 4006
       name: outbound
   selector:
-    app: {{ $participantId }}-thirdparty-scheme-adapter
+    app: {{ $participantId }}-thirdparty-sdk
   clusterIP: None
 ---
 # TODO: ingress rules for each of the 3 apis...
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: {{ $participantId }}-thirdparty-scheme-adapter
+  name: {{ $participantId }}-thirdparty-sdk
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$2
     nginx.ingress.kubernetes.io/use-regex: "true"
@@ -111,13 +111,13 @@ spec:
   rules:
     - http:
         paths:
-          - path: /{{ $participantId }}/thirdparty-scheme-adapter/inbound(/|$)(.*)
+          - path: /{{ $participantId }}/thirdparty-sdk/inbound(/|$)(.*)
             backend:
-              serviceName: {{ $participantId }}-thirdparty-scheme-adapter
+              serviceName: {{ $participantId }}-thirdparty-sdk
               servicePort: 4005
-          - path: /{{ $participantId }}/thirdparty-scheme-adapter/outbound(/|$)(.*)
+          - path: /{{ $participantId }}/thirdparty-sdk/outbound(/|$)(.*)
             backend:
-              serviceName: {{ $participantId }}-thirdparty-scheme-adapter
+              serviceName: {{ $participantId }}-thirdparty-sdk
               servicePort: 4006
 
 {{- end }}

@@ -27,7 +27,7 @@
     "COLOR": true
   },
   "SHARED": {
-    "PEER_ENDPOINT": "transaction-request-service:4003",
+    "PEER_ENDPOINT": "thirdparty-api-svc:4003",
     "ALS_ENDPOINT": "account-lookup-service:4002",
     "QUOTES_ENDPOINT": "quoting-service:3002",
     "TRANSFERS_ENDPOINT": "ml-api-adapter:3000",

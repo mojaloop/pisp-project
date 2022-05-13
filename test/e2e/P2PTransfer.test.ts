@@ -31,24 +31,47 @@ describe('Peer to Peer transfer', (): void => {
     ]
     const expected = {
       amount: TestEnv.amount,
+      amountType: 'SEND',
+      currency: TestEnv.currency,
       currentState: 'COMPLETED',
+      direction: 'OUTBOUND',
       fulfil: expect.objectContaining({
-        transferState: 'COMMITTED'
+        body: expect.objectContaining({
+          transferState: 'COMMITTED'
+        }),
+        headers: expect.any(Object)
       }),
       from: expect.objectContaining({
         idType: 'MSISDN',
         idValue: TestEnv.users.alice.idValue
       }),
+      getPartiesRequest: expect.any(Object),
+      getPartiesResponse: expect.objectContaining({
+        body: expect.any(Object),
+        headers: expect.any(Object)
+      }),
+      homeTransactionId: 'homeTxId123',
+      initiatedTimestamp: expect.any(String),
+      note: 'Test p2p transfer',
+      prepare: expect.any(Object),
+      quoteRequest: expect.any(Object),
+      quoteResponse: expect.objectContaining({
+        body: expect.objectContaining({
+          transferAmount: {
+            amount: TestEnv.amount,
+            currency: TestEnv.currency
+          }
+        }),
+        headers: expect.any(Object)
+      }),
       to: expect.objectContaining({
         idType: 'MSISDN',
         idValue: TestEnv.users.bob.idValue
       }),
-      quoteResponse: expect.objectContaining({
-        transferAmount: {
-          amount: TestEnv.amount,
-          currency: TestEnv.currency
-        }
-      })
+      transactionType: 'TRANSFER',
+      transferId: expect.any(String),
+      quoteId: expect.any(String),
+      quoteResponseSource: 'dfspb'
     }
 
     // Act
@@ -84,29 +107,51 @@ describe('Peer to Peer transfer', (): void => {
     ]
     const expected = {
       amount: TestEnv.amount,
+      amountType: 'SEND',
+      currency: TestEnv.currency,
       currentState: 'COMPLETED',
-      fulfil: expect.objectContaining({
-        transferState: 'COMMITTED'
-      }),
+      direction: 'OUTBOUND',
       from: expect.objectContaining({
         idType: 'MSISDN',
         idValue: TestEnv.users.bob.idValue
+      }),
+      fulfil: expect.objectContaining({
+        body: expect.objectContaining({
+          transferState: 'COMMITTED'
+        }),
+        headers: expect.any(Object)
+      }),
+      getPartiesRequest: expect.any(Object),
+      getPartiesResponse: expect.objectContaining({
+        body: expect.any(Object),
+        headers: expect.any(Object)
+      }),
+      homeTransactionId: 'homeTxId123',
+      initiatedTimestamp: expect.any(String),
+      note: 'Test p2p transfer',
+      prepare: expect.any(Object),
+      quoteRequest: expect.any(Object),
+      quoteResponse: expect.objectContaining({
+        body: expect.objectContaining({
+          transferAmount: {
+            amount: TestEnv.amount,
+            currency: TestEnv.currency
+          }
+        }),
+        headers: expect.any(Object)
       }),
       to: expect.objectContaining({
         idType: 'MSISDN',
         idValue: TestEnv.users.alice.idValue
       }),
-      quoteResponse: expect.objectContaining({
-        transferAmount: {
-          amount: TestEnv.amount,
-          currency: TestEnv.currency
-        }
-      })
+      transactionType: 'TRANSFER',
+      transferId: expect.any(String),
+      quoteId: expect.any(String),
+      quoteResponseSource: 'dfspa'
     }
 
     // Act
     const result = await axios.post(scenariosURI, options)
-
     // Assert
     expect(result.status).toBe(200)
     expect(result.data.scenario1.result).toEqual(expect.objectContaining(expected))

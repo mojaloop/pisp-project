@@ -372,7 +372,7 @@ services:
       - mojaloop-net
 
   dfspa-sdk-scheme-adapter:
-    image: "mojaloop/sdk-scheme-adapter:v12.0.0"
+    image: "mojaloop/sdk-scheme-adapter:v13.0.3"
     # build:
     #   context: ../../sdk-scheme-adapter
     #   dockerfile: ./Dockerfile
@@ -393,7 +393,7 @@ services:
     restart: always
 
   dfspa-thirdparty-sdk-inbound:
-    image: "mojaloop/thirdparty-sdk:v12.0.2"
+    image: "mojaloop/thirdparty-sdk:v13.0.0"
     # build:
     #  context: https://github.com/mojaloop/thirdparty-sdk.git#feat/deterministic-test-consentids
     #  dockerfile: ./docker/Dockerfile
@@ -423,7 +423,7 @@ services:
       interval: 30s
 
   dfspa-thirdparty-sdk-outbound:
-    image: "mojaloop/thirdparty-sdk:v12.0.2"
+    image: "mojaloop/thirdparty-sdk:v13.0.0"
     # build:
     #  context: https://github.com/mojaloop/thirdparty-sdk.git#feat/deterministic-test-consentids
     #  dockerfile: ./docker/Dockerfile
@@ -473,7 +473,7 @@ services:
       - mojaloop-net
 
   dfspb-sdk-scheme-adapter:
-    image: "mojaloop/sdk-scheme-adapter:v12.0.0"
+    image: "mojaloop/sdk-scheme-adapter:v13.0.3"
     # build:
     #   context: ../../sdk-scheme-adapter
     #   dockerfile: ./Dockerfile
@@ -494,7 +494,7 @@ services:
     restart: always
 
   dfspb-thirdparty-sdk-inbound:
-    image: "mojaloop/thirdparty-sdk:v12.0.2"
+    image: "mojaloop/thirdparty-sdk:v13.0.0"
     #build:
     #  context: https://github.com/username/thirdparty-sdk.git#feat/branch
     #  dockerfile: ./docker/Dockerfile
@@ -523,7 +523,7 @@ services:
       interval: 30s
 
   dfspb-thirdparty-sdk-outbound:
-    image: "mojaloop/thirdparty-sdk:v12.0.2"
+    image: "mojaloop/thirdparty-sdk:v13.0.0"
     #build:
     #  context: https://github.com/username/thirdparty-sdk.git#feat/branch
     #  dockerfile: ./docker/Dockerfile
@@ -571,7 +571,7 @@ services:
       - "11003:3003"
 
   pisp-sdk-scheme-adapter:
-    image: "mojaloop/sdk-scheme-adapter:v12.0.0"
+    image: "mojaloop/sdk-scheme-adapter:v13.0.3"
     # build:
     #   context: ../../sdk-scheme-adapter
     #   dockerfile: ./Dockerfile
@@ -592,7 +592,7 @@ services:
     restart: always
 
   pisp-thirdparty-sdk-inbound:
-    image: "mojaloop/thirdparty-sdk:v12.0.2"
+    image: "mojaloop/thirdparty-sdk:v13.0.0"
     #build:
     #  context: https://github.com/username/thirdparty-sdk.git#feat/branch
     #  dockerfile: ./docker/Dockerfile
@@ -622,7 +622,7 @@ services:
       interval: 30s
 
   pisp-thirdparty-sdk-outbound:
-    image: "mojaloop/thirdparty-sdk:v12.0.2"
+    image: "mojaloop/thirdparty-sdk:v13.0.0"
     #build:
     #  context: https://github.com/username/thirdparty-sdk.git#feat/branch
     #  dockerfile: ./docker/Dockerfile

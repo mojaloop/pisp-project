@@ -422,35 +422,6 @@ services:
       start_period: 30s
       interval: 30s
 
-  dfspa-thirdparty-sdk-outbound:
-    image: "mojaloop/thirdparty-sdk:v13.0.0"
-    # build:
-    #  context: https://github.com/mojaloop/thirdparty-sdk.git#feat/deterministic-test-consentids
-    #  dockerfile: ./docker/Dockerfile
-    container_name: dfspa-thirdparty-sdk-outbound
-    environment:
-      - NODE_ENV=e2e
-    command: sh -c "/opt/thirdparty-sdk/wait4/wait4.js dfspa-thirdparty-sdk && npm run start:outbound"
-    volumes:
-      - "./dfsp_a/secrets:/opt/thirdparty-sdk/secrets"
-      - "./dfsp_a/dfsp_a_thirdparty_sdk.json:/opt/thirdparty-sdk/dist/config/e2e.json"
-      - "./docker/wait4:/opt/thirdparty-sdk/wait4"
-    ports:
-      - "5006:4006"
-    networks:
-      - mojaloop-net
-    depends_on:
-      - dfspa-redis
-      - dfspa-sdk-scheme-adapter
-      - thirdparty-api-svc
-    restart: always
-    healthcheck:
-      test: wget -q http://localhost:4006/health -O /dev/null || exit 1
-      timeout: 3s
-      retries: 10
-      start_period: 10s
-      interval: 30s
-
   dfspa-redis:
     container_name: dfspa-redis
     image: "redis:5.0.4-alpine"
@@ -521,36 +492,6 @@ services:
       retries: 10
       start_period: 10s
       interval: 30s
-
-  dfspb-thirdparty-sdk-outbound:
-    image: "mojaloop/thirdparty-sdk:v13.0.0"
-    #build:
-    #  context: https://github.com/username/thirdparty-sdk.git#feat/branch
-    #  dockerfile: ./docker/Dockerfile
-    container_name: dfspb-thirdparty-sdk-outbound
-    environment:
-      - NODE_ENV=e2e
-    command: sh -c "/opt/thirdparty-sdk/wait4/wait4.js dfspb-thirdparty-sdk && npm run start:outbound"
-    volumes:
-      - "./dfsp_b/secrets:/opt/thirdparty-sdk/secrets"
-      - "./dfsp_b/dfsp_b_thirdparty_sdk.json:/opt/thirdparty-sdk/dist/config/e2e.json"
-      - "./docker/wait4:/opt/thirdparty-sdk/wait4"
-    ports:
-      - "6006:4006"
-    networks:
-      - mojaloop-net
-    depends_on:
-      - dfspb-redis
-      - dfspb-sdk-scheme-adapter
-      - thirdparty-api-svc
-    restart: always
-    healthcheck:
-      test: wget -q http://localhost:4006/health -O /dev/null || exit 1
-      timeout: 3s
-      retries: 10
-      start_period: 10s
-      interval: 30s
-
   dfspb-redis:
     container_name: dfspb-redis
     image: "redis:5.0.4-alpine"

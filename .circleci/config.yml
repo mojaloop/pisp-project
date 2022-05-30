@@ -129,9 +129,9 @@ jobs:
             sleep 10
             docker-compose up -d central-settlement
             sleep 10
-            docker-compose up -d dfspa-sdk-scheme-adapter dfspa-thirdparty-sdk-inbound dfspa-thirdparty-sdk-outbound
+            docker-compose up -d dfspa-sdk-scheme-adapter dfspa-thirdparty-sdk-inbound
             sleep 10
-            docker-compose up -d dfspb-sdk-scheme-adapter dfspb-thirdparty-sdk-inbound dfspb-thirdparty-sdk-outbound
+            docker-compose up -d dfspb-sdk-scheme-adapter dfspb-thirdparty-sdk-inbound
             sleep 10
             docker-compose up -d login-flow-simulator-ui login-flow-simulator
             sleep 10

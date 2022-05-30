@@ -15,12 +15,10 @@ const expectedContainers = [
   // 'dfspa-backend', no health check
   // 'dfspa-sdk-scheme-adapter', no health check
   'dfspa-thirdparty-sdk-inbound',
-  'dfspa-thirdparty-sdk-outbound',
   // 'dfspa-redis', no health check
   // 'dfspb-backend', no health check
   // 'dfspb-sdk-scheme-adapter', no health check
   'dfspb-thirdparty-sdk-inbound',
-  'dfspb-thirdparty-sdk-outbound',
   // 'dfspb-redis', no health check
   // 'pisp-backend', no health check
   // 'pisp-sdk-scheme-adapter', no health check

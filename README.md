@@ -16,6 +16,11 @@ This repo contains the documentation, specifications and tests for the Mojaloop-
  - [ZenHub board](https://app.zenhub.com/workspaces/mojaloop-project-59edee71d1407922110cf083/board?labels=oss-pisp,oss-pisp-ref&filterLogic=any&useDefaultFilterLogic=false&repos=116650553,106737677)
 
 
+## System dependencies
+
+In order to generate plant uml diagrams which is a pre-commit hook, you need to have Java installed on your system.
+It is advised to search out how to install Java on your individual os or distro.
+
 ## Running Tests
 
 Tests are run automatically by CircleCI.
@@ -48,7 +53,7 @@ npm run test:e2e -- --watch
 
 ### End To End Testing with TTK
 
-To support the wider adoption of the Third Party API and Services, we 
+To support the wider adoption of the Third Party API and Services, we
 are currently translating our jest-based E2E test to TTK collections.
 
 While this process will soon be automated and handled outside of this

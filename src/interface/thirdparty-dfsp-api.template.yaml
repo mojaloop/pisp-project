@@ -6,10 +6,10 @@ info:
     A Mojaloop API for DFSPs supporting Third Party functions.
 
     DFSPs who want to enable Payment Initiation Service Providers
-    (PISPs) to perform actions on behalf of a DFSP's user should 
+    (PISPs) to perform actions on behalf of a DFSP's user should
     implement this API.
 
-    PISPs should implement the accompanying API - Mojaloop Third 
+    PISPs should implement the accompanying API - Mojaloop Third
     Party API (PISP) instead.
   license:
     name: Open API for FSP Interoperability (FSPIOP) (Implementation Friendly Version)
@@ -18,36 +18,36 @@ servers:
   - url: /
 paths:
   /accounts/{ID}:
-    $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/paths/accounts_ID.yaml'
+    $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/v1_0/openapi3/paths/accounts_ID.yaml'
   /accounts/{ID}/error:
-    $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/paths/accounts_ID_error.yaml'
+    $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/v1_0/openapi3/paths/accounts_ID_error.yaml'
   /consentRequests:
-    $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/paths/consentRequests.yaml'
+    $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/v1_0/openapi3/paths/consentRequests.yaml'
   /consentRequests/{ID}:
-    $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/paths/consentRequests_ID.yaml'
+    $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/v1_0/openapi3/paths/consentRequests_ID.yaml'
   /consentRequests/{ID}/error:
-    $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/paths/consentRequests_ID_error.yaml'
+    $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/v1_0/openapi3/paths/consentRequests_ID_error.yaml'
   /consents:
-    $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/paths/consents.yaml'
+    $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/v1_0/openapi3/paths/consents.yaml'
   /consents/{ID}:
-    $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/paths/consents_ID.yaml'
+    $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/v1_0/openapi3/paths/consents_ID.yaml'
   /consents/{ID}/error:
-    $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/paths/consents_ID_error.yaml'
+    $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/v1_0/openapi3/paths/consents_ID_error.yaml'
   /thirdpartyRequests/authorizations:
-    $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/paths/thirdpartyRequests_authorizations.yaml'
+    $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/v1_0/openapi3/paths/thirdpartyRequests_authorizations.yaml'
   /thirdpartyRequests/authorizations/{ID}:
-    $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/paths/thirdpartyRequests_authorizations_ID.yaml'
+    $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/v1_0/openapi3/paths/thirdpartyRequests_authorizations_ID.yaml'
   /thirdpartyRequests/authorizations/{ID}/error:
-    $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/paths/thirdpartyRequests_authorizations_ID_error.yaml'
+    $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/v1_0/openapi3/paths/thirdpartyRequests_authorizations_ID_error.yaml'
   /thirdpartyRequests/transactions:
-    $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/paths/thirdpartyRequests_transactions.yaml'
+    $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/v1_0/openapi3/paths/thirdpartyRequests_transactions.yaml'
   /thirdpartyRequests/transactions/{ID}:
-    $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/paths/thirdpartyRequests_transactions_ID.yaml'
+    $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/v1_0/openapi3/paths/thirdpartyRequests_transactions_ID.yaml'
   /thirdpartyRequests/transactions/{ID}/error:
-    $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/paths/thirdpartyRequests_transactions_ID_error.yaml'
+    $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/v1_0/openapi3/paths/thirdpartyRequests_transactions_ID_error.yaml'
   /thirdpartyRequests/verifications:
-    $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/paths/thirdpartyRequests_verifications.yaml'
+    $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/v1_0/openapi3/paths/thirdpartyRequests_verifications.yaml'
   /thirdpartyRequests/verifications/{ID}:
-    $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/paths/thirdpartyRequests_verifications_ID.yaml'
+    $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/v1_0/openapi3/paths/thirdpartyRequests_verifications_ID.yaml'
   /thirdpartyRequests/verifications/{ID}/error:
-    $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/openapi3/paths/thirdpartyRequests_verifications_ID_error.yaml'
+    $ref: '../../node_modules/@mojaloop/api-snippets/thirdparty/v1_0/openapi3/paths/thirdpartyRequests_verifications_ID_error.yaml'

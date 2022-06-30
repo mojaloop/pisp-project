@@ -371,7 +371,7 @@ services:
       - mojaloop-net
 
   dfspa-sdk-scheme-adapter:
-    image: "mojaloop/sdk-scheme-adapter:v14.0.0"
+    image: "mojaloop/sdk-scheme-adapter:v15.0.0"
     # build:
     #   context: ../../sdk-scheme-adapter
     #   dockerfile: ./Dockerfile
@@ -443,7 +443,7 @@ services:
       - mojaloop-net
 
   dfspb-sdk-scheme-adapter:
-    image: "mojaloop/sdk-scheme-adapter:v14.0.0"
+    image: "mojaloop/sdk-scheme-adapter:v15.0.0"
     # build:
     #   context: ../../sdk-scheme-adapter
     #   dockerfile: ./Dockerfile
@@ -513,7 +513,7 @@ services:
       - "11003:3003"
 
   pisp-sdk-scheme-adapter:
-    image: "mojaloop/sdk-scheme-adapter:v14.0.0"
+    image: "mojaloop/sdk-scheme-adapter:v15.0.0"
     # build:
     #   context: ../../sdk-scheme-adapter
     #   dockerfile: ./Dockerfile

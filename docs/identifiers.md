@@ -2,7 +2,7 @@
 
 > ***Note:** This isn't the final destination for this documentation, I just figured this repo would be a good place to add any new docs. If you think it belongs elsewhere, please suggest a new location.*
 
-## Purpose: 
+## Purpose:
 
 Within the PISP world we are designing, we need a means to associate a PISP's view of a (user + device + account) with a DFSP's view of a (Party + Account), and be able to share such an association with other participants (DFSPs) in the Mojaloop Ecosystem.
 
@@ -24,10 +24,8 @@ This document aims to define the relationship between a party's account with a D
 
 ### Basic Sequence Diagram
 
-![Identifiers Association Flow](./out/identifiers-assoc/Identifiers_Association.svg)
 
-
-1. Ayeesha registers her chequing account with DFSP A to the PISP App  
+1. Ayeesha registers her chequing account with DFSP A to the PISP App
 
 > ... Account Linking Steps here...
 
@@ -47,7 +45,7 @@ This document aims to define the relationship between a party's account with a D
 
 Q: Why can't the association between a PISP and DFSP Account be stored either with the DFSP or PISP? For example, the DFSP could give an account number to the PISP to store. Or the opposite, the PISP could generate their own association ID to give to the DFSP to be able to identify the sending account.
 A: A few reasons:
-  - There is no standard for accounts defined in Mojaloop. For the DFSP to give an 'account number' to the PISP, this would need to be defined, and would make the solution less generalizable accross a myriad of DFSPs
+  - There is no standard for accounts defined in Mojaloop. For the DFSP to give an 'account number' to the PISP, this would need to be defined, and would make the solution less generalizable across a myriad of DFSPs
   - Even if we did have a standard for 'account number' the DFSP could share the a PISP, do we really want to ask the DFSP to disclose this information? In some instances it might be ok from a security perspective, but once again, that is heavily dependent on the DFSP's own implementations, which we don't want to get involved with.
   - The PISP could create an identifier and ask the DFSP to store this for them, but it seems to me that PISPs should be "read only" from DFSPs, and asking DFSPs to store a value on behalf of the PISPs would break the existing convention we have.
     > Could someone please add to this answer? Or let me know if it even makes sense? I'm sure there's other reasons we don't want to do this.
@@ -77,7 +75,7 @@ A: A few reasons:
 
 *Michael Richards:*
 
-**Thoughts on identifiers:**  
+**Thoughts on identifiers:**
 As part of the association process, either the PISP or the DFSP creates a nonce value (e.g. a UUID) to identify the association with a particular account.
 
 1. We add a new identifier type, say ASSOCIATION
@@ -91,19 +89,19 @@ Thanks Michael, can you please jog my memory about the problem being solved with
 
 *Sam:*
 
-@Lewis Daly this is a proposal I think, to provide for identifying & associating multiple accounts (understanding the possibility of having multiple accounts for a same ID). Right now, the API supports only one account for any ID.  
+@Lewis Daly this is a proposal I think, to provide for identifying & associating multiple accounts (understanding the possibility of having multiple accounts for a same ID). Right now, the API supports only one account for any ID.
 @Michael Richards please let me know if I understood that correctly
 
-*matdehaast:*  
+*matdehaast:*
 And also ensuring account data provided to PISP's aren't sensitive data and mapped internally
 
 *Michael Richards:*
 
-The way in which Mojaloop obtains the route to a DFSP is by using an identifier - a `MSISDN`, or `IBAN`, or whatever - to get an answer from the ALS: apply to this DFSP. 
+The way in which Mojaloop obtains the route to a DFSP is by using an identifier - a `MSISDN`, or `IBAN`, or whatever - to get an answer from the ALS: apply to this DFSP.
 
 The DFSP then associates the identifier with an actual transaction account using its own internal processes which are undefined as far as Mojaloop is concerned. For associations between a PISP and a DFSP, we need to ensure that the identifier used by the PISP will always route to the associated account, so we want to make the identifier specific to that account. Which is what this solution is designed to achieve...
 
-*Lewis Daly:* 
+*Lewis Daly:*
 
 Ah I see, thanks. And as Matt said, we also want to make sure a PISP doesn’t know sensitive information about the account holder, right? Otherwise we could determine the UUID deterministically (ie. a hash value of the dfspId, pispId and account iban/msisdn)
 

@@ -37,6 +37,18 @@ defaults_awsCliDependencies: &defaults_awsCliDependencies |
           mailcap
   pip3 install --upgrade pip awscli==1.14.5 s3cmd==2.0.1 python-magic
 
+defaults_configure_nvm: &defaults_configure_nvm
+  name: Configure NVM
+  command: |
+    touch $HOME/.profile
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+    echo "Installing Node version: $(cat .nvmrc)"
+    nvm install $(cat .nvmrc)
+    nvm alias default $(cat .nvmrc)
+    nvm use $(cat .nvmrc)
+
 ##
 # Executors
 #
@@ -101,22 +113,15 @@ jobs:
           command: |
             sudo ./scripts/_setup_hosts_file.sh
       - run:
-          name: Set up nvm
-          command: |
-            echo ${NVM_DIR}
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            nvm install v16.15.0
-            nvm alias default v16.15.0
+          <<: *defaults_configure_nvm
       - run:
           name: build any containers that need building
           command: |
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             cd ./docker-local/
             docker-compose build
       - run:
           name: Spin up the E2E test environment
           command: |
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             cd ./docker-local/
             docker-compose pull
 
@@ -161,7 +166,6 @@ jobs:
       - run:
           name: Run the E2E tests
           command: |
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             npm run test:e2e -- --reporters=default --reporters=jest-junit
       - run:
           name: prepare test results
@@ -173,7 +177,6 @@ jobs:
       - run:
           name: wait for services to be healthy again
           command: |
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             npm run wait-4-docker
       - run:
           name: run the tests with the TTK-cli
@@ -201,16 +204,10 @@ jobs:
           command: |
             sudo ./scripts/_setup_hosts_file.sh
       - run:
-          name: Set up nvm
-          command: |
-            echo ${NVM_DIR}
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            nvm install v16.15.0
-            nvm alias default v16.15.0
+          <<: *defaults_configure_nvm
       - run:
           name: Spin up the contract test environment
           command: |
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             cd ./docker-contract/
             docker-compose pull
             docker-compose up -d
@@ -225,7 +222,6 @@ jobs:
       - run:
           name: Run the contract tests
           command: |
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             npm run test:contract -- --reporters=default --reporters=jest-junit
       - run:
           name: prepare test/results
@@ -243,19 +239,11 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Set up NVM
-          command: |
-            echo ${NVM_DIR}
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            nvm install v16.15.0
-            nvm alias default v16.15.0
-            node --version
-            npm ci
+          <<: *defaults_configure_nvm
       - run:
           name: Check if plantuml has been updated correctly
           command: |
             set +o pipefail
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             npm run build:plantuml:all
             FILE_COUNT=$(git diff --cached --name-only | grep .svg | wc -l)
             if [ ${FILE_COUNT} -ne "0" ]; then

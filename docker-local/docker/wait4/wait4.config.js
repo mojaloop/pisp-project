@@ -137,7 +137,7 @@ module.exports = {
           method: 'mysql',
           rc: {
             namespace: 'CO',
-            configPath: '../config/default.json'
+            configPath: '../dist/config/default.json'
           },
           retries: 60
         }

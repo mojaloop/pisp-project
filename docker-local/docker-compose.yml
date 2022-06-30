@@ -7,14 +7,14 @@ networks:
 services:
   ## Switch
   central-ledger:
-    image: mojaloop/central-ledger:v13.14.1
+    image: mojaloop/central-ledger:v15.1.1
     container_name: central-ledger
-    command: sh -c "/opt/central-ledger/wait4/wait4.js central-ledger && node src/api/index.js"
+    command: sh -c "/opt/app/wait4/wait4.js central-ledger && node src/api/index.js"
     ports:
       - "3001:3001"
     volumes:
-       - ./docker/central-ledger/default.json:/opt/central-ledger/config/default.json
-       - ./docker/wait4:/opt/central-ledger/wait4
+       - ./docker/central-ledger/default.json:/opt/app/config/default.json
+       - ./docker/wait4:/opt/app/wait4
     environment:
       - LOG_LEVEL=info
       - CLEDG_MONGODB__DISABLED=false
@@ -50,7 +50,7 @@ services:
       start_period: 40s
 
   quoting-service:
-    image: "mojaloop/quoting-service:v10.1.0"
+    image: "mojaloop/quoting-service:v15.0.2"
     container_name: quoting-service
     networks:
       - mojaloop-net
@@ -60,7 +60,7 @@ services:
     ports:
       - "3002:3002"
     volumes:
-      - ./docker/quoting-service/default.json:/opt/quoting-service/config/default.json
+      - ./docker/quoting-service/default.json:/opt/app/config/default.json
     healthcheck:
       test: wget -q http://localhost:3002/health -O /dev/null || exit 1
       timeout: 20s
@@ -69,14 +69,14 @@ services:
     user: root
 
   ml-api-adapter:
-    image: mojaloop/ml-api-adapter:v11.1.6
+    image: mojaloop/ml-api-adapter:v14.0.0
     container_name: ml-api-adapter
-    command: sh -c "/opt/ml-api-adapter/wait4/wait4.js ml-api-adapter && node src/api/index.js"
+    command: sh -c "/opt/app/wait4/wait4.js ml-api-adapter && node src/api/index.js"
     ports:
       - "3000:3000"
     volumes:
-      - ./docker/ml-api-adapter/default.json:/opt/ml-api-adapter/config/default.json
-      - ./docker/wait4:/opt/ml-api-adapter/wait4
+      - ./docker/ml-api-adapter/default.json:/opt/app/config/default.json
+      - ./docker/wait4:/opt/app/wait4
     environment:
       - LOG_LEVEL=info
     networks:
@@ -136,7 +136,6 @@ services:
 
   transaction-requests-service:
     image: mojaloop/transaction-requests-service:v13.0.0
-
     container_name: transaction-requests-service
     ports:
       - "4003:4003"
@@ -172,7 +171,7 @@ services:
       interval: 30s
 
   central-settlement:
-    image: mojaloop/central-settlement:v10.5.0
+    image: mojaloop/central-settlement:v13.4.1
     container_name: central-settlement
     command: sh -c "/opt/central-settlement/wait4/wait4.js central-settlement && node src/api/index.js"
     networks:
@@ -187,9 +186,9 @@ services:
        - ./docker/wait4:/opt/central-settlement/wait4
 
   account-lookup-service:
-    image: mojaloop/account-lookup-service:v11.3.2
+    image: mojaloop/account-lookup-service:v14.0.0
     container_name: account-lookup-service
-    command: sh -c "/opt/account-lookup-service/wait4/wait4.js account-lookup-service && npm run migrate && node src/index.js server"
+    command: sh -c "/opt/app/wait4/wait4.js account-lookup-service && npm run migrate && node src/index.js server"
     ports:
       - "4001:4001"
       - "4002:4002"
@@ -202,8 +201,8 @@ services:
       - mysql-als
       - central-ledger
     volumes:
-      - ./docker/account-lookup-service/default.json:/opt/account-lookup-service/config/default.json
-      - ./docker/wait4:/opt/account-lookup-service/wait4
+      - ./docker/account-lookup-service/default.json:/opt/app/config/default.json
+      - ./docker/wait4:/opt/app/wait4
     healthcheck:
       test: wget -q http://localhost:4001/health -O /dev/null || exit 1
       timeout: 20s
@@ -235,8 +234,8 @@ services:
 
   als-consent-oracle:
     container_name: als-consent-oracle
-    image: "mojaloop/als-consent-oracle:v0.0.6"
-    command: sh -c "/opt/als-consent-oracle/wait4/wait4.js als-consent-oracle && npm run migrate && npm run start"
+    image: "mojaloop/als-consent-oracle:v0.2.0"
+    command: sh -c "/opt/app/wait4/wait4.js als-consent-oracle && npm run migrate && npm run start"
     ports:
       - "16000:3000"
     networks:
@@ -244,8 +243,8 @@ services:
     depends_on:
       - als-consent-oracle-mysql
     volumes:
-       - ./docker/wait4:/opt/als-consent-oracle/wait4
-       - ./docker/als-consent-oracle/default.json:/opt/als-consent-oracle/config/default.json
+       - ./docker/wait4:/opt/app/wait4
+       - ./docker/als-consent-oracle/default.json:/opt/app/dist/config/default.json
     healthcheck:
       test: wget -q http://localhost:3000/health -O /dev/null || exit 1
       timeout: 20s
@@ -276,11 +275,11 @@ services:
       interval: 30s
 
   auth-service:
-    image: mojaloop/auth-service:v12.0.2
+    image: mojaloop/auth-service:v13.0.2
     #build:
     #  context: https://github.com/username/auth-service.git#branch
     #  dockerfile: ./Dockerfile
-    command: sh -c "/opt/auth-service/wait4/wait4.js auth-service && npm run migrate && npm run start"
+    command: sh -c "/opt/app/wait4/wait4.js auth-service && npm run migrate && npm run start"
     container_name: auth-service
     ports:
       - "26050:4004"
@@ -290,8 +289,8 @@ services:
       - auth-service-mysql
       - auth-service-redis
     volumes:
-      - ./docker/wait4:/opt/auth-service/wait4
-      - ./docker/auth-service/default.json:/opt/auth-service/dist/config/integration.json
+      - ./docker/wait4:/opt/app/wait4
+      - ./docker/auth-service/default.json:/opt/app/dist/config/integration.json
     environment:
       - NODE_ENV=integration
       - LOG_LEVEL=debug
@@ -330,18 +329,18 @@ services:
     restart: always
 
   thirdparty-api-svc:
-    image: "mojaloop/thirdparty-api-svc:v12.0.1"
+    image: "mojaloop/thirdparty-api-svc:v13.0.2"
     #build:
     #  context: https://@github.com/username/thirdparty-api-adapter.git#branch-name
     #  dockerfile: ./Dockerfile
     container_name: thirdparty-api-svc
-    command: sh -c "/opt/thirdparty-api-svc/wait4/wait4.js thirdparty-api-svc && npm run start"
+    command: sh -c "/opt/app/wait4/wait4.js thirdparty-api-svc && npm run start"
     ports:
       - "12000:3008"
     volumes:
-      - ./docker/thirdparty-api-svc/default.json:/opt/thirdparty-api-svc/dist/config/default.json
-      - ./docker/thirdparty-api-svc/default.json:/opt/thirdparty-api-svc/config/default.json
-      - ./docker/wait4:/opt/thirdparty-api-svc/wait4
+      - ./docker/thirdparty-api-svc/default.json:/opt/app/dist/config/default.json
+      - ./docker/thirdparty-api-svc/default.json:/opt/app/config/default.json
+      - ./docker/wait4:/opt/app/wait4
     networks:
       - mojaloop-net
     depends_on:
@@ -356,7 +355,7 @@ services:
 
   ## DFSP A
   dfspa-backend:
-    image: "mojaloop/mojaloop-simulator:v12.0.0"
+    image: "mojaloop/mojaloop-simulator:v12.1.1"
     # build
     #   context: ../../mojaloop-simulator
     #   dockerfile: ./Dockerfile
@@ -372,7 +371,7 @@ services:
       - mojaloop-net
 
   dfspa-sdk-scheme-adapter:
-    image: "mojaloop/sdk-scheme-adapter:v13.0.3"
+    image: "mojaloop/sdk-scheme-adapter:v14.0.0"
     # build:
     #   context: ../../sdk-scheme-adapter
     #   dockerfile: ./Dockerfile
@@ -392,50 +391,22 @@ services:
       - ml-api-adapter
     restart: always
 
-  dfspa-thirdparty-sdk-inbound:
-    image: "mojaloop/thirdparty-sdk:v13.0.0"
+  dfspa-thirdparty-sdk:
+    image: "mojaloop/thirdparty-sdk:v15.1.0"
     # build:
     #  context: https://github.com/mojaloop/thirdparty-sdk.git#feat/deterministic-test-consentids
     #  dockerfile: ./docker/Dockerfile
-    container_name: dfspa-thirdparty-sdk-inbound
+    container_name: dfspa-thirdparty-sdk
     environment:
       - NODE_ENV=e2e
       - LOG_LEVEL=debug
-    command: sh -c "/opt/thirdparty-sdk/wait4/wait4.js dfspa-thirdparty-sdk && npm run start:inbound"
+    command: sh -c "/opt/app/wait4/wait4.js dfspa-thirdparty-sdk && npm run start"
     volumes:
-      - "./dfsp_a/secrets:/opt/thirdparty-sdk/secrets"
-      - "./dfsp_a/dfsp_a_thirdparty_sdk.json:/opt/thirdparty-sdk/dist/config/e2e.json"
-      - "./docker/wait4:/opt/thirdparty-sdk/wait4"
+      - "./dfsp_a/secrets:/opt/app/secrets"
+      - "./dfsp_a/dfsp_a_thirdparty_sdk.json:/opt/app/dist/config/e2e.json"
+      - "./docker/wait4:/opt/app/wait4"
     ports:
       - "5005:4005"
-    networks:
-      - mojaloop-net
-    depends_on:
-      - dfspa-redis
-      - dfspa-sdk-scheme-adapter
-      - thirdparty-api-svc
-    restart: always
-    healthcheck:
-      test: wget -q http://localhost:4005/health -O /dev/null || exit 1
-      timeout: 3s
-      retries: 10
-      start_period: 30s
-      interval: 30s
-
-  dfspa-thirdparty-sdk-outbound:
-    image: "mojaloop/thirdparty-sdk:v13.0.0"
-    # build:
-    #  context: https://github.com/mojaloop/thirdparty-sdk.git#feat/deterministic-test-consentids
-    #  dockerfile: ./docker/Dockerfile
-    container_name: dfspa-thirdparty-sdk-outbound
-    environment:
-      - NODE_ENV=e2e
-    command: sh -c "/opt/thirdparty-sdk/wait4/wait4.js dfspa-thirdparty-sdk && npm run start:outbound"
-    volumes:
-      - "./dfsp_a/secrets:/opt/thirdparty-sdk/secrets"
-      - "./dfsp_a/dfsp_a_thirdparty_sdk.json:/opt/thirdparty-sdk/dist/config/e2e.json"
-      - "./docker/wait4:/opt/thirdparty-sdk/wait4"
-    ports:
       - "5006:4006"
     networks:
       - mojaloop-net
@@ -445,12 +416,11 @@ services:
       - thirdparty-api-svc
     restart: always
     healthcheck:
-      test: wget -q http://localhost:4006/health -O /dev/null || exit 1
+      test: wget -q http://localhost:4005/health http://localhost:4006/health -O /dev/null || exit 1
       timeout: 3s
       retries: 10
-      start_period: 10s
+      start_period: 30s
       interval: 30s
-
   dfspa-redis:
     container_name: dfspa-redis
     image: "redis:5.0.4-alpine"
@@ -460,7 +430,7 @@ services:
 
   ## DFSP B
   dfspb-backend:
-    image: "mojaloop/mojaloop-simulator:v12.0.0"
+    image: "mojaloop/mojaloop-simulator:v12.1.1"
     container_name: dfspb-backend
     env_file: ./dfsp_b/dfsp_b_backend.env
     volumes:
@@ -473,7 +443,7 @@ services:
       - mojaloop-net
 
   dfspb-sdk-scheme-adapter:
-    image: "mojaloop/sdk-scheme-adapter:v13.0.3"
+    image: "mojaloop/sdk-scheme-adapter:v14.0.0"
     # build:
     #   context: ../../sdk-scheme-adapter
     #   dockerfile: ./Dockerfile
@@ -493,49 +463,21 @@ services:
       - ml-api-adapter
     restart: always
 
-  dfspb-thirdparty-sdk-inbound:
-    image: "mojaloop/thirdparty-sdk:v13.0.0"
+  dfspb-thirdparty-sdk:
+    image: "mojaloop/thirdparty-sdk:v15.1.0"
     #build:
     #  context: https://github.com/username/thirdparty-sdk.git#feat/branch
     #  dockerfile: ./docker/Dockerfile
-    container_name: dfspb-thirdparty-sdk-inbound
+    container_name: dfspb-thirdparty-sdk
     environment:
       - NODE_ENV=e2e
-    command: sh -c "/opt/thirdparty-sdk/wait4/wait4.js dfspb-thirdparty-sdk && npm run start:inbound"
+    command: sh -c "/opt/app/wait4/wait4.js dfspb-thirdparty-sdk && npm run start"
     volumes:
-      - "./dfsp_b/secrets:/opt/thirdparty-sdk/secrets"
-      - "./dfsp_b/dfsp_b_thirdparty_sdk.json:/opt/thirdparty-sdk/dist/config/e2e.json"
-      - "./docker/wait4:/opt/thirdparty-sdk/wait4"
+      - "./dfsp_b/secrets:/opt/app/secrets"
+      - "./dfsp_b/dfsp_b_thirdparty_sdk.json:/opt/app/dist/config/e2e.json"
+      - "./docker/wait4:/opt/app/wait4"
     ports:
       - "6005:4005"
-    networks:
-      - mojaloop-net
-    depends_on:
-      - dfspb-redis
-      - dfspb-sdk-scheme-adapter
-      - thirdparty-api-svc
-    restart: always
-    healthcheck:
-      test: wget -q http://localhost:4005/health -O /dev/null || exit 1
-      timeout: 3s
-      retries: 10
-      start_period: 10s
-      interval: 30s
-
-  dfspb-thirdparty-sdk-outbound:
-    image: "mojaloop/thirdparty-sdk:v13.0.0"
-    #build:
-    #  context: https://github.com/username/thirdparty-sdk.git#feat/branch
-    #  dockerfile: ./docker/Dockerfile
-    container_name: dfspb-thirdparty-sdk-outbound
-    environment:
-      - NODE_ENV=e2e
-    command: sh -c "/opt/thirdparty-sdk/wait4/wait4.js dfspb-thirdparty-sdk && npm run start:outbound"
-    volumes:
-      - "./dfsp_b/secrets:/opt/thirdparty-sdk/secrets"
-      - "./dfsp_b/dfsp_b_thirdparty_sdk.json:/opt/thirdparty-sdk/dist/config/e2e.json"
-      - "./docker/wait4:/opt/thirdparty-sdk/wait4"
-    ports:
       - "6006:4006"
     networks:
       - mojaloop-net
@@ -545,7 +487,7 @@ services:
       - thirdparty-api-svc
     restart: always
     healthcheck:
-      test: wget -q http://localhost:4006/health -O /dev/null || exit 1
+      test: wget -q http://localhost:4005/health http://localhost:4006/health -O /dev/null || exit 1
       timeout: 3s
       retries: 10
       start_period: 10s
@@ -560,7 +502,7 @@ services:
 
   ## PISP
   pisp-backend:
-    image: "mojaloop/mojaloop-simulator:v12.0.0"
+    image: "mojaloop/mojaloop-simulator:v12.1.1"
     container_name: pisp-backend
     env_file: ./pisp/pisp_backend.env
     volumes:
@@ -571,7 +513,7 @@ services:
       - "11003:3003"
 
   pisp-sdk-scheme-adapter:
-    image: "mojaloop/sdk-scheme-adapter:v13.0.3"
+    image: "mojaloop/sdk-scheme-adapter:v14.0.0"
     # build:
     #   context: ../../sdk-scheme-adapter
     #   dockerfile: ./Dockerfile
@@ -591,53 +533,22 @@ services:
       - ml-api-adapter
     restart: always
 
-  pisp-thirdparty-sdk-inbound:
-    image: "mojaloop/thirdparty-sdk:v13.0.0"
+  pisp-thirdparty-sdk:
+    image: "mojaloop/thirdparty-sdk:v15.1.0"
     #build:
     #  context: https://github.com/username/thirdparty-sdk.git#feat/branch
     #  dockerfile: ./docker/Dockerfile
-    container_name: pisp-thirdparty-sdk-inbound
+    container_name: pisp-thirdparty-sdk
     environment:
       - NODE_ENV=e2e
       - DFSP_ID=pisp
-    command: sh -c "/opt/thirdparty-sdk/wait4/wait4.js pisp-thirdparty-sdk && npm run start:inbound"
+    command: sh -c "/opt/app/wait4/wait4.js pisp-thirdparty-sdk && npm run start"
     volumes:
-      - "./pisp/secrets:/opt/thirdparty-sdk/secrets"
-      - "./pisp/pisp_thirdparty_sdk.json:/opt/thirdparty-sdk/dist/config/e2e.json"
-      - "./docker/wait4:/opt/thirdparty-sdk/wait4"
+      - "./pisp/secrets:/opt/app/secrets"
+      - "./pisp/pisp_thirdparty_sdk.json:/opt/app/dist/config/e2e.json"
+      - "./docker/wait4:/opt/app/wait4"
     ports:
       - "7005:4005"
-    networks:
-      - mojaloop-net
-    depends_on:
-      - pisp-redis
-      - pisp-sdk-scheme-adapter
-      - thirdparty-api-svc
-    restart: always
-    healthcheck:
-      test: wget -q http://localhost:4005/health -O /dev/null || exit 1
-      timeout: 3s
-      retries: 10
-      start_period: 10s
-      interval: 30s
-
-  pisp-thirdparty-sdk-outbound:
-    image: "mojaloop/thirdparty-sdk:v13.0.0"
-    #build:
-    #  context: https://github.com/username/thirdparty-sdk.git#feat/branch
-    #  dockerfile: ./docker/Dockerfile
-    container_name: pisp-thirdparty-sdk-outbound
-    environment:
-      - NODE_ENV=e2e
-      - ENV=e2e
-      - DFSP_ID=pisp
-      - LOG_LEVEL=debug
-    command: sh -c "/opt/thirdparty-sdk/wait4/wait4.js pisp-thirdparty-sdk && npm run start:outbound"
-    volumes:
-      - "./pisp/secrets:/opt/thirdparty-sdk/secrets"
-      - "./pisp/pisp_thirdparty_sdk.json:/opt/thirdparty-sdk/dist/config/e2e.json"
-      - "./docker/wait4:/opt/thirdparty-sdk/wait4"
-    ports:
       - "7006:4006"
     networks:
       - mojaloop-net
@@ -647,7 +558,7 @@ services:
       - thirdparty-api-svc
     restart: always
     healthcheck:
-      test: wget -q http://localhost:4006/health -O /dev/null || exit 1
+      test: wget -q http://localhost:4005/health http://localhost:4006/health -O /dev/null || exit 1
       timeout: 3s
       retries: 10
       start_period: 10s

@@ -105,8 +105,8 @@ jobs:
           command: |
             echo ${NVM_DIR}
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            nvm install v12.16.1
-            nvm alias default v12.16.1
+            nvm install v16.15.0
+            nvm alias default v16.15.0
       - run:
           name: build any containers that need building
           command: |
@@ -131,9 +131,9 @@ jobs:
             sleep 10
             docker-compose up -d central-settlement
             sleep 10
-            docker-compose up -d dfspa-sdk-scheme-adapter dfspa-thirdparty-sdk-inbound dfspa-thirdparty-sdk-outbound
+            docker-compose up -d dfspa-sdk-scheme-adapter dfspa-thirdparty-sdk
             sleep 10
-            docker-compose up -d dfspb-sdk-scheme-adapter dfspb-thirdparty-sdk-inbound dfspb-thirdparty-sdk-outbound
+            docker-compose up -d dfspb-sdk-scheme-adapter dfspb-thirdparty-sdk
             sleep 10
             docker-compose up -d login-flow-simulator-ui login-flow-simulator
             sleep 10
@@ -143,7 +143,7 @@ jobs:
             sleep 10
             docker-compose up -d quoting-service
             sleep 10
-            docker-compose up -d pisp-sdk-scheme-adapter pisp-redis pisp-thirdparty-sdk-inbound pisp-backend pisp-thirdparty-sdk-outbound
+            docker-compose up -d pisp-sdk-scheme-adapter pisp-redis pisp-thirdparty-sdk pisp-backend
             sleep 10
 
             # everything else
@@ -205,8 +205,8 @@ jobs:
           command: |
             echo ${NVM_DIR}
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            nvm install v12.16.1
-            nvm alias default v12.16.1
+            nvm install v16.15.0
+            nvm alias default v16.15.0
       - run:
           name: Spin up the contract test environment
           command: |
@@ -247,8 +247,8 @@ jobs:
           command: |
             echo ${NVM_DIR}
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            nvm install v12.16.1
-            nvm alias default v12.16.1
+            nvm install v16.15.0
+            nvm alias default v16.15.0
             node --version
             npm ci
       - run:

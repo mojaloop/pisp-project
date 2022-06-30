@@ -1,60 +1,76 @@
 {
-  "INBOUND": {
-    "PORT": 4005,
-    "HOST": "0.0.0.0",
-    "PISP_TRANSACTION_MODE": "true"
+  "control": {
+    "mgmtAPIWsUrl": "127.0.0.1",
+    "mgmtAPIWsPort": 4010
   },
-  "OUTBOUND": {
-    "PORT": 4006,
-    "HOST": "0.0.0.0"
-  },
-  "REQUEST_PROCESSING_TIMEOUT_SECONDS": 30,
-  "WSO2_AUTH": {
-    "staticToken": "0706c62f-c022-3c42-8d14-8b5df128876d",
-    "tokenEndpoint": "",
-    "clientKey": "test-client-key",
-    "clientSecret": "test-client-secret",
-    "refreshSeconds": 3600
-  },
-  "REDIS": {
-    "PORT": 6379,
-    "HOST": "pisp-redis",
-    "TIMEOUT": 100
-  },
-  "INSPECT": {
-    "DEPTH": 4,
-    "SHOW_HIDDEN": false,
-    "COLOR": true
-  },
-  "SHARED": {
-    "PEER_ENDPOINT": "thirdparty-api-svc:4003",
-    "ALS_ENDPOINT": "account-lookup-service:4002",
-    "QUOTES_ENDPOINT": "quoting-service:3002",
-    "TRANSFERS_ENDPOINT": "ml-api-adapter:3000",
-    "BULK_TRANSFERS_ENDPOINT": "ml-api-adapter:3000",
-    "THIRDPARTY_REQUESTS_ENDPOINT": "thirdparty-api-svc:3008",
-    "SERVICES_ENDPOINT": "thirdparty-api-svc:3008",
-    "DFSP_ID": "pisp",
-    "DFSP_BACKEND_URI": "pisp-backend:11000",
-    "DFSP_BACKEND_HTTP_SCHEME": "http",
-    "PISP_BACKEND_URI": "pisp-backend:11000",
-    "PISP_BACKEND_HTTP_SCHEME": "http",
-    "PISP_BACKEND_SIGN_AUTHORIZATION_PATH": "signchallenge",
-    "SDK_OUTGOING_URI": "pisp-sdk-scheme-adapter:4001",
-    "SDK_OUTGOING_HTTP_SCHEME": "http",
-    "SDK_OUTGOING_PARTIES_INFORMATION_PATH": "parties/{Type}/{ID}/{SubId}",
-    "SDK_REQUEST_TO_PAY_TRANSFER_URI": "requestToPay",
-    "JWS_SIGN": false,
-    "JWS_SIGNING_KEY": "./secrets/jwsSigningKey.key",
-    "TLS": {
+  "inbound": {
+    "port": 4005,
+    "host": "0.0.0.0",
+    "pispTransactionMode": true,
+    "tls": {
       "mutualTLS": {
-          "enabled": false
+        "enabled": false
       },
       "creds": {
-        "ca": "./secrets/pisp_client.crt",
-        "cert": "./secrets/pisp_client.crt",
-        "key": "./secrets/pisp_client.crt"
+        "ca": "./secrets/dfsp_or_3ppi_client_cacert.pem",
+        "cert": "./secrets/dfsp_or_3ppi_server_cert.pem",
+        "key": "./secrets/dfsp_or_3ppi_server_key.key"
       }
     }
-  }
+  },
+  "outbound": {
+    "port": 4006,
+    "host": "0.0.0.0",
+    "tls": {
+      "mutualTLS": {
+        "enabled": false
+      },
+      "creds": {
+        "ca": "./secrets/hub_server_cacert.pem",
+        "cert": "./secrets/dfsp_or_3ppi_client_cert.cer",
+        "key": "./secrets/dfsp_or_3ppi_client_key.key"
+      }
+    }
+  },
+  "requestProcessingTimeoutSeconds": 30,
+  "wso2": {
+    "auth": {
+      "staticToken": "0706c62f-c022-3c42-8d14-8b5df128876d",
+      "tokenEndpoint": "",
+      "clientKey": "test-client-key",
+      "clientSecret": "test-client-secret",
+      "refreshSeconds": 3600
+    }
+  },
+  "redis": {
+    "port": 6379,
+    "host": "pisp-redis",
+    "timeout": 100
+  },
+  "inspect": {
+    "depth": 4,
+    "showHidden": false,
+    "color": true
+  },
+  "shared": {
+    "peerEndpoint": "thirdparty-api-svc:4003",
+    "alsEndpoint": "account-lookup-service:4002",
+    "quotesEndpoint": "quoting-service:3002",
+    "transfersEndpoint": "ml-api-adapter:3000",
+    "bulkTransfersEndpoint": "ml-api-adapter:3000",
+    "thirdpartyRequestsEndpoint": "thirdparty-api-svc:3008",
+    "servicesEndpoint": "thirdparty-api-svc:3008",
+    "dfspId": "pisp",
+    "dfspBackendUri": "pisp-backend:11000",
+    "dfspBackendHttpScheme": "http",
+    "sdkOutgoingUri": "pisp-sdk-scheme-adapter:4001",
+    "sdkOutgoingHttpScheme": "http",
+    "sdkOutgoingPartiesInformationPath": "parties/{Type}/{ID}/{SubId}",
+    "sdkRequestToPayTransferUri": "requestToPay"
+  },
+  "pm4mlEnabled": false,
+  "validateInboundJws": false,
+  "jwsSign": false,
+  "jwsSigningKey": "/jwsSigningKey.key",
+  "jwsVerificationKeysDirectory": null
 }

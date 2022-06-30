@@ -31,7 +31,21 @@
     "DISABLED": false,
     "API": {
       "DISABLED": false
+    },
+    "SETTINGS": {
+      "RULES": {
+        "SCRIPTS_FOLDER": "./scripts/transferSettlementTemp",
+        "SCRIPT_TIMEOUT": 100,
+        "CONSUMER_COMMIT": true,
+        "FROM_SWITCH": true
+      }
     }
+  },
+  "API_DOC_ENDPOINTS_ENABLED": true,
+  "SWITCH_ENDPOINT": "http://localhost:3001",
+  "AMOUNT": {
+    "PRECISION": 18,
+    "SCALE": 4
   },
   "KAFKA": {
     "TOPIC_TEMPLATES": {
@@ -41,7 +55,7 @@
       }
     },
     "CONSUMER": {
-      "SETTLEMENTWINDOW": {
+      "DEFERREDSETTLEMENT": {
         "CLOSE": {
           "config": {
             "options": {
@@ -55,10 +69,37 @@
               "consumeTimeout": 1000
             },
             "rdkafkaConf": {
-              "client.id": "cs-con-setlementwindow-close",
-              "group.id": "cs-group-setlementwindow-close",
+              "client.id": "cs-con-deferredsettlement-close",
+              "group.id": "cs-group-deferredsettlement-close",
               "metadata.broker.list": "kafka:29092",
-              "socket.keepalive.enable": true
+              "socket.keepalive.enable": true,
+              "allow.auto.create.topics": true
+            },
+            "topicConf": {
+              "auto.offset.reset": "earliest"
+            }
+          }
+        }
+      },
+      "NOTIFICATION": {
+        "EVENT": {
+          "config": {
+            "options": {
+              "mode": 2,
+              "batchSize": 1,
+              "pollFrequency": 10,
+              "recursiveTimeout": 100,
+              "messageCharset": "utf8",
+              "messageAsJSON": true,
+              "sync": true,
+              "consumeTimeout": 1000
+            },
+            "rdkafkaConf": {
+              "client.id": "cs-con-notification-event",
+              "group.id": "cs-group-notification-event",
+              "metadata.broker.list": "kafka:29092",
+              "socket.keepalive.enable": true,
+              "allow.auto.create.topics": true
             },
             "topicConf": {
               "auto.offset.reset": "earliest"
@@ -94,7 +135,7 @@
           }
         }
       },
-      "SETTLEMENTWINDOW": {
+      "DEFERREDSETTLEMENT": {
         "CLOSE": {
           "config": {
             "options": {
@@ -102,7 +143,7 @@
             },
             "rdkafkaConf": {
               "metadata.broker.list": "kafka:29092",
-              "client.id": "cs-prod-setlementwindow-close",
+              "client.id": "cs-prod-deferredsettlement-close",
               "event_cb": true,
               "dr_cb": true,
               "socket.keepalive.enable": true,

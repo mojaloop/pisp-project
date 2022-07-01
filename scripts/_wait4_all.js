@@ -14,18 +14,15 @@ const expectedContainers = [
   // 'central-settlement', no health check
   // 'dfspa-backend', no health check
   // 'dfspa-sdk-scheme-adapter', no health check
-  'dfspa-thirdparty-sdk-inbound',
-  'dfspa-thirdparty-sdk-outbound',
+  'dfspa-thirdparty-sdk',
   // 'dfspa-redis', no health check
   // 'dfspb-backend', no health check
   // 'dfspb-sdk-scheme-adapter', no health check
-  'dfspb-thirdparty-sdk-inbound',
-  'dfspb-thirdparty-sdk-outbound',
+  'dfspb-thirdparty-sdk',
   // 'dfspb-redis', no health check
   // 'pisp-backend', no health check
   // 'pisp-sdk-scheme-adapter', no health check
-  'pisp-thirdparty-sdk-inbound',
-  'pisp-thirdparty-sdk-outbound',
+  'pisp-thirdparty-sdk',
   'thirdparty-api-svc',
   // 'pisp-redis', no health check
   'kafka',

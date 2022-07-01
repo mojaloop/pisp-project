@@ -4,8 +4,8 @@ info:
   version: '1.0'
   description: |
     A Mojaloop API for DFSPs supporting Third Party functions.
-    DFSPs who want to enable Payment Initiation Service Providers (PISPs) to perform actions on behalf of a DFSP's user should  implement this API.
-    PISPs should implement the accompanying API - Mojaloop Third  Party API (PISP) instead.
+    DFSPs who want to enable Payment Initiation Service Providers (PISPs) to perform actions on behalf of a DFSP's user should implement this API.
+    PISPs should implement the accompanying API - Mojaloop Third Party API (PISP) instead.
   license:
     name: Open API for FSP Interoperability (FSPIOP) (Implementation Friendly Version)
     url: 'https://github.com/mojaloop/mojaloop-specification/blob/master/LICENSE.md'
@@ -75,14 +75,24 @@ paths:
             schema:
               title: AccountsIDPutResponse
               type: object
-              description: 'The object sent in a `PUT /accounts/{ID}` request.'
+              description: |-
+                Callback and data model information for GET /accounts/{ID}:
+                Callback - PUT /accounts/{ID} Error Callback - PUT /accounts/{ID}/error Data Model - Empty body
+                The PUT /accounts/{ID} response is used to inform the requester of the result of a request for accounts information. The identifier ID given in the call are the values given in the original request.
+                https://github.com/mojaloop/documentation/blob/master/website/versioned_docs/v1.0.1/api/thirdparty/data-models.md#31121--put-accountsid
               properties:
                 accounts:
+                  title: AccountList
                   type: array
+                  description: |-
+                    The AccountList data model is used to hold information about the accounts that a party controls.
+                    https://github.com/mojaloop/documentation/blob/master/website/versioned_docs/v1.0.1/api/thirdparty/data-models.md#3213-accountlist
                   items:
                     title: Account
                     type: object
-                    description: Data model for the complex type Account.
+                    description: |-
+                      Data model for the complex type Account.
+                      https://github.com/mojaloop/documentation/blob/master/website/versioned_docs/v1.0.1/api/thirdparty/data-models.md#3211-account
                     properties:
                       accountNickname:
                         title: Name
@@ -94,189 +104,18 @@ paths:
                           Regular Expression - The regular expression for restricting the Name type is "^(?!\s*$)[\w .,'-]{1,128}$". The restriction does not allow a string consisting of whitespace only, all Unicode characters are allowed, as well as the period (.) (apostrophe (‘), dash (-), comma (,) and space characters ( ).
 
                           **Note:** In some programming languages, Unicode support must be specifically enabled. For example, if Java is used, the flag UNICODE_CHARACTER_CLASS must be enabled to allow Unicode characters.
-                      id:
-                        title: AccountId
-                        type: string
-                        description: |
-                          A long-lived unique account identifier provided by the DFSP. This MUST NOT
-                          be Bank Account Number or anything that may expose a User's private bank
-                          account information.
-                        pattern: '^([0-9A-Za-z_~\-\.]+[0-9A-Za-z_~\-])$'
-                        minLength: 1
-                        maxLength: 1023
+                      address:
+                        $ref: '#/paths/~1consentRequests/post/requestBody/content/application~1json/schema/properties/scopes/items/properties/address'
                       currency:
-                        title: Currency
-                        description: 'The currency codes defined in [ISO 4217](https://www.iso.org/iso-4217-currency-codes.html) as three-letter alphabetic codes are used as the standard naming representation for currencies.'
-                        type: string
-                        minLength: 3
-                        maxLength: 3
-                        enum:
-                          - AED
-                          - AFN
-                          - ALL
-                          - AMD
-                          - ANG
-                          - AOA
-                          - ARS
-                          - AUD
-                          - AWG
-                          - AZN
-                          - BAM
-                          - BBD
-                          - BDT
-                          - BGN
-                          - BHD
-                          - BIF
-                          - BMD
-                          - BND
-                          - BOB
-                          - BRL
-                          - BSD
-                          - BTN
-                          - BWP
-                          - BYN
-                          - BZD
-                          - CAD
-                          - CDF
-                          - CHF
-                          - CLP
-                          - CNY
-                          - COP
-                          - CRC
-                          - CUC
-                          - CUP
-                          - CVE
-                          - CZK
-                          - DJF
-                          - DKK
-                          - DOP
-                          - DZD
-                          - EGP
-                          - ERN
-                          - ETB
-                          - EUR
-                          - FJD
-                          - FKP
-                          - GBP
-                          - GEL
-                          - GGP
-                          - GHS
-                          - GIP
-                          - GMD
-                          - GNF
-                          - GTQ
-                          - GYD
-                          - HKD
-                          - HNL
-                          - HRK
-                          - HTG
-                          - HUF
-                          - IDR
-                          - ILS
-                          - IMP
-                          - INR
-                          - IQD
-                          - IRR
-                          - ISK
-                          - JEP
-                          - JMD
-                          - JOD
-                          - JPY
-                          - KES
-                          - KGS
-                          - KHR
-                          - KMF
-                          - KPW
-                          - KRW
-                          - KWD
-                          - KYD
-                          - KZT
-                          - LAK
-                          - LBP
-                          - LKR
-                          - LRD
-                          - LSL
-                          - LYD
-                          - MAD
-                          - MDL
-                          - MGA
-                          - MKD
-                          - MMK
-                          - MNT
-                          - MOP
-                          - MRO
-                          - MUR
-                          - MVR
-                          - MWK
-                          - MXN
-                          - MYR
-                          - MZN
-                          - NAD
-                          - NGN
-                          - NIO
-                          - NOK
-                          - NPR
-                          - NZD
-                          - OMR
-                          - PAB
-                          - PEN
-                          - PGK
-                          - PHP
-                          - PKR
-                          - PLN
-                          - PYG
-                          - QAR
-                          - RON
-                          - RSD
-                          - RUB
-                          - RWF
-                          - SAR
-                          - SBD
-                          - SCR
-                          - SDG
-                          - SEK
-                          - SGD
-                          - SHP
-                          - SLL
-                          - SOS
-                          - SPL
-                          - SRD
-                          - STD
-                          - SVC
-                          - SYP
-                          - SZL
-                          - THB
-                          - TJS
-                          - TMT
-                          - TND
-                          - TOP
-                          - TRY
-                          - TTD
-                          - TVD
-                          - TWD
-                          - TZS
-                          - UAH
-                          - UGX
-                          - USD
-                          - UYU
-                          - UZS
-                          - VEF
-                          - VND
-                          - VUV
-                          - WST
-                          - XAF
-                          - XCD
-                          - XDR
-                          - XOF
-                          - XPF
-                          - YER
-                          - ZAR
-                          - ZMW
-                          - ZWD
+                        $ref: '#/paths/~1thirdpartyRequests~1transactions/post/requestBody/content/application~1json/schema/properties/amount/allOf/0/properties/currency'
                     required:
                       - accountNickname
-                      - id
+                      - address
                       - currency
+                  minItems: 1
+                  maxItems: 256
+                extensionList:
+                  $ref: '#/paths/~1consentRequests/post/requestBody/content/application~1json/schema/properties/extensionList'
               required:
                 - accounts
             example:
@@ -355,7 +194,7 @@ paths:
                       maxLength: 128
                       description: Error description string.
                     extensionList:
-                      $ref: '#/paths/~1thirdpartyRequests~1authorizations/post/requestBody/content/application~1json/schema/properties/extensionList'
+                      $ref: '#/paths/~1consentRequests/post/requestBody/content/application~1json/schema/properties/extensionList'
                   required:
                     - errorCode
                     - errorDescription
@@ -398,7 +237,8 @@ paths:
       operationId: CreateConsentRequest
       summary: CreateConsentRequest
       description: |
-        A request from a PISP to a DFSP to start the process of delegating consent
+        The HTTP request **POST /consentRequests** is used to request a DFSP to grant access to one or more
+        accounts owned by a customer of the DFSP for the PISP who sends the request.
       parameters:
         - $ref: '#/paths/~1consents/post/parameters/0'
         - $ref: '#/paths/~1consents/post/parameters/1'
@@ -410,7 +250,12 @@ paths:
             schema:
               title: ConsentRequestsPostRequest
               type: object
-              description: The object sent in a `POST /consentRequests` request.
+              description: |-
+                Used by: PISP
+                The HTTP request POST /consentRequests is used to request a DFSP to grant access to one or more accounts owned by a customer of the DFSP for the PISP who sends the request.
+                Callback and data model for POST /consentRequests:
+                Callback: PUT /consentRequests/{ID} Error callback: PUT /consentRequests/{ID}/error Data model - see below url
+                https://github.com/mojaloop/documentation/blob/master/website/versioned_docs/v1.0.1/api/thirdparty/data-models.md#31212-post-consentrequests
               properties:
                 consentRequestId:
                   title: CorrelationId
@@ -420,38 +265,59 @@ paths:
                   example: b51ec534-ee48-4575-b6a9-ead2955b8069
                 userId:
                   type: string
-                  description: ID used to associate request with GET /accounts request.
+                  description: 'The identifier used in the **GET /accounts/**_{ID}_. Used by the DFSP to correlate an account lookup to a `consentRequest`'
+                  minLength: 1
+                  maxLength: 128
                 scopes:
                   type: array
+                  minLength: 1
+                  maxLength: 256
                   items:
                     title: Scope
                     type: object
-                    description: Scope + Account Identifier mapping for a Consent.
-                    example: |
-                      {
-                        accountId: "dfsp.username.5678",
-                        actions: [ "accounts.transfer", "accounts.getBalance" ]
-                      }
+                    description: |-
+                      The Scope element contains an identifier defining, in the terms of a DFSP, an account on which access types can be requested or granted. It also defines the access types which are requested or granted.
+                      https://github.com/mojaloop/documentation/blob/master/website/versioned_docs/v1.0.1/api/thirdparty/data-models.md#32121-scope
                     properties:
-                      accountId:
-                        $ref: '#/paths/~1accounts~1%7BID%7D/put/requestBody/content/application~1json/schema/properties/accounts/items/properties/id'
+                      address:
+                        title: AccountAddress
+                        type: string
+                        description: |-
+                          The AccountAddress data type is a variable length string with a maximum size of 1023 characters and consists of:
+                          Alphanumeric characters, upper or lower case. (Addresses are case-sensitive so that they can contain data encoded in formats such as base64url.)
+                          - Underscore (_) - Tilde (~) - Hyphen (-) - Period (.) Addresses MUST NOT end in a period (.) character
+                          An entity providing accounts to parties (i.e. a participant) can provide any value for an AccountAddress that is meaningful to that entity. It does not need to provide an address that makes the account identifiable outside the entity's domain.
+                          IMPORTANT: The policy for defining addresses and the life-cycle of these is at the discretion of the address space owner (the payer DFSP in this case).
+                          https://github.com/mojaloop/documentation/blob/master/website/versioned_docs/v1.0.1/api/thirdparty/data-models.md#3212-accountaddress
+                        pattern: '^([0-9A-Za-z_~\-\.]+[0-9A-Za-z_~\-])$'
+                        minLength: 1
+                        maxLength: 1023
                       actions:
                         type: array
+                        minItems: 1
+                        maxItems: 32
                         items:
-                          title: ConsentScopeType
+                          title: ScopeAction
                           type: string
-                          enum:
-                            - accounts.getBalance
-                            - accounts.transfer
                           description: |
-                            The scopes requested for a ConsentRequest.
-                            - "accounts.getBalance" - Get the balance of a given account.
-                            - "accounts.transfer" - Initiate a transfer from an account.
+                            The ScopeAction element contains an access type which a PISP can request
+                            from a DFSP, or which a DFSP can grant to a PISP.
+                            It must be a member of the appropriate enumeration.
+
+                            - ACCOUNTS_GET_BALANCE: PISP can request a balance for the linked account
+                            - ACCOUNTS_TRANSFER: PISP can request a transfer of funds from the linked account in the DFSP
+                            - ACCOUNTS_STATEMENT: PISP can request a statement of individual transactions on a user's account
+                          enum:
+                            - ACCOUNTS_GET_BALANCE
+                            - ACCOUNTS_TRANSFER
+                            - ACCOUNTS_STATEMENT
                     required:
-                      - accountId
+                      - address
                       - actions
                 authChannels:
                   type: array
+                  minLength: 1
+                  maxLength: 256
                   items:
                     title: ConsentRequestChannelType
                     type: string
@@ -459,34 +325,55 @@ paths:
                       - WEB
                       - OTP
                     description: |
-                      The auth channel being used for the consentRequest.
-                      - "WEB" - The Web auth channel.
-                      - "OTP" - The OTP auth channel.
+                      The auth channel being used for the consent request.
+                      - WEB - DFSP can support authorization via a web-based login.
+                      - OTP - DFSP can support authorization via a One Time PIN.
                 callbackUri:
+                  title: Uri
                   type: string
-                  description: The callback uri that the user will be redirected to after completing the out of band WEB authentication with the DFSP. Used to allow the DFSP to whitelist the PISP's url ahead of time.
+                  pattern: '^(([^:/?#]+):)?(//([^/?#]*))?([^?#]*)(\?([^#]*))?(#(.*))?'
+                  minLength: 1
+                  maxLength: 512
+                  description: |
+                    The API data type Uri is a JSON string in a canonical format that is restricted by a regular expression for interoperability reasons.
+                extensionList:
+                  title: ExtensionList
+                  type: object
+                  description: 'Data model for the complex type ExtensionList. An optional list of extensions, specific to deployment.'
+                  properties:
+                    extension:
+                      type: array
+                      items:
+                        title: Extension
+                        type: object
+                        description: Data model for the complex type Extension.
+                        properties:
+                          key:
+                            title: ExtensionKey
+                            type: string
+                            minLength: 1
+                            maxLength: 32
+                            description: Extension key.
+                          value:
+                            title: ExtensionValue
+                            type: string
+                            minLength: 1
+                            maxLength: 128
+                            description: Extension value.
+                        required:
+                          - key
+                          - value
+                      minItems: 1
+                      maxItems: 16
+                      description: Number of Extension elements.
+                  required:
+                    - extension
               required:
                 - consentRequestId
                 - userId
                 - scopes
                 - authChannels
                 - callbackUri
-            example:
-              id: '456'
-              initiatorId: pispA
-              authChannels:
-                - WEB
-                - OTP
-              scopes:
-                - accountId: dfspa.username.1234
-                  actions:
-                    - accounts.transfer
-                    - accounts.getBalance
-                - accountId: dfspa.username.5678
-                  actions:
-                    - accounts.transfer
-                    - accounts.getBalance
-              callbackUri: 'pisp-app://callback.com'
       responses:
         '202':
           $ref: '#/paths/~1consents/post/responses/202'
@@ -518,6 +405,37 @@ paths:
       - $ref: '#/paths/~1consents/parameters/6'
       - $ref: '#/paths/~1consents/parameters/7'
       - $ref: '#/paths/~1consents/parameters/8'
+    get:
+      operationId: GetConsentRequestsById
+      summary: GetConsentRequestsById
+      description: |
+        The HTTP request `GET /consentRequests/{ID}` is used to get information about a previously
+        requested consent. The *{ID}* in the URI should contain the consentRequestId that was assigned to the
+        request by the PISP when the PISP originated the request.
+      tags:
+        - consentRequests
+        - sampled
+      parameters:
+        - $ref: '#/paths/~1consents/post/parameters/0'
+      responses:
+        '202':
+          $ref: '#/paths/~1consents/post/responses/202'
+        '400':
+          $ref: '#/paths/~1consents/post/responses/400'
+        '401':
+          $ref: '#/paths/~1consents/post/responses/401'
+        '403':
+          $ref: '#/paths/~1consents/post/responses/403'
+        '404':
+          $ref: '#/paths/~1consents/post/responses/404'
+        '405':
+          $ref: '#/paths/~1consents/post/responses/405'
+        '406':
+          $ref: '#/paths/~1consents/post/responses/406'
+        '501':
+          $ref: '#/paths/~1consents/post/responses/501'
+        '503':
+          $ref: '#/paths/~1consents/post/responses/503'
     put:
       tags:
         - consentRequests
@@ -525,10 +443,15 @@ paths:
       operationId: UpdateConsentRequest
       summary: UpdateConsentRequest
       description: |
-        DFSP updates auth channels and/or auth uri in response to consentRequest.
+        A DFSP uses this callback to (1) inform the PISP that the consentRequest has been accepted,
+        and (2) communicate to the PISP which `authChannel` it should use to authenticate their user
+        with.
 
-        PISP updates the consentRequest to include authorization token from their user,
-        which the DFSP is to then verify.
+        When a PISP requests a series of permissions from a DFSP on behalf of a DFSP’s customer, not all
+        the permissions requested may be granted by the DFSP. Conversely, the out-of-band authorization
+        process  may result in additional privileges being granted by the account holder to the PISP. The
+        **PUT /consentRequests/**_{ID}_ resource returns the current state of the permissions relating to a
+        particular authorization request.
       parameters:
         - $ref: '#/paths/~1consents/post/parameters/1'
       requestBody:
@@ -549,23 +472,27 @@ paths:
                   properties:
                     scopes:
                       type: array
+                      minLength: 1
+                      maxLength: 256
                       items:
                         $ref: '#/paths/~1consentRequests/post/requestBody/content/application~1json/schema/properties/scopes/items'
                     authChannels:
                       type: array
+                      minLength: 1
+                      maxLength: 1
                       items:
                         title: ConsentRequestChannelTypeWeb
                         type: string
                         enum:
                           - WEB
                         description: |
-                          The web auth channel being used for PUT consentRequest/{ID} request.
+                          The web auth channel being used for `PUT /consentRequest/{ID}` request.
                     callbackUri:
-                      type: string
-                      description: The callback uri that the user will be redirected to after completing the out of band WEB authentication with the DFSP. Used to allow the DFSP to whitelist the PISP's url ahead of time.
+                      $ref: '#/paths/~1consentRequests/post/requestBody/content/application~1json/schema/properties/callbackUri'
                     authUri:
-                      type: string
-                      description: The callback uri that the pisp app should redirect to for user to complete their login.
+                      $ref: '#/paths/~1consentRequests/post/requestBody/content/application~1json/schema/properties/callbackUri'
+                    extensionList:
+                      $ref: '#/paths/~1consentRequests/post/requestBody/content/application~1json/schema/properties/extensionList'
                   required:
                     - scopes
                     - authChannels
@@ -581,20 +508,25 @@ paths:
                   properties:
                     scopes:
                       type: array
+                      minLength: 1
+                      maxLength: 256
                       items:
                         $ref: '#/paths/~1consentRequests/post/requestBody/content/application~1json/schema/properties/scopes/items'
                     authChannels:
                       type: array
+                      minLength: 1
+                      maxLength: 1
                       items:
                         title: ConsentRequestChannelTypeOTP
                         type: string
                         enum:
                           - OTP
                         description: |
-                          The OTP auth channel being used for PUT consentRequest/{ID} request.
+                          The OTP auth channel being used for `PUT /consentRequests/{ID}` request.
                     callbackUri:
-                      type: string
-                      description: The callback uri that the user will be redirected to after completing the out of band WEB authentication with the DFSP. Used to allow the DFSP to whitelist the PISP's url ahead of time.
+                      $ref: '#/paths/~1consentRequests/post/requestBody/content/application~1json/schema/properties/callbackUri'
+                    extensionList:
+                      $ref: '#/paths/~1consentRequests/post/requestBody/content/application~1json/schema/properties/extensionList'
                   required:
                     - scopes
                     - authChannels
@@ -625,7 +557,7 @@ paths:
       operationId: PatchConsentRequest
       summary: PatchConsentRequest
       description: |
-        PISP sends user's OTP token to a DFSP to verify user trusts aforementioned PISP
+        After the user completes an out-of-band authorization with the DFSP, the PISP will receive a token which they can use to prove to the DFSP that the user trusts this PISP.
       parameters:
         - $ref: '#/paths/~1consents/post/parameters/0'
         - $ref: '#/paths/~1consents/post/parameters/1'
@@ -636,10 +568,17 @@ paths:
             schema:
               title: ConsentRequestsIDPatchRequest
               type: object
-              description: 'The object sent in a `PATCH /consentRequests/{ID}` request.'
+              description: |-
+                Used by: PISP
+                After the user completes an out-of-band authorization with the DFSP, the PISP will receive a token which they can use to prove to the DFSP that the user trusts this PISP.
+                https://github.com/mojaloop/documentation/blob/master/website/versioned_docs/v1.0.1/api/thirdparty/data-models.md#31222-patch-consentrequestsid
               properties:
                 authToken:
                   type: string
+                  pattern: '^[A-Za-z0-9-_]+[=]{0,2}$'
+                  description: 'The API data type BinaryString is a JSON String. The string is a base64url  encoding of a string of raw bytes, where padding (character ‘=’) is added at the end of the data if needed to ensure that the string is a multiple of 4 characters. The length restriction indicates the allowed number of characters.'
+                extensionList:
+                  $ref: '#/paths/~1consentRequests/post/requestBody/content/application~1json/schema/properties/extensionList'
               required:
                 - authToken
       responses:
@@ -676,6 +615,7 @@ paths:
     put:
       tags:
         - consentRequests
+        - sampled
       operationId: NotifyErrorConsentRequests
       summary: NotifyErrorConsentRequests
       description: |
@@ -774,7 +714,7 @@ paths:
       operationId: PostConsents
       summary: PostConsents
       description: |
-        DFSP sends this request to the PISP after granting consent. DFSP sends this request to an Auth service to validate a signed consent.
+        The **POST /consents** request is used to request the creation of a consent for interactions between a PISP and the DFSP who owns the account which a PISP’s customer wants to allow the PISP access to.
       parameters:
         - name: Accept
           in: header
@@ -800,54 +740,76 @@ paths:
                 - title: ConsentPostRequestAUTH
                   type: object
                   description: |
-                    The object sent in a `POST /consents` request to AUTH-SERVICE by DFSP to store registered consent with PublicKey
-                    and whatever needed to perform authorization validation later
+                    The object sent in a `POST /consents` request to the Auth-Service
+                    by a DFSP to store registered Consent and credential
                   properties:
                     consentId:
                       allOf:
                         - $ref: '#/paths/~1consentRequests/post/requestBody/content/application~1json/schema/properties/consentRequestId'
                       description: |
                         Common ID between the PISP and FSP for the Consent object
-                        decided by the DFSP who creates the Consent
-                        This field is REQUIRED for POST /consent.
-                        creation of this Consent.
+                        determined by the DFSP who creates the Consent.
+                    consentRequestId:
+                      $ref: '#/paths/~1consentRequests/post/requestBody/content/application~1json/schema/properties/consentRequestId'
                     scopes:
+                      minLength: 1
+                      maxLength: 256
                       type: array
                       items:
                         $ref: '#/paths/~1consentRequests/post/requestBody/content/application~1json/schema/properties/scopes/items'
                     credential:
                       allOf:
                         - $ref: '#/paths/~1consents~1%7BID%7D/put/requestBody/content/application~1json/schema/oneOf/0/properties/credential'
+                    status:
+                      title: ConsentStatus
+                      type: string
+                      enum:
+                        - ISSUED
+                        - REVOKED
+                      description: |-
+                        Allowed values for the enumeration ConsentStatus
+                        - ISSUED - The consent has been issued by the DFSP
+                        - REVOKED - The consent has been revoked
+                    extensionList:
+                      $ref: '#/paths/~1consentRequests/post/requestBody/content/application~1json/schema/properties/extensionList'
                   required:
                     - consentId
                     - scopes
                     - credential
+                    - status
                   additionalProperties: false
                 - title: ConsentPostRequestPISP
                   type: object
-                  description: The object sent in a `POST /consents` request to PISP by DFSP to ask for delivering the credential object.
+                  description: |
+                    The provisional Consent object sent by the DFSP in `POST /consents`.
                   properties:
                     consentId:
                       allOf:
                         - $ref: '#/paths/~1consentRequests/post/requestBody/content/application~1json/schema/properties/consentRequestId'
                       description: |
-                        Common ID between the PISP and FSP for the Consent object
-                        decided by the DFSP who creates the Consent
-                        This field is REQUIRED for POST /consent.
+                        Common ID between the PISP and the Payer DFSP for the consent object. The ID
+                        should be reused for re-sends of the same consent. A new ID should be generated
+                        for each new consent.
                     consentRequestId:
                       allOf:
                         - $ref: '#/paths/~1consentRequests/post/requestBody/content/application~1json/schema/properties/consentRequestId'
                       description: |
-                        The id of the ConsentRequest that was used to initiate the
-                        creation of this Consent.
+                        The ID given to the original consent request on which this consent is based.
                     scopes:
                       type: array
+                      minLength: 1
+                      maxLength: 256
                       items:
                         $ref: '#/paths/~1consentRequests/post/requestBody/content/application~1json/schema/properties/scopes/items'
+                    status:
+                      $ref: '#/paths/~1consents/post/requestBody/content/application~1json/schema/oneOf/0/properties/status'
+                    extensionList:
+                      $ref: '#/paths/~1consentRequests/post/requestBody/content/application~1json/schema/properties/extensionList'
                   required:
                     - consentId
-                    - scopes
                     - consentRequestId
+                    - scopes
+                    - status
       responses:
         '202':
           description: Accepted
@@ -967,7 +929,7 @@ paths:
       - $ref: '#/paths/~1consents/parameters/8'
     get:
       description: |
-        The HTTP request `GET /consents/{ID}` is used to get information regarding a consent object created or requested earlier. The `{ID}` in the URI should contain the `{ID}` that was used in the `POST /consents`. summary: GetConsent
+        The **GET /consents/**_{ID}_ resource allows a party to enquire after the status of a consent. The *{ID}* used in the URI of the request should be the consent request ID which was used to identify the consent when it was created.
       tags:
         - consents
       operationId: GetConsent
@@ -1021,7 +983,7 @@ paths:
                   description: |
                     PATCH /consents/{ID} request object.
 
-                    Sent by the DFSP to the PISP when a consent is verified.
+                    Sent by the DFSP to the PISP when a consent is issued and verified.
                     Used in the "Register Credential" part of the Account linking flow.
                   type: object
                   properties:
@@ -1029,15 +991,17 @@ paths:
                       type: object
                       properties:
                         status:
-                          title: ConsentStatusType
+                          title: CredentialStatusVerified
                           type: string
                           enum:
                             - VERIFIED
                           description: |
-                            The status of the Consent.
-                            - "VERIFIED" - The Consent is valid and verified.
+                            The status of the Credential.
+                            - "VERIFIED" - The Credential is valid and verified.
                       required:
                         - status
+                    extensionList:
+                      $ref: '#/paths/~1consentRequests/post/requestBody/content/application~1json/schema/properties/extensionList'
                   required:
                     - credential
                 - title: ConsentsIDPatchResponseRevoked
@@ -1049,15 +1013,17 @@ paths:
                   type: object
                   properties:
                     status:
-                      title: ConsentStatusType
+                      title: ConsentStatusRevoked
                       type: string
                       enum:
                         - REVOKED
-                      description: |
-                        The status of the Consent.
-                        - "REVOKED" - The Consent is no longer valid and has been revoked.
+                      description: |-
+                        Allowed values for the enumeration ConsentStatus
+                        - REVOKED - The consent has been revoked
                     revokedAt:
                       $ref: '#/paths/~1thirdpartyRequests~1transactions~1%7BID%7D/patch/requestBody/content/application~1json/schema/properties/completedTimestamp'
+                    extensionList:
+                      $ref: '#/paths/~1consentRequests/post/requestBody/content/application~1json/schema/properties/extensionList'
                   required:
                     - status
                     - revokedAt
@@ -1106,6 +1072,14 @@ paths:
                     The HTTP request `PUT /consents/{ID}` is used by the PISP to update a Consent with a signed challenge and register a credential.
                     Called by a `PISP` to after signing a challenge. Sent to a DFSP for verification.
                   properties:
+                    status:
+                      title: ConsentStatusIssued
+                      type: string
+                      enum:
+                        - ISSUED
+                      description: |-
+                        Allowed values for the enumeration ConsentStatus
+                        - ISSUED - The consent has been issued by the DFSP
                     scopes:
                       type: array
                       items:
@@ -1126,76 +1100,42 @@ paths:
                           type: string
                           enum:
                             - FIDO
-                          description: |
-                            The type of the Credential.
-                            - "FIDO" - A FIDO public/private keypair
+                            - GENERIC
+                          description: |-
+                            The type of the Credential. - "FIDO" - The credential is based on a FIDO challenge. Its payload is a FIDOPublicKeyCredentialAttestation object. - "GENERIC" - The credential is based on a simple public key validation. Its payload is a GenericCredential object.
+                            https://github.com/mojaloop/documentation/blob/master/website/versioned_docs/v1.0.1/api/thirdparty/data-models.md#3226-credentialtype
                         status:
+                          title: CredentialStatusPending
                           type: string
                           enum:
                             - PENDING
-                          description: The challenge has signed but not yet verified.
-                        payload:
-                          oneOf:
-                            - $ref: '#/paths/~1consents~1%7BID%7D/put/requestBody/content/application~1json/schema/oneOf/1/properties/credential/properties/payload'
-                            - title: GenericCredential
-                              type: object
-                              description: |
-                                A publicKey + signature of a challenge for a generic public/private keypair
-                              properties:
-                                publicKey:
-                                  $ref: '#/paths/~1thirdpartyRequests~1verifications/post/requestBody/content/application~1json/schema/oneOf/1/properties/value'
-                                signature:
-                                  $ref: '#/paths/~1thirdpartyRequests~1verifications/post/requestBody/content/application~1json/schema/oneOf/1/properties/value'
-                              required:
-                                - publicKey
-                                - signature
-                              additionalProperties: false
-                      required:
-                        - credentialType
-                        - status
-                        - payload
-                      additionalProperties: false
-                  required:
-                    - scopes
-                    - credential
-                  additionalProperties: false
-                - title: ConsentsIDPutResponseVerified
-                  type: object
-                  description: |
-                    The HTTP request `PUT /consents/{ID}` is used by the DFSP or Auth-Service to update a Consent object once it has been Verified.
-                    Called by a `auth-service` to notify a DFSP that a credential has been verified and registered.
-                  properties:
-                    scopes:
-                      type: array
-                      items:
-                        $ref: '#/paths/~1consentRequests/post/requestBody/content/application~1json/schema/properties/scopes/items'
-                    credential:
-                      title: VerifiedCredential
-                      type: object
-                      description: |
-                        A credential used to allow a user to prove their identity and access
-                        to an account with a DFSP.
-
-                        VerifiedCredential is a special formatting of the credential to allow us to be
-                        more explicit about the `status` field - it should only ever be VERIFIED when
-                        updating a credential.
-                      properties:
-                        credentialType:
-                          $ref: '#/paths/~1consents~1%7BID%7D/put/requestBody/content/application~1json/schema/oneOf/0/properties/credential/properties/credentialType'
-                        status:
-                          type: string
-                          enum:
-                            - VERIFIED
-                          description: 'The Credential is valid, and ready to be used by the PISP.'
-                        payload:
+                          description: |
+                            The status of the Credential.
+                            - "PENDING" - The credential has been created, but has not been verified
+                        genericPayload:
+                          title: GenericCredential
+                          type: object
+                          description: |
+                            A publicKey + signature of a challenge for a generic public/private keypair.
+                          properties:
+                            publicKey:
+                              $ref: '#/paths/~1consentRequests~1%7BID%7D/patch/requestBody/content/application~1json/schema/properties/authToken'
+                            signature:
+                              $ref: '#/paths/~1consentRequests~1%7BID%7D/patch/requestBody/content/application~1json/schema/properties/authToken'
+                          required:
+                            - publicKey
+                            - signature
+                          additionalProperties: false
+                        fidoPayload:
                           title: FIDOPublicKeyCredentialAttestation
                           type: object
                           description: |
-                            An object sent in a `PUT /consents/{ID}` request.
-                            Based on https://w3c.github.io/webauthn/#iface-pkcredential
-                            and mostly on: https://webauthn.guide/#registration
-                            AuthenticatorAttestationResponse
-                            https://w3c.github.io/webauthn/#dom-authenticatorattestationresponse-attestationobject
+                            A data model representing a FIDO Attestation result. Derived from 
+                            [`PublicKeyCredential` Interface](https://w3c.github.io/webauthn/#iface-pkcredential).
+
+                            The `PublicKeyCredential` interface represents the below fields with
+                            a Type of Javascript [ArrayBuffer](https://heycam.github.io/webidl/#idl-ArrayBuffer).
+                            For this API, we represent ArrayBuffers as base64 encoded utf-8 strings.
                           properties:
                             id:
                               type: string
@@ -1238,15 +1178,56 @@ paths:
                                 - public-key
                           required:
                             - id
-                            - rawId
                             - response
                             - type
                           additionalProperties: false
                       required:
                         - credentialType
                         - status
-                        - payload
                       additionalProperties: false
+                    extensionList:
+                      $ref: '#/paths/~1consentRequests/post/requestBody/content/application~1json/schema/properties/extensionList'
+                  required:
+                    - scopes
+                    - credential
+                  additionalProperties: false
+                - title: ConsentsIDPutResponseVerified
+                  type: object
+                  description: |
+                    The HTTP request `PUT /consents/{ID}` is used by the DFSP or Auth-Service to update a Consent object once it has been Verified.
+                    Called by a `auth-service` to notify a DFSP that a credential has been verified and registered.
+                  properties:
+                    status:
+                      $ref: '#/paths/~1consents~1%7BID%7D/put/requestBody/content/application~1json/schema/oneOf/0/properties/status'
+                    scopes:
+                      type: array
+                      items:
+                        $ref: '#/paths/~1consentRequests/post/requestBody/content/application~1json/schema/properties/scopes/items'
+                    credential:
+                      title: VerifiedCredential
+                      type: object
+                      description: |
+                        A credential used to allow a user to prove their identity and access
+                        to an account with a DFSP.
+
+                        VerifiedCredential is a special formatting of Credential to allow us to be
+                        more explicit about the `status` field - it should only ever be VERIFIED when
+                        updating a credential.
+                      properties:
+                        credentialType:
+                          $ref: '#/paths/~1consents~1%7BID%7D/put/requestBody/content/application~1json/schema/oneOf/0/properties/credential/properties/credentialType'
+                        status:
+                          $ref: '#/paths/~1consents~1%7BID%7D/patch/requestBody/content/application~1json/schema/oneOf/0/properties/credential/properties/status'
+                        genericPayload:
+                          $ref: '#/paths/~1consents~1%7BID%7D/put/requestBody/content/application~1json/schema/oneOf/0/properties/credential/properties/genericPayload'
+                        fidoPayload:
+                          $ref: '#/paths/~1consents~1%7BID%7D/put/requestBody/content/application~1json/schema/oneOf/0/properties/credential/properties/fidoPayload'
+                      required:
+                        - credentialType
+                        - status
+                      additionalProperties: false
+                    extensionList:
+                      $ref: '#/paths/~1consentRequests/post/requestBody/content/application~1json/schema/properties/extensionList'
                   required:
                     - scopes
                     - credential
@@ -1276,9 +1257,12 @@ paths:
           $ref: '#/paths/~1consents/post/responses/503'
     delete:
       description: |
-        The HTTP request `DELETE /consents/{ID}` is used to mark as deleted a previously created consent.
+        Used by PISP, DFSP
 
-        - Called by a PISP when a user wants to remove their consent.
+        The **DELETE /consents/**_{ID}_ request is used to request the revocation of a previously agreed consent.
+        For tracing and auditing purposes, the switch should be sure not to delete the consent physically;
+        instead, information relating to the consent should be marked as deleted and requests relating to the
+        consent should not be honoured.
       operationId: DeleteConsentByID
       parameters:
         - $ref: '#/paths/~1consents/post/parameters/0'
@@ -1318,6 +1302,7 @@ paths:
     put:
       tags:
         - consents
+        - sampled
       operationId: NotifyErrorConsents
       summary: NotifyErrorConsents
       description: |
@@ -1363,11 +1348,12 @@ paths:
       - $ref: '#/paths/~1consents/parameters/8'
     post:
       description: |
-        The HTTP request `POST /thirdpartyRequests/authorizations` is used to request the Payer to enter the applicable credentials in the PISP system.
+        The HTTP request **POST /thirdpartyRequests/authorizations** is used to request the validation by a customer for the transfer described in the request.
       operationId: PostThirdpartyRequestsAuthorizations
       summary: PostThirdpartyRequestsAuthorizations
       tags:
         - authorizations
+        - sampled
       parameters:
         - $ref: '#/paths/~1consents/post/parameters/0'
         - $ref: '#/paths/~1consents/post/parameters/1'
@@ -1378,7 +1364,12 @@ paths:
           application/json:
             schema:
               title: ThirdpartyRequestsAuthorizationsPostRequest
-              description: POST /thirdpartyRequests/authorizations request object.
+              description: |-
+                Used by: DFSP
+                The HTTP request POST /thirdpartyRequests/authorizations is used to request the validation by a customer for the transfer described in the request.
+                Callback and data model information for POST /thirdpartyRequests/authorizations:
+                Callback - PUT /thirdpartyRequests/authorizations/{ID} Error Callback - PUT /thirdpartyRequests/authorizations/{ID}/error Data Model - See below url
+                https://github.com/mojaloop/documentation/blob/master/website/versioned_docs/v1.0.1/api/thirdparty/data-models.md#31612-post-thirdpartyrequestsauthorizations
               type: object
               properties:
                 authorizationRequestId:
@@ -1391,11 +1382,11 @@ paths:
                 transferAmount:
                   allOf:
                     - $ref: '#/paths/~1thirdpartyRequests~1transactions/post/requestBody/content/application~1json/schema/properties/amount/allOf/0'
-                  description: The amount that will be debited from the sending customer’s  account as a consequence of the transaction.
+                  description: The amount that will be debited from the sending customer's account as a consequence of the transaction.
                 payeeReceiveAmount:
                   allOf:
                     - $ref: '#/paths/~1thirdpartyRequests~1transactions/post/requestBody/content/application~1json/schema/properties/amount/allOf/0'
-                  description: The amount that will be credited to the receiving customer’s  account as a consequence of the transaction.
+                  description: The amount that will be credited to the receiving customer's account as a consequence of the transaction.
                 fees:
                   allOf:
                     - $ref: '#/paths/~1thirdpartyRequests~1transactions/post/requestBody/content/application~1json/schema/properties/amount/allOf/0'
@@ -1493,37 +1484,7 @@ paths:
                     - $ref: '#/paths/~1thirdpartyRequests~1transactions~1%7BID%7D/patch/requestBody/content/application~1json/schema/properties/completedTimestamp'
                   description: 'The time by which the transfer must be completed, set by the payee DFSP.'
                 extensionList:
-                  title: ExtensionList
-                  type: object
-                  description: 'Data model for the complex type ExtensionList. An optional list of extensions, specific to deployment.'
-                  properties:
-                    extension:
-                      type: array
-                      items:
-                        title: Extension
-                        type: object
-                        description: Data model for the complex type Extension.
-                        properties:
-                          key:
-                            title: ExtensionKey
-                            type: string
-                            minLength: 1
-                            maxLength: 32
-                            description: Extension key.
-                          value:
-                            title: ExtensionValue
-                            type: string
-                            minLength: 1
-                            maxLength: 128
-                            description: Extension value.
-                        required:
-                          - key
-                          - value
-                      minItems: 1
-                      maxItems: 16
-                      description: Number of Extension elements.
-                  required:
-                    - extension
+                  $ref: '#/paths/~1consentRequests/post/requestBody/content/application~1json/schema/properties/extensionList'
               required:
                 - authorizationRequestId
                 - transactionRequestId
@@ -1536,33 +1497,6 @@ paths:
                 - transactionType
                 - expiration
               additionalProperties: false
-            example:
-              authorizationRequestId: 33333333-0000-0000-0000-000000000000
-              transactionRequestId: 00000000-0000-0000-0000-000000000000
-              challenge: <base64 encoded binary - the encoded challenge>
-              transferAmount:
-                amount: '100'
-                currency: USD
-              payeeReceiveAmount:
-                amount: '99'
-                currency: USD
-              fees:
-                amount: '1'
-                currency: USD
-              payee:
-                partyIdInfo:
-                  partyIdType: MSISDN
-                  partyIdentifier: +44 1234 5678
-                  fspId: dfspb
-              payer:
-                partyIdType: THIRD_PARTY_LINK
-                partyIdentifier: qwerty-123456
-                fspId: dfspa
-              transactionType:
-                scenario: TRANSFER
-                initiator: PAYER
-                initiatorType: CONSUMER
-              expiration: '2020-06-15T12:00:00.000'
       responses:
         '202':
           $ref: '#/paths/~1consents/post/responses/202'
@@ -1594,11 +1528,44 @@ paths:
       - $ref: '#/paths/~1consents/parameters/6'
       - $ref: '#/paths/~1consents/parameters/7'
       - $ref: '#/paths/~1consents/parameters/8'
+    get:
+      description: |
+        The HTTP request **GET /thirdpartyRequests/authorizations/**_{ID}_ is used to get information relating
+        to a previously issued authorization request. The *{ID}* in the request should match the
+        `authorizationRequestId` which was given when the authorization request was created.
+      operationId: GetThirdpartyRequestsAuthorizationsById
+      summary: GetThirdpartyRequestsAuthorizationsById
+      tags:
+        - authorizations
+        - sampled
+      parameters:
+        - $ref: '#/paths/~1consents/post/parameters/0'
+      responses:
+        '202':
+          $ref: '#/paths/~1consents/post/responses/202'
+        '400':
+          $ref: '#/paths/~1consents/post/responses/400'
+        '401':
+          $ref: '#/paths/~1consents/post/responses/401'
+        '403':
+          $ref: '#/paths/~1consents/post/responses/403'
+        '404':
+          $ref: '#/paths/~1consents/post/responses/404'
+        '405':
+          $ref: '#/paths/~1consents/post/responses/405'
+        '406':
+          $ref: '#/paths/~1consents/post/responses/406'
+        '501':
+          $ref: '#/paths/~1consents/post/responses/501'
+        '503':
+          $ref: '#/paths/~1consents/post/responses/503'
     put:
       description: |
-        The callback PUT /thirdpartyRequests/authorizations/{ID} is used to inform the client of the
-        result of a previously-requested authorization. The ID in the URI should
-        contain the one that was used in the POST /authorizations/ requestBody.transactionRequestId @ OUTBOUND
+        After receiving the **POST /thirdpartyRequests/authorizations**, the PISP will present the details of the
+        transaction to their user, and request that the client sign the `challenge` field using the credential
+        they previously registered.
+
+        The signed challenge will be sent back by the PISP in **PUT /thirdpartyRequests/authorizations/**_{ID}_:
       operationId: PutThirdpartyRequestsAuthorizationsById
       summary: PutThirdpartyRequestsAuthorizationsById
       tags:
@@ -1612,17 +1579,19 @@ paths:
           application/json:
             schema:
               oneOf:
-                - title: ThirdpartyRequestsAuthorizationsIDPutResponseGeneric
+                - title: ThirdpartyRequestsAuthorizationsIDPutResponseRejected
                   type: object
                   description: 'The object sent in the PUT /thirdpartyRequests/authorizations/{ID} callback.'
                   properties:
                     responseType:
-                      title: AuthorizationResponseType
+                      title: AuthorizationResponseTypeRejected
                       description: |
                         The customer rejected the terms of the transfer.
                       type: string
                       enum:
                         - REJECTED
+                    extensionList:
+                      $ref: '#/paths/~1consentRequests/post/requestBody/content/application~1json/schema/properties/extensionList'
                   required:
                     - responseType
                 - title: ThirdpartyRequestsAuthorizationsIDPutResponseFIDO
@@ -1637,16 +1606,19 @@ paths:
                       enum:
                         - ACCEPTED
                     signedPayload:
+                      title: SignedPayloadFIDO
                       type: object
                       properties:
                         signedPayloadType:
                           $ref: '#/paths/~1thirdpartyRequests~1verifications/post/requestBody/content/application~1json/schema/oneOf/0/properties/signedPayloadType'
-                        value:
-                          $ref: '#/paths/~1thirdpartyRequests~1verifications/post/requestBody/content/application~1json/schema/oneOf/0/properties/value'
+                        fidoSignedPayload:
+                          $ref: '#/paths/~1thirdpartyRequests~1verifications/post/requestBody/content/application~1json/schema/oneOf/0/properties/fidoSignedPayload'
                       required:
                         - signedPayloadType
-                        - value
+                        - fidoSignedPayload
                       additionalProperties: false
+                    extensionList:
+                      $ref: '#/paths/~1consentRequests/post/requestBody/content/application~1json/schema/properties/extensionList'
                   required:
                     - responseType
                     - signedPayload
@@ -1658,30 +1630,23 @@ paths:
                     responseType:
                       $ref: '#/paths/~1thirdpartyRequests~1authorizations~1%7BID%7D/put/requestBody/content/application~1json/schema/oneOf/1/properties/responseType'
                     signedPayload:
+                      title: SignedPayloadGeneric
                       type: object
                       properties:
                         signedPayloadType:
                           $ref: '#/paths/~1thirdpartyRequests~1verifications/post/requestBody/content/application~1json/schema/oneOf/1/properties/signedPayloadType'
-                        value:
-                          $ref: '#/paths/~1thirdpartyRequests~1verifications/post/requestBody/content/application~1json/schema/oneOf/1/properties/value'
+                        genericSignedPayload:
+                          $ref: '#/paths/~1consentRequests~1%7BID%7D/patch/requestBody/content/application~1json/schema/properties/authToken'
                       required:
                         - signedPayloadType
-                        - value
+                        - genericSignedPayload
                       additionalProperties: false
+                    extensionList:
+                      $ref: '#/paths/~1consentRequests/post/requestBody/content/application~1json/schema/properties/extensionList'
                   required:
                     - responseType
                     - signedPayload
                   additionalProperties: false
-            example:
-              signedPayloadType: FIDO
-              signedPayload:
-                id: 45c-TkfkjQovQeAWmOy-RLBHEJ_e4jYzQYgD8VdbkePgM5d98BaAadadNYrknxgH0jQEON8zBydLgh1EqoC9DA
-                rawId: 45c+TkfkjQovQeAWmOy+RLBHEJ/e4jYzQYgD8VdbkePgM5d98BaAadadNYrknxgH0jQEON8zBydLgh1EqoC9DA==
-                response:
-                  authenticatorData: SZYN5YgOjGh0NBcPZHZgW4/krrmihjLHmVzzuoMdl2MBAAAACA==
-                  clientDataJSON: eyJ0eXBlIjoid2ViYXV0aG4uZ2V0IiwiY2hhbGxlbmdlIjoiQUFBQUFBQUFBQUFBQUFBQUFBRUNBdyIsIm9yaWdpbiI6Imh0dHA6Ly9sb2NhbGhvc3Q6NDIxODEiLCJjcm9zc09yaWdpbiI6ZmFsc2UsIm90aGVyX2tleXNfY2FuX2JlX2FkZGVkX2hlcmUiOiJkbyBub3QgY29tcGFyZSBjbGllbnREYXRhSlNPTiBhZ2FpbnN0IGEgdGVtcGxhdGUuIFNlZSBodHRwczovL2dvby5nbC95YWJQZXgifQ==
-                  signature: MEUCIDcJRBu5aOLJVc/sPyECmYi23w8xF35n3RNhyUNVwQ2nAiEA+Lnd8dBn06OKkEgAq00BVbmH87ybQHfXlf1Y4RJqwQ8=
-                type: public-key
       responses:
         '200':
           $ref: '#/paths/~1accounts~1%7BID%7D/put/responses/200'
@@ -1768,6 +1733,12 @@ paths:
       - $ref: '#/paths/~1consents/parameters/7'
       - $ref: '#/paths/~1consents/parameters/8'
     post:
+      operationId: ThirdpartyRequestsTransactionsPost
+      summary: ThirdpartyRequestsTransactionsPost
+      description: The HTTP request POST `/thirdpartyRequests/transactions` is used by a PISP to initiate a 3rd party Transaction request with a DFSP
+      tags:
+        - thirdpartyRequests
+        - sampled
       parameters:
         - $ref: '#/paths/~1consents/post/parameters/0'
         - $ref: '#/paths/~1consents/post/parameters/1'
@@ -1779,13 +1750,18 @@ paths:
             schema:
               title: ThirdpartyRequestsTransactionsPostRequest
               type: object
-              description: The object sent in the POST /thirdpartyRequests/transactions request.
+              description: |-
+                Used by: PISP
+                The HTTP request POST /thirdpartyRequests/transactions is used to request the creation of a transaction request on the server for the transfer described in the request.
+                Callback and data model information for POST /thirdpartyRequests/transactions:
+                Callback - PUT /thirdpartyRequests/transactions/{ID} Error Callback - PUT /thirdpartyRequests/transactions/{ID}/error Data Model - See link below
+                https://github.com/mojaloop/documentation/blob/master/website/versioned_docs/v1.0.1/api/thirdparty/data-models.md#31712-post-thirdpartyrequeststransactions
               properties:
                 transactionRequestId:
                   allOf:
                     - $ref: '#/paths/~1consentRequests/post/requestBody/content/application~1json/schema/properties/consentRequestId'
                   description: |
-                    Common ID between the FSPs for the transaction request object. The ID should be reused for resends of the same transaction request. A new ID should be generated for each new transaction request.
+                    Common ID between the PISP and the Payer DFSP for the transaction request object. The ID should be reused for resends of the same transaction request. A new ID should be generated for each new transaction request.
                 payee:
                   allOf:
                     - title: Party
@@ -1869,9 +1845,6 @@ paths:
                             - CONSENT
                             - THIRD_PARTY_LINK
                           description: |
-                            This is a variant based on FSPIOP `PartyIdType` specification.
-                            Main difference being the CONSENT and THIRD_PARTY_LINK enums.
-
                             Below are the allowed values for the enumeration.
                             - MSISDN - An MSISDN (Mobile Station International Subscriber Directory
                             Number, that is, the phone number) is used as reference to a participant.
@@ -1884,7 +1857,7 @@ paths:
                             [RFC 3696](https://tools.ietf.org/html/rfc3696).
                             - PERSONAL_ID - A personal identifier is used as reference to a participant.
                             Examples of personal identification are passport number, birth certificate
-                            number, and national registration number. The identifier number is added in
+                            number, and national registration number. The identifier number is added in 
                             the PartyIdentifier element. The personal identifier type is added in the
                             PartySubIdOrType element.
                             - BUSINESS - A specific Business (for example, an organization or a company)
@@ -1907,8 +1880,14 @@ paths:
                             The ALIAS identifier can be in any format. It is also possible to use the
                             PartySubIdOrType element for identifying an account under an Alias defined
                             by the PartyIdentifier.
-                            - CONSENT - TBD
-                            - THIRD_PARTY_LINK - TBD
+                            - CONSENT - A Consent represents an agreement between a PISP, a Customer and
+                            a DFSP which allows the PISP permission to perform actions on behalf of the 
+                            customer. A Consent has an authoritative source: either the DFSP who issued 
+                            the Consent, or an Auth Service which administers the Consent.
+                            - THIRD_PARTY_LINK - A Third Party Link represents an agreement between a PISP,
+                            a DFSP, and a specific Customer's account at the DFSP. The content of the link 
+                            is created by the DFSP at the time when it gives permission to the PISP for 
+                            specific access to a given account.
                           example: PERSONAL_ID
                         partyIdentifier:
                           title: PartyIdentifier
@@ -1930,7 +1909,7 @@ paths:
                           maxLength: 32
                           description: FSP identifier.
                         extensionList:
-                          $ref: '#/paths/~1thirdpartyRequests~1authorizations/post/requestBody/content/application~1json/schema/properties/extensionList'
+                          $ref: '#/paths/~1consentRequests/post/requestBody/content/application~1json/schema/properties/extensionList'
                       required:
                         - partyIdType
                         - partyIdentifier
@@ -1955,7 +1934,176 @@ paths:
                       description: Data model for the complex type Money.
                       properties:
                         currency:
-                          $ref: '#/paths/~1accounts~1%7BID%7D/put/requestBody/content/application~1json/schema/properties/accounts/items/properties/currency'
+                          title: Currency
+                          description: 'The currency codes defined in [ISO 4217](https://www.iso.org/iso-4217-currency-codes.html) as three-letter alphabetic codes are used as the standard naming representation for currencies.'
+                          type: string
+                          minLength: 3
+                          maxLength: 3
+                          enum:
+                            - AED
+                            - AFN
+                            - ALL
+                            - AMD
+                            - ANG
+                            - AOA
+                            - ARS
+                            - AUD
+                            - AWG
+                            - AZN
+                            - BAM
+                            - BBD
+                            - BDT
+                            - BGN
+                            - BHD
+                            - BIF
+                            - BMD
+                            - BND
+                            - BOB
+                            - BRL
+                            - BSD
+                            - BTN
+                            - BWP
+                            - BYN
+                            - BZD
+                            - CAD
+                            - CDF
+                            - CHF
+                            - CLP
+                            - CNY
+                            - COP
+                            - CRC
+                            - CUC
+                            - CUP
+                            - CVE
+                            - CZK
+                            - DJF
+                            - DKK
+                            - DOP
+                            - DZD
+                            - EGP
+                            - ERN
+                            - ETB
+                            - EUR
+                            - FJD
+                            - FKP
+                            - GBP
+                            - GEL
+                            - GGP
+                            - GHS
+                            - GIP
+                            - GMD
+                            - GNF
+                            - GTQ
+                            - GYD
+                            - HKD
+                            - HNL
+                            - HRK
+                            - HTG
+                            - HUF
+                            - IDR
+                            - ILS
+                            - IMP
+                            - INR
+                            - IQD
+                            - IRR
+                            - ISK
+                            - JEP
+                            - JMD
+                            - JOD
+                            - JPY
+                            - KES
+                            - KGS
+                            - KHR
+                            - KMF
+                            - KPW
+                            - KRW
+                            - KWD
+                            - KYD
+                            - KZT
+                            - LAK
+                            - LBP
+                            - LKR
+                            - LRD
+                            - LSL
+                            - LYD
+                            - MAD
+                            - MDL
+                            - MGA
+                            - MKD
+                            - MMK
+                            - MNT
+                            - MOP
+                            - MRO
+                            - MUR
+                            - MVR
+                            - MWK
+                            - MXN
+                            - MYR
+                            - MZN
+                            - NAD
+                            - NGN
+                            - NIO
+                            - NOK
+                            - NPR
+                            - NZD
+                            - OMR
+                            - PAB
+                            - PEN
+                            - PGK
+                            - PHP
+                            - PKR
+                            - PLN
+                            - PYG
+                            - QAR
+                            - RON
+                            - RSD
+                            - RUB
+                            - RWF
+                            - SAR
+                            - SBD
+                            - SCR
+                            - SDG
+                            - SEK
+                            - SGD
+                            - SHP
+                            - SLL
+                            - SOS
+                            - SPL
+                            - SRD
+                            - STD
+                            - SVC
+                            - SYP
+                            - SZL
+                            - THB
+                            - TJS
+                            - TMT
+                            - TND
+                            - TOP
+                            - TRY
+                            - TTD
+                            - TVD
+                            - TWD
+                            - TZS
+                            - UAH
+                            - UGX
+                            - USD
+                            - UYU
+                            - UZS
+                            - VEF
+                            - VND
+                            - VUV
+                            - WST
+                            - XAF
+                            - XCD
+                            - XDR
+                            - XOF
+                            - XPF
+                            - XTS
+                            - XXX
+                            - YER
+                            - ZAR
+                            - ZMW
+                            - ZWD
                         amount:
                           title: Amount
                           type: string
@@ -1970,11 +2118,18 @@ paths:
                   allOf:
                     - $ref: '#/paths/~1thirdpartyRequests~1authorizations/post/requestBody/content/application~1json/schema/properties/transactionType'
                   description: Type of transaction.
+                note:
+                  type: string
+                  minLength: 1
+                  maxLength: 256
+                  description: A memo that will be attached to the transaction.
                 expiration:
                   type: string
                   description: |
                     Date and time until when the transaction request is valid. It can be set to get a quick failure in case the peer FSP takes too long to respond.
                   example: '2016-05-24T08:38:08.699-04:00'
+                extensionList:
+                  $ref: '#/paths/~1consentRequests/post/requestBody/content/application~1json/schema/properties/extensionList'
               required:
                 - transactionRequestId
                 - payee
@@ -1983,26 +2138,6 @@ paths:
                 - amount
                 - transactionType
                 - expiration
-            example:
-              transactionRequestId: 8d34f91d-d078-4077-8263-2c047876fcf6
-              payee:
-                partyIdInfo:
-                  partyIdType: MSISDN
-                  partyIdentifier: +44 1234 5678
-                  fspId: dfspb
-              payer:
-                partyIdType: THIRD_PARTY_LINK
-                partyIdentifier: qwerty-123456
-                fspId: dfspa
-              amountType: SEND
-              amount:
-                amount: '100'
-                currency: USD
-              transactionType:
-                scenario: TRANSFER
-                initiator: PAYER
-                initiatorType: CONSUMER
-              expiration: '2020-07-15T22:17:28.985-01:00'
       responses:
         '202':
           $ref: '#/paths/~1consents/post/responses/202'
@@ -2022,12 +2157,6 @@ paths:
           $ref: '#/paths/~1consents/post/responses/501'
         '503':
           $ref: '#/paths/~1consents/post/responses/503'
-      operationId: CreateThirdpartyTransactionRequests
-      summary: CreateThirdpartyTransactionRequests
-      description: The HTTP request POST `/thirdpartyRequests/transactions` is used by a PISP to initiate a 3rd party Transaction request with a DFSP
-      tags:
-        - thirdpartyRequests
-        - sampled
   '/thirdpartyRequests/transactions/{ID}':
     parameters:
       - $ref: '#/paths/~1accounts~1%7BID%7D/parameters/0'
@@ -2090,8 +2219,13 @@ paths:
             schema:
               title: ThirdpartyRequestsTransactionsIDPutResponse
               type: object
-              description: 'The object sent in the PUT /thirdPartyRequests/transactions/{ID} request.'
+              description: |-
+                Used by: DFSP
+                After a PISP requests the creation of a Third Party Transaction request (POST /thirdpartyRequests/transactions) or the status of a previously created Third Party Transaction request (GET /thirdpartyRequests/transactions/{ID}), the DFSP will send this callback.
+                https://github.com/mojaloop/documentation/blob/master/website/versioned_docs/v1.0.1/api/thirdparty/data-models.md#31721-put-thirdpartyrequeststransactionsid
               properties:
+                transactionId:
+                  $ref: '#/paths/~1consentRequests/post/requestBody/content/application~1json/schema/properties/consentRequestId'
                 transactionRequestState:
                   title: TransactionRequestState
                   type: string
@@ -2107,10 +2241,11 @@ paths:
                     - ACCEPTED - Payer has approved the transaction.
                     - REJECTED - Payer has rejected the transaction.
                   example: RECEIVED
+                extensionList:
+                  $ref: '#/paths/~1consentRequests/post/requestBody/content/application~1json/schema/properties/extensionList'
               required:
                 - transactionRequestState
             example:
-              transactionId: 11111111-0000-0000-0000-000000000000
               transactionRequestState: RECEIVED
       responses:
         '200':
@@ -2151,7 +2286,12 @@ paths:
             schema:
               title: ThirdpartyRequestsTransactionsIDPatchResponse
               type: object
-              description: 'The object sent in the PATCH /thirdpartyRequests/transactions/{ID} callback.'
+              description: |-
+                Used by: DFSP
+                The issuing PISP will expect a response to their request for a transfer which describes the finalized state of the requested transfer.
+                This response will be given by a PATCH call on the /thirdpartyRequests/transactions/{ID} resource.
+                The {ID} given in the query string should be the transactionRequestId which was originally used by the PISP to identify the transaction request.
+                https://github.com/mojaloop/documentation/blob/master/website/versioned_docs/v1.0.1/api/thirdparty/data-models.md#31612-post-thirdpartyrequestsauthorizations
               properties:
                 completedTimestamp:
                   title: DateTime
@@ -2176,11 +2316,12 @@ paths:
                     - COMPLETED - Payee FSP has successfully performed the transaction.
                     - REJECTED - Payee FSP has failed to perform the transaction.
                   example: RECEIVED
+                extensionList:
+                  $ref: '#/paths/~1consentRequests/post/requestBody/content/application~1json/schema/properties/extensionList'
               required:
                 - transactionRequestState
                 - transactionState
             example:
-              transactionId: 11111111-0000-0000-0000-000000000000
               transactionRequestState: ACCEPTED
               transactionState: COMMITTED
       responses:
@@ -2304,13 +2445,18 @@ paths:
                       enum:
                         - FIDO
                       description: Describes a challenge that has been signed with FIDO Attestation flows
-                    value:
+                    fidoSignedPayload:
                       title: FIDOPublicKeyCredentialAssertion
                       type: object
                       description: |
-                        An object sent in a `PUT /thirdpartyRequests/authorization/{ID}` request.
-                        based mostly on: https://webauthn.guide/#authentication
-                        AuthenticatorAssertionResponse
+                        A data model representing a FIDO Assertion result.
+                        Derived from PublicKeyCredential Interface in WebAuthN.
+
+                        The PublicKeyCredential interface represents the below fields with a Type of
+                        Javascript ArrayBuffer.
+                        For this API, we represent ArrayBuffers as base64 encoded utf-8 strings.
+
+                        https://github.com/mojaloop/documentation/blob/master/website/versioned_docs/v1.0.1/api/thirdparty/data-models.md#32128-fidopublickeycredentialassertion
                       properties:
                         id:
                           type: string
@@ -2371,12 +2517,14 @@ paths:
                         - response
                         - type
                       additionalProperties: false
+                    extensionList:
+                      $ref: '#/paths/~1consentRequests/post/requestBody/content/application~1json/schema/properties/extensionList'
                   required:
                     - verificationRequestId
                     - challenge
                     - consentId
                     - signedPayloadType
-                    - value
+                    - fidoSignedPayload
                 - title: ThirdpartyRequestsVerificationsPostRequestGeneric
                   type: object
                   description: The object sent in the POST /thirdpartyRequests/verifications request.
@@ -2399,29 +2547,16 @@ paths:
                       enum:
                         - GENERIC
                       description: Describes a challenge that has been signed with a private key
-                    value:
-                      type: string
-                      pattern: '^[A-Za-z0-9-_]+[=]{0,2}$'
-                      description: 'The API data type BinaryString is a JSON String. The string is a base64url  encoding of a string of raw bytes, where padding (character ‘=’) is added at the end of the data if needed to ensure that the string is a multiple of 4 characters. The length restriction indicates the allowed number of characters.'
+                    genericSignedPayload:
+                      $ref: '#/paths/~1consentRequests~1%7BID%7D/patch/requestBody/content/application~1json/schema/properties/authToken'
+                    extensionList:
+                      $ref: '#/paths/~1consentRequests/post/requestBody/content/application~1json/schema/properties/extensionList'
                   required:
                     - verificationRequestId
                     - challenge
                     - consentId
                     - signedPayloadType
-                    - value
-            example:
-              verificationRequestId: 44444444-0000-0000-0000-000000000000
-              challenge: <base64 encoded binary - the encoded challenge>
-              consentId: 8d34f91d-d078-4077-8263-2c0498dhbjr
-              signedPayloadType: FIDO
-              signedPayload:
-                id: 45c-TkfkjQovQeAWmOy-RLBHEJ_e4jYzQYgD8VdbkePgM5d98BaAadadNYrknxgH0jQEON8zBydLgh1EqoC9DA
-                rawId: 45c+TkfkjQovQeAWmOy+RLBHEJ/e4jYzQYgD8VdbkePgM5d98BaAadadNYrknxgH0jQEON8zBydLgh1EqoC9DA==
-                response:
-                  authenticatorData: SZYN5YgOjGh0NBcPZHZgW4/krrmihjLHmVzzuoMdl2MBAAAACA==
-                  clientDataJSON: eyJ0eXBlIjoid2ViYXV0aG4uZ2V0IiwiY2hhbGxlbmdlIjoiQUFBQUFBQUFBQUFBQUFBQUFBRUNBdyIsIm9yaWdpbiI6Imh0dHA6Ly9sb2NhbGhvc3Q6NDIxODEiLCJjcm9zc09yaWdpbiI6ZmFsc2UsIm90aGVyX2tleXNfY2FuX2JlX2FkZGVkX2hlcmUiOiJkbyBub3QgY29tcGFyZSBjbGllbnREYXRhSlNPTiBhZ2FpbnN0IGEgdGVtcGxhdGUuIFNlZSBodHRwczovL2dvby5nbC95YWJQZXgifQ==
-                  signature: MEUCIDcJRBu5aOLJVc/sPyECmYi23w8xF35n3RNhyUNVwQ2nAiEA+Lnd8dBn06OKkEgAq00BVbmH87ybQHfXlf1Y4RJqwQ8=
-                type: public-key
+                    - genericSignedPayload
       responses:
         '202':
           $ref: '#/paths/~1consents/post/responses/202'
@@ -2453,18 +2588,47 @@ paths:
       - $ref: '#/paths/~1consents/parameters/6'
       - $ref: '#/paths/~1consents/parameters/7'
       - $ref: '#/paths/~1consents/parameters/8'
+    get:
+      tags:
+        - thirdpartyRequests
+        - sampled
+      operationId: GetThirdpartyRequestsVerificationsById
+      summary: GetThirdpartyRequestsVerificationsById
+      description: |
+        The HTTP request `/thirdpartyRequests/verifications/{ID}` is used to get
+        information regarding a previously created or requested authorization. The *{ID}*
+        in the URI should contain the verification request ID
+      parameters:
+        - $ref: '#/paths/~1consents/post/parameters/0'
+      responses:
+        '202':
+          $ref: '#/paths/~1consents/post/responses/202'
+        '400':
+          $ref: '#/paths/~1consents/post/responses/400'
+        '401':
+          $ref: '#/paths/~1consents/post/responses/401'
+        '403':
+          $ref: '#/paths/~1consents/post/responses/403'
+        '404':
+          $ref: '#/paths/~1consents/post/responses/404'
+        '405':
+          $ref: '#/paths/~1consents/post/responses/405'
+        '406':
+          $ref: '#/paths/~1consents/post/responses/406'
+        '501':
+          $ref: '#/paths/~1consents/post/responses/501'
+        '503':
+          $ref: '#/paths/~1consents/post/responses/503'
     put:
       tags:
         - thirdpartyRequests
         - sampled
       operationId: PutThirdpartyRequestsVerificationsById
       summary: PutThirdpartyRequestsVerificationsById
-      description: |
-        The HTTP request `PUT /thirdpartyRequests/verifications/{ID}` is used by the Auth-Service to inform
-        the DFSP of a successful result in validating the verification of a Thirdparty Transaction Request.
-
-        If the validation fails, The Auth-Service MUST use `PUT /thirdpartyRequests/verifications/{ID}/error`
-        instead.
+      description: |-
+        The HTTP request `PUT /thirdpartyRequests/verifications/{ID}` is used by the Auth-Service to inform the DFSP of a successful result in validating the verification of a Thirdparty Transaction Request.
+        If the validation fails, the auth-service will send back `PUT /thirdpartyRequests/verifications/{ID}` with `authenticationResponse: 'REJECTED'`.
+        In unplanned error cases the Auth-Service MUST use `PUT /thirdpartyRequests/verifications/{ID}/error`.
       parameters:
         - $ref: '#/paths/~1consents/post/parameters/1'
       requestBody:
@@ -2475,13 +2639,21 @@ paths:
             schema:
               title: ThirdpartyRequestsVerificationsIDPutResponse
               type: object
-              description: 'The object sent in the PUT /thirdpartyRequests/verifications/{ID} request.'
+              description: |-
+                Used by: Auth Service
+                The callback PUT /thirdpartyRequests/verifications/{ID} is used to inform the client of the result of an authorization check. The {ID} in the URI should contain the authorizationRequestId which was used to request the check, or the {ID} that was used in the GET /thirdpartyRequests/verifications/{ID}.
+                https://github.com/mojaloop/documentation/blob/master/website/versioned_docs/v1.0.1/api/thirdparty/data-models.md#31821-put-thirdpartyrequestsverificationsid
               properties:
                 authenticationResponse:
+                  title: AuthenticationResponse
                   type: string
                   enum:
                     - VERIFIED
-                  description: The verification passed
+                  description: |-
+                    The AuthenticationResponse enumeration describes the result of authenticating verification request.
+                    Below are the allowed values for the enumeration AuthenticationResponse. - VERIFIED - The challenge was correctly signed.
+                extensionList:
+                  $ref: '#/paths/~1consentRequests/post/requestBody/content/application~1json/schema/properties/extensionList'
               required:
                 - authenticationResponse
             example:

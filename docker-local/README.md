@@ -69,9 +69,9 @@ npm install
 - A hosts file with the following entries:
 ```
 127.0.0.1       central-ledger.local central-settlement.local ml-api-adapter.local account-lookup-service.local account-lookup-service-admin.local quoting-service.local moja-simulator.local central-ledger central-settlement ml-api-adapter account-lookup-service account-lookup-service-admin quoting-service simulator host.docker.internal transaction-request-service
-127.0.0.1 dfspa-backend dfspa-thirdparty-sdk-inbound dfspa-thirdparty-sdk-outbound dfspa-sdk-scheme-adapter
-127.0.0.1 dfspb-backend dfspb-thirdparty-sdk-inbound dfspb-thirdparty-sdk-outbound dfspb-sdk-scheme-adapter
-127.0.0.1 pisp-backend pisp-thirdparty-sdk-inbound pisp-thirdparty-sdk-outbound pisp-sdk-scheme-adapter
+127.0.0.1 dfspa-backend dfspa-thirdparty-sdk dfspa-sdk-scheme-adapter
+127.0.0.1 dfspb-backend dfspb-thirdparty-sdk dfspb-sdk-scheme-adapter
+127.0.0.1 pisp-backend pisp-thirdparty-sdk pisp-sdk-scheme-adapter
 127.0.0.1 als-consent-oracle
 127.0.0.1 auth-service
 ```
@@ -99,10 +99,10 @@ docker-compose logs -f quoting-service
 docker-compose logs -f ml-api-adapter
 docker-compose logs -f central-settlement
 docker-compose logs -f account-lookup-service
-docker-compose logs -f dfspa-sdk-scheme-adapter dfspa-backend dfspa-thirdparty-sdk-inbound dfspa-thirdparty-sdk-outbound
-docker-compose logs -f dfspb-sdk-scheme-adapter dfspb-backend dfspb-thirdparty-sdk-inbound dfspb-thirdparty-sdk-outbound
+docker-compose logs -f dfspa-sdk-scheme-adapter dfspa-backend dfspa-thirdparty-sdk
+docker-compose logs -f dfspb-sdk-scheme-adapter dfspb-backend dfspb-thirdparty-sdk
 docker-compose logs -f transaction-requests-service
-docker-compose logs -f pisp-backend  pisp-sdk-scheme-adapter pisp-redis pisp-thirdparty-sdk-inbound pisp-thirdparty-sdk-outbound
+docker-compose logs -f pisp-backend  pisp-sdk-scheme-adapter pisp-redis pisp-thirdparty-sdk
 ```
 
 ## Create some initial data

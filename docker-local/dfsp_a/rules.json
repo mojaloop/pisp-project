@@ -1,4 +1,4 @@
-[
+[  
   {
     "ruleId": 1,
     "description": "Returns an Payee rejected transaction error (ML error 5105) from the simulator when transfer value is 5105 in any currency",
@@ -500,6 +500,310 @@
               "OTP"
             ]
           }
+        }
+      }
+    }
+  },
+  {
+    "ruleId": 15,
+    "description": "transactionrequests rejected",
+    "conditions": {
+      "all": [
+        {
+          "fact": "path",
+          "operator": "equal",
+          "value": "/transactionrequests"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "POST"
+        },
+        {
+          "fact": "body",
+          "operator": "equal",
+          "value": "aaaa7105-1be2-4c0b-aece-aa8dcb92a6cc",
+          "path": "$.transactionRequestId"
+        }
+      ]
+    },
+    "event": {
+      "type": "FIXED_CALLBACK",
+      "params": {
+        "statusCode": 200,
+        "body": {
+          "transactionId": "2acf1dfa-ce45-486e-b19e-ae4ad9804a64",
+          "transactionRequestState": "REJECTED"
+        }
+      }
+    }
+  },
+  {
+    "ruleId": 16,
+    "description": "verify received thirdparty transaction request - 1a",
+    "conditions": {
+      "all": [
+        {
+          "fact": "path",
+          "operator": "equal",
+          "value": "/validate-thirdparty-transaction-request"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "POST"
+        },
+        {
+          "fact": "body",
+          "operator": "equal",
+          "value": "aaaa7105-1be2-4c0b-aece-aa8dcb92a6cc",
+          "path": "$.transactionRequestId"
+        }
+      ]
+    },
+    "event": {
+      "type": "FIXED_CALLBACK",
+      "params": {
+        "statusCode": 200,
+        "body": {
+          "isValid": true,
+          "payerPartyIdInfo": {
+            "partyIdType": "MSISDN",
+            "partyIdentifier": "123456789",
+            "fspId": "dfspa"
+          },
+          "consentId": "2acf1dfa-ce45-486e-b19e-ae4ad9804a64"
+        }
+      }
+    }
+  },
+  {
+    "ruleId": 17,
+    "description": "verify received thirdparty transaction request - 2.1a",
+    "conditions": {
+      "all": [
+        {
+          "fact": "path",
+          "operator": "equal",
+          "value": "/validate-thirdparty-transaction-request"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "POST"
+        },
+        {
+          "fact": "body",
+          "operator": "equal",
+          "value": "321a7105-1be2-4c0b-aece-aa8dcb92a6cc",
+          "path": "$.transactionRequestId"
+        }
+      ]
+    },
+    "event": {
+      "type": "FIXED_CALLBACK",
+      "params": {
+        "statusCode": 200,
+        "body": {
+          "isValid": true,
+          "payerPartyIdInfo": {
+            "partyIdType": "MSISDN",
+            "partyIdentifier": "123456789",
+            "fspId": "dfspa"
+          },
+          "consentId": "2acf1dfa-ce45-486e-b19e-ae4ad9804a63"
+        }
+      }
+    }
+  },
+  {
+    "ruleId": 18,
+    "description": "verify received thirdparty transaction request - 2.1b",
+    "conditions": {
+      "all": [
+        {
+          "fact": "path",
+          "operator": "equal",
+          "value": "/validate-thirdparty-transaction-request"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "POST"
+        },
+        {
+          "fact": "body",
+          "operator": "equal",
+          "value": "321b7105-1be2-4c0b-aece-aa8dcb92a6cc",
+          "path": "$.transactionRequestId"
+        }
+      ]
+    },
+    "event": {
+      "type": "FIXED_CALLBACK",
+      "params": {
+        "statusCode": 200,
+        "body": {
+          "isValid": true,
+          "payerPartyIdInfo": {
+            "partyIdType": "MSISDN",
+            "partyIdentifier": "123456789",
+            "fspId": "dfspa"
+          },
+          "consentId": "2acf1dfa-ce45-486e-b19e-ae4ad9804a63"
+        }
+      }
+    }
+  },
+  {
+    "ruleId": 19,
+    "description": "verify received thirdparty transaction request - 2.1c",
+    "conditions": {
+      "all": [
+        {
+          "fact": "path",
+          "operator": "equal",
+          "value": "/validate-thirdparty-transaction-request"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "POST"
+        },
+        {
+          "fact": "body",
+          "operator": "equal",
+          "value": "321c7105-1be2-4c0b-aece-aa8dcb92a6cc",
+          "path": "$.transactionRequestId"
+        }
+      ]
+    },
+    "event": {
+      "type": "FIXED_CALLBACK",
+      "params": {
+        "statusCode": 200,
+        "body": {
+          "isValid": true,
+          "payerPartyIdInfo": {
+            "partyIdType": "MSISDN",
+            "partyIdentifier": "123456789",
+            "fspId": "dfspa"
+          },
+          "consentId": "2acf1dfa-ce45-486e-b19e-ae4ad9804a63"
+        }
+      }
+    }
+  },
+  {
+    "ruleId": 20,
+    "description": "verify received thirdparty transaction request - 3.1a",
+    "conditions": {
+      "all": [
+        {
+          "fact": "path",
+          "operator": "equal",
+          "value": "/validate-thirdparty-transaction-request"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "POST"
+        },
+        {
+          "fact": "body",
+          "operator": "equal",
+          "value": "331a7105-1be2-4c0b-aece-aa8dcb92a6cc",
+          "path": "$.transactionRequestId"
+        }
+      ]
+    },
+    "event": {
+      "type": "FIXED_CALLBACK",
+      "params": {
+        "statusCode": 200,
+        "body": {
+          "isValid": true,
+          "payerPartyIdInfo": {
+            "partyIdType": "MSISDN",
+            "partyIdentifier": "123456789",
+            "fspId": "dfspa"
+          },
+          "consentId": "2acf1dfa-ce45-486e-b19e-ae4ad9804a63"
+        }
+      }
+    }
+  },
+  {
+    "ruleId": 21,
+    "description": "validate consentRequests - OTP",
+    "conditions": {
+      "all": [
+        {
+          "fact": "path",
+          "operator": "equal",
+          "value": "/validateConsentRequests"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "POST"
+        },
+        {
+          "fact": "body",
+          "operator": "equal",
+          "value": "b5d6206c-4f06-497d-af15-ed866ea6958f",
+          "path": "$.consentRequestId"
+        }
+      ]
+    },
+    "event": {
+      "type": "FIXED_CALLBACK",
+      "params": {
+        "statusCode": 200,
+        "body": {
+          "isValid": true,
+          "data": {
+            "authChannels": ["OTP"]
+          }
+        }
+      }
+    }
+  },
+  {
+    "ruleId": 22,
+    "description": "verify received thirdparty transaction request",
+    "conditions": {
+      "all": [
+        {
+          "fact": "path",
+          "operator": "equal",
+          "value": "/validate-thirdparty-transaction-request"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "POST"
+        },
+        {
+          "fact": "body",
+          "operator": "equal",
+          "value": "332a7105-1be2-4c0b-aece-aa8dcb92a6cc",
+          "path": "$.transactionRequestId"
+        }
+      ]
+    },
+    "event": {
+      "type": "FIXED_CALLBACK",
+      "params": {
+        "statusCode": 200,
+        "body": {
+          "isValid": true,
+          "payerPartyIdInfo": {
+            "partyIdType": "MSISDN",
+            "partyIdentifier": "123456789",
+            "fspId": "dfspa"
+          },
+          "consentId": "2acf1dfa-ce45-486e-b19e-ae4ad9804a63"
         }
       }
     }

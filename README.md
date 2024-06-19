@@ -73,7 +73,7 @@ npm run reseed
 ```
 
 - Next, go to the test-runner ttk site at localhost:26060 > Test Runner > collections Manager
-- Browse for for the collection.json file in ./test/e2e-ttk/collection.json and import
+- Browse for the collection.json file in ./test/e2e-ttk/collection.json and import
 - click "run" and see the test cases get run.
 
 If you want to re-run the test cases, make sure you reset the test state with:

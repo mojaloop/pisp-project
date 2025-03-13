@@ -1,3 +1,10 @@
+/*****
+License
+--------------
+Copyright © 2020-2025 Mojaloop Foundation
+The Mojaloop files are made available by the Mojaloop Foundation under the Apache License, Version 2.0 (the "License")
+*****/
+
 /* eslint-disable import/no-named-as-default-member */
 import TestEnv from './TestEnv'
 import axios from 'axios'

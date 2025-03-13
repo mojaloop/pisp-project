@@ -1,3 +1,10 @@
+/*****
+License
+--------------
+Copyright © 2020-2025 Mojaloop Foundation
+The Mojaloop files are made available by the Mojaloop Foundation under the Apache License, Version 2.0 (the "License")
+*****/
+
 import { Result, RunResult } from './runResult'
 
 /**

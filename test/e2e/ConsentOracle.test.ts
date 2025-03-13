@@ -1,3 +1,10 @@
+/*****
+License
+--------------
+Copyright © 2020-2025 Mojaloop Foundation
+The Mojaloop files are made available by the Mojaloop Foundation under the Apache License, Version 2.0 (the "License")
+*****/
+
 import TestEnv from './TestEnv'
 import axios from 'axios'
 import { v4 as uuidv4 } from 'uuid'

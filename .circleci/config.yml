@@ -21,33 +21,8 @@ defaults_Dependencies: &defaults_Dependencies |
   apk --no-cache add curl
   apk --no-cache add openssh-client
   apk --no-cache add bash
-  # Required for plantuml dependencies
-  apk --no-cache add openjdk11
-  apk add --no-cache -t build-dependencies make gcc g++ python3 libtool autoconf automake
   npm config set unsafe-perm true
   npm install -g node-gyp
-
-defaults_awsCliDependencies: &defaults_awsCliDependencies |
-  apk upgrade --no-cache
-  apk --no-cache add \
-          python3 \
-          py3-pip \
-          groff \
-          less \
-          mailcap
-  pip3 install --upgrade pip awscli==1.14.5 s3cmd==2.0.1 python-magic
-
-defaults_configure_nvm: &defaults_configure_nvm
-  name: Configure NVM
-  command: |
-    touch $HOME/.profile
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-    export NVM_DIR="$HOME/.nvm"
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-    echo "Installing Node version: $(cat .nvmrc)"
-    nvm install $(cat .nvmrc)
-    nvm alias default $(cat .nvmrc)
-    nvm use $(cat .nvmrc)
 
 ##
 # Executors
@@ -56,15 +31,9 @@ defaults_configure_nvm: &defaults_configure_nvm
 ##
 executors:
   default-docker:
-    working_directory: &WORKING_DIR /home/circleci/project
+    working_directory: /home/circleci/project
     docker:
-      - image: node:16.15.0-alpine # Ref: https://hub.docker.com/_/node?tab=tags&page=1&name=alpine
-
-  default-machine:
-    working_directory: *WORKING_DIR
-    machine:
-      image: ubuntu-2004:current # Ref: https://circleci.com/developer/machine/image/ubuntu-2004
-
+      - image: node:16.15.0-alpine
 
 ##
 # Jobs
@@ -75,183 +44,20 @@ jobs:
   setup:
     executor: default-docker
     steps:
+      - run:
+          name: Install git
+          command: apk add --no-cache git openssh
       - checkout
       - run:
           name: Install general dependencies
           command: *defaults_Dependencies
       - run:
-          name: Access npm folder as root
-          command: cd $(npm root -g)/npm
-      - run:
           name: Update NPM install
           command: npm ci
-      - run:
-          name: Delete build dependencies
-          command: apk del build-dependencies
       - save_cache:
           key: dependency-cache-{{ checksum "package-lock.json" }}
           paths:
             - node_modules
-
-  # This test currently runs both the Jest base e2e tests as well as
-  # the TTK e2e test runner.
-  # In the future, we will likely remove the jest runner in favour of
-  # using the ttk only
-  test-e2e:
-    executor: default-machine
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - dependency-cache-{{ checksum "package-lock.json" }}
-      - run:
-          name: Make a test output file
-          command: |
-            mkdir -p /tmp/test/results
-      - run:
-          name: Add /etc/hosts entries
-          command: |
-            sudo ./scripts/_setup_hosts_file.sh
-      - run:
-          <<: *defaults_configure_nvm
-      - run:
-          name: build any containers that need building
-          command: |
-            cd ./docker-local/
-            docker-compose build
-      - run:
-          name: Spin up the E2E test environment
-          command: |
-            cd ./docker-local/
-            docker-compose pull
-
-            # Start the services piecemeal to not overwhelm circleci
-            docker-compose up -d account-lookup-service simulator
-            sleep 30
-            docker-compose up -d central-ledger
-            sleep 10
-            docker-compose up -d als-consent-oracle
-            sleep 10
-            docker-compose up -d auth-service
-            sleep 10
-            docker-compose up -d central-settlement
-            sleep 10
-            docker-compose up -d dfspa-sdk-scheme-adapter dfspa-thirdparty-sdk
-            sleep 10
-            docker-compose up -d dfspb-sdk-scheme-adapter dfspb-thirdparty-sdk
-            sleep 10
-            docker-compose up -d login-flow-simulator-ui login-flow-simulator
-            sleep 10
-            docker-compose up -d ml-api-adapter
-            sleep 10
-            docker-compose up -d thirdparty-api-svc
-            sleep 10
-            docker-compose up -d quoting-service
-            sleep 10
-            docker-compose up -d pisp-sdk-scheme-adapter pisp-redis pisp-thirdparty-sdk pisp-backend
-            sleep 10
-
-            # everything else
-            docker-compose up -d
-
-            # Check straight away to see if any containers have exited
-            docker-compose ps
-
-            # wait for services to be up and running
-            npm run wait-4-docker
-
-            # seed the environment
-            npm run reseed:docker-local
-          no_output_timeout: 20m
-      - run:
-          name: Run the E2E tests
-          command: |
-            npm run test:e2e -- --reporters=default --reporters=jest-junit
-      - run:
-          name: prepare test results
-          command: |
-            mv junit.xml /tmp/test/results
-      - run:
-          name: reset the test state before next test
-          command: ./scripts/_reset_test_state.sh
-      - run:
-          name: wait for services to be healthy again
-          command: |
-            npm run wait-4-docker
-      - run:
-          name: run the tests with the TTK-cli
-          command: |
-            cd ./docker-local/
-            docker-compose -f ./docker-compose.ttk-cli.yml up --exit-code-from ttk-cli ttk-cli
-      - store_artifacts:
-          path: /tmp/test/results
-          prefix: test
-      - store_artifacts:
-          path: ./test/e2e-ttk/results.html
-      - store_test_results:
-          path: /tmp/test/results
-
-  test-contract:
-    executor: default-machine
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - dependency-cache-{{ checksum "package-lock.json" }}
-      # TODO: set up /etc/hosts!
-      - run:
-          name: Add /etc/hosts entries
-          command: |
-            sudo ./scripts/_setup_hosts_file.sh
-      - run:
-          <<: *defaults_configure_nvm
-      - run:
-          name: Spin up the contract test environment
-          command: |
-            cd ./docker-contract/
-            docker-compose pull
-            docker-compose up -d
-
-            # wait for services to be up and running
-            npm run wait-4-docker-contract
-
-            # seed the environment
-            npm run reseed:docker-contract
-
-            sleep 45s
-      - run:
-          name: Run the contract tests
-          command: |
-            npm run test:contract -- --reporters=default --reporters=jest-junit
-      - run:
-          name: prepare test/results
-          command: |
-            mkdir -p test/results
-            mv junit.xml test/results
-      - store_artifacts:
-          path: ./test/results
-          prefix: test
-      - store_test_results:
-          path: ./test/results
-
-  test-docs:
-    executor: default-machine
-    steps:
-      - checkout
-      - run:
-          <<: *defaults_configure_nvm
-      - run:
-          name: Check if plantuml has been updated correctly
-          command: |
-            set +o pipefail
-            npm run build:plantuml:all
-            FILE_COUNT=$(git diff --cached --name-only | grep .svg | wc -l)
-            if [ ${FILE_COUNT} -ne "0" ]; then
-              echo 'Plantuml files are out of sync. Please run npm run build:plantuml and try again.';
-              exit 1;
-            else
-              echo 'Plantuml files are up to date';
-            fi
 
 ##
 # Workflows
@@ -267,42 +73,3 @@ workflows:
           filters:
             tags:
               only: /.*/
-            # TODO re-gnore when we're done with this setup
-            branches:
-              ignore:
-                - /feature*/
-                - /bugfix*/
-      - test-e2e:
-          context: org-global
-          requires:
-            - setup
-          filters:
-            tags:
-              only: /.*/
-            branches:
-              ignore:
-                - /feature*/
-                - /bugfix*/
-      - test-contract:
-          context: org-global
-          requires:
-            - setup
-          filters:
-            tags:
-              only: /.*/
-            branches:
-              ignore:
-                - /feature*/
-                - /bugfix*/
-      - test-docs:
-          context: org-global
-          requires:
-            - setup
-          filters:
-            tags:
-              only: /.*/
-            branches:
-              ignore:
-                - /feature*/
-                - /bugfix*/
-

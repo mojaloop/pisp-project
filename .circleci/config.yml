@@ -27,6 +27,13 @@ defaults_Dependencies: &defaults_Dependencies |
   npm config set unsafe-perm true
   npm install -g node-gyp
 
+# Add checkout configuration
+checkout_config: &checkout_config
+  checkout:
+    path: ~/project
+    post:
+      - git config --global url."https://${GITHUB_TOKEN}@github.com/".insteadOf "git@github.com:"
+
 defaults_awsCliDependencies: &defaults_awsCliDependencies |
   apk upgrade --no-cache
   apk --no-cache add \
@@ -75,7 +82,7 @@ jobs:
   setup:
     executor: default-docker
     steps:
-      - checkout
+      - <<: *checkout_config
       - run:
           name: Install general dependencies
           command: *defaults_Dependencies
@@ -100,7 +107,7 @@ jobs:
   test-e2e:
     executor: default-machine
     steps:
-      - checkout
+      - <<: *checkout_config
       - restore_cache:
           keys:
             - dependency-cache-{{ checksum "package-lock.json" }}
@@ -194,7 +201,7 @@ jobs:
   test-contract:
     executor: default-machine
     steps:
-      - checkout
+      - <<: *checkout_config
       - restore_cache:
           keys:
             - dependency-cache-{{ checksum "package-lock.json" }}
@@ -237,7 +244,7 @@ jobs:
   test-docs:
     executor: default-machine
     steps:
-      - checkout
+      - <<: *checkout_config
       - run:
           <<: *defaults_configure_nvm
       - run:

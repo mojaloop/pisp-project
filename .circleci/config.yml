@@ -51,6 +51,27 @@ checkout_config: &checkout_config
             git --version
             # Verify SSH installation
             ssh -V
+      - run:
+          name: Setup SSH
+          command: |
+            # Create SSH directory if it doesn't exist
+            mkdir -p ~/.ssh
+            chmod 700 ~/.ssh
+            
+            # Add GitHub to known hosts
+            ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
+            
+            # Set correct permissions for known_hosts
+            chmod 644 ~/.ssh/known_hosts
+            
+            # Debug SSH configuration
+            echo "SSH directory contents:"
+            ls -la ~/.ssh/
+            echo "SSH known_hosts contents:"
+            cat ~/.ssh/known_hosts
+            
+            # Test SSH connection with verbose output
+            ssh -vT git@github.com || true
 
 defaults_awsCliDependencies: &defaults_awsCliDependencies |
   apk upgrade --no-cache

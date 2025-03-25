@@ -31,8 +31,21 @@ defaults_Dependencies: &defaults_Dependencies |
 checkout_config: &checkout_config
   checkout:
     path: ~/project
+    pre:
+      - run:
+          name: Install git
+          command: |
+            if [ -f /etc/alpine-release ]; then
+              apk --no-cache add git
+            else
+              apt-get update && apt-get install -y git
+            fi
     post:
-      - git config --global url."https://${GITHUB_TOKEN}@github.com/".insteadOf "git@github.com:"
+      - run:
+          name: Configure git for HTTPS
+          command: |
+            git config --global url."https://${GITHUB_TOKEN}@github.com/".insteadOf "git@github.com:"
+            git config --global url."https://${GITHUB_TOKEN}@github.com/".insteadOf "https://github.com/"
 
 defaults_awsCliDependencies: &defaults_awsCliDependencies |
   apk upgrade --no-cache

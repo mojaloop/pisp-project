@@ -33,19 +33,24 @@ checkout_config: &checkout_config
     path: ~/project
     pre:
       - run:
-          name: Install git
+          name: Install git and SSH dependencies
           command: |
             if [ -f /etc/alpine-release ]; then
-              apk --no-cache add git
+              # For Alpine
+              apk update
+              apk add --no-cache git openssh-client openssh-keygen
+              # Ensure SSH directory exists with correct permissions
+              mkdir -p ~/.ssh
+              chmod 700 ~/.ssh
             else
-              apt-get update && apt-get install -y git
+              # For Ubuntu
+              apt-get update
+              apt-get install -y git openssh-client
             fi
-    post:
-      - run:
-          name: Configure git for HTTPS
-          command: |
-            git config --global url."https://${GITHUB_TOKEN}@github.com/".insteadOf "git@github.com:"
-            git config --global url."https://${GITHUB_TOKEN}@github.com/".insteadOf "https://github.com/"
+            # Verify git installation
+            git --version
+            # Verify SSH installation
+            ssh -V
 
 defaults_awsCliDependencies: &defaults_awsCliDependencies |
   apk upgrade --no-cache

@@ -82,7 +82,7 @@
     "@mojaloop/sdk-standard-components": "^17.0.4",
     "ajv": "^8.11.0",
     "atob": "^2.1.2",
-    "axios": "^0.27.2",
+    "axios": "^1.12.0",
     "btoa": "^1.2.1",
     "cbor": "^8.1.0",
     "chalk": "^5.0.1"

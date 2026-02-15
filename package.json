@@ -80,9 +80,9 @@
   "homepage": "https://github.com/mojaloop/pisp#readme",
   "dependencies": {
     "@mojaloop/sdk-standard-components": "^17.0.4",
-    "ajv": "^8.11.0",
+    "ajv": "^8.18.0",
     "atob": "^2.1.2",
-    "axios": "^0.27.2",
+    "axios": "^1.13.5",
     "btoa": "^1.2.1",
     "cbor": "^8.1.0",
     "chalk": "^5.0.1"
